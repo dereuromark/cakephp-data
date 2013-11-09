@@ -33,6 +33,12 @@ class CountryProvincesController extends DataAppController {
 		$this->set(compact('countryProvinces', 'defaultFieldLabel'));
 	}
 
+	/**
+	 * CountryProvincesController::index()
+	 *
+	 * @param mixed $cid
+	 * @return void
+	 */
 	public function index($cid = null) {
 		$this->CountryProvince->recursive = 0;
 		$this->paginate['order'] = array('CountryProvince.name' => 'ASC');

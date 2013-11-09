@@ -16,12 +16,6 @@ class CountriesController extends DataAppController {
 
 		if (isset($this->Auth)) {
 			$this->Auth->allow('index');
-			/*
-			$this->Auth->actionMap = array_merge($this->Auth->actionMap, array(
-				'admin_down' => 'edit',
-				'admin_up' => 'edit'
-			));
-			*/
 		}
 	}
 
@@ -36,7 +30,7 @@ class CountriesController extends DataAppController {
 		$this->set(compact('countries'));
 	}
 
-	public function _icons() {
+	protected function _icons() {
 		$useCache = true;
 		if (!empty($this->request->params['named']['reset'])) {
 			$useCache = false;
@@ -63,7 +57,7 @@ class CountriesController extends DataAppController {
 	 * CountriesController::admin_update_coordinates()
 	 *
 	 * @param mixed $id
-	 * @return
+	 * @return void
 	 */
 	public function admin_update_coordinates($id = null) {
 		set_time_limit(120);
@@ -80,6 +74,8 @@ class CountriesController extends DataAppController {
 
 	/**
 	 * Check for missing or unused country flag icons
+	 *
+	 * @return void
 	 */
 	public function admin_icons() {
 		$icons = $this->_icons();
@@ -108,6 +104,11 @@ class CountriesController extends DataAppController {
 		$this->set(compact('icons', 'countries', 'contriesWithoutIcons', 'iconsWithoutCountries'));
 	}
 
+	/**
+	 * CountriesController::admin_import()
+	 *
+	 * @return void
+	 */
 	public function admin_import() {
 		if ($this->Common->isPosted()) {
 
