@@ -80,8 +80,6 @@ foreach ($countryProvinces as $countryProvince):
 	<?php echo $this->Paginator->last(__('last'), array());?>
 </div>
 
-
-Bitte meldet fehlende/fehlerhafte Bundesländer!
 <br /><br />
 
 <div class="actions">
