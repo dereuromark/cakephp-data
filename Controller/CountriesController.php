@@ -16,6 +16,12 @@ class CountriesController extends DataAppController {
 
 		if (isset($this->Auth)) {
 			$this->Auth->allow('index');
+			/*
+			$this->Auth->actionMap = array_merge($this->Auth->actionMap, array(
+				'admin_down' => 'edit',
+				'admin_up' => 'edit'
+			));
+			*/
 		}
 	}
 
@@ -185,7 +191,7 @@ class CountriesController extends DataAppController {
 		$countries = $this->paginate();
 		$this->set(compact('countries'));
 
-		$this->helpers = array_merge($this->helpers, array('Data.GoogleMapV3'));
+		$this->helpers = array_merge($this->helpers, array('Tools.GoogleMapV3'));
 	}
 
 	public function admin_view($id = null) {

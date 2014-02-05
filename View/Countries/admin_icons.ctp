@@ -7,7 +7,7 @@
 <?php
 	foreach ($contriesWithoutIcons as $country) {
 		echo '<li>';
-		echo $this->Format->countryIcon(null) . ' ' . h($country['Country']['name']) . ' (' . $country['Country']['iso2'] . ', ' . $country['Country']['iso3'] . ') ' . $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $country['Country']['id']), array('escape' => false), 'Sicher?');
+		echo $this->Data->countryIcon(null) . ' ' . h($country['Country']['name']) . ' (' . $country['Country']['iso2'] . ', ' . $country['Country']['iso3'] . ') ' . $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $country['Country']['id']), array('escape' => false), 'Sicher?');
 		echo '</li>';
 	}
 ?>
@@ -19,7 +19,7 @@
 <?php
 	foreach ($iconsWithoutCountries as $icon) {
 		echo '<li>';
-		echo $this->Format->countryIcon($icon) . ' (' . $icon . ')';
+		echo $this->Data->countryIcon($icon) . ' (' . $icon . ')';
 		echo '</li>';
 	}
 ?>

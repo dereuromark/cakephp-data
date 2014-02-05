@@ -1,5 +1,5 @@
-<?php $this->Html->script($this->GoogleMapV3->apiUrl(), array('inline'=>false))?>
-<?php $this->Html->script($this->GoogleMapV3->gearsUrl(), array('inline'=>false))?>
+<?php $this->Html->script($this->GoogleMapV3->apiUrl(), array('inline' => false))?>
+<?php $this->Html->script($this->GoogleMapV3->gearsUrl(), array('inline' => false))?>
 
 <h2>Geolocate</h2>
 Funktioniert bisher nur in Cutting-Edge-Browsern wie Google Chrome (evtl noch Firefox).
@@ -19,13 +19,13 @@ if (isset($ipData['lng'])) {
 	$zoom = 10;
 }
 
-echo $this->GoogleMapV3->map(array('zoom'=>$zoom, 'geolocate'=>true, 'lat'=>$lat, 'lng'=>$lng));
+echo $this->GoogleMapV3->map(array('zoom' => $zoom, 'geolocate' => true, 'lat' => $lat, 'lng' => $lng));
 
 
 $title = 'Eigene Position';
 $content = 'Eigene Position';
 
-$this->GoogleMapV3->addMarker(array('lat'=>$lat,'lng'=>$lng, 'title'=>$title, 'content'=>$content));
+$this->GoogleMapV3->addMarker(array('lat' => $lat, 'lng' => $lng, 'title' => $title, 'content' => $content));
 
 
 

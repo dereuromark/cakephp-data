@@ -16,7 +16,7 @@ class LanguagesControllerTest extends ControllerTestCase {
 	public $fixtures = array('plugin.data.language');
 
 	/**
-	 * testAdminImportFromCore method
+	 * TestAdminImportFromCore method
 	 *
 	 * @return void
 	 */
@@ -24,7 +24,7 @@ class LanguagesControllerTest extends ControllerTestCase {
 	}
 
 	/**
-	 * testAdminCompareToIsoList method
+	 * TestAdminCompareToIsoList method
 	 *
 	 * @return void
 	 */
@@ -32,7 +32,7 @@ class LanguagesControllerTest extends ControllerTestCase {
 	}
 
 	/**
-	 * testAdminCompareIsoListToCore method
+	 * TestAdminCompareIsoListToCore method
 	 *
 	 * @return void
 	 */
@@ -40,7 +40,7 @@ class LanguagesControllerTest extends ControllerTestCase {
 	}
 
 	/**
-	 * testAdminSetPrimaryLanguagesActive method
+	 * TestAdminSetPrimaryLanguagesActive method
 	 *
 	 * @return void
 	 */
@@ -48,7 +48,7 @@ class LanguagesControllerTest extends ControllerTestCase {
 	}
 
 	/**
-	 * testAdminIndex method
+	 * TestAdminIndex method
 	 *
 	 * @return void
 	 */
@@ -56,7 +56,7 @@ class LanguagesControllerTest extends ControllerTestCase {
 	}
 
 	/**
-	 * testAdminView method
+	 * TestAdminView method
 	 *
 	 * @return void
 	 */
@@ -64,7 +64,7 @@ class LanguagesControllerTest extends ControllerTestCase {
 	}
 
 	/**
-	 * testAdminAdd method
+	 * TestAdminAdd method
 	 *
 	 * @return void
 	 */
@@ -72,7 +72,7 @@ class LanguagesControllerTest extends ControllerTestCase {
 	}
 
 	/**
-	 * testAdminEdit method
+	 * TestAdminEdit method
 	 *
 	 * @return void
 	 */
@@ -80,7 +80,7 @@ class LanguagesControllerTest extends ControllerTestCase {
 	}
 
 	/**
-	 * testAdminDelete method
+	 * TestAdminDelete method
 	 *
 	 * @return void
 	 */

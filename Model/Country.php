@@ -93,6 +93,13 @@ class Country extends DataAppModel {
 		parent::__construct($id, $table, $ds);
 	}
 
+	/**
+	 * Country::active()
+	 *
+	 * @param string $type
+	 * @param mixed $customOptions
+	 * @return array
+	 */
 	public function active($type = 'all', $customOptions = array()) {
 		$options = array('conditions' => array($this->alias . '.status' => 1), );
 		if (!empty($customOptions)) {
@@ -101,10 +108,16 @@ class Country extends DataAppModel {
 		return $this->find($type, $options);
 	}
 
+	/**
+	 * Country::getList()
+	 *
+	 * @return array
+	 */
 	public function getList() {
-		return $this->find('list', array(
+		$options = array(
 			//'conditions'=>array('active'=>1),
-		));
+		);
+		return $this->find('list', $options);
 	}
 
 	/**
@@ -113,6 +126,7 @@ class Country extends DataAppModel {
 	 * @param id
 	 * - NULL: update all records with missing coordinates only
 	 * - otherwise: specific update
+	 * @return boolean Success
 	 */
 	public function updateCoordinatesNew($id = null) {
 		$Geocoder = new GeocodeLib();
@@ -390,6 +404,7 @@ class Country extends DataAppModel {
 	}
 
 	const STATUS_ACTIVE = 1;
+
 	const STATUS_INACTIVE = 0;
 
 }

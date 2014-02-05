@@ -3,7 +3,6 @@ App::uses('DataAppController', 'Data.Controller');
 
 class CountryProvincesController extends DataAppController {
 
-	//public $helpers = array('Html', 'Form');
 	public $paginate = array('order' => array('CountryProvince.modified' => 'DESC'));
 
 	public function beforeFilter() {

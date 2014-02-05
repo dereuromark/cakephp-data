@@ -45,7 +45,7 @@ foreach ($countryProvinces as $countryProvince):
 	<tr<?php echo $class;?>>
 
 		<td>
-			<?php echo $this->Format->countryIcon($countryProvince['Country']['iso2']); ?> <?php echo $this->Html->link($countryProvince['Country']['name'], array('controller'=> 'countries', 'action'=>'view', $countryProvince['Country']['id'])); ?>
+			<?php echo $this->Data->countryIcon($countryProvince['Country']['iso2']); ?> <?php echo $this->Html->link($countryProvince['Country']['name'], array('controller'=> 'countries', 'action'=>'view', $countryProvince['Country']['id'])); ?>
 		</td>
 		<td>
 			<?php echo h($countryProvince['CountryProvince']['name']); ?>

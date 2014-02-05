@@ -1141,6 +1141,8 @@ class MimeTypeImagesController extends DataAppController {
 
 			pr($data);
 		}
+
+		/* END */
 	}
 
 }

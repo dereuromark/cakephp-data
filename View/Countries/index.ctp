@@ -21,7 +21,7 @@ foreach ($countries as $country):
 ?>
 	<tr<?php echo $class;?>>
 		<td>
-			<?php echo $this->Format->countryIcon($country['Country']['iso2']); ?>
+			<?php echo $this->Data->countryIcon($country['Country']['iso2']); ?>
 		</td>
 		<td>
 			<?php echo $country['Country']['name']; ?>
@@ -61,5 +61,5 @@ Hinweis:
 <br />
 <span class="keyList">Legende:</span>
 <ul class="keyList">
-<li><?php echo $this->Format->countryIcon(null); ?> = Default Icon</li>
+<li><?php echo $this->Data->countryIcon(null); ?> = Default Icon</li>
 </ul>

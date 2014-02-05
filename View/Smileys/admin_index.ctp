@@ -24,7 +24,7 @@ foreach ($smileys as $smiley):
 ?>
 	<tr<?php echo $class;?>>
 		<td>
-			<?php echo $this->Html->imageIfExists('/tools/img/smileys/default/'.$smiley['Smiley']['smiley_path'])?>
+			<?php echo $this->Html->imageIfExists('/data/img/smileys/default/'.$smiley['Smiley']['smiley_path'])?>
 		</td>
 <?php if (false) { ?>
 		<td>

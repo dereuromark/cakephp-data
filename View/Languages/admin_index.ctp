@@ -24,16 +24,18 @@ foreach ($languages as $language):
 		<td>
 <?php
 	$languageFlags = Cache::read('language_flags');
+	list($wwwPath, $path) = $this->Data->getCountryIconPaths();
 	if (!$languageFlags) {
 		App::uses('Folder', 'Utility');
-		$handle = new Folder(App::pluginPath('Tools').'webroot'.DS.'img'.DS.'country_flags');
+
+		$handle = new Folder($path);
 		$languageFlags = $handle->read(true, true);
 		$languageFlags = $languageFlags[1];
 		Cache::write('language_flags', $languageFlags);
 	}
 
-	if (!empty($language['Language']['code']) && in_array($language['Language']['code'].'.gif', $languageFlags)) {
-		echo $this->Html->image('/tools/img/country_flags/'.$language['Language']['code'].'.gif');
+	if (!empty($language['Language']['code']) && in_array($language['Language']['code'] . '.gif', $languageFlags)) {
+		echo $this->Html->image($wwwPath . $language['Language']['code'] . '.gif');
 	}
 ?>
 		</td>

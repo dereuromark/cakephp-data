@@ -34,7 +34,7 @@ foreach ($isoList['values'] as $language):
 	}
 
 	if (!empty($language['iso2']) && in_array($language['iso2'].'.gif', $languageFlags)) {
-		echo $this->Html->image('/tools/img/country_flags/'.$language['iso2'].'.gif');
+		echo $this->Html->image('/data/img/country_flags/'.$language['iso2'].'.gif');
 	}
 ?>
 		</td>
