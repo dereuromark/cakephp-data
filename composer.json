@@ -1,0 +1,24 @@
+{
+	"name": "dereuromark/cakephp-data",
+	"type": "cakephp-plugin",
+	"description": "A CakePHP plugin containing lots of useful and reusable data containers",
+	"keywords": ["cakephp", "plugin", "data", "geo"],
+	"homepage": "https://github.com/dereuromark/data",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Mark Scherer",
+			"homepage": "http://www.dereuromark.de"
+		}
+	],
+	"require": {
+		"php": ">=5.3",
+		"composer/installers": "*"
+	},
+	"support": {
+		"source": "https://github.com/dereuromark/data"
+	},
+	"extra": {
+		"installer-name": "Data"
+	}
+}
