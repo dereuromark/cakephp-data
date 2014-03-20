@@ -1,90 +1,22 @@
 <?php
 
 App::uses('LanguagesController', 'Data.Controller');
+App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
-/**
- * LanguagesController Test Case
- *
- */
-class LanguagesControllerTest extends ControllerTestCase {
+class LanguagesControllerTest extends MyCakeTestCase {
 
-	/**
-	 * Fixtures
-	 *
-	 * @var array
-	 */
-	public $fixtures = array('plugin.data.language');
+	public $LanguagesController;
 
-	/**
-	 * TestAdminImportFromCore method
-	 *
-	 * @return void
-	 */
-	public function testAdminImportFromCore() {
+	public function setUp() {
+		parent::setUp();
+
+		$this->LanguagesController = new LanguagesController();
 	}
 
-	/**
-	 * TestAdminCompareToIsoList method
-	 *
-	 * @return void
-	 */
-	public function testAdminCompareToIsoList() {
+	public function testObject() {
+		$this->assertTrue(is_object($this->LanguagesController));
+		$this->assertInstanceOf('LanguagesController', $this->LanguagesController);
 	}
 
-	/**
-	 * TestAdminCompareIsoListToCore method
-	 *
-	 * @return void
-	 */
-	public function testAdminCompareIsoListToCore() {
-	}
-
-	/**
-	 * TestAdminSetPrimaryLanguagesActive method
-	 *
-	 * @return void
-	 */
-	public function testAdminSetPrimaryLanguagesActive() {
-	}
-
-	/**
-	 * TestAdminIndex method
-	 *
-	 * @return void
-	 */
-	public function testAdminIndex() {
-	}
-
-	/**
-	 * TestAdminView method
-	 *
-	 * @return void
-	 */
-	public function testAdminView() {
-	}
-
-	/**
-	 * TestAdminAdd method
-	 *
-	 * @return void
-	 */
-	public function testAdminAdd() {
-	}
-
-	/**
-	 * TestAdminEdit method
-	 *
-	 * @return void
-	 */
-	public function testAdminEdit() {
-	}
-
-	/**
-	 * TestAdminDelete method
-	 *
-	 * @return void
-	 */
-	public function testAdminDelete() {
-	}
-
+	//TODO
 }

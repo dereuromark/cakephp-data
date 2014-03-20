@@ -16,6 +16,8 @@ class CountryProvincesController extends DataAppController {
 	/**
 	 * Ajax function
 	 * new: optional true/false for default field label
+	 *
+	 * @return void
 	 */
 	public function update_select($id = null) {
 		//$this->autoRender = false;
@@ -25,7 +27,7 @@ class CountryProvincesController extends DataAppController {
 		$this->layout = 'ajax';
 		$countryProvinces = $this->CountryProvince->getListByCountry($id);
 		$defaultFieldLabel = 'pleaseSelect';
-		if (!empty($this->request->params['named']['optional'])) {
+		if ($this->request->query('optional')) {
 			$defaultFieldLabel = 'doesNotMatter';
 		}
 
@@ -55,6 +57,12 @@ class CountryProvincesController extends DataAppController {
 	* ADMIN functions
 	****************************************************************************************/
 
+	/**
+	 * CountryProvincesController::admin_update_coordinates()
+	 *
+	 * @param mixed $id
+	 * @return void
+	 */
 	public function admin_update_coordinates($id = null) {
 		set_time_limit(120);
 		$res = $this->CountryProvince->updateCoordinates($id);
@@ -68,6 +76,12 @@ class CountryProvincesController extends DataAppController {
 		return $this->redirect(array('action' => 'index'));
 	}
 
+	/**
+	 * CountryProvincesController::admin_index()
+	 *
+	 * @param mixed $cid
+	 * @return void
+	 */
 	public function admin_index($cid = null) {
 		$cid = $this->_processCountry($cid);
 
@@ -79,6 +93,12 @@ class CountryProvincesController extends DataAppController {
 		$this->Common->loadHelper(array('Tools.GoogleMapV3'));
 	}
 
+	/**
+	 * CountryProvincesController::admin_view()
+	 *
+	 * @param mixed $id
+	 * @return void
+	 */
 	public function admin_view($id = null) {
 		$this->CountryProvince->recursive = 0;
 		if (empty($id)) {
@@ -93,6 +113,11 @@ class CountryProvincesController extends DataAppController {
 		$this->set(compact('countryProvince'));
 	}
 
+	/**
+	 * CountryProvincesController::admin_add()
+	 *
+	 * @return void
+	 */
 	public function admin_add() {
 		if ($this->Common->isPosted()) {
 			$this->CountryProvince->create();
@@ -114,6 +139,12 @@ class CountryProvincesController extends DataAppController {
 		$this->set(compact('countries'));
 	}
 
+	/**
+	 * CountryProvincesController::admin_edit()
+	 *
+	 * @param mixed $id
+	 * @return void
+	 */
 	public function admin_edit($id = null) {
 		if (empty($id)) {
 			$this->Common->flashMessage(__('record invalid'), 'error');
@@ -139,6 +170,12 @@ class CountryProvincesController extends DataAppController {
 		$this->set(compact('countries'));
 	}
 
+	/**
+	 * CountryProvincesController::admin_delete()
+	 *
+	 * @param mixed $id
+	 * @return void
+	 */
 	public function admin_delete($id = null) {
 		if (!$this->Common->isPosted()) {
 			throw new MethodNotAllowedException();
@@ -169,8 +206,10 @@ class CountryProvincesController extends DataAppController {
 
 	/**
 	 * For both index views
+	 *
+	 * @return void
 	 */
-	public function _processCountry($cid) {
+	protected function _processCountry($cid) {
 		$saveCid = true;
 		if (empty($cid)) {
 			$saveCid = false;

@@ -6,6 +6,12 @@ class MimeTypeImagesController extends DataAppController {
 
 	public $paginate = array('order' => array('MimeTypeImage.modified' => 'DESC'));
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+
+		//$this->Auth->allow();
+	}
+
 	public function admin_import() {
 
 		if ($this->Common->isPosted()) {

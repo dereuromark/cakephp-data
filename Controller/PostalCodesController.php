@@ -63,8 +63,6 @@ class PostalCodesController extends DataAppController {
  * ADMIN functions
  ****************************************************************************************/
 
-	public $presetVars = true;
-
 	/**
 	 * @return void
 	 */
@@ -75,7 +73,7 @@ class PostalCodesController extends DataAppController {
 		$this->PostalCode->Behaviors->load('Search.Searchable');
 		$this->Common->loadComponent(array('Search.Prg'));
 		$this->Prg->commonProcess();
-		$this->paginate['conditions'] = $this->PostalCode->parseCriteria($this->passedArgs);
+		$this->paginate['conditions'] = $this->PostalCode->parseCriteria($this->Prg->parsedParams());
 
 		$postalCodes = $this->paginate();
 

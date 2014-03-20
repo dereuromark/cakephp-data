@@ -111,12 +111,10 @@ class MimeType extends DataAppModel {
 		}
 		# notify admin
 		App::uses('EmailLib', 'Tools.Lib');
-		App::import('Controller', 'Data.MimeTypes');
+		//App::import('Controller', 'Data.MimeTypes');
 		$this->Email = new EmailLib();
-		$this->Email->to(Configure::read('Config.admin_email'), Configure::read('Config.admin_emailname'));
-		$this->Email->replyTo(Configure::read('Config.admin_email'), Configure::read('Config.admin_emailname'));
-
-		//$this->Email->from(Configure::read('Config.admin_email'), Configure::read('Config.admin_emailname'));
+		$this->Email->to(Configure::read('Config.adminEmail'), Configure::read('Config.adminEmailname'));
+		$this->Email->replyTo(Configure::read('Config.adminEmail'), Configure::read('Config.adminEmailname'));
 
 		$this->Email->subject(Configure::read('Config.page_name') . ' - ' . __('MimeType'));
 		$this->Email->template('simple_email');
