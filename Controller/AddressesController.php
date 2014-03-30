@@ -1,5 +1,6 @@
 <?php
 App::uses('DataAppController', 'Data.Controller');
+
 class AddressesController extends DataAppController {
 
 	public $paginate = array();

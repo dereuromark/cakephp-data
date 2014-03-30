@@ -1,5 +1,6 @@
 <?php
 App::uses('Component', 'Controller');
+
 /**
  */
 class CountryProvinceHelperComponent extends Component {

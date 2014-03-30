@@ -1,5 +1,6 @@
 <?php
 App::uses('DataAppModel', 'Data.Model');
+
 class Location extends DataAppModel {
 
 	public $actsAs = array('Tools.Geocoder' => array('min_accuracy' => 4, 'address' => array('name', 'country_name'), 'formatted_address' => 'formatted_address', 'real' => false, 'before' => 'validate', 'allow_inconclusive' => true, 'expect' => array())); //'postal_code', 'locality', 'sublocality', 'street_address'

@@ -1,5 +1,6 @@
 <?php
 App::uses('DataAppModel', 'Data.Model');
+
 class Continent extends DataAppModel {
 
 	public $actsAs = array('Tree');

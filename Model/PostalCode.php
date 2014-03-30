@@ -1,5 +1,6 @@
 <?php
 App::uses('DataAppModel', 'Data.Model');
+
 class PostalCode extends DataAppModel {
 
 	public $displayField = 'code';
