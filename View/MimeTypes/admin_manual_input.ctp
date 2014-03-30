@@ -10,13 +10,13 @@
 //pr ($exportArray);
 
 if (!empty($exportArray)) {
-	$out = '$result = array('.BR;
+	$out = '$result = array(' . BR;
 	foreach ($exportArray as $key => $value) {
-		$out.=' &nbsp; \''.h($key).'\' =&gt; array('.BR;
+		$out .= ' &nbsp; \'' . h($key) . '\' =&gt; array(' . BR;
 		foreach ($value as $subkey => $subvalue) {
-			$out.=' &nbsp;&nbsp;&nbsp; \''.h($subkey).'\' =&gt; \''.h($subvalue).'\','.BR;
+			$out .= ' &nbsp;&nbsp;&nbsp; \'' . h($subkey) . '\' =&gt; \'' . h($subvalue) . '\',' . BR;
 		}
-		$out.=' &nbsp; ),'.BR;
+		$out .= ' &nbsp; ),' . BR;
 	}
 	$out .= ');';
 

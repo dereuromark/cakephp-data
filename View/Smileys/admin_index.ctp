@@ -24,7 +24,7 @@ foreach ($smileys as $smiley):
 ?>
 	<tr<?php echo $class;?>>
 		<td>
-			<?php echo $this->Html->imageIfExists('/data/img/smileys/default/'.$smiley['Smiley']['smiley_path'])?>
+			<?php echo $this->Html->imageIfExists('/data/img/smileys/default/' . $smiley['Smiley']['smiley_path'])?>
 		</td>
 <?php if (false) { ?>
 		<td>
@@ -42,21 +42,21 @@ foreach ($smileys as $smiley):
 		</td>
 		<td>
 			<span class="ajaxToggling" id="ajaxToggle-is_base-<?php echo $smiley['Smiley']['id']?>">
-			<?php echo $this->Html->link($this->Format->yesNo($smiley['Smiley']['is_base'], 'Ja', 'Nein'), array('action'=>'toggle', 'is_base', $smiley['Smiley']['id']), array('escape'=>false)); ?>
+			<?php echo $this->Html->link($this->Format->yesNo($smiley['Smiley']['is_base'], 'Ja', 'Nein'), array('action' => 'toggle', 'is_base', $smiley['Smiley']['id']), array('escape' => false)); ?>
 			</span>
 		</td>
 		<td>
 			<span class="ajaxToggling" id="ajaxToggle-active-<?php echo $smiley['Smiley']['id']?>">
-			<?php echo $this->Html->link($this->Format->yesNo($smiley['Smiley']['active'], 'Aktiv', 'Inaktiv'), array('action'=>'toggle', 'active', $smiley['Smiley']['id']), array('escape'=>false)); ?>
+			<?php echo $this->Html->link($this->Format->yesNo($smiley['Smiley']['active'], 'Aktiv', 'Inaktiv'), array('action' => 'toggle', 'active', $smiley['Smiley']['id']), array('escape' => false)); ?>
 			</span>
 		</td>
 		<td>
 			<?php echo $this->Datetime->niceDate($smiley['Smiley']['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $smiley['Smiley']['id']), array('escape'=>false)); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), array('action'=>'edit', $smiley['Smiley']['id']), array('escape'=>false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action'=>'delete', $smiley['Smiley']['id']), array('escape'=>false), __('Are you sure you want to delete # %s?', $smiley['Smiley']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $smiley['Smiley']['id']), array('escape' => false)); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $smiley['Smiley']['id']), array('escape' => false)); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $smiley['Smiley']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $smiley['Smiley']['id'])); ?>
 		</td>
 	</tr>
 <?php
@@ -66,7 +66,7 @@ foreach ($smileys as $smiley):
 	</table>
 
 <div class="pagination-container">
-<?php echo $this->element('pagination', array(), array('plugin'=>'tools')); ?></div>
+<?php echo $this->element('Tools.pagination'); ?></div>
 
 </div>
 

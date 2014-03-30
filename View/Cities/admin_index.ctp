@@ -37,9 +37,9 @@ foreach ($cities as $city) { ?>
 			<?php echo $this->Datetime->niceDate($city['City']['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $city['City']['id']), array('escape'=>false)); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), array('action'=>'edit', $city['City']['id']), array('escape'=>false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action'=>'delete', $city['City']['id']), array('escape'=>false), __('Are you sure you want to delete # %s?', $city['City']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $city['City']['id']), array('escape' => false)); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $city['City']['id']), array('escape' => false)); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $city['City']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $city['City']['id'])); ?>
 		</td>
 	</tr>
 <?php } ?>

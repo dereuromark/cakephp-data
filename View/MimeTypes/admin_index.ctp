@@ -9,23 +9,23 @@ echo $this->Paginator->counter(array(
 ?></p>
 
 <div class="searchWrapper">
-<?php echo $this->Form->create('MimeType', array('action'=>'index'));?>
-<div class="floatLeft"><?php echo $this->Form->input('Form.search', array('label'=>'(Teil)Suche:','value'=>$searchStr));?></div>
+<?php echo $this->Form->create('MimeType', array('action' => 'index'));?>
+<div class="floatLeft"><?php echo $this->Form->input('Form.search', array('label' => '(Teil)Suche:', 'value' => $searchStr));?></div>
 <div class="floatLeft"><?php echo $this->Form->end(__('Submit'));?></div>
 <?php
 if (!empty($searchStr)) {
-	echo '<div class="floatRight">'.$this->Html->link('Wieder alle anzeigen', array('action'=>'index','clear'=>'search')).'</div>';
+	echo '<div class="floatRight">' . $this->Html->link('Wieder alle anzeigen', array('action' => 'index', 'clear' => 'search')) . '</div>';
 }
 ?>
 <?php
 if (!empty($searchStr) && !empty($allCount)) {
 	$currentCount = $this->Paginator->params['paging']['CollectionEntry']['count'];
-	if ($currentCount==0) {
+	if ($currentCount == 0) {
 		$perCent = 0;
 	} else {
-		$perCent = ceil(($currentCount/$allCount)*100);
+		$perCent = ceil(($currentCount / $allCount) * 100);
 	}
-	echo '<br class="clear"/><div>'.$this->Html->image('icons/results.gif').' Treffer: <b>'.$perCent.'%</b> ('.$currentCount.__(' out of ').$allCount.')</div>';
+	echo '<br class="clear"/><div>' . $this->Html->image('icons/results.gif') . ' Treffer: <b>' . $perCent . '%</b> (' . $currentCount . __(' out of ') . $allCount . ')</div>';
 }
 ?>
 </div>
@@ -59,9 +59,9 @@ foreach ($mimeTypes as $mimeType):
 			if (!empty($mimeType['MimeTypeImage']['id'])) { // && !empty($mimeType['MimeTypeImage']['ext'])
 				$fileName = $mimeType['MimeTypeImage']['name'];
 				$fileExt = (!empty($mimeType['MimeTypeImage']['ext'])?$mimeType['MimeTypeImage']['ext']:'png');
-				$title = (!empty($mimeType['MimeTypeImage']['ext'])?$fileName.'.'.$fileExt:'Kein Image festgelegt...');
+				$title = (!empty($mimeType['MimeTypeImage']['ext'])?$fileName . '.' . $fileExt:'Kein Image festgelegt...');
 
-				$icon = $this->Html->image(IMG_MIMETYPES.$fileName.'.'.$fileExt, array('title'=>$title,'alt'=>$fileName.'.'.$fileExt));
+				$icon = $this->Html->image(IMG_MIMETYPES . $fileName . '.' . $fileExt, array('title' => $title, 'alt' => $fileName . '.' . $fileExt));
 			}
 			echo $icon;
 
@@ -77,13 +77,13 @@ foreach ($mimeTypes as $mimeType):
 			<?php echo h($mimeType['MimeType']['type']); ?>
 			<?php
 			if (!empty($mimeType['MimeType']['alt_type'])) {
-				echo '['.h($mimeType['MimeType']['alt_type']).']';
+				echo '[' . h($mimeType['MimeType']['alt_type']) . ']';
 			}
 			?>
 		</td>
 		<td>
 			<span class="ajaxToggling" id="ajaxToggle-<?php echo $mimeType['MimeType']['id']?>">
-			<?php echo $this->Html->link($this->Format->yesNo($mimeType['MimeType']['active'],'Active','Inactive',1), array('action'=>'toggleActive', $mimeType['MimeType']['id']), array('escape'=>false));?>
+			<?php echo $this->Html->link($this->Format->yesNo($mimeType['MimeType']['active'], 'Active', 'Inactive', 1), array('action' => 'toggleActive', $mimeType['MimeType']['id']), array('escape' => false));?>
 			</span>
 		</td>
 		<td>
@@ -96,9 +96,9 @@ foreach ($mimeTypes as $mimeType):
 			<?php echo $this->Datetime->niceDate($mimeType['MimeType']['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $mimeType['MimeType']['id']), array('escape'=>false)); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), array('action'=>'edit', $mimeType['MimeType']['id']), array('escape'=>false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action'=>'delete', $mimeType['MimeType']['id']), array('escape'=>false), __('Are you sure you want to delete # %s?', $mimeType['MimeType']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $mimeType['MimeType']['id']), array('escape' => false)); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $mimeType['MimeType']['id']), array('escape' => false)); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $mimeType['MimeType']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $mimeType['MimeType']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -107,23 +107,23 @@ foreach ($mimeTypes as $mimeType):
 <div class="paging">
 	<?php echo $this->Paginator->first(__('first'), array());?>
  |
-	<?php echo $this->Paginator->prev(__('previous'), array(), null, array('class'=>'disabled'));?>
+	<?php echo $this->Paginator->prev(__('previous'), array(), null, array('class' => 'disabled'));?>
  |
 	<?php echo $this->Paginator->numbers(array('separator' => PAGINATOR_SEPARATOR));?>
  |
-	<?php echo $this->Paginator->next(__('next'), array(), null, array('class'=>'disabled'));?>
+	<?php echo $this->Paginator->next(__('next'), array(), null, array('class' => 'disabled'));?>
 
  |
 	<?php echo $this->Paginator->last(__('last'), array());?>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add Mime Type'), array('action'=>'add')); ?></li>
+		<li><?php echo $this->Html->link(__('Add Mime Type'), array('action' => 'add')); ?></li>
 
-		<li><?php echo $this->Html->link(__('(Auto-) Allocate Icons by Extension'), array('action'=>'allocate')); ?></li>
-		<li><?php echo $this->Html->link(__('Allocate Icons by Type (Groups)'), array('action'=>'allocateByType')); ?></li>
-		<li><?php echo $this->Html->link(__('Import from Core Media View'), array('action'=>'fromCore')); ?></li>
-		<li><?php echo $this->Html->link(__('Import from File'), array('action'=>'fromFile')); ?></li>
+		<li><?php echo $this->Html->link(__('(Auto-) Allocate Icons by Extension'), array('action' => 'allocate')); ?></li>
+		<li><?php echo $this->Html->link(__('Allocate Icons by Type (Groups)'), array('action' => 'allocateByType')); ?></li>
+		<li><?php echo $this->Html->link(__('Import from Core Media View'), array('action' => 'fromCore')); ?></li>
+		<li><?php echo $this->Html->link(__('Import from File'), array('action' => 'fromFile')); ?></li>
 	</ul>
 </div>
 <br />

@@ -5,9 +5,9 @@
 	<fieldset>
 		<legend><?php echo __('Add %s', __('Address')); ?></legend>
 	<?php
-		echo $this->Form->input('country_id', array('empty'=>array(0=>' - [ '.__('noSelection').' ] - ')));
+		echo $this->Form->input('country_id', array('empty' => array(0 => ' - [ ' . __('noSelection') . ' ] - ')));
 	if (Configure::read('Address.CountryProvince')) {
-		echo $this->Form->input('country_province_id', array('empty'=>array(0=>' - [ '.__('noSelection').' ] - ')));
+		echo $this->Form->input('country_province_id', array('empty' => array(0 => ' - [ ' . __('noSelection') . ' ] - ')));
 	}
 		echo $this->Form->input('first_name');
 		echo $this->Form->input('last_name');
@@ -20,7 +20,7 @@
 		<legend><?php echo __('Relations'); ?></legend>
 	<?php
 		echo $this->Form->input('model');
-		echo $this->Form->input('foreign_id', array('type'=>'text', 'empty'=>array(0=>' - [ '.__('noSelection').' ] - ')));
+		echo $this->Form->input('foreign_id', array('type' => 'text', 'empty' => array(0 => ' - [ ' . __('noSelection') . ' ] - ')));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>

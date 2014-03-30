@@ -31,16 +31,16 @@ foreach ($continents as $continent):
 			<?php echo $this->Datetime->niceDate($continent['Continent']['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $continent['Continent']['id']), array('escape'=>false)); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), array('action'=>'edit', $continent['Continent']['id']), array('escape'=>false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action'=>'delete', $continent['Continent']['id']), array('escape'=>false), __('Are you sure you want to delete # %s?', $continent['Continent']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $continent['Continent']['id']), array('escape' => false)); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $continent['Continent']['id']), array('escape' => false)); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $continent['Continent']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $continent['Continent']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
 </table>
 
 <div class="pagination-container">
-<?php echo $this->element('pagination', array(), array('plugin'=>'tools')); ?></div>
+<?php echo $this->element('Tools.pagination'); ?></div>
 
 </div>
 

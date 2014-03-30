@@ -3,12 +3,12 @@
 <div class="floatRight">
 <?php echo __('Country');?>:&nbsp;&nbsp;
 <?php echo $this->Form->input('Filter.id', array(
-	'class'=>'filter',
-	'label'=>false,
+	'class' => 'filter',
+	'label' => false,
 	'div' => false,
-	'type'=>'select',
-	'empty'=>array(-1=>'- [ '.__('noRestriction').' ] -'),
-	'onchange'=>'changeSel(this,\''.$this->Html->url(array('action'=>'index')).'/index/\')',
+	'type' => 'select',
+	'empty' => array(-1 => '- [ ' . __('noRestriction') . ' ] -'),
+	'onchange' => 'changeSel(this,\'' . $this->Html->url(array('action' => 'index')) . '/index/\')',
 	/*
 	'onchange'=>'filter(this,\''.$this->Html->url(array(
 				'filter'=>'on',
@@ -16,7 +16,7 @@
 				'direction'=>(!empty($filters['direction']) ? $filters['direction'] : '')
 				)).'/'.$filter_field.':\')',
 	*/
-	'options'=>$countries));?>
+	'options' => $countries));?>
 <div></div>
 </div>
 
@@ -40,7 +40,7 @@ foreach ($countryProvinces as $countryProvince):
 	<tr<?php echo $class;?>>
 
 		<td>
-			<?php echo $this->Data->countryIcon($countryProvince['Country']['iso2']).' '.h($countryProvince['Country']['name']); ?>
+			<?php echo $this->Data->countryIcon($countryProvince['Country']['iso2']) . ' ' . h($countryProvince['Country']['name']); ?>
 		</td>
 		<td>
 			<?php echo h($countryProvince['CountryProvince']['name']); ?>
@@ -53,7 +53,7 @@ foreach ($countryProvinces as $countryProvince):
 			<?php
 			$coordinates = '';
 			if ((int)$countryProvince['CountryProvince']['lat'] != 0 || (int)$countryProvince['CountryProvince']['lat'] != 0) {
-				$coordinates = $countryProvince['CountryProvince']['lat'].','.$countryProvince['CountryProvince']['lat'];
+				$coordinates = $countryProvince['CountryProvince']['lat'] . ',' . $countryProvince['CountryProvince']['lat'];
 			}
 			echo $this->Format->yesNo((int)!empty($coordinates), $coordinates, 'keine hinterlegt');
 			?>

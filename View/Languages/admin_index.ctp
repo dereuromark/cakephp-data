@@ -61,16 +61,16 @@ foreach ($languages as $language):
 			<?php echo $this->Datetime->niceDate($language['Language']['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $language['Language']['id']), array('escape'=>false)); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), array('action'=>'edit', $language['Language']['id']), array('escape'=>false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action'=>'delete', $language['Language']['id']), array('escape'=>false), __('Are you sure you want to delete # %s?', $language['Language']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $language['Language']['id']), array('escape' => false)); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $language['Language']['id']), array('escape' => false)); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $language['Language']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $language['Language']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
 	</table>
 
 <div class="pagination-container">
-<?php echo $this->element('pagination', array(), array('plugin'=>'tools')); ?></div>
+<?php echo $this->element('Tools.pagination'); ?></div>
 
 </div>
 

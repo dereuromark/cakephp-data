@@ -57,9 +57,9 @@ foreach ($addresses as $address):
 					echo number_format($address['Address']['lng'], 1, ',', '.');
 
 					$markers = array();
-					$markers[] = array('lat'=>$address['Address']['lat'],'lng'=>$address['Address']['lng'],'color'=>'green');
+					$markers[] = array('lat' => $address['Address']['lat'], 'lng' => $address['Address']['lng'], 'color' => 'green');
 					$mapMarkers = $this->GoogleMapV3->staticMarkers($markers);
-					echo $this->Html->link($this->Format->cIcon(ICON_DETAILS, 'Zeigen'), $this->GoogleMapV3->staticMapUrl(array('center'=>$address['Address']['lat'].','.$address['Address']['lng'],'markers'=>$mapMarkers,'size'=>'640x510','zoom'=>12)), array('id'=>'googleMap','class'=>'internal highslideImage','title'=>__('click for full map'),'escape'=>false));
+					echo $this->Html->link($this->Format->cIcon(ICON_DETAILS, 'Zeigen'), $this->GoogleMapV3->staticMapUrl(array('center' => $address['Address']['lat'] . ',' . $address['Address']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 12)), array('id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false));
 				}
 			 ?>
 		</td>
@@ -70,16 +70,16 @@ foreach ($addresses as $address):
 			<?php echo h($address['Address']['formatted_address']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $address['Address']['id']), array('escape'=>false)); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), array('action'=>'edit', $address['Address']['id']), array('escape'=>false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action'=>'delete', $address['Address']['id']), array('escape'=>false), __('Are you sure you want to delete # %s?', $address['Address']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $address['Address']['id']), array('escape' => false)); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $address['Address']['id']), array('escape' => false)); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $address['Address']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $address['Address']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
 </table>
 
 <div class="pagination-container">
-<?php echo $this->element('pagination', array(), array('plugin'=>'tools')); ?></div>
+<?php echo $this->element('Tools.pagination'); ?></div>
 
 </div>
 

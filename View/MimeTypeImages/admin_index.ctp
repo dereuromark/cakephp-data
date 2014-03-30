@@ -30,10 +30,10 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 	$imageSize = $imageWidth = $imageHeight = null;
 	if (!empty($mimeTypeImage['MimeTypeImage']['ext']) && empty($mimeTypeImage['MimeTypeImage']['warning'])) {
 		# Icon exists
-		$image = $this->Html->image(IMG_MIMETYPES.$mimeTypeImage['MimeTypeImage']['name'].'.'.$mimeTypeImage['MimeTypeImage']['ext'], array('
-		title'=>$mimeTypeImage['MimeTypeImage']['name'].'.'.$mimeTypeImage['MimeTypeImage']['ext'],'alt'=>$mimeTypeImage['MimeTypeImage']['name'].'.'.$mimeTypeImage['MimeTypeImage']['ext']));
+		$image = $this->Html->image(IMG_MIMETYPES . $mimeTypeImage['MimeTypeImage']['name'] . '.' . $mimeTypeImage['MimeTypeImage']['ext'], array('
+		title' => $mimeTypeImage['MimeTypeImage']['name'] . '.' . $mimeTypeImage['MimeTypeImage']['ext'], 'alt' => $mimeTypeImage['MimeTypeImage']['name'] . '.' . $mimeTypeImage['MimeTypeImage']['ext']));
 
-		$imageSize = getimagesize(PATH_MIMETYPES.$mimeTypeImage['MimeTypeImage']['name'].'.'.$mimeTypeImage['MimeTypeImage']['ext']);
+		$imageSize = getimagesize(PATH_MIMETYPES . $mimeTypeImage['MimeTypeImage']['name'] . '.' . $mimeTypeImage['MimeTypeImage']['ext']);
 		$imageWidth = $imageSize[0];
 		$imageHeight = $imageSize[1];
 	}
@@ -51,12 +51,12 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 		</td>
 		<td>
 			<span class="ajaxToggling" id="ajaxToggle-<?php echo $mimeTypeImage['MimeTypeImage']['id']?>">
-			<?php echo $this->Html->link($this->Format->yesNo($mimeTypeImage['MimeTypeImage']['active'],'Active','Inactive',1), array('action'=>'toggleActive', $mimeTypeImage['MimeTypeImage']['id']), array('escape'=>false));?>
+			<?php echo $this->Html->link($this->Format->yesNo($mimeTypeImage['MimeTypeImage']['active'], 'Active', 'Inactive', 1), array('action' => 'toggleActive', $mimeTypeImage['MimeTypeImage']['id']), array('escape' => false));?>
 			</span>
 
 			<?php
 				if (!empty($mimeTypeImage['MimeTypeImage']['warning'])) {
-				echo ' '.$this->Format->icon('warning','Icon konnte nicht gefunden werden!');
+				echo ' ' . $this->Format->icon('warning', 'Icon konnte nicht gefunden werden!');
 				}
 
 			?>
@@ -65,8 +65,8 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 		<td>
 			<?php $count = count($mimeTypeImage['MimeType']);
 				if ($count > 0) {
-					echo $count.' &nbsp; ';
-					echo $this->Format->icon('details',null,null,null, array('class'=>'hand','id'=>'details_'.$mimeTypeImage['MimeTypeImage']['id']));
+					echo $count . ' &nbsp; ';
+					echo $this->Format->icon('details', null, null, null, array('class' => 'hand', 'id' => 'details_' . $mimeTypeImage['MimeTypeImage']['id']));
 				} else {
 					echo '---';
 				}
@@ -83,13 +83,13 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 		</td>
 		<td class="actions">
 			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $mimeTypeImage['MimeTypeImage']['id']), array('escape'=>false)); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), array('action'=>'edit', $mimeTypeImage['MimeTypeImage']['id']), array('escape'=>false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action'=>'delete', $mimeTypeImage['MimeTypeImage']['id']), array('escape'=>false), __('Are you sure you want to delete # %s?', $mimeTypeImage['MimeTypeImage']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $mimeTypeImage['MimeTypeImage']['id']), array('escape' => false)); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $mimeTypeImage['MimeTypeImage']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $mimeTypeImage['MimeTypeImage']['id'])); ?>
 			<?php
 				if (isset($imageWidth) && isset($imageHeight) && $imageWidth != 16 && $imageHeight != 16) {
-					echo $this->Format->cIcon(ICON_SIZE,'Größe ist nicht 16x16, sondern '.$imageWidth.'x'.$imageHeight.'! Anpassen...');
+					echo $this->Format->cIcon(ICON_SIZE, 'Größe ist nicht 16x16, sondern ' . $imageWidth . 'x' . $imageHeight . '! Anpassen...');
 				} elseif (empty($mimeTypeImage['MimeTypeImage']['ext']) || !empty($mimeTypeImage['MimeTypeImage']['warning'])) {
-					echo $this->Html->link($this->Format->cIcon('google.gif','Bei Google suchen'),'http://images.google.de/images?q='.$mimeTypeImage['MimeTypeImage']['name'].'+imagesize%3A16x16&btnG=Bilder-Suche', array('escape'=>false));
+					echo $this->Html->link($this->Format->cIcon('google.gif', 'Bei Google suchen'), 'http://images.google.de/images?q=' . $mimeTypeImage['MimeTypeImage']['name'] . '+imagesize%3A16x16&btnG=Bilder-Suche', array('escape' => false));
 				}
 			?>
 		</td>
@@ -100,20 +100,20 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 <div class="paging">
 	<?php echo $this->Paginator->first(__('first'), array());?>
  |
-	<?php echo $this->Paginator->prev(__('previous'), array(), null, array('class'=>'disabled'));?>
+	<?php echo $this->Paginator->prev(__('previous'), array(), null, array('class' => 'disabled'));?>
  |
 	<?php echo $this->Paginator->numbers(array('separator' => PAGINATOR_SEPARATOR));?>
  |
-	<?php echo $this->Paginator->next(__('next'), array(), null, array('class'=>'disabled'));?>
+	<?php echo $this->Paginator->next(__('next'), array(), null, array('class' => 'disabled'));?>
 
  |
 	<?php echo $this->Paginator->last(__('last'), array());?>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add Mime Type Image'), array('action'=>'add')); ?></li>
-		<li><?php echo $this->Html->link(__('(Auto-) Allocate Icons Files'), array('action'=>'allocate')); ?></li>
-		<li><?php echo $this->Html->link(__('Import Extensions'), array('action'=>'import')); ?></li>
+		<li><?php echo $this->Html->link(__('Add Mime Type Image'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('(Auto-) Allocate Icons Files'), array('action' => 'allocate')); ?></li>
+		<li><?php echo $this->Html->link(__('Import Extensions'), array('action' => 'import')); ?></li>
 		<li><?php echo $this->Html->link(__('Search Icon on google.de'), 'http://images.google.de/images?q=icon+imagesize%3A16x16&btnG=Bilder-Suche'); ?></li>
 	</ul>
 </div>

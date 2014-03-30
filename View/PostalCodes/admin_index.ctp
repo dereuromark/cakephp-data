@@ -3,8 +3,8 @@
 <div class="searchBox" style="float: right;">
 <?php
 	echo $this->Form->create('PostalCode');
-	echo $this->Form->input('code', array('placeholder'=>'Platzhalter: * und ?'));
-	echo $this->Form->input('country_id', array('empty'=>' - egal - '));
+	echo $this->Form->input('code', array('placeholder' => 'Platzhalter: * und ?'));
+	echo $this->Form->input('country_id', array('empty' => ' - egal - '));
 	echo $this->Form->submit(__('Search'), array('div' => false));
 	echo $this->Form->end();
 ?>
@@ -49,16 +49,16 @@ foreach ($postalCodes as $postalCode): ?>
 			<?php echo $this->Datetime->niceDate($postalCode['PostalCode']['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $postalCode['PostalCode']['id']), array('escape'=>false)); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), array('action'=>'edit', $postalCode['PostalCode']['id']), array('escape'=>false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action'=>'delete', $postalCode['PostalCode']['id']), array('escape'=>false), __('Are you sure you want to delete # %s?', $postalCode['PostalCode']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $postalCode['PostalCode']['id']), array('escape' => false)); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $postalCode['PostalCode']['id']), array('escape' => false)); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $postalCode['PostalCode']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $postalCode['PostalCode']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
 	</table>
 
 	<div class="pagination-container">
-<?php echo $this->element('pagination', array(), array('plugin'=>'tools')); ?>
+<?php echo $this->element('Tools.pagination'); ?>
 	</div>
 
 </div>

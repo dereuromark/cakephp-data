@@ -27,14 +27,14 @@ foreach ($isoList['values'] as $language):
 	$languageFlags = Cache::read('language_flags');
 	if (!$languageFlags) {
 		App::uses('Folder', 'Utility');
-		$handle = new Folder(App::pluginPath('Tools').'webroot'.DS.'img'.DS.'country_flags');
+		$handle = new Folder(App::pluginPath('Tools') . 'webroot' . DS . 'img' . DS . 'country_flags');
 		$languageFlags = $handle->read(true, true);
 		$languageFlags = $languageFlags[1];
 		Cache::write('language_flags', $languageFlags);
 	}
 
-	if (!empty($language['iso2']) && in_array($language['iso2'].'.gif', $languageFlags)) {
-		echo $this->Html->image('/data/img/country_flags/'.$language['iso2'].'.gif');
+	if (!empty($language['iso2']) && in_array($language['iso2'] . '.gif', $languageFlags)) {
+		echo $this->Html->image('/data/img/country_flags/' . $language['iso2'] . '.gif');
 	}
 ?>
 		</td>
@@ -58,7 +58,7 @@ foreach ($isoList['values'] as $language):
 				if (!empty($language['iso2'])) {
 					foreach ($languages as $lang) {
 					if (!empty($lang['Language']['code']) && $language['iso2'] == $lang['Language']['code']) {
-						echo '<div>'.h($lang['Language']['name']).'</div>';
+						echo '<div>' . h($lang['Language']['name']) . '</div>';
 					}
 					}
 				}

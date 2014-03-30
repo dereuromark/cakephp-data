@@ -67,16 +67,16 @@ foreach ($addresses as $address):
 			<?php echo h($address['Address']['formatted_address']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $address['Address']['id']), array('escape'=>false)); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), array('action'=>'edit', $address['Address']['id']), array('escape'=>false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action'=>'delete', $address['Address']['id']), array('escape'=>false), __('Are you sure you want to delete # %s?', $address['Address']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $address['Address']['id']), array('escape' => false)); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $address['Address']['id']), array('escape' => false)); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $address['Address']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $address['Address']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
 </table>
 
 <div class="pagination-container">
-<?php echo $this->element('pagination', array(), array('plugin'=>'tools')); ?></div>
+<?php echo $this->element('Tools.pagination'); ?></div>
 
 </div>
 

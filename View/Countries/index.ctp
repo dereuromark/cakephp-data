@@ -3,7 +3,7 @@
 
 <table class="list">
 <tr>
-	<th><?php echo $this->Paginator->sort('sort', $this->Format->cIcon(ICON_ORDER), array('escape'=>false));?></th>
+	<th><?php echo $this->Paginator->sort('sort', $this->Format->cIcon(ICON_ORDER), array('escape' => false));?></th>
 	<th><?php echo $this->Paginator->sort('name');?></th>
 	<th><?php echo $this->Paginator->sort('ori_name');?></th>
 	<th><?php echo $this->Paginator->sort('iso2');?></th>
@@ -36,7 +36,7 @@ foreach ($countries as $country):
 			<?php echo $country['Country']['iso3']; ?>
 		</td>
 		<td>
-			<?php echo '+'.$country['Country']['country_code']; ?>
+			<?php echo '+' . $country['Country']['country_code']; ?>
 		</td>
 		<td>
 			<?php if (!empty($country['Country']['zip_length'])) {

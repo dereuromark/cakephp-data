@@ -3,11 +3,11 @@
 
 <?php
 	if (!empty($unused)) {
-		echo '<h3>'.count($unused).' unused images</h3>';
+		echo '<h3>' . count($unused) . ' unused images</h3>';
 		echo '<ul>';
 		foreach ($unused as $u) {
 			echo '<li>';
-			echo $this->Html->image(IMG_MIMETYPES.$u['MimeTypeImage']['name'].'.'.$u['MimeTypeImage']['ext']).' '.$u['MimeTypeImage']['name'];
+			echo $this->Html->image(IMG_MIMETYPES . $u['MimeTypeImage']['name'] . '.' . $u['MimeTypeImage']['ext']) . ' ' . $u['MimeTypeImage']['name'];
 			echo '</li>';
 		}
 		echo '</ul>';
@@ -19,6 +19,6 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List Mime Types'), array('action'=>'index'));?></li>
+		<li><?php echo $this->Html->link(__('List Mime Types'), array('action' => 'index'));?></li>
 	</ul>
 </div>

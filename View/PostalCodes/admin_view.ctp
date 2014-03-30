@@ -24,7 +24,7 @@
 <?php if ((int)$postalCode['PostalCode']['lat'] || (int)$postalCode['PostalCode']['lng']) { ?>
 		<dt><?php echo __('Map'); ?></dt>
 		<dd>
-			<?php echo $this->GoogleMapV3->staticMap(array('size'=>'640x600', 'zoom'=>12, 'markers'=>$this->GoogleMapV3->staticMarkers(array(array('lat'=>$postalCode['PostalCode']['lat'], 'lng'=>$postalCode['PostalCode']['lng']))))); ?>
+			<?php echo $this->GoogleMapV3->staticMap(array('size' => '640x600', 'zoom' => 12, 'markers' => $this->GoogleMapV3->staticMarkers(array(array('lat' => $postalCode['PostalCode']['lat'], 'lng' => $postalCode['PostalCode']['lng']))))); ?>
 		</dd>
 <?php } ?>
 		<dt><?php echo __('Official Address'); ?></dt>
