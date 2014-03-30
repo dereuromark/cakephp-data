@@ -9,7 +9,7 @@
 	<th><?php echo $this->Paginator->sort('iso2');?></th>
 	<th><?php echo $this->Paginator->sort('iso3');?></th>
 	<th><?php echo $this->Paginator->sort('country_code');?></th>
-	<th><?php echo $this->Paginator->sort('zip_length');?></th>
+	<th><?php echo $this->Paginator->sort('zip_length', null, array('direction' => 'desc'));?></th>
 </tr>
 <?php
 $i = 0;
@@ -49,17 +49,19 @@ foreach ($countries as $country):
 <?php endforeach; ?>
 </table>
 
-<?php echo $this->element('pagination', array(), array('plugin'=>'tools')); ?>
+<?php echo $this->element('Tools.pagination'); ?>
 </div>
 
+<?php if (__('countryCodeExplanation') !== 'countryCodeExplanation') { ?>
 <br />
 Hinweis:
 <ul>
-<li><?__('countryCodeExplanation')?></li>
+<li><?php echo __('countryCodeExplanation')?></li>
 </ul>
+<?php } ?>
 
 <br />
-<span class="keyList">Legende:</span>
+<span class="keyList"><?php echo __('Legend');?></span>
 <ul class="keyList">
 <li><?php echo $this->Data->countryIcon(null); ?> = Default Icon</li>
 </ul>
