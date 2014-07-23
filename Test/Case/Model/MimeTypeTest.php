@@ -10,7 +10,7 @@ class MimeTypeTest extends MyCakeTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->MimeType = new MimeType();
+		$this->MimeType = ClassRegistry::init('Data.MimeType');
 	}
 
 	public function testObject() {

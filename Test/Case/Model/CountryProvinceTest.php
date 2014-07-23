@@ -5,12 +5,14 @@ App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
 class CountryProvinceTest extends MyCakeTestCase {
 
+	public $fixtures = array('plugin.data.country_province');
+
 	public $CountryProvince;
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->CountryProvince = new CountryProvince();
+		$this->CountryProvince = ClassRegistry::init('Data.CountryProvince');
 	}
 
 	public function testObject() {

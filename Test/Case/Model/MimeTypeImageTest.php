@@ -5,12 +5,14 @@ App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
 class MimeTypeImageTest extends MyCakeTestCase {
 
+	public $fixtures = array('plugin.data.mime_type_image');
+
 	public $MimeTypeImage;
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->MimeTypeImage = new MimeTypeImage();
+		$this->MimeTypeImage = ClassRegistry::init('Data.MimeTypeImage');
 	}
 
 	public function testObject() {

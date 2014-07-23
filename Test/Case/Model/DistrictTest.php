@@ -5,12 +5,14 @@ App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
 class DistrictTest extends MyCakeTestCase {
 
+	public $fixtures = array('plugin.data.district');
+
 	public $District;
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->District = new District();
+		$this->District = ClassRegistry::init('Data.District');
 	}
 
 	public function testObject() {
@@ -18,5 +20,4 @@ class DistrictTest extends MyCakeTestCase {
 		$this->assertInstanceOf('District', $this->District);
 	}
 
-	//TODO
 }

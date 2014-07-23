@@ -5,12 +5,14 @@ App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
 class LocationTest extends MyCakeTestCase {
 
+	public $fixtures = array('plugin.data.location');
+
 	public $Location;
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->Location = new Location();
+		$this->Location = ClassRegistry::init('Data.Location');
 	}
 
 	public function testObject() {

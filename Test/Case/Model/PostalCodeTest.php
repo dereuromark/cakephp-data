@@ -5,12 +5,14 @@ App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
 class PostalCodeTest extends MyCakeTestCase {
 
+	public $fixtures = array('plugin.data.postal_code');
+
 	public $PostalCode;
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->PostalCode = new PostalCode();
+		$this->PostalCode = ClassRegistry::init('Data.PostalCode');
 	}
 
 	public function testObject() {
