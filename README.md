@@ -1,4 +1,4 @@
-# CakePHP Data Plugin
+# CakePHP Data Plugin [![Build Status](https://api.travis-ci.org/dereuromark/cakephp-data.png)](https://travis-ci.org/dereuromark/cakephp-data)
 
 A Cake2.x Plugin containing several useful data models that can be used in many projects.
 
