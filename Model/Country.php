@@ -82,6 +82,11 @@ class Country extends DataAppModel {
 */
 	);
 
+	public $filterArgs = array(
+		'search' => array('type' => 'like', 'field' => array('name', 'ori_name', 'iso2', 'iso3', 'country_code')),
+		//'status' => array('type' => 'value')
+	);
+
 	public function __construct($id = false, $table = false, $ds = null) {
 		if (Configure::read('Country.provinces') === false) {
 			unset($this->hasMany['CountryProvince']);
@@ -126,7 +131,7 @@ class Country extends DataAppModel {
 	 * @param id
 	 * - NULL: update all records with missing coordinates only
 	 * - otherwise: specific update
-	 * @return boolean Success
+	 * @return bool Success
 	 */
 	public function updateCoordinatesNew($id = null) {
 		$Geocoder = new GeocodeLib();
@@ -346,7 +351,7 @@ class Country extends DataAppModel {
 	 * Try to guess the country of the user
 	 * - time sensitive (only works in a certain timeframe < 24h)
 	 *
-	 * @return integer country or -1 on error
+	 * @return int country or -1 on error
 	 */
 	public function guessByIp($ip = null) {
 		/*

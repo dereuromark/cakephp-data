@@ -1,6 +1,17 @@
 <div class="page index">
 <h2><?php echo __('Currencies');?></h2>
 
+<?php if (CakePlugin::loaded('Search')) { ?>
+<div class="search-box">
+<?php
+echo $this->Form->create();
+echo $this->Form->input('search', array('placeholder' => __('wildcardSearch %s and %s', '*', '?')));
+echo $this->Form->submit(__('Search'), array());
+echo $this->Form->end();
+?>
+</div>
+<?php } ?>
+
 <table class="list">
 <tr>
 	<th><?php echo $this->Paginator->sort('name');?></th>
@@ -10,7 +21,7 @@
 	<th><?php echo $this->Paginator->sort('decimal_places');?></th>
 	<th><?php echo $this->Paginator->sort('value');?></th>
 	<th class="actions"><?php echo __('Status');?></th>
-	<th><?php echo $this->Paginator->sort('modified');?></th>
+	<th><?php echo $this->Paginator->sort('modified', null, array('direction' => 'desc'));?></th>
 	<th class="actions"><?php echo __('Actions');?></th>
 </tr>
 <?php

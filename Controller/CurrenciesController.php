@@ -11,97 +11,9 @@ class CurrenciesController extends DataAppController {
 		parent::beforeFilter();
 	}
 
-/****************************************************************************************
- * USER functions
- ****************************************************************************************/
-
-	/*
-	public function index() {
-		$this->Currency->recursive = 0;
-		$currencies = $this->paginate();
-		$this->set(compact('currencies'));
-	}
-	*/
-
-	/*
-	public function view($id = null) {
-		$this->Currency->recursive = 0;
-		if (empty($id)) {
-			$this->Common->flashMessage(__('record invalid'),'error');
-			return $this->Common->autoRedirect(array('action'=>'index'));
-		}
-		$currency = $this->Currency->get($id);
-		if (empty($currency)) {
-			$this->Common->flashMessage(__('record not exists'),'error');
-			return $this->Common->autoRedirect(array('action'=>'index'));
-		}
-		$this->set(compact('currency'));
-	}
-
-	public function add() {
-		if ($this->Common->isPosted()) {
-			$this->Currency->create();
-			if ($this->Currency->save($this->request->data)) {
-				$id = $this->Currency->id;
-				//$name = $this->request->data['Currency']['name'];
-				$this->Common->flashMessage(__('record add %s saved', $id),'success');
-				return $this->redirect(array('action'=>'index'));
-			} else {
-				$this->Common->flashMessage(__('record add not saved'),'error');
-			}
-		}
-	}
-
-	public function edit($id = null) {
-		if (empty($id)) {
-			$this->Common->flashMessage(__('record invalid'),'error');
-			return $this->Common->autoRedirect(array('action'=>'index'));
-		}
-		if ($this->Common->isPosted()) {
-			if ($this->Currency->save($this->request->data)) {
-				//$name = $this->request->data['Currency']['name'];
-				$this->Common->flashMessage(__('record edit %s saved', $id),'success');
-				return $this->redirect(array('action'=>'index'));
-			} else {
-				$this->Common->flashMessage(__('record edit not saved'),'error');
-			}
-		}
-		if (empty($this->request->data)) {
-			$this->request->data = $this->Currency->get($id);
-			if (empty($this->request->data)) { # still no record found
-				$this->Common->flashMessage(__('record not exists'),'error');
-				return $this->redirect(array('action'=>'index'));
-			}
-		}
-	}
-
-	public function delete($id = null) {
-		if (!$this->Common->isPosted()) {
-			throw new MethodNotAllowedException();
-		}
-		if (empty($id)) {
-			$this->Common->flashMessage(__('record invalid'),'error');
-			return $this->Common->autoRedirect(array('action'=>'index'));
-		}
-		$res = $this->Currency->find('first', array('fields'=>array('id'),'conditions'=>array('Currency.id'=>$id)));
-		if (empty($res)) {
-			$this->Common->flashMessage(__('record del not exists'),'error');
-			return $this->Common->autoRedirect(array('action'=>'index'));
-		}
-
-		//$name = $res['Currency']['name'];
-		if ($this->Currency->delete($id)) {
-			$this->Common->flashMessage(__('record del %s done', $id),'success');
-			return $this->Common->postRedirect(array('action'=>'index'));
-		} else {
-			$this->Common->flashMessage(__('record del %s not done exception', $id),'error');
-			return $this->Common->autoRedirect(array('action'=>'index'));
-		}
-	}
-*/
-
-	//@deprecated
-
+	/**
+	 * @deprecated
+	 */
 	public function admin_list() {
 		$currencies = $this->Currency->availableCurrencies();
 		$res = array();
@@ -127,6 +39,15 @@ class CurrenciesController extends DataAppController {
 
 	public function admin_index() {
 		$this->Currency->recursive = 0;
+
+		if (CakePlugin::loaded('Search')) {
+			$this->Currency->Behaviors->load('Search.Searchable');
+			$this->Common->loadComponent(array('Search.Prg'));
+
+			$this->Prg->commonProcess();
+			$this->paginate['conditions'] = $this->Currency->parseCriteria($this->Prg->parsedParams());
+		}
+
 		$currencies = $this->paginate();
 
 		$baseCurrency = array();
@@ -137,7 +58,10 @@ class CurrenciesController extends DataAppController {
 			}
 		}
 		if (empty($baseCurrency)) {
-			$this->Common->flashMessage(__('noBaseCurrency'), 'warning');
+			$baseCurrency = $this->Currency->find('first', array('conditions' => array('base' => true)));
+			if (!$baseCurrency) {
+				$this->Common->flashMessage(__('noBaseCurrency'), 'warning');
+			}
 		}
 
 		$this->set(compact('baseCurrency', 'currencies'));

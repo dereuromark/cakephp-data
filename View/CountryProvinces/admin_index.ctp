@@ -31,7 +31,7 @@
 	<th><?php echo $this->Paginator->sort('name');?></th>
 	<th><?php echo $this->Paginator->sort('abbr');?></th>
 	<th><?php echo __('Coordinates');?></th>
-	<th><?php echo $this->Paginator->sort('modified');?></th>
+	<th><?php echo $this->Paginator->sort('modified', null, array('direction' => 'desc'));?></th>
 	<th class="actions"><?php echo __('Actions');?></th>
 </tr>
 <?php

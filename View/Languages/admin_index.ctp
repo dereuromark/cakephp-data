@@ -1,6 +1,18 @@
 <div class="page index">
 <h2><?php echo __('Languages');?></h2>
 
+<?php if (CakePlugin::loaded('Search')) { ?>
+<div class="search-box">
+<?php
+echo $this->Form->create();
+echo $this->Form->input('search', array('placeholder' => __('wildcardSearch %s and %s', '*', '?')));
+echo $this->Form->input('dir', array('label' => __('Direction'), 'options' => Language::directions(), 'empty' => Configure::read('Select.defaultBefore') . __('noSelection') . Configure::read('Select.defaultAfter')));
+echo $this->Form->submit(__('Search'), array());
+echo $this->Form->end();
+?>
+</div>
+<?php } ?>
+
 <table class="list"><tr>
 	<th>&nbsp;</th>
 	<th><?php echo $this->Paginator->sort('name');?></th>
@@ -8,8 +20,9 @@
 	<th><?php echo $this->Paginator->sort('code');?></th>
 	<th><?php echo $this->Paginator->sort('locale');?></th>
 	<th><?php echo $this->Paginator->sort('locale_fallback');?></th>
+	<th><?php echo $this->Paginator->sort('direction');?></th>
 	<th><?php echo $this->Paginator->sort('status');?></th>
-	<th><?php echo $this->Paginator->sort('modified');?></th>
+	<th><?php echo $this->Paginator->sort('modified', null, array('direction' => 'desc'));?></th>
 	<th class="actions"><?php echo __('Actions');?></th>
 </tr>
 <?php
@@ -53,6 +66,9 @@ foreach ($languages as $language):
 		</td>
 		<td>
 			<?php echo h($language['Language']['locale_fallback']); ?>
+		</td>
+		<td>
+			<?php echo h($language['Language']['direction']); ?>
 		</td>
 		<td>
 			<?php echo $this->Format->yesNo($language['Language']['status'], __('Active'), __('Inactive')); ?>

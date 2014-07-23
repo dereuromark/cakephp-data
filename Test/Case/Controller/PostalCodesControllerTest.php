@@ -129,7 +129,7 @@ class TestPostalCodesController extends PostalCodesController {
 	/**
 	 * Auto render
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	public $autoRender = false;
 
@@ -138,7 +138,7 @@ class TestPostalCodesController extends PostalCodesController {
 	 *
 	 * @param mixed $url
 	 * @param mixed $status
-	 * @param boolean $exit
+	 * @param bool $exit
 	 * @return void
 	 */
 	public function redirect($url, $status = null, $exit = true) {

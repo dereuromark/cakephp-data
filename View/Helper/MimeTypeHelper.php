@@ -72,7 +72,7 @@ class MimeTypeHelper extends AppHelper {
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getTypes() {
 		if ($this->types === null) {

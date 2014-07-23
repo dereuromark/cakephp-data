@@ -39,8 +39,8 @@ if (!empty($searchStr) && !empty($allCount)) {
 	<th><?php echo $this->Paginator->sort('type');?></th>
 	<th><?php echo $this->Paginator->sort('active');?></th>
 	<th><?php echo $this->Paginator->sort('core');?></th>
-	<th><?php echo $this->Paginator->sort('created');?></th>
-	<th><?php echo $this->Paginator->sort('modified');?></th>
+	<th><?php echo $this->Paginator->sort('created', null, array('direction' => 'desc'));?></th>
+	<th><?php echo $this->Paginator->sort('modified', null, array('direction' => 'desc'));?></th>
 	<th class="actions"><?php echo __('Actions');?></th>
 </tr>
 <?php

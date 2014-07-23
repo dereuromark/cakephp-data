@@ -91,7 +91,7 @@ class CitiesController extends DataAppController {
 	 * @throws MethodNotAllowedException
 	 */
 	public function admin_delete($id = null) {
-		$this->request->onlyAllow('post', 'delete');
+		$this->request->allowMethod(array('post', 'delete'));
 		if (empty($id) || !($city = $this->City->find('first', array('conditions' => array('City.id' => $id), 'fields' => array('id', 'name'))))) {
 			$this->Common->flashMessage(__('invalidRecord'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
@@ -106,11 +106,4 @@ class CitiesController extends DataAppController {
 		return $this->Common->autoRedirect(array('action' => 'index'));
 	}
 
-/****************************************************************************************
- * protected/interal functions
- ****************************************************************************************/
-
-/****************************************************************************************
- * deprecated/test functions
- ****************************************************************************************/
 }

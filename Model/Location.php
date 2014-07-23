@@ -30,7 +30,7 @@ class Location extends DataAppModel {
 	 * Location::beforeSave()
 	 *
 	 * @param mixed $options
-	 * @return boolean Success
+	 * @return bool Success
 	 */
 	public function beforeSave($options = array()) {
 		parent::beforeSave($options);
@@ -47,7 +47,7 @@ class Location extends DataAppModel {
 
 	/**
 	 * @param string $location
-	 * @param integer $countryId
+	 * @param int $countryId
 	 * @return array location on success, false otherwise
 	 */
 	public function getLocation($locationName, $countryId = null) {

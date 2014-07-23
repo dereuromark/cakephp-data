@@ -9,29 +9,82 @@ class LanguagesController extends DataAppController {
 		parent::beforeFilter();
 	}
 
-/****************************************************************************************
- * USER functions
- ****************************************************************************************/
-
-	/*
-	public function index() {
+	/**
+	 * LanguagesController::admin_index()
+	 *
+	 * @return void
+	 */
+	public function admin_index() {
 		$this->Language->recursive = 0;
+
+		if (CakePlugin::loaded('Search')) {
+			$this->Language->Behaviors->load('Search.Searchable');
+			$this->Common->loadComponent(array('Search.Prg'));
+
+			$this->Prg->commonProcess();
+			$this->paginate['conditions'] = $this->Language->parseCriteria($this->Prg->parsedParams());
+		}
+
 		$languages = $this->paginate();
 		$this->set(compact('languages'));
 	}
 
-	public function view($id = null) {
-		if (empty($id) || !($language = $this->Language->find('first', array('conditions'=>array('Language.id'=>$id))))) {
+	public function admin_view($id = null) {
+		if (empty($id) || !($language = $this->Language->find('first', array('conditions' => array('Language.id' => $id))))) {
 			$this->Common->flashMessage(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		$this->set(compact('language'));
 	}
-	*/
 
-/****************************************************************************************
- * ADMIN functions
- ****************************************************************************************/
+	public function admin_add() {
+		if ($this->Common->isPosted()) {
+			$this->Language->create();
+			if ($this->Language->save($this->request->data)) {
+				$var = $this->request->data['Language']['name'];
+				$this->Common->flashMessage(__('record add %s saved', h($var)), 'success');
+				return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Common->flashMessage(__('formContainsErrors'), 'error');
+			}
+		}
+	}
+
+	public function admin_edit($id = null) {
+		if (empty($id) || !($language = $this->Language->find('first', array('conditions' => array('Language.id' => $id))))) {
+			$this->Common->flashMessage(__('invalid record'), 'error');
+			return $this->Common->autoRedirect(array('action' => 'index'));
+		}
+		if ($this->Common->isPosted()) {
+			if ($this->Language->save($this->request->data)) {
+				$var = $this->request->data['Language']['name'];
+				$this->Common->flashMessage(__('record edit %s saved', h($var)), 'success');
+				return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Common->flashMessage(__('formContainsErrors'), 'error');
+			}
+		}
+		if (empty($this->request->data)) {
+			$this->request->data = $language;
+		}
+	}
+
+	public function admin_delete($id = null) {
+		if (!$this->Common->isPosted()) {
+			throw new MethodNotAllowedException();
+		}
+		if (empty($id) || !($language = $this->Language->find('first', array('conditions' => array('Language.id' => $id), 'fields' => array('id', 'name'))))) {
+			$this->Common->flashMessage(__('invalid record'), 'error');
+			return $this->Common->autoRedirect(array('action' => 'index'));
+		}
+		if ($this->Language->delete($id)) {
+			$var = $language['Language']['name'];
+			$this->Common->flashMessage(__('record del %s done', h($var)), 'success');
+			return $this->redirect(array('action' => 'index'));
+		}
+		$this->Common->flashMessage(__('record del %s not done exception', h($var)), 'error');
+		return $this->Common->autoRedirect(array('action' => 'index'));
+	}
 
 	/**
 	 * Should only be done once at the very beginning
@@ -204,76 +257,5 @@ Array
 )
 
 */
-
-	public function admin_index() {
-		$this->Language->recursive = 0;
-		$languages = $this->paginate();
-		$this->set(compact('languages'));
-	}
-
-	public function admin_view($id = null) {
-		if (empty($id) || !($language = $this->Language->find('first', array('conditions' => array('Language.id' => $id))))) {
-			$this->Common->flashMessage(__('invalid record'), 'error');
-			return $this->Common->autoRedirect(array('action' => 'index'));
-		}
-		$this->set(compact('language'));
-	}
-
-	public function admin_add() {
-		if ($this->Common->isPosted()) {
-			$this->Language->create();
-			if ($this->Language->save($this->request->data)) {
-				$var = $this->request->data['Language']['name'];
-				$this->Common->flashMessage(__('record add %s saved', h($var)), 'success');
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Common->flashMessage(__('formContainsErrors'), 'error');
-			}
-		}
-	}
-
-	public function admin_edit($id = null) {
-		if (empty($id) || !($language = $this->Language->find('first', array('conditions' => array('Language.id' => $id))))) {
-			$this->Common->flashMessage(__('invalid record'), 'error');
-			return $this->Common->autoRedirect(array('action' => 'index'));
-		}
-		if ($this->Common->isPosted()) {
-			if ($this->Language->save($this->request->data)) {
-				$var = $this->request->data['Language']['name'];
-				$this->Common->flashMessage(__('record edit %s saved', h($var)), 'success');
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Common->flashMessage(__('formContainsErrors'), 'error');
-			}
-		}
-		if (empty($this->request->data)) {
-			$this->request->data = $language;
-		}
-	}
-
-	public function admin_delete($id = null) {
-		if (!$this->Common->isPosted()) {
-			throw new MethodNotAllowedException();
-		}
-		if (empty($id) || !($language = $this->Language->find('first', array('conditions' => array('Language.id' => $id), 'fields' => array('id', 'name'))))) {
-			$this->Common->flashMessage(__('invalid record'), 'error');
-			return $this->Common->autoRedirect(array('action' => 'index'));
-		}
-		if ($this->Language->delete($id)) {
-			$var = $language['Language']['name'];
-			$this->Common->flashMessage(__('record del %s done', h($var)), 'success');
-			return $this->redirect(array('action' => 'index'));
-		}
-		$this->Common->flashMessage(__('record del %s not done exception', h($var)), 'error');
-		return $this->Common->autoRedirect(array('action' => 'index'));
-	}
-
-/****************************************************************************************
- * protected/interal functions
- ****************************************************************************************/
-
-/****************************************************************************************
- * deprecated/test functions
- ****************************************************************************************/
 
 }

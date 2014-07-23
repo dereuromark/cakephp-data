@@ -10,6 +10,7 @@
 		echo $this->Form->input('code');
 		echo $this->Form->input('locale');
 		echo $this->Form->input('locale_fallback');
+		echo $this->Form->input('direction', array('options' => Language::directions()));
 		//echo $this->Form->input('status');
 	?>
 	</fieldset>

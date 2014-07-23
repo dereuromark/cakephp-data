@@ -27,7 +27,7 @@ foreach ($isoList['values'] as $language):
 	$languageFlags = Cache::read('language_flags');
 	if (!$languageFlags) {
 		App::uses('Folder', 'Utility');
-		$handle = new Folder(App::pluginPath('Tools') . 'webroot' . DS . 'img' . DS . 'country_flags');
+		$handle = new Folder(CakePlugin::path('Tools') . 'webroot' . DS . 'img' . DS . 'country_flags');
 		$languageFlags = $handle->read(true, true);
 		$languageFlags = $languageFlags[1];
 		Cache::write('language_flags', $languageFlags);

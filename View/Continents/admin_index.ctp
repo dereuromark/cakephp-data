@@ -6,7 +6,7 @@
 	<th><?php echo $this->Paginator->sort('name');?></th>
 	<th><?php echo $this->Paginator->sort('ori_name');?></th>
 	<th><?php echo $this->Paginator->sort('parent_id');?></th>
-	<th><?php echo $this->Paginator->sort('modified');?></th>
+	<th><?php echo $this->Paginator->sort('modified', null, array('direction' => 'desc'));?></th>
 	<th class="actions"><?php echo __('Actions');?></th>
 </tr>
 <?php

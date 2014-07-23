@@ -38,7 +38,7 @@ class District extends DataAppModel {
 	 * District::beforeValidate()
 	 *
 	 * @param array $options
-	 * @return boolean Success
+	 * @return bool Success
 	 */
 	public function beforeValidate($options = array()) {
 		parent::beforeValidate($options);

@@ -58,6 +58,11 @@ class Language extends DataAppModel {
 		),
 	);
 
+	public $filterArgs = array(
+		'search' => array('type' => 'like', 'field' => array('name', 'ori_name', 'code', 'locale', 'locale_fallback')),
+		'dir' => array('type' => 'value', 'field' => 'direction')
+	);
+
 	/**
 	 * For language switch etc
 	 *
@@ -195,6 +200,24 @@ class Language extends DataAppModel {
 
 		return array('heading' => $heading, 'values' => $languages);
 	}
+
+	/**
+	 * Language::directions()
+	 *
+	 * @param mixed $value
+	 * @return mixed
+	 */
+	public static function directions($value = null) {
+		$options = array(
+			self::DIR_LTR => 'LTR',
+			self::DIR_RTL => 'RTL'
+		);
+		return parent::enum($value, $options);
+	}
+
+	const DIR_LTR = 0;
+
+	const DIR_RTL = 1;
 
 	const STATUS_ACTIVE = 1;
 

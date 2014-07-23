@@ -9,7 +9,7 @@
 		<th><?php echo $this->Paginator->sort('postal_code');?></th>
 		<th><?php echo ('Coordinates');?></th>
 		<th><?php echo $this->Paginator->sort('postal_code_unique');?></th>
-		<th><?php echo $this->Paginator->sort('modified');?></th>
+		<th><?php echo $this->Paginator->sort('modified', null, array('direction' => 'desc'));?></th>
 		<th class="actions"><?php echo __('Actions');?></th>
 	</tr>
 <?php

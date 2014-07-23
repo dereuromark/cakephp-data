@@ -38,6 +38,11 @@ class Currency extends DataAppModel {
 		'decimal_places' => array('numeric'),
 	);
 
+	public $filterArgs = array(
+		'search' => array('type' => 'like', 'field' => array('name', 'code')),
+		'active' => array('type' => 'value')
+	);
+
 	public function beforeValidate($options = array()) {
 		$ret = parent::beforeValidate($options);
 

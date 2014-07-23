@@ -11,7 +11,7 @@
 	<th><?php echo $this->Paginator->sort('title');?></th>
 	<th><?php echo $this->Paginator->sort('is_base');?></th>
 	<th><?php echo $this->Paginator->sort('active');?></th>
-	<th><?php echo $this->Paginator->sort('modified');?></th>
+	<th><?php echo $this->Paginator->sort('modified', null, array('direction' => 'desc'));?></th>
 	<th class="actions"><?php echo __('Actions');?></th>
 </tr>
 <?php

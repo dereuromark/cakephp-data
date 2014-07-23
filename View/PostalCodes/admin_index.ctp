@@ -19,8 +19,8 @@
 		<th><?php echo $this->Paginator->sort('lat');?></th>
 		<th><?php echo $this->Paginator->sort('lng');?></th>
 		<th><?php echo $this->Paginator->sort('official_address');?></th>
-		<th><?php echo $this->Paginator->sort('created');?></th>
-		<th><?php echo $this->Paginator->sort('modified');?></th>
+		<th><?php echo $this->Paginator->sort('created', null, array('direction' => 'desc'));?></th>
+		<th><?php echo $this->Paginator->sort('modified', null, array('direction' => 'desc'));?></th>
 		<th class="actions"><?php echo __('Actions');?></th>
 	</tr>
 <?php

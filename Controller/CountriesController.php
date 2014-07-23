@@ -187,7 +187,20 @@ class CountriesController extends DataAppController {
 		}
 	}
 
+	/**
+	 * CountriesController::admin_index()
+	 *
+	 * @return void
+	 */
 	public function admin_index() {
+		if (CakePlugin::loaded('Search')) {
+			$this->Country->Behaviors->load('Search.Searchable');
+			$this->Common->loadComponent(array('Search.Prg'));
+
+			$this->Prg->commonProcess();
+			$this->paginate['conditions'] = $this->Country->parseCriteria($this->Prg->parsedParams());
+		}
+
 		$countries = $this->paginate();
 		$this->set(compact('countries'));
 

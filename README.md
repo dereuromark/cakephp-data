@@ -15,6 +15,7 @@ That's it. It should be up and running.
 ### Possible Dependencies
 
 - Tools plugin
+- CakeDC search plugin (optional, if you want basic filtering)
 
 ## Disclaimer
 Use at your own risk. Please provide any fixes or enhancements via issue or better pull request.

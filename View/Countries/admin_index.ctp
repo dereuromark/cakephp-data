@@ -6,6 +6,17 @@
 <div class="page index">
 <h2><?php echo __('Countries');?></h2>
 
+<?php if (CakePlugin::loaded('Search')) { ?>
+<div class="search-box">
+<?php
+echo $this->Form->create();
+echo $this->Form->input('search', array('placeholder' => __('wildcardSearch %s and %s', '*', '?')));
+echo $this->Form->submit(__('Search'), array());
+echo $this->Form->end();
+?>
+</div>
+<?php } ?>
+
 <table class="list">
 <tr>
 	<th>&nbsp;</th>
@@ -16,7 +27,7 @@
 	<th><?php echo $this->Paginator->sort('country_code');?></th>
 	<th><?php echo __('Coordinates');?></th>
 	<th><?php echo $this->Paginator->sort('sort');?></th>
-	<th><?php echo $this->Paginator->sort('modified');?></th>
+	<th><?php echo $this->Paginator->sort('modified', null, array('direction' => 'desc'));?></th>
 	<th class="actions"><?php echo __('Actions');?></th>
 </tr>
 <?php

@@ -13,7 +13,8 @@
 	],
 	"require": {
 		"php": ">=5.3",
-		"composer/installers": "*"
+		"composer/installers": "*",
+		"dereuromark/tools-cakephp": "dev-master"
 	},
 	"support": {
 		"source": "https://github.com/dereuromark/data"

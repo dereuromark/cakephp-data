@@ -46,6 +46,9 @@ class DataHelper extends TextHelper {
 	public function getCountryIconPaths() {
 		if ($specific = Configure::read('Country.imagePath')) {
 			list ($plugin, $specificPath) = pluginSplit($specific);
+			if (substr($specificPath, 0, 1) !== '/') {
+				$specificPath = '/img/' . $specific;
+			}
 			$wwwPath = $specificPath;
 			if ($plugin) {
 				$wwwPath = '/' . Inflector::underscore($plugin) . '/' . $wwwPath;
@@ -55,10 +58,11 @@ class DataHelper extends TextHelper {
 			} else {
 				$path = WWW_ROOT;
 			}
-			$path .= $specificPath . DS;
+			$specificPath = str_replace('/', DS, $specificPath);
+			$path .= trim($specificPath, DS) . DS;
 		} else {
 			$wwwPath = '/data/img/country_flags/';
-			$path = App::pluginPath('Data') . 'webroot' . DS . 'img' . DS . 'country_flags' . DS;
+			$path = CakePlugin::path('Data') . 'webroot' . DS . 'img' . DS . 'country_flags' . DS;
 		}
 		return array($wwwPath, $path);
 	}
@@ -83,6 +87,7 @@ class DataHelper extends TextHelper {
 				$ending = $options['ending'];
 			}
 		}
+
 		$icon = mb_strtolower($icon);
 
 		if (empty($icon)) {
