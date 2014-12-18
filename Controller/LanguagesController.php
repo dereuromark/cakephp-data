@@ -31,7 +31,7 @@ class LanguagesController extends DataAppController {
 
 	public function admin_view($id = null) {
 		if (empty($id) || !($language = $this->Language->find('first', array('conditions' => array('Language.id' => $id))))) {
-			$this->Common->flashMessage(__('invalid record'), 'error');
+			$this->Flash->message(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		$this->set(compact('language'));
@@ -42,26 +42,26 @@ class LanguagesController extends DataAppController {
 			$this->Language->create();
 			if ($this->Language->save($this->request->data)) {
 				$var = $this->request->data['Language']['name'];
-				$this->Common->flashMessage(__('record add %s saved', h($var)), 'success');
+				$this->Flash->message(__('record add %s saved', h($var)), 'success');
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Common->flashMessage(__('formContainsErrors'), 'error');
+				$this->Flash->message(__('formContainsErrors'), 'error');
 			}
 		}
 	}
 
 	public function admin_edit($id = null) {
 		if (empty($id) || !($language = $this->Language->find('first', array('conditions' => array('Language.id' => $id))))) {
-			$this->Common->flashMessage(__('invalid record'), 'error');
+			$this->Flash->message(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->Language->save($this->request->data)) {
 				$var = $this->request->data['Language']['name'];
-				$this->Common->flashMessage(__('record edit %s saved', h($var)), 'success');
+				$this->Flash->message(__('record edit %s saved', h($var)), 'success');
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Common->flashMessage(__('formContainsErrors'), 'error');
+				$this->Flash->message(__('formContainsErrors'), 'error');
 			}
 		}
 		if (empty($this->request->data)) {
@@ -70,19 +70,17 @@ class LanguagesController extends DataAppController {
 	}
 
 	public function admin_delete($id = null) {
-		if (!$this->Common->isPosted()) {
-			throw new MethodNotAllowedException();
-		}
+		$this->request->allowMethod('post');
 		if (empty($id) || !($language = $this->Language->find('first', array('conditions' => array('Language.id' => $id), 'fields' => array('id', 'name'))))) {
-			$this->Common->flashMessage(__('invalid record'), 'error');
+			$this->Flash->message(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		if ($this->Language->delete($id)) {
 			$var = $language['Language']['name'];
-			$this->Common->flashMessage(__('record del %s done', h($var)), 'success');
+			$this->Flash->message(__('record del %s done', h($var)), 'success');
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->Common->flashMessage(__('record del %s not done exception', h($var)), 'error');
+		$this->Flash->message(__('record del %s not done exception', h($var)), 'error');
 		return $this->Common->autoRedirect(array('action' => 'index'));
 	}
 
@@ -117,13 +115,13 @@ class LanguagesController extends DataAppController {
 			}
 		}
 
-		$this->Common->flashMessage($count . ' of ' . count($languages) . ' ' . __('languages added'), 'success');
+		$this->Flash->message($count . ' of ' . count($languages) . ' ' . __('languages added'), 'success');
 
 		$errorMessage = array();
 		foreach ($errors as $error) {
 			$errorMessage[] = $error['data']['language'] . ' (' . returns($error['errors']) . ')';
 		}
-		$this->Common->flashMessage(__('not added') . ' ' . implode(', ', $errorMessage), 'warning');
+		$this->Flash->message(__('not added') . ' ' . implode(', ', $errorMessage), 'warning');
 		return $this->redirect(array('action' => 'index'));
 		//pr($errors);
 	}
@@ -174,7 +172,7 @@ class LanguagesController extends DataAppController {
 		$languages = $this->Language->getPrimaryLanguages('list');
 		$this->Language->updateAll(array('status' => Language::STATUS_ACTIVE), array('id' => array_keys($languages)));
 
-		$this->Common->flashMessage(__('%s of %s set active', $this->Language->getAffectedRows(), count($languages)), 'success');
+		$this->Flash->message(__('%s of %s set active', $this->Language->getAffectedRows(), count($languages)), 'success');
 		return $this->redirect(array('action' => 'index'));
 	}
 

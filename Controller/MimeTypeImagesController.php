@@ -30,7 +30,7 @@ class MimeTypeImagesController extends DataAppController {
 					}
 
 					if (!empty($successfullyInserted)) {
-						$this->Common->flashMessage(count($successfullyInserted) . ' File Extensions added: ' . implode(', ', $successfullyInserted), 'success');
+						$this->Flash->message(count($successfullyInserted) . ' File Extensions added: ' . implode(', ', $successfullyInserted), 'success');
 					}
 				}
 			}
@@ -68,7 +68,7 @@ class MimeTypeImagesController extends DataAppController {
 			}
 
 			if (empty($this->request->data['MimeTypeImage']['extensions']) && empty($this->request->data['MimeTypeImage']['import'])) {
-				$this->Common->flashMessage('Nothing selected', 'warning');
+				$this->Flash->message('Nothing selected', 'warning');
 			}
 		}
 	}
@@ -110,7 +110,7 @@ class MimeTypeImagesController extends DataAppController {
 		}
 
 		if (!empty($renameSuccess)) {
-			$this->Common->flashMessage(count($renameSuccess) . ' Icons added: ' . implode(', ', $renameSuccess), 'success');
+			$this->Flash->message(count($renameSuccess) . ' Icons added: ' . implode(', ', $renameSuccess), 'success');
 		}
 
 		$renameSuccess = array();
@@ -127,7 +127,7 @@ class MimeTypeImagesController extends DataAppController {
 					$ext = mb_strtolower(Sanitize::paranoid($ext));
 					$name = mb_strtolower(Sanitize::paranoid($image));
 					if (empty($name) || empty($ext)) {
-						$this->Common->flashMessage(' \'' . $filename . ' \': \'' . $name . '\' not a valid extension name, or \'' . $ext . '\' not a valid image file extension...',
+						$this->Flash->message(' \'' . $filename . ' \': \'' . $name . '\' not a valid extension name, or \'' . $ext . '\' not a valid image file extension...',
 							'error');
 						continue;
 					}
@@ -138,13 +138,13 @@ class MimeTypeImagesController extends DataAppController {
 						if (empty($dbImage['MimeTypeImage']['ext']) || !file_exists(PATH_MIMETYPES . $dbImage['MimeTypeImage']['name'] . '.' . $dbImage['MimeTypeImage']['ext'])) {
 							$recordId = $dbImage['MimeTypeImage']['id'];
 						} else {
-							$this->Common->flashMessage(' \'' . $filename . ' \': extension \'' . $name . '\' already exists with an image present...', 'error');
+							$this->Flash->message(' \'' . $filename . ' \': extension \'' . $name . '\' already exists with an image present...', 'error');
 							continue;
 						}
 					}
 
 					if (!file_exists(PATH_MIMETYPES . 'import' . DS . $filename)) {
-						$this->Common->flashMessage(' \'' . $filename . ' \' was moved/deleted and could not be found anymore...', 'error');
+						$this->Flash->message(' \'' . $filename . ' \' was moved/deleted and could not be found anymore...', 'error');
 						continue;
 					}
 
@@ -161,7 +161,7 @@ class MimeTypeImagesController extends DataAppController {
 
 				}
 				if (!empty($renameSuccess)) {
-					$this->Common->flashMessage(count($renameSuccess) . ' Icons added: ' . implode(', ', $renameSuccess), 'success');
+					$this->Flash->message(count($renameSuccess) . ' Icons added: ' . implode(', ', $renameSuccess), 'success');
 				}
 			}
 		}
@@ -204,7 +204,7 @@ class MimeTypeImagesController extends DataAppController {
 				rename(PATH_MIMETYPES . $m['MimeTypeImage']['name'] . '.' . $m['MimeTypeImage']['ext'], PATH_MIMETYPES . 'archive' . DS . $m['MimeTypeImage']['name'] .
 					'.' . $m['MimeTypeImage']['ext']);
 			}
-			$this->Common->flashMessage(count($images) . ' Icon-Dateien vorhanden, obwohl kein Datensatz dazu (verschoben nach Archiv): ' . implode(', ',
+			$this->Flash->message(count($images) . ' Icon-Dateien vorhanden, obwohl kein Datensatz dazu (verschoben nach Archiv): ' . implode(', ',
 				$images));
 		}
 
@@ -214,12 +214,12 @@ class MimeTypeImagesController extends DataAppController {
 	public function admin_view($id = null) {
 		$this->MimeTypeImage->recursive = 0;
 		if (empty($id)) {
-			$this->Common->flashMessage(__('record invalid'), 'error');
+			$this->Flash->message(__('record invalid'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		$mimeTypeImage = $this->MimeTypeImage->get($id);
 		if (empty($mimeTypeImage)) {
-			$this->Common->flashMessage(__('record not exists'), 'error');
+			$this->Flash->message(__('record not exists'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		$this->set(compact('mimeTypeImage'));
@@ -259,7 +259,7 @@ class MimeTypeImagesController extends DataAppController {
 		if (!array_key_exists($ext, MimeTypeImage::extensions()) || (!empty($this->request->data['MimeTypeImage']['ext']) && $this->request->data['MimeTypeImage']['ext'] !=
 			$ext)) {
 			# re-render
-			$this->Common->flashMessage(__('re-rendered'), 'success');
+			$this->Flash->message(__('re-rendered'), 'success');
 
 			/*
 			if (!empty($this->request->data['MimeTypeImage']['ext'])) {
@@ -307,10 +307,10 @@ class MimeTypeImagesController extends DataAppController {
 			if (empty($error) && $this->MimeTypeImage->save($this->request->data)) {
 				$id = $this->MimeTypeImage->id;
 				//$name = $this->request->data['MimeTypeImage']['name'];
-				$this->Common->flashMessage(__('record add %s saved', $id), 'success');
+				$this->Flash->message(__('record add %s saved', $id), 'success');
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Common->flashMessage(__('record add not saved'), 'error');
+				$this->Flash->message(__('record add not saved'), 'error');
 			}
 		} else {
 			$this->request->data['MimeTypeImage']['active'] = 1;
@@ -328,7 +328,7 @@ class MimeTypeImagesController extends DataAppController {
 
 	public function admin_edit($id = null) {
 		if (empty($id)) {
-			$this->Common->flashMessage(__('record invalid'), 'error');
+			$this->Flash->message(__('record invalid'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		if ($this->Common->isPosted()) {
@@ -345,16 +345,16 @@ class MimeTypeImagesController extends DataAppController {
 
 			if ($this->MimeTypeImage->save($this->request->data)) {
 				//$name = $this->request->data['MimeTypeImage']['name'];
-				$this->Common->flashMessage(__('record edit %s saved', $id), 'success');
+				$this->Flash->message(__('record edit %s saved', $id), 'success');
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Common->flashMessage(__('record edit not saved'), 'error');
+				$this->Flash->message(__('record edit not saved'), 'error');
 			}
 		}
 		if (empty($this->request->data)) {
 			$this->request->data = $this->MimeTypeImage->get($id);
 			if (empty($this->request->data)) { # still no record found
-				$this->Common->flashMessage(__('record not exists'), 'error');
+				$this->Flash->message(__('record not exists'), 'error');
 				return $this->redirect(array('action' => 'index'));
 			}
 		}
@@ -370,11 +370,9 @@ class MimeTypeImagesController extends DataAppController {
 	}
 
 	public function admin_delete($id = null) {
-		if (!$this->Common->isPosted()) {
-			throw new MethodNotAllowedException();
-		}
+		$this->request->allowMethod('post');
 		if (empty($id)) {
-			$this->Common->flashMessage(__('record invalid'), 'error');
+			$this->Flash->message(__('record invalid'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		$res = $this->MimeTypeImage->find('first', array('fields' => array(
@@ -382,7 +380,7 @@ class MimeTypeImagesController extends DataAppController {
 				'name',
 				'ext'), 'conditions' => array('MimeTypeImage.id' => $id)));
 		if (empty($res)) {
-			$this->Common->flashMessage(__('record del not exists'), 'error');
+			$this->Flash->message(__('record del not exists'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 
@@ -395,15 +393,15 @@ class MimeTypeImagesController extends DataAppController {
 				//@copy...
 				//@unlink(PATH_MIMETYPES.$name);
 				# strange: "rename" seems to work but still throws an error (copy + unlink as well)
-				//$this->Common->flashMessage(__('could not move the old icon %s to \'archive\'...', $name),'warning');
+				//$this->Flash->message(__('could not move the old icon %s to \'archive\'...', $name),'warning');
 			} else {
-				$this->Common->flashMessage(__('old icon %s moved to \'archive\'', $name), 'success');
+				$this->Flash->message(__('old icon %s moved to \'archive\'', $name), 'success');
 			}
 
-			$this->Common->flashMessage(__('record del %s done', $fileName), 'success');
+			$this->Flash->message(__('record del %s done', $fileName), 'success');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		} else {
-			$this->Common->flashMessage(__('record del %s not done exception', $fileName), 'error');
+			$this->Flash->message(__('record del %s not done exception', $fileName), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 	}

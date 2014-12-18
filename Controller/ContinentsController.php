@@ -21,7 +21,7 @@ class ContinentsController extends DataAppController {
 
 	public function view($id = null) {
 		if (empty($id) || !($continent = $this->Continent->find('first', array('conditions' => array('Continent.id' => $id))))) {
-			$this->Common->flashMessage(__('invalid record'), 'error');
+			$this->Flash->message(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		$this->set(compact('continent'));
@@ -32,10 +32,10 @@ class ContinentsController extends DataAppController {
 			$this->Continent->create();
 			if ($this->Continent->save($this->request->data)) {
 				$var = $this->request->data['Continent']['name'];
-				$this->Common->flashMessage(__('record add %s saved', h($var)), 'success');
+				$this->Flash->message(__('record add %s saved', h($var)), 'success');
 				return $this->Common->postRedirect(array('action' => 'index'));
 			} else {
-				$this->Common->flashMessage(__('formContainsErrors'), 'error');
+				$this->Flash->message(__('formContainsErrors'), 'error');
 			}
 		}
 		$parents = array(0 => __('Root')) + $this->Continent->ParentContinent->generateTreeList(null, null, null, '» ');
@@ -44,16 +44,16 @@ class ContinentsController extends DataAppController {
 
 	public function edit($id = null) {
 		if (empty($id) || !($continent = $this->Continent->find('first', array('conditions' => array('Continent.id' => $id))))) {
-			$this->Common->flashMessage(__('invalid record'), 'error');
+			$this->Flash->message(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->Continent->save($this->request->data)) {
 				$var = $this->request->data['Continent']['name'];
-				$this->Common->flashMessage(__('record edit %s saved', h($var)), 'success');
+				$this->Flash->message(__('record edit %s saved', h($var)), 'success');
 				return $this->Common->postRedirect(array('action' => 'index'));
 			} else {
-				$this->Common->flashMessage(__('formContainsErrors'), 'error');
+				$this->Flash->message(__('formContainsErrors'), 'error');
 			}
 		}
 		if (empty($this->request->data)) {
@@ -64,20 +64,18 @@ class ContinentsController extends DataAppController {
 	}
 
 	public function delete($id = null) {
-		if (!$this->Common->isPosted()) {
-			throw new MethodNotAllowedException();
-		}
+		$this->request->allowMethod('post');
 		if (empty($id) || !($continent = $this->Continent->find('first', array('conditions' => array('Continent.id' => $id), 'fields' => array('id', 'name'))))) {
-			$this->Common->flashMessage(__('invalid record'), 'error');
+			$this->Flash->message(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		$var = $continent['Continent']['name'];
 
 		if ($this->Continent->delete($id)) {
-			$this->Common->flashMessage(__('record del %s done', h($var)), 'success');
+			$this->Flash->message(__('record del %s done', h($var)), 'success');
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->Common->flashMessage(__('record del %s not done exception', h($var)), 'error');
+		$this->Flash->message(__('record del %s not done exception', h($var)), 'error');
 		return $this->Common->autoRedirect(array('action' => 'index'));
 	}
 
@@ -93,7 +91,7 @@ class ContinentsController extends DataAppController {
 
 	public function admin_view($id = null) {
 		if (empty($id) || !($continent = $this->Continent->find('first', array('conditions' => array('Continent.id' => $id))))) {
-			$this->Common->flashMessage(__('invalid record'), 'error');
+			$this->Flash->message(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		$this->set(compact('continent'));
@@ -104,10 +102,10 @@ class ContinentsController extends DataAppController {
 			$this->Continent->create();
 			if ($this->Continent->save($this->request->data)) {
 				$var = $this->request->data['Continent']['name'];
-				$this->Common->flashMessage(__('record add %s saved', h($var)), 'success');
+				$this->Flash->message(__('record add %s saved', h($var)), 'success');
 				return $this->Common->postRedirect(array('action' => 'index'));
 			} else {
-				$this->Common->flashMessage(__('formContainsErrors'), 'error');
+				$this->Flash->message(__('formContainsErrors'), 'error');
 			}
 		}
 		$parents = array(0 => __('Root')) + $this->Continent->ParentContinent->generateTreeList(null, null, null, '» ');
@@ -116,16 +114,16 @@ class ContinentsController extends DataAppController {
 
 	public function admin_edit($id = null) {
 		if (empty($id) || !($continent = $this->Continent->find('first', array('conditions' => array('Continent.id' => $id))))) {
-			$this->Common->flashMessage(__('invalid record'), 'error');
+			$this->Flash->message(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->Continent->save($this->request->data)) {
 				$var = $this->request->data['Continent']['name'];
-				$this->Common->flashMessage(__('record edit %s saved', h($var)), 'success');
+				$this->Flash->message(__('record edit %s saved', h($var)), 'success');
 				return $this->Common->postRedirect(array('action' => 'index'));
 			} else {
-				$this->Common->flashMessage(__('formContainsErrors'), 'error');
+				$this->Flash->message(__('formContainsErrors'), 'error');
 			}
 		}
 		if (empty($this->request->data)) {
@@ -136,20 +134,18 @@ class ContinentsController extends DataAppController {
 	}
 
 	public function admin_delete($id = null) {
-		if (!$this->Common->isPosted()) {
-			throw new MethodNotAllowedException();
-		}
+		$this->request->allowMethod('post');
 		if (empty($id) || !($continent = $this->Continent->find('first', array('conditions' => array('Continent.id' => $id), 'fields' => array('id', 'name'))))) {
-			$this->Common->flashMessage(__('invalid record'), 'error');
+			$this->Flash->message(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		$var = $continent['Continent']['name'];
 
 		if ($this->Continent->delete($id)) {
-			$this->Common->flashMessage(__('record del %s done', h($var)), 'success');
+			$this->Flash->message(__('record del %s done', h($var)), 'success');
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->Common->flashMessage(__('record del %s not done exception', h($var)), 'error');
+		$this->Flash->message(__('record del %s not done exception', h($var)), 'error');
 		return $this->Common->autoRedirect(array('action' => 'index'));
 	}
 
