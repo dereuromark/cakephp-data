@@ -3,7 +3,7 @@ App::uses('AppController', 'Controller');
 
 class DataAppController extends AppController {
 
-	public $components = array('Session', 'Tools.Common');
+	public $components = array('Session', 'Tools.Common', 'Tools.Flash');
 
 	public $helpers = array('Tools.Common', 'Tools.Format', 'Tools.Datetime', 'Tools.Numeric', 'Data.Data');
 
