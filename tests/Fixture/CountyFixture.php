@@ -1,5 +1,7 @@
 <?php
 /* County Fixture generated on: 2011-11-20 21:58:50 : 1321822730 */
+namespace Data\Test\Fixture;
+
 
 /**
  * CountyFixture

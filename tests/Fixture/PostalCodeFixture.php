@@ -1,5 +1,7 @@
 <?php
 /* PostalCode Fixture generated on: 2011-11-20 21:59:25 : 1321822765 */
+namespace Data\Test\Fixture;
+
 
 /**
  * PostalCodeFixture

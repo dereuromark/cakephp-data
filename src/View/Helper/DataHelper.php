@@ -1,4 +1,6 @@
 <?php
+namespace Data\View\Helper;
+
 App::uses('TextHelper', 'View/Helper');
 
 /**

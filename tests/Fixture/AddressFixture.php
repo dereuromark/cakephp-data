@@ -4,6 +4,8 @@
  * AddressFixture
  *
  */
+namespace Data\Test\Fixture;
+
 class AddressFixture extends CakeTestFixture {
 
 	/**

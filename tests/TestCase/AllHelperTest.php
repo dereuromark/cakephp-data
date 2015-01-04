@@ -2,6 +2,8 @@
 /**
  * Group test - Data
  */
+namespace Data\Test\TestCase;
+
 class AllHelperTest extends PHPUnit_Framework_TestSuite {
 
 	/**

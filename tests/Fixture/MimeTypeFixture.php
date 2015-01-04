@@ -3,6 +3,8 @@
  * MimeTypeFixture
  *
  */
+namespace Data\Test\Fixture;
+
 class MimeTypeFixture extends CakeTestFixture {
 
 	/**

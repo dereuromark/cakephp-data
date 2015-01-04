@@ -1,4 +1,6 @@
 <?php
+namespace Data\Test\TestCase\Controller;
+
 App::uses('CitiesController', 'Data.Controller');
 App::uses('CakeRequest', 'Network');
 App::uses('CakeResponse', 'Network');

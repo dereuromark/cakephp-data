@@ -1,5 +1,7 @@
 <?php
 
+namespace Data\Test\Fixture;
+
 class ContinentFixture extends CakeTestFixture {
 
 	public $fields = array(

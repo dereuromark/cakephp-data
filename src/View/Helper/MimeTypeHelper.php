@@ -1,4 +1,6 @@
 <?php
+namespace Data\View\Helper;
+
 App::uses('File', 'Utility');
 App::uses('AppHelper', 'View/Helper');
 

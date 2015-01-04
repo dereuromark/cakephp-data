@@ -1,5 +1,7 @@
 <?php
 
+namespace Data\Controller;
+
 App::uses('DataAppController', 'Data.Controller');
 
 class MimeTypeImagesController extends DataAppController {

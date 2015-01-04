@@ -1,5 +1,7 @@
 <?php
 /* Language Fixture generated on: 2011-11-20 21:59:07 : 1321822747 */
+namespace Data\Test\Fixture;
+
 
 /**
  * LanguageFixture

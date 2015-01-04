@@ -1,4 +1,6 @@
 <?php
+namespace Data\Controller;
+
 App::uses('DataAppController', 'Data.Controller');
 
 /**

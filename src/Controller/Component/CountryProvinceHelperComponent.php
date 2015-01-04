@@ -1,4 +1,6 @@
 <?php
+namespace Data\Controller\Component;
+
 App::uses('Component', 'Controller');
 
 /**

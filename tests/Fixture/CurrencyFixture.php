@@ -1,5 +1,7 @@
 <?php
 /* Currency Fixture generated on: 2011-11-20 21:58:59 : 1321822739 */
+namespace Data\Test\Fixture;
+
 
 /**
  * CurrencyFixture

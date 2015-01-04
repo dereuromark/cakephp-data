@@ -1,5 +1,7 @@
 <?php
 
+namespace Data\Test\TestCase\Controller;
+
 App::uses('CountriesController', 'Data.Controller');
 App::uses('MyCakeTestCase', 'Tools.TestSuite');
 

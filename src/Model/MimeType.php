@@ -1,4 +1,6 @@
 <?php
+namespace Data\Model;
+
 App::uses('DataAppModel', 'Data.Model');
 App::uses('File', 'Utility');
 

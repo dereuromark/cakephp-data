@@ -1,4 +1,6 @@
 <?php
+namespace Data\Controller;
+
 App::uses('AppController', 'Controller');
 
 class DataAppController extends AppController {

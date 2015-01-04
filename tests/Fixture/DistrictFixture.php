@@ -3,6 +3,8 @@
  * DistrictFixture
  *
  */
+namespace Data\Test\Fixture;
+
 class DistrictFixture extends CakeTestFixture {
 
 	/**

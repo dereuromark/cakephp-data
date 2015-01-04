@@ -2,6 +2,8 @@
 /**
  * Group test - Data
  */
+namespace Data\Test\TestCase;
+
 class AllComponentTest extends PHPUnit_Framework_TestSuite {
 
 	/**

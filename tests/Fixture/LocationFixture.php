@@ -3,6 +3,8 @@
  * LocationFixture
  *
  */
+namespace Data\Test\Fixture;
+
 class LocationFixture extends CakeTestFixture {
 
 	/**

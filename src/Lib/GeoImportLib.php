@@ -3,6 +3,8 @@
  * Import data into Country model
  *
  */
+namespace Data\Lib;
+
 class GeoImportLib {
 
 	public function __construct() {

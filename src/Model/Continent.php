@@ -1,4 +1,6 @@
 <?php
+namespace Data\Model;
+
 App::uses('DataAppModel', 'Data.Model');
 
 class Continent extends DataAppModel {

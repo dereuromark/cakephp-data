@@ -1,5 +1,6 @@
 <?php
 
+namespace Data\Test\TestCase\View\Helper;
 App::uses('MimeTypeHelper', 'Data.View/Helper');
 App::uses('MyCakeTestCase', 'Tools.TestSuite');
 App::uses('View', 'View');

@@ -1,5 +1,6 @@
 <?php
 
+namespace Data\Test\TestCase\Model;
 App::uses('Smiley', 'Data.Model');
 
 class SmileyTest extends CakeTestCase {

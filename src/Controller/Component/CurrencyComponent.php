@@ -4,6 +4,8 @@
  * - http://www.webservicex.net/WS/WSDetails.aspx?WSID=10 (XML)
  * - http://www.webserviceshare.com/business/financial/currency/service/Noon-Foreign-Exchange-Rates.htm (XML)
  */
+namespace Data\Controller\Component;
+
 App::uses('HttpSocket', 'Network/Http');
 App::uses('Xml', 'Utility');
 App::uses('Component', 'Controller');

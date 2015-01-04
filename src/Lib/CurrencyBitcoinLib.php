@@ -1,4 +1,6 @@
 <?php
+namespace Data\Lib;
+
 App::uses('HttpSocketLib', 'Tools.Lib');
 
 /**

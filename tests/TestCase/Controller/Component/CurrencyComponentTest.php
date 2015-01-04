@@ -1,4 +1,6 @@
 <?php
+namespace Data\Test\TestCase\Controller\Component;
+
 App::uses('CurrencyComponent', 'Data.Controller/Component');
 App::uses('Controller', 'Controller');
 App::uses('MyCakeTestCase', 'Tools.TestSuite');
