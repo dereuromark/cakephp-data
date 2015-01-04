@@ -1,7 +1,11 @@
 <?php
 namespace Data\Model;
 
-App::uses('DataAppModel', 'Data.Model');
+use Cake\Core\App;
+use Cake\Core\Configure;
+use Data\Model\Country;
+use Data\Model\DataAppModel;
+use Tools\Utility\Utility;
 
 class Location extends DataAppModel {
 
@@ -53,7 +57,6 @@ class Location extends DataAppModel {
 	 * @return array location on success, false otherwise
 	 */
 	public function getLocation($locationName, $countryId = null) {
-		App::uses('Country', 'Data.Model');
 
 		$country = !empty($countryId) ? ', ' . Country::addressList($countryId) : __('Germany');
 		$countryId = !empty($countryId) ? $countryId : 1;
@@ -142,7 +145,6 @@ class Location extends DataAppModel {
 			}
 			return '127.0.0.1';
 		}
-		App::uses('Utility', 'Tools.Utility');
 		$ip = Utility::getClientIp();
 		# usually getClientIp already removes multiple ips in favor of one single ip. but seems to fail sometimes
 		if (strpos($ip, ',') !== false) {

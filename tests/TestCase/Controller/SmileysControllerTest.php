@@ -2,8 +2,8 @@
 
 namespace Data\Test\TestCase\Controller;
 
-App::uses('SmileysController', 'Data.Controller');
-App::uses('MyCakeTestCase', 'Tools.TestSuite');
+use Data\Controller\SmileysController;
+use Tools\TestSuite\MyCakeTestCase;
 
 class SmileysControllerTest extends MyCakeTestCase {
 

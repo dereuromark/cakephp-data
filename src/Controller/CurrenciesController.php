@@ -1,7 +1,8 @@
 <?php
 namespace Data\Controller;
 
-App::uses('DataAppController', 'Data.Controller');
+use Cake\Core\Plugin;
+use Data\Controller\DataAppController;
 
 class CurrenciesController extends DataAppController {
 
@@ -42,7 +43,7 @@ class CurrenciesController extends DataAppController {
 	public function admin_index() {
 		$this->Currency->recursive = 0;
 
-		if (CakePlugin::loaded('Search')) {
+		if (Plugin::loaded('Search')) {
 			$this->Currency->Behaviors->load('Search.Searchable');
 			$this->Common->loadComponent(array('Search.Prg'));
 

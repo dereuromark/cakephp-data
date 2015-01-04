@@ -1,14 +1,15 @@
 <?php
 namespace Data\Test\TestCase\Controller\Component;
 
-App::uses('CurrencyComponent', 'Data.Controller/Component');
-App::uses('Controller', 'Controller');
-App::uses('MyCakeTestCase', 'Tools.TestSuite');
+use Cake\Controller\Controller;
+use Cake\TestSuite\TestCase;
+use Data\Controller\Component\CurrencyComponent;
+use Tools\TestSuite\MyCakeTestCase;
 
 /**
  * Short description for class.
  */
-class CurrencyComponentTest extends CakeTestCase {
+class CurrencyComponentTest extends TestCase {
 
 	/**
 	 * SetUp method

@@ -2,8 +2,8 @@
 
 namespace Data\Test\TestCase\Controller;
 
-App::uses('CurrenciesController', 'Data.Controller');
-App::uses('MyCakeTestCase', 'Tools.TestSuite');
+use Data\Controller\CurrenciesController;
+use Tools\TestSuite\MyCakeTestCase;
 
 class CurrenciesControllerTest extends MyCakeTestCase {
 

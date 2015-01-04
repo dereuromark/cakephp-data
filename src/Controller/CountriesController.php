@@ -1,7 +1,11 @@
 <?php
 namespace Data\Controller;
 
-App::uses('DataAppController', 'Data.Controller');
+use Cake\Cache\Cache;
+use Cake\Core\Configure;
+use Cake\Core\Plugin;
+use Cake\Utility\Folder;
+use Data\Controller\DataAppController;
 
 class CountriesController extends DataAppController {
 
@@ -13,7 +17,7 @@ class CountriesController extends DataAppController {
 		if ($specific = Configure::read('Country.image_path')) {
 			$this->imageFolder = WWW_ROOT . 'img' . DS . $specific . DS;
 		} else {
-			$this->imageFolder = CakePlugin::path('Data') . DS . 'webroot' . DS . 'img' . DS . 'country_flags' . DS;
+			$this->imageFolder = Plugin::path('Data') . DS . 'webroot' . DS . 'img' . DS . 'country_flags' . DS;
 		}
 
 		if (isset($this->Auth)) {
@@ -48,7 +52,6 @@ class CountriesController extends DataAppController {
 			$this->Common->flashMessage('Cache Used', 'info');
 			return $iconNames;
 		}
-		App::uses('Folder', 'Utility');
 		$handle = new Folder($this->imageFolder);
 		$icons = $handle->read(true, true);
 
@@ -195,7 +198,7 @@ class CountriesController extends DataAppController {
 	 * @return void
 	 */
 	public function admin_index() {
-		if (CakePlugin::loaded('Search')) {
+		if (Plugin::loaded('Search')) {
 			$this->Country->Behaviors->load('Search.Searchable');
 			$this->Common->loadComponent(array('Search.Prg'));
 

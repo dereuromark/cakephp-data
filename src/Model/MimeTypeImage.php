@@ -1,7 +1,9 @@
 <?php
 namespace Data\Model;
 
-App::uses('DataAppModel', 'Data.Model');
+use Cake\Model\Model;
+use Cake\Utility\File;
+use Data\Model\DataAppModel;
 
 class MimeTypeImage extends DataAppModel {
 
@@ -89,7 +91,6 @@ class MimeTypeImage extends DataAppModel {
 	}
 
 	public function cleanUp() {
-		App::uses('File', 'Utility');
 		$handle = new File(FILES . 'mime_types.txt');
 		$handle->delete();
 	}

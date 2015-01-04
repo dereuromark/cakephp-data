@@ -2,8 +2,8 @@
 
 namespace Data\Test\TestCase\Lib;
 
-App::uses('CurrencyBitcoinLib', 'Data.Lib');
-App::uses('MyCakeTestCase', 'Tools.TestSuite');
+use Data\Lib\CurrencyBitcoinLib;
+use Tools\TestSuite\MyCakeTestCase;
 
 class CurrencyBitcoinLibTest extends MyCakeTestCase {
 

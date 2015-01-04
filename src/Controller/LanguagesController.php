@@ -1,7 +1,8 @@
 <?php
 namespace Data\Controller;
 
-App::uses('DataAppController', 'Data.Controller');
+use Cake\Core\Plugin;
+use Data\Controller\DataAppController;
 
 class LanguagesController extends DataAppController {
 
@@ -19,7 +20,7 @@ class LanguagesController extends DataAppController {
 	public function admin_index() {
 		$this->Language->recursive = 0;
 
-		if (CakePlugin::loaded('Search')) {
+		if (Plugin::loaded('Search')) {
 			$this->Language->Behaviors->load('Search.Searchable');
 			$this->Common->loadComponent(array('Search.Prg'));
 

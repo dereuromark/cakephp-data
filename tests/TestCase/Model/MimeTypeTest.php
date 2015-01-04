@@ -1,9 +1,9 @@
 <?php
 
 namespace Data\Test\TestCase\Model;
-App::uses('MimeType', 'Data.Model');
-App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
+use Data\Model\MimeType;
+use Tools\TestSuite\MyCakeTestCase;
 class MimeTypeTest extends MyCakeTestCase {
 
 	public $MimeType;

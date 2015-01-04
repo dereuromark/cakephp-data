@@ -1,9 +1,9 @@
 <?php
 namespace Data\Test\TestCase\Controller;
 
-App::uses('CitiesController', 'Data.Controller');
-App::uses('CakeRequest', 'Network');
-App::uses('CakeResponse', 'Network');
+use Cake\Network\Request;
+use Cake\Network\Response;
+use Data\Controller\CitiesController;
 
 /**
  * CitiesController Test Case
@@ -28,7 +28,7 @@ class CitiesControllerTest extends ControllerTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->CitiesController = new CitiesController(new CakeRequest, new CakeResponse);
+		$this->CitiesController = new CitiesController(new Request, new Response);
 	}
 
 	public function testObject() {

@@ -2,8 +2,8 @@
 
 namespace Data\Test\TestCase\Controller;
 
-App::uses('MimeTypeImagesController', 'Data.Controller');
-App::uses('MyCakeTestCase', 'Tools.TestSuite');
+use Data\Controller\MimeTypeImagesController;
+use Tools\TestSuite\MyCakeTestCase;
 
 class MimeTypeImagesControllerTest extends MyCakeTestCase {
 

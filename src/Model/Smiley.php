@@ -1,7 +1,8 @@
 <?php
 namespace Data\Model;
 
-App::uses('DataAppModel', 'Data.Model');
+use Cake\Core\Plugin;
+use Data\Model\DataAppModel;
 
 class Smiley extends DataAppModel {
 
@@ -107,7 +108,7 @@ class Smiley extends DataAppModel {
 			if (!empty($smiley[$this->alias]['prim_code'])) {
 				$res[] = array(
 					'code' => $smiley[$this->alias]['prim_code'],
-					'path' => CakePlugin::path('Data') . 'webroot' . DS . 'img' . DS . 'smileys' . DS . 'default' . DS . $smiley[$this->alias]['smiley_path'],
+					'path' => Plugin::path('Data') . 'webroot' . DS . 'img' . DS . 'smileys' . DS . 'default' . DS . $smiley[$this->alias]['smiley_path'],
 					'url' => $path . $smiley[$this->alias]['smiley_path'],
 					'title' => $smiley[$this->alias]['title'],
 					'base' => $smiley[$this->alias]['is_base']
@@ -116,7 +117,7 @@ class Smiley extends DataAppModel {
 			if (!empty($smiley[$this->alias]['sec_code'])) {
 				$res[] = array(
 					'code' => $smiley[$this->alias]['sec_code'],
-					'path' => CakePlugin::path('Data') . 'webroot' . DS . 'img' . DS . 'smileys' . DS . 'default' . DS . $smiley[$this->alias]['smiley_path'],
+					'path' => Plugin::path('Data') . 'webroot' . DS . 'img' . DS . 'smileys' . DS . 'default' . DS . $smiley[$this->alias]['smiley_path'],
 					'url' => $path . $smiley[$this->alias]['smiley_path'],
 					'title' => $smiley[$this->alias]['title'],
 					'base' => $smiley[$this->alias]['is_base']

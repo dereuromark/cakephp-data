@@ -1,7 +1,7 @@
 <?php
 namespace Data\Model;
 
-App::uses('AppModel', 'Model');
+use App\Model\AppModel;
 
 class DataAppModel extends AppModel {
 }

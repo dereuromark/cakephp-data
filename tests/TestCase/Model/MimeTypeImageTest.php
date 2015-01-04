@@ -1,9 +1,9 @@
 <?php
 
 namespace Data\Test\TestCase\Model;
-App::uses('MimeTypeImage', 'Data.Model');
-App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
+use Data\Model\MimeTypeImage;
+use Tools\TestSuite\MyCakeTestCase;
 class MimeTypeImageTest extends MyCakeTestCase {
 
 	public $fixtures = array('plugin.data.mime_type_image');

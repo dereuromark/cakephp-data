@@ -1,8 +1,9 @@
 <?php
 namespace Data\Test\TestCase\Lib;
 
-App::uses('CurrencyLib', 'Data.Lib');
-App::uses('MyCakeTestCase', 'Tools.TestSuite');
+use Cake\Core\Plugin;
+use Data\Lib\CurrencyLib;
+use Tools\TestSuite\MyCakeTestCase;
 
 class CurrencyLibTest extends MyCakeTestCase {
 
@@ -89,7 +90,7 @@ class TestCurrencyLib extends CurrencyLib {
 		}
 
 		$file = basename($url);
-		$url = CakePlugin::path('Data') . 'Test' . DS . 'test_files' . DS . 'xml' . DS . $file;
+		$url = Plugin::path('Data') . 'Test' . DS . 'test_files' . DS . 'xml' . DS . $file;
 		return parent::_loadXml($url);
 	}
 

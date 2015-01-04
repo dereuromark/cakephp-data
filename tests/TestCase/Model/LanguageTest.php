@@ -1,9 +1,9 @@
 <?php
 
 namespace Data\Test\TestCase\Model;
-App::uses('Language', 'Data.Model');
-App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
+use Data\Model\Language;
+use Tools\TestSuite\MyCakeTestCase;
 class LanguageTest extends MyCakeTestCase {
 
 	public $fixtures = array('plugin.data.language');

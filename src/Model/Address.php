@@ -1,7 +1,9 @@
 <?php
 namespace Data\Model;
 
-App::uses('DataAppModel', 'Data.Model');
+use Cake\Core\Configure;
+use Cake\Model\Model;
+use Data\Model\DataAppModel;
 
 class Address extends DataAppModel {
 

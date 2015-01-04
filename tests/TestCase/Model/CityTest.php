@@ -2,8 +2,8 @@
 
 namespace Data\Test\TestCase\Model;
 
-App::uses('City', 'Data.Model');
-App::uses('MyCakeTestCase', 'Tools.TestSuite');
+use Data\Model\City;
+use Tools\TestSuite\MyCakeTestCase;
 
 class CityTest extends MyCakeTestCase {
 

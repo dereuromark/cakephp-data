@@ -1,8 +1,11 @@
 <?php
 namespace Data\Model;
 
-App::uses('DataAppModel', 'Data.Model');
-App::uses('GeocodeLib', 'Data.Lib');
+use Cake\Core\Configure;
+use Data\Lib\GeocodeLib;
+use Data\Model\DataAppModel;
+use Tools\Lib\GeocodeLib;
+use Tools\Lib\GeolocateLib;
 
 class Country extends DataAppModel {
 
@@ -227,7 +230,6 @@ class Country extends DataAppModel {
 	//TODO: test
 
 	public function updateAbbr($id = null) {
-		App::uses('GeocodeLib', 'Tools.Lib');
 		$Geocoder = new GeocodeLib();
 
 		$override = false;
@@ -299,7 +301,6 @@ class Country extends DataAppModel {
 	 * @deprecated but seems to have better lat/lng for countries...
 	 */
 	public function updateCoordinates($id = null) {
-		App::uses('GeocodeLib', 'Tools.Lib');
 		$Geocoder = new GeocodeLib();
 		//$Geocoder->setup();
 
@@ -364,7 +365,6 @@ class Country extends DataAppModel {
 			return -1;
 		}
 		*/
-		App::uses('GeolocateLib', 'Tools.Lib');
 		$this->GeolocateLib = new GeolocateLib();
 		if ($this->GeolocateLib->locate($ip)) {
 			$country = $this->GeolocateLib->getResult('country_code'); # iso2

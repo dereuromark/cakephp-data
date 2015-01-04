@@ -2,12 +2,13 @@
 
 namespace Data\Test\TestCase\Lib;
 
-App::uses('GeoImportLib', 'Data.Lib');
+use Cake\TestSuite\TestCase;
+use Data\Lib\GeoImportLib;
 
 /**
  * GeoImportLib test
  */
-class GeoImportLibTest extends CakeTestCase {
+class GeoImportLibTest extends TestCase {
 
 	public function setUp() {
 		parent::setUp();

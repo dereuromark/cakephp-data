@@ -6,9 +6,10 @@
  */
 namespace Data\Lib;
 
-App::uses('HttpSocket', 'Network/Http');
-App::uses('Xml', 'Utility');
-App::uses('CurrencyBitcoinLib', 'Data.Lib');
+use App\Network\Http\HttpSocket;
+use Cake\Cache\Cache;
+use Cake\Utility\Xml;
+use Data\Lib\CurrencyBitcoinLib;
 
 /**
  * Component to retreive calculate currencies

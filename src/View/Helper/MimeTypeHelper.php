@@ -1,8 +1,8 @@
 <?php
 namespace Data\View\Helper;
 
-App::uses('File', 'Utility');
-App::uses('AppHelper', 'View/Helper');
+use App\View\Helper\AppHelper;
+use Cake\Utility\File;
 
 class MimeTypeHelper extends AppHelper {
 

@@ -2,8 +2,8 @@
 
 namespace Data\Test\TestCase\Model;
 
-App::uses('Currency', 'Data.Model');
-App::uses('MyCakeTestCase', 'Tools.TestSuite');
+use Data\Model\Currency;
+use Tools\TestSuite\MyCakeTestCase;
 
 class CurrencyTest extends MyCakeTestCase {
 

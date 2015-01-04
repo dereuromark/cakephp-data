@@ -1,9 +1,9 @@
 <?php
 
 namespace Data\Test\TestCase\Model;
-App::uses('Location', 'Data.Model');
-App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
+use Data\Model\Location;
+use Tools\TestSuite\MyCakeTestCase;
 class LocationTest extends MyCakeTestCase {
 
 	public $fixtures = array('plugin.data.location');

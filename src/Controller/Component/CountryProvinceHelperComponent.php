@@ -1,7 +1,8 @@
 <?php
 namespace Data\Controller\Component;
 
-App::uses('Component', 'Controller');
+use Cake\Controller\Component;
+use Cake\Controller\Controller;
 
 /**
  */

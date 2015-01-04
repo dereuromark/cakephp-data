@@ -2,8 +2,8 @@
 
 namespace Data\Test\TestCase\Model;
 
-App::uses('Address', 'Data.Model');
-App::uses('MyCakeTestCase', 'Tools.TestSuite');
+use Data\Model\Address;
+use Tools\TestSuite\MyCakeTestCase;
 
 class AddressTest extends MyCakeTestCase {
 

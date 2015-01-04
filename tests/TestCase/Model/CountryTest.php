@@ -2,8 +2,8 @@
 
 namespace Data\Test\TestCase\Model;
 
-App::uses('Country', 'Data.Model');
-App::uses('MyCakeTestCase', 'Tools.TestSuite');
+use Data\Model\Country;
+use Tools\TestSuite\MyCakeTestCase;
 
 class CountryTest extends MyCakeTestCase {
 

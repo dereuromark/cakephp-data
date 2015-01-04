@@ -1,7 +1,8 @@
 <?php
 namespace Data\Model;
 
-App::uses('DataAppModel', 'Data.Model');
+use Data\Model\DataAppModel;
+use Tools\Lib\GeocodeLib;
 
 class State extends DataAppModel {
 
@@ -91,7 +92,6 @@ class State extends DataAppModel {
 	 * - otherwise: specific update
 	 */
 	public function updateCoordinates($id = null) {
-		App::uses('GeocodeLib', 'Tools.Lib');
 		$geocoder = new GeocodeLib();
 
 		$override = false;

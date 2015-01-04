@@ -6,9 +6,11 @@
  */
 namespace Data\Controller\Component;
 
-App::uses('HttpSocket', 'Network/Http');
-App::uses('Xml', 'Utility');
-App::uses('Component', 'Controller');
+use App\Network\Http\HttpSocket;
+use Cake\Cache\Cache;
+use Cake\Controller\Component;
+use Cake\Utility\Xml;
+use Data\Lib\CurrencyBitcoinLib;
 
 /**
  * Component to retreive calculate currencies
@@ -159,7 +161,6 @@ class CurrencyComponent extends Component {
 	}
 
 	public function _getBitcoin() {
-		App::uses('CurrencyBitcoinLib', 'Data.Lib');
 		$Btc = new CurrencyBitcoinLib();
 		return $Btc->rate(array('currency' => $this->baseCurrency));
 	}

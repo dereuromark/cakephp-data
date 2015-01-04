@@ -1,7 +1,10 @@
 <?php
 namespace Data\View\Helper;
 
-App::uses('TextHelper', 'View/Helper');
+use App\View\Helper\TextHelper;
+use Cake\Core\Configure;
+use Cake\Core\Plugin;
+use Cake\Utility\Inflector;
 
 /**
  * DataHelper with basic html snippets
@@ -56,7 +59,7 @@ class DataHelper extends TextHelper {
 				$wwwPath = '/' . Inflector::underscore($plugin) . '/' . $wwwPath;
 			}
 			if ($plugin) {
-				$path = CakePlugin::path($plugin) . 'webroot' . DS;
+				$path = Plugin::path($plugin) . 'webroot' . DS;
 			} else {
 				$path = WWW_ROOT;
 			}
@@ -64,7 +67,7 @@ class DataHelper extends TextHelper {
 			$path .= trim($specificPath, DS) . DS;
 		} else {
 			$wwwPath = '/data/img/country_flags/';
-			$path = CakePlugin::path('Data') . 'webroot' . DS . 'img' . DS . 'country_flags' . DS;
+			$path = Plugin::path('Data') . 'webroot' . DS . 'img' . DS . 'country_flags' . DS;
 		}
 		return array($wwwPath, $path);
 	}

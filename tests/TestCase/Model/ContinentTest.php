@@ -2,8 +2,8 @@
 
 namespace Data\Test\TestCase\Model;
 
-App::uses('Continent', 'Data.Model');
-App::uses('MyCakeTestCase', 'Tools.TestSuite');
+use Data\Model\Continent;
+use Tools\TestSuite\MyCakeTestCase;
 
 class ContinentTest extends MyCakeTestCase {
 

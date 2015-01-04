@@ -1,7 +1,8 @@
 <?php
 namespace Data\Controller;
 
-App::uses('DataAppController', 'Data.Controller');
+use Cake\Core\Configure;
+use Data\Controller\DataAppController;
 
 class AddressesController extends DataAppController {
 

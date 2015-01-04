@@ -2,7 +2,9 @@
 
 namespace Data\Controller;
 
-App::uses('DataAppController', 'Data.Controller');
+use App\Utility\Sanitize;
+use Cake\Utility\Folder;
+use Data\Controller\DataAppController;
 
 class MimeTypeImagesController extends DataAppController {
 
@@ -43,7 +45,6 @@ class MimeTypeImagesController extends DataAppController {
 				$extensions = CommonComponent::parseList($this->request->data['MimeTypeImage']['import'], ',');
 				//$extensions = array_unique($extensions);
 				$fileExtensions = array();
-				App::uses('Sanitize', 'Utility');
 
 				foreach ($extensions as $extension) {
 					# is it "exe" or "someName.exe"?
@@ -76,8 +77,6 @@ class MimeTypeImagesController extends DataAppController {
 	}
 
 	public function admin_allocate() {
-		App::uses('Sanitize', 'Utility');
-		App::uses('Folder', 'Utility');
 		$folder = new Folder(PATH_MIMETYPES . 'import' . DS);
 		$images = $folder->find('.*');
 
@@ -176,7 +175,6 @@ class MimeTypeImagesController extends DataAppController {
 		$mimeTypeImages = $this->paginate();
 
 		/*
-		App::uses('Folder', 'Utility');
 		$folder = new Folder(PATH_MIMETYPES);
 		$images = $folder->find('.*');
 		*/
@@ -243,7 +241,6 @@ class MimeTypeImagesController extends DataAppController {
 			'png');
 
 		$image = $file['name'];
-		App::uses('Sanitize', 'Utility');
 		$ext = mb_strtolower(Sanitize::paranoid(extractPathInfo('ext', $image)));
 
 		if (empty($ext) || !in_array($ext, $this->_allowedTypes)) {
@@ -288,7 +285,6 @@ class MimeTypeImagesController extends DataAppController {
 	}
 
 	public function admin_add() {
-		App::uses('Folder', 'Utility');
 		$folder = new Folder(PATH_MIMETYPES, true, 777);
 		//pr (substr(sprintf('%o', fileperms(PATH_IMAGES)), -4));
 
@@ -318,7 +314,6 @@ class MimeTypeImagesController extends DataAppController {
 			$this->request->data['MimeTypeImage']['active'] = 1;
 		}
 
-		App::uses('Folder', 'Utility');
 		$folder = new Folder(PATH_MIMETYPES . 'import' . DS);
 		$images = $folder->find('.*');
 		$availableImages = array();
@@ -361,7 +356,6 @@ class MimeTypeImagesController extends DataAppController {
 			}
 		}
 
-		App::uses('Folder', 'Utility');
 		$folder = new Folder(PATH_MIMETYPES . 'import' . DS);
 		$images = $folder->find('.*');
 		$availableImages = array();

@@ -1,7 +1,8 @@
 <?php
 namespace Data\Model;
 
-App::uses('DataAppModel', 'Data.Model');
+use Cake\Core\App;
+use Data\Model\DataAppModel;
 
 class Currency extends DataAppModel {
 

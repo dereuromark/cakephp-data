@@ -1,9 +1,9 @@
 <?php
 
 namespace Data\Test\TestCase\Model;
-App::uses('PostalCode', 'Data.Model');
-App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
+use Data\Model\PostalCode;
+use Tools\TestSuite\MyCakeTestCase;
 class PostalCodeTest extends MyCakeTestCase {
 
 	public $fixtures = array('plugin.data.postal_code');

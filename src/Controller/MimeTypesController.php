@@ -1,7 +1,9 @@
 <?php
 namespace Data\Controller;
 
-App::uses('DataAppController', 'Data.Controller');
+use Cake\Utility\File;
+use Data\Controller\DataAppController;
+use Tools\Lib\MimeLib;
 
 /**
  * @link http://en.wikipedia.org/wiki/List_of_file_formats_(alphabetical)
@@ -123,7 +125,6 @@ class MimeTypesController extends DataAppController {
 		*/
 
 		# try to let PHP detect the mime type by ajax uploading some on the fly created files
-		App::uses('File', 'Utility');
 		$extensions = array('gif', 'pdf', 'exe', 'ooooooo', '7z', 'vcf', 'csv');
 		foreach ($extensions as $extension) {
 			//$handler = new File(WWW_ROOT.'files'.DS.'tmp'.DS.'test.'.$extension, true, 0777);
@@ -175,7 +176,6 @@ class MimeTypesController extends DataAppController {
 
 		}
 
-		App::uses('MimeLib', 'Tools.Lib');
 		$Mime = new MimeLib();
 		$mimeTypes = $Mime->getMimeTypes(true);
 
@@ -512,8 +512,7 @@ class MimeTypesController extends DataAppController {
 		if (!empty($export)) {
 			$this->set('exportArray', $export);
 			/*
-			App::uses('File', 'Utility');
-			$file = new File(TMP.'mime_types_'.time().'.txt');
+				$file = new File(TMP.'mime_types_'.time().'.txt');
 			$file->open('w', true);
 			$file->write(serialize($export), 'w', true);
 			*/

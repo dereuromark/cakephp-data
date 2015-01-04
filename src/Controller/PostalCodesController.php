@@ -1,7 +1,9 @@
 <?php
 namespace Data\Controller;
 
-App::uses('DataAppController', 'Data.Controller');
+use Data\Controller\DataAppController;
+use Tools\Lib\GeocodeLib;
+use Tools\Lib\GeolocateLib;
 
 /**
  * PostalCodes Controller
@@ -85,7 +87,6 @@ class PostalCodesController extends DataAppController {
 
 	public function admin_geolocate() {
 		if (($ipData = $this->Session->read('GeoLocation.data')) === null) {
-			App::uses('GeolocateLib', 'Tools.Lib');
 			$this->GeolocateLib = new GeolocateLib();
 			if ($this->GeolocateLib->locate()) {
 				$ipData = $this->GeolocateLib->getResult();
@@ -101,7 +102,6 @@ class PostalCodesController extends DataAppController {
 	}
 
 	public function admin_query() {
-		App::uses('GeocodeLib', 'Tools.Lib');
 		$this->GeocodeLib = new GeocodeLib();
 		$results = array();
 		if ($this->Common->isPosted()) {

@@ -1,8 +1,11 @@
 <?php
 namespace Data\Model;
 
-App::uses('DataAppModel', 'Data.Model');
-App::uses('File', 'Utility');
+use Cake\Core\App;
+use Cake\Core\Configure;
+use Cake\Utility\File;
+use Data\Model\DataAppModel;
+use Tools\Lib\EmailLib;
 
 class MimeType extends DataAppModel {
 
@@ -112,7 +115,6 @@ class MimeType extends DataAppModel {
 			return false;
 		}
 		# notify admin
-		App::uses('EmailLib', 'Tools.Lib');
 		//App::import('Controller', 'Data.MimeTypes');
 		$this->Email = new EmailLib();
 		$this->Email->to(Configure::read('Config.adminEmail'), Configure::read('Config.adminEmailname'));

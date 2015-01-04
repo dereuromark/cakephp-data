@@ -1,7 +1,11 @@
 <?php
 namespace Data\Model;
 
-App::uses('DataAppModel', 'Data.Model');
+use App\I18n\L10n;
+use Cake\Cache\Cache;
+use Cake\Core\App;
+use Data\Model\DataAppModel;
+use Tools\Lib\HtmlDomLib;
 
 /**
  * Languages and their locales
@@ -147,7 +151,6 @@ class Language extends DataAppModel {
 	 */
 	public function catalog($lang = null) {
 		if (!isset($this->L10n)) {
-			App::uses('L10n', 'I18n');
 			$this->L10n = new L10n();
 		}
 		return $this->L10n->catalog($lang);
@@ -157,7 +160,6 @@ class Language extends DataAppModel {
 	 * @return Array 2d heading and values
 	 */
 	public function getOfficialIsoList() {
-		App::uses('HtmlDomLib', 'Tools.Lib');
 		$this->HtmlDom = new HtmlDomLib();
 		if (!($res = Cache::read('lov_gov_iso_list'))) {
 			$res = file_get_contents('http://www.loc.gov/standards/iso639-2/php/code_list.php');

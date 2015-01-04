@@ -1,7 +1,7 @@
 <?php
 namespace Data\Lib;
 
-App::uses('HttpSocketLib', 'Tools.Lib');
+use Tools\Lib\HttpSocketLib;
 
 /**
  * Use Webservices to get current rates etc

@@ -1,7 +1,8 @@
 <?php
 namespace Data\Model;
 
-App::uses('DataAppModel', 'Data.Model');
+use Cake\Core\Configure;
+use Data\Model\DataAppModel;
 
 class City extends DataAppModel {
 

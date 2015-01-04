@@ -1,7 +1,7 @@
 <?php
 namespace Data\Controller;
 
-App::uses('DataAppController', 'Data.Controller');
+use Data\Controller\DataAppController;
 
 /**
  * Cities Controller
