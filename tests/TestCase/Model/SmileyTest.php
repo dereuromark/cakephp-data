@@ -1,9 +1,11 @@
 <?php
 
 namespace Data\Test\TestCase\Model;
-App::uses('Smiley', 'Data.Model');
 
-class SmileyTest extends CakeTestCase {
+use Cake\TestSuite\TestCase;
+use Data\Model\Smiley;
+
+class SmileyTest extends TestCase {
 
 	public $fixtures = array('plugin.data.smiley');
 
