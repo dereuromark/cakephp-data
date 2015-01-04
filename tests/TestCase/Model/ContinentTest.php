@@ -1,5 +1,7 @@
 <?php
 
+namespace Data\Test\TestCase\Model;
+
 App::uses('Continent', 'Data.Model');
 App::uses('MyCakeTestCase', 'Tools.TestSuite');
 

@@ -1,4 +1,6 @@
 <?php
+namespace Data\Test\TestCase\Lib;
+
 App::uses('CurrencyLib', 'Data.Lib');
 App::uses('MyCakeTestCase', 'Tools.TestSuite');
 

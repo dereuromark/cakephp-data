@@ -1,5 +1,7 @@
 <?php
 
+namespace Data\Test\TestCase\Lib;
+
 App::uses('GeoImportLib', 'Data.Lib');
 
 /**

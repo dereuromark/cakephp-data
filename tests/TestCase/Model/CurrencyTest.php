@@ -1,5 +1,7 @@
 <?php
 
+namespace Data\Test\TestCase\Model;
+
 App::uses('Currency', 'Data.Model');
 App::uses('MyCakeTestCase', 'Tools.TestSuite');
 

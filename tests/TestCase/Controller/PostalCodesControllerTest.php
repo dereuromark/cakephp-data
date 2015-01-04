@@ -1,4 +1,6 @@
 <?php
+namespace Data\Test\TestCase\Controller;
+
 App::uses('PostalCodesController', 'Data.Controller');
 App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
