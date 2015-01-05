@@ -22,7 +22,7 @@ class CurrencyComponentTest extends TestCase {
 		$this->skipIf(true, 'deprecated');
 
 		$this->Controller = new CurrencyTestController();
-		$this->Controller->Currency = new CurrencyComponent(new ComponentCollection());
+		$this->Controller->Currency = new CurrencyComponent(new ComponentRegistry());
 	}
 
 	/**

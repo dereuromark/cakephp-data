@@ -10,7 +10,7 @@ class CountryProvinceHelperComponentTest extends MyCakeTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->CountryProvinceHelper = new CountryProvinceHelperComponent(new ComponentCollection());
+		$this->CountryProvinceHelper = new CountryProvinceHelperComponent(new ComponentRegistry());
 	}
 
 	public function tearDown() {
