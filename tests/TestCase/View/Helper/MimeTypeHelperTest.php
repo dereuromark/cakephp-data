@@ -4,9 +4,9 @@ namespace Data\Test\TestCase\View\Helper;
 
 use Cake\View\View;
 use Data\View\Helper\MimeTypeHelper;
-use Tools\TestSuite\MyCakeTestCase;
+use Tools\TestSuite\TestCase;
 
-class MimeTypeHelperTest extends MyCakeTestCase {
+class MimeTypeHelperTest extends TestCase {
 
 	public $MimeTypeHelper;
 

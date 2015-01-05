@@ -3,8 +3,8 @@
 namespace Data\Test\TestCase\Model;
 
 use Data\Model\PostalCode;
-use Tools\TestSuite\MyCakeTestCase;
-class PostalCodeTest extends MyCakeTestCase {
+use Tools\TestSuite\TestCase;
+class PostalCodeTest extends TestCase {
 
 	public $fixtures = array(
 		'plugin.data.postal_codes'

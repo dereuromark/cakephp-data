@@ -3,9 +3,9 @@
 namespace Data\Test\TestCase\Controller;
 
 use Data\Controller\AddressesController;
-use Tools\TestSuite\MyCakeTestCase;
+use Tools\TestSuite\TestCase;
 
-class AddressesControllerTest extends MyCakeTestCase {
+class AddressesControllerTest extends TestCase {
 
 	public $AddressesController;
 

@@ -3,9 +3,9 @@
 namespace Data\Test\TestCase\Lib;
 
 use Data\Lib\CurrencyBitcoinLib;
-use Tools\TestSuite\MyCakeTestCase;
+use Tools\TestSuite\TestCase;
 
-class CurrencyBitcoinLibTest extends MyCakeTestCase {
+class CurrencyBitcoinLibTest extends TestCase {
 
 	public function setUp() {
 		parent::setUp();

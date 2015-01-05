@@ -3,8 +3,8 @@
 namespace Data\Test\TestCase\Model;
 
 use Data\Model\Location;
-use Tools\TestSuite\MyCakeTestCase;
-class LocationTest extends MyCakeTestCase {
+use Tools\TestSuite\TestCase;
+class LocationTest extends TestCase {
 
 	public $fixtures = array(
 		'plugin.data.locations'

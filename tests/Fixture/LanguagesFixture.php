@@ -4,10 +4,10 @@ namespace Data\Test\Fixture;
 
 
 /**
- * LanguageFixture
+ * LanguagesFixture
  *
  */
-class LanguageFixture extends TestFixture {
+class LanguagesFixture extends TestFixture {
 
 	/**
 	 * Fields

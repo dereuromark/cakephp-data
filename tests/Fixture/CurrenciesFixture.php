@@ -4,10 +4,10 @@ namespace Data\Test\Fixture;
 
 
 /**
- * CurrencyFixture
+ * CurrenciesFixture
  *
  */
-class CurrencyFixture extends TestFixture {
+class CurrenciesFixture extends TestFixture {
 
 	/**
 	 * Fields

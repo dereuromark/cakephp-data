@@ -3,9 +3,9 @@
 namespace Data\Test\TestCase\Model;
 
 use Data\Model\Continent;
-use Tools\TestSuite\MyCakeTestCase;
+use Tools\TestSuite\TestCase;
 
-class ContinentTest extends MyCakeTestCase {
+class ContinentTest extends TestCase {
 
 	public $fixtures = array(
 		'plugin.data.continents'

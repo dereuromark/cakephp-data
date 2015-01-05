@@ -4,10 +4,10 @@ namespace Data\Test\Fixture;
 
 
 /**
- * StateFixture
+ * StatesFixture
  *
  */
-class StateFixture extends TestFixture {
+class StatesFixture extends TestFixture {
 
 	/**
 	 * Fields

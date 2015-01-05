@@ -3,9 +3,9 @@
 namespace Data\Test\TestCase\Controller\Component;
 
 use Data\Controller\Component\CountryProvinceHelperComponent;
-use Tools\TestSuite\MyCakeTestCase;
+use Tools\TestSuite\TestCase;
 
-class CountryProvinceHelperComponentTest extends MyCakeTestCase {
+class CountryProvinceHelperComponentTest extends TestCase {
 
 	public function setUp() {
 		parent::setUp();

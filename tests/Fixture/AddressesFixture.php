@@ -1,12 +1,12 @@
 <?php
 
 /**
- * AddressFixture
+ * AddressesFixture
  *
  */
 namespace Data\Test\Fixture;
 
-class AddressFixture extends TestFixture {
+class AddressesFixture extends TestFixture {
 
 	/**
 	 * Fields

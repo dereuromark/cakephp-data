@@ -4,10 +4,10 @@ namespace Data\Test\Fixture;
 
 
 /**
- * PostalCodeFixture
+ * PostalCodesFixture
  *
  */
-class PostalCodeFixture extends TestFixture {
+class PostalCodesFixture extends TestFixture {
 
 	/**
 	 * Fields

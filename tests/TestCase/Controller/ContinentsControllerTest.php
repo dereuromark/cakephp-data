@@ -3,9 +3,9 @@
 namespace Data\Test\TestCase\Controller;
 
 use Data\Controller\ContinentsController;
-use Tools\TestSuite\MyCakeTestCase;
+use Tools\TestSuite\TestCase;
 
-class ContinentsControllerTest extends MyCakeTestCase {
+class ContinentsControllerTest extends TestCase {
 
 	public $ContinentsController;
 

@@ -3,9 +3,9 @@
 namespace Data\Test\TestCase\Controller;
 
 use Data\Controller\MimeTypeImagesController;
-use Tools\TestSuite\MyCakeTestCase;
+use Tools\TestSuite\TestCase;
 
-class MimeTypeImagesControllerTest extends MyCakeTestCase {
+class MimeTypeImagesControllerTest extends TestCase {
 
 	public $MimeTypeImagesController;
 

@@ -3,8 +3,8 @@
 namespace Data\Test\TestCase\Model;
 
 use Data\Model\Language;
-use Tools\TestSuite\MyCakeTestCase;
-class LanguageTest extends MyCakeTestCase {
+use Tools\TestSuite\TestCase;
+class LanguageTest extends TestCase {
 
 	public $fixtures = array(
 		'plugin.data.languages'

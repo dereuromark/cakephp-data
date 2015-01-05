@@ -2,13 +2,13 @@
 namespace Data\Test\TestCase\Controller;
 
 use Data\Controller\PostalCodesController;
-use Tools\TestSuite\MyCakeTestCase;
+use Tools\TestSuite\TestCase;
 
 /**
  * PostalCodesController Test Case
  *
  */
-class PostalCodesControllerTest extends MyCakeTestCase {
+class PostalCodesControllerTest extends TestCase {
 
 	public $PostalCodes;
 

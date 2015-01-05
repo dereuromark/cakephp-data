@@ -3,9 +3,9 @@
 namespace Data\Test\TestCase\Model;
 
 use Data\Model\Address;
-use Tools\TestSuite\MyCakeTestCase;
+use Tools\TestSuite\TestCase;
 
-class AddressTest extends MyCakeTestCase {
+class AddressTest extends TestCase {
 
 	public $fixtures = array(
 		'plugin.data.addresses'

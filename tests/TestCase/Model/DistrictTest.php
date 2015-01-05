@@ -3,9 +3,9 @@
 namespace Data\Test\TestCase\Model;
 
 use Data\Model\District;
-use Tools\TestSuite\MyCakeTestCase;
+use Tools\TestSuite\TestCase;
 
-class DistrictTest extends MyCakeTestCase {
+class DistrictTest extends TestCase {
 
 	public $fixtures = array(
 		'plugin.data.districts'

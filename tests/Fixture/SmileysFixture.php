@@ -2,7 +2,7 @@
 
 namespace Data\Test\Fixture;
 
-class SmileyFixture extends TestFixture {
+class SmileysFixture extends TestFixture {
 
 	public $fields = array(
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10],

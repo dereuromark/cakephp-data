@@ -3,9 +3,9 @@
 namespace Data\Test\TestCase\Controller;
 
 use Data\Controller\LanguagesController;
-use Tools\TestSuite\MyCakeTestCase;
+use Tools\TestSuite\TestCase;
 
-class LanguagesControllerTest extends MyCakeTestCase {
+class LanguagesControllerTest extends TestCase {
 
 	public $LanguagesController;
 

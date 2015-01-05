@@ -1,11 +1,11 @@
 <?php
 /**
- * LocationFixture
+ * LocationsFixture
  *
  */
 namespace Data\Test\Fixture;
 
-class LocationFixture extends TestFixture {
+class LocationsFixture extends TestFixture {
 
 	/**
 	 * Fields

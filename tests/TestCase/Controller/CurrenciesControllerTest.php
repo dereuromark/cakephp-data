@@ -3,9 +3,9 @@
 namespace Data\Test\TestCase\Controller;
 
 use Data\Controller\CurrenciesController;
-use Tools\TestSuite\MyCakeTestCase;
+use Tools\TestSuite\TestCase;
 
-class CurrenciesControllerTest extends MyCakeTestCase {
+class CurrenciesControllerTest extends TestCase {
 
 	public $CurrenciesController;
 

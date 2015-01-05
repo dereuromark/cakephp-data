@@ -1,11 +1,11 @@
 <?php
 /**
- * MimeTypeFixture
+ * MimeTypesFixture
  *
  */
 namespace Data\Test\Fixture;
 
-class MimeTypeFixture extends TestFixture {
+class MimeTypesFixture extends TestFixture {
 
 	/**
 	 * Fields

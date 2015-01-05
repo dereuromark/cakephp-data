@@ -3,8 +3,8 @@
 namespace Data\Test\TestCase\Model;
 
 use Data\Model\MimeType;
-use Tools\TestSuite\MyCakeTestCase;
-class MimeTypeTest extends MyCakeTestCase {
+use Tools\TestSuite\TestCase;
+class MimeTypeTest extends TestCase {
 
 	public $MimeType;
 

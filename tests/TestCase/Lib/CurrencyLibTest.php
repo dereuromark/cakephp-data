@@ -3,9 +3,9 @@ namespace Data\Test\TestCase\Lib;
 
 use Cake\Core\Plugin;
 use Data\Lib\CurrencyLib;
-use Tools\TestSuite\MyCakeTestCase;
+use Tools\TestSuite\TestCase;
 
-class CurrencyLibTest extends MyCakeTestCase {
+class CurrencyLibTest extends TestCase {
 
 	public function setUp() {
 		parent::setUp();

@@ -3,9 +3,9 @@
 namespace Data\Test\TestCase\Controller;
 
 use Data\Controller\SmileysController;
-use Tools\TestSuite\MyCakeTestCase;
+use Tools\TestSuite\TestCase;
 
-class SmileysControllerTest extends MyCakeTestCase {
+class SmileysControllerTest extends TestCase {
 
 	public $SmileysController;
 

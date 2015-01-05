@@ -4,7 +4,7 @@ namespace Data\Test\TestCase\Controller\Component;
 use Cake\Controller\Controller;
 use Cake\TestSuite\TestCase;
 use Data\Controller\Component\CurrencyComponent;
-use Tools\TestSuite\MyCakeTestCase;
+use Tools\TestSuite\TestCase;
 
 /**
  * Short description for class.

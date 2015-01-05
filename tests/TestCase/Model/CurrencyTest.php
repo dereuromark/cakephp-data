@@ -3,9 +3,9 @@
 namespace Data\Test\TestCase\Model;
 
 use Data\Model\Currency;
-use Tools\TestSuite\MyCakeTestCase;
+use Tools\TestSuite\TestCase;
 
-class CurrencyTest extends MyCakeTestCase {
+class CurrencyTest extends TestCase {
 
 	public $fixtures = array(
 		'plugin.data.currencies'

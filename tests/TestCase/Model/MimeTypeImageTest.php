@@ -3,8 +3,8 @@
 namespace Data\Test\TestCase\Model;
 
 use Data\Model\MimeTypeImage;
-use Tools\TestSuite\MyCakeTestCase;
-class MimeTypeImageTest extends MyCakeTestCase {
+use Tools\TestSuite\TestCase;
+class MimeTypeImageTest extends TestCase {
 
 	public $fixtures = array(
 		'plugin.data.mime_type_images'

@@ -3,9 +3,9 @@
 namespace Data\Test\TestCase\Model;
 
 use Data\Model\State;
-use Tools\TestSuite\MyCakeTestCase;
+use Tools\TestSuite\TestCase;
 
-class StateTest extends MyCakeTestCase {
+class StateTest extends TestCase {
 
 	public $fixtures = array(
 		'plugin.data.states'
