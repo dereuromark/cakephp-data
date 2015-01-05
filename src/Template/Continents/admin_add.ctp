@@ -1,9 +1,9 @@
-<h2><?php echo __('Add %s', __('Continent')); ?></h2>
+<h2><?php echo __('Add {0}', __('Continent')); ?></h2>
 
 <div class="page form">
 <?php echo $this->Form->create('Continent');?>
 	<fieldset>
-		<legend><?php echo __('Add %s', __('Continent')); ?></legend>
+		<legend><?php echo __('Add {0}', __('Continent')); ?></legend>
 	<?php
 		echo $this->Form->input('name');
 		//echo $this->Form->input('ori_name');
@@ -18,8 +18,8 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List %s', __('Continents')), array('action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('List %s', __('Continents')), array('controller' => 'continents', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('List %s', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Continents')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Continents')), array('controller' => 'continents', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
 	</ul>
 </div>

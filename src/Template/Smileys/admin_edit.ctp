@@ -1,7 +1,7 @@
 <div class="page form">
 <?php echo $this->Form->create('Smiley');?>
 	<fieldset>
-				<legend><?php echo __('Edit %s', __('Smiley')); ?></legend>
+				<legend><?php echo __('Edit {0}', __('Smiley')); ?></legend>
 	<?php
 		echo $this->Form->input('id');
 		//echo $this->Form->input('smiley_cat_id');
@@ -21,7 +21,7 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Smiley.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Smiley.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List %s', __('Smileys')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Smiley.id')), null, __('Are you sure you want to delete # {0}?', $this->Form->value('Smiley.id'))); ?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Smileys')), array('action' => 'index'));?></li>
 	</ul>
 </div>

@@ -56,7 +56,7 @@ foreach ($smileys as $smiley):
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $smiley['Smiley']['id']), array('escape' => false)); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $smiley['Smiley']['id']), array('escape' => false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $smiley['Smiley']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $smiley['Smiley']['id'])); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $smiley['Smiley']['id']), array('escape' => false), __('Are you sure you want to delete # {0}?', $smiley['Smiley']['id'])); ?>
 		</td>
 	</tr>
 <?php
@@ -74,6 +74,6 @@ foreach ($smileys as $smiley):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add %s', __('Smiley')), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('Add {0}', __('Smiley')), array('action' => 'add')); ?></li>
 	</ul>
 </div>

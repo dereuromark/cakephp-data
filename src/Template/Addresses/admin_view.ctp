@@ -73,11 +73,11 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit %s', __('Address')), array('action' => 'edit', $address['Address']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('Mark as %s', __('Used')), array('action' => 'mark_as_used', $address['Address']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete %s', __('Address')), array('action' => 'delete', $address['Address']['id']), null, __('Are you sure you want to delete # %s?', $address['Address']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List %s', __('Addresses')), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('List %s', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('List %s', __('Country Provinces')), array('controller' => 'country_provinces', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('Edit {0}', __('Address')), array('action' => 'edit', $address['Address']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('Mark as {0}', __('Used')), array('action' => 'mark_as_used', $address['Address']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete {0}', __('Address')), array('action' => 'delete', $address['Address']['id']), null, __('Are you sure you want to delete # {0}?', $address['Address']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Addresses')), array('action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Country Provinces')), array('controller' => 'country_provinces', 'action' => 'index')); ?> </li>
 	</ul>
 </div>

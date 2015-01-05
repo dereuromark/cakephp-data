@@ -6,7 +6,7 @@
 <div>
 <?php echo $this->Form->create('PostalCode');?>
 	<fieldset>
-		<legend><?php echo __('Search %s', __('Area Code')); ?></legend>
+		<legend><?php echo __('Search {0}', __('Area Code')); ?></legend>
 	<?php
 		echo $this->Form->input('code');
 		echo $this->Form->submit(__('Submit'));

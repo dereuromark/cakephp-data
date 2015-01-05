@@ -10,7 +10,7 @@
 <div class="search-box">
 <?php
 echo $this->Form->create();
-echo $this->Form->input('search', array('placeholder' => __('wildcardSearch %s and %s', '*', '?')));
+echo $this->Form->input('search', array('placeholder' => __('wildcardSearch {0} and {1}', '*', '?')));
 echo $this->Form->submit(__('Search'), array());
 echo $this->Form->end();
 ?>
@@ -90,7 +90,7 @@ foreach ($countries as $country):
 
 			<?php echo $this->Html->link($this->Format->cIcon(ICON_MAP, 'Koordinaten updaten'), array('action' => 'update_coordinates', $country['Country']['id']), array('escape' => false)); ?>
 
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $country['Country']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $country['Country']['id']), false); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $country['Country']['id']), array('escape' => false), __('Are you sure you want to delete # {0}?', $country['Country']['id']), false); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -102,7 +102,7 @@ foreach ($countries as $country):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add %s', __('Country')), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('Add {0}', __('Country')), array('action' => 'add')); ?></li>
 		<li><?php echo $this->Html->link(__('Update Coordinates'), array('action' => 'update_coordinates')); ?></li>
 		<li><?php echo $this->Html->link(__('Icons'), array('action' => 'icons')); ?></li>
 	</ul>

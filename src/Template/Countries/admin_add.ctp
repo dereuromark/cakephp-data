@@ -1,7 +1,7 @@
 <div class="page form">
 <?php echo $this->Form->create('Country');?>
 	<fieldset>
-		<legend><?php echo __('Add %s', __('Country'));?></legend>
+		<legend><?php echo __('Add {0}', __('Country'));?></legend>
 	<?php
 		echo $this->Form->input('name');
 		echo $this->Form->input('ori_name');
@@ -24,7 +24,7 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List %s', __('Countries')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), array('action' => 'index'));?></li>
 		<li><?php echo $this->Html->link(__('List Country Provinces'), array('controller' => 'country_provinces', 'action' => 'index')); ?> </li>
 	</ul>
 </div>

@@ -71,6 +71,6 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List %s', __('Dances')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Dances')), array('action' => 'index'));?></li>
 	</ul>
 </div>

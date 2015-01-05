@@ -71,7 +71,7 @@ class CountryProvincesController extends DataAppController {
 		if (!$res) {
 			$this->Common->flashMessage(__('coordinates not updated'), 'error');
 		} else {
-			$this->Common->flashMessage(__('coordinates %s updated', $res), 'success');
+			$this->Common->flashMessage(__('coordinates {0} updated', $res), 'success');
 		}
 
 		$this->autoRender = false;
@@ -126,7 +126,7 @@ class CountryProvincesController extends DataAppController {
 			if ($this->CountryProvince->save($this->request->data)) {
 				$id = $this->CountryProvince->id;
 				$name = $this->request->data['CountryProvince']['name'];
-				$this->Common->flashMessage(__('record add %s saved', h($name)), 'success');
+				$this->Common->flashMessage(__('record add {0} saved', h($name)), 'success');
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Common->flashMessage(__('record add not saved'), 'error');
@@ -155,7 +155,7 @@ class CountryProvincesController extends DataAppController {
 		if ($this->Common->isPosted()) {
 			if ($this->CountryProvince->save($this->request->data)) {
 				$name = $this->request->data['CountryProvince']['name'];
-				$this->Common->flashMessage(__('record edit %s saved', h($name)), 'success');
+				$this->Common->flashMessage(__('record edit {0} saved', h($name)), 'success');
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Common->flashMessage(__('record edit not saved'), 'error');
@@ -194,10 +194,10 @@ class CountryProvincesController extends DataAppController {
 
 		$name = $res['CountryProvince']['name'];
 		if ($this->CountryProvince->delete($id)) {
-			$this->Common->flashMessage(__('record del %s done', h($name)), 'success');
+			$this->Common->flashMessage(__('record del {0} done', h($name)), 'success');
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Common->flashMessage(__('record del %s not done exception', $name), 'error');
+			$this->Common->flashMessage(__('record del {0} not done exception', $name), 'error');
 			return $this->redirect(array('action' => 'index'));
 		}
 	}

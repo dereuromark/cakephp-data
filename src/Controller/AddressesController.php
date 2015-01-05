@@ -37,7 +37,7 @@ class AddressesController extends DataAppController {
 			$this->Address->create();
 			if ($this->Address->save($this->request->data)) {
 				$var = $this->request->data['Address']['formatted_address'];
-				$this->Common->flashMessage(__('record add %s saved', h($var)), 'success');
+				$this->Common->flashMessage(__('record add {0} saved', h($var)), 'success');
 				return $this->redirect(array('action' => 'index'));
 			}
 			$this->Common->flashMessage(__('formContainsErrors'), 'error');
@@ -59,7 +59,7 @@ class AddressesController extends DataAppController {
 		if ($this->Common->isPosted()) {
 			if ($this->Address->save($this->request->data)) {
 				$var = $this->request->data['Address']['formatted_address'];
-				$this->Common->flashMessage(__('record edit %s saved', h($var)), 'success');
+				$this->Common->flashMessage(__('record edit {0} saved', h($var)), 'success');
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Common->flashMessage(__('formContainsErrors'), 'error');
@@ -87,10 +87,10 @@ class AddressesController extends DataAppController {
 		$var = $address['Address']['formatted_address'];
 
 		if ($this->Address->delete($id)) {
-			$this->Common->flashMessage(__('record del %s done', h($var)), 'success');
+			$this->Common->flashMessage(__('record del {0} done', h($var)), 'success');
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->Common->flashMessage(__('record del %s not done exception', h($var)), 'error');
+		$this->Common->flashMessage(__('record del {0} not done exception', h($var)), 'error');
 		return $this->Common->autoRedirect(array('action' => 'index'));
 	}
 	*/
@@ -121,7 +121,7 @@ class AddressesController extends DataAppController {
 			$this->Address->create();
 			if ($this->Address->save($this->request->data)) {
 				$var = $this->request->data['Address']['formatted_address'];
-				$this->Common->flashMessage(__('record add %s saved', h($var)), 'success');
+				$this->Common->flashMessage(__('record add {0} saved', h($var)), 'success');
 				return $this->redirect(array('action' => 'index'));
 			}
 			$this->Common->flashMessage(__('formContainsErrors'), 'error');
@@ -149,7 +149,7 @@ class AddressesController extends DataAppController {
 		if ($this->Common->isPosted()) {
 			if ($this->Address->save($this->request->data)) {
 				$var = $this->request->data['Address']['formatted_address'];
-				$this->Common->flashMessage(__('record edit %s saved', h($var)), 'success');
+				$this->Common->flashMessage(__('record edit {0} saved', h($var)), 'success');
 				return $this->redirect(array('action' => 'index'));
 			}
 			$this->Common->flashMessage(__('formContainsErrors'), 'error');
@@ -188,10 +188,10 @@ class AddressesController extends DataAppController {
 		$var = $address['Address']['formatted_address'];
 
 		if ($this->Address->delete($id)) {
-			$this->Common->flashMessage(__('record del %s done', h($var)), 'success');
+			$this->Common->flashMessage(__('record del {0} done', h($var)), 'success');
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->Common->flashMessage(__('record del %s not done exception', h($var)), 'error');
+		$this->Common->flashMessage(__('record del {0} not done exception', h($var)), 'error');
 		return $this->Common->autoRedirect(array('action' => 'index'));
 	}
 
@@ -202,7 +202,7 @@ class AddressesController extends DataAppController {
 		}
 		$this->Address->touch($id);
 		$var = $address['Address']['formatted_address'];
-		$this->Common->flashMessage(__('Address \'%s\' marked as last used', h($var)), 'success');
+		$this->Common->flashMessage(__('Address \'{0}\' marked as last used', h($var)), 'success');
 		return $this->Common->autoRedirect(array('action' => 'index'));
 	}
 

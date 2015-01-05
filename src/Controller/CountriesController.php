@@ -76,7 +76,7 @@ class CountriesController extends DataAppController {
 		if (!$res) {
 			$this->Common->flashMessage(__('coordinates not updated'), 'error');
 		} else {
-			$this->Common->flashMessage(__('coordinates %s updated', $res), 'success');
+			$this->Common->flashMessage(__('coordinates {0} updated', $res), 'success');
 		}
 
 		$this->autoRender = false;
@@ -139,7 +139,7 @@ class CountriesController extends DataAppController {
 					}
 
 				}
-				$this->Common->flashMessage(__('record import %s saved', $count), 'success');
+				$this->Common->flashMessage(__('record import {0} saved', $count), 'success');
 
 			} else {
 
@@ -233,7 +233,7 @@ class CountriesController extends DataAppController {
 			if ($this->Country->save($this->request->data)) {
 				$id = $this->Country->id;
 				//$name = $this->request->data['Country']['name'];
-				$this->Common->flashMessage(__('record add %s saved', $id), 'success');
+				$this->Common->flashMessage(__('record add {0} saved', $id), 'success');
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Common->flashMessage(__('record add not saved'), 'error');
@@ -249,7 +249,7 @@ class CountriesController extends DataAppController {
 		if ($this->Common->isPosted()) {
 			if ($this->Country->save($this->request->data)) {
 				$name = $country['Country']['name'];
-				$this->Common->flashMessage(__('record edit %s saved', h($name)), 'success');
+				$this->Common->flashMessage(__('record edit {0} saved', h($name)), 'success');
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Common->flashMessage(__('record edit not saved'), 'error');
@@ -278,10 +278,10 @@ class CountriesController extends DataAppController {
 
 		//$name = $res['Country']['name'];
 		if ($this->Country->delete($id)) {
-			$this->Common->flashMessage(__('record del %s done', $id), 'success');
+			$this->Common->flashMessage(__('record del {0} done', $id), 'success');
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Common->flashMessage(__('record del %s not done exception', $id), 'error');
+			$this->Common->flashMessage(__('record del {0} not done exception', $id), 'error');
 			return $this->redirect(array('action' => 'index'));
 		}
 	}

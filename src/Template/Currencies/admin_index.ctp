@@ -5,7 +5,7 @@
 <div class="search-box">
 <?php
 echo $this->Form->create();
-echo $this->Form->input('search', array('placeholder' => __('wildcardSearch %s and %s', '*', '?')));
+echo $this->Form->input('search', array('placeholder' => __('wildcardSearch {0} and {1}', '*', '?')));
 echo $this->Form->submit(__('Search'), array());
 echo $this->Form->end();
 ?>
@@ -70,7 +70,7 @@ foreach ($currencies as $currency):
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $currency['Currency']['id']), array('escape' => false)); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $currency['Currency']['id']), array('escape' => false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $currency['Currency']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $currency['Currency']['id'])); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $currency['Currency']['id']), array('escape' => false), __('Are you sure you want to delete # {0}?', $currency['Currency']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -81,7 +81,7 @@ foreach ($currencies as $currency):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add %s', __('Currency')), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('Update %s', __('Currency Values')), array('action' => 'update')); ?></li>
+		<li><?php echo $this->Html->link(__('Add {0}', __('Currency')), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('Update {0}', __('Currency Values')), array('action' => 'update')); ?></li>
 	</ul>
 </div>

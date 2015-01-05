@@ -49,8 +49,8 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit %s', __('Postal Code')), array('action' => 'edit', $postalCode['PostalCode']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete %s', __('Postal Code')), array('action' => 'delete', $postalCode['PostalCode']['id']), null, __('Are you sure you want to delete # %s?', $postalCode['PostalCode']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List %s', __('Postal Codes')), array('action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('Edit {0}', __('Postal Code')), array('action' => 'edit', $postalCode['PostalCode']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete {0}', __('Postal Code')), array('action' => 'delete', $postalCode['PostalCode']['id']), null, __('Are you sure you want to delete # {0}?', $postalCode['PostalCode']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Postal Codes')), array('action' => 'index')); ?> </li>
 	</ul>
 </div>

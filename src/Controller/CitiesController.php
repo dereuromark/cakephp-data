@@ -52,7 +52,7 @@ class CitiesController extends DataAppController {
 			$this->City->create();
 			if ($this->City->save($this->request->data)) {
 				$var = $this->request->data['City']['name'];
-				$this->Common->flashMessage(__('record add %s saved', h($var)), 'success');
+				$this->Common->flashMessage(__('record add {0} saved', h($var)), 'success');
 				return $this->Common->postRedirect(array('action' => 'index'));
 			}
 			$this->Common->flashMessage(__('formContainsErrors'), 'error');
@@ -74,7 +74,7 @@ class CitiesController extends DataAppController {
 		if ($this->Common->isPosted()) {
 			if ($this->City->save($this->request->data)) {
 				$var = $this->request->data['City']['name'];
-				$this->Common->flashMessage(__('record edit %s saved', h($var)), 'success');
+				$this->Common->flashMessage(__('record edit {0} saved', h($var)), 'success');
 				return $this->Common->postRedirect(array('action' => 'index'));
 			}
 			$this->Common->flashMessage(__('formContainsErrors'), 'error');
@@ -101,10 +101,10 @@ class CitiesController extends DataAppController {
 		$var = $city['City']['name'];
 
 		if ($this->City->delete($id)) {
-			$this->Common->flashMessage(__('record del %s done', h($var)), 'success');
+			$this->Common->flashMessage(__('record del {0} done', h($var)), 'success');
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->Common->flashMessage(__('record del %s not done exception', h($var)), 'error');
+		$this->Common->flashMessage(__('record del {0} not done exception', h($var)), 'error');
 		return $this->Common->autoRedirect(array('action' => 'index'));
 	}
 

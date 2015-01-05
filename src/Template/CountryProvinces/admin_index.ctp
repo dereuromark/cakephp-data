@@ -80,7 +80,7 @@ foreach ($countryProvinces as $countryProvince):
 
 			<?php echo $this->Html->link($this->Format->cIcon(ICON_MAP, 'Koordinaten updaten'), array('action' => 'update_coordinates', $countryProvince['CountryProvince']['id']), array('escape' => false)); ?>
 
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $countryProvince['CountryProvince']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $countryProvince['CountryProvince']['id']), false); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $countryProvince['CountryProvince']['id']), array('escape' => false), __('Are you sure you want to delete # {0}?', $countryProvince['CountryProvince']['id']), false); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -95,6 +95,6 @@ foreach ($countryProvinces as $countryProvince):
 		<li><?php echo $this->Html->link(__('Update Coordinates'), array('action' => 'update_coordinates')); ?></li>
 <?php } ?>
 		<li><?php echo $this->Html->link(__('Add Country Province'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List %s', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
 	</ul>
 </div>

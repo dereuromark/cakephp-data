@@ -1,9 +1,9 @@
-<h2><?php echo __('Edit %s', __('Continent')); ?></h2>
+<h2><?php echo __('Edit {0}', __('Continent')); ?></h2>
 
 <div class="page form">
 <?php echo $this->Form->create('Continent');?>
 	<fieldset>
-		<legend><?php echo __('Edit %s', __('Continent')); ?></legend>
+		<legend><?php echo __('Edit {0}', __('Continent')); ?></legend>
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('name');
@@ -19,9 +19,9 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Continent.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Continent.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List %s', __('Continents')), array('action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('List %s', __('Continents')), array('controller' => 'continents', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('List %s', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Continent.id')), null, __('Are you sure you want to delete # {0}?', $this->Form->value('Continent.id'))); ?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Continents')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Continents')), array('controller' => 'continents', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
 	</ul>
 </div>

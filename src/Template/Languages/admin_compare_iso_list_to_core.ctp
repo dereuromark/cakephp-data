@@ -134,6 +134,6 @@ foreach ($locales as $key => $locale):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List %s', __('Languages')), array('action' => 'index')); ?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Languages')), array('action' => 'index')); ?></li>
 	</ul>
 </div>

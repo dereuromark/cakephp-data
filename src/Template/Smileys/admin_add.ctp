@@ -1,7 +1,7 @@
 <div class="page form">
 <?php echo $this->Form->create('Smiley');?>
 	<fieldset>
-				<legend><?php echo __('Add %s', __('Smiley')); ?></legend>
+				<legend><?php echo __('Add {0}', __('Smiley')); ?></legend>
 	<?php
 		//echo $this->Form->input('smiley_cat_id');
 		echo $this->Form->input('smiley_path');
@@ -20,6 +20,6 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List %s', __('Smileys')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Smileys')), array('action' => 'index'));?></li>
 	</ul>
 </div>

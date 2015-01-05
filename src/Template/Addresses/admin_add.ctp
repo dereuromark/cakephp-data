@@ -1,9 +1,9 @@
-<h2><?php echo __('Add %s', __('Address')); ?></h2>
+<h2><?php echo __('Add {0}', __('Address')); ?></h2>
 
 <div class="page form">
 <?php echo $this->Form->create('Address');?>
 	<fieldset>
-		<legend><?php echo __('Add %s', __('Address')); ?></legend>
+		<legend><?php echo __('Add {0}', __('Address')); ?></legend>
 	<?php
 		echo $this->Form->input('country_id', array('empty' => array(0 => ' - [ ' . __('noSelection') . ' ] - ')));
 	if (Configure::read('Address.CountryProvince')) {
@@ -30,8 +30,8 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List %s', __('Addresses')), array('action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('List %s', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('List %s', __('Country Provinces')), array('controller' => 'country_provinces', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Addresses')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Country Provinces')), array('controller' => 'country_provinces', 'action' => 'index')); ?> </li>
 	</ul>
 </div>

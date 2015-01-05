@@ -98,7 +98,7 @@ foreach ($mimeTypes as $mimeType):
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $mimeType['MimeType']['id']), array('escape' => false)); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $mimeType['MimeType']['id']), array('escape' => false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $mimeType['MimeType']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $mimeType['MimeType']['id'])); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $mimeType['MimeType']['id']), array('escape' => false), __('Are you sure you want to delete # {0}?', $mimeType['MimeType']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

@@ -1,5 +1,5 @@
 <div class="page form">
-<h2><?php echo __('Query %s', __('Geo Data')); ?></h2>
+<h2><?php echo __('Query {0}', __('Geo Data')); ?></h2>
 
 <?php echo $this->Form->create('PostalCode');?>
 	<fieldset>
@@ -25,6 +25,6 @@
 <div class="actions">
 	<ul>
 
-		<li><?php echo $this->Html->link(__('List %s', __('Postal Codes')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Postal Codes')), array('action' => 'index'));?></li>
 	</ul>
 </div>

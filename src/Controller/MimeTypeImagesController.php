@@ -305,7 +305,7 @@ class MimeTypeImagesController extends DataAppController {
 			if (empty($error) && $this->MimeTypeImage->save($this->request->data)) {
 				$id = $this->MimeTypeImage->id;
 				//$name = $this->request->data['MimeTypeImage']['name'];
-				$this->Common->flashMessage(__('record add %s saved', $id), 'success');
+				$this->Common->flashMessage(__('record add {0} saved', $id), 'success');
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Common->flashMessage(__('record add not saved'), 'error');
@@ -342,7 +342,7 @@ class MimeTypeImagesController extends DataAppController {
 
 			if ($this->MimeTypeImage->save($this->request->data)) {
 				//$name = $this->request->data['MimeTypeImage']['name'];
-				$this->Common->flashMessage(__('record edit %s saved', $id), 'success');
+				$this->Common->flashMessage(__('record edit {0} saved', $id), 'success');
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Common->flashMessage(__('record edit not saved'), 'error');
@@ -391,15 +391,15 @@ class MimeTypeImagesController extends DataAppController {
 				//@copy...
 				//@unlink(PATH_MIMETYPES.$name);
 				# strange: "rename" seems to work but still throws an error (copy + unlink as well)
-				//$this->Common->flashMessage(__('could not move the old icon %s to \'archive\'...', $name),'warning');
+				//$this->Common->flashMessage(__('could not move the old icon {0} to \'archive\'...', $name),'warning');
 			} else {
-				$this->Common->flashMessage(__('old icon %s moved to \'archive\'', $name), 'success');
+				$this->Common->flashMessage(__('old icon {0} moved to \'archive\'', $name), 'success');
 			}
 
-			$this->Common->flashMessage(__('record del %s done', $fileName), 'success');
+			$this->Common->flashMessage(__('record del {0} done', $fileName), 'success');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		} else {
-			$this->Common->flashMessage(__('record del %s not done exception', $fileName), 'error');
+			$this->Common->flashMessage(__('record del {0} not done exception', $fileName), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 	}

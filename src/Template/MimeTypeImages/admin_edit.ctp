@@ -20,7 +20,7 @@
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('MimeTypeImage.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('MimeTypeImage.id'))); ?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('MimeTypeImage.id')), null, __('Are you sure you want to delete # {0}?', $this->Form->value('MimeTypeImage.id'))); ?></li>
 		<li><?php echo $this->Html->link(__('List Mime Type Images'), array('action' => 'index'));?></li>
 	</ul>
 </div>

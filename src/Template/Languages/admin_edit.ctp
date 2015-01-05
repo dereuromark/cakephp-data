@@ -1,9 +1,9 @@
-<h2><?php echo __('Edit %s', __('Language')); ?></h2>
+<h2><?php echo __('Edit {0}', __('Language')); ?></h2>
 
 <div class="page form">
 <?php echo $this->Form->create('Language');?>
 	<fieldset>
-		<legend><?php echo __('Edit %s', __('Language')); ?></legend>
+		<legend><?php echo __('Edit {0}', __('Language')); ?></legend>
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('name');
@@ -22,7 +22,7 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Language.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Language.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List %s', __('Languages')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Language.id')), null, __('Are you sure you want to delete # {0}?', $this->Form->value('Language.id'))); ?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Languages')), array('action' => 'index'));?></li>
 	</ul>
 </div>

@@ -39,7 +39,7 @@ foreach ($cities as $city) { ?>
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $city['City']['id']), array('escape' => false)); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $city['City']['id']), array('escape' => false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $city['City']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $city['City']['id'])); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $city['City']['id']), array('escape' => false), __('Are you sure you want to delete # {0}?', $city['City']['id'])); ?>
 		</td>
 	</tr>
 <?php } ?>
@@ -53,6 +53,6 @@ foreach ($cities as $city) { ?>
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('New %s', __('City')), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('New {0}', __('City')), array('action' => 'add')); ?></li>
 	</ul>
 </div>

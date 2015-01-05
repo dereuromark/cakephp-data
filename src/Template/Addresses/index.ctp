@@ -69,7 +69,7 @@ foreach ($addresses as $address):
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $address['Address']['id']), array('escape' => false)); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $address['Address']['id']), array('escape' => false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $address['Address']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $address['Address']['id'])); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $address['Address']['id']), array('escape' => false), __('Are you sure you want to delete # {0}?', $address['Address']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -84,9 +84,9 @@ foreach ($addresses as $address):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add %s', __('Address')), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List %s', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('List %s', __('Country Provinces')), array('controller' => 'country_provinces', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('List %s', __('Users')), array('controller' => 'users', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('Add {0}', __('Address')), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Country Provinces')), array('controller' => 'country_provinces', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Users')), array('controller' => 'users', 'action' => 'index')); ?> </li>
 	</ul>
 </div>

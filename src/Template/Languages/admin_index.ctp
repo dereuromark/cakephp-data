@@ -5,7 +5,7 @@
 <div class="search-box">
 <?php
 echo $this->Form->create();
-echo $this->Form->input('search', array('placeholder' => __('wildcardSearch %s and %s', '*', '?')));
+echo $this->Form->input('search', array('placeholder' => __('wildcardSearch {0} and {1}', '*', '?')));
 echo $this->Form->input('dir', array('label' => __('Direction'), 'options' => Language::directions(), 'empty' => Configure::read('Select.defaultBefore') . __('noSelection') . Configure::read('Select.defaultAfter')));
 echo $this->Form->submit(__('Search'), array());
 echo $this->Form->end();
@@ -79,7 +79,7 @@ foreach ($languages as $language):
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $language['Language']['id']), array('escape' => false)); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $language['Language']['id']), array('escape' => false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $language['Language']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $language['Language']['id'])); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $language['Language']['id']), array('escape' => false), __('Are you sure you want to delete # {0}?', $language['Language']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -97,10 +97,10 @@ The language flags are actually country flags. Due to incompatabities between co
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add %s', __('Language')), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('Compare %s', __('Languages')), array('action' => 'compare_to_iso_list')); ?></li>
-		<li><?php echo $this->Html->link(__('Compare %s to core', __('Languages')), array('action' => 'compare_iso_list_to_core')); ?></li>
-		<li><?php echo $this->Html->link(__('Import %s from Core', __('Language')), array('action' => 'import_from_core'), array(), __('Sure?')); ?></li>
+		<li><?php echo $this->Html->link(__('Add {0}', __('Language')), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('Compare {0}', __('Languages')), array('action' => 'compare_to_iso_list')); ?></li>
+		<li><?php echo $this->Html->link(__('Compare {0} to core', __('Languages')), array('action' => 'compare_iso_list_to_core')); ?></li>
+		<li><?php echo $this->Html->link(__('Import {0} from Core', __('Language')), array('action' => 'import_from_core'), array(), __('Sure?')); ?></li>
 		<li><?php echo $this->Html->link(__('Set primary languages active'), array('action' => 'set_primary_languages_active'), array(), __('Sure?')); ?></li>
 	</ul>
 </div>

@@ -1,9 +1,9 @@
 <div class="page form">
-<h2><?php echo __('Add %s', __('City')); ?></h2>
+<h2><?php echo __('Add {0}', __('City')); ?></h2>
 
 <?php echo $this->Form->create('City');?>
 	<fieldset>
-		<legend><?php echo __('Add %s', __('City')); ?></legend>
+		<legend><?php echo __('Add {0}', __('City')); ?></legend>
 	<?php
 		echo $this->Form->input('country_id');
 		echo $this->Form->input('official_id', array('type' => 'text'));
@@ -27,6 +27,6 @@
 <div class="actions">
 	<ul>
 
-		<li><?php echo $this->Html->link(__('List %s', __('Cities')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Cities')), array('action' => 'index'));?></li>
 	</ul>
 </div>

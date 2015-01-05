@@ -26,7 +26,7 @@
 <?php } ?>
 
 	<fieldset>
-		<legend><?php echo __('Add %s', __('Extensions'));?></legend>
+		<legend><?php echo __('Add {0}', __('Extensions'));?></legend>
 	<?php
 		echo $this->Form->input('import', array('type' => 'textarea'));
 	?>

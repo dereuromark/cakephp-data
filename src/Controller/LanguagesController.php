@@ -45,7 +45,7 @@ class LanguagesController extends DataAppController {
 			$this->Language->create();
 			if ($this->Language->save($this->request->data)) {
 				$var = $this->request->data['Language']['name'];
-				$this->Common->flashMessage(__('record add %s saved', h($var)), 'success');
+				$this->Common->flashMessage(__('record add {0} saved', h($var)), 'success');
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Common->flashMessage(__('formContainsErrors'), 'error');
@@ -61,7 +61,7 @@ class LanguagesController extends DataAppController {
 		if ($this->Common->isPosted()) {
 			if ($this->Language->save($this->request->data)) {
 				$var = $this->request->data['Language']['name'];
-				$this->Common->flashMessage(__('record edit %s saved', h($var)), 'success');
+				$this->Common->flashMessage(__('record edit {0} saved', h($var)), 'success');
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Common->flashMessage(__('formContainsErrors'), 'error');
@@ -82,10 +82,10 @@ class LanguagesController extends DataAppController {
 		}
 		if ($this->Language->delete($id)) {
 			$var = $language['Language']['name'];
-			$this->Common->flashMessage(__('record del %s done', h($var)), 'success');
+			$this->Common->flashMessage(__('record del {0} done', h($var)), 'success');
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->Common->flashMessage(__('record del %s not done exception', h($var)), 'error');
+		$this->Common->flashMessage(__('record del {0} not done exception', h($var)), 'error');
 		return $this->Common->autoRedirect(array('action' => 'index'));
 	}
 
@@ -177,7 +177,7 @@ class LanguagesController extends DataAppController {
 		$languages = $this->Language->getPrimaryLanguages('list');
 		$this->Language->updateAll(array('status' => Language::STATUS_ACTIVE), array('id' => array_keys($languages)));
 
-		$this->Common->flashMessage(__('%s of %s set active', $this->Language->getAffectedRows(), count($languages)), 'success');
+		$this->Common->flashMessage(__('{0} of {1} set active', $this->Language->getAffectedRows(), count($languages)), 'success');
 		return $this->redirect(array('action' => 'index'));
 	}
 

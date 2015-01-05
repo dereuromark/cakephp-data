@@ -2,7 +2,7 @@
 <div class="page form">
 <?php echo $this->Form->create('Currency');?>
 	<fieldset>
-		<legend><?php echo __('Add %s', __('Currency'));?></legend>
+		<legend><?php echo __('Add {0}', __('Currency'));?></legend>
 
 	<?php
 		echo $this->Form->input('name');
@@ -23,6 +23,6 @@ Das selbe gilt für den aktuellen Wechselkurs.
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List %s', __('Currencies')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Currencies')), array('action' => 'index'));?></li>
 	</ul>
 </div>

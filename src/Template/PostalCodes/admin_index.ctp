@@ -51,7 +51,7 @@ foreach ($postalCodes as $postalCode): ?>
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $postalCode['PostalCode']['id']), array('escape' => false)); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $postalCode['PostalCode']['id']), array('escape' => false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $postalCode['PostalCode']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $postalCode['PostalCode']['id'])); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $postalCode['PostalCode']['id']), array('escape' => false), __('Are you sure you want to delete # {0}?', $postalCode['PostalCode']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -65,7 +65,7 @@ foreach ($postalCodes as $postalCode): ?>
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('New %s', __('Postal Code')), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('New {0}', __('Postal Code')), array('action' => 'add')); ?></li>
 		<li><?php echo $this->Html->link(__('Query'), array('action' => 'query')); ?></li>
 		<li><?php echo $this->Html->link(__('Geolocate'), array('action' => 'geolocate')); ?></li>
 	</ul>

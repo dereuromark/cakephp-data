@@ -34,7 +34,7 @@ class SmileysController extends DataAppController {
 			$this->Smiley->create();
 			if ($this->Smiley->save($this->request->data)) {
 				$var = $this->Smiley->id; //$this->request->data['Smiley']['name'];
-				$this->Common->flashMessage(__('record add %s saved', h($var)), 'success');
+				$this->Common->flashMessage(__('record add {0} saved', h($var)), 'success');
 				return $this->Common->autoRedirect(array('action' => 'index'));
 			} else {
 				$this->Common->flashMessage(__('formContainsErrors'), 'error');
@@ -50,7 +50,7 @@ class SmileysController extends DataAppController {
 		if ($this->Common->isPosted()) {
 			if ($this->Smiley->save($this->request->data)) {
 				$var = $id; //$this->request->data['Smiley']['name'];
-				$this->Common->flashMessage(__('record edit %s saved', h($var)), 'success');
+				$this->Common->flashMessage(__('record edit {0} saved', h($var)), 'success');
 				return $this->Common->postRedirect(array('action' => 'index'));
 			} else {
 				$this->Common->flashMessage(__('formContainsErrors'), 'error');
@@ -71,10 +71,10 @@ class SmileysController extends DataAppController {
 		}
 		if ($this->Smiley->delete($id)) {
 			$var = $smiley['Smiley']['id'];
-			$this->Common->flashMessage(__('record del %s done', h($var)), 'success');
+			$this->Common->flashMessage(__('record del {0} done', h($var)), 'success');
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->Common->flashMessage(__('record del %s not done exception', h($var)), 'error');
+		$this->Common->flashMessage(__('record del {0} not done exception', h($var)), 'error');
 		return $this->Common->autoRedirect(array('action' => 'index'));
 	}
 

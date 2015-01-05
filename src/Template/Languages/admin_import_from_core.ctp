@@ -1,9 +1,9 @@
-<h2><?php echo __('Import %s', __('Languages')); ?></h2>
+<h2><?php echo __('Import {0}', __('Languages')); ?></h2>
 
 <div class="page form">
 <?php echo $this->Form->create('Language');?>
 	<fieldset>
-		<legend><?php echo __('Add %s', __('Language')); ?></legend>
+		<legend><?php echo __('Add {0}', __('Language')); ?></legend>
 	<?php
 		//echo $this->Form->input('name');
 		//echo $this->Form->input('ori_name');
@@ -19,6 +19,6 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List %s', __('Languages')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Languages')), array('action' => 'index'));?></li>
 	</ul>
 </div>

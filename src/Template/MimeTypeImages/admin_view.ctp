@@ -31,7 +31,7 @@
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit Mime Type Image'), array('action' => 'edit', $mimeTypeImage['MimeTypeImage']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Mime Type Image'), array('action' => 'delete', $mimeTypeImage['MimeTypeImage']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $mimeTypeImage['MimeTypeImage']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete Mime Type Image'), array('action' => 'delete', $mimeTypeImage['MimeTypeImage']['id']), array('escape' => false), __('Are you sure you want to delete # {0}?', $mimeTypeImage['MimeTypeImage']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('List Mime Type Images'), array('action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('Add Mime Type Image'), array('action' => 'add')); ?> </li>
 	</ul>

@@ -1,7 +1,7 @@
 <div class="page form">
 <?php echo $this->Form->create('Country');?>
 	<fieldset>
-		<legend><?php echo __('Edit %s', __('Country'));?></legend>
+		<legend><?php echo __('Edit {0}', __('Country'));?></legend>
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('name');
@@ -25,8 +25,8 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Country.id')), array('escape' => false), __('Are you sure you want to delete # %s?', $this->Form->value('Country.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List %s', __('Countries')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Country.id')), array('escape' => false), __('Are you sure you want to delete # {0}?', $this->Form->value('Country.id'))); ?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), array('action' => 'index'));?></li>
 		<li><?php echo $this->Html->link(__('List Country Provinces'), array('controller' => 'country_provinces', 'action' => 'index')); ?> </li>
 	</ul>
 </div>

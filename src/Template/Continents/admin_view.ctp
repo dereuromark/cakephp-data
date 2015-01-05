@@ -33,15 +33,15 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit %s', __('Continent')), array('action' => 'edit', $continent['Continent']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete %s', __('Continent')), array('action' => 'delete', $continent['Continent']['id']), null, __('Are you sure you want to delete # %s?', $continent['Continent']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List %s', __('Continents')), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('List %s', __('Continents')), array('controller' => 'continents', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('List %s', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('Edit {0}', __('Continent')), array('action' => 'edit', $continent['Continent']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete {0}', __('Continent')), array('action' => 'delete', $continent['Continent']['id']), null, __('Are you sure you want to delete # {0}?', $continent['Continent']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Continents')), array('action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Continents')), array('controller' => 'continents', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
 	</ul>
 </div>
 <div class="related">
-	<h3><?php echo __('Related %s', __('Continents'));?></h3>
+	<h3><?php echo __('Related {0}', __('Continents'));?></h3>
 	<?php if (!empty($continent['ChildContinent'])):?>
 	<table class="list">	<tr>
 		<th><?php echo __('Id'); ?></th>
@@ -74,7 +74,7 @@
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'continents', 'action' => 'view', $childContinent['id'])); ?>
 				<?php echo $this->Html->link(__('Edit'), array('controller' => 'continents', 'action' => 'edit', $childContinent['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'continents', 'action' => 'delete', $childContinent['id']), null, __('Are you sure you want to delete # %s?', $childContinent['id'])); ?>
+				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'continents', 'action' => 'delete', $childContinent['id']), null, __('Are you sure you want to delete # {0}?', $childContinent['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
@@ -83,12 +83,12 @@
 
 	<div class="actions">
 		<ul>
-			<li><?php echo $this->Html->link(__('Add %s', __('Child Continent')), array('controller' => 'continents', 'action' => 'add'));?> </li>
+			<li><?php echo $this->Html->link(__('Add {0}', __('Child Continent')), array('controller' => 'continents', 'action' => 'add'));?> </li>
 		</ul>
 	</div>
 </div>
 <div class="related">
-	<h3><?php echo __('Related %s', __('Countries'));?></h3>
+	<h3><?php echo __('Related {0}', __('Countries'));?></h3>
 	<?php if (!empty($continent['Country'])):?>
 	<table class="list">	<tr>
 		<th><?php echo __('Id'); ?></th>
@@ -139,7 +139,7 @@
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'countries', 'action' => 'view', $country['id'])); ?>
 				<?php echo $this->Html->link(__('Edit'), array('controller' => 'countries', 'action' => 'edit', $country['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'countries', 'action' => 'delete', $country['id']), null, __('Are you sure you want to delete # %s?', $country['id'])); ?>
+				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'countries', 'action' => 'delete', $country['id']), null, __('Are you sure you want to delete # {0}?', $country['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
@@ -148,7 +148,7 @@
 
 	<div class="actions">
 		<ul>
-			<li><?php echo $this->Html->link(__('Add %s', __('Country')), array('controller' => 'countries', 'action' => 'add'));?> </li>
+			<li><?php echo $this->Html->link(__('Add {0}', __('Country')), array('controller' => 'countries', 'action' => 'add'));?> </li>
 		</ul>
 	</div>
 </div>

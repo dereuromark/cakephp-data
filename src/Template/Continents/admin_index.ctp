@@ -33,7 +33,7 @@ foreach ($continents as $continent):
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $continent['Continent']['id']), array('escape' => false)); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $continent['Continent']['id']), array('escape' => false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $continent['Continent']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $continent['Continent']['id'])); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $continent['Continent']['id']), array('escape' => false), __('Are you sure you want to delete # {0}?', $continent['Continent']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -48,8 +48,8 @@ foreach ($continents as $continent):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add %s', __('Continent')), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List %s', __('Continents')), array('controller' => 'continents', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('List %s', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('Add {0}', __('Continent')), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Continents')), array('controller' => 'continents', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
 	</ul>
 </div>
