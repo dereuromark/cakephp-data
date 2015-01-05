@@ -6,9 +6,9 @@
  */
 namespace Data\Controller\Component;
 
-use Cake\Network\Http\Client;
 use Cake\Cache\Cache;
 use Cake\Controller\Component;
+use Cake\Network\Http\Client;
 use Cake\Utility\Xml;
 use Data\Lib\CurrencyBitcoinLib;
 

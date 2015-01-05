@@ -1,8 +1,8 @@
 <?php
 namespace Data\Test\App\Config;
 
-use Cake\Routing\Router;
 use Cake\Core\Plugin;
+use Cake\Routing\Router;
 
 Router::scope('/', function($routes) {
 	$routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'InflectedRoute']);

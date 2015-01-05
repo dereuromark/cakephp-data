@@ -6,9 +6,9 @@
 namespace Data\Lib;
 
 use Cake\Cache\Cache;
-use Tools\HtmlDom\HtmlDom;
-use Cake\ORM\TableRegistry;
 use Cake\Network\Http\Client;
+use Cake\ORM\TableRegistry;
+use Tools\HtmlDom\HtmlDom;
 
 class GeoImportLib {
 
