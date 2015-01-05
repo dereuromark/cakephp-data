@@ -28,7 +28,7 @@ class CurrencyLibTest extends TestCase {
 	 * @return void
 	 */
 	public function testConvert() {
-		$this->out('<h2>30 EUR in USD</h2>', true);
+		//$this->out('<h2>30 EUR in USD</h2>', true);
 		$is = $this->CurrencyLib->convert(30, 'EUR', 'USD');
 		$this->debug($is);
 		$this->assertTrue($is > 30 && $is < 60);
@@ -90,7 +90,7 @@ class TestCurrencyLib extends CurrencyLib {
 		}
 
 		$file = basename($url);
-		$url = Plugin::path('Data') . 'Test' . DS . 'test_files' . DS . 'xml' . DS . $file;
+		$url = Plugin::path('Data') . 'tests' . DS . 'test_files' . DS . 'xml' . DS . $file;
 		return parent::_loadXml($url);
 	}
 

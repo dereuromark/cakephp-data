@@ -6,6 +6,8 @@
  */
 namespace Data\Test\Fixture;
 
+use Cake\TestSuite\Fixture\TestFixture;
+
 class AddressesFixture extends TestFixture {
 
 	/**

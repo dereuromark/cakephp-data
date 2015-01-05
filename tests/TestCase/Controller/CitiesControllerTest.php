@@ -33,7 +33,8 @@ class CitiesControllerTest extends IntegrationTestCase {
 	}
 
 	public function testIndex() {
-		$this->get(array('plugin' => 'Data', 'controller' => 'Cities', 'action' => 'index'));
+		$this->get(array('plugin' => 'Data', 'controller' => 'Cities', 'prefix' => 'admin', 'action' => 'index'));
+		$this->assertResponseCode(200);
 	}
 
 }

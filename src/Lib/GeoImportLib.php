@@ -7,11 +7,15 @@ namespace Data\Lib;
 
 use Cake\Cache\Cache;
 use Tools\Lib\HtmlDomLib;
-use Tools\Lib\HttpSocketLib;
+use Cake\ORM\TableRegistry;
+use Cake\Network\Http\Client;
+
 class GeoImportLib {
 
+	public $Countries;
+
 	public function __construct() {
-		$this->Country = ClassRegistry::init('Data.Country');
+		$this->Countries = TableRegistry::get('Data.Countries');
 	}
 
 	public function import($countryCode = 'AT') {
@@ -75,7 +79,7 @@ class GeoImportLib {
 
 			$t['citizens'] = (int)str_replace('\'', '', $this->_parse($tmp[13]));
 			$t['country'] = 'AT';
-			$t['country_id'] = $this->Country->getIdByIso('AT');
+			$t['country_id'] = $this->Countries->getIdByIso('AT');
 
 			$array[] = $t;
 		}
@@ -129,7 +133,7 @@ class GeoImportLib {
 						$t['state'] = $this->_parse($tmp[6]);
 						$t['citizens'] = (int)str_replace('.', '', $this->_parse($tmp[5]));
 						$t['country'] = 'AT';
-						$t['country_id'] = $this->Country->getIdByIso('AT');
+						$t['country_id'] = $this->Countries->getIdByIso('AT');
 
 						$array[] = $t;
 					}
@@ -157,7 +161,7 @@ class GeoImportLib {
 						$t['state'] = $this->_parse($tmp[2]);
 						$t['citizens'] = (int)str_replace('.', '', $this->_parse($tmp[3]));
 						$t['country'] = 'AT';
-						$t['country_id'] = $this->Country->getIdByIso('AT');
+						$t['country_id'] = $this->Countries->getIdByIso('AT');
 
 						if (mb_strlen($t['county']) < 2) {
 							$t['county'] = $t['city'];
@@ -220,7 +224,7 @@ class GeoImportLib {
 			$t['state'] = $this->_parse($tmp[2]);
 			$t['citizens'] = (int)str_replace('.', '', $this->_parse($tmp[6]));
 			$t['country'] = 'AT';
-			$t['country_id'] = $this->Country->getIdByIso('AT');
+			$t['country_id'] = $this->Countries->getIdByIso('AT');
 
 			if ($t['county'] === '<sup>2</sup>') {
 				$t['county'] = $t['city'];
@@ -252,8 +256,8 @@ class GeoImportLib {
 		if ($cache = Cache::read('geo_import_' . md5($url))) {
 			return $cache;
 		}
-		$HttpSocket = new HttpSocketLib();
-		$res = $HttpSocket->fetch($url);
+		$HttpSocket = new Client();
+		$res = $HttpSocket->get($url);
 		Cache::write('geo_import_' . md5($url), $res);
 		return $res;
 	}

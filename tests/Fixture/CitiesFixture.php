@@ -1,7 +1,7 @@
 <?php
-/* City Fixture generated on: 2011-11-20 21:58:46 : 1321822726 */
 namespace Data\Test\Fixture;
 
+use Cake\TestSuite\Fixture\TestFixture;
 
 /**
  * CitiesFixture
