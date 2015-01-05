@@ -11,7 +11,7 @@ class CountriesController extends DataAppController {
 
 	public $paginate = array('order' => array('Country.sort' => 'DESC'));
 
-	public function beforeFilter() {
+	public function beforeFilter(Event $event) {
 		parent::beforeFilter();
 
 		if ($specific = Configure::read('Country.image_path')) {

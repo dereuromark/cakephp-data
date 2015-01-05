@@ -7,7 +7,7 @@ class SmileysController extends DataAppController {
 
 	public $paginate = array('order' => array('Smiley.is_base' => 'DESC', 'Smiley.sort' => 'ASC'), 'limit' => 100);
 
-	public function beforeFilter() {
+	public function beforeFilter(Event $event) {
 		parent::beforeFilter();
 	}
 

@@ -10,7 +10,7 @@ class MimeTypeImagesController extends DataAppController {
 
 	public $paginate = array('order' => array('MimeTypeImage.modified' => 'DESC'));
 
-	public function beforeFilter() {
+	public function beforeFilter(Event $event) {
 		parent::beforeFilter();
 
 		//$this->Auth->allow();

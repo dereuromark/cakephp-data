@@ -13,7 +13,7 @@ class PostalCodesController extends DataAppController {
 
 	public $paginate = array();
 
-	public function beforeFilter() {
+	public function beforeFilter(Event $event) {
 		parent::beforeFilter();
 	}
 

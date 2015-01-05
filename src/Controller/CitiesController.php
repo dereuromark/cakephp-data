@@ -11,7 +11,7 @@ class CitiesController extends DataAppController {
 
 	public $paginate = array('order' => array('City.modified' => 'DESC'));
 
-	public function beforeFilter() {
+	public function beforeFilter(Event $event) {
 		parent::beforeFilter();
 	}
 

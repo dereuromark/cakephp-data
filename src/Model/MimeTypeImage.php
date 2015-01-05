@@ -63,7 +63,7 @@ class MimeTypeImage extends DataAppModel {
 		return true;
 	}
 
-	public function afterDelete() {
+	public function afterDelete(Event $event, Entity $entity, ArrayObject $options) {
 		if (!empty($this->_del)) {
 			# todo: ...
 			$image = $this->_del[$this->alias]['name'] . '.' . $this->_del[$this->alias]['ext'];

@@ -7,7 +7,7 @@ class CountryProvincesController extends DataAppController {
 
 	public $paginate = array('order' => array('CountryProvince.modified' => 'DESC'));
 
-	public function beforeFilter() {
+	public function beforeFilter(Event $event) {
 		parent::beforeFilter();
 
 		if (isset($this->Auth)) {

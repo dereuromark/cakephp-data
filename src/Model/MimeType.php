@@ -68,7 +68,7 @@ class MimeType extends DataAppModel {
 		$this->cleanUp();
 	}
 
-	public function afterDelete() {
+	public function afterDelete(Event $event, Entity $entity, ArrayObject $options) {
 		parent::afterDelete();
 
 		$this->cleanUp();

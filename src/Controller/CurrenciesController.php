@@ -10,7 +10,7 @@ class CurrenciesController extends DataAppController {
 
 	public $paginate = array('order' => array('Currency.base' => 'DESC', 'Currency.modified' => 'DESC'));
 
-	public function beforeFilter() {
+	public function beforeFilter(Event $event) {
 		parent::beforeFilter();
 	}
 
