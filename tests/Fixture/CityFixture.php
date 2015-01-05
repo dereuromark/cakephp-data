@@ -7,7 +7,7 @@ namespace Data\Test\Fixture;
  * CityFixture
  *
  */
-class CityFixture extends CakeTestFixture {
+class CityFixture extends TestFixture {
 
 	/**
 	 * Fields

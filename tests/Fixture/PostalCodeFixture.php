@@ -7,7 +7,7 @@ namespace Data\Test\Fixture;
  * PostalCodeFixture
  *
  */
-class PostalCodeFixture extends CakeTestFixture {
+class PostalCodeFixture extends TestFixture {
 
 	/**
 	 * Fields

@@ -5,7 +5,7 @@
  */
 namespace Data\Test\Fixture;
 
-class LocationFixture extends CakeTestFixture {
+class LocationFixture extends TestFixture {
 
 	/**
 	 * Fields

@@ -2,7 +2,7 @@
 
 namespace Data\Test\Fixture;
 
-class SmileyFixture extends CakeTestFixture {
+class SmileyFixture extends TestFixture {
 
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary'),

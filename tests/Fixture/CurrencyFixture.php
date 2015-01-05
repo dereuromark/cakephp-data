@@ -7,7 +7,7 @@ namespace Data\Test\Fixture;
  * CurrencyFixture
  *
  */
-class CurrencyFixture extends CakeTestFixture {
+class CurrencyFixture extends TestFixture {
 
 	/**
 	 * Fields

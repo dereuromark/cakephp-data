@@ -2,7 +2,7 @@
 
 namespace Data\Test\Fixture;
 
-class ContinentFixture extends CakeTestFixture {
+class ContinentFixture extends TestFixture {
 
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary'),

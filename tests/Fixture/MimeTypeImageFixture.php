@@ -5,7 +5,7 @@
  */
 namespace Data\Test\Fixture;
 
-class MimeTypeImageFixture extends CakeTestFixture {
+class MimeTypeImageFixture extends TestFixture {
 
 	/**
 	 * Fields

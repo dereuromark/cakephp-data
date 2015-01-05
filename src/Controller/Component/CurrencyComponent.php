@@ -6,7 +6,7 @@
  */
 namespace Data\Controller\Component;
 
-use App\Network\Http\HttpSocket;
+use Cake\Network\Http\Client;
 use Cake\Cache\Cache;
 use Cake\Controller\Component;
 use Cake\Utility\Xml;
@@ -106,7 +106,7 @@ class CurrencyComponent extends Component {
 		}
 
 		//Create an http socket
-		$http = new HttpSocket();
+		$http = new Client();
 		$currencies = new XML($http->get(self::URL_HISTORY));
 		$currencies = Set::reverse($currencies);
 		//Filter down to just the rates
@@ -133,7 +133,7 @@ class CurrencyComponent extends Component {
 		//...we haven't, so load utility classes needed
 
 		//Create an http socket
-		$Http = new HttpSocket();
+		$Http = new Client();
 		$res = $Http->get(self::URL);
 		//And retrieve rates as an XML object
 		$currencyXml = Xml::build($res->body);

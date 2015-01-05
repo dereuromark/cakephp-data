@@ -7,7 +7,7 @@ namespace Data\Test\Fixture;
  * CountryFixture
  *
  */
-class CountryFixture extends CakeTestFixture {
+class CountryFixture extends TestFixture {
 
 	/**
 	 * Fields

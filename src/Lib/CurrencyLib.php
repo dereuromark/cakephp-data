@@ -6,7 +6,6 @@
  */
 namespace Data\Lib;
 
-use App\Network\Http\HttpSocket;
 use Cake\Cache\Cache;
 use Cake\Utility\Xml;
 use Data\Lib\CurrencyBitcoinLib;
