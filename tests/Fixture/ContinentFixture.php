@@ -5,16 +5,16 @@ namespace Data\Test\Fixture;
 class ContinentFixture extends TestFixture {
 
 	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary'),
-		'name' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 64, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
-		'ori_name' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 64, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
-		'parent_id' => array('type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10),
-		'lft' => array('type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10),
-		'rgt' => array('type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10),
-		'status' => array('type' => 'integer', 'null' => false, 'default' => '0', 'length' => 2),
-		'modified' => array('type' => 'datetime', 'null' => false, 'default' => null),
-		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM')
+		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10],
+		'name' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 64, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'],
+		'ori_name' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 64, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'],
+		'parent_id' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10],
+		'lft' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10],
+		'rgt' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10],
+		'status' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 2],
+		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null],
+		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
+		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM']
 	);
 
 	public $records = array(
