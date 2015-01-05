@@ -6,7 +6,9 @@ use Data\Model\MimeTypeImage;
 use Tools\TestSuite\MyCakeTestCase;
 class MimeTypeImageTest extends MyCakeTestCase {
 
-	public $fixtures = array('plugin.data.mime_type_image');
+	public $fixtures = array(
+		'plugin.data.mime_type_images'
+	);
 
 	public $MimeTypeImage;
 

@@ -7,7 +7,9 @@ use Data\Model\Smiley;
 
 class SmileyTest extends TestCase {
 
-	public $fixtures = array('plugin.data.smiley');
+	public $fixtures = array(
+		'plugin.data.smileys'
+	);
 
 	public function setUp() {
 		parent::setUp();

@@ -7,7 +7,9 @@ use Tools\TestSuite\MyCakeTestCase;
 
 class CityTest extends MyCakeTestCase {
 
-	public $fixtures = array('plugin.data.city');
+	public $fixtures = array(
+		'plugin.data.cities'
+	);
 
 	public $City;
 

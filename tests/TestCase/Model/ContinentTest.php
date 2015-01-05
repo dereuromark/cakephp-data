@@ -7,7 +7,9 @@ use Tools\TestSuite\MyCakeTestCase;
 
 class ContinentTest extends MyCakeTestCase {
 
-	public $fixtures = array('plugin.data.continent');
+	public $fixtures = array(
+		'plugin.data.continents'
+	);
 
 	public $Continent;
 

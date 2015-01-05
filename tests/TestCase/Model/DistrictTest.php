@@ -7,7 +7,9 @@ use Tools\TestSuite\MyCakeTestCase;
 
 class DistrictTest extends MyCakeTestCase {
 
-	public $fixtures = array('plugin.data.district');
+	public $fixtures = array(
+		'plugin.data.districts'
+	);
 
 	public $District;
 

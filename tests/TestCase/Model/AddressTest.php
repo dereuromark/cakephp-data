@@ -7,7 +7,9 @@ use Tools\TestSuite\MyCakeTestCase;
 
 class AddressTest extends MyCakeTestCase {
 
-	public $fixtures = array('plugin.data.address');
+	public $fixtures = array(
+		'plugin.data.addresses'
+	);
 
 	public $Address;
 

@@ -7,7 +7,9 @@ use Tools\TestSuite\MyCakeTestCase;
 
 class StateTest extends MyCakeTestCase {
 
-	public $fixtures = array('plugin.data.state');
+	public $fixtures = array(
+		'plugin.data.states'
+	);
 
 	public $State;
 

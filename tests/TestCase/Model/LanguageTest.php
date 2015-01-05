@@ -6,7 +6,9 @@ use Data\Model\Language;
 use Tools\TestSuite\MyCakeTestCase;
 class LanguageTest extends MyCakeTestCase {
 
-	public $fixtures = array('plugin.data.language');
+	public $fixtures = array(
+		'plugin.data.languages'
+	);
 
 	public $Language;
 

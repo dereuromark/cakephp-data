@@ -6,7 +6,9 @@ use Data\Model\Location;
 use Tools\TestSuite\MyCakeTestCase;
 class LocationTest extends MyCakeTestCase {
 
-	public $fixtures = array('plugin.data.location');
+	public $fixtures = array(
+		'plugin.data.locations'
+	);
 
 	public $Location;
 

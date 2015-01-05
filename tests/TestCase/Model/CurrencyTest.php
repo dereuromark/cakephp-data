@@ -7,7 +7,9 @@ use Tools\TestSuite\MyCakeTestCase;
 
 class CurrencyTest extends MyCakeTestCase {
 
-	public $fixtures = array('plugin.data.currency');
+	public $fixtures = array(
+		'plugin.data.currencies'
+	);
 
 	public $Currency;
 

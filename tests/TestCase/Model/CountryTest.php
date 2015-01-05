@@ -7,7 +7,9 @@ use Tools\TestSuite\MyCakeTestCase;
 
 class CountryTest extends MyCakeTestCase {
 
-	public $fixtures = array('plugin.data.country');
+	public $fixtures = array(
+		'plugin.data.countries'
+	);
 
 	public $Country;
 
