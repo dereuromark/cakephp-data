@@ -2,3 +2,5 @@
 /plugins/
 /phpunit.phar
 /composer.lock
+/tmp/
+/logs/

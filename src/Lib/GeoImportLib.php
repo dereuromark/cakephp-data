@@ -6,7 +6,7 @@
 namespace Data\Lib;
 
 use Cake\Cache\Cache;
-use Tools\Lib\HtmlDomLib;
+use Tools\HtmlDom\HtmlDom;
 use Cake\ORM\TableRegistry;
 use Cake\Network\Http\Client;
 
@@ -48,8 +48,8 @@ class GeoImportLib {
 			$res = file_get_contents(TMP . 'import.txt');
 		} else {
 			$content = $this->_getFromUrl($url);
-			$HtmlDom = new HtmlDomLib();
-			$res = $HtmlDom->domFromString($content)->find('textarea', 0)->innertext;
+			$HtmlDom = new HtmlDom($content);
+			$res = $HtmlDom->find('textarea', 0)->innertext;
 		}
 		if (empty($res)) {
 			trigger_error('/tmp/import.txt missing or url not accessable');
@@ -104,8 +104,8 @@ class GeoImportLib {
 				$res = file_get_contents(TMP . 'import.txt');
 			} else {
 				$content = $this->_getFromUrl($url);
-					$HtmlDom = new HtmlDomLib();
-				$res = $HtmlDom->domFromString($content)->find('textarea', 0)->innertext;
+				$HtmlDom = new HtmlDomLib($content);
+				$res = $HtmlDom->find('textarea', 0)->innertext;
 			}
 			if (empty($res)) {
 				trigger_error('/tmp/import.txt missing or url not accessable');
@@ -192,8 +192,8 @@ class GeoImportLib {
 			$res = file_get_contents(TMP . 'import.txt');
 		} else {
 			$content = $this->_getFromUrl($url);
-			$HtmlDom = new HtmlDomLib();
-			$res = $HtmlDom->domFromString($content)->find('textarea', 0)->innertext;
+			$HtmlDom = new HtmlDomLib($content);
+			$res = $HtmlDom->find('textarea', 0)->innertext;
 		}
 		if (empty($res)) {
 			trigger_error('/tmp/import.txt missing or url not accessable');
