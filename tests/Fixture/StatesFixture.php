@@ -2,6 +2,8 @@
 /* State Fixture generated on: 2011-11-20 21:59:38 : 1321822778 */
 namespace Data\Test\Fixture;
 
+use Cake\TestSuite\Fixture\TestFixture;
+
 
 /**
  * StatesFixture

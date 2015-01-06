@@ -2,7 +2,7 @@
 
 namespace Data\Test\TestCase\Model;
 
-use Cake\TestSuite\TestCase;
+use Tools\TestSuite\TestCase;
 use Data\Model\Smiley;
 
 class SmileyTest extends TestCase {

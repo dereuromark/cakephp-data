@@ -2,6 +2,8 @@
 
 namespace Data\Test\Fixture;
 
+use Cake\TestSuite\Fixture\TestFixture;
+
 class SmileysFixture extends TestFixture {
 
 	public $fields = array(

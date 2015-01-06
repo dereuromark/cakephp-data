@@ -3,8 +3,8 @@ namespace Data\Test\TestCase\Controller;
 
 use Cake\Network\Request;
 use Cake\Network\Response;
-use Data\Controller\CitiesController;
 use Cake\TestSuite\IntegrationTestCase;
+use Data\Controller\CitiesController;
 
 /**
  * CitiesController Test Case

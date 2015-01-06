@@ -2,9 +2,9 @@
 
 namespace Data\Test\TestCase\Model;
 
+use Cake\ORM\TableRegistry;
 use Data\Model\Language;
 use Tools\TestSuite\TestCase;
-use Cake\ORM\TableRegistry;
 
 class LanguagesTableTest extends TestCase {
 

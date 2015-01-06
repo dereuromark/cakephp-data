@@ -5,6 +5,8 @@
  */
 namespace Data\Test\Fixture;
 
+use Cake\TestSuite\Fixture\TestFixture;
+
 class MimeTypeImagesFixture extends TestFixture {
 
 	/**

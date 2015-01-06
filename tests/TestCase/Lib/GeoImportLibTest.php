@@ -2,7 +2,7 @@
 
 namespace Data\Test\TestCase\Lib;
 
-use Cake\TestSuite\TestCase;
+use Tools\TestSuite\TestCase;
 use Data\Lib\GeoImportLib;
 
 /**
