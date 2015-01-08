@@ -34,13 +34,13 @@
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>
 		<dd>
-			<?php echo $this->Datetime->niceDate($postalCode['PostalCode']['created']); ?>
+			<?php echo $this->Time->niceDate($postalCode['PostalCode']['created']); ?>
 			&nbsp;
 		</dd>
 <?php if ($postalCode['PostalCode']['created'] != $postalCode['PostalCode']['modified']) { ?>
 		<dt><?php echo __('Modified'); ?></dt>
 		<dd>
-			<?php echo $this->Datetime->niceDate($postalCode['PostalCode']['modified']); ?>
+			<?php echo $this->Time->niceDate($postalCode['PostalCode']['modified']); ?>
 			&nbsp;
 		</dd>
 <?php } ?>

@@ -76,10 +76,10 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 			<?php echo nl2br(h($mimeTypeImage['MimeTypeImage']['details'])); ?>
 		</td>
 		<td>
-			<?php echo $this->Datetime->niceDate($mimeTypeImage['MimeTypeImage']['created']); ?>
+			<?php echo $this->Time->niceDate($mimeTypeImage['MimeTypeImage']['created']); ?>
 		</td>
 		<td>
-			<?php echo $this->Datetime->niceDate($mimeTypeImage['MimeTypeImage']['modified']); ?>
+			<?php echo $this->Time->niceDate($mimeTypeImage['MimeTypeImage']['modified']); ?>
 		</td>
 		<td class="actions">
 			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $mimeTypeImage['MimeTypeImage']['id']), array('escape'=>false)); ?>

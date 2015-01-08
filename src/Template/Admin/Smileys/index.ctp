@@ -51,7 +51,7 @@ foreach ($smileys as $smiley):
 			</span>
 		</td>
 		<td>
-			<?php echo $this->Datetime->niceDate($smiley['Smiley']['modified']); ?>
+			<?php echo $this->Time->niceDate($smiley['Smiley']['modified']); ?>
 		</td>
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $smiley['Smiley']['id']), array('escape' => false)); ?>

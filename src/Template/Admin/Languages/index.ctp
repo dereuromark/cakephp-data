@@ -74,7 +74,7 @@ foreach ($languages as $language):
 			<?php echo $this->Format->yesNo($language['Language']['status'], __('Active'), __('Inactive')); ?>
 		</td>
 		<td>
-			<?php echo $this->Datetime->niceDate($language['Language']['modified']); ?>
+			<?php echo $this->Time->niceDate($language['Language']['modified']); ?>
 		</td>
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $language['Language']['id']), array('escape' => false)); ?>

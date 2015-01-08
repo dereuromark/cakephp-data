@@ -64,7 +64,7 @@ foreach ($addresses as $address):
 			 ?>
 		</td>
 		<td>
-			<?php echo $this->Datetime->niceDate($address['Address']['last_used']); ?>
+			<?php echo $this->Time->niceDate($address['Address']['last_used']); ?>
 		</td>
 		<td>
 			<?php echo h($address['Address']['formatted_address']); ?>

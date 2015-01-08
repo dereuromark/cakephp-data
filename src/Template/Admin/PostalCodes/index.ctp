@@ -43,10 +43,10 @@ foreach ($postalCodes as $postalCode): ?>
 			<?php echo h($postalCode['PostalCode']['official_address']); ?>
 		</td>
 		<td>
-			<?php echo $this->Datetime->niceDate($postalCode['PostalCode']['created']); ?>
+			<?php echo $this->Time->niceDate($postalCode['PostalCode']['created']); ?>
 		</td>
 		<td>
-			<?php echo $this->Datetime->niceDate($postalCode['PostalCode']['modified']); ?>
+			<?php echo $this->Time->niceDate($postalCode['PostalCode']['modified']); ?>
 		</td>
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $postalCode['PostalCode']['id']), array('escape' => false)); ?>

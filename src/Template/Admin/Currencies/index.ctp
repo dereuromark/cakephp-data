@@ -65,7 +65,7 @@ foreach ($currencies as $currency):
 			} ?>
 		</td>
 		<td>
-			<?php echo $this->Datetime->niceDate($currency['Currency']['modified']); ?>
+			<?php echo $this->Time->niceDate($currency['Currency']['modified']); ?>
 		</td>
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $currency['Currency']['id']), array('escape' => false)); ?>

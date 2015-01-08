@@ -18,12 +18,12 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Created'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Datetime->niceDate($mimeType['MimeType']['created']); ?>
+			<?php echo $this->Time->niceDate($mimeType['MimeType']['created']); ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Modified'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Datetime->niceDate($mimeType['MimeType']['modified']); ?>
+			<?php echo $this->Time->niceDate($mimeType['MimeType']['modified']); ?>
 			&nbsp;
 		</dd>
 	</dl>

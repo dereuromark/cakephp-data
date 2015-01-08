@@ -51,7 +51,7 @@
 		</dd>
 		<dt><?php echo __('Modified'); ?></dt>
 		<dd>
-			<?php echo $this->Datetime->niceDate($city['City']['modified']); ?>
+			<?php echo $this->Time->niceDate($city['City']['modified']); ?>
 			&nbsp;
 		</dd>
 	</dl>

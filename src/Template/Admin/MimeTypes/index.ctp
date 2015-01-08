@@ -90,10 +90,10 @@ foreach ($mimeTypes as $mimeType):
 			<?php echo $this->Format->yesNo($mimeType['MimeType']['core']); ?>
 		</td>
 		<td>
-			<?php echo $this->Datetime->niceDate($mimeType['MimeType']['created']); ?>
+			<?php echo $this->Time->niceDate($mimeType['MimeType']['created']); ?>
 		</td>
 		<td>
-			<?php echo $this->Datetime->niceDate($mimeType['MimeType']['modified']); ?>
+			<?php echo $this->Time->niceDate($mimeType['MimeType']['modified']); ?>
 		</td>
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $mimeType['MimeType']['id']), array('escape' => false)); ?>

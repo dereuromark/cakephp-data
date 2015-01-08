@@ -28,7 +28,7 @@ foreach ($continents as $continent):
 			<?php echo $this->Html->link($continent['ParentContinent']['name'], array('controller' => 'continents', 'action' => 'view', $continent['ParentContinent']['id'])); ?>
 		</td>
 		<td>
-			<?php echo $this->Datetime->niceDate($continent['Continent']['modified']); ?>
+			<?php echo $this->Time->niceDate($continent['Continent']['modified']); ?>
 		</td>
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $continent['Continent']['id']), array('escape' => false)); ?>

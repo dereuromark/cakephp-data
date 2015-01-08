@@ -43,13 +43,13 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Created'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Datetime->niceDate($smiley['Smiley']['created']); ?>
+			<?php echo $this->Time->niceDate($smiley['Smiley']['created']); ?>
 			&nbsp;
 		</dd>
 <?php if ($smiley['Smiley']['created'] != $smiley['Smiley']['modified']) { ?>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Modified'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Datetime->niceDate($smiley['Smiley']['modified']); ?>
+			<?php echo $this->Time->niceDate($smiley['Smiley']['modified']); ?>
 			&nbsp;
 		</dd>
 <?php } ?>

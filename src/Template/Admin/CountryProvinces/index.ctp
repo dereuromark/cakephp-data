@@ -72,7 +72,7 @@ foreach ($countryProvinces as $countryProvince):
 			?>
 		</td>
 		<td>
-			<?php echo $this->Datetime->niceDate($countryProvince['CountryProvince']['modified']); ?>
+			<?php echo $this->Time->niceDate($countryProvince['CountryProvince']['modified']); ?>
 		</td>
 		<td class="actions">
 			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $countryProvince['CountryProvince']['id']), array('escape'=>false)); ?>

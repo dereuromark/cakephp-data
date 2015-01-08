@@ -80,7 +80,7 @@ foreach ($countries as $country):
 			<?php echo $country['Country']['sort']; ?>
 		</td>
 		<td>
-			<?php echo $this->Datetime->niceDate($country['Country']['modified']); ?>
+			<?php echo $this->Time->niceDate($country['Country']['modified']); ?>
 		</td>
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('up'), array('action' => 'up', $country['Country']['id']), array('escape' => false)); ?>

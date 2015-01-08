@@ -34,7 +34,7 @@ foreach ($cities as $city) { ?>
 			<?php echo $this->Format->yesNo($city['City']['postal_code_unique']); ?>
 		</td>
 		<td>
-			<?php echo $this->Datetime->niceDate($city['City']['modified']); ?>
+			<?php echo $this->Time->niceDate($city['City']['modified']); ?>
 		</td>
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $city['City']['id']), array('escape' => false)); ?>

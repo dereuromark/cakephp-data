@@ -23,7 +23,7 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Modified'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Datetime->niceDate($continent['Continent']['modified']); ?>
+			<?php echo $this->Time->niceDate($continent['Continent']['modified']); ?>
 			&nbsp;
 		</dd>
 	</dl>

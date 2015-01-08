@@ -33,7 +33,7 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Modified'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Datetime->niceDate($currency['Currency']['modified']); ?>
+			<?php echo $this->Time->niceDate($currency['Currency']['modified']); ?>
 			&nbsp;
 		</dd>
 	</dl>
