@@ -12,7 +12,7 @@ class CountriesController extends DataAppController {
 	public $paginate = array('order' => array('Country.sort' => 'DESC'));
 
 	public function beforeFilter(Event $event) {
-		parent::beforeFilter();
+		parent::beforeFilter($event);
 
 		if ($specific = Configure::read('Country.image_path')) {
 			$this->imageFolder = WWW_ROOT . 'img' . DS . $specific . DS;

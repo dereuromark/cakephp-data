@@ -9,7 +9,7 @@ class AddressesController extends DataAppController {
 	public $paginate = array();
 
 	public function beforeFilter(Event $event) {
-		parent::beforeFilter();
+		parent::beforeFilter($event);
 	}
 
 /****************************************************************************************

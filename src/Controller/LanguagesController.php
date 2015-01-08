@@ -9,7 +9,7 @@ class LanguagesController extends DataAppController {
 	public $paginate = array('order' => array('Language.name' => 'ASC'));
 
 	public function beforeFilter(Event $event) {
-		parent::beforeFilter();
+		parent::beforeFilter($event);
 	}
 
 	/**

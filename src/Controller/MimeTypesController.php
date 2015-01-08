@@ -16,7 +16,7 @@ class MimeTypesController extends DataAppController {
 	public $paginate = array('order' => array('MimeType.modified' => 'DESC'));
 
 	public function beforeFilter(Event $event) {
-		parent::beforeFilter();
+		parent::beforeFilter($event);
 
 		//$this->Auth->allow();
 	}
