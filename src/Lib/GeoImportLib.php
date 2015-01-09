@@ -258,8 +258,8 @@ class GeoImportLib {
 		}
 		$HttpSocket = new Client();
 		$res = $HttpSocket->get($url);
-		Cache::write('geo_import_' . md5($url), $res);
-		return $res;
+		Cache::write('geo_import_' . md5($url), $res->body);
+		return $res->body;
 	}
 
 	protected function _parse($row) {

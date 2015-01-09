@@ -1,7 +1,7 @@
 <?php
 namespace Data\Lib;
 
-use Tools\Lib\HttpSocketLib;
+use Cake\Network\Http\Client;
 
 /**
  * Use Webservices to get current rates etc
@@ -125,11 +125,11 @@ class CurrencyBitcoinLib {
 	}
 
 	protected function _get($url) {
-		$http = new HttpSocketLib();
-		if (!($res = $http->fetch($url))) {
+		$http = new Client();
+		if (!($res = $http->get($url))) {
 			return false;
 		}
-		return $res;
+		return $res->body;
 	}
 
 }
