@@ -18,9 +18,6 @@
 		"cakephp/cakephp": "3.0.*-dev",
 		"dereuromark/cakephp-tools": "dev-cake3"
 	},
-	"require-dev": {
-		"phpunit/phpunit": "*"
-	},
 	"autoload": {
 		"psr-4": {
 			"Data\\": "src"
@@ -37,5 +34,6 @@
 	},
 	"extra": {
 		"installer-name": "Data"
-	}
+	},
+	"minimum-stability": "dev"
 }
