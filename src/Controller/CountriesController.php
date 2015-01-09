@@ -6,6 +6,7 @@ use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Utility\Folder;
 use Data\Controller\DataAppController;
+use Cake\Event\Event;
 
 class CountriesController extends DataAppController {
 
@@ -37,7 +38,6 @@ class CountriesController extends DataAppController {
 	 * @return void
 	 */
 	public function index() {
-		$this->Country->recursive = 0;
 		$countries = $this->paginate();
 		$this->set(compact('countries'));
 	}
@@ -213,7 +213,6 @@ class CountriesController extends DataAppController {
 	}
 
 	public function admin_view($id = null) {
-		$this->Country->recursive = 0;
 		$id = (int)$id;
 		if ($id <= 0) {
 			$this->Common->flashMessage(__('record invalid'), 'error');

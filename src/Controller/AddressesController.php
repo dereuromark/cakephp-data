@@ -3,6 +3,7 @@ namespace Data\Controller;
 
 use Cake\Core\Configure;
 use Data\Controller\DataAppController;
+use Cake\Event\Event;
 
 class AddressesController extends DataAppController {
 
@@ -12,102 +13,13 @@ class AddressesController extends DataAppController {
 		parent::beforeFilter($event);
 	}
 
-/****************************************************************************************
- * USER functions
- ****************************************************************************************/
-
-	/*
-	public function index() {
-		$this->Address->recursive = 0;
-		$addresses = $this->paginate();
-		$this->set(compact('addresses'));
-	}
-
-	public function view($id = null) {
-		$this->Address->recursive = 0;
-		if (empty($id) || !($address = $this->Address->find('first', array('conditions'=>array('Address.id'=>$id))))) {
-			$this->Common->flashMessage(__('invalid record'), 'error');
-			return $this->Common->autoRedirect(array('action' => 'index'));
-		}
-		$this->set(compact('address'));
-	}
-
-	public function add() {
-		if ($this->Common->isPosted()) {
-			$this->Address->create();
-			if ($this->Address->save($this->request->data)) {
-				$var = $this->request->data['Address']['formatted_address'];
-				$this->Common->flashMessage(__('record add {0} saved', h($var)), 'success');
-				return $this->redirect(array('action' => 'index'));
-			}
-			$this->Common->flashMessage(__('formContainsErrors'), 'error');
-			}
-		}
-		$countries = $this->Address->Country->find('list');
-		$countryProvinces = array();
-		if (Configure::read('Address.CountryProvince')) {
-			$countryProvinces = $this->Address->CountryProvince->find('list');
-		}
-		$this->set(compact('countries', 'countryProvinces'));
-	}
-
-	public function edit($id = null) {
-		if (empty($id) || !($address = $this->Address->find('first', array('conditions'=>array('Address.id'=>$id))))) {
-			$this->Common->flashMessage(__('invalid record'), 'error');
-			return $this->Common->autoRedirect(array('action' => 'index'));
-		}
-		if ($this->Common->isPosted()) {
-			if ($this->Address->save($this->request->data)) {
-				$var = $this->request->data['Address']['formatted_address'];
-				$this->Common->flashMessage(__('record edit {0} saved', h($var)), 'success');
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Common->flashMessage(__('formContainsErrors'), 'error');
-			}
-		}
-		if (empty($this->request->data)) {
-			$this->request->data = $address;
-		}
-		$countries = $this->Address->Country->find('list');
-		$countryProvinces = array();
-		if (Configure::read('Address.CountryProvince')) {
-			$countryProvinces = $this->Address->CountryProvince->find('list');
-		}
-		$this->set(compact('countries', 'countryProvinces'));
-	}
-
-	public function delete($id = null) {
-		if (!$this->Common->isPosted()) {
-			throw new MethodNotAllowedException();
-		}
-		if (empty($id) || !($address = $this->Address->find('first', array('conditions'=>array('Address.id'=>$id), 'fields'=>array('id', 'formatted_address'))))) {
-			$this->Common->flashMessage(__('invalid record'), 'error');
-			return $this->Common->autoRedirect(array('action'=>'index'));
-		}
-		$var = $address['Address']['formatted_address'];
-
-		if ($this->Address->delete($id)) {
-			$this->Common->flashMessage(__('record del {0} done', h($var)), 'success');
-			return $this->redirect(array('action' => 'index'));
-		}
-		$this->Common->flashMessage(__('record del {0} not done exception', h($var)), 'error');
-		return $this->Common->autoRedirect(array('action' => 'index'));
-	}
-	*/
-
-/****************************************************************************************
- * ADMIN functions
- ****************************************************************************************/
-
 	public function admin_index() {
-		$this->Address->recursive = 0;
 		$addresses = $this->paginate();
 		$this->set(compact('addresses'));
 		$this->Common->loadHelper('Tools.GoogleMapV3');
 	}
 
 	public function admin_view($id = null) {
-		$this->Address->recursive = 0;
 		if (empty($id) || !($address = $this->Address->find('first', array('conditions' => array('Address.id' => $id))))) {
 			$this->Common->flashMessage(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));

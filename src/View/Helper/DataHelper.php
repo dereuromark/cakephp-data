@@ -1,7 +1,7 @@
 <?php
 namespace Data\View\Helper;
 
-use App\View\Helper\TextHelper;
+use Cake\View\Helper;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Utility\Inflector;
@@ -10,7 +10,9 @@ use Cake\Utility\Inflector;
  * DataHelper with basic html snippets
  *
  */
-class DataHelper extends TextHelper {
+class DataHelper extends Helper {
+
+	public $helpers = array('Html');
 
 	/**
 	 * FormatHelper::countryAndProvince()
@@ -21,6 +23,8 @@ class DataHelper extends TextHelper {
 	 */
 	public function countryAndProvince($array, $options = array()) {
 		$res = '<span class="help" title="%s">%s</span>';
+
+		$options += ['separator' => '&nbsp;'];
 
 		$countryTitle = '';
 		if (!empty($array['Country']['name'])) {
@@ -38,7 +42,7 @@ class DataHelper extends TextHelper {
 			$countryTitle .= '';
 		}
 
-		$content = $this->countryIcon($country) . '&nbsp;' . $countyProvince;
+		$content = $this->countryIcon($country) . $options['separator'] . $countyProvince;
 		$res = sprintf($res, $countryTitle, $content);
 		return $res;
 	}

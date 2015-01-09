@@ -2,6 +2,7 @@
 namespace Data\Controller;
 
 use Data\Controller\DataAppController;
+use Cake\Event\Event;
 
 class CountryProvincesController extends DataAppController {
 
@@ -43,7 +44,6 @@ class CountryProvincesController extends DataAppController {
 	 * @return void
 	 */
 	public function index($cid = null) {
-		$this->CountryProvince->recursive = 0;
 		$this->paginate['order'] = array('CountryProvince.name' => 'ASC');
 		$this->paginate['conditions'] = array('Country.status' => 1);
 
@@ -87,7 +87,6 @@ class CountryProvincesController extends DataAppController {
 	public function admin_index($cid = null) {
 		$cid = $this->_processCountry($cid);
 
-		$this->CountryProvince->recursive = 0;
 		$countryProvinces = $this->paginate();
 		$countries = $this->CountryProvince->Country->find('list');
 
@@ -102,7 +101,6 @@ class CountryProvincesController extends DataAppController {
 	 * @return void
 	 */
 	public function admin_view($id = null) {
-		$this->CountryProvince->recursive = 0;
 		if (empty($id)) {
 			$this->Common->flashMessage(__('record invalid'), 'error');
 			return $this->redirect(array('action' => 'index'));

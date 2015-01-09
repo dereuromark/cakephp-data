@@ -8,18 +8,12 @@ class LanguagesController extends DataAppController {
 
 	public $paginate = array('order' => array('Language.name' => 'ASC'));
 
-	public function beforeFilter(Event $event) {
-		parent::beforeFilter($event);
-	}
-
 	/**
 	 * LanguagesController::admin_index()
 	 *
 	 * @return void
 	 */
 	public function admin_index() {
-		$this->Language->recursive = 0;
-
 		if (Plugin::loaded('Search')) {
 			$this->Language->Behaviors->load('Search.Searchable');
 			$this->Common->loadComponent(array('Search.Prg'));

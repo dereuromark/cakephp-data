@@ -13,14 +13,6 @@ class PostalCodesController extends DataAppController {
 
 	public $paginate = array();
 
-	public function beforeFilter(Event $event) {
-		parent::beforeFilter($event);
-	}
-
-/****************************************************************************************
- * USER functions
- ****************************************************************************************/
-
 	public function index() {
 	}
 
@@ -72,7 +64,6 @@ class PostalCodesController extends DataAppController {
 	 */
 	public function admin_index() {
 		$this->PostalCode->bindModel(array('belongsTo' => array('Country' => array('className' => 'Data.Country'))), false);
-		$this->PostalCode->recursive = 0;
 
 		$this->PostalCode->Behaviors->load('Search.Searchable');
 		$this->Common->loadComponent(array('Search.Prg'));
@@ -139,7 +130,6 @@ class PostalCodesController extends DataAppController {
 	 * @return void
 	 */
 	public function admin_view($id = null) {
-		$this->PostalCode->recursive = 0;
 		$this->PostalCode->bindModel(array('belongsTo' => array('Country' => array('className' => 'Data.Country'))), false);
 
 		if (empty($id) || !($postalCode = $this->PostalCode->find('first', array('contain' => array('Country'), 'conditions' => array('PostalCode.id' => $id))))) {

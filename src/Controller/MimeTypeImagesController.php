@@ -10,12 +10,6 @@ class MimeTypeImagesController extends DataAppController {
 
 	public $paginate = array('order' => array('MimeTypeImage.modified' => 'DESC'));
 
-	public function beforeFilter(Event $event) {
-		parent::beforeFilter($event);
-
-		//$this->Auth->allow();
-	}
-
 	public function admin_import() {
 
 		if ($this->Common->isPosted()) {
@@ -171,7 +165,6 @@ class MimeTypeImagesController extends DataAppController {
 	}
 
 	public function admin_index() {
-		$this->MimeTypeImage->recursive = 1;
 		$mimeTypeImages = $this->paginate();
 
 		/*
@@ -212,7 +205,6 @@ class MimeTypeImagesController extends DataAppController {
 	}
 
 	public function admin_view($id = null) {
-		$this->MimeTypeImage->recursive = 0;
 		if (empty($id)) {
 			$this->Common->flashMessage(__('record invalid'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));

@@ -7,16 +7,8 @@ class ContinentsController extends DataAppController {
 
 	public $paginate = array();
 
-	public function beforeFilter(Event $event) {
-		parent::beforeFilter($event);
-	}
-
-/****************************************************************************************
- * USER functions
- ****************************************************************************************/
 
 	public function index() {
-		$this->Continent->recursive = 0;
 		$continents = $this->paginate();
 		$this->set(compact('continents'));
 	}
@@ -83,12 +75,7 @@ class ContinentsController extends DataAppController {
 		return $this->Common->autoRedirect(array('action' => 'index'));
 	}
 
-/****************************************************************************************
- * ADMIN functions
- ****************************************************************************************/
-
 	public function admin_index() {
-		$this->Continent->recursive = 0;
 		$continents = $this->paginate();
 		$this->set(compact('continents'));
 	}

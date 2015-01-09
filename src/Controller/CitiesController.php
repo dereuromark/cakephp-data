@@ -11,23 +11,10 @@ class CitiesController extends DataAppController {
 
 	public $paginate = array('order' => array('City.modified' => 'DESC'));
 
-	public function beforeFilter(Event $event) {
-		parent::beforeFilter($event);
-	}
-
-/****************************************************************************************
- * USER functions
- ****************************************************************************************/
-
-/****************************************************************************************
- * ADMIN functions
- ****************************************************************************************/
-
 	/**
 	 * @return void
 	 */
 	public function admin_index() {
-		$this->City->recursive = 0;
 		$cities = $this->paginate();
 		$this->set(compact('cities'));
 	}
@@ -36,7 +23,6 @@ class CitiesController extends DataAppController {
 	 * @return void
 	 */
 	public function admin_view($id = null) {
-		$this->City->recursive = 0;
 		if (empty($id) || !($city = $this->City->find('first', array('conditions' => array('City.id' => $id))))) {
 			$this->Common->flashMessage(__('invalidRecord'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));

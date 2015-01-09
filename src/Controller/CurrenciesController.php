@@ -10,10 +10,6 @@ class CurrenciesController extends DataAppController {
 
 	public $paginate = array('order' => array('Currency.base' => 'DESC', 'Currency.modified' => 'DESC'));
 
-	public function beforeFilter(Event $event) {
-		parent::beforeFilter($event);
-	}
-
 	/**
 	 * @deprecated
 	 */
@@ -41,8 +37,6 @@ class CurrenciesController extends DataAppController {
 	}
 
 	public function admin_index() {
-		$this->Currency->recursive = 0;
-
 		if (Plugin::loaded('Search')) {
 			$this->Currency->Behaviors->load('Search.Searchable');
 			$this->Common->loadComponent(array('Search.Prg'));
@@ -71,7 +65,6 @@ class CurrenciesController extends DataAppController {
 	}
 
 	public function admin_view($id = null) {
-		$this->Currency->recursive = 0;
 		if (empty($id)) {
 			$this->Common->flashMessage(__('record invalid'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
