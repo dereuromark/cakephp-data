@@ -1,10 +1,15 @@
 <?php
 namespace Data\View\Helper;
 
-use App\View\Helper\AppHelper;
-use Cake\Utility\File;
+use Cake\View\Helper;
+use Cake\Filesystem\File;
+use Cake\ORM\TableRegistry;
 
-class MimeTypeHelper extends AppHelper {
+if (!defined('FILE_CACHE')) {
+	define('FILE_CACHE', TMP);
+}
+
+class MimeTypeHelper extends Helper {
 
 	public $helpers = array('Html');
 
@@ -87,31 +92,32 @@ class MimeTypeHelper extends AppHelper {
 	}
 
 	/**
-	 * MimeTypeHelper::_getTypes()
+	 * get Types with file cache?
+	 * //TODO: use normal cache
 	 *
 	 * @return array
 	 */
 	protected function _getTypes() {
-		$handle = new File(FILES . 'mime_types.txt');
+		$handle = new File(FILE_CACHE . 'mime_types.txt', true, 0770);
 		if (!$handle->exists()) {
 			# create and fill: ext||type||name||img (array serialized? separated by ||?)
-			$MimeType = ClassRegistry::init('Data.MimeType');
-			$mimeTypes = $MimeType->find('all', array('fields' => array('name', 'ext', 'type'), 'conditions' => array('MimeType.active' => 1), 'contain' => array('MimeTypeImage' => array('name', 'ext'))));
+			$MimeTypes = TableRegistry::get('Data.MimeTypes');
+			$mimeTypes = $MimeTypes->find('all', array('fields' => array('name', 'ext', 'type', 'MimeTypeImages.name', 'MimeTypeImages.ext'), 'conditions' => array('MimeTypes.active' => 1), 'contain' => array('MimeTypeImages')));
 
 			$content = array();
 			foreach ($mimeTypes as $m) {
-				$img = (!empty($m['MimeTypeImage']['ext']) ? $m['MimeTypeImage']['name'] . '.' . $m['MimeTypeImage']['ext'] : '');
+				$img = (!empty($m->mime_type_image['ext']) ? $m->mime_type_image['name'] . '.' . $m->mime_type_image['ext'] : '');
 				$content[] = array(
-					'ext' => $m['MimeType']['ext'],
-					'name' => $m['MimeType']['name'],
-					'type' => $m['MimeType']['type'],
+					'ext' => $m['ext'],
+					'name' => $m['name'],
+					'type' => $m['type'],
 					'img' => $img,
 				);
 			}
 			# add special types? (file not found icon, default fallback icon, generic file ext icon...)
 
 			if (!$handle->write(serialize($content), 'w', true)) {
-				die('ERROR');
+				throw new \Exception('Write error');
 			}
 		} else {
 			//$handle->open('r', true);

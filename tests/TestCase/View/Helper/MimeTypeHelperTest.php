@@ -10,15 +10,18 @@ class MimeTypeHelperTest extends TestCase {
 
 	public $MimeTypeHelper;
 
+	public $fixtures = array('plugin.Data.MimeTypes', 'plugin.Data.MimeTypeImages');
+
 	public function setUp() {
 		parent::setUp();
 
 		$this->MimeTypeHelper = new MimeTypeHelper(new View(null));
 	}
 
-	public function testObject() {
-		$this->assertTrue(is_object($this->MimeTypeHelper));
-		$this->assertInstanceOf('MimeTypeHelper', $this->MimeTypeHelper);
+	public function testGetTypes() {
+		$result = $this->MimeTypeHelper->getTypes();
+		debug($result);
+		//$this->assertInstanceOf('MimeTypeHelper', $this->MimeTypeHelper);
 	}
 
 	//TODO

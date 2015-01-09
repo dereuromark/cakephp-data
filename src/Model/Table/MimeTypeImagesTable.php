@@ -1,13 +1,14 @@
 <?php
-namespace Data\Model;
+namespace Data\Model\Table;
 
 use Cake\Model\Model;
 use Cake\Utility\File;
 use Data\Model\DataAppModel;
+use Tools\Model\Table\Table;
 
-class MimeTypeImage extends DataAppModel {
+class MimeTypeImagesTable extends Table {
 
-	public $order = array('MimeTypeImage.modified' => 'DESC');
+	public $order = array('modified' => 'DESC');
 
 	public $validate = array(
 		'name' => array( # e.g. "exe"
@@ -95,7 +96,7 @@ class MimeTypeImage extends DataAppModel {
 		$handle->delete();
 	}
 
-	public function findList() {
+	public function findAsList() {
 		$list = array();
 		$images = $this->find('all', array('conditions' => array('active' => 1))); // ,'contain'=>'MimeType.id'
 		foreach ($images as $image) {

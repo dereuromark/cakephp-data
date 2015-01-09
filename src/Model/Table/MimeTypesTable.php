@@ -1,15 +1,16 @@
 <?php
-namespace Data\Model;
+namespace Data\Model\Table;
 
 use Cake\Core\App;
 use Cake\Core\Configure;
 use Cake\Utility\File;
 use Data\Model\DataAppModel;
 use Tools\Lib\EmailLib;
+use Tools\Model\Table\Table;
 
-class MimeType extends DataAppModel {
+class MimeTypesTable extends Table {
 
-	public $order = array('MimeType.modified' => 'DESC');
+	public $order = array('modified' => 'DESC');
 
 	public $validate = array(
 		'name' => array(
