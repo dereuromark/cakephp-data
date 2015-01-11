@@ -16,7 +16,7 @@ use Tools\Model\Table\Table;
  */
 class LanguagesTable extends Table {
 
-	public $order = array('Language.name' => 'ASC');
+	public $order = array('name' => 'ASC');
 
 	public $validate = array(
 		'name' => array(
@@ -106,7 +106,7 @@ class LanguagesTable extends Table {
 		$res = $this->find('all', array('group' => array('code'), 'conditions' => $conditions, 'fields' => array('id', 'name')));
 		$ret = array();
 		foreach ($res as $language) {
-			$ret[$language[$this->alias]['id']] = $language[$this->alias]['name'];
+			$ret[$language['id']] = $language['name'];
 		}
 		return $ret;
 	}
@@ -120,7 +120,7 @@ class LanguagesTable extends Table {
 		$res = $this->find('all', array('group' => array('code'), 'conditions' => $conditions, 'fields' => array('code', 'name')));
 		$ret = array();
 		foreach ($res as $language) {
-			$ret[$language[$this->alias]['code']] = $language[$this->alias]['name'];
+			$ret[$language['code']] = $language['name'];
 		}
 		return $ret;
 	}
