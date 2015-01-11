@@ -1,14 +1,13 @@
 <?php
 namespace Data\Model\Table;
 
-use Data\Model\DataAppModel;
 use Tools\Model\Table\Table;
 
 class DistrictsTable extends Table {
 
-	public $actsAs = array('Tools.Geocoder' => array(
+	public $actsAs = array('Geo.Geocoder' => array(
 		'min_accuracy' => 3, 'address' => array('address'), 'before' => 'save', 'real' => false, 'required' => false
-	), 'Data.Slugged' => array('mode' => 'ascii', 'case' => 'low'));
+	), 'Tools.Slugged' => array('mode' => 'ascii', 'case' => 'low'));
 
 	public $order = array('name' => 'ASC');
 
@@ -67,7 +66,7 @@ class DistrictsTable extends Table {
 				//$this->alias.'.lng <>' => 0,
 				$this->City->alias . '.slug' => $citySlug,
 			),
-			'fields' => array($this->alias . '.slug', $this->alias . '.name'),
+			'fields' => array($this->alias() . '.slug', $this->alias() . '.name'),
 		);
 		return $this->find($type, $options);
 	}
@@ -82,7 +81,7 @@ class DistrictsTable extends Table {
 	public function getIdBySlug($slug, $customOptions = array()) {
 		$options = array(
 			'conditions' => array(
-				$this->alias . '.slug' => $slug,
+				$this->alias() . '.slug' => $slug,
 			)
 		);
 		if (!empty($customOptions)) {

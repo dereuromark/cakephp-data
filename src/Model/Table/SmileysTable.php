@@ -2,7 +2,7 @@
 namespace Data\Model\Table;
 
 use Cake\Core\Plugin;
-use Data\Model\DataAppModel;
+use Tools\Model\Table\Table;
 
 class SmileysTable extends Table {
 
@@ -82,7 +82,7 @@ class SmileysTable extends Table {
 	 * category not yet supported
 	 */
 	public function getList($category = null) {
-		$conditions = array($this->alias . '.active' => 1);
+		$conditions = array($this->alias() . '.active' => 1);
 		if (!empty($category)) {
 			$conditions['category_id'] = $category;
 		}
@@ -134,7 +134,7 @@ class SmileysTable extends Table {
 		}
 		if ($this->find('first', array(
 			'fields' => array('id'),
-			'conditions' => array('OR' => array(array($this->alias . '.prim_code' => $code, array($this->alias . '.sec_code' => $code))))
+			'conditions' => array('OR' => array(array($this->alias() . '.prim_code' => $code, array($this->alias() . '.sec_code' => $code))))
 		))) {
 			return false;
 		}

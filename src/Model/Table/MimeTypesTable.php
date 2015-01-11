@@ -3,9 +3,8 @@ namespace Data\Model\Table;
 
 use Cake\Core\App;
 use Cake\Core\Configure;
-use Cake\Utility\File;
-use Data\Model\DataAppModel;
-use Tools\Lib\EmailLib;
+use Cake\Filesystem\File;
+use Tools\Network\Email\Email;
 use Tools\Model\Table\Table;
 
 class MimeTypesTable extends Table {
@@ -81,9 +80,9 @@ class MimeTypesTable extends Table {
 	}
 
 	public function mimeTypes($inactiveOnes = false) {
-		$options = array('conditions' => array($this->alias . '.ext' => $ext));
+		$options = array('conditions' => array($this->alias() . '.ext' => $ext));
 		if ($inactiveOnes !== true) {
-			$options['conditions'][$this->alias . '.active'] = 1;
+			$options['conditions'][$this->alias() . '.active'] = 1;
 		}
 		return $this->find('first', $options);
 	}
@@ -92,7 +91,7 @@ class MimeTypesTable extends Table {
 		if (empty($ext)) {
 			return array();
 		}
-		return $this->find('first', array('conditions' => array($this->alias . '.ext' => $ext)));
+		return $this->find('first', array('conditions' => array($this->alias() . '.ext' => $ext)));
 	}
 
 	/**

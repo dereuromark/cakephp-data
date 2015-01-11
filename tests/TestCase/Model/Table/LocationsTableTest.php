@@ -2,26 +2,30 @@
 
 namespace Data\Test\TestCase\Model\Table;
 
-use Data\Model\Location;
+use Cake\ORM\TableRegistry;
 use Tools\TestSuite\TestCase;
+
 class LocationsTableTest extends TestCase {
 
 	public $fixtures = array(
 		'plugin.data.locations'
 	);
 
-	public $Location;
+	public $Locations;
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->Location = TableRegistry::get('Data.Location');
+		$this->Locations = TableRegistry::get('Data.Locations');
 	}
 
-	public function testObject() {
-		$this->assertTrue(is_object($this->Location));
-		$this->assertInstanceOf('Location', $this->Location);
+	/**
+	 *
+	 * @return void
+	 */
+	public function testBasicFind() {
+		$result = $this->Locations->find()->first();
+		$this->assertNotEmpty($result);
 	}
 
-	//TODO
 }

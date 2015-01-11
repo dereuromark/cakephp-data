@@ -4,7 +4,6 @@ namespace Data\Model\Table;
 use App\I18n\L10n;
 use Cake\Cache\Cache;
 use Cake\Core\App;
-use Data\Model\DataAppModel;
 use Tools\HtmlDom\HtmlDom;
 use Tools\Model\Table\Table;
 

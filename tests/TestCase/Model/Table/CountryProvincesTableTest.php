@@ -2,7 +2,7 @@
 
 namespace Data\Test\TestCase\Model\Table;
 
-use Data\Model\CountryProvince;
+use Cake\ORM\TableRegistry;
 use Tools\TestSuite\TestCase;
 
 class CountryProvincesTableTest extends TestCase {
@@ -11,18 +11,20 @@ class CountryProvincesTableTest extends TestCase {
 		'plugin.data.country_provinces'
 	);
 
-	public $CountryProvince;
+	public $CountryProvinces;
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->CountryProvince = TableRegistry::get('Data.CountryProvince');
+		$this->CountryProvinces = TableRegistry::get('Data.CountryProvinces');
 	}
 
-	public function testObject() {
-		$this->assertTrue(is_object($this->CountryProvince));
-		$this->assertInstanceOf('CountryProvince', $this->CountryProvince);
+	/**
+	 *
+	 * @return void
+	 */
+	public function testBasicFind() {
+		$result = $this->CountryProvinces->find()->first();
+		$this->assertNotEmpty($result);
 	}
-
-	//TODO
 }

@@ -2,7 +2,7 @@
 
 namespace Data\Test\TestCase\Model\Table;
 
-use Data\Model\Currency;
+use Cake\ORM\TableRegistry;
 use Tools\TestSuite\TestCase;
 
 class CurrenciesTableTest extends TestCase {
@@ -11,18 +11,21 @@ class CurrenciesTableTest extends TestCase {
 		'plugin.data.currencies'
 	);
 
-	public $Currency;
+	public $Currencies;
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->Currency = TableRegistry::get('Data.Currency');
+		$this->Currencies = TableRegistry::get('Data.Currencies');
 	}
 
-	public function testObject() {
-		$this->assertTrue(is_object($this->Currency));
-		$this->assertInstanceOf('Currency', $this->Currency);
+	/**
+	 *
+	 * @return void
+	 */
+	public function testBasicFind() {
+		$result = $this->Currencies->find()->first();
+		$this->assertNotEmpty($result);
 	}
 
-	//TODO
 }

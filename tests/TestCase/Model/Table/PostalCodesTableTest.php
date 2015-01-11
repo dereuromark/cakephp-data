@@ -2,26 +2,35 @@
 
 namespace Data\Test\TestCase\Model\Table;
 
-use Data\Model\PostalCode;
+use Cake\ORM\TableRegistry;
 use Tools\TestSuite\TestCase;
+
 class PostalCodesTableTest extends TestCase {
 
 	public $fixtures = array(
 		'plugin.data.postal_codes'
 	);
 
-	public $PostalCode;
+	public $PostalCodes;
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->PostalCode = TableRegistry::get('Data.PostalCode');
+		$this->PostalCodes = TableRegistry::get('Data.PostalCodes');
+
+		$entity = $this->PostalCodes->newEntity(['code' => '81222']);
+		$this->assertEmpty($entity->errors());
+		$result = $this->PostalCodes->save($entity);
+		$this->assertNotEmpty($result);
 	}
 
-	public function testObject() {
-		$this->assertTrue(is_object($this->PostalCode));
-		$this->assertInstanceOf('PostalCode', $this->PostalCode);
+	/**
+	 *
+	 * @return void
+	 */
+	public function testBasicFind() {
+		$result = $this->PostalCodes->find()->first();
+		$this->assertNotEmpty($result);
 	}
 
-	//TODO
 }

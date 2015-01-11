@@ -2,7 +2,7 @@
 
 namespace Data\Test\TestCase\Model\Table;
 
-use Data\Model\Continent;
+use Cake\ORM\TableRegistry;
 use Tools\TestSuite\TestCase;
 
 class ContinentsTableTest extends TestCase {
@@ -11,18 +11,22 @@ class ContinentsTableTest extends TestCase {
 		'plugin.data.continents'
 	);
 
-	public $Continent;
+	public $Continents;
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->Continent = TableRegistry::get('Data.Continent');
+		$this->Continents = TableRegistry::get('Data.Continents');
 	}
 
-	public function testObject() {
-		$this->assertTrue(is_object($this->Continent));
-		$this->assertInstanceOf('Continent', $this->Continent);
+	/**
+	 * ContinentsTableTest::testBasicFind()
+	 *
+	 * @return void
+	 */
+	public function testBasicFind() {
+		$result = $this->Continents->find()->first();
+		$this->assertNotEmpty($result);
 	}
 
-	//TODO
 }

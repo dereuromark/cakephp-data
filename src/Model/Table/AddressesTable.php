@@ -3,7 +3,6 @@ namespace Data\Model\Table;
 
 use Cake\Core\Configure;
 use Cake\Model\Model;
-use Data\Model\DataAppModel;
 use Tools\Model\Table\Table;
 
 if (!defined('CLASS_USERS')) {
@@ -284,7 +283,7 @@ class AddressesTable extends Table {
 	 * Update last used timestamp
 	 */
 	public function touch($addressId) {
-		$this->updateAll(array($this->alias . '.last_used' => 'NOW()'), array($this->alias . '.id' => $addressId));
+		$this->updateAll(array($this->alias() . '.last_used' => 'NOW()'), array($this->alias() . '.id' => $addressId));
 	}
 
 	/**

@@ -1,7 +1,6 @@
 <?php
 namespace Data\Model\Table;
 
-use Data\Model\DataAppModel;
 use Tools\Lib\GeocodeLib;
 use Tools\Model\Table\Table;
 
@@ -74,8 +73,8 @@ class StatesTable extends Table {
 			return array();
 		}
 		return $this->find('list', array(
-			'conditions' => array($this->alias . '.country_id' => $cid),
-			'order' => array($this->alias . '.name' => 'ASC')
+			'conditions' => array($this->alias() . '.country_id' => $cid),
+			'order' => array($this->alias() . '.name' => 'ASC')
 		));
 	}
 
@@ -102,7 +101,7 @@ class StatesTable extends Table {
 		}
 
 		if (!empty($id)) {
-			$res = $this->find('first', array('conditions' => array($this->alias . '.id' => $id), 'contain' => array('Country.name')));
+			$res = $this->find('first', array('conditions' => array($this->alias() . '.id' => $id), 'contain' => array('Country.name')));
 			if (!empty($res['name']) && !empty($res[$this->Country->alias]['name']) && $geocoder->geocode($res['name'] .
 				', ' . $res[$this->Country->alias]['name'])) {
 
@@ -130,7 +129,7 @@ class StatesTable extends Table {
 
 			$conditions = array();
 			if (!$override) {
-				$conditions = array($this->alias . '.lat' => 0, $this->alias . '.lng' => 0);
+				$conditions = array($this->alias() . '.lat' => 0, $this->alias() . '.lng' => 0);
 			}
 
 			$results = $this->find('all', array('conditions' => $conditions, 'contain' => array('Country.name'), 'order' => array('CountryProvince.modified' =>

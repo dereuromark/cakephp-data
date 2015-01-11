@@ -3,7 +3,7 @@
 namespace Data\Test\TestCase\Model\Table;
 
 use Tools\TestSuite\TestCase;
-use Data\Model\Smiley;
+use Cake\ORM\TableRegistry;
 
 class SmileysTableTest extends TestCase {
 
@@ -14,40 +14,26 @@ class SmileysTableTest extends TestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->Smiley = TableRegistry::get('Data.Smiley');
+		$this->Smileys = TableRegistry::get('Data.Smileys');
 	}
 
 	/**
-	 * Seems to keep the last one on duplicates
+	 *
+	 * @return void
 	 */
-	public function testArrayUnique() {
-		$is = array(
-			'x' => 't',
-			'x' => 'e',
-			'y' => 'z',
-			'z' => 'r',
-			't' => 'w'
-		);
-		$is = array_unique($is);
-		pr($is);
-		$this->assertEquals($is['x'], 'e');
-
-		$is = array(
-			'e' => 't',
-			'x' => 'e',
-			'y' => 'z',
-			'z' => 't',
-			't' => 'w'
-		);
-		$is = array_unique($is);
-		pr($is);
-		$this->assertEquals($is['e'], 't');
+	public function testBasicFind() {
+		$result = $this->Smileys->find()->first();
+		$this->assertNotEmpty($result);
 	}
 
+	/**
+	 * SmileysTableTest::testExport()
+	 *
+	 * @return void
+	 */
 	public function testExport() {
-
-		$is = $this->Smiley->export();
-		pr($is);
+		$is = $this->Smileys->export();
+		//pr($is);
 		$this->assertTrue(!empty($is));
 	}
 

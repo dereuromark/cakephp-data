@@ -1,5 +1,4 @@
 <?php
-/* PostalCode Fixture generated on: 2011-11-20 21:59:25 : 1321822765 */
 namespace Data\Test\Fixture;
 
 use Cake\TestSuite\Fixture\TestFixture;
@@ -23,8 +22,8 @@ class PostalCodesFixture extends TestFixture {
 		'lat' => ['type' => 'float', 'null' => false, 'default' => '0.0000', 'length' => '9,4', 'collate' => null, 'comment' => ''],
 		'lng' => ['type' => 'float', 'null' => false, 'default' => '0.0000', 'length' => '9,4', 'collate' => null, 'comment' => ''],
 		'official_address' => ['type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
-		'created' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
-		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
+		'created' => ['type' => 'datetime', 'null' => true, 'default' => null, 'collate' => null, 'comment' => ''],
+		'modified' => ['type' => 'datetime', 'null' => true, 'default' => null, 'collate' => null, 'comment' => ''],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
 		'_options' => []
 	);
@@ -35,5 +34,15 @@ class PostalCodesFixture extends TestFixture {
 	 * @var array
 	 */
 	public $records = array(
+	/*
+		'id' => '1',
+		'code' => '81234',
+		'country_id' => 1,
+		'lat' => 11,
+		'lng' => 12,
+		'official_adress' => 'Foo bar',
+		'created' => null,
+		'modified' => null
+	*/
 	);
 }

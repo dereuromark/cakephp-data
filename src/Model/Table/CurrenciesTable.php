@@ -1,8 +1,7 @@
 <?php
 namespace Data\Model\Table;
 
-use Cake\Core\App;
-use Data\Model\DataAppModel;
+use Tools\Model\Table\Table;
 
 class CurrenciesTable extends Table {
 
@@ -60,7 +59,7 @@ class CurrenciesTable extends Table {
 			# intelligent autocomplete
 			if (isset($this->data['name']) && empty($this->data['name'])) {
 				if (!isset($this->CurrencyLib)) {
-					App::import('Component', 'Data.Currency');
+					//App::import('Component', 'Data.Currency');
 					$this->CurrencyLib = new CurrencyComponent();
 				}
 				$this->data['name'] = $this->CurrencyLib->getName($code, '');
@@ -68,7 +67,7 @@ class CurrenciesTable extends Table {
 
 			if (isset($this->data['value']) && $this->data['value'] == 0) {
 				if (!isset($this->CurrencyLib)) {
-					App::import('Component', 'Data.Currency');
+					//App::import('Component', 'Data.Currency');
 					$this->CurrencyLib = new CurrencyComponent();
 				}
 				$currencies = $this->availableCurrencies();
@@ -138,13 +137,13 @@ class CurrenciesTable extends Table {
 	 * All except base one
 	 */
 	public function foreignCurrencies($type = 'all', $options = array()) {
-		$defaults = array('conditions' => array($this->alias . '.base' => 0));
+		$defaults = array('conditions' => array($this->alias() . '.base' => 0));
 		$options = Set::merge($defaults, $options);
 		return $this->find($type, $options);
 	}
 
 	public function baseCurrency($options = array()) {
-		$defaults = array('conditions' => array($this->alias . '.base' => 1));
+		$defaults = array('conditions' => array($this->alias() . '.base' => 1));
 		$options = Set::merge($defaults, $options);
 		return $this->find('first', $options);
 	}

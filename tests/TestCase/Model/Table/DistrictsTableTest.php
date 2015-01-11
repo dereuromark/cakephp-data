@@ -12,17 +12,21 @@ class DistrictsTableTest extends TestCase {
 		'plugin.data.districts'
 	);
 
-	public $District;
+	public $Districts;
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->District = TableRegistry::get('Data.Districts');
+		$this->Districts = TableRegistry::get('Data.Districts');
 	}
 
-	public function testObject() {
-		$this->assertTrue(is_object($this->District));
-		$this->assertInstanceOf('District', $this->District);
+	/**
+	 *
+	 * @return void
+	 */
+	public function testBasicFind() {
+		$result = $this->Districts->find()->first();
+		$this->assertNotEmpty($result);
 	}
 
 }

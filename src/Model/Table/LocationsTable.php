@@ -4,12 +4,12 @@ namespace Data\Model\Table;
 use Cake\Core\App;
 use Cake\Core\Configure;
 use Data\Model\Country;
-use Data\Model\DataAppModel;
+use Tools\Model\Table\Table;
 use Tools\Utility\Utility;
 
 class LocationsTable extends Table {
 
-	public $actsAs = array('Tools.Geocoder' => array('min_accuracy' => 4, 'address' => array('name', 'country_name'), 'formatted_address' => 'formatted_address', 'real' => false, 'before' => 'validate', 'allow_inconclusive' => true, 'expect' => array())); //'postal_code', 'locality', 'sublocality', 'street_address'
+	public $actsAs = array('Geo.Geocoder' => array('min_accuracy' => 4, 'address' => array('name', 'country_name'), 'formatted_address' => 'formatted_address', 'real' => false, 'before' => 'validate', 'allow_inconclusive' => true, 'expect' => array())); //'postal_code', 'locality', 'sublocality', 'street_address'
 
 	public $validate = array(
 		'name' => array(

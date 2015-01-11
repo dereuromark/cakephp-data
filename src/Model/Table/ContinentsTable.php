@@ -1,7 +1,7 @@
 <?php
 namespace Data\Model\Table;
 
-use Data\Model\DataAppModel;
+use Tools\Model\Table\Table;
 
 class ContinentsTable extends Table {
 

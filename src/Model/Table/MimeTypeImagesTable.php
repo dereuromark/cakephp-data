@@ -3,7 +3,6 @@ namespace Data\Model\Table;
 
 use Cake\Model\Model;
 use Cake\Utility\File;
-use Data\Model\DataAppModel;
 use Tools\Model\Table\Table;
 
 class MimeTypeImagesTable extends Table {
@@ -59,7 +58,7 @@ class MimeTypeImagesTable extends Table {
 
 	public function beforeDelete($cascade = true) {
 		# retrieve infos
-		$this->_del = $this->find('first', array('conditions' => array($this->alias . '.id' => $this->id)));
+		$this->_del = $this->find('first', array('conditions' => array($this->alias() . '.id' => $this->id)));
 
 		return true;
 	}

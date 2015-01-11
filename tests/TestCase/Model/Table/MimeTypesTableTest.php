@@ -2,22 +2,30 @@
 
 namespace Data\Test\TestCase\Model\Table;
 
-use Data\Model\MimeType;
+use Cake\ORM\TableRegistry;
 use Tools\TestSuite\TestCase;
+
 class MimeTypesTableTest extends TestCase {
 
-	public $MimeType;
+	public $fixtures = array(
+		'plugin.data.mime_types'
+	);
+
+	public $MimeTypes;
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->MimeType = TableRegistry::get('Data.MimeType');
+		$this->MimeTypes = TableRegistry::get('Data.MimeTypes');
 	}
 
-	public function testObject() {
-		$this->assertTrue(is_object($this->MimeType));
-		$this->assertInstanceOf('MimeType', $this->MimeType);
+	/**
+	 *
+	 * @return void
+	 */
+	public function testBasicFind() {
+		$result = $this->MimeTypes->find()->first();
+		$this->assertNotEmpty($result);
 	}
 
-	//TODO
 }

@@ -2,7 +2,6 @@
 namespace Data\Model\Table;
 
 use Cake\Core\Configure;
-use Data\Model\DataAppModel;
 use Tools\Model\Table\Table;
 
 class CitiesTable extends Table {
@@ -40,7 +39,7 @@ class CitiesTable extends Table {
 	public function autoCompleteName($name) {
 		$options = array(
 			'conditions' => array(
-				$this->alias . '.name LIKE' => $name . '%'
+				$this->alias() . '.name LIKE' => $name . '%'
 			),
 			'fields' => array('id', 'postal_code', 'name')
 		);
@@ -49,8 +48,8 @@ class CitiesTable extends Table {
 
 	public function largeCities($country, $limit = 0) {
 		$options = array(
-			'conditions' => array($this->alias . '.country_id' => $country),
-			'order' => array($this->alias . '.citizens' => 'desc'),
+			'conditions' => array($this->alias() . '.country_id' => $country),
+			'order' => array($this->alias() . '.citizens' => 'desc'),
 			'limit' => $limit
 		);
 

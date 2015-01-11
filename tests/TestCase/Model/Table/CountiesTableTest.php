@@ -42,7 +42,7 @@ class CountiesTableTest extends TestCase {
 		$this->assertEmpty($entity->errors());
 
 		$result = $this->Counties->save($entity);
-		debug($result);ob_flush();
+		//debug($result);ob_flush();
 		$this->assertNotEmpty($result);
 		$this->assertSame('foo-bar', $result['slug']);
 	}
