@@ -1,10 +1,10 @@
 <?php
-namespace Data\Model;
+namespace Data\Model\Table;
 
 use Cake\Core\Configure;
 use Data\Model\DataAppModel;
 
-class City extends DataAppModel {
+class CitiesTable extends Table {
 
 	public $order = array('City.name' => 'ASC');
 

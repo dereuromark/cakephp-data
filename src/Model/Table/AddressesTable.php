@@ -1,11 +1,11 @@
 <?php
-namespace Data\Model;
+namespace Data\Model\Table;
 
 use Cake\Core\Configure;
 use Cake\Model\Model;
 use Data\Model\DataAppModel;
 
-class Address extends DataAppModel {
+class AddressesTable extends Table {
 
 	public $displayField = 'formatted_address';
 

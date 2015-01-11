@@ -1,11 +1,11 @@
 <?php
 
-namespace Data\Test\TestCase\Model;
+namespace Data\Test\TestCase\Model\Table;
 
 use Data\Model\Continent;
 use Tools\TestSuite\TestCase;
 
-class ContinentTest extends TestCase {
+class ContinentsTableTest extends TestCase {
 
 	public $fixtures = array(
 		'plugin.data.continents'

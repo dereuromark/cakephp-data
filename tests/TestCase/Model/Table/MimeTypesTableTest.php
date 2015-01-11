@@ -1,10 +1,10 @@
 <?php
 
-namespace Data\Test\TestCase\Model;
+namespace Data\Test\TestCase\Model\Table;
 
 use Data\Model\MimeType;
 use Tools\TestSuite\TestCase;
-class MimeTypeTest extends TestCase {
+class MimeTypesTableTest extends TestCase {
 
 	public $MimeType;
 

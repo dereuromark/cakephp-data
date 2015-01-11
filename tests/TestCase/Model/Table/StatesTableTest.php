@@ -1,11 +1,11 @@
 <?php
 
-namespace Data\Test\TestCase\Model;
+namespace Data\Test\TestCase\Model\Table;
 
 use Data\Model\State;
 use Tools\TestSuite\TestCase;
 
-class StateTest extends TestCase {
+class StatesTableTest extends TestCase {
 
 	public $fixtures = array(
 		'plugin.data.states'

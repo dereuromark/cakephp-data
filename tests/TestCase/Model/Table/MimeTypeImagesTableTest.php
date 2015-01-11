@@ -1,10 +1,10 @@
 <?php
 
-namespace Data\Test\TestCase\Model;
+namespace Data\Test\TestCase\Model\Table;
 
 use Data\Model\MimeTypeImage;
 use Tools\TestSuite\TestCase;
-class MimeTypeImageTest extends TestCase {
+class MimeTypeImagesTableTest extends TestCase {
 
 	public $fixtures = array(
 		'plugin.data.mime_type_images'

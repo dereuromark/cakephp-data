@@ -1,10 +1,10 @@
 <?php
-namespace Data\Model;
+namespace Data\Model\Table;
 
 use Cake\Core\App;
 use Data\Model\DataAppModel;
 
-class Currency extends DataAppModel {
+class CurrenciesTable extends Table {
 
 	public $order = array('Currency.base' => 'DESC', 'Currency.code' => 'ASC');
 

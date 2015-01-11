@@ -1,11 +1,11 @@
 <?php
 
-namespace Data\Test\TestCase\Model;
+namespace Data\Test\TestCase\Model\Table;
 
 use Data\Model\Address;
 use Tools\TestSuite\TestCase;
 
-class AddressTest extends TestCase {
+class AddressesTableTest extends TestCase {
 
 	public $fixtures = array(
 		'plugin.data.addresses'

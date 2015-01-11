@@ -1,9 +1,9 @@
 <?php
-namespace Data\Model;
+namespace Data\Model\Table;
 
 use Data\Model\DataAppModel;
 
-class Continent extends DataAppModel {
+class ContinentsTable extends Table {
 
 	public $actsAs = array('Tree');
 

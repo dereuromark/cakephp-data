@@ -1,9 +1,9 @@
 <?php
-namespace Data\Model;
+namespace Data\Model\Table;
 
 use Data\Model\DataAppModel;
 
-class PostalCode extends DataAppModel {
+class PostalCodesTable extends Table {
 
 	public $displayField = 'code';
 

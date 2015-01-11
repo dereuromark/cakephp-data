@@ -1,10 +1,10 @@
 <?php
 
-namespace Data\Test\TestCase\Model;
+namespace Data\Test\TestCase\Model\Table;
 
 use Data\Model\PostalCode;
 use Tools\TestSuite\TestCase;
-class PostalCodeTest extends TestCase {
+class PostalCodesTableTest extends TestCase {
 
 	public $fixtures = array(
 		'plugin.data.postal_codes'

@@ -1,9 +1,9 @@
 <?php
-namespace Data\Model;
+namespace Data\Model\Table;
 
 use Data\Model\DataAppModel;
 
-class County extends DataAppModel {
+class CountiesTable extends Table {
 
 	public $actsAs = array('Tools.Slugged' => array('case' => 'low', 'mode' => 'ascii', 'unique' => false, 'overwrite' => false));
 

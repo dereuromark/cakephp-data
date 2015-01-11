@@ -1,5 +1,5 @@
 <?php
-namespace Data\Model;
+namespace Data\Model\Table;
 
 use Cake\Core\App;
 use Cake\Core\Configure;
@@ -7,7 +7,7 @@ use Data\Model\Country;
 use Data\Model\DataAppModel;
 use Tools\Utility\Utility;
 
-class Location extends DataAppModel {
+class LocationsTable extends Table {
 
 	public $actsAs = array('Tools.Geocoder' => array('min_accuracy' => 4, 'address' => array('name', 'country_name'), 'formatted_address' => 'formatted_address', 'real' => false, 'before' => 'validate', 'allow_inconclusive' => true, 'expect' => array())); //'postal_code', 'locality', 'sublocality', 'street_address'
 

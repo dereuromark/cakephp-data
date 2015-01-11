@@ -1,10 +1,10 @@
 <?php
-namespace Data\Model;
+namespace Data\Model\Table;
 
 use Cake\Core\Plugin;
 use Data\Model\DataAppModel;
 
-class Smiley extends DataAppModel {
+class SmileysTable extends Table {
 
 	public $order = array('Smiley.is_base' => 'DESC', 'Smiley.sort' => 'DESC');
 

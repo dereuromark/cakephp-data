@@ -1,10 +1,10 @@
 <?php
-namespace Data\Model;
+namespace Data\Model\Table;
 
 use Data\Model\DataAppModel;
 use Tools\Lib\GeocodeLib;
 
-class State extends DataAppModel {
+class StatesTable extends Table {
 
 	public $actsAs = array('Tools.Slugged' => array('case' => 'low', 'mode' => 'ascii', 'unique' => false, 'overwrite' => false));
 

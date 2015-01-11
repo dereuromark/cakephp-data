@@ -1,11 +1,11 @@
 <?php
 
-namespace Data\Test\TestCase\Model;
+namespace Data\Test\TestCase\Model\Table;
 
 use Data\Model\Currency;
 use Tools\TestSuite\TestCase;
 
-class CurrencyTest extends TestCase {
+class CurrenciesTableTest extends TestCase {
 
 	public $fixtures = array(
 		'plugin.data.currencies'

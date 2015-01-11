@@ -1,11 +1,11 @@
 <?php
 
-namespace Data\Test\TestCase\Model;
+namespace Data\Test\TestCase\Model\Table;
 
 use Tools\TestSuite\TestCase;
 use Data\Model\Smiley;
 
-class SmileyTest extends TestCase {
+class SmileysTableTest extends TestCase {
 
 	public $fixtures = array(
 		'plugin.data.smileys'

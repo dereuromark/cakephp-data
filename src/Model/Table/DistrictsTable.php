@@ -1,9 +1,9 @@
 <?php
-namespace Data\Model;
+namespace Data\Model\Table;
 
 use Data\Model\DataAppModel;
 
-class District extends DataAppModel {
+class DistrictsTable extends Table {
 
 	public $actsAs = array('Tools.Geocoder' => array(
 		'min_accuracy' => 3, 'address' => array('address'), 'before' => 'save', 'real' => false, 'required' => false

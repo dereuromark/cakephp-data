@@ -1,10 +1,10 @@
 <?php
 
-namespace Data\Test\TestCase\Model;
+namespace Data\Test\TestCase\Model\Table;
 
 use Data\Model\Location;
 use Tools\TestSuite\TestCase;
-class LocationTest extends TestCase {
+class LocationsTableTest extends TestCase {
 
 	public $fixtures = array(
 		'plugin.data.locations'
