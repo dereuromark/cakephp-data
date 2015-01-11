@@ -1,15 +1,14 @@
 <?php
-namespace Data\Model;
+namespace Data\Model\Table;
 
 use Cake\Core\Configure;
-use Data\Lib\GeocodeLib;
-use Data\Model\DataAppModel;
-use Tools\Lib\GeocodeLib;
-use Tools\Lib\GeolocateLib;
+//use Data\Lib\GeocodeLib;
+use Tools\Model\Table\Table;
+//use Tools\Lib\GeolocateLib;
 
-class Country extends DataAppModel {
+class CountriesTable extends Table {
 
-	public $order = array('Country.sort' => 'DESC', 'Country.name' => 'ASC');
+	public $order = array('sort' => 'DESC', 'name' => 'ASC');
 
 	public $actsAs = array('Tools.Sortable');
 

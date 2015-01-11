@@ -4,6 +4,7 @@ namespace Data\Controller\Component;
 use Cake\Controller\Component;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
 
 /**
  */
@@ -30,11 +31,11 @@ class CountryProvinceHelperComponent extends Component {
 		}
 
 		if (!isset($this->Controller->CountryProvince)) {
-			$this->Controller->CountryProvince = TableRegistry::get('Data.CountryProvinces');
+			$this->Controller->CountryProvinces = TableRegistry::get('Data.CountryProvinces');
 		}
 
 		if (!empty($this->Controller->request->data[$model]['country_id'])) {
-			$countryProvinces = $this->Controller->CountryProvinces->getListByCountry($this->Controller->request->data[$model]['country_id']);
+			$countryProvinces = $this->Controller->CountryProvincess->getListByCountry($this->Controller->request->data[$model]['country_id']);
 		} elseif ($ignoreProvinces === true) {
 			# do nothing
 		} else {

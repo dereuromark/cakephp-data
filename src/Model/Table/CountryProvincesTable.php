@@ -1,15 +1,16 @@
 <?php
-namespace Data\Model;
+namespace Data\Model\Table;
 
 use Data\Model\DataAppModel;
-use Tools\Lib\GeocodeLib;
+//use Tools\Lib\GeocodeLib;
+use Tools\Model\Table\Table;
 
 /**
  * @deprecated - use State instead
  */
-class CountryProvince extends DataAppModel {
+class CountryProvincesTable extends Table {
 
-	public $order = array('CountryProvince.name' => 'ASC');
+	public $order = array('name' => 'ASC');
 
 	public $validate = array(
 		'country_id' => array('numeric'),
@@ -48,7 +49,7 @@ class CountryProvince extends DataAppModel {
 			return array();
 		}
 		return $this->find('list', array(
-			'conditions' => array($this->alias . '.country_id' => $cid),
+			'conditions' => array('country_id' => $cid),
 			//'order' => array($this->alias.'.name'=>'ASC')
 		));
 	}
