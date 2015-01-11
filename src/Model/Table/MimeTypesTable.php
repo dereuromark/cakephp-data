@@ -53,11 +53,11 @@ class MimeTypesTable extends Table {
 
 	public function beforeSave($options = array()) {
 		parent::beforeSave($options);
-		if (isset($this->data[$this->alias]['ext'])) {
-			$this->data[$this->alias]['ext'] = mb_strtolower($this->data[$this->alias]['ext']);
+		if (isset($this->data['ext'])) {
+			$this->data['ext'] = mb_strtolower($this->data['ext']);
 		}
-		if (isset($this->data[$this->alias]['name'])) {
-			$this->data[$this->alias]['name'] = ucwords($this->data[$this->alias]['name']);
+		if (isset($this->data['name'])) {
+			$this->data['name'] = ucwords($this->data['name']);
 		}
 
 		return true;
@@ -105,8 +105,8 @@ class MimeTypesTable extends Table {
 	public function push($ext = null) {
 		$type = $this->mimeTypeExists($ext);
 		if (!empty($type)) {
-			$this->id = $type[$this->alias]['id'];
-			return $this->saveField('sort', $type[$this->alias]['sort'] + 1);
+			$this->id = $type['id'];
+			return $this->saveField('sort', $type['sort'] + 1);
 		}
 		# insert this new extension
 		$data = array('ext' => $ext, 'name' => 'auto-added', 'sort' => 1);

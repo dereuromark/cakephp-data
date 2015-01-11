@@ -148,7 +148,7 @@ class CountriesTable extends Table {
 
 		if (!empty($id)) {
 			$res = $this->find('first', array('conditions' => array($this->alias . '.id' => $id), 'contain' => array()));
-			if (!empty($res[$this->alias]['ori_name']) && $Geocoder->geocode($res[$this->alias]['ori_name']) || $res[$this->alias]['name'] != $res[$this->alias]['ori_name'] && $Geocoder->geocode($res[$this->alias]['name'])) {
+			if (!empty($res['ori_name']) && $Geocoder->geocode($res['ori_name']) || $res['name'] != $res['ori_name'] && $Geocoder->geocode($res['name'])) {
 
 				$data = $Geocoder->getResult();
 				//pr($data); die();
@@ -181,7 +181,7 @@ class CountriesTable extends Table {
 
 			$count = 0;
 			foreach ($results as $res) {
-				if (!empty($res[$this->alias]['ori_name']) && $Geocoder->geocode($res[$this->alias]['ori_name']) || $res[$this->alias]['name'] != $res[$this->alias]['ori_name'] && $Geocoder->geocode($res[$this->alias]['name'])) {
+				if (!empty($res['ori_name']) && $Geocoder->geocode($res['ori_name']) || $res['name'] != $res['ori_name'] && $Geocoder->geocode($res['name'])) {
 
 					$data = $Geocoder->getResult();
 					echo returns($res);
@@ -202,15 +202,15 @@ class CountriesTable extends Table {
 						//die(returns($saveArray));
 					}
 
-					$this->id = $res[$this->alias]['id'];
+					$this->id = $res['id'];
 					if ($this->save($saveArray, true, array('lat', 'lng', 'iso2', 'iso3'))) {
 						$count++;
 
-						if (!empty($saveArray['iso2']) && $saveArray['iso2'] != $res[$this->alias]['iso2']) {
-				$this->log('Iso2 for country \'' . $data['country'] . '\' changed from \'' . $res[$this->alias]['iso2'] . '\' to \'' . $saveArray['iso2'] . '\'', LOG_NOTICE);
+						if (!empty($saveArray['iso2']) && $saveArray['iso2'] != $res['iso2']) {
+				$this->log('Iso2 for country \'' . $data['country'] . '\' changed from \'' . $res['iso2'] . '\' to \'' . $saveArray['iso2'] . '\'', LOG_NOTICE);
 					}
-					if (!empty($saveArray['iso3']) && $saveArray['iso3'] != $res[$this->alias]['iso3']) {
-				$this->log('Iso3 for country \'' . $data['country'] . '\' changed from \'' . $res[$this->alias]['iso3'] . '\' to \'' . $saveArray['iso3'] . '\'', LOG_NOTICE);
+					if (!empty($saveArray['iso3']) && $saveArray['iso3'] != $res['iso3']) {
+				$this->log('Iso3 for country \'' . $data['country'] . '\' changed from \'' . $res['iso3'] . '\' to \'' . $saveArray['iso3'] . '\'', LOG_NOTICE);
 					}
 
 					} else {
@@ -239,7 +239,7 @@ class CountriesTable extends Table {
 
 		if (!empty($id)) {
 			$res = $this->find('first', array('conditions' => array($this->alias . '.id' => $id), 'contain' => array()));
-			if (!empty($res[$this->alias]['ori_name']) && $Geocoder->geocode($res[$this->alias]['ori_name']) || $res[$this->alias]['name'] != $res[$this->alias]['ori_name'] && $Geocoder->geocode($res[$this->alias]['name'])) {
+			if (!empty($res['ori_name']) && $Geocoder->geocode($res['ori_name']) || $res['name'] != $res['ori_name'] && $Geocoder->geocode($res['name'])) {
 
 			}
 		} else {
@@ -252,7 +252,7 @@ class CountriesTable extends Table {
 
 			$count = 0;
 			foreach ($results as $res) {
-				if (!empty($res[$this->alias]['ori_name']) && $Geocoder->geocode($res[$this->alias]['ori_name']) || $res[$this->alias]['name'] != $res[$this->alias]['ori_name'] && $Geocoder->geocode($res[$this->alias]['name'])) {
+				if (!empty($res['ori_name']) && $Geocoder->geocode($res['ori_name']) || $res['name'] != $res['ori_name'] && $Geocoder->geocode($res['name'])) {
 
 					$data = $Geocoder->getResult();
 					echo returns($res);
@@ -269,15 +269,15 @@ class CountriesTable extends Table {
 						//die(returns($saveArray));
 					}
 
-					$this->id = $res[$this->alias]['id'];
+					$this->id = $res['id'];
 					if ($this->save($saveArray, true, array('iso2', 'iso3'))) {
 						$count++;
 
-						if (!empty($saveArray['iso2']) && $saveArray['iso2'] != $res[$this->alias]['iso2']) {
-				$this->log('Iso2 for country \'' . $data['country'] . '\' changed from \'' . $res[$this->alias]['iso2'] . '\' to \'' . $saveArray['iso2'] . '\'', LOG_NOTICE);
+						if (!empty($saveArray['iso2']) && $saveArray['iso2'] != $res['iso2']) {
+				$this->log('Iso2 for country \'' . $data['country'] . '\' changed from \'' . $res['iso2'] . '\' to \'' . $saveArray['iso2'] . '\'', LOG_NOTICE);
 					}
-					if (!empty($saveArray['iso3']) && $saveArray['iso3'] != $res[$this->alias]['iso3']) {
-				$this->log('Iso3 for country \'' . $data['country'] . '\' changed from \'' . $res[$this->alias]['iso3'] . '\' to \'' . $saveArray['iso3'] . '\'', LOG_NOTICE);
+					if (!empty($saveArray['iso3']) && $saveArray['iso3'] != $res['iso3']) {
+				$this->log('Iso3 for country \'' . $data['country'] . '\' changed from \'' . $res['iso3'] . '\' to \'' . $saveArray['iso3'] . '\'', LOG_NOTICE);
 					}
 
 					} else {
@@ -316,7 +316,7 @@ class CountriesTable extends Table {
 
 		if (!empty($id)) {
 			$res = $this->find('first', array('fields' => array($this->alias . '.id', $this->alias . '.name', $this->alias . '.ori_name'), 'conditions' => array($this->alias . '.id' => $id), 'contain' => array()));
-			if (!empty($res[$this->alias]['ori_name']) && ($data = $Geocoder->geocode($res[$this->alias]['ori_name'])) || $res[$this->alias]['name'] != $res[$this->alias]['ori_name'] && ($data = $Geocoder->geocode($res[$this->alias]['name']))) {
+			if (!empty($res['ori_name']) && ($data = $Geocoder->geocode($res['ori_name'])) || $res['name'] != $res['ori_name'] && ($data = $Geocoder->geocode($res['name']))) {
 
 				//echo returns($data); echo returns($Geocoder->debug()); die();
 
@@ -329,10 +329,10 @@ class CountriesTable extends Table {
 			$results = $this->find('all', array('fields' => array($this->alias . '.id', $this->alias . '.name', $this->alias . '.ori_name'), 'conditions' => $conditions, 'contain' => array()));
 			$count = 0;
 			foreach ($results as $res) {
-				if (!empty($res[$this->alias]['ori_name']) && ($data = $Geocoder->geocode($res[$this->alias]['ori_name'])) || $res[$this->alias]['name'] != $res[$this->alias]['ori_name'] && ($data = $Geocoder->geocode($res[$this->alias]['name']))) {
+				if (!empty($res['ori_name']) && ($data = $Geocoder->geocode($res['ori_name'])) || $res['name'] != $res['ori_name'] && ($data = $Geocoder->geocode($res['name']))) {
 					//echo returns($data); echo returns($Geocoder->debug()); die();
 
-					$this->id = $res[$this->alias]['id'];
+					$this->id = $res['id'];
 					if ($this->save($data, true, array('lat', 'lng'))) {
 						$count++;
 					} else {

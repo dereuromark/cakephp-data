@@ -4,14 +4,19 @@ namespace Data\Model\Table;
 use Cake\Core\Configure;
 use Cake\Model\Model;
 use Data\Model\DataAppModel;
+use Tools\Model\Table\Table;
+
+if (!defined('CLASS_USERS')) {
+	define('CLASS_USERS', 'Users');
+}
 
 class AddressesTable extends Table {
 
 	public $displayField = 'formatted_address';
 
-	public $actsAs = array('Tools.Geocoder' => array('real' => false, 'override' => true, 'allow_inconclusive' => true)); //'before'=>'validate'
+	public $actsAs = array('Geo.Geocoder' => array('real' => false, 'override' => true, 'allow_inconclusive' => true)); //'before'=>'validate'
 
-	public $order = array('Address.type_id' => 'ASC', 'Address.formatted_address' => 'ASC');
+	public $order = array('type_id' => 'ASC', 'formatted_address' => 'ASC');
 
 	public $config = array();
 
@@ -112,7 +117,7 @@ class AddressesTable extends Table {
 			'order' => ''
 		),
 		'User' => array(
-			'className' => CLASS_USER,
+			'className' => CLASS_USERS,
 			'foreignKey' => 'foreign_id',
 			'conditions' => array('model' => 'User'),
 			'fields' => array('id', 'username'),
@@ -145,12 +150,12 @@ class AddressesTable extends Table {
 	}
 
 	public function primaryUnique(&$data) {
-		if (empty($this->data[$this->alias]['foreign_id']) || $this->data[$this->alias]['address_type_id'] != self::TYPE_MAIN) {
+		if (empty($this->data['foreign_id']) || $this->data['address_type_id'] != self::TYPE_MAIN) {
 			return true;
 		}
-		$conditions = array('foreign_id' => $this->data[$this->alias]['foreign_id'], 'address_type_id' => self::TYPE_MAIN);
-		if (!empty($this->data[$this->alias]['id'])) {
-			$conditions['user_id !='] = $this->data[$this->alias]['id'];
+		$conditions = array('foreign_id' => $this->data['foreign_id'], 'address_type_id' => self::TYPE_MAIN);
+		if (!empty($this->data['id'])) {
+			$conditions['user_id !='] = $this->data['id'];
 		}
 		if ($this->find('first', array('conditions' => $conditions))) {
 			return false;
@@ -162,14 +167,14 @@ class AddressesTable extends Table {
 	 * Zip Codes
 	 */
 	public function correspondsWithCountry(&$data) {
-		if (!empty($this->data[$this->alias]['postal_code'])) {
+		if (!empty($this->data['postal_code'])) {
 			$res = $this->Country->find('first', array(
-				'conditions' => array('Country.id' => $this->data[$this->alias]['country_id'])
+				'conditions' => array('Country.id' => $this->data['country_id'])
 			));
 			if (empty($res)) {
 				return true;
 			}
-			if (!empty($res['Country']['zip_length']) && $res['Country']['zip_length'] != mb_strlen($this->data[$this->alias]['postal_code'])) {
+			if (!empty($res['Country']['zip_length']) && $res['Country']['zip_length'] != mb_strlen($this->data['postal_code'])) {
 				return false;
 			}
 
@@ -181,15 +186,15 @@ class AddressesTable extends Table {
 	 * Validation of country_province_id
 	 */
 	public function fitsToCountry(&$data) {
-		if (!$this->config['CountryProvince'] || !isset($this->data[$this->alias]['country_id']) || !isset($this->data[$this->alias]['country_province_id'])) {
+		if (!$this->config['CountryProvince'] || !isset($this->data['country_id']) || !isset($this->data['country_province_id'])) {
 			return true;
 		}
 		$res = $this->Country->CountryProvince->find('list', array(
-			'conditions' => array('country_id' => $this->data[$this->alias]['country_id'])
+			'conditions' => array('country_id' => $this->data['country_id'])
 		));
 		if (empty($res) || array_shift($data) == 0) {
-			$this->data[$this->alias]['country_province_id'] = 0;
-		} elseif (empty($this->data[$this->alias]['country_province_id']) || !array_key_exists($this->data[$this->alias]['country_province_id'], $res)) {
+			$this->data['country_province_id'] = 0;
+		} elseif (empty($this->data['country_province_id']) || !array_key_exists($this->data['country_province_id'], $res)) {
 			return false;
 		}
 		return true;
@@ -199,25 +204,25 @@ class AddressesTable extends Table {
 		parent::beforeValidate($options);
 
 		# add country name for geocoder
-		if (!empty($this->data[$this->alias]['country_id'])) {
-			$this->data[$this->alias]['country'] = $this->Country->field('name', array('id' => $this->data[$this->alias]['country_id']));
+		if (!empty($this->data['country_id'])) {
+			$this->data['country'] = $this->Country->field('name', array('id' => $this->data['country_id']));
 		}
-		if (!empty($this->data[$this->alias]['postal_code'])) {
+		if (!empty($this->data['postal_code'])) {
 			unset($this->validate['city']['notEmpty']);
-		} elseif (!empty($this->data[$this->alias]['city'])) {
+		} elseif (!empty($this->data['city'])) {
 			unset($this->validate['postal_code']['notEmpty']);
 		}
 
-		if (isset($this->data[$this->alias]['foreign_id']) && empty($this->data[$this->alias]['foreign_id'])) {
-			$this->data[$this->alias]['foreign_id'] = 0;
+		if (isset($this->data['foreign_id']) && empty($this->data['foreign_id'])) {
+			$this->data['foreign_id'] = 0;
 		}
 
 		# prevents NULL inserts into DB
-		if (isset($this->data[$this->alias]['lat'])) {
-			$this->data[$this->alias]['lat'] = number_format((float)$this->data[$this->alias]['lat'], 6);
+		if (isset($this->data['lat'])) {
+			$this->data['lat'] = number_format((float)$this->data['lat'], 6);
 		}
-		if (isset($this->data[$this->alias]['lng'])) {
-			$this->data[$this->alias]['lng'] = number_format((float)$this->data[$this->alias]['lng'], 6);
+		if (isset($this->data['lng'])) {
+			$this->data['lng'] = number_format((float)$this->data['lng'], 6);
 		}
 
 		return true;
@@ -226,51 +231,51 @@ class AddressesTable extends Table {
 	public function beforeSave($options = array()) {
 		parent::beforeSave($options);
 
-		if (!empty($this->data[$this->alias]['formatted_address']) && !empty($this->data[$this->alias]['geocoder_result'])) {
+		if (!empty($this->data['formatted_address']) && !empty($this->data['geocoder_result'])) {
 			# fix city/plz?
-			if (isset($this->data[$this->alias]['postal_code']) && empty($this->data[$this->alias]['postal_code'])) {
-				$this->data[$this->alias]['postal_code'] = $this->data[$this->alias]['geocoder_result']['postal_code'];
+			if (isset($this->data['postal_code']) && empty($this->data['postal_code'])) {
+				$this->data['postal_code'] = $this->data['geocoder_result']['postal_code'];
 			}
-			if (isset($this->data[$this->alias]['city']) && empty($this->data[$this->alias]['city'])) {
+			if (isset($this->data['city']) && empty($this->data['city'])) {
 				# use sublocality too?
-				$this->data[$this->alias]['city'] = $this->data[$this->alias]['geocoder_result']['locality'];
+				$this->data['city'] = $this->data['geocoder_result']['locality'];
 			}
-			if (isset($this->data[$this->alias]['postal_code']) && empty($this->data[$this->alias]['postal_code']) && !empty($this->data[$this->alias]['geocoder_result']['postal_code'])) {
+			if (isset($this->data['postal_code']) && empty($this->data['postal_code']) && !empty($this->data['geocoder_result']['postal_code'])) {
 				# use postal_code
-				$this->data[$this->alias]['postal_code'] = $this->data[$this->alias]['geocoder_result']['postal_code'];
+				$this->data['postal_code'] = $this->data['geocoder_result']['postal_code'];
 			}
 
 			# ensure province is correct
 			if ($this->config['CountryProvince']) {
-				if (isset($this->data[$this->alias]['country_province_id']) && !empty($this->data[$this->alias]['country_province_id']) && !empty($this->data[$this->alias]['geocoder_result']['country_province_code'])) {
-					//$this->data[$this->alias]['country_province_id']
-					$countryProvince = $this->Country->CountryProvince->find('first', array('conditions' => array('CountryProvince.id' => $this->data[$this->alias]['country_province_id'])));
-					if (!empty($countryProvince) && strlen($countryProvince['CountryProvince']['abbr']) === strlen($this->data[$this->alias]['geocoder_result']['country_province_code']) && $countryProvince['CountryProvince']['abbr'] != $this->data[$this->alias]['geocoder_result']['country_province_code']) {
-						$this->invalidate('country_province_id', 'Als Bundesland wurde für diese Adresse \'' . h($this->data[$this->alias]['geocoder_result']['country_province']) . '\' erwartet - du hast aber \'' . h($countryProvince['CountryProvince']['name']) . '\' angegeben. Liegt denn deine Adresse tatsächlich in einem anderen Bundesland? Dann gebe bitte die genaue PLZ und Ort an, damit das Bundesland dazu auch korrekt identifiziert werden kann.');
+				if (isset($this->data['country_province_id']) && !empty($this->data['country_province_id']) && !empty($this->data['geocoder_result']['country_province_code'])) {
+					//$this->data['country_province_id']
+					$countryProvince = $this->Country->CountryProvince->find('first', array('conditions' => array('CountryProvince.id' => $this->data['country_province_id'])));
+					if (!empty($countryProvince) && strlen($countryProvince['CountryProvince']['abbr']) === strlen($this->data['geocoder_result']['country_province_code']) && $countryProvince['CountryProvince']['abbr'] != $this->data['geocoder_result']['country_province_code']) {
+						$this->invalidate('country_province_id', 'Als Bundesland wurde für diese Adresse \'' . h($this->data['geocoder_result']['country_province']) . '\' erwartet - du hast aber \'' . h($countryProvince['CountryProvince']['name']) . '\' angegeben. Liegt denn deine Adresse tatsächlich in einem anderen Bundesland? Dann gebe bitte die genaue PLZ und Ort an, damit das Bundesland dazu auch korrekt identifiziert werden kann.');
 						return false;
 					}
 
 				# enter new id
-				} elseif (isset($this->data[$this->alias]['country_province_id']) && !empty($this->data[$this->alias]['geocoder_result']['country_province_code'])) {
-					$countryProvince = $this->Country->CountryProvince->find('first', array('conditions' => array('OR' => array('CountryProvince.abbr' => $this->data[$this->alias]['geocoder_result']['country_province_code'], 'CountryProvince.name' => $this->data[$this->alias]['geocoder_result']['country_province']))));
+				} elseif (isset($this->data['country_province_id']) && !empty($this->data['geocoder_result']['country_province_code'])) {
+					$countryProvince = $this->Country->CountryProvince->find('first', array('conditions' => array('OR' => array('CountryProvince.abbr' => $this->data['geocoder_result']['country_province_code'], 'CountryProvince.name' => $this->data['geocoder_result']['country_province']))));
 					if (!empty($countryProvince)) {
-						$this->data[$this->alias]['country_province_id'] = $countryProvince['CountryProvince']['id'];
+						$this->data['country_province_id'] = $countryProvince['CountryProvince']['id'];
 					}
 				}
 			}
 
 			# enter new id
-			if (isset($this->data[$this->alias]['country_id']) && empty($this->data[$this->alias]['country_id']) && !empty($this->data[$this->alias]['geocoder_result']['country_code'])) {
-				$country = $this->Country->find('first', array('conditions' => array('Country.iso2' => $this->data[$this->alias]['geocoder_result']['country_code'])));
+			if (isset($this->data['country_id']) && empty($this->data['country_id']) && !empty($this->data['geocoder_result']['country_code'])) {
+				$country = $this->Country->find('first', array('conditions' => array('Country.iso2' => $this->data['geocoder_result']['country_code'])));
 				if (!empty($country)) {
-					$this->data[$this->alias]['country_id'] = $country['Country']['id'];
+					$this->data['country_id'] = $country['Country']['id'];
 				}
 			}
 
 		}
 
-		if (isset($this->data[$this->alias]['geocoder_result']) && !$this->Behaviors->loaded('Jsonable')) {
-			unset($this->data[$this->alias]['geocoder_result']);
+		if (isset($this->data['geocoder_result']) && !$this->Behaviors->loaded('Jsonable')) {
+			unset($this->data['geocoder_result']);
 		}
 		return true;
 	}

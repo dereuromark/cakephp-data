@@ -4,6 +4,7 @@ namespace Data\Test\TestCase\Model\Table;
 
 use Data\Model\State;
 use Tools\TestSuite\TestCase;
+use Cake\ORM\TableRegistry;
 
 class StatesTableTest extends TestCase {
 
@@ -11,18 +12,22 @@ class StatesTableTest extends TestCase {
 		'plugin.data.states'
 	);
 
-	public $State;
+	public $States;
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->State = ClassRegistry::init('Data.State');
+		$this->States = TableRegistry::get('Data.States');
 	}
 
-	public function testObject() {
-		$this->assertTrue(is_object($this->State));
-		$this->assertInstanceOf('State', $this->State);
+	/**
+	 * StatesTableTest::testBasicFind()
+	 *
+	 * @return void
+	 */
+	public function testBasicFind() {
+		$result = $this->States->find()->first();
+		$this->assertNotEmpty($result);
 	}
 
-	//TODO
 }

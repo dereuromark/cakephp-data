@@ -7,7 +7,7 @@ class ContinentsTable extends Table {
 
 	public $actsAs = array('Tree');
 
-	public $order = array('Continent.name' => 'ASC');
+	public $order = array('name' => 'ASC');
 
 	public $validate = array(
 		'name' => array(

@@ -3,12 +3,13 @@ namespace Data\Model\Table;
 
 use Data\Model\DataAppModel;
 use Tools\Lib\GeocodeLib;
+use Tools\Model\Table\Table;
 
 class StatesTable extends Table {
 
 	public $actsAs = array('Tools.Slugged' => array('case' => 'low', 'mode' => 'ascii', 'unique' => false, 'overwrite' => false));
 
-	public $order = array('State.name' => 'ASC');
+	public $order = array('name' => 'ASC');
 
 	public $validate = array(
 		'country_id' => array('numeric'),
@@ -102,12 +103,12 @@ class StatesTable extends Table {
 
 		if (!empty($id)) {
 			$res = $this->find('first', array('conditions' => array($this->alias . '.id' => $id), 'contain' => array('Country.name')));
-			if (!empty($res[$this->alias]['name']) && !empty($res[$this->Country->alias]['name']) && $geocoder->geocode($res[$this->alias]['name'] .
+			if (!empty($res['name']) && !empty($res[$this->Country->alias]['name']) && $geocoder->geocode($res['name'] .
 				', ' . $res[$this->Country->alias]['name'])) {
 
 				$data = $geocoder->getResult();
 				//pr($data); die();
-				$saveArray = array('id' => $id, 'lat' => $data['lat'], 'lng' => $data['lng'], 'country_id' => $res[$this->alias]['country_id']);
+				$saveArray = array('id' => $id, 'lat' => $data['lat'], 'lng' => $data['lng'], 'country_id' => $res['country_id']);
 
 				if (!empty($data['country_province_code']) && mb_strlen($data['country_province_code']) <= 3 && preg_match('/^([A-Z])*$/', $data['country_province_code'])) {
 					$saveArray['abbr'] = $data['country_province_code'];
@@ -137,13 +138,13 @@ class StatesTable extends Table {
 			$count = 0;
 
 			foreach ($results as $res) {
-				if (!empty($res[$this->alias]['name']) && !empty($res[$this->Country->alias]['name']) && $geocoder->geocode($res[$this->alias]['name'] .
+				if (!empty($res['name']) && !empty($res[$this->Country->alias]['name']) && $geocoder->geocode($res['name'] .
 					', ' . $res[$this->Country->alias]['name'])) {
 
 					$data = $geocoder->getResult();
 					//pr($data); die();
 					//pr ($geocoder->debug());
-					$saveArray = array('id' => $res[$this->alias]['id'], 'country_id' => $res[$this->alias]['country_id']);
+					$saveArray = array('id' => $res['id'], 'country_id' => $res['country_id']);
 					if (isset($data['lat']) && isset($data['lng'])) {
 						$saveArray = array_merge($saveArray, array('lat' => $data['lat'], 'lng' => $data['lng']));
 					}
@@ -152,12 +153,12 @@ class StatesTable extends Table {
 						$saveArray['abbr'] = $data['country_province_code'];
 					}
 
-					$this->id = $res[$this->alias]['id'];
+					$this->id = $res['id'];
 					if ($this->save($saveArray, true, array('lat', 'lng', 'abbr', 'country_id'))) {
 						$count++;
 
-						if (!empty($saveArray['abbr']) && $saveArray['abbr'] != $res[$this->alias]['abbr']) {
-							$this->log('Abbr for country province \'' . $data['country_province'] . '\' changed from \'' . $res[$this->alias]['abbr'] . '\' to \'' . $saveArray['abbr'] .
+						if (!empty($saveArray['abbr']) && $saveArray['abbr'] != $res['abbr']) {
+							$this->log('Abbr for country province \'' . $data['country_province'] . '\' changed from \'' . $res['abbr'] . '\' to \'' . $saveArray['abbr'] .
 								'\'', LOG_NOTICE);
 						}
 

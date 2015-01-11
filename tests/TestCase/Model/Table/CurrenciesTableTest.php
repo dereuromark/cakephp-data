@@ -16,7 +16,7 @@ class CurrenciesTableTest extends TestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->Currency = ClassRegistry::init('Data.Currency');
+		$this->Currency = TableRegistry::get('Data.Currency');
 	}
 
 	public function testObject() {

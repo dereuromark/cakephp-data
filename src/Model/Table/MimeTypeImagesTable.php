@@ -41,11 +41,11 @@ class MimeTypeImagesTable extends Table {
 
 	public function beforeSave($options = array()) {
 		parent::beforeSave($options);
-		if (isset($this->data[$this->alias]['name'])) {
-			$this->data[$this->alias]['name'] = mb_strtolower($this->data[$this->alias]['name']);
+		if (isset($this->data['name'])) {
+			$this->data['name'] = mb_strtolower($this->data['name']);
 		}
-		if (isset($this->data[$this->alias]['ext'])) {
-			$this->data[$this->alias]['ext'] = mb_strtolower($this->data[$this->alias]['ext']);
+		if (isset($this->data['ext'])) {
+			$this->data['ext'] = mb_strtolower($this->data['ext']);
 		}
 
 		return true;
@@ -67,7 +67,7 @@ class MimeTypeImagesTable extends Table {
 	public function afterDelete(Event $event, Entity $entity, ArrayObject $options) {
 		if (!empty($this->_del)) {
 			# todo: ...
-			$image = $this->_del[$this->alias]['name'] . '.' . $this->_del[$this->alias]['ext'];
+			$image = $this->_del['name'] . '.' . $this->_del['ext'];
 
 			# delete image (right now: move to archive)
 			if (file_exists(PATH_MIMETYPES . $image)) {
@@ -78,7 +78,7 @@ class MimeTypeImagesTable extends Table {
 
 			# remove id from mime_types table
 
-			$types = $this->MimeType->find('all', array('fields' => array('id'), 'conditions' => array('mime_type_image_id' => $this->_del[$this->alias]['id'])));
+			$types = $this->MimeType->find('all', array('fields' => array('id'), 'conditions' => array('mime_type_image_id' => $this->_del['id'])));
 			foreach ($types as $type) {
 				$this->MimeType->id = $type[$this->MimeType->alias]['id'];
 				$this->MimeType->saveField('mime_type_image_id', 0);

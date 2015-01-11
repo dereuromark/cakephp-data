@@ -6,7 +6,7 @@ use Data\Model\DataAppModel;
 
 class SmileysTable extends Table {
 
-	public $order = array('Smiley.is_base' => 'DESC', 'Smiley.sort' => 'DESC');
+	public $order = array('is_base' => 'DESC', 'sort' => 'DESC');
 
 	public $validate = array(
 		'smiley_cat_id' => array(
@@ -105,22 +105,22 @@ class SmileysTable extends Table {
 
 		$path = '/Data/img/smileys/default/';
 		foreach ($smileys as $smiley) {
-			if (!empty($smiley[$this->alias]['prim_code'])) {
+			if (!empty($smiley['prim_code'])) {
 				$res[] = array(
-					'code' => $smiley[$this->alias]['prim_code'],
-					'path' => Plugin::path('Data') . 'webroot' . DS . 'img' . DS . 'smileys' . DS . 'default' . DS . $smiley[$this->alias]['smiley_path'],
-					'url' => $path . $smiley[$this->alias]['smiley_path'],
-					'title' => $smiley[$this->alias]['title'],
-					'base' => $smiley[$this->alias]['is_base']
+					'code' => $smiley['prim_code'],
+					'path' => Plugin::path('Data') . 'webroot' . DS . 'img' . DS . 'smileys' . DS . 'default' . DS . $smiley['smiley_path'],
+					'url' => $path . $smiley['smiley_path'],
+					'title' => $smiley['title'],
+					'base' => $smiley['is_base']
 				);
 			}
-			if (!empty($smiley[$this->alias]['sec_code'])) {
+			if (!empty($smiley['sec_code'])) {
 				$res[] = array(
-					'code' => $smiley[$this->alias]['sec_code'],
-					'path' => Plugin::path('Data') . 'webroot' . DS . 'img' . DS . 'smileys' . DS . 'default' . DS . $smiley[$this->alias]['smiley_path'],
-					'url' => $path . $smiley[$this->alias]['smiley_path'],
-					'title' => $smiley[$this->alias]['title'],
-					'base' => $smiley[$this->alias]['is_base']
+					'code' => $smiley['sec_code'],
+					'path' => Plugin::path('Data') . 'webroot' . DS . 'img' . DS . 'smileys' . DS . 'default' . DS . $smiley['smiley_path'],
+					'url' => $path . $smiley['smiley_path'],
+					'title' => $smiley['title'],
+					'base' => $smiley['is_base']
 				);
 			}
 		}

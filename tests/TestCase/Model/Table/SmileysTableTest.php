@@ -14,7 +14,7 @@ class SmileysTableTest extends TestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->Smiley = ClassRegistry::init('Data.Smiley');
+		$this->Smiley = TableRegistry::get('Data.Smiley');
 	}
 
 	/**

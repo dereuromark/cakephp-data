@@ -25,7 +25,7 @@ class StatesFixture extends TestFixture {
 		'lng' => ['type' => 'float', 'null' => false, 'default' => '0.000000', 'length' => '10,6', 'collate' => null, 'comment' => ''],
 		'slug' => ['type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
-		'_indexes' => ['slug' => ['unique' => 0, 'columns' => 'slug']],
+		//'_indexes' => ['slug' => ['unique' => 0, 'columns' => 'slug']],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
 		'_options' => []
 	);

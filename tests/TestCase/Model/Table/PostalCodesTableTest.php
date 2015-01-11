@@ -15,7 +15,7 @@ class PostalCodesTableTest extends TestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->PostalCode = ClassRegistry::init('Data.PostalCode');
+		$this->PostalCode = TableRegistry::get('Data.PostalCode');
 	}
 
 	public function testObject() {

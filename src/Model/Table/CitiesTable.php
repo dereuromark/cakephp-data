@@ -3,10 +3,11 @@ namespace Data\Model\Table;
 
 use Cake\Core\Configure;
 use Data\Model\DataAppModel;
+use Tools\Model\Table\Table;
 
 class CitiesTable extends Table {
 
-	public $order = array('City.name' => 'ASC');
+	public $order = array('name' => 'ASC');
 
 	public $validate = array(
 		'name' => array(

@@ -28,7 +28,7 @@ class CountiesFixture extends TestFixture {
 		'single_city' => ['type' => 'boolean', 'null' => false, 'default' => '0', 'collate' => null, 'comment' => ''],
 		'rank' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 5, 'collate' => null, 'comment' => ''],
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
-		'_indexes' => ['country' => ['unique' => 0, 'columns' => 'country_id'], 'state_id' => ['unique' => 0, 'columns' => 'state_id'], 'rank' => ['unique' => 0, 'columns' => 'rank']],
+		//'_indexes' => ['country' => ['unique' => 0, 'columns' => 'country_id'], 'state_id' => ['unique' => 0, 'columns' => 'state_id'], 'rank' => ['unique' => 0, 'columns' => 'rank']],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']], 'official_id' => ['type' => 'unique', 'columns' => 'official_id'], 'slug' => ['type' => 'unique', 'columns' => 'slug']],
 		'_options' => []
 	);

@@ -15,7 +15,7 @@ class LocationsTableTest extends TestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->Location = ClassRegistry::init('Data.Location');
+		$this->Location = TableRegistry::get('Data.Location');
 	}
 
 	public function testObject() {

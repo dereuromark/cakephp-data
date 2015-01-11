@@ -7,7 +7,7 @@ class PostalCodesTable extends Table {
 
 	public $displayField = 'code';
 
-	public $order = array('PostalCode.code' => 'ASC');
+	public $order = array('code' => 'ASC');
 
 	public $actsAs = array('Tools.Geocoder' => array('min_accuracy' => 2, 'address' => array('code', 'country_name'), 'formatted_address' => 'official_address', 'real' => false, 'before' => 'validate', 'allow_inconclusive' => true));
 
@@ -83,7 +83,7 @@ class PostalCodesTable extends Table {
 		$list = $this->find('all', array('fields' => array('COUNT(*) as count', 'country_id'), 'group' => 'country_id'));
 
 		foreach ($list as $x) {
-			$res[$x[$this->alias]['country_id']] = $x[0]['count'];
+			$res[$x['country_id']] = $x[0]['count'];
 		}
 
 		return $res;

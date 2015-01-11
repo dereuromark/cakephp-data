@@ -2,27 +2,49 @@
 
 namespace Data\Test\TestCase\Model\Table;
 
-use Data\Model\County;
 use Tools\TestSuite\TestCase;
+use Cake\ORM\TableRegistry;
 
 class CountiesTableTest extends TestCase {
 
 	public $fixtures = array(
-		'plugin.data.counties'
+		'plugin.data.counties', 'plugin.data.states',
 	);
 
-	public $County;
+	public $Counties;
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->County = ClassRegistry::init('Data.County');
+		$this->Counties = TableRegistry::get('Data.Counties');
 	}
 
-	public function testObject() {
-		$this->assertTrue(is_object($this->County));
-		$this->assertInstanceOf('County', $this->County);
+	/**
+	 * CountiesTableTest::testBasicFind()
+	 *
+	 * @return void
+	 */
+	public function testBasicFind() {
+		$result = $this->Counties->find()->first();
+		$this->assertNotEmpty($result);
 	}
 
-	//TODO
+	/**
+	 * CountiesTableTest::testBasicSave()
+	 *
+	 * @return void
+	 */
+	public function testBasicSave() {
+		$data = array(
+			'name' => 'Foo Bar'
+		);
+		$entity = $this->Counties->newEntity($data);
+		$this->assertEmpty($entity->errors());
+
+		$result = $this->Counties->save($entity);
+		debug($result);ob_flush();
+		$this->assertNotEmpty($result);
+		$this->assertSame('foo-bar', $result['slug']);
+	}
+
 }

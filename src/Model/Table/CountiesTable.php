@@ -2,6 +2,7 @@
 namespace Data\Model\Table;
 
 use Data\Model\DataAppModel;
+use Tools\Model\Table\Table;
 
 class CountiesTable extends Table {
 
@@ -15,18 +16,15 @@ class CountiesTable extends Table {
 		'State' => array('className' => 'Data.State')
 	);
 
+	/**
+	 * CountiesTable::initCounty()
+	 *
+	 * @param mixed $data
+	 * @return
+	 */
 	public function initCounty($data) {
-		$this->create();
-
-		$this->set($data);
-		return $this->save(null, false);
+		$entity = $this->newEntity($data);
+		return $this->save($entity);
 	}
 
-	/*
-	public function beforeSave($options = array()) {
-		parent::beforeSave($options);
-
-		//debug($this->data);
-	}
-	*/
 }

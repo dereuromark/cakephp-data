@@ -16,7 +16,7 @@ class CountriesTableTest extends TestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->Country = ClassRegistry::init('Data.Country');
+		$this->Country = TableRegistry::get('Data.Country');
 	}
 
 	public function testObject() {

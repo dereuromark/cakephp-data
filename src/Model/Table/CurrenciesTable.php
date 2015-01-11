@@ -6,7 +6,7 @@ use Data\Model\DataAppModel;
 
 class CurrenciesTable extends Table {
 
-	public $order = array('Currency.base' => 'DESC', 'Currency.code' => 'ASC');
+	public $order = array('base' => 'DESC', 'code' => 'ASC');
 
 	public $validate = array(
 		'name' => array(
@@ -49,31 +49,31 @@ class CurrenciesTable extends Table {
 	public function beforeValidate($options = array()) {
 		$ret = parent::beforeValidate($options);
 
-		if (isset($this->data[$this->alias]['value'])) {
-			$this->data[$this->alias]['value'] = (float)$this->data[$this->alias]['value'];
+		if (isset($this->data['value'])) {
+			$this->data['value'] = (float)$this->data['value'];
 		}
 
-		if (isset($this->data[$this->alias]['code'])) {
-			$this->data[$this->alias]['code'] = mb_strtoupper($this->data[$this->alias]['code']);
+		if (isset($this->data['code'])) {
+			$this->data['code'] = mb_strtoupper($this->data['code']);
 
-			$code = $this->data[$this->alias]['code'];
+			$code = $this->data['code'];
 			# intelligent autocomplete
-			if (isset($this->data[$this->alias]['name']) && empty($this->data[$this->alias]['name'])) {
+			if (isset($this->data['name']) && empty($this->data['name'])) {
 				if (!isset($this->CurrencyLib)) {
 					App::import('Component', 'Data.Currency');
 					$this->CurrencyLib = new CurrencyComponent();
 				}
-				$this->data[$this->alias]['name'] = $this->CurrencyLib->getName($code, '');
+				$this->data['name'] = $this->CurrencyLib->getName($code, '');
 			}
 
-			if (isset($this->data[$this->alias]['value']) && $this->data[$this->alias]['value'] == 0) {
+			if (isset($this->data['value']) && $this->data['value'] == 0) {
 				if (!isset($this->CurrencyLib)) {
 					App::import('Component', 'Data.Currency');
 					$this->CurrencyLib = new CurrencyComponent();
 				}
 				$currencies = $this->availableCurrencies();
 				if (array_key_exists($code, $currencies)) {
-					$this->data[$this->alias]['value'] = $currencies[$code];
+					$this->data['value'] = $currencies[$code];
 				}
 			}
 		}
@@ -83,8 +83,8 @@ class CurrenciesTable extends Table {
 
 	public function beforeSave($options = array()) {
 		parent::beforeSave($options);
-		if (isset($this->data[$this->alias]['name'])) {
-			$this->data[$this->alias]['name'] = ucwords($this->data[$this->alias]['name']);
+		if (isset($this->data['name'])) {
+			$this->data['name'] = ucwords($this->data['name']);
 
 			# intelligent autocomplete
 		}
@@ -96,10 +96,10 @@ class CurrenciesTable extends Table {
 	 * Model validation
 	 */
 	public function available() {
-		if (empty($this->data[$this->alias]['code'])) {
+		if (empty($this->data['code'])) {
 			return false;
 		}
-		return $this->isAvailable($this->data[$this->alias]['code']);
+		return $this->isAvailable($this->data['code']);
 	}
 
 	/**
@@ -124,12 +124,12 @@ class CurrenciesTable extends Table {
 		$base = $this->baseCurrency();
 		$currencies = $this->foreignCurrencies();
 		foreach ($currencies as $currency) {
-			$value = $this->CurrencyLib->convert(1, $base[$this->alias]['code'], $currency[$this->alias]['code'], 4);
+			$value = $this->CurrencyLib->convert(1, $base['code'], $currency['code'], 4);
 			if ($value !== false) {
-				$this->id = $currency[$this->alias]['id'];
+				$this->id = $currency['id'];
 				$this->saveField('value', $value);
 			} else {
-				$this->log('Invalid Currency ' . $currency[$this->alias]['code'], 'warning');
+				$this->log('Invalid Currency ' . $currency['code'], 'warning');
 			}
 		}
 	}
@@ -158,7 +158,7 @@ class CurrenciesTable extends Table {
 			$this->CurrencyLib = new CurrencyComponent();
 		}
 		$base = $this->baseCurrency();
-		if ($res = $this->CurrencyLib->table($base[$this->alias]['code'], 4)) {
+		if ($res = $this->CurrencyLib->table($base['code'], 4)) {
 			return $res;
 		}
 		return array();

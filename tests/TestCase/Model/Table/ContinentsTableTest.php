@@ -16,7 +16,7 @@ class ContinentsTableTest extends TestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->Continent = ClassRegistry::init('Data.Continent');
+		$this->Continent = TableRegistry::get('Data.Continent');
 	}
 
 	public function testObject() {

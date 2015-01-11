@@ -11,7 +11,7 @@ class MimeTypesTableTest extends TestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->MimeType = ClassRegistry::init('Data.MimeType');
+		$this->MimeType = TableRegistry::get('Data.MimeType');
 	}
 
 	public function testObject() {

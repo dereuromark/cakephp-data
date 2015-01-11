@@ -2,6 +2,7 @@
 namespace Data\Model\Table;
 
 use Data\Model\DataAppModel;
+use Tools\Model\Table\Table;
 
 class DistrictsTable extends Table {
 
@@ -9,7 +10,7 @@ class DistrictsTable extends Table {
 		'min_accuracy' => 3, 'address' => array('address'), 'before' => 'save', 'real' => false, 'required' => false
 	), 'Data.Slugged' => array('mode' => 'ascii', 'case' => 'low'));
 
-	public $order = array('District.name' => 'ASC');
+	public $order = array('name' => 'ASC');
 
 	public $validate = array(
 		'name' => array(
@@ -45,9 +46,9 @@ class DistrictsTable extends Table {
 	public function beforeValidate($options = array()) {
 		parent::beforeValidate($options);
 
-		if (!empty($this->data[$this->alias]['name']) && !empty($this->data[$this->alias]['city_id'])) {
-			$city = $this->City->field('name', array('id' => $this->data[$this->alias]['city_id']));
-			$this->data[$this->alias]['address'] = $this->data[$this->alias]['name'] . ', ' . $city;
+		if (!empty($this->data['name']) && !empty($this->data['city_id'])) {
+			$city = $this->City->field('name', array('id' => $this->data['city_id']));
+			$this->data['address'] = $this->data['name'] . ', ' . $city;
 		}
 
 		return true;

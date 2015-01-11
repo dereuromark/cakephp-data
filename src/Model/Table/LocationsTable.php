@@ -43,8 +43,8 @@ class LocationsTable extends Table {
 
 		$additional = array('locality', 'sublocality');
 		foreach ($additional as $field) {
-			if (!empty($this->data[$this->alias]['geocoder_result'][$field])) {
-				$this->data[$this->alias][$field] = $this->data[$this->alias]['geocoder_result'][$field];
+			if (!empty($this->data['geocoder_result'][$field])) {
+				$this->data[$field] = $this->data['geocoder_result'][$field];
 			}
 		}
 

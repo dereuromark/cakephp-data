@@ -4,6 +4,7 @@ namespace Data\Test\TestCase\Model\Table;
 
 use Data\Model\Address;
 use Tools\TestSuite\TestCase;
+use Cake\ORM\TableRegistry;
 
 class AddressesTableTest extends TestCase {
 
@@ -11,18 +12,22 @@ class AddressesTableTest extends TestCase {
 		'plugin.data.addresses'
 	);
 
-	public $Address;
+	public $Addresses;
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->Address = ClassRegistry::init('Data.Address');
+		$this->Addresses = TableRegistry::get('Data.Addresses');
 	}
 
-	public function testObject() {
-		$this->assertTrue(is_object($this->Address));
-		$this->assertInstanceOf('Address', $this->Address);
+	/**
+	 * AddressesTableTest::testBasicFind()
+	 *
+	 * @return void
+	 */
+	public function testBasicFind() {
+		$result = $this->Addresses->find()->first();
+		$this->assertNotEmpty($result);
 	}
 
-	//TODO
 }
