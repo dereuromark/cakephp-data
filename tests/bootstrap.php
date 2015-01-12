@@ -65,7 +65,7 @@ Cake\Cache\Cache::config($cache);
 
 //needed?
 Cake\Core\Plugin::load('Data', ['path' => ROOT . DS]);
-Cake\Core\Plugin::load('Tools', ['path' => ROOT . DS . 'plugins' . DS . 'Tools' . DS]);
+//Cake\Core\Plugin::load('Tools', ['path' => ROOT . DS . 'plugins' . DS . 'Tools' . DS]);
 
 // Ensure default test connection is defined
 if (!getenv('db_class')) {
