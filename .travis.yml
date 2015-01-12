@@ -14,7 +14,7 @@ env:
 matrix:
   allow_failures:
     - php: 5.4
-      env: PHPCS=1 DEFAULT=0
+      env: PHPCS=1 DEFAULT=0 DB=mysql db_class='Cake\Database\Driver\Mysql' db_dsn='mysql:host=0.0.0.0;dbname=cakephp_test' db_database='cakephp_test' db_username='travis' db_password=''
 
   fast_finish: true
 
