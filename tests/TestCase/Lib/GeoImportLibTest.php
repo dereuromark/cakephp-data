@@ -10,6 +10,8 @@ use Data\Lib\GeoImportLib;
  */
 class GeoImportLibTest extends TestCase {
 
+	public $fixtures = array('plugin.data.countries');
+
 	public function setUp() {
 		parent::setUp();
 
@@ -18,12 +20,12 @@ class GeoImportLibTest extends TestCase {
 
 	public function testImportCountiesCH() {
 		$res = $this->Geo->importCounties('CH');
-		debug($res);
+		//debug($res);
 	}
 
 	public function testImportCH() {
 		$res = $this->Geo->importCounties('CH');
-		debug($res);
+		//debug($res);
 	}
 
 }
