@@ -18,11 +18,15 @@ class MimeTypeHelperTest extends TestCase {
 		$this->MimeTypeHelper = new MimeTypeHelper(new View(null));
 	}
 
+	/**
+	 * MimeTypeHelperTest::testGetTypes()
+	 *
+	 * @return void
+	 */
 	public function testGetTypes() {
 		$result = $this->MimeTypeHelper->getTypes();
-		debug($result);
+		//debug($result);
 		//$this->assertInstanceOf('MimeTypeHelper', $this->MimeTypeHelper);
 	}
 
-	//TODO
 }

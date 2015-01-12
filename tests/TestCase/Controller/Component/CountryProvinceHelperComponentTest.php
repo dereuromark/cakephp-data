@@ -32,7 +32,7 @@ class CountryProvinceHelperComponentTest extends TestCase {
 		$event = new Event('Controller.startup', $this->Controller);
 		$this->CountryProvinceHelper->startup($event);
 		$result = $this->CountryProvinceHelper->provideData();
-		debug($result);
+		//debug($result);
 	}
 
 }
