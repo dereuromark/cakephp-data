@@ -126,7 +126,7 @@ class CurrencyBitcoinLib {
 
 	protected function _get($url) {
 		$http = new Client();
-		if (!($res = $http->get($url, [], ['ssl_verify_peer' => false]))) {
+		if (!($res = $http->get($url, [], ['ssl_verify_peer' => false, 'ssl_verify_host' => false]))) {
 			return false;
 		}
 		return $res->body;
