@@ -257,7 +257,7 @@ class GeoImportLib {
 			return $cache;
 		}
 		$HttpSocket = new Client();
-		$res = $HttpSocket->get($url);
+		$res = $HttpSocket->get($url, [], ['ssl_verify_peer' => false]);
 		Cache::write('geo_import_' . md5($url), $res->body);
 		return $res->body;
 	}
