@@ -43,7 +43,7 @@ class CurrencyBitcoinLib {
 	 */
 	public function bitcoincharts($options = array()) {
 		$options += $this->settings;
-		$url = 'http://bitcoincharts.com/t/markets.json';
+		$url = 'http://api.bitcoincharts.com/v1/markets.json';
 		$res = $this->_getBitcoincharts($url);
 		if (!$res) {
 			return false;
@@ -104,6 +104,12 @@ class CurrencyBitcoinLib {
 		//TODO
 	}
 
+	/**
+	 * CurrencyBitcoinLib::_getBitmarket()
+	 *
+	 * @param mixed $url
+	 * @return string|bool
+	 */
 	protected function _getBitmarket($url) {
 		if (!($res = $this->_get($url))) {
 			return false;
@@ -114,6 +120,12 @@ class CurrencyBitcoinLib {
 		return $res;
 	}
 
+	/**
+	 * CurrencyBitcoinLib::_getBitcoincharts()
+	 *
+	 * @param mixed $url
+	 * @return string|bool
+	 */
 	protected function _getBitcoincharts($url) {
 		if (!($res = $this->_get($url))) {
 			return false;
@@ -124,9 +136,15 @@ class CurrencyBitcoinLib {
 		return $res;
 	}
 
+	/**
+	 * CurrencyBitcoinLib::_get()
+	 *
+	 * @param mixed $url
+	 * @return string|bool
+	 */
 	protected function _get($url) {
 		$http = new Client();
-		if (!($res = $http->get($url, [], ['ssl_verify_peer' => false, 'ssl_verify_host' => false]))) {
+		if (!($res = $http->get($url))) {
 			return false;
 		}
 		return $res->body;

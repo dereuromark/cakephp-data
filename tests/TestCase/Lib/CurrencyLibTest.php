@@ -64,6 +64,11 @@ class CurrencyLibTest extends TestCase {
 		$this->assertTrue($this->CurrencyLib->cacheFileUsed());
 	}
 
+	/**
+	 * CurrencyLibTest::testHistory()
+	 *
+	 * @return void
+	 */
 	public function testHistory() {
 		$is = $this->CurrencyLib->history();
 		$this->assertTrue(is_array($is) && !empty($is));
@@ -75,8 +80,7 @@ class CurrencyLibTest extends TestCase {
 	 * @return void
 	 */
 	public function testReset() {
-		$res = $this->CurrencyLib->reset();
-		$this->assertTrue($res === null || $res === true);
+		$this->CurrencyLib->reset();
 	}
 
 }
@@ -84,7 +88,7 @@ class CurrencyLibTest extends TestCase {
 class TestCurrencyLib extends CurrencyLib {
 
 	protected function _loadXml($url) {
-		if (php_sapi_name() !== 'cli' && !empty($_GET) && !empty($_GET['debug'])) {
+		if (!empty($_SERVER['argv']) && in_array('--debug', $_SERVER['argv'], true)) {
 			debug('Live Data!');
 			return parent::_loadXml($url);
 		}

@@ -44,15 +44,13 @@ class GeoImportLib {
 
 	protected function _importChCounties() {
 		$url = 'http://de.wikipedia.org/w/index.php?title=Kanton_(Schweiz)&action=edit&section=4';
-		if (file_exists(TMP . 'import.txt')) {
-			$res = file_get_contents(TMP . 'import.txt');
-		} else {
-			$content = $this->_getFromUrl($url);
-			$HtmlDom = new HtmlDom($content);
-			$res = $HtmlDom->find('textarea', 0)->innertext;
-		}
+		$content = $this->_getFromUrl($url);
+
+		$HtmlDom = new HtmlDom($content);
+		$res = $HtmlDom->find('textarea', 0)->innertext;
+
 		if (empty($res)) {
-			trigger_error('/tmp/import.txt missing or url not accessable');
+			trigger_error('URL not accessable');
 			return false;
 		}
 
@@ -100,15 +98,12 @@ class GeoImportLib {
 		);
 		$array = array();
 		foreach ($urls as $key => $url) {
-			if (file_exists(TMP . 'import.txt')) {
-				$res = file_get_contents(TMP . 'import.txt');
-			} else {
-				$content = $this->_getFromUrl($url);
-				$HtmlDom = new HtmlDomLib($content);
-				$res = $HtmlDom->find('textarea', 0)->innertext;
-			}
+			$content = $this->_getFromUrl($url);
+			$HtmlDom = new HtmlDom($content);
+			$res = $HtmlDom->find('textarea', 0)->innertext;
+
 			if (empty($res)) {
-				trigger_error('/tmp/import.txt missing or url not accessable');
+				trigger_error('URL not accessable');
 				continue;
 			}
 
@@ -188,15 +183,12 @@ class GeoImportLib {
 	protected function _importAt() {
 		$url = 'http://de.wikipedia.org/w/index.php?title=Liste_der_St%C3%A4dte_in_%C3%96sterreich&action=edit&section=4';
 
-		if (file_exists(TMP . 'import.txt')) {
-			$res = file_get_contents(TMP . 'import.txt');
-		} else {
-			$content = $this->_getFromUrl($url);
-			$HtmlDom = new HtmlDomLib($content);
-			$res = $HtmlDom->find('textarea', 0)->innertext;
-		}
+		$content = $this->_getFromUrl($url);
+		$HtmlDom = new HtmlDom($content);
+		$res = $HtmlDom->find('textarea', 0)->innertext;
+
 		if (empty($res)) {
-			trigger_error('/tmp/import.txt missing or url not accessable');
+			trigger_error('URL not accessable');
 			return false;
 		}
 
@@ -257,7 +249,9 @@ class GeoImportLib {
 			return $cache;
 		}
 		$HttpSocket = new Client();
-		$res = $HttpSocket->get($url, [], ['ssl_verify_peer' => false]);
+		$res = $HttpSocket->get($url);
+		//file_put_contents(TMP . \Cake\Utility\Inflector::slug($url) . '.json', $res->body);
+
 		Cache::write('geo_import_' . md5($url), $res->body);
 		return $res->body;
 	}

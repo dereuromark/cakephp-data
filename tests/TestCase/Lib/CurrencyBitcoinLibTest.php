@@ -4,32 +4,54 @@ namespace Data\Test\TestCase\Lib;
 
 use Data\Lib\CurrencyBitcoinLib;
 use Tools\TestSuite\TestCase;
+use Cake\Core\Plugin;
 
 class CurrencyBitcoinLibTest extends TestCase {
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->CurrencyBitcoin = new CurrencyBitcoinLib();
+		if ($this->isDebug()) {
+			$this->CurrencyBitcoin = new CurrencyBitcoinLib();
+			return;
+		}
+
+		$this->CurrencyBitcoin = $this->getMock('Data\Lib\CurrencyBitcoinLib', ['_get']);
+		$this->path = Plugin::path('Data') . 'tests' . DS . 'test_files' . DS . 'json' . DS;
 	}
 
 	/**
+	 * @return void
 	 */
 	public function testBitmarket() {
+		if (!$this->isDebug()) {
+			$this->CurrencyBitcoin->expects($this->once())
+				->method('_get')
+				->with('https://bitmarket.eu/api/ticker')
+				->will($this->returnValue(file_get_contents($this->path . 'bitmarket.json')));
+		}
 		$is = $this->CurrencyBitcoin->bitmarket();
-		//$this->debug($is);
+		//debug($is);
 		$this->assertTrue(!empty($is['last']));
 	}
 
 	/**
+	 * @return void
 	 */
 	public function testBitcoincharts() {
+		if (!$this->isDebug()) {
+			$this->CurrencyBitcoin->expects($this->once())
+				->method('_get')
+				->with('http://api.bitcoincharts.com/v1/markets.json')
+				->will($this->returnValue(file_get_contents($this->path . 'bitcoincharts.json')));
+		}
 		$is = $this->CurrencyBitcoin->bitcoincharts();
-		//$this->debug($is);
-		$this->assertFalse($is);
+		//debug($is);
+		$this->assertTrue(!empty($is['close']));
 	}
 
 	/**
+	 * @return void
 	 */
 	public function testRate() {
 		$this->skipIf(true, 'TODO!');

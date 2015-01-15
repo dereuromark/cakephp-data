@@ -43,7 +43,8 @@ Cake\Core\Configure::write('debug', true);
 
 $cache = [
 	'default' => [
-		'engine' => 'File'
+		'engine' => 'File',
+		'path' => CACHE
 	],
 	'_cake_core_' => [
 		'className' => 'File',
