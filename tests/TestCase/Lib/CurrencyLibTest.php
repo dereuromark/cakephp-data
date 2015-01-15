@@ -87,6 +87,15 @@ class CurrencyLibTest extends TestCase {
 
 class TestCurrencyLib extends CurrencyLib {
 
+	protected function _getBitcoin() {
+		if (!empty($_SERVER['argv']) && in_array('--debug', $_SERVER['argv'], true)) {
+			debug('Live Data!');
+			return parent::_getBitcoin();
+		}
+		// Fake for now
+		return 55;
+	}
+
 	protected function _loadXml($url) {
 		if (!empty($_SERVER['argv']) && in_array('--debug', $_SERVER['argv'], true)) {
 			debug('Live Data!');

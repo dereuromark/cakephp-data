@@ -40,7 +40,7 @@ class GeoImportLibTest extends TestCase {
 		}
 
 		$res = $this->GeoImport->importCounties('CH');
-		debug($res);
+		//debug($res);
 	}
 
 	public function testImportCH() {
@@ -56,7 +56,7 @@ class GeoImportLibTest extends TestCase {
 		}
 
 		$res = $this->GeoImport->import('CH');
-		debug($res);
+		//debug($res);
 	}
 
 }
