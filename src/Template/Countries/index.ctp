@@ -3,7 +3,7 @@
 
 <table class="list">
 <tr>
-	<th><?php echo $this->Paginator->sort('sort', $this->Format->cIcon(ICON_ORDER), array('escape' => false));?></th>
+	<th><?php echo $this->Paginator->sort('sort', $this->Format->cIcon('filter.gif'), array('escape' => false));?></th>
 	<th><?php echo $this->Paginator->sort('name');?></th>
 	<th><?php echo $this->Paginator->sort('ori_name');?></th>
 	<th><?php echo $this->Paginator->sort('iso2');?></th>
@@ -24,10 +24,10 @@ foreach ($countries as $country):
 			<?php echo $this->Data->countryIcon($country['Country']['iso2']); ?>
 		</td>
 		<td>
-			<?php echo $country['Country']['name']; ?>
+			<?php echo h($country['Country']['name']); ?>
 		</td>
 		<td>
-			<?php echo $country['Country']['ori_name']; ?>
+			<?php echo h($country['Country']['ori_name']); ?>
 		</td>
 		<td>
 			<?php echo $country['Country']['iso2']; ?>
