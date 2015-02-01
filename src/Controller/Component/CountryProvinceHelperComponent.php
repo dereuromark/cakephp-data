@@ -30,12 +30,12 @@ class CountryProvinceHelperComponent extends Component {
 			$model = $this->Controller->modelClass;
 		}
 
-		if (!isset($this->Controller->CountryProvince)) {
+		if (!isset($this->Controller->CountryProvinces)) {
 			$this->Controller->CountryProvinces = TableRegistry::get('Data.CountryProvinces');
 		}
 
-		if (!empty($this->Controller->request->data[$model]['country_id'])) {
-			$countryProvinces = $this->Controller->CountryProvincess->getListByCountry($this->Controller->request->data[$model]['country_id']);
+		if (!empty($this->Controller->request->data['country_id'])) {
+			$countryProvinces = $this->Controller->CountryProvinces->getListByCountry($this->Controller->request->data['country_id']);
 		} elseif ($ignoreProvinces === true) {
 			# do nothing
 		} else {
