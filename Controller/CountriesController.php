@@ -214,7 +214,7 @@ class CountriesController extends DataAppController {
 			$this->Flash->message(__('record invalid'), 'error');
 			return $this->redirect(array('action' => 'index'));
 		}
-		$country = $this->Country->get($id);
+		$country = $this->Country->record($id);
 		if (empty($country)) {
 			$this->Flash->message(__('record not exists'), 'error');
 			return $this->redirect(array('action' => 'index'));
@@ -237,7 +237,7 @@ class CountriesController extends DataAppController {
 	}
 
 	public function admin_edit($id = null) {
-		if (!$id || !($country = $this->Country->get($id))) {
+		if (!$id || !($country = $this->Country->record($id))) {
 			$this->Flash->message(__('record invalid'), 'error');
 			return $this->redirect(array('action' => 'index'));
 		}

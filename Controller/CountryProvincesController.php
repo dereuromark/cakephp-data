@@ -105,7 +105,7 @@ class CountryProvincesController extends DataAppController {
 			$this->Flash->message(__('record invalid'), 'error');
 			return $this->redirect(array('action' => 'index'));
 		}
-		$countryProvince = $this->CountryProvince->get($id);
+		$countryProvince = $this->CountryProvince->record($id);
 		if (empty($countryProvince)) {
 			$this->Flash->message(__('record not exists'), 'error');
 			return $this->redirect(array('action' => 'index'));
@@ -160,7 +160,7 @@ class CountryProvincesController extends DataAppController {
 			}
 		}
 		if (empty($this->request->data)) {
-			$this->request->data = $this->CountryProvince->get($id);
+			$this->request->data = $this->CountryProvince->record($id);
 			if (empty($this->request->data)) { # still no record found
 				$this->Flash->message(__('record not exists'), 'error');
 				return $this->redirect(array('action' => 'index'));

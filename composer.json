@@ -14,7 +14,7 @@
 	"require": {
 		"php": ">=5.3",
 		"composer/installers": "*",
-		"dereuromark/cakephp-tools": "dev-master"
+		"dereuromark/cakephp-tools": "0.*"
 	},
 	"support": {
 		"source": "https://github.com/dereuromark/cakephp-data"

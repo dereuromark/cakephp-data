@@ -217,7 +217,7 @@ class MimeTypeImagesController extends DataAppController {
 			$this->Flash->message(__('record invalid'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
-		$mimeTypeImage = $this->MimeTypeImage->get($id);
+		$mimeTypeImage = $this->MimeTypeImage->record($id);
 		if (empty($mimeTypeImage)) {
 			$this->Flash->message(__('record not exists'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
@@ -352,7 +352,7 @@ class MimeTypeImagesController extends DataAppController {
 			}
 		}
 		if (empty($this->request->data)) {
-			$this->request->data = $this->MimeTypeImage->get($id);
+			$this->request->data = $this->MimeTypeImage->record($id);
 			if (empty($this->request->data)) { # still no record found
 				$this->Flash->message(__('record not exists'), 'error');
 				return $this->redirect(array('action' => 'index'));

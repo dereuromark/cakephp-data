@@ -73,7 +73,7 @@ class CurrenciesController extends DataAppController {
 			$this->Flash->message(__('record invalid'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
-		$currency = $this->Currency->get($id);
+		$currency = $this->Currency->record($id);
 		if (empty($currency)) {
 			$this->Flash->message(__('record not exists'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
@@ -117,7 +117,7 @@ class CurrenciesController extends DataAppController {
 			}
 		}
 		if (empty($this->request->data)) {
-			$this->request->data = $this->Currency->get($id);
+			$this->request->data = $this->Currency->record($id);
 			if (empty($this->request->data)) { # still no record found
 				$this->Flash->message(__('record not exists'), 'error');
 				return $this->redirect(array('action' => 'index'));
