@@ -2,24 +2,24 @@
 
 class SmileyFixture extends CakeTestFixture {
 
-	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary'),
-		'smiley_cat_id' => array('type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10),
-		'smiley_path' => array('type' => 'string', 'null' => false),
-		'title' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 32),
-		'prim_code' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 15),
-		'sec_code' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 15),
-		'is_base' => array('type' => 'boolean', 'null' => false, 'default' => '0'),
-		'sort' => array('type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10),
-		'active' => array('type' => 'boolean', 'null' => false, 'default' => '0'),
-		'created' => array('type' => 'datetime', 'null' => false, 'default' => null),
-		'modified' => array('type' => 'datetime', 'null' => false, 'default' => null),
-		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
-		'tableParameters' => array()
-	);
+	public $fields = [
+		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary'],
+		'smiley_cat_id' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10],
+		'smiley_path' => ['type' => 'string', 'null' => false],
+		'title' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 32],
+		'prim_code' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 15],
+		'sec_code' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 15],
+		'is_base' => ['type' => 'boolean', 'null' => false, 'default' => '0'],
+		'sort' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10],
+		'active' => ['type' => 'boolean', 'null' => false, 'default' => '0'],
+		'created' => ['type' => 'datetime', 'null' => false, 'default' => null],
+		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null],
+		'indexes' => ['PRIMARY' => ['column' => 'id', 'unique' => 1]],
+		'tableParameters' => []
+	];
 
-	public $records = array(
-		array(
+	public $records = [
+		[
 			'id' => 1,
 			'smiley_cat_id' => 1,
 			'smiley_path' => 'Lorem ipsum dolor sit amet',
@@ -31,6 +31,6 @@ class SmileyFixture extends CakeTestFixture {
 			'active' => 1,
 			'created' => '2010-06-02 01:33:59',
 			'modified' => '2010-06-02 01:33:59'
-		),
-	);
+		],
+	];
 }

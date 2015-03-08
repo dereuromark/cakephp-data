@@ -3,36 +3,36 @@ App::uses('DataAppModel', 'Data.Model');
 
 class District extends DataAppModel {
 
-	public $actsAs = array('Tools.Geocoder' => array(
-		'min_accuracy' => 3, 'address' => array('address'), 'before' => 'save', 'real' => false, 'required' => false
-	), 'Data.Slugged' => array('mode' => 'ascii', 'case' => 'low'));
+	public $actsAs = ['Tools.Geocoder' => [
+		'min_accuracy' => 3, 'address' => ['address'], 'before' => 'save', 'real' => false, 'required' => false
+	], 'Data.Slugged' => ['mode' => 'ascii', 'case' => 'low']];
 
-	public $order = array('District.name' => 'ASC');
+	public $order = ['District.name' => 'ASC'];
 
-	public $validate = array(
-		'name' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+	public $validate = [
+		'name' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
-			),
-		),
-		'city_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+			],
+		],
+		'city_id' => [
+			'numeric' => [
+				'rule' => ['numeric'],
 				'message' => 'valErrMandatoryField',
-			),
-		),
-	);
+			],
+		],
+	];
 
-	public $belongsTo = array(
-		'City' => array(
+	public $belongsTo = [
+		'City' => [
 			'className' => 'Data.City',
 			'foreignKey' => 'city_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
-	);
+		]
+	];
 
 	/**
 	 * District::beforeValidate()
@@ -40,11 +40,11 @@ class District extends DataAppModel {
 	 * @param array $options
 	 * @return bool Success
 	 */
-	public function beforeValidate($options = array()) {
+	public function beforeValidate($options = []) {
 		parent::beforeValidate($options);
 
 		if (!empty($this->data[$this->alias]['name']) && !empty($this->data[$this->alias]['city_id'])) {
-			$city = $this->City->field('name', array('id' => $this->data[$this->alias]['city_id']));
+			$city = $this->City->field('name', ['id' => $this->data[$this->alias]['city_id']]);
 			$this->data[$this->alias]['address'] = $this->data[$this->alias]['name'] . ', ' . $city;
 		}
 
@@ -57,15 +57,15 @@ class District extends DataAppModel {
 	 * @return array
 	 */
 	public function getDistrictsByCity($citySlug, $type = 'all') {
-		$options = array(
-			'contain' => array('City.slug'),
-			'conditions' => array(
+		$options = [
+			'contain' => ['City.slug'],
+			'conditions' => [
 				//$this->alias.'.lat <>' => 0,
 				//$this->alias.'.lng <>' => 0,
 				$this->City->alias . '.slug' => $citySlug,
-			),
-			'fields' => array($this->alias . '.slug', $this->alias . '.name'),
-		);
+			],
+			'fields' => [$this->alias . '.slug', $this->alias . '.name'],
+		];
 		return $this->find($type, $options);
 	}
 
@@ -76,12 +76,12 @@ class District extends DataAppModel {
 	 * @param array $customOptions
 	 * @return array
 	 */
-	public function getIdBySlug($slug, $customOptions = array()) {
-		$options = array(
-			'conditions' => array(
+	public function getIdBySlug($slug, $customOptions = []) {
+		$options = [
+			'conditions' => [
 				$this->alias . '.slug' => $slug,
-			)
-		);
+			]
+		];
 		if (!empty($customOptions)) {
 			$options = array_merge($options, $customOptions);
 		}

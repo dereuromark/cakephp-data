@@ -7,7 +7,7 @@ App::uses('DataAppController', 'Data.Controller');
  */
 class PostalCodesController extends DataAppController {
 
-	public $paginate = array();
+	public $paginate = [];
 
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -33,30 +33,30 @@ class PostalCodesController extends DataAppController {
 		}
 
 		$length = max(1, strlen($term));
-		$options = array(
-			'fields' => array('SUM(lng) as lng_sum', 'SUM(lat) as lat_sum', 'COUNT(*) as count', 'SUBSTRING(code FROM 1 FOR ' . $length . ') as sub', 'PostalCode.*'),
-			'conditions' => array('code LIKE' => $term . '%', 'country_id' => 1),
+		$options = [
+			'fields' => ['SUM(lng) as lng_sum', 'SUM(lat) as lat_sum', 'COUNT(*) as count', 'SUBSTRING(code FROM 1 FOR ' . $length . ') as sub', 'PostalCode.*'],
+			'conditions' => ['code LIKE' => $term . '%', 'country_id' => 1],
 			//'limit' => 50,
-			'group' => array('sub')
-		);
+			'group' => ['sub']
+		];
 		$postalCodes = $this->PostalCode->find('all', $options);
 		if (!empty($term)) {
 			$overviewCode = $postalCodes[0];
 			$this->set(compact('overviewCode'));
 
-			$options = array(
-				'fields' => array('SUM(lng) as lng_sum', 'SUM(lat) as lat_sum', 'COUNT(*) as count', 'SUBSTRING(code FROM 1 FOR ' . ($length + 1) . ') as sub', 'PostalCode.*'),
-				'conditions' => array('code LIKE' => $term . '%', 'country_id' => 1),
+			$options = [
+				'fields' => ['SUM(lng) as lng_sum', 'SUM(lat) as lat_sum', 'COUNT(*) as count', 'SUBSTRING(code FROM 1 FOR ' . ($length + 1) . ') as sub', 'PostalCode.*'],
+				'conditions' => ['code LIKE' => $term . '%', 'country_id' => 1],
 				//'limit' => 50,
-				'group' => array('sub')
-			);
+				'group' => ['sub']
+			];
 			$postalCodes = $this->PostalCode->find('all', $options);
 			//pr($postalCodes);
 		}
 
 		$numbers = strlen($term);
 		$this->set(compact('postalCodes', 'numbers'));
-		$this->helpers = array_merge($this->helpers, array('Tools.GoogleMapV3'));
+		$this->helpers = array_merge($this->helpers, ['Tools.GoogleMapV3']);
 	}
 
 /****************************************************************************************
@@ -67,11 +67,11 @@ class PostalCodesController extends DataAppController {
 	 * @return void
 	 */
 	public function admin_index() {
-		$this->PostalCode->bindModel(array('belongsTo' => array('Country' => array('className' => 'Data.Country'))), false);
+		$this->PostalCode->bindModel(['belongsTo' => ['Country' => ['className' => 'Data.Country']]], false);
 		$this->PostalCode->recursive = 0;
 
 		$this->PostalCode->Behaviors->load('Search.Searchable');
-		$this->Common->loadComponent(array('Search.Prg'));
+		$this->Common->loadComponent(['Search.Prg']);
 		$this->Prg->commonProcess();
 		$this->paginate['conditions'] = $this->PostalCode->parseCriteria($this->Prg->parsedParams());
 
@@ -88,34 +88,34 @@ class PostalCodesController extends DataAppController {
 			if ($this->GeolocateLib->locate()) {
 				$ipData = $this->GeolocateLib->getResult();
 			} else {
-				$ipData = array();
+				$ipData = [];
 			}
 			$this->Session->write('GeoLocation.data', $ipData);
 		}
 
 		$this->set(compact('ipData'));
-		$this->helpers = array_merge($this->helpers, array('Tools.GoogleMapV3'));
+		$this->helpers = array_merge($this->helpers, ['Tools.GoogleMapV3']);
 		$this->render('geolocate');
 	}
 
 	public function admin_query() {
 		App::uses('GeocodeLib', 'Tools.Lib');
 		$this->GeocodeLib = new GeocodeLib();
-		$results = array();
+		$results = [];
 		if ($this->Common->isPosted()) {
-			$this->PostalCode->validate['address'] = array(
-				'notEmpty' => array(
-					'rule' => array('notEmpty'),
+			$this->PostalCode->validate['address'] = [
+				'notEmpty' => [
+					'rule' => ['notEmpty'],
 					'message' => 'valErrMandatoryField',
 					'last' => true
-				));
+				]];
 			$this->PostalCode->set($this->request->data);
 
 			$address = $this->request->data['PostalCode']['address'];
-			$settings = array(
+			$settings = [
 				'allow_inconclusive' => $this->request->data['PostalCode']['allow_inconclusive'],
 				'min_accuracy' => $this->request->data['PostalCode']['min_accuracy']
-			);
+			];
 			$this->GeocodeLib->setOptions($settings);
 
 			if ($this->PostalCode->validates() && $this->GeocodeLib->geocode($address)) {
@@ -128,7 +128,7 @@ class PostalCodesController extends DataAppController {
 			$this->request->data['PostalCode']['min_accuracy'] = GeocodeLib::ACC_COUNTRY;
 		}
 
-		$this->helpers = array_merge($this->helpers, array('Tools.GoogleMapV3'));
+		$this->helpers = array_merge($this->helpers, ['Tools.GoogleMapV3']);
 		$minAccuracies = $this->GeocodeLib->accuracyTypes();
 		$this->set(compact('results', 'minAccuracies'));
 	}
@@ -138,11 +138,11 @@ class PostalCodesController extends DataAppController {
 	 */
 	public function admin_view($id = null) {
 		$this->PostalCode->recursive = 0;
-		$this->PostalCode->bindModel(array('belongsTo' => array('Country' => array('className' => 'Data.Country'))), false);
+		$this->PostalCode->bindModel(['belongsTo' => ['Country' => ['className' => 'Data.Country']]], false);
 
-		if (empty($id) || !($postalCode = $this->PostalCode->find('first', array('contain' => array('Country'), 'conditions' => array('PostalCode.id' => $id))))) {
+		if (empty($id) || !($postalCode = $this->PostalCode->find('first', ['contain' => ['Country'], 'conditions' => ['PostalCode.id' => $id]]))) {
 			$this->Flash->message(__('invalidRecord'), 'error');
-			return $this->Common->autoRedirect(array('action' => 'index'));
+			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 
 		$this->set(compact('postalCode'));
@@ -157,7 +157,7 @@ class PostalCodesController extends DataAppController {
 			if ($this->PostalCode->save($this->request->data)) {
 				$var = $this->request->data['PostalCode']['code'];
 				$this->Flash->message(__('record add %s saved', h($var)), 'success');
-				return $this->Common->postRedirect(array('action' => 'index'));
+				return $this->Common->postRedirect(['action' => 'index']);
 			} else {
 				$this->Flash->message(__('formContainsErrors'), 'error');
 			}
@@ -168,15 +168,15 @@ class PostalCodesController extends DataAppController {
 	 * @return void
 	 */
 	public function admin_edit($id = null) {
-		if (empty($id) || !($postalCode = $this->PostalCode->find('first', array('conditions' => array('PostalCode.id' => $id))))) {
+		if (empty($id) || !($postalCode = $this->PostalCode->find('first', ['conditions' => ['PostalCode.id' => $id]]))) {
 			$this->Flash->message(__('invalidRecord'), 'error');
-			return $this->Common->autoRedirect(array('action' => 'index'));
+			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->PostalCode->save($this->request->data)) {
 				$var = $this->request->data['PostalCode']['code'];
 				$this->Flash->message(__('record edit %s saved', h($var)), 'success');
-				return $this->Common->postRedirect(array('action' => 'index'));
+				return $this->Common->postRedirect(['action' => 'index']);
 			} else {
 				$this->Flash->message(__('formContainsErrors'), 'error');
 			}
@@ -191,18 +191,18 @@ class PostalCodesController extends DataAppController {
 	 */
 	public function admin_delete($id = null) {
 		$this->request->allowMethod('post');
-		if (empty($id) || !($postalCode = $this->PostalCode->find('first', array('conditions' => array('PostalCode.id' => $id), 'fields' => array('id', 'code'))))) {
+		if (empty($id) || !($postalCode = $this->PostalCode->find('first', ['conditions' => ['PostalCode.id' => $id], 'fields' => ['id', 'code']]))) {
 			$this->Flash->message(__('invalidRecord'), 'error');
-			return $this->Common->autoRedirect(array('action' => 'index'));
+			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$var = $postalCode['PostalCode']['code'];
 
 		if ($this->PostalCode->delete($id)) {
 			$this->Flash->message(__('record del %s done', h($var)), 'success');
-			return $this->redirect(array('action' => 'index'));
+			return $this->redirect(['action' => 'index']);
 		}
 		$this->Flash->message(__('record del %s not done exception', h($var)), 'error');
-		return $this->Common->autoRedirect(array('action' => 'index'));
+		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 
 /****************************************************************************************

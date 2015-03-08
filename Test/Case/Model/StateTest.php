@@ -5,7 +5,7 @@ App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
 class StateTest extends MyCakeTestCase {
 
-	public $fixtures = array('plugin.data.state');
+	public $fixtures = ['plugin.data.state'];
 
 	public $State;
 

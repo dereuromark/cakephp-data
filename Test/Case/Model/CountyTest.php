@@ -5,7 +5,7 @@ App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
 class CountyTest extends MyCakeTestCase {
 
-	public $fixtures = array('plugin.data.county');
+	public $fixtures = ['plugin.data.county'];
 
 	public $County;
 

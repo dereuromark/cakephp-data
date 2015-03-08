@@ -1,4 +1,4 @@
-<?php $this->Html->script($this->GoogleMapV3->apiUrl(), array('inline' => false))?>
+<?php $this->Html->script($this->GoogleMapV3->apiUrl(), ['inline' => false])?>
 
 <h2>Area Codes</h2>
 <h3>Map</h3>
@@ -21,22 +21,22 @@ if (!isset($numbers)) {
 	$numbers = 0;
 }
 
-$zooms = array(
+$zooms = [
 	0 => 5,
 	1 => 6, # 0 ... 9
 	2 => 7, # 00 ... 99
 	3 => 8, # 000 ... 999
 	4 => 9, # 0000 ... 9999
 	5 => 10, # 00001 ... 99999
-);
+];
 $zoom = $zooms[$numbers];
 
-$mapOptions = array('zoom' => $zoom);
+$mapOptions = ['zoom' => $zoom];
 if (!empty($overviewCode)) {
 	$mapOptions['lat'] = $overviewCode['PostalCode']['lat'];
 	$mapOptions['lng'] = $overviewCode['PostalCode']['lng'];
 }
-echo $this->GoogleMapV3->map(array('map' => $mapOptions));
+echo $this->GoogleMapV3->map(['map' => $mapOptions]);
 
 foreach ($postalCodes as $code) {
 	$title = $code[0]['sub'];
@@ -44,7 +44,7 @@ foreach ($postalCodes as $code) {
 	$lng = $code['PostalCode']['lng'];
 
 	$content = 'Area Code <b>' . $title . '</b>' . BR . $code[0]['count'] . ' codes for this area';
-	$content .= ' ' . $this->Html->link($this->Format->cIcon(ICON_MAP), $this->GoogleMapV3->mapUrl(array('to' => $lat . ',' . $lng)), array('escape' => false));
+	$content .= ' ' . $this->Html->link($this->Format->cIcon(ICON_MAP), $this->GoogleMapV3->mapUrl(['to' => $lat . ',' . $lng]), ['escape' => false]);
 
 	# more correct average location
 	if (isset($code[0]['lat_sum'])) {
@@ -55,7 +55,7 @@ foreach ($postalCodes as $code) {
 	}
 
 
-	$this->GoogleMapV3->addMarker(array('lat' => $lat, 'lng' => $lng, 'title' => $title, 'content' => $content));
+	$this->GoogleMapV3->addMarker(['lat' => $lat, 'lng' => $lng, 'title' => $title, 'content' => $content]);
 }
 
 echo $this->GoogleMapV3->script();

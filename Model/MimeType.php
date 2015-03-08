@@ -4,48 +4,48 @@ App::uses('File', 'Utility');
 
 class MimeType extends DataAppModel {
 
-	public $order = array('MimeType.modified' => 'DESC');
+	public $order = ['MimeType.modified' => 'DESC'];
 
-	public $validate = array(
-		'name' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+	public $validate = [
+		'name' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
-			),
-		),
-		'ext' => array(
-			'isUnique' => array(
+			],
+		],
+		'ext' => [
+			'isUnique' => [
 				'rule' => 'isUnique',
 				'message' => 'Already exists',
-			),
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			],
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
 				'allowEmpty' => false,
 				//'required' => true
-			),
-		),
-		'type' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			],
+		],
+		'type' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
-			),
-		),
-		'active' => array('numeric'),
-		'mime_type_image_id' => array('numeric'),
-	);
+			],
+		],
+		'active' => ['numeric'],
+		'mime_type_image_id' => ['numeric'],
+	];
 
-	public $belongsTo = array(
-		'MimeTypeImage' => array(
+	public $belongsTo = [
+		'MimeTypeImage' => [
 			'className' => 'Data.MimeTypeImage',
 			'foreignKey' => 'mime_type_image_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-	);
+		],
+	];
 
-	public function beforeSave($options = array()) {
+	public function beforeSave($options = []) {
 		parent::beforeSave($options);
 		if (isset($this->data[$this->alias]['ext'])) {
 			$this->data[$this->alias]['ext'] = mb_strtolower($this->data[$this->alias]['ext']);
@@ -57,7 +57,7 @@ class MimeType extends DataAppModel {
 		return true;
 	}
 
-	public function afterSave($created, $options = array()) {
+	public function afterSave($created, $options = []) {
 		parent::afterSave($created, $options);
 
 		$this->cleanUp();
@@ -75,7 +75,7 @@ class MimeType extends DataAppModel {
 	}
 
 	public function mimeTypes($inactiveOnes = false) {
-		$options = array('conditions' => array($this->alias . '.ext' => $ext));
+		$options = ['conditions' => [$this->alias . '.ext' => $ext]];
 		if ($inactiveOnes !== true) {
 			$options['conditions'][$this->alias . '.active'] = 1;
 		}
@@ -84,9 +84,9 @@ class MimeType extends DataAppModel {
 
 	public function mimeTypeExists($ext = null) {
 		if (empty($ext)) {
-			return array();
+			return [];
 		}
-		return $this->find('first', array('conditions' => array($this->alias . '.ext' => $ext)));
+		return $this->find('first', ['conditions' => [$this->alias . '.ext' => $ext]]);
 	}
 
 	/**
@@ -103,7 +103,7 @@ class MimeType extends DataAppModel {
 			return $this->saveField('sort', $type[$this->alias]['sort'] + 1);
 		}
 		# insert this new extension
-		$data = array('ext' => $ext, 'name' => 'auto-added', 'sort' => 1);
+		$data = ['ext' => $ext, 'name' => 'auto-added', 'sort' => 1];
 		$this->create();
 		if (!$this->save($data)) {
 			$this->log('problem with pushing new mimeType');

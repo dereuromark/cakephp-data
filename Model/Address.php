@@ -5,121 +5,121 @@ class Address extends DataAppModel {
 
 	public $displayField = 'formatted_address';
 
-	public $actsAs = array('Tools.Geocoder' => array('real' => false, 'override' => true, 'allow_inconclusive' => true)); //'before'=>'validate'
+	public $actsAs = ['Tools.Geocoder' => ['real' => false, 'override' => true, 'allow_inconclusive' => true]]; //'before'=>'validate'
 
-	public $order = array('Address.type_id' => 'ASC', 'Address.formatted_address' => 'ASC');
+	public $order = ['Address.type_id' => 'ASC', 'Address.formatted_address' => 'ASC'];
 
-	public $config = array();
+	public $config = [];
 
-	public $validate = array(
-		'country_province_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+	public $validate = [
+		'country_province_id' => [
+			'numeric' => [
+				'rule' => ['numeric'],
 				'message' => 'valErrMandatoryField',
 				'last' => true
-			),
-			'fitsToCountry' => array(
-				'rule' => array('fitsToCountry'),
+			],
+			'fitsToCountry' => [
+				'rule' => ['fitsToCountry'],
 				'message' => 'The province seems not be fit to the chosen country'
-			),
-		),
-		'country_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+			],
+		],
+		'country_id' => [
+			'numeric' => [
+				'rule' => ['numeric'],
 				'message' => 'valErrMandatoryField',
 				'last' => true
-			),
+			],
 
-		),
-		'address_type_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+		],
+		'address_type_id' => [
+			'numeric' => [
+				'rule' => ['numeric'],
 				'message' => 'valErrMandatoryField',
 				'last' => true
-			),
-			'primaryUnique' => array(
-				'rule' => array('primaryUnique'),
+			],
+			'primaryUnique' => [
+				'rule' => ['primaryUnique'],
 				'message' => 'Es darf nur eine Adresse "Haupt-Wohnsitz" sein, bitte einen anderen Typ wählen',
 				'last' => true
-			),
-		),
-		'foreign_id' => array(
-			'validateKey' => array(
-				'rule' => array('validateKey'),
+			],
+		],
+		'foreign_id' => [
+			'validateKey' => [
+				'rule' => ['validateKey'],
 				'message' => 'valErrInvalidKey'
-			),
-		),
-		'postal_code' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			],
+		],
+		'postal_code' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
 				'last' => true
-			),
-			'correspondsWithCountry' => array(
-				'rule' => array('correspondsWithCountry'),
+			],
+			'correspondsWithCountry' => [
+				'rule' => ['correspondsWithCountry'],
 				'message' => 'The zip code seems not to have the correct length',
-			),
-		),
-		'city' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			],
+		],
+		'city' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField'
-			),
-		),
-		'street' => array(
-		),
-		'formatted_address' => array(
-			'validateUnique' => array(
-				'rule' => array('validateUnique', array('foreign_id', 'model')),
+			],
+		],
+		'street' => [
+		],
+		'formatted_address' => [
+			'validateUnique' => [
+				'rule' => ['validateUnique', ['foreign_id', 'model']],
 				'allowEmpty' => true,
 				'message' => 'valErrRecordNameExists'
-			),
-		),
-		'lat' => array(
-			'decimal' => array(
-				'rule' => array('decimal', 6),
+			],
+		],
+		'lat' => [
+			'decimal' => [
+				'rule' => ['decimal', 6],
 				'allowEmpty' => true,
 				'message' => 'not a valid geografic number for latitude',
-			),
-		),
-		'lng' => array(
-			'decimal' => array(
-				'rule' => array('decimal', 6),
+			],
+		],
+		'lng' => [
+			'decimal' => [
+				'rule' => ['decimal', 6],
 				'allowEmpty' => true,
 				'message' => 'not a valid geografic number for longitude',
-			),
-		),
-	);
+			],
+		],
+	];
 
-	public $belongsTo = array(
-		'Country' => array(
+	public $belongsTo = [
+		'Country' => [
 			'className' => 'Data.Country',
 			'foreignKey' => 'country_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
+		],
 		# redundant:
-		'CountryProvince' => array(
+		'CountryProvince' => [
 			'className' => 'Data.CountryProvince',
 			'foreignKey' => 'country_province_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-		'User' => array(
+		],
+		'User' => [
 			'className' => CLASS_USER,
 			'foreignKey' => 'foreign_id',
-			'conditions' => array('model' => 'User'),
-			'fields' => array('id', 'username'),
+			'conditions' => ['model' => 'User'],
+			'fields' => ['id', 'username'],
 			'order' => ''
-		),
-	);
+		],
+	];
 
 	public function __construct($id = false, $table = false, $ds = null) {
 
 		if ($config = Configure::read('Address')) {
-			$vars = array('displayField', 'order', 'actsAs', 'validate', 'belongsTo');
+			$vars = ['displayField', 'order', 'actsAs', 'validate', 'belongsTo'];
 			foreach ($vars as $var) {
 				if (isset($config[$var])) {
 					$this->{$var} = $config[$var];
@@ -131,7 +131,7 @@ class Address extends DataAppModel {
 				$config['CountryProvince'] = true;
 			}
 			if (!empty($config['debug'])) {
-				$this->actsAs['Tools.Jsonable'] = array('fields' => array('debug'), 'map' => array('geocoder_result'));
+				$this->actsAs['Tools.Jsonable'] = ['fields' => ['debug'], 'map' => ['geocoder_result']];
 			}
 
 			$this->config = $config;
@@ -144,11 +144,11 @@ class Address extends DataAppModel {
 		if (empty($this->data[$this->alias]['foreign_id']) || $this->data[$this->alias]['address_type_id'] != self::TYPE_MAIN) {
 			return true;
 		}
-		$conditions = array('foreign_id' => $this->data[$this->alias]['foreign_id'], 'address_type_id' => self::TYPE_MAIN);
+		$conditions = ['foreign_id' => $this->data[$this->alias]['foreign_id'], 'address_type_id' => self::TYPE_MAIN];
 		if (!empty($this->data[$this->alias]['id'])) {
 			$conditions['user_id !='] = $this->data[$this->alias]['id'];
 		}
-		if ($this->find('first', array('conditions' => $conditions))) {
+		if ($this->find('first', ['conditions' => $conditions])) {
 			return false;
 		}
 		return true;
@@ -159,9 +159,9 @@ class Address extends DataAppModel {
 	 */
 	public function correspondsWithCountry(&$data) {
 		if (!empty($this->data[$this->alias]['postal_code'])) {
-			$res = $this->Country->find('first', array(
-				'conditions' => array('Country.id' => $this->data[$this->alias]['country_id'])
-			));
+			$res = $this->Country->find('first', [
+				'conditions' => ['Country.id' => $this->data[$this->alias]['country_id']]
+			]);
 			if (empty($res)) {
 				return true;
 			}
@@ -180,9 +180,9 @@ class Address extends DataAppModel {
 		if (!$this->config['CountryProvince'] || !isset($this->data[$this->alias]['country_id']) || !isset($this->data[$this->alias]['country_province_id'])) {
 			return true;
 		}
-		$res = $this->Country->CountryProvince->find('list', array(
-			'conditions' => array('country_id' => $this->data[$this->alias]['country_id'])
-		));
+		$res = $this->Country->CountryProvince->find('list', [
+			'conditions' => ['country_id' => $this->data[$this->alias]['country_id']]
+		]);
 		if (empty($res) || array_shift($data) == 0) {
 			$this->data[$this->alias]['country_province_id'] = 0;
 		} elseif (empty($this->data[$this->alias]['country_province_id']) || !array_key_exists($this->data[$this->alias]['country_province_id'], $res)) {
@@ -191,12 +191,12 @@ class Address extends DataAppModel {
 		return true;
 	}
 
-	public function beforeValidate($options = array()) {
+	public function beforeValidate($options = []) {
 		parent::beforeValidate($options);
 
 		# add country name for geocoder
 		if (!empty($this->data[$this->alias]['country_id'])) {
-			$this->data[$this->alias]['country'] = $this->Country->field('name', array('id' => $this->data[$this->alias]['country_id']));
+			$this->data[$this->alias]['country'] = $this->Country->field('name', ['id' => $this->data[$this->alias]['country_id']]);
 		}
 		if (!empty($this->data[$this->alias]['postal_code'])) {
 			unset($this->validate['city']['notEmpty']);
@@ -219,7 +219,7 @@ class Address extends DataAppModel {
 		return true;
 	}
 
-	public function beforeSave($options = array()) {
+	public function beforeSave($options = []) {
 		parent::beforeSave($options);
 
 		if (!empty($this->data[$this->alias]['formatted_address']) && !empty($this->data[$this->alias]['geocoder_result'])) {
@@ -240,7 +240,7 @@ class Address extends DataAppModel {
 			if ($this->config['CountryProvince']) {
 				if (isset($this->data[$this->alias]['country_province_id']) && !empty($this->data[$this->alias]['country_province_id']) && !empty($this->data[$this->alias]['geocoder_result']['country_province_code'])) {
 					//$this->data[$this->alias]['country_province_id']
-					$countryProvince = $this->Country->CountryProvince->find('first', array('conditions' => array('CountryProvince.id' => $this->data[$this->alias]['country_province_id'])));
+					$countryProvince = $this->Country->CountryProvince->find('first', ['conditions' => ['CountryProvince.id' => $this->data[$this->alias]['country_province_id']]]);
 					if (!empty($countryProvince) && strlen($countryProvince['CountryProvince']['abbr']) === strlen($this->data[$this->alias]['geocoder_result']['country_province_code']) && $countryProvince['CountryProvince']['abbr'] != $this->data[$this->alias]['geocoder_result']['country_province_code']) {
 						$this->invalidate('country_province_id', 'Als Bundesland wurde für diese Adresse \'' . h($this->data[$this->alias]['geocoder_result']['country_province']) . '\' erwartet - du hast aber \'' . h($countryProvince['CountryProvince']['name']) . '\' angegeben. Liegt denn deine Adresse tatsächlich in einem anderen Bundesland? Dann gebe bitte die genaue PLZ und Ort an, damit das Bundesland dazu auch korrekt identifiziert werden kann.');
 						return false;
@@ -248,7 +248,7 @@ class Address extends DataAppModel {
 
 				# enter new id
 				} elseif (isset($this->data[$this->alias]['country_province_id']) && !empty($this->data[$this->alias]['geocoder_result']['country_province_code'])) {
-					$countryProvince = $this->Country->CountryProvince->find('first', array('conditions' => array('OR' => array('CountryProvince.abbr' => $this->data[$this->alias]['geocoder_result']['country_province_code'], 'CountryProvince.name' => $this->data[$this->alias]['geocoder_result']['country_province']))));
+					$countryProvince = $this->Country->CountryProvince->find('first', ['conditions' => ['OR' => ['CountryProvince.abbr' => $this->data[$this->alias]['geocoder_result']['country_province_code'], 'CountryProvince.name' => $this->data[$this->alias]['geocoder_result']['country_province']]]]);
 					if (!empty($countryProvince)) {
 						$this->data[$this->alias]['country_province_id'] = $countryProvince['CountryProvince']['id'];
 					}
@@ -257,7 +257,7 @@ class Address extends DataAppModel {
 
 			# enter new id
 			if (isset($this->data[$this->alias]['country_id']) && empty($this->data[$this->alias]['country_id']) && !empty($this->data[$this->alias]['geocoder_result']['country_code'])) {
-				$country = $this->Country->find('first', array('conditions' => array('Country.iso2' => $this->data[$this->alias]['geocoder_result']['country_code'])));
+				$country = $this->Country->find('first', ['conditions' => ['Country.iso2' => $this->data[$this->alias]['geocoder_result']['country_code']]]);
 				if (!empty($country)) {
 					$this->data[$this->alias]['country_id'] = $country['Country']['id'];
 				}
@@ -275,7 +275,7 @@ class Address extends DataAppModel {
 	 * Update last used timestamp
 	 */
 	public function touch($addressId) {
-		$this->updateAll(array($this->alias . '.last_used' => 'NOW()'), array($this->alias . '.id' => $addressId));
+		$this->updateAll([$this->alias . '.last_used' => 'NOW()'], [$this->alias . '.id' => $addressId]);
 	}
 
 	/**
@@ -290,18 +290,18 @@ class Address extends DataAppModel {
 		if ($addressType === null) {
 			$addressType = self::TYPE_MAIN;
 		}
-		return $this->find($type, array('conditions' => array('foreign_id' => $id, 'address_type_id' => $addressType)));
+		return $this->find($type, ['conditions' => ['foreign_id' => $id, 'address_type_id' => $addressType]]);
 	}
 
 	/**
 	 * Static Model::method()
 	 */
 	public static function addressTypes($value = null) {
-		$options = array(
+		$options = [
 			self::TYPE_MAIN => __('Main Residence'),
 			self::TYPE_OTHER => __('Other'),
 
-		);
+		];
 		return parent::enum($value, $options);
 	}
 

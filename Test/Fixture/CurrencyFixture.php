@@ -12,28 +12,28 @@ class CurrencyFixture extends CakeTestFixture {
 	 *
 	 * @var array
 	 */
-	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary', 'collate' => null, 'comment' => ''),
-		'name' => array('type' => 'string', 'null' => false, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'),
-		'code' => array('type' => 'string', 'null' => false, 'length' => 3, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'),
-		'symbol_left' => array('type' => 'string', 'null' => true, 'length' => 12, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'),
-		'symbol_right' => array('type' => 'string', 'null' => true, 'length' => 12, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'),
-		'decimal_places' => array('type' => 'string', 'null' => true, 'length' => 1, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'),
-		'value' => array('type' => 'float', 'null' => true, 'default' => '0.0000', 'length' => '9,4', 'collate' => null, 'comment' => ''),
-		'base' => array('type' => 'boolean', 'null' => false, 'default' => '0', 'collate' => null, 'comment' => 'is base currency'),
-		'active' => array('type' => 'boolean', 'null' => false, 'default' => '0', 'collate' => null, 'comment' => ''),
-		'modified' => array('type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''),
-		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
-		'tableParameters' => array()
-	);
+	public $fields = [
+		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary', 'collate' => null, 'comment' => ''],
+		'name' => ['type' => 'string', 'null' => false, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
+		'code' => ['type' => 'string', 'null' => false, 'length' => 3, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
+		'symbol_left' => ['type' => 'string', 'null' => true, 'length' => 12, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
+		'symbol_right' => ['type' => 'string', 'null' => true, 'length' => 12, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
+		'decimal_places' => ['type' => 'string', 'null' => true, 'length' => 1, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
+		'value' => ['type' => 'float', 'null' => true, 'default' => '0.0000', 'length' => '9,4', 'collate' => null, 'comment' => ''],
+		'base' => ['type' => 'boolean', 'null' => false, 'default' => '0', 'collate' => null, 'comment' => 'is base currency'],
+		'active' => ['type' => 'boolean', 'null' => false, 'default' => '0', 'collate' => null, 'comment' => ''],
+		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
+		'indexes' => ['PRIMARY' => ['column' => 'id', 'unique' => 1]],
+		'tableParameters' => []
+	];
 
 	/**
 	 * Records
 	 *
 	 * @var array
 	 */
-	public $records = array(
-		array(
+	public $records = [
+		[
 			'id' => '1',
 			'name' => 'US Dollar',
 			'code' => 'USD',
@@ -44,8 +44,8 @@ class CurrencyFixture extends CakeTestFixture {
 			'base' => 0,
 			'active' => 1,
 			'modified' => '2011-07-16 15:12:33'
-		),
-		array(
+		],
+		[
 			'id' => '2',
 			'name' => 'Euro',
 			'code' => 'EUR',
@@ -56,8 +56,8 @@ class CurrencyFixture extends CakeTestFixture {
 			'base' => 1,
 			'active' => 1,
 			'modified' => '2009-11-23 12:45:15'
-		),
-		array(
+		],
+		[
 			'id' => '3',
 			'name' => 'British Pounds',
 			'code' => 'GBP',
@@ -68,8 +68,8 @@ class CurrencyFixture extends CakeTestFixture {
 			'base' => 0,
 			'active' => 1,
 			'modified' => '2011-07-16 15:12:33'
-		),
-		array(
+		],
+		[
 			'id' => '4',
 			'name' => 'Schweizer Franken',
 			'code' => 'CHF',
@@ -80,8 +80,8 @@ class CurrencyFixture extends CakeTestFixture {
 			'base' => 0,
 			'active' => 1,
 			'modified' => '2011-07-16 15:12:33'
-		),
-		array(
+		],
+		[
 			'id' => '5',
 			'name' => 'Australien Dollar',
 			'code' => 'AUD',
@@ -92,8 +92,8 @@ class CurrencyFixture extends CakeTestFixture {
 			'base' => 0,
 			'active' => 0,
 			'modified' => '2011-07-16 15:12:33'
-		),
-		array(
+		],
+		[
 			'id' => '6',
 			'name' => 'Canadian Dollar',
 			'code' => 'CAD',
@@ -104,8 +104,8 @@ class CurrencyFixture extends CakeTestFixture {
 			'base' => 0,
 			'active' => 0,
 			'modified' => '2011-07-16 15:12:33'
-		),
-		array(
+		],
+		[
 			'id' => '7',
 			'name' => 'Japanese Yen',
 			'code' => 'JPY',
@@ -116,8 +116,8 @@ class CurrencyFixture extends CakeTestFixture {
 			'base' => 0,
 			'active' => 0,
 			'modified' => '2011-07-16 15:12:33'
-		),
-		array(
+		],
+		[
 			'id' => '9',
 			'name' => 'Mexican Peso',
 			'code' => 'MXN',
@@ -128,8 +128,8 @@ class CurrencyFixture extends CakeTestFixture {
 			'base' => 0,
 			'active' => 0,
 			'modified' => '2011-07-16 15:12:33'
-		),
-		array(
+		],
+		[
 			'id' => '10',
 			'name' => 'Norwegian Krone',
 			'code' => 'NOK',
@@ -140,8 +140,8 @@ class CurrencyFixture extends CakeTestFixture {
 			'base' => 0,
 			'active' => 0,
 			'modified' => '2011-07-16 15:12:33'
-		),
-		array(
+		],
+		[
 			'id' => '11',
 			'name' => 'Swedish Krona',
 			'code' => 'SEK',
@@ -152,6 +152,6 @@ class CurrencyFixture extends CakeTestFixture {
 			'base' => 0,
 			'active' => 0,
 			'modified' => '2011-07-16 15:12:33'
-		),
-	);
+		],
+	];
 }

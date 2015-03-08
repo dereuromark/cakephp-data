@@ -5,7 +5,7 @@ App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
 class ContinentTest extends MyCakeTestCase {
 
-	public $fixtures = array('plugin.data.continent');
+	public $fixtures = ['plugin.data.continent'];
 
 	public $Continent;
 

@@ -14,9 +14,9 @@ class CitiesControllerTest extends ControllerTestCase {
 	 *
 	 * @var array
 	 */
-	public $fixtures = array(
+	public $fixtures = [
 		'plugin.data.city'
-	);
+	];
 
 	/**
 	 * SetUp method

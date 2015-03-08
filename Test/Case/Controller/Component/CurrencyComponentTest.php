@@ -97,7 +97,7 @@ class CurrencyTestController extends Controller {
 	 *
 	 * @var array
 	 */
-	public $components = array('TestCurrency');
+	public $components = ['TestCurrency'];
 
 	/**
 	 * Failed property
@@ -111,7 +111,7 @@ class CurrencyTestController extends Controller {
 	 *
 	 * @var array
 	 */
-	public $testHeaders = array();
+	public $testHeaders = [];
 
 	/**
 	 * Fail method

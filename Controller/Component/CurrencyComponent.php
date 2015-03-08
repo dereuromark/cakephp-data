@@ -71,7 +71,7 @@ class CurrencyComponent extends Component {
 	 */
 	public function table($base = 'EUR', $decimals = 2) {
 		//Create array to holds rates
-		$rateTable = array();
+		$rateTable = [];
 		//Get rate table array
 		$rates = $this->_retrieveCurrencies();
 
@@ -108,7 +108,7 @@ class CurrencyComponent extends Component {
 		//Filter down to just the rates
 		$currencies = $currencies['Envelope']['Cube']['Cube']['Cube'];
 
-		$historyList = array();
+		$historyList = [];
 		//European Central bank gives us everything against Euro so add this manually
 		$historyList[$this->baseCurrency] = 1;
 		//Now iterate through and add the rates provided
@@ -139,7 +139,7 @@ class CurrencyComponent extends Component {
 		$currencies = $currencies['Envelope']['Cube']['Cube']['Cube'];
 
 		//Create an array to hold the rates
-		$currencyList = array();
+		$currencyList = [];
 		//European Central bank gives us everything against Euro so add this manually
 		$currencyList[$this->baseCurrency] = 1;
 		//Now iterate through and add the rates provided
@@ -159,7 +159,7 @@ class CurrencyComponent extends Component {
 	public function _getBitcoin() {
 		App::uses('CurrencyBitcoinLib', 'Data.Lib');
 		$Btc = new CurrencyBitcoinLib();
-		return $Btc->rate(array('currency' => $this->baseCurrency));
+		return $Btc->rate(['currency' => $this->baseCurrency]);
 	}
 
 	/**
@@ -217,7 +217,7 @@ class CurrencyComponent extends Component {
 		return $default;
 	}
 
-	public $currencies = array(
+	public $currencies = [
 		'AFA' => 'Afghanistan Afghani',
 		'ALL' => 'Albanian Lek',
 		'DZD' => 'Algerian Dinar',
@@ -369,6 +369,6 @@ class CurrencyComponent extends Component {
 		'YUM' => 'Yugoslav Dinar',
 		'ZMK' => 'Zambian Kwacha',
 		'ZWD' => 'Zimbabwe Dollar',
-	);
+	];
 
 }

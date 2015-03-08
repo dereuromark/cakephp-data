@@ -6,7 +6,7 @@
 	<th><?php echo $this->Paginator->sort('name');?></th>
 	<th><?php echo $this->Paginator->sort('ori_name');?></th>
 	<th><?php echo $this->Paginator->sort('parent_id');?></th>
-	<th><?php echo $this->Paginator->sort('modified', null, array('direction' => 'desc'));?></th>
+	<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
 	<th class="actions"><?php echo __('Actions');?></th>
 </tr>
 <?php
@@ -25,15 +25,15 @@ foreach ($continents as $continent):
 			<?php echo h($continent['Continent']['ori_name']); ?>
 		</td>
 		<td>
-			<?php echo $this->Html->link($continent['ParentContinent']['name'], array('controller' => 'continents', 'action' => 'view', $continent['ParentContinent']['id'])); ?>
+			<?php echo $this->Html->link($continent['ParentContinent']['name'], ['controller' => 'continents', 'action' => 'view', $continent['ParentContinent']['id']]); ?>
 		</td>
 		<td>
 			<?php echo $this->Datetime->niceDate($continent['Continent']['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $continent['Continent']['id']), array('escape' => false)); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $continent['Continent']['id']), array('escape' => false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $continent['Continent']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $continent['Continent']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $continent['Continent']['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $continent['Continent']['id']], ['escape' => false]); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $continent['Continent']['id']], ['escape' => false], __('Are you sure you want to delete # %s?', $continent['Continent']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -48,8 +48,8 @@ foreach ($continents as $continent):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add %s', __('Continent')), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List %s', __('Continents')), array('controller' => 'continents', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('List %s', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('Add %s', __('Continent')), ['action' => 'add']); ?></li>
+		<li><?php echo $this->Html->link(__('List %s', __('Continents')), ['controller' => 'continents', 'action' => 'index']); ?> </li>
+		<li><?php echo $this->Html->link(__('List %s', __('Countries')), ['controller' => 'countries', 'action' => 'index']); ?> </li>
 	</ul>
 </div>

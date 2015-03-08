@@ -3,7 +3,7 @@ App::uses('DataAppController', 'Data.Controller');
 
 class CountriesController extends DataAppController {
 
-	public $paginate = array('order' => array('Country.sort' => 'DESC'));
+	public $paginate = ['order' => ['Country.sort' => 'DESC']];
 
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -50,7 +50,7 @@ class CountriesController extends DataAppController {
 		$handle = new Folder($this->imageFolder);
 		$icons = $handle->read(true, true);
 
-		$iconNames = array();
+		$iconNames = [];
 		foreach ($icons[1] as $icon) { # only use files (not folders)
 			$iconNames[] = strtoupper(extractPathInfo('filename', $icon));
 		}
@@ -75,7 +75,7 @@ class CountriesController extends DataAppController {
 		}
 
 		$this->autoRender = false;
-		return $this->redirect(array('action' => 'index'));
+		return $this->redirect(['action' => 'index']);
 	}
 
 	/**
@@ -86,12 +86,12 @@ class CountriesController extends DataAppController {
 	public function admin_icons() {
 		$icons = $this->_icons();
 
-		$countries = $this->Country->find('all', array('fields' => array('id', 'name', 'iso2', 'iso3')));
+		$countries = $this->Country->find('all', ['fields' => ['id', 'name', 'iso2', 'iso3']]);
 
-		$usedIcons = array();
+		$usedIcons = [];
 
 		# countries without icons
-		$contriesWithoutIcons = array();
+		$contriesWithoutIcons = [];
 		foreach ($countries as $country) {
 			$icon = strtoupper($country['Country']['iso2']);
 			if (!in_array($icon, $icons)) {
@@ -103,7 +103,7 @@ class CountriesController extends DataAppController {
 		}
 
 		# icons without countries
-		$iconsWithoutCountries = array();
+		$iconsWithoutCountries = [];
 		$iconsWithoutCountries = array_diff($icons, $usedIcons);
 		//pr($iconsWithoutCountries);
 
@@ -122,7 +122,7 @@ class CountriesController extends DataAppController {
 				$count = 0;
 				foreach ($this->request->data['Form'] as $key => $val) {
 					$this->Country->create();
-					$data = array('iso3' => $val['iso3'], 'iso2' => $val['iso2'], 'name' => $val['name']);
+					$data = ['iso3' => $val['iso3'], 'iso2' => $val['iso2'], 'name' => $val['name']];
 					if (empty($val['confirm'])) {
 						# do nothing
 					} elseif ($this->Country->save($data)) {
@@ -142,7 +142,7 @@ class CountriesController extends DataAppController {
 
 				if (!empty($this->request->data['Country']['import_separator_custom'])) {
 					$separator = $this->request->data['Country']['import_separator_custom'];
-					$separator = str_replace(array('{SPACE}', '{TAB}'), array(Country::separators(SEPARATOR_SPACE, true), Country::separators(SEPARATOR_TAB, true)), $separator);
+					$separator = str_replace(['{SPACE}', '{TAB}'], [Country::separators(SEPARATOR_SPACE, true), Country::separators(SEPARATOR_TAB, true)], $separator);
 
 				} else {
 					$separator = $this->request->data['Country']['import_separator'];
@@ -154,13 +154,13 @@ class CountriesController extends DataAppController {
 				if (empty($countries)) {
 					$this->Country->invalidate('import_separator', 'falscher Separator');
 				} elseif (!empty($this->request->data['Country']['import_pattern'])) {
-					$pattern = str_replace(array('{SPACE}', '{TAB}'), array(Country::separators(SEPARATOR_SPACE, true), Country::separators(SEPARATOR_TAB, true)), $this->request->data['Country']['import_pattern']);
+					$pattern = str_replace(['{SPACE}', '{TAB}'], [Country::separators(SEPARATOR_SPACE, true), Country::separators(SEPARATOR_TAB, true)], $this->request->data['Country']['import_pattern']);
 					# select part that matches %name
 					foreach ($countries as $key => $danceStep) {
 						$tmp = sscanf($danceStep, $pattern); # returns array
 						# write back into $countries array
 						if (!empty($tmp[2])) {
-							$this->request->data['Form'][$key] = array('name' => $tmp[2], 'confirm' => 1);
+							$this->request->data['Form'][$key] = ['name' => $tmp[2], 'confirm' => 1];
 							if (!empty($tmp[1])) {
 								$this->request->data['Form'][$key]['iso2'] = $tmp[1];
 							}
@@ -176,7 +176,7 @@ class CountriesController extends DataAppController {
 					}
 				} else {
 					foreach ($countries as $key => $country) {
-						$this->request->data['Form'][$key] = array('name' => $country, 'confirm' => 1);
+						$this->request->data['Form'][$key] = ['name' => $country, 'confirm' => 1];
 					}
 				}
 
@@ -195,7 +195,7 @@ class CountriesController extends DataAppController {
 	public function admin_index() {
 		if (CakePlugin::loaded('Search')) {
 			$this->Country->Behaviors->load('Search.Searchable');
-			$this->Common->loadComponent(array('Search.Prg'));
+			$this->Common->loadComponent(['Search.Prg']);
 
 			$this->Prg->commonProcess();
 			$this->paginate['conditions'] = $this->Country->parseCriteria($this->Prg->parsedParams());
@@ -204,7 +204,7 @@ class CountriesController extends DataAppController {
 		$countries = $this->paginate();
 		$this->set(compact('countries'));
 
-		$this->helpers = array_merge($this->helpers, array('Tools.GoogleMapV3'));
+		$this->helpers = array_merge($this->helpers, ['Tools.GoogleMapV3']);
 	}
 
 	public function admin_view($id = null) {
@@ -212,12 +212,12 @@ class CountriesController extends DataAppController {
 		$id = (int)$id;
 		if ($id <= 0) {
 			$this->Flash->message(__('record invalid'), 'error');
-			return $this->redirect(array('action' => 'index'));
+			return $this->redirect(['action' => 'index']);
 		}
 		$country = $this->Country->record($id);
 		if (empty($country)) {
 			$this->Flash->message(__('record not exists'), 'error');
-			return $this->redirect(array('action' => 'index'));
+			return $this->redirect(['action' => 'index']);
 		}
 		$this->set(compact('country'));
 	}
@@ -229,7 +229,7 @@ class CountriesController extends DataAppController {
 				$id = $this->Country->id;
 				//$name = $this->request->data['Country']['name'];
 				$this->Flash->message(__('record add %s saved', $id), 'success');
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(['action' => 'index']);
 			} else {
 				$this->Flash->message(__('record add not saved'), 'error');
 			}
@@ -239,13 +239,13 @@ class CountriesController extends DataAppController {
 	public function admin_edit($id = null) {
 		if (!$id || !($country = $this->Country->record($id))) {
 			$this->Flash->message(__('record invalid'), 'error');
-			return $this->redirect(array('action' => 'index'));
+			return $this->redirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->Country->save($this->request->data)) {
 				$name = $country['Country']['name'];
 				$this->Flash->message(__('record edit %s saved', h($name)), 'success');
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(['action' => 'index']);
 			} else {
 				$this->Flash->message(__('record edit not saved'), 'error');
 			}
@@ -254,7 +254,7 @@ class CountriesController extends DataAppController {
 			$this->request->data = $country;
 			if (empty($this->request->data)) { # still no record found
 				$this->Flash->message(__('record not exists'), 'error');
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(['action' => 'index']);
 			}
 		}
 	}
@@ -263,40 +263,40 @@ class CountriesController extends DataAppController {
 		$id = (int)$id;
 		if ($id <= 0) {
 			$this->Flash->message(__('record invalid'), 'error');
-			return $this->redirect(array('action' => 'index'));
+			return $this->redirect(['action' => 'index']);
 		}
-		$res = $this->Country->find('first', array('fields' => array('id'), 'conditions' => array('Country.id' => $id)));
+		$res = $this->Country->find('first', ['fields' => ['id'], 'conditions' => ['Country.id' => $id]]);
 		if (empty($res)) {
 			$this->Flash->message(__('record del not exists'), 'error');
-			return $this->redirect(array('action' => 'index'));
+			return $this->redirect(['action' => 'index']);
 		}
 
 		//$name = $res['Country']['name'];
 		if ($this->Country->delete($id)) {
 			$this->Flash->message(__('record del %s done', $id), 'success');
-			return $this->redirect(array('action' => 'index'));
+			return $this->redirect(['action' => 'index']);
 		} else {
 			$this->Flash->message(__('record del %s not done exception', $id), 'error');
-			return $this->redirect(array('action' => 'index'));
+			return $this->redirect(['action' => 'index']);
 		}
 	}
 
 	public function admin_up($id = null) {
-		if (empty($id) || !($navigation = $this->Country->find('first', array('conditions' => array('Country.id' => $id))))) {
+		if (empty($id) || !($navigation = $this->Country->find('first', ['conditions' => ['Country.id' => $id]]))) {
 			$this->Flash->message(__('invalid record'), 'error');
-			return $this->Common->autoRedirect(array('action' => 'index'));
+			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->Country->moveDown($id, 1);
-		return $this->redirect(array('action' => 'index'));
+		return $this->redirect(['action' => 'index']);
 	}
 
 	public function admin_down($id = null) {
-		if (empty($id) || !($navigation = $this->Country->find('first', array('conditions' => array('Country.id' => $id))))) {
+		if (empty($id) || !($navigation = $this->Country->find('first', ['conditions' => ['Country.id' => $id]]))) {
 			$this->Flash->message(__('invalid record'), 'error');
-			return $this->Common->autoRedirect(array('action' => 'index'));
+			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->Country->moveUp($id, 1);
-		return $this->redirect(array('action' => 'index'));
+		return $this->redirect(['action' => 'index']);
 	}
 
 	/**

@@ -5,7 +5,7 @@ App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
 class DistrictTest extends MyCakeTestCase {
 
-	public $fixtures = array('plugin.data.district');
+	public $fixtures = ['plugin.data.district'];
 
 	public $District;
 

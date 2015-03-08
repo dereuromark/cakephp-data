@@ -3,15 +3,15 @@ App::uses('DataAppModel', 'Data.Model');
 
 class County extends DataAppModel {
 
-	public $actsAs = array('Tools.Slugged' => array('case' => 'low', 'mode' => 'ascii', 'unique' => false, 'overwrite' => false));
+	public $actsAs = ['Tools.Slugged' => ['case' => 'low', 'mode' => 'ascii', 'unique' => false, 'overwrite' => false]];
 
-	public $hasMany = array(
-		'City' => array('className' => 'Data.City')
-	);
+	public $hasMany = [
+		'City' => ['className' => 'Data.City']
+	];
 
-	public $belongsTo = array(
-		'State' => array('className' => 'Data.State')
-	);
+	public $belongsTo = [
+		'State' => ['className' => 'Data.State']
+	];
 
 	public function initCounty($data) {
 		$this->create();

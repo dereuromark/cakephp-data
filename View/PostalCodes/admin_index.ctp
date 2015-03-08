@@ -3,9 +3,9 @@
 <div class="searchBox" style="float: right;">
 <?php
 	echo $this->Form->create('PostalCode');
-	echo $this->Form->input('code', array('placeholder' => 'Platzhalter: * und ?'));
-	echo $this->Form->input('country_id', array('empty' => ' - egal - '));
-	echo $this->Form->submit(__('Search'), array('div' => false));
+	echo $this->Form->input('code', ['placeholder' => 'Platzhalter: * und ?']);
+	echo $this->Form->input('country_id', ['empty' => ' - egal - ']);
+	echo $this->Form->submit(__('Search'), ['div' => false]);
 	echo $this->Form->end();
 ?>
 </div>
@@ -19,8 +19,8 @@
 		<th><?php echo $this->Paginator->sort('lat');?></th>
 		<th><?php echo $this->Paginator->sort('lng');?></th>
 		<th><?php echo $this->Paginator->sort('official_address');?></th>
-		<th><?php echo $this->Paginator->sort('created', null, array('direction' => 'desc'));?></th>
-		<th><?php echo $this->Paginator->sort('modified', null, array('direction' => 'desc'));?></th>
+		<th><?php echo $this->Paginator->sort('created', null, ['direction' => 'desc']);?></th>
+		<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
 		<th class="actions"><?php echo __('Actions');?></th>
 	</tr>
 <?php
@@ -49,9 +49,9 @@ foreach ($postalCodes as $postalCode): ?>
 			<?php echo $this->Datetime->niceDate($postalCode['PostalCode']['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $postalCode['PostalCode']['id']), array('escape' => false)); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $postalCode['PostalCode']['id']), array('escape' => false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $postalCode['PostalCode']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $postalCode['PostalCode']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $postalCode['PostalCode']['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $postalCode['PostalCode']['id']], ['escape' => false]); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $postalCode['PostalCode']['id']], ['escape' => false], __('Are you sure you want to delete # %s?', $postalCode['PostalCode']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -65,8 +65,8 @@ foreach ($postalCodes as $postalCode): ?>
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('New %s', __('Postal Code')), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('Query'), array('action' => 'query')); ?></li>
-		<li><?php echo $this->Html->link(__('Geolocate'), array('action' => 'geolocate')); ?></li>
+		<li><?php echo $this->Html->link(__('New %s', __('Postal Code')), ['action' => 'add']); ?></li>
+		<li><?php echo $this->Html->link(__('Query'), ['action' => 'query']); ?></li>
+		<li><?php echo $this->Html->link(__('Geolocate'), ['action' => 'geolocate']); ?></li>
 	</ul>
 </div>

@@ -12,29 +12,29 @@ class CountyFixture extends CakeTestFixture {
 	 *
 	 * @var array
 	 */
-	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary', 'collate' => null, 'comment' => ''),
-		'official_id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 9, 'key' => 'unique', 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'),
-		'country_id' => array('type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10, 'key' => 'index', 'collate' => null, 'comment' => ''),
-		'state_id' => array('type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10, 'key' => 'index', 'collate' => null, 'comment' => ''),
-		'name' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'),
-		'lat' => array('type' => 'float', 'null' => false, 'default' => '0.000000', 'length' => '10,6', 'collate' => null, 'comment' => ''),
-		'lng' => array('type' => 'float', 'null' => false, 'default' => '0.000000', 'length' => '10,6', 'collate' => null, 'comment' => ''),
-		'slug' => array('type' => 'string', 'null' => false, 'default' => null, 'key' => 'unique', 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'),
-		'single_city' => array('type' => 'boolean', 'null' => false, 'default' => '0', 'collate' => null, 'comment' => ''),
-		'rank' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 5, 'key' => 'index', 'collate' => null, 'comment' => ''),
-		'modified' => array('type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''),
-		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1), 'official_id' => array('column' => 'official_id', 'unique' => 1), 'slug' => array('column' => 'slug', 'unique' => 1), 'country' => array('column' => 'country_id', 'unique' => 0), 'state_id' => array('column' => 'state_id', 'unique' => 0), 'rank' => array('column' => 'rank', 'unique' => 0)),
-		'tableParameters' => array()
-	);
+	public $fields = [
+		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary', 'collate' => null, 'comment' => ''],
+		'official_id' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 9, 'key' => 'unique', 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
+		'country_id' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10, 'key' => 'index', 'collate' => null, 'comment' => ''],
+		'state_id' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10, 'key' => 'index', 'collate' => null, 'comment' => ''],
+		'name' => ['type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
+		'lat' => ['type' => 'float', 'null' => false, 'default' => '0.000000', 'length' => '10,6', 'collate' => null, 'comment' => ''],
+		'lng' => ['type' => 'float', 'null' => false, 'default' => '0.000000', 'length' => '10,6', 'collate' => null, 'comment' => ''],
+		'slug' => ['type' => 'string', 'null' => false, 'default' => null, 'key' => 'unique', 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
+		'single_city' => ['type' => 'boolean', 'null' => false, 'default' => '0', 'collate' => null, 'comment' => ''],
+		'rank' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 5, 'key' => 'index', 'collate' => null, 'comment' => ''],
+		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
+		'indexes' => ['PRIMARY' => ['column' => 'id', 'unique' => 1], 'official_id' => ['column' => 'official_id', 'unique' => 1], 'slug' => ['column' => 'slug', 'unique' => 1], 'country' => ['column' => 'country_id', 'unique' => 0], 'state_id' => ['column' => 'state_id', 'unique' => 0], 'rank' => ['column' => 'rank', 'unique' => 0]],
+		'tableParameters' => []
+	];
 
 	/**
 	 * Records
 	 *
 	 * @var array
 	 */
-	public $records = array(
-		array(
+	public $records = [
+		[
 			'id' => '1',
 			'official_id' => '01-0-01',
 			'country_id' => '1',
@@ -46,8 +46,8 @@ class CountyFixture extends CakeTestFixture {
 			'single_city' => 1,
 			'rank' => '1',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '2',
 			'official_id' => '01-0-02',
 			'country_id' => '1',
@@ -59,8 +59,8 @@ class CountyFixture extends CakeTestFixture {
 			'single_city' => 1,
 			'rank' => '3',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '3',
 			'official_id' => '01-0-03',
 			'country_id' => '1',
@@ -72,8 +72,8 @@ class CountyFixture extends CakeTestFixture {
 			'single_city' => 1,
 			'rank' => '4',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '4',
 			'official_id' => '01-0-04',
 			'country_id' => '1',
@@ -85,8 +85,8 @@ class CountyFixture extends CakeTestFixture {
 			'single_city' => 1,
 			'rank' => '5',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '5',
 			'official_id' => '02-0-00',
 			'country_id' => '1',
@@ -98,8 +98,8 @@ class CountyFixture extends CakeTestFixture {
 			'single_city' => 1,
 			'rank' => '0',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '6',
 			'official_id' => '03-1-01',
 			'country_id' => '1',
@@ -111,8 +111,8 @@ class CountyFixture extends CakeTestFixture {
 			'single_city' => 1,
 			'rank' => '2',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '7',
 			'official_id' => '03-1-02',
 			'country_id' => '1',
@@ -124,8 +124,8 @@ class CountyFixture extends CakeTestFixture {
 			'single_city' => 1,
 			'rank' => '34',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '8',
 			'official_id' => '03-1-03',
 			'country_id' => '1',
@@ -137,8 +137,8 @@ class CountyFixture extends CakeTestFixture {
 			'single_city' => 1,
 			'rank' => '45',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '9',
 			'official_id' => '03-4-01',
 			'country_id' => '1',
@@ -150,8 +150,8 @@ class CountyFixture extends CakeTestFixture {
 			'single_city' => 1,
 			'rank' => '6',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '10',
 			'official_id' => '03-4-02',
 			'country_id' => '1',
@@ -163,6 +163,6 @@ class CountyFixture extends CakeTestFixture {
 			'single_city' => 1,
 			'rank' => '8',
 			'modified' => '0000-00-00 00:00:00'
-		),
-	);
+		],
+	];
 }

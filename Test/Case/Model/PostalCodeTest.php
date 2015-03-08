@@ -5,7 +5,7 @@ App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
 class PostalCodeTest extends MyCakeTestCase {
 
-	public $fixtures = array('plugin.data.postal_code');
+	public $fixtures = ['plugin.data.postal_code'];
 
 	public $PostalCode;
 

@@ -12,26 +12,26 @@ class StateFixture extends CakeTestFixture {
 	 *
 	 * @var array
 	 */
-	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary', 'collate' => null, 'comment' => ''),
-		'country_id' => array('type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10, 'collate' => null, 'comment' => ''),
-		'name' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'),
-		'abbr' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 3, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'),
-		'lat' => array('type' => 'float', 'null' => false, 'default' => '0.000000', 'length' => '10,6', 'collate' => null, 'comment' => ''),
-		'lng' => array('type' => 'float', 'null' => false, 'default' => '0.000000', 'length' => '10,6', 'collate' => null, 'comment' => ''),
-		'slug' => array('type' => 'string', 'null' => false, 'default' => null, 'key' => 'index', 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'),
-		'modified' => array('type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''),
-		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1), 'slug' => array('column' => 'slug', 'unique' => 0)),
-		'tableParameters' => array()
-	);
+	public $fields = [
+		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary', 'collate' => null, 'comment' => ''],
+		'country_id' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10, 'collate' => null, 'comment' => ''],
+		'name' => ['type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
+		'abbr' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 3, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
+		'lat' => ['type' => 'float', 'null' => false, 'default' => '0.000000', 'length' => '10,6', 'collate' => null, 'comment' => ''],
+		'lng' => ['type' => 'float', 'null' => false, 'default' => '0.000000', 'length' => '10,6', 'collate' => null, 'comment' => ''],
+		'slug' => ['type' => 'string', 'null' => false, 'default' => null, 'key' => 'index', 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
+		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
+		'indexes' => ['PRIMARY' => ['column' => 'id', 'unique' => 1], 'slug' => ['column' => 'slug', 'unique' => 0]],
+		'tableParameters' => []
+	];
 
 	/**
 	 * Records
 	 *
 	 * @var array
 	 */
-	public $records = array(
-		array(
+	public $records = [
+		[
 			'id' => '1',
 			'country_id' => '1',
 			'name' => 'Schleswig-Holstein',
@@ -40,8 +40,8 @@ class StateFixture extends CakeTestFixture {
 			'lng' => '0.000000',
 			'slug' => 'schleswig-holstein',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '2',
 			'country_id' => '1',
 			'name' => 'Hamburg',
@@ -50,8 +50,8 @@ class StateFixture extends CakeTestFixture {
 			'lng' => '0.000000',
 			'slug' => 'hamburg',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '3',
 			'country_id' => '1',
 			'name' => 'Niedersachsen',
@@ -60,8 +60,8 @@ class StateFixture extends CakeTestFixture {
 			'lng' => '0.000000',
 			'slug' => 'niedersachsen',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '4',
 			'country_id' => '1',
 			'name' => 'Bremen',
@@ -70,8 +70,8 @@ class StateFixture extends CakeTestFixture {
 			'lng' => '0.000000',
 			'slug' => 'bremen',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '5',
 			'country_id' => '1',
 			'name' => 'Nordrhein-Westfalen',
@@ -80,8 +80,8 @@ class StateFixture extends CakeTestFixture {
 			'lng' => '0.000000',
 			'slug' => 'nordrhein-westfalen',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '6',
 			'country_id' => '1',
 			'name' => 'Hessen',
@@ -90,8 +90,8 @@ class StateFixture extends CakeTestFixture {
 			'lng' => '0.000000',
 			'slug' => 'hessen',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '7',
 			'country_id' => '1',
 			'name' => 'Rheinland-Pfalz',
@@ -100,8 +100,8 @@ class StateFixture extends CakeTestFixture {
 			'lng' => '0.000000',
 			'slug' => 'rheinland-pfalz',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '8',
 			'country_id' => '1',
 			'name' => 'Baden-Württemberg',
@@ -110,8 +110,8 @@ class StateFixture extends CakeTestFixture {
 			'lng' => '0.000000',
 			'slug' => 'baden-wuerttemberg',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '9',
 			'country_id' => '1',
 			'name' => 'Bayern',
@@ -120,8 +120,8 @@ class StateFixture extends CakeTestFixture {
 			'lng' => '0.000000',
 			'slug' => 'bayern',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '10',
 			'country_id' => '1',
 			'name' => 'Saarland',
@@ -130,6 +130,6 @@ class StateFixture extends CakeTestFixture {
 			'lng' => '0.000000',
 			'slug' => 'saarland',
 			'modified' => '0000-00-00 00:00:00'
-		),
-	);
+		],
+	];
 }

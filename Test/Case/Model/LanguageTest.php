@@ -5,7 +5,7 @@ App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
 class LanguageTest extends MyCakeTestCase {
 
-	public $fixtures = array('plugin.data.language');
+	public $fixtures = ['plugin.data.language'];
 
 	public $Language;
 

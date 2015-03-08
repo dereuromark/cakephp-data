@@ -4,7 +4,7 @@ App::uses('AppHelper', 'View/Helper');
 
 class MimeTypeHelper extends AppHelper {
 
-	public $helpers = array('Html');
+	public $helpers = ['Html'];
 
 	public $types = null;
 
@@ -21,7 +21,7 @@ class MimeTypeHelper extends AppHelper {
 			$this->getTypes();
 		}
 
-		$default = array('ext' => $ext, 'name' => 'Datei');
+		$default = ['ext' => $ext, 'name' => 'Datei'];
 
 		foreach ($this->types as $t) {
 
@@ -53,7 +53,7 @@ class MimeTypeHelper extends AppHelper {
 			$filename = $attr['filename'];
 			unset($attr['filename']);
 		}
-		$imageAttr = array('class' => 'help', 'title' => $icon['name'] . ' (' . $filename . '.' . $icon['ext'] . ')', 'alt' => $icon['ext'], 'height' => '16');
+		$imageAttr = ['class' => 'help', 'title' => $icon['name'] . ' (' . $filename . '.' . $icon['ext'] . ')', 'alt' => $icon['ext'], 'height' => '16'];
 		if (!empty($attr) && is_array($attr)) {
 			$imageAttr = array_merge($imageAttr, $attr);
 		}
@@ -94,17 +94,17 @@ class MimeTypeHelper extends AppHelper {
 		if (!$handle->exists()) {
 			# create and fill: ext||type||name||img (array serialized? separated by ||?)
 			$MimeType = ClassRegistry::init('Data.MimeType');
-			$mimeTypes = $MimeType->find('all', array('fields' => array('name', 'ext', 'type'), 'conditions' => array('MimeType.active' => 1), 'contain' => array('MimeTypeImage' => array('name', 'ext'))));
+			$mimeTypes = $MimeType->find('all', ['fields' => ['name', 'ext', 'type'], 'conditions' => ['MimeType.active' => 1], 'contain' => ['MimeTypeImage' => ['name', 'ext']]]);
 
-			$content = array();
+			$content = [];
 			foreach ($mimeTypes as $m) {
 				$img = (!empty($m['MimeTypeImage']['ext']) ? $m['MimeTypeImage']['name'] . '.' . $m['MimeTypeImage']['ext'] : '');
-				$content[] = array(
+				$content[] = [
 					'ext' => $m['MimeType']['ext'],
 					'name' => $m['MimeType']['name'],
 					'type' => $m['MimeType']['type'],
 					'img' => $img,
-				);
+				];
 			}
 			# add special types? (file not found icon, default fallback icon, generic file ext icon...)
 
@@ -115,11 +115,11 @@ class MimeTypeHelper extends AppHelper {
 			//$handle->open('r', true);
 			$content = $handle->read();
 			if ($content === false) {
-				return array();
+				return [];
 			}
 			$content = @unserialize($content);
 			if ($content === false || !is_array($content)) {
-				return array();
+				return [];
 			}
 		}
 		return $content;

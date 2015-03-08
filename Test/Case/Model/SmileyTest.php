@@ -4,7 +4,7 @@ App::uses('Smiley', 'Data.Model');
 
 class SmileyTest extends CakeTestCase {
 
-	public $fixtures = array('plugin.data.smiley');
+	public $fixtures = ['plugin.data.smiley'];
 
 	public function setUp() {
 		parent::setUp();
@@ -16,24 +16,24 @@ class SmileyTest extends CakeTestCase {
 	 * Seems to keep the last one on duplicates
 	 */
 	public function testArrayUnique() {
-		$is = array(
+		$is = [
 			'x' => 't',
 			'x' => 'e',
 			'y' => 'z',
 			'z' => 'r',
 			't' => 'w'
-		);
+		];
 		$is = array_unique($is);
 		pr($is);
 		$this->assertEquals($is['x'], 'e');
 
-		$is = array(
+		$is = [
 			'e' => 't',
 			'x' => 'e',
 			'y' => 'z',
 			'z' => 't',
 			't' => 'w'
-		);
+		];
 		$is = array_unique($is);
 		pr($is);
 		$this->assertEquals($is['e'], 't');

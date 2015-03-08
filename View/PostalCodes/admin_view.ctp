@@ -24,7 +24,7 @@
 <?php if ((int)$postalCode['PostalCode']['lat'] || (int)$postalCode['PostalCode']['lng']) { ?>
 		<dt><?php echo __('Map'); ?></dt>
 		<dd>
-			<?php echo $this->GoogleMapV3->staticMap(array('size' => '640x600', 'zoom' => 12, 'markers' => $this->GoogleMapV3->staticMarkers(array(array('lat' => $postalCode['PostalCode']['lat'], 'lng' => $postalCode['PostalCode']['lng']))))); ?>
+			<?php echo $this->GoogleMapV3->staticMap(['size' => '640x600', 'zoom' => 12, 'markers' => $this->GoogleMapV3->staticMarkers([['lat' => $postalCode['PostalCode']['lat'], 'lng' => $postalCode['PostalCode']['lng']]])]); ?>
 		</dd>
 <?php } ?>
 		<dt><?php echo __('Official Address'); ?></dt>
@@ -49,8 +49,8 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit %s', __('Postal Code')), array('action' => 'edit', $postalCode['PostalCode']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete %s', __('Postal Code')), array('action' => 'delete', $postalCode['PostalCode']['id']), null, __('Are you sure you want to delete # %s?', $postalCode['PostalCode']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List %s', __('Postal Codes')), array('action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('Edit %s', __('Postal Code')), ['action' => 'edit', $postalCode['PostalCode']['id']]); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete %s', __('Postal Code')), ['action' => 'delete', $postalCode['PostalCode']['id']], null, __('Are you sure you want to delete # %s?', $postalCode['PostalCode']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('List %s', __('Postal Codes')), ['action' => 'index']); ?> </li>
 	</ul>
 </div>

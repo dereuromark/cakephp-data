@@ -4,54 +4,54 @@ App::uses('GeocodeLib', 'Data.Lib');
 
 class Country extends DataAppModel {
 
-	public $order = array('Country.sort' => 'DESC', 'Country.name' => 'ASC');
+	public $order = ['Country.sort' => 'DESC', 'Country.name' => 'ASC'];
 
-	public $actsAs = array('Tools.Sortable');
+	public $actsAs = ['Tools.Sortable'];
 
-	public $validate = array(
-		'name' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+	public $validate = [
+		'name' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'Manditory field',
 				'last' => true,
-			),
-			'isUnique' => array(
-				'rule' => array('isUnique'),
+			],
+			'isUnique' => [
+				'rule' => ['isUnique'],
 				'message' => 'record (with this name) already exists',
-			),
-		),
-		'ori_name' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			],
+		],
+		'ori_name' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'Manditory field',
 				'last' => true,
-			),
-			'isUnique' => array(
-				'rule' => array('isUnique'),
+			],
+			'isUnique' => [
+				'rule' => ['isUnique'],
 				'message' => 'record (with this name) already exists',
-			),
-		),
-		'iso2' => array(
-			'isUnique' => array(
-				'rule' => array('isUnique'),
+			],
+		],
+		'iso2' => [
+			'isUnique' => [
+				'rule' => ['isUnique'],
 				'allowEmpty' => true,
 				'message' => 'record (with this name) already exists',
-			),
-		),
-		'iso3' => array(
-			'isUnique' => array(
-				'rule' => array('isUnique'),
+			],
+		],
+		'iso3' => [
+			'isUnique' => [
+				'rule' => ['isUnique'],
 				'allowEmpty' => true,
 				'message' => 'record (with this name) already exists',
-			),
-		),
-		'country_code' => array('numeric'),
+			],
+		],
+		'country_code' => ['numeric'],
 		//'special' => array('notEmpty'),
 		//'sort' => array('numeric')
-	);
+	];
 
-	public $hasMany = array(
-		'CountryProvince' => array(
+	public $hasMany = [
+		'CountryProvince' => [
 			'className' => 'Data.CountryProvince',
 			'foreignKey' => 'country_id',
 			'dependent' => true, # !!!
@@ -59,8 +59,8 @@ class Country extends DataAppModel {
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
-		),
-		'State' => array(
+		],
+		'State' => [
 			'className' => 'Data.State',
 			'foreignKey' => 'country_id',
 			'dependent' => true, # !!!
@@ -68,7 +68,7 @@ class Country extends DataAppModel {
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
-		),
+		],
 /*
 		'Location' => array(
 			'className' => 'Location',
@@ -80,12 +80,12 @@ class Country extends DataAppModel {
 			'limit' => '',
 		)
 */
-	);
+	];
 
-	public $filterArgs = array(
-		'search' => array('type' => 'like', 'field' => array('name', 'ori_name', 'iso2', 'iso3', 'country_code')),
+	public $filterArgs = [
+		'search' => ['type' => 'like', 'field' => ['name', 'ori_name', 'iso2', 'iso3', 'country_code']],
 		//'status' => array('type' => 'value')
-	);
+	];
 
 	public function __construct($id = false, $table = false, $ds = null) {
 		if (Configure::read('Country.provinces') === false) {
@@ -105,8 +105,8 @@ class Country extends DataAppModel {
 	 * @param mixed $customOptions
 	 * @return array
 	 */
-	public function active($type = 'all', $customOptions = array()) {
-		$options = array('conditions' => array($this->alias . '.status' => 1), );
+	public function active($type = 'all', $customOptions = []) {
+		$options = ['conditions' => [$this->alias . '.status' => 1], ];
 		if (!empty($customOptions)) {
 			$options = array_merge($options, $customOptions);
 		}
@@ -119,9 +119,9 @@ class Country extends DataAppModel {
 	 * @return array
 	 */
 	public function getList() {
-		$options = array(
+		$options = [
 			//'conditions'=>array('active'=>1),
-		);
+		];
 		return $this->find('list', $options);
 	}
 
@@ -143,12 +143,12 @@ class Country extends DataAppModel {
 		}
 
 		if (!empty($id)) {
-			$res = $this->find('first', array('conditions' => array($this->alias . '.id' => $id), 'contain' => array()));
+			$res = $this->find('first', ['conditions' => [$this->alias . '.id' => $id], 'contain' => []]);
 			if (!empty($res[$this->alias]['ori_name']) && $Geocoder->geocode($res[$this->alias]['ori_name']) || $res[$this->alias]['name'] != $res[$this->alias]['ori_name'] && $Geocoder->geocode($res[$this->alias]['name'])) {
 
 				$data = $Geocoder->getResult();
 				//pr($data); die();
-				$saveArray = array('lat' => $data['lat'], 'lng' => $data['lng']);
+				$saveArray = ['lat' => $data['lat'], 'lng' => $data['lng']];
 
 				if (!empty($data['country_code']) && mb_strlen($data['country_code']) === 3 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
 					$saveArray['iso3'] = $data['country_code'];
@@ -160,7 +160,7 @@ class Country extends DataAppModel {
 				}
 
 				$this->id = $id;
-				if (!$this->save($saveArray, true, array('lat', 'lng', 'iso2', 'iso3'))) {
+				if (!$this->save($saveArray, true, ['lat', 'lng', 'iso2', 'iso3'])) {
 					echo returns($this->id);
 					pr($res); pr($data); pr($saveArray); die(returns($this->validationErrors));
 				}
@@ -168,12 +168,12 @@ class Country extends DataAppModel {
 			}
 		} else {
 
-			$conditions = array();
+			$conditions = [];
 			if (!$override) {
-				$conditions = array($this->alias . '.lat' => 0, $this->alias . '.lng' => 0);
+				$conditions = [$this->alias . '.lat' => 0, $this->alias . '.lng' => 0];
 			}
 
-			$results = $this->find('all', array('conditions' => $conditions, 'contain' => array()));
+			$results = $this->find('all', ['conditions' => $conditions, 'contain' => []]);
 
 			$count = 0;
 			foreach ($results as $res) {
@@ -184,9 +184,9 @@ class Country extends DataAppModel {
 					echo returns($data); die();
 					# seems to be very problematic: country "Georgien" results in "Georgia, USA"
 
-					$saveArray = array();
+					$saveArray = [];
 					if (isset($data['lat']) && isset($data['lng'])) {
-						$saveArray = array('lat' => $data['lat'], 'lng' => $data['lng']);
+						$saveArray = ['lat' => $data['lat'], 'lng' => $data['lng']];
 					}
 
 					if (!empty($data['country_code']) && mb_strlen($data['country_code']) === 3 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
@@ -199,7 +199,7 @@ class Country extends DataAppModel {
 					}
 
 					$this->id = $res[$this->alias]['id'];
-					if ($this->save($saveArray, true, array('lat', 'lng', 'iso2', 'iso3'))) {
+					if ($this->save($saveArray, true, ['lat', 'lng', 'iso2', 'iso3'])) {
 						$count++;
 
 						if (!empty($saveArray['iso2']) && $saveArray['iso2'] != $res[$this->alias]['iso2']) {
@@ -235,17 +235,17 @@ class Country extends DataAppModel {
 		}
 
 		if (!empty($id)) {
-			$res = $this->find('first', array('conditions' => array($this->alias . '.id' => $id), 'contain' => array()));
+			$res = $this->find('first', ['conditions' => [$this->alias . '.id' => $id], 'contain' => []]);
 			if (!empty($res[$this->alias]['ori_name']) && $Geocoder->geocode($res[$this->alias]['ori_name']) || $res[$this->alias]['name'] != $res[$this->alias]['ori_name'] && $Geocoder->geocode($res[$this->alias]['name'])) {
 
 			}
 		} else {
-			$conditions = array();
+			$conditions = [];
 			if (!$override) {
-				$conditions = array($this->alias . '.iso2' => ''); # right now only iso2
+				$conditions = [$this->alias . '.iso2' => '']; # right now only iso2
 			}
 
-			$results = $this->find('all', array('conditions' => $conditions, 'contain' => array()));
+			$results = $this->find('all', ['conditions' => $conditions, 'contain' => []]);
 
 			$count = 0;
 			foreach ($results as $res) {
@@ -256,7 +256,7 @@ class Country extends DataAppModel {
 					echo returns($data); die();
 					# seems to be very problematic: country "Georgien" results in "Georgia, USA"
 
-					$saveArray = array();
+					$saveArray = [];
 					if (!empty($data['country_code']) && mb_strlen($data['country_code']) === 3 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
 						$saveArray['iso3'] = $data['country_code'];
 						//die(returns($saveArray));
@@ -267,7 +267,7 @@ class Country extends DataAppModel {
 					}
 
 					$this->id = $res[$this->alias]['id'];
-					if ($this->save($saveArray, true, array('iso2', 'iso3'))) {
+					if ($this->save($saveArray, true, ['iso2', 'iso3'])) {
 						$count++;
 
 						if (!empty($saveArray['iso2']) && $saveArray['iso2'] != $res[$this->alias]['iso2']) {
@@ -307,31 +307,31 @@ class Country extends DataAppModel {
 			$override = true;
 		}
 
-		$conditions = array();
+		$conditions = [];
 		if (!$override) {
-			$conditions = array($this->alias . '.lat' => 0, $this->alias . '.lng' => 0);
+			$conditions = [$this->alias . '.lat' => 0, $this->alias . '.lng' => 0];
 		}
 
 		if (!empty($id)) {
-			$res = $this->find('first', array('fields' => array($this->alias . '.id', $this->alias . '.name', $this->alias . '.ori_name'), 'conditions' => array($this->alias . '.id' => $id), 'contain' => array()));
+			$res = $this->find('first', ['fields' => [$this->alias . '.id', $this->alias . '.name', $this->alias . '.ori_name'], 'conditions' => [$this->alias . '.id' => $id], 'contain' => []]);
 			if (!empty($res[$this->alias]['ori_name']) && ($data = $Geocoder->geocode($res[$this->alias]['ori_name'])) || $res[$this->alias]['name'] != $res[$this->alias]['ori_name'] && ($data = $Geocoder->geocode($res[$this->alias]['name']))) {
 
 				//echo returns($data); echo returns($Geocoder->debug()); die();
 
 				$this->id = $id;
-				$this->save($data, true, array('lat', 'lng'));
+				$this->save($data, true, ['lat', 'lng']);
 				return true;
 			}
 		} else {
 
-			$results = $this->find('all', array('fields' => array($this->alias . '.id', $this->alias . '.name', $this->alias . '.ori_name'), 'conditions' => $conditions, 'contain' => array()));
+			$results = $this->find('all', ['fields' => [$this->alias . '.id', $this->alias . '.name', $this->alias . '.ori_name'], 'conditions' => $conditions, 'contain' => []]);
 			$count = 0;
 			foreach ($results as $res) {
 				if (!empty($res[$this->alias]['ori_name']) && ($data = $Geocoder->geocode($res[$this->alias]['ori_name'])) || $res[$this->alias]['name'] != $res[$this->alias]['ori_name'] && ($data = $Geocoder->geocode($res[$this->alias]['name']))) {
 					//echo returns($data); echo returns($Geocoder->debug()); die();
 
 					$this->id = $res[$this->alias]['id'];
-					if ($this->save($data, true, array('lat', 'lng'))) {
+					if ($this->save($data, true, ['lat', 'lng'])) {
 						$count++;
 					} else {
 						//echo returns($data); echo returns($Geocoder->debug()); die();
@@ -367,7 +367,7 @@ class Country extends DataAppModel {
 		if ($this->GeolocateLib->locate($ip)) {
 			$country = $this->GeolocateLib->getResult('country_code'); # iso2
 			if (!empty($country)) {
-				$c = $this->field('id', array($this->alias . '.iso2' => $country));
+				$c = $this->field('id', [$this->alias . '.iso2' => $country]);
 				if (!empty($c)) {
 					return $c;
 				}
@@ -376,7 +376,7 @@ class Country extends DataAppModel {
 		return -1;
 	}
 
-	public function afterSave($created, $options = array()) {
+	public function afterSave($created, $options = []) {
 		if ($created) {
 			$this->updateCoordinates($this->id);
 		}
@@ -385,7 +385,7 @@ class Country extends DataAppModel {
 	//not in use
 
 	public function getIdByIso($isoCode) {
-		$match = array('DE' => 1, 'AT' => 2, 'CH' => 3);
+		$match = ['DE' => 1, 'AT' => 2, 'CH' => 3];
 
 		if (array_key_exists($isoCode = strtoupper($isoCode), $match)) {
 			return $match[$isoCode];
@@ -396,7 +396,7 @@ class Country extends DataAppModel {
 	//not in use
 
 	public function getIsoById($id, $default = '') {
-		$match = array(1 => 'DE', 2 => 'AT', 3 => 'CH');
+		$match = [1 => 'DE', 2 => 'AT', 3 => 'CH'];
 
 		if (array_key_exists($id, $match)) {
 			return $match[$id];

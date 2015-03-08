@@ -5,7 +5,7 @@ App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
 class CurrencyTest extends MyCakeTestCase {
 
-	public $fixtures = array('plugin.data.currency');
+	public $fixtures = ['plugin.data.currency'];
 
 	public $Currency;
 

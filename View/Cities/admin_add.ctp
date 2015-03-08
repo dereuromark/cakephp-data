@@ -6,7 +6,7 @@
 		<legend><?php echo __('Add %s', __('City')); ?></legend>
 	<?php
 		echo $this->Form->input('country_id');
-		echo $this->Form->input('official_id', array('type' => 'text'));
+		echo $this->Form->input('official_id', ['type' => 'text']);
 
 		if (Configure::read('City.County') !== false) {
 			echo $this->Form->input('county_id');
@@ -27,6 +27,6 @@
 <div class="actions">
 	<ul>
 
-		<li><?php echo $this->Html->link(__('List %s', __('Cities')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Html->link(__('List %s', __('Cities')), ['action' => 'index']);?></li>
 	</ul>
 </div>

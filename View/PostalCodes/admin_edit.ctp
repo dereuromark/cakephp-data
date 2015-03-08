@@ -19,7 +19,7 @@
 <div class="actions">
 	<ul>
 
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('PostalCode.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('PostalCode.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List %s', __('Postal Codes')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('PostalCode.id')], null, __('Are you sure you want to delete # %s?', $this->Form->value('PostalCode.id'))); ?></li>
+		<li><?php echo $this->Html->link(__('List %s', __('Postal Codes')), ['action' => 'index']);?></li>
 	</ul>
 </div>

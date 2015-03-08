@@ -3,28 +3,28 @@ App::uses('DataAppModel', 'Data.Model');
 
 class Location extends DataAppModel {
 
-	public $actsAs = array('Tools.Geocoder' => array('min_accuracy' => 4, 'address' => array('name', 'country_name'), 'formatted_address' => 'formatted_address', 'real' => false, 'before' => 'validate', 'allow_inconclusive' => true, 'expect' => array())); //'postal_code', 'locality', 'sublocality', 'street_address'
+	public $actsAs = ['Tools.Geocoder' => ['min_accuracy' => 4, 'address' => ['name', 'country_name'], 'formatted_address' => 'formatted_address', 'real' => false, 'before' => 'validate', 'allow_inconclusive' => true, 'expect' => []]]; //'postal_code', 'locality', 'sublocality', 'street_address'
 
-	public $validate = array(
-		'name' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+	public $validate = [
+		'name' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
 				'last' => true
-			),
-			'unique' => array(
-				'rule' => array('validateUnique', array('country_id')),
+			],
+			'unique' => [
+				'rule' => ['validateUnique', ['country_id']],
 				'message' => 'valErrRecordNameExists',
-			),
-		),
-		'country_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+			],
+		],
+		'country_id' => [
+			'numeric' => [
+				'rule' => ['numeric'],
 				'message' => 'valErrMandatoryField',
 				'last' => true
-			),
-		)
-	);
+			],
+		]
+	];
 
 	/**
 	 * Location::beforeSave()
@@ -32,10 +32,10 @@ class Location extends DataAppModel {
 	 * @param mixed $options
 	 * @return bool Success
 	 */
-	public function beforeSave($options = array()) {
+	public function beforeSave($options = []) {
 		parent::beforeSave($options);
 
-		$additional = array('locality', 'sublocality');
+		$additional = ['locality', 'sublocality'];
 		foreach ($additional as $field) {
 			if (!empty($this->data[$this->alias]['geocoder_result'][$field])) {
 				$this->data[$this->alias][$field] = $this->data[$this->alias]['geocoder_result'][$field];
@@ -57,14 +57,14 @@ class Location extends DataAppModel {
 		$countryId = !empty($countryId) ? $countryId : 1;
 
 		if (is_numeric($locationName) && strlen($locationName) < 5) { //Country::zipCodeLength($countryId)
-			$result = $this->find('first', array('conditions' => array('formatted_address LIKE' => $locationName . '%' . $country)));
+			$result = $this->find('first', ['conditions' => ['formatted_address LIKE' => $locationName . '%' . $country]]);
 		} else {
-			$result = $this->find('first', array('conditions' => array('name' => $locationName, 'country_id' => $countryId)));
+			$result = $this->find('first', ['conditions' => ['name' => $locationName, 'country_id' => $countryId]]);
 		}
 
 		if (empty($result)) {
 			$this->create();
-			$this->set(array('Location' => array('name' => $locationName, 'country_id' => $countryId, 'country_name' => $country)));
+			$this->set(['Location' => ['name' => $locationName, 'country_id' => $countryId, 'country_name' => $country]]);
 			$result = $this->save();
 		}
 
@@ -83,26 +83,26 @@ class Location extends DataAppModel {
 		if (!is_numeric($lat) || !is_numeric($lng) || !is_numeric($limit)) {
 			return false;
 		}
-		$conditions = array(
+		$conditions = [
 			'Location.lat<>0',
 			'Location.lng<>0',
 			'1=1 HAVING distance<' . 75
-		);
-		$result = $this->find('all', array(
+		];
+		$result = $this->find('all', [
 			'conditions' => $conditions,
 			'fields' => array_merge(
-				array('Location.id', 'Location.name', 'Location.formatted_address'),
-				array(
+				['Location.id', 'Location.name', 'Location.formatted_address'],
+				[
 					'6371.04 * ACOS( COS( PI()/2 - RADIANS(90 - Location.lat)) * ' .
 					'COS( PI()/2 - RADIANS(90 - ' . $lat . ')) * ' .
 					'COS( RADIANS(Location.lng) - RADIANS(' . $lng . ')) + ' .
 					'SIN( PI()/2 - RADIANS(90 - Location.lat)) * ' .
 					'SIN( PI()/2 - RADIANS(90 - ' . $lat . '))) ' .
 					'AS distance'
-				)),
+				]),
 				'order' => 'distance ASC',
 				'limit' => $limit
-		));
+		]);
 		return $result;
 	}
 
@@ -115,7 +115,7 @@ class Location extends DataAppModel {
 			return false;
 		}
 		if (Validation::ip($ip)) {
-			App::import('Vendor', 'geoip', array('file' => 'geoip' . DS . 'geoip.php'));
+			App::import('Vendor', 'geoip', ['file' => 'geoip' . DS . 'geoip.php']);
 			$gi = Net_GeoIP::getInstance(APP . 'vendors' . DS . 'geoip' . DS . 'GeoLiteCity.dat');
 			$record = $gi->lookupLocation($ip);
 			$gi->close();

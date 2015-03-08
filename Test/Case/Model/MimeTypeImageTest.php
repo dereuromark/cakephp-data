@@ -5,7 +5,7 @@ App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
 class MimeTypeImageTest extends MyCakeTestCase {
 
-	public $fixtures = array('plugin.data.mime_type_image');
+	public $fixtures = ['plugin.data.mime_type_image'];
 
 	public $MimeTypeImage;
 

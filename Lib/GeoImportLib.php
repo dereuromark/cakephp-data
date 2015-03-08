@@ -51,7 +51,7 @@ class GeoImportLib {
 		$res = substr($res, strpos($res, 'Amtssprache(n)]]&lt;br />') + 25);
 		$res = substr($res, 0, strpos($res, '|}'));
 
-		$array = array();
+		$array = [];
 		$res = explode('|-', $res);
 		foreach ($res as $key => $val) {
 			if (empty($val)) {
@@ -63,7 +63,7 @@ class GeoImportLib {
 				continue;
 			}
 
-			$t = array();
+			$t = [];
 			$t['state'] = $this->_parse($tmp[4]);
 			$t['abbr'] = substr($tmp[4], strpos($tmp[4], '(') + 1, 2);
 			$tmp[13] = substr($tmp[13], 0, strpos($tmp[13], '&lt;'));
@@ -86,11 +86,11 @@ class GeoImportLib {
 	 * @return array cities or FALSE on failure
 	 */
 	protected function _importCh() {
-		$urls = array(
+		$urls = [
 			'http://de.wikipedia.org/w/index.php?title=Liste_der_St%C3%A4dte_in_der_Schweiz&action=edit&section=3',
 			'http://de.wikipedia.org/w/index.php?title=Liste_der_St%C3%A4dte_in_der_Schweiz&action=edit&section=4'
-		);
-		$array = array();
+		];
+		$array = [];
 		foreach ($urls as $key => $url) {
 			if (file_exists(TMP . 'import.txt')) {
 				$res = file_get_contents(TMP . 'import.txt');
@@ -120,7 +120,7 @@ class GeoImportLib {
 						}
 						//die(returns($tmp));
 
-						$t = array();
+						$t = [];
 						$t['city'] = $this->_parse($tmp[1]);
 						$t['county'] = $t['city'];
 						$t['state'] = $this->_parse($tmp[6]);
@@ -148,7 +148,7 @@ class GeoImportLib {
 							continue;
 						}
 
-						$t = array();
+						$t = [];
 						$t['city'] = $this->_parse($tmp[0]);
 						$t['county'] = $this->_parse($tmp[1]);
 						$t['state'] = $this->_parse($tmp[2]);
@@ -197,7 +197,7 @@ class GeoImportLib {
 		$res = substr($res, strpos($res, '(F 2007)') + 8);
 		$res = substr($res, 0, strpos($res, '|}'));
 
-		$array = array();
+		$array = [];
 		$res = explode('|-', $res);
 		foreach ($res as $key => $val) {
 			if (empty($val)) {
@@ -212,7 +212,7 @@ class GeoImportLib {
 				$tmp[6] = $tmp[5];
 			}
 
-			$t = array();
+			$t = [];
 			$t['city'] = $this->_parse($tmp[0]);
 			$t['county'] = $this->_parse($tmp[1]);
 			$t['state'] = $this->_parse($tmp[2]);
@@ -227,7 +227,7 @@ class GeoImportLib {
 			$array[] = $t;
 		}
 
-		$counties = array();
+		$counties = [];
 		foreach ($array as $city) {
 			if (!isset($counties[$city['county']])) {
 				$counties[$city['county']] = 1;

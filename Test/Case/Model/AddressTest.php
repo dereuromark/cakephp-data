@@ -5,7 +5,7 @@ App::uses('MyCakeTestCase', 'Tools.TestSuite');
 
 class AddressTest extends MyCakeTestCase {
 
-	public $fixtures = array('plugin.data.address');
+	public $fixtures = ['plugin.data.address'];
 
 	public $Address;
 

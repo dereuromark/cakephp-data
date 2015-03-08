@@ -5,7 +5,7 @@ class CurrenciesController extends DataAppController {
 
 	//public $helpers = array('Data.Numeric', 'Data.FormExt');
 
-	public $paginate = array('order' => array('Currency.base' => 'DESC', 'Currency.modified' => 'DESC'));
+	public $paginate = ['order' => ['Currency.base' => 'DESC', 'Currency.modified' => 'DESC']];
 
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -16,13 +16,13 @@ class CurrenciesController extends DataAppController {
 	 */
 	public function admin_list() {
 		$currencies = $this->Currency->availableCurrencies();
-		$res = array();
+		$res = [];
 		foreach ($currencies as $key => $currency) {
-			$x = array('id' => $key, 'name' => $key);
+			$x = ['id' => $key, 'name' => $key];
 			$res[] = $x;
 		}
 
-		echo json_encode(array('results' => $res));
+		echo json_encode(['results' => $res]);
 		die();
 	}
 
@@ -34,7 +34,7 @@ class CurrenciesController extends DataAppController {
 	public function admin_update() {
 		$this->Currency->updateValues();
 		$this->Flash->message('Currencies Updated', 'success');
-		return $this->Common->autoRedirect(array('action' => 'index'));
+		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 
 	public function admin_index() {
@@ -42,7 +42,7 @@ class CurrenciesController extends DataAppController {
 
 		if (CakePlugin::loaded('Search')) {
 			$this->Currency->Behaviors->load('Search.Searchable');
-			$this->Common->loadComponent(array('Search.Prg'));
+			$this->Common->loadComponent(['Search.Prg']);
 
 			$this->Prg->commonProcess();
 			$this->paginate['conditions'] = $this->Currency->parseCriteria($this->Prg->parsedParams());
@@ -50,7 +50,7 @@ class CurrenciesController extends DataAppController {
 
 		$currencies = $this->paginate();
 
-		$baseCurrency = array();
+		$baseCurrency = [];
 		foreach ($currencies as $currency) {
 			if ($currency['Currency']['base']) {
 				$baseCurrency = $currency;
@@ -58,7 +58,7 @@ class CurrenciesController extends DataAppController {
 			}
 		}
 		if (empty($baseCurrency)) {
-			$baseCurrency = $this->Currency->find('first', array('conditions' => array('base' => true)));
+			$baseCurrency = $this->Currency->find('first', ['conditions' => ['base' => true]]);
 			if (!$baseCurrency) {
 				$this->Flash->message(__('noBaseCurrency'), 'warning');
 			}
@@ -71,12 +71,12 @@ class CurrenciesController extends DataAppController {
 		$this->Currency->recursive = 0;
 		if (empty($id)) {
 			$this->Flash->message(__('record invalid'), 'error');
-			return $this->Common->autoRedirect(array('action' => 'index'));
+			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$currency = $this->Currency->record($id);
 		if (empty($currency)) {
 			$this->Flash->message(__('record not exists'), 'error');
-			return $this->Common->autoRedirect(array('action' => 'index'));
+			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->set(compact('currency'));
 	}
@@ -88,7 +88,7 @@ class CurrenciesController extends DataAppController {
 				$id = $this->Currency->id;
 				//$name = $this->request->data['Currency']['name'];
 				$this->Flash->message(__('record add %s saved', $id), 'success');
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(['action' => 'index']);
 			} else {
 				$this->request->data = $this->Currency->data;
 
@@ -105,13 +105,13 @@ class CurrenciesController extends DataAppController {
 	public function admin_edit($id = null) {
 		if (empty($id)) {
 			$this->Flash->message(__('record invalid'), 'error');
-			return $this->Common->autoRedirect(array('action' => 'index'));
+			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->Currency->save($this->request->data)) {
 				//$name = $this->request->data['Currency']['name'];
 				$this->Flash->message(__('record edit %s saved', $id), 'success');
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(['action' => 'index']);
 			} else {
 				$this->Flash->message(__('record edit not saved'), 'error');
 			}
@@ -120,7 +120,7 @@ class CurrenciesController extends DataAppController {
 			$this->request->data = $this->Currency->record($id);
 			if (empty($this->request->data)) { # still no record found
 				$this->Flash->message(__('record not exists'), 'error');
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(['action' => 'index']);
 			}
 		}
 	}
@@ -129,21 +129,21 @@ class CurrenciesController extends DataAppController {
 		$this->request->allowMethod('post');
 		if (empty($id)) {
 			$this->Flash->message(__('record invalid'), 'error');
-			return $this->Common->autoRedirect(array('action' => 'index'));
+			return $this->Common->autoRedirect(['action' => 'index']);
 		}
-		$res = $this->Currency->find('first', array('fields' => array('id'), 'conditions' => array('Currency.id' => $id)));
+		$res = $this->Currency->find('first', ['fields' => ['id'], 'conditions' => ['Currency.id' => $id]]);
 		if (empty($res)) {
 			$this->Flash->message(__('record del not exists'), 'error');
-			return $this->Common->autoRedirect(array('action' => 'index'));
+			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 
 		//$name = $res['Currency']['name'];
 		if ($this->Currency->delete($id)) {
 			$this->Flash->message(__('record del %s done', $id), 'success');
-			return $this->redirect(array('action' => 'index'));
+			return $this->redirect(['action' => 'index']);
 		} else {
 			$this->Flash->message(__('record del %s not done exception', $id), 'error');
-			return $this->Common->autoRedirect(array('action' => 'index'));
+			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 	}
 
@@ -166,14 +166,14 @@ class CurrenciesController extends DataAppController {
 			$this->Flash->message(__('set as primary not done exception', $name), 'error');
 
 		}
-		return $this->Common->autoRedirect(array('action' => 'index'));
+		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 
 	/**
 	 * Toggle - ajax
 	 */
 	public function admin_toggle($field = null, $id = null) {
-		 $fields = array('active');
+		 $fields = ['active'];
 
 		if (!empty($field) && in_array($field, $fields) && !empty($id)) {
 			$value = $this->{$this->modelClass}->toggleField($field, $id);
@@ -185,7 +185,7 @@ class CurrenciesController extends DataAppController {
 		# http get request + redirect
 		if (!$this->request->is('ajax')) {
 			$this->Flash->message(__('Saved'), 'success');
-			return $this->Common->autoRedirect(array('action' => 'index'));
+			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 
 		# ajax

@@ -3,76 +3,76 @@ App::uses('DataAppModel', 'Data.Model');
 
 class Continent extends DataAppModel {
 
-	public $actsAs = array('Tree');
+	public $actsAs = ['Tree'];
 
-	public $order = array('Continent.name' => 'ASC');
+	public $order = ['Continent.name' => 'ASC'];
 
-	public $validate = array(
-		'name' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+	public $validate = [
+		'name' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
-			),
-		),
-		'ori_name' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			],
+		],
+		'ori_name' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
-			),
-		),
-		'parent_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+			],
+		],
+		'parent_id' => [
+			'numeric' => [
+				'rule' => ['numeric'],
 				'message' => 'valErrMandatoryField',
-			),
-		),
-		'lft' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+			],
+		],
+		'lft' => [
+			'numeric' => [
+				'rule' => ['numeric'],
 				'message' => 'valErrMandatoryField',
-			),
-		),
-		'rgt' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+			],
+		],
+		'rgt' => [
+			'numeric' => [
+				'rule' => ['numeric'],
 				'message' => 'valErrMandatoryField',
-			),
-		),
-		'status' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+			],
+		],
+		'status' => [
+			'numeric' => [
+				'rule' => ['numeric'],
 				'message' => 'valErrMandatoryField',
-			),
-		),
-	);
+			],
+		],
+	];
 
-	public $belongsTo = array(
-		'ParentContinent' => array(
+	public $belongsTo = [
+		'ParentContinent' => [
 			'className' => 'Continent',
 			'foreignKey' => 'parent_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
-	);
+		]
+	];
 
-	public $hasMany = array(
-		'ChildContinent' => array(
+	public $hasMany = [
+		'ChildContinent' => [
 			'className' => 'Continent',
 			'foreignKey' => 'parent_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
-		),
-		'Country' => array(
+		],
+		'Country' => [
 			'className' => 'Country',
 			'foreignKey' => 'continent_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
-		)
-	);
+		]
+	];
 
 }

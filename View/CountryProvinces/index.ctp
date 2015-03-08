@@ -2,13 +2,13 @@
 
 <div class="floatRight">
 <?php echo __('Country');?>:&nbsp;&nbsp;
-<?php echo $this->Form->input('Filter.id', array(
+<?php echo $this->Form->input('Filter.id', [
 	'class' => 'filter',
 	'label' => false,
 	'div' => false,
 	'type' => 'select',
-	'empty' => array(-1 => '- [ ' . __('noRestriction') . ' ] -'),
-	'onchange' => 'changeSel(this,\'' . $this->Html->url(array('action' => 'index')) . '/index/\')',
+	'empty' => [-1 => '- [ ' . __('noRestriction') . ' ] -'],
+	'onchange' => 'changeSel(this,\'' . $this->Html->url(['action' => 'index']) . '/index/\')',
 	/*
 	'onchange'=>'filter(this,\''.$this->Html->url(array(
 				'filter'=>'on',
@@ -16,7 +16,7 @@
 				'direction'=>(!empty($filters['direction']) ? $filters['direction'] : '')
 				)).'/'.$filter_field.':\')',
 	*/
-	'options' => $countries));?>
+	'options' => $countries]);?>
 <div></div>
 </div>
 
@@ -69,6 +69,6 @@ foreach ($countryProvinces as $countryProvince):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List %s', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('List %s', __('Countries')), ['controller' => 'countries', 'action' => 'index']); ?> </li>
 	</ul>
 </div>

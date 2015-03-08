@@ -5,8 +5,8 @@
 <div class="search-box">
 <?php
 echo $this->Form->create();
-echo $this->Form->input('search', array('placeholder' => __('wildcardSearch %s and %s', '*', '?')));
-echo $this->Form->submit(__('Search'), array());
+echo $this->Form->input('search', ['placeholder' => __('wildcardSearch %s and %s', '*', '?')]);
+echo $this->Form->submit(__('Search'), []);
 echo $this->Form->end();
 ?>
 </div>
@@ -21,7 +21,7 @@ echo $this->Form->end();
 	<th><?php echo $this->Paginator->sort('decimal_places');?></th>
 	<th><?php echo $this->Paginator->sort('value');?></th>
 	<th class="actions"><?php echo __('Status');?></th>
-	<th><?php echo $this->Paginator->sort('modified', null, array('direction' => 'desc'));?></th>
+	<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
 	<th class="actions"><?php echo __('Actions');?></th>
 </tr>
 <?php
@@ -57,20 +57,20 @@ foreach ($currencies as $currency):
 		</td>
 		<td>
 			<span class="ajaxToggling" id="ajaxToggle-<?php echo $currency['Currency']['id']?>">
-			<?php echo $this->Html->link($this->Format->yesNo($currency['Currency']['active'], 'Aktiv', 'Inaktiv'), array('action' => 'toggle', 'active', $currency['Currency']['id']), array('escape' => false)); ?></span>&nbsp;&nbsp;<?php
+			<?php echo $this->Html->link($this->Format->yesNo($currency['Currency']['active'], 'Aktiv', 'Inaktiv'), ['action' => 'toggle', 'active', $currency['Currency']['id']], ['escape' => false]); ?></span>&nbsp;&nbsp;<?php
 			if ($currency['Currency']['base'] && !empty($baseCurrency)) {
 				echo $this->Format->yesNo($currency['Currency']['base'], 'Basis-Wert');
 			} else {
-				echo $this->Html->link($this->Format->cIcon('checkbox_ticked.gif', 'Zum Basis-Wert machen'), array('action' => 'base', $currency['Currency']['id']), array('escape' => false), 'Sicher?');
+				echo $this->Html->link($this->Format->cIcon('checkbox_ticked.gif', 'Zum Basis-Wert machen'), ['action' => 'base', $currency['Currency']['id']], ['escape' => false], 'Sicher?');
 			} ?>
 		</td>
 		<td>
 			<?php echo $this->Datetime->niceDate($currency['Currency']['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $currency['Currency']['id']), array('escape' => false)); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $currency['Currency']['id']), array('escape' => false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $currency['Currency']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $currency['Currency']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $currency['Currency']['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $currency['Currency']['id']], ['escape' => false]); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $currency['Currency']['id']], ['escape' => false], __('Are you sure you want to delete # %s?', $currency['Currency']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -81,7 +81,7 @@ foreach ($currencies as $currency):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add %s', __('Currency')), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('Update %s', __('Currency Values')), array('action' => 'update')); ?></li>
+		<li><?php echo $this->Html->link(__('Add %s', __('Currency')), ['action' => 'add']); ?></li>
+		<li><?php echo $this->Html->link(__('Update %s', __('Currency Values')), ['action' => 'update']); ?></li>
 	</ul>
 </div>

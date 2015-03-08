@@ -15,7 +15,7 @@ class PostalCodesControllerTest extends MyCakeTestCase {
 	 *
 	 * @var array
 	 */
-	public $fixtures = array('plugin.data.postal_code');
+	public $fixtures = ['plugin.data.postal_code'];
 
 	/**
 	 * SetUp method

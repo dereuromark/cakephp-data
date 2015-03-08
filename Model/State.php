@@ -3,34 +3,34 @@ App::uses('DataAppModel', 'Data.Model');
 
 class State extends DataAppModel {
 
-	public $actsAs = array('Tools.Slugged' => array('case' => 'low', 'mode' => 'ascii', 'unique' => false, 'overwrite' => false));
+	public $actsAs = ['Tools.Slugged' => ['case' => 'low', 'mode' => 'ascii', 'unique' => false, 'overwrite' => false]];
 
-	public $order = array('State.name' => 'ASC');
+	public $order = ['State.name' => 'ASC'];
 
-	public $validate = array(
-		'country_id' => array('numeric'),
-		'abbr' => array(
-			'validateUnique' => array(
-				'rule' => array('validateUnique', array('country_id')),
+	public $validate = [
+		'country_id' => ['numeric'],
+		'abbr' => [
+			'validateUnique' => [
+				'rule' => ['validateUnique', ['country_id']],
 				'message' => 'valErrRecordNameExists',
 				'allowEmpty' => true
-			),
-		),
-		'name' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			],
+		],
+		'name' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
 				'last' => true
-			),
-			'isUnique' => array(
-				'rule' => array('validateUnique', array('country_id')),
+			],
+			'isUnique' => [
+				'rule' => ['validateUnique', ['country_id']],
 				'message' => 'valErrRecordNameExists',
-			),
-		),
-	);
+			],
+		],
+	];
 
-	public $hasMany = array(
-		'County' => array(
+	public $hasMany = [
+		'County' => [
 			'className' => 'Data.County',
 			'foreignKey' => 'state_id',
 			'dependent' => false,
@@ -38,18 +38,18 @@ class State extends DataAppModel {
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
-		)
-	);
+		]
+	];
 
-	public $belongsTo = array(
-		'Country' => array(
+	public $belongsTo = [
+		'Country' => [
 			'className' => 'Data.Country',
 			'foreignKey' => 'country_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
-	);
+		]
+	];
 
 	public function getStateId($conditions) {
 		if ($id = $this->field('id', $conditions)) {
@@ -67,15 +67,15 @@ class State extends DataAppModel {
 
 	public function getListByCountry($cid = null) {
 		if (empty($cid)) {
-			return array();
+			return [];
 		}
-		return $this->find('list', array(
-			'conditions' => array($this->alias . '.country_id' => $cid),
-			'order' => array($this->alias . '.name' => 'ASC')
-		));
+		return $this->find('list', [
+			'conditions' => [$this->alias . '.country_id' => $cid],
+			'order' => [$this->alias . '.name' => 'ASC']
+		]);
 	}
 
-	public function afterSave($created, $options = array()) {
+	public function afterSave($created, $options = []) {
 		if ($created) {
 			$this->updateCoordinates($this->id);
 		}
@@ -99,20 +99,20 @@ class State extends DataAppModel {
 		}
 
 		if (!empty($id)) {
-			$res = $this->find('first', array('conditions' => array($this->alias . '.id' => $id), 'contain' => array('Country.name')));
+			$res = $this->find('first', ['conditions' => [$this->alias . '.id' => $id], 'contain' => ['Country.name']]);
 			if (!empty($res[$this->alias]['name']) && !empty($res[$this->Country->alias]['name']) && $geocoder->geocode($res[$this->alias]['name'] .
 				', ' . $res[$this->Country->alias]['name'])) {
 
 				$data = $geocoder->getResult();
 				//pr($data); die();
-				$saveArray = array('id' => $id, 'lat' => $data['lat'], 'lng' => $data['lng'], 'country_id' => $res[$this->alias]['country_id']);
+				$saveArray = ['id' => $id, 'lat' => $data['lat'], 'lng' => $data['lng'], 'country_id' => $res[$this->alias]['country_id']];
 
 				if (!empty($data['country_province_code']) && mb_strlen($data['country_province_code']) <= 3 && preg_match('/^([A-Z])*$/', $data['country_province_code'])) {
 					$saveArray['abbr'] = $data['country_province_code'];
 				}
 
 				$this->id = $id;
-				if (!$this->save($saveArray, true, array('id', 'lat', 'lng', 'abbr', 'country_id'))) {
+				if (!$this->save($saveArray, true, ['id', 'lat', 'lng', 'abbr', 'country_id'])) {
 					if ($data['country_province_code'] !== 'DC') {
 						echo returns($this->id);
 						pr($res);
@@ -125,13 +125,13 @@ class State extends DataAppModel {
 			}
 		} else {
 
-			$conditions = array();
+			$conditions = [];
 			if (!$override) {
-				$conditions = array($this->alias . '.lat' => 0, $this->alias . '.lng' => 0);
+				$conditions = [$this->alias . '.lat' => 0, $this->alias . '.lng' => 0];
 			}
 
-			$results = $this->find('all', array('conditions' => $conditions, 'contain' => array('Country.name'), 'order' => array('CountryProvince.modified' =>
-				'ASC')));
+			$results = $this->find('all', ['conditions' => $conditions, 'contain' => ['Country.name'], 'order' => ['CountryProvince.modified' =>
+				'ASC']]);
 			$count = 0;
 
 			foreach ($results as $res) {
@@ -141,9 +141,9 @@ class State extends DataAppModel {
 					$data = $geocoder->getResult();
 					//pr($data); die();
 					//pr ($geocoder->debug());
-					$saveArray = array('id' => $res[$this->alias]['id'], 'country_id' => $res[$this->alias]['country_id']);
+					$saveArray = ['id' => $res[$this->alias]['id'], 'country_id' => $res[$this->alias]['country_id']];
 					if (isset($data['lat']) && isset($data['lng'])) {
-						$saveArray = array_merge($saveArray, array('lat' => $data['lat'], 'lng' => $data['lng']));
+						$saveArray = array_merge($saveArray, ['lat' => $data['lat'], 'lng' => $data['lng']]);
 					}
 
 					if (!empty($data['country_province_code']) && mb_strlen($data['country_province_code']) <= 3 && preg_match('/^([A-Z])*$/', $data['country_province_code'])) {
@@ -151,7 +151,7 @@ class State extends DataAppModel {
 					}
 
 					$this->id = $res[$this->alias]['id'];
-					if ($this->save($saveArray, true, array('lat', 'lng', 'abbr', 'country_id'))) {
+					if ($this->save($saveArray, true, ['lat', 'lng', 'abbr', 'country_id'])) {
 						$count++;
 
 						if (!empty($saveArray['abbr']) && $saveArray['abbr'] != $res[$this->alias]['abbr']) {

@@ -10,7 +10,7 @@
 		echo $this->Form->input('code');
 		echo $this->Form->input('locale');
 		echo $this->Form->input('locale_fallback');
-		echo $this->Form->input('direction', array('options' => Language::directions()));
+		echo $this->Form->input('direction', ['options' => Language::directions()]);
 		//echo $this->Form->input('status');
 	?>
 	</fieldset>
@@ -21,6 +21,6 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List %s', __('Languages')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Html->link(__('List %s', __('Languages')), ['action' => 'index']);?></li>
 	</ul>
 </div>

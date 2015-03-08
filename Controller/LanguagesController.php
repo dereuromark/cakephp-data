@@ -3,7 +3,7 @@ App::uses('DataAppController', 'Data.Controller');
 
 class LanguagesController extends DataAppController {
 
-	public $paginate = array('order' => array('Language.name' => 'ASC'));
+	public $paginate = ['order' => ['Language.name' => 'ASC']];
 
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -19,7 +19,7 @@ class LanguagesController extends DataAppController {
 
 		if (CakePlugin::loaded('Search')) {
 			$this->Language->Behaviors->load('Search.Searchable');
-			$this->Common->loadComponent(array('Search.Prg'));
+			$this->Common->loadComponent(['Search.Prg']);
 
 			$this->Prg->commonProcess();
 			$this->paginate['conditions'] = $this->Language->parseCriteria($this->Prg->parsedParams());
@@ -30,9 +30,9 @@ class LanguagesController extends DataAppController {
 	}
 
 	public function admin_view($id = null) {
-		if (empty($id) || !($language = $this->Language->find('first', array('conditions' => array('Language.id' => $id))))) {
+		if (empty($id) || !($language = $this->Language->find('first', ['conditions' => ['Language.id' => $id]]))) {
 			$this->Flash->message(__('invalid record'), 'error');
-			return $this->Common->autoRedirect(array('action' => 'index'));
+			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->set(compact('language'));
 	}
@@ -43,7 +43,7 @@ class LanguagesController extends DataAppController {
 			if ($this->Language->save($this->request->data)) {
 				$var = $this->request->data['Language']['name'];
 				$this->Flash->message(__('record add %s saved', h($var)), 'success');
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(['action' => 'index']);
 			} else {
 				$this->Flash->message(__('formContainsErrors'), 'error');
 			}
@@ -51,15 +51,15 @@ class LanguagesController extends DataAppController {
 	}
 
 	public function admin_edit($id = null) {
-		if (empty($id) || !($language = $this->Language->find('first', array('conditions' => array('Language.id' => $id))))) {
+		if (empty($id) || !($language = $this->Language->find('first', ['conditions' => ['Language.id' => $id]]))) {
 			$this->Flash->message(__('invalid record'), 'error');
-			return $this->Common->autoRedirect(array('action' => 'index'));
+			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->Language->save($this->request->data)) {
 				$var = $this->request->data['Language']['name'];
 				$this->Flash->message(__('record edit %s saved', h($var)), 'success');
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(['action' => 'index']);
 			} else {
 				$this->Flash->message(__('formContainsErrors'), 'error');
 			}
@@ -71,17 +71,17 @@ class LanguagesController extends DataAppController {
 
 	public function admin_delete($id = null) {
 		$this->request->allowMethod('post');
-		if (empty($id) || !($language = $this->Language->find('first', array('conditions' => array('Language.id' => $id), 'fields' => array('id', 'name'))))) {
+		if (empty($id) || !($language = $this->Language->find('first', ['conditions' => ['Language.id' => $id], 'fields' => ['id', 'name']]))) {
 			$this->Flash->message(__('invalid record'), 'error');
-			return $this->Common->autoRedirect(array('action' => 'index'));
+			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Language->delete($id)) {
 			$var = $language['Language']['name'];
 			$this->Flash->message(__('record del %s done', h($var)), 'success');
-			return $this->redirect(array('action' => 'index'));
+			return $this->redirect(['action' => 'index']);
 		}
 		$this->Flash->message(__('record del %s not done exception', h($var)), 'error');
-		return $this->Common->autoRedirect(array('action' => 'index'));
+		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 
 	/**
@@ -94,35 +94,35 @@ class LanguagesController extends DataAppController {
 		//$languages = $this->Language->iso3ToIso2();
 		$languages = $this->Language->catalog();
 		$count = 0;
-		$errors = array();
+		$errors = [];
 		foreach ($languages as $language) {
 			if (!($code = $this->Language->iso3ToIso2($language['localeFallback']))) {
 				$code = '';
 			}
-			$data = array(
+			$data = [
 				'name' => $language['language'],
 				'ori_name' => $language['language'],
 				'code' => $code,
 				'locale' => $language['locale'],
 				'locale_fallback' => $language['localeFallback'],
 				'direction' => $language['direction']
-			);
+			];
 			$this->Language->create();
 			if ($this->Language->save($data)) {
 				$count++;
 			} else {
-				$errors[] = array('data' => $language, 'errors' => $this->Language->validationErrors);
+				$errors[] = ['data' => $language, 'errors' => $this->Language->validationErrors];
 			}
 		}
 
 		$this->Flash->message($count . ' of ' . count($languages) . ' ' . __('languages added'), 'success');
 
-		$errorMessage = array();
+		$errorMessage = [];
 		foreach ($errors as $error) {
 			$errorMessage[] = $error['data']['language'] . ' (' . returns($error['errors']) . ')';
 		}
 		$this->Flash->message(__('not added') . ' ' . implode(', ', $errorMessage), 'warning');
-		return $this->redirect(array('action' => 'index'));
+		return $this->redirect(['action' => 'index']);
 		//pr($errors);
 	}
 
@@ -132,7 +132,7 @@ class LanguagesController extends DataAppController {
 	public function admin_compare_to_iso_list() {
 		$isoList = $this->Language->getOfficialIsoList();
 
-		$languages = $this->Language->find('all', array());
+		$languages = $this->Language->find('all', []);
 
 		$this->set(compact('isoList', 'languages'));
 	}
@@ -144,11 +144,11 @@ class LanguagesController extends DataAppController {
 		$isoList = $this->Language->getOfficialIsoList();
 
 		$languages = $this->Language->catalog();
-		$locales = array();
+		$locales = [];
 		foreach ($languages as $key => $value) {
 			if (strlen($key) === 2) {
 				$locales[$key] = $value;
-				$locales[$key]['regional'] = array();
+				$locales[$key]['regional'] = [];
 				continue;
 			}
 			if (strlen($key) === 1) {
@@ -158,7 +158,7 @@ class LanguagesController extends DataAppController {
 			}
 			$baseLocale = substr($key, 0, 2);
 			if (!isset($locales[$baseLocale])) {
-				$locales[$baseLocale] = array('missing_base' => 1);
+				$locales[$baseLocale] = ['missing_base' => 1];
 			}
 			$locales[$baseLocale]['regional'][] = $value;
 		}
@@ -170,10 +170,10 @@ class LanguagesController extends DataAppController {
 
 	public function admin_set_primary_languages_active() {
 		$languages = $this->Language->getPrimaryLanguages('list');
-		$this->Language->updateAll(array('status' => Language::STATUS_ACTIVE), array('id' => array_keys($languages)));
+		$this->Language->updateAll(['status' => Language::STATUS_ACTIVE], ['id' => array_keys($languages)]);
 
 		$this->Flash->message(__('%s of %s set active', $this->Language->getAffectedRows(), count($languages)), 'success');
-		return $this->redirect(array('action' => 'index'));
+		return $this->redirect(['action' => 'index']);
 	}
 
 /* probs:

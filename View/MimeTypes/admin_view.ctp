@@ -30,9 +30,9 @@
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit Mime Type'), array('action' => 'edit', $mimeType['MimeType']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Mime Type'), array('action' => 'delete', $mimeType['MimeType']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $mimeType['MimeType']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Mime Types'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('Add Mime Type'), array('action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Edit Mime Type'), ['action' => 'edit', $mimeType['MimeType']['id']]); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete Mime Type'), ['action' => 'delete', $mimeType['MimeType']['id']], ['escape' => false], __('Are you sure you want to delete # %s?', $mimeType['MimeType']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('List Mime Types'), ['action' => 'index']); ?> </li>
+		<li><?php echo $this->Html->link(__('Add Mime Type'), ['action' => 'add']); ?> </li>
 	</ul>
 </div>

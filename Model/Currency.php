@@ -3,47 +3,47 @@ App::uses('DataAppModel', 'Data.Model');
 
 class Currency extends DataAppModel {
 
-	public $order = array('Currency.base' => 'DESC', 'Currency.code' => 'ASC');
+	public $order = ['Currency.base' => 'DESC', 'Currency.code' => 'ASC'];
 
-	public $validate = array(
-		'name' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+	public $validate = [
+		'name' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
 				'last' => true
-			),
-			'isUnique' => array(
-				'rule' => array('isUnique'),
+			],
+			'isUnique' => [
+				'rule' => ['isUnique'],
 				'message' => 'key already exists',
-			),
-		),
-		'code' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			],
+		],
+		'code' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
 				'last' => true
-			),
-			'isUnique' => array(
-				'rule' => array('isUnique'),
+			],
+			'isUnique' => [
+				'rule' => ['isUnique'],
 				'message' => 'key already exists',
 				'last' => true
-			),
-			'available' => array(
-				'rule' => array('available'),
+			],
+			'available' => [
+				'rule' => ['available'],
 				'message' => 'this currency is not available',
-			),
-		),
-		'value' => array('numeric'),
-		'base' => array('numeric'),
-		'decimal_places' => array('numeric'),
-	);
+			],
+		],
+		'value' => ['numeric'],
+		'base' => ['numeric'],
+		'decimal_places' => ['numeric'],
+	];
 
-	public $filterArgs = array(
-		'search' => array('type' => 'like', 'field' => array('name', 'code')),
-		'active' => array('type' => 'value')
-	);
+	public $filterArgs = [
+		'search' => ['type' => 'like', 'field' => ['name', 'code']],
+		'active' => ['type' => 'value']
+	];
 
-	public function beforeValidate($options = array()) {
+	public function beforeValidate($options = []) {
 		$ret = parent::beforeValidate($options);
 
 		if (isset($this->data[$this->alias]['value'])) {
@@ -78,7 +78,7 @@ class Currency extends DataAppModel {
 		return $ret;
 	}
 
-	public function beforeSave($options = array()) {
+	public function beforeSave($options = []) {
 		parent::beforeSave($options);
 		if (isset($this->data[$this->alias]['name'])) {
 			$this->data[$this->alias]['name'] = ucwords($this->data[$this->alias]['name']);
@@ -134,14 +134,14 @@ class Currency extends DataAppModel {
 	/**
 	 * All except base one
 	 */
-	public function foreignCurrencies($type = 'all', $options = array()) {
-		$defaults = array('conditions' => array($this->alias . '.base' => 0));
+	public function foreignCurrencies($type = 'all', $options = []) {
+		$defaults = ['conditions' => [$this->alias . '.base' => 0]];
 		$options = Set::merge($defaults, $options);
 		return $this->find($type, $options);
 	}
 
-	public function baseCurrency($options = array()) {
-		$defaults = array('conditions' => array($this->alias . '.base' => 1));
+	public function baseCurrency($options = []) {
+		$defaults = ['conditions' => [$this->alias . '.base' => 1]];
 		$options = Set::merge($defaults, $options);
 		return $this->find('first', $options);
 	}
@@ -158,7 +158,7 @@ class Currency extends DataAppModel {
 		if ($res = $this->CurrencyLib->table($base[$this->alias]['code'], 4)) {
 			return $res;
 		}
-		return array();
+		return [];
 	}
 
 	/**

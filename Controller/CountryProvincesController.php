@@ -3,7 +3,7 @@ App::uses('DataAppController', 'Data.Controller');
 
 class CountryProvincesController extends DataAppController {
 
-	public $paginate = array('order' => array('CountryProvince.modified' => 'DESC'));
+	public $paginate = ['order' => ['CountryProvince.modified' => 'DESC']];
 
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -42,8 +42,8 @@ class CountryProvincesController extends DataAppController {
 	 */
 	public function index($cid = null) {
 		$this->CountryProvince->recursive = 0;
-		$this->paginate['order'] = array('CountryProvince.name' => 'ASC');
-		$this->paginate['conditions'] = array('Country.status' => 1);
+		$this->paginate['order'] = ['CountryProvince.name' => 'ASC'];
+		$this->paginate['conditions'] = ['Country.status' => 1];
 
 		$cid = $this->_processCountry($cid);
 
@@ -73,7 +73,7 @@ class CountryProvincesController extends DataAppController {
 		}
 
 		$this->autoRender = false;
-		return $this->redirect(array('action' => 'index'));
+		return $this->redirect(['action' => 'index']);
 	}
 
 	/**
@@ -90,7 +90,7 @@ class CountryProvincesController extends DataAppController {
 		$countries = $this->CountryProvince->Country->find('list');
 
 		$this->set(compact('countryProvinces', 'countries'));
-		$this->Common->loadHelper(array('Tools.GoogleMapV3'));
+		$this->Common->loadHelper(['Tools.GoogleMapV3']);
 	}
 
 	/**
@@ -103,12 +103,12 @@ class CountryProvincesController extends DataAppController {
 		$this->CountryProvince->recursive = 0;
 		if (empty($id)) {
 			$this->Flash->message(__('record invalid'), 'error');
-			return $this->redirect(array('action' => 'index'));
+			return $this->redirect(['action' => 'index']);
 		}
 		$countryProvince = $this->CountryProvince->record($id);
 		if (empty($countryProvince)) {
 			$this->Flash->message(__('record not exists'), 'error');
-			return $this->redirect(array('action' => 'index'));
+			return $this->redirect(['action' => 'index']);
 		}
 		$this->set(compact('countryProvince'));
 	}
@@ -125,7 +125,7 @@ class CountryProvincesController extends DataAppController {
 				$id = $this->CountryProvince->id;
 				$name = $this->request->data['CountryProvince']['name'];
 				$this->Flash->message(__('record add %s saved', h($name)), 'success');
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(['action' => 'index']);
 			} else {
 				$this->Flash->message(__('record add not saved'), 'error');
 			}
@@ -148,13 +148,13 @@ class CountryProvincesController extends DataAppController {
 	public function admin_edit($id = null) {
 		if (empty($id)) {
 			$this->Flash->message(__('record invalid'), 'error');
-			return $this->redirect(array('action' => 'index'));
+			return $this->redirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->CountryProvince->save($this->request->data)) {
 				$name = $this->request->data['CountryProvince']['name'];
 				$this->Flash->message(__('record edit %s saved', h($name)), 'success');
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(['action' => 'index']);
 			} else {
 				$this->Flash->message(__('record edit not saved'), 'error');
 			}
@@ -163,7 +163,7 @@ class CountryProvincesController extends DataAppController {
 			$this->request->data = $this->CountryProvince->record($id);
 			if (empty($this->request->data)) { # still no record found
 				$this->Flash->message(__('record not exists'), 'error');
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(['action' => 'index']);
 			}
 		}
 		$countries = $this->CountryProvince->Country->find('list');
@@ -180,21 +180,21 @@ class CountryProvincesController extends DataAppController {
 		$this->request->allowMethod('post');
 		if (empty($id)) {
 			$this->Flash->message(__('record invalid'), 'error');
-			return $this->redirect(array('action' => 'index'));
+			return $this->redirect(['action' => 'index']);
 		}
-		$res = $this->CountryProvince->find('first', array('fields' => array('id', 'name'), 'conditions' => array('CountryProvince.id' => $id)));
+		$res = $this->CountryProvince->find('first', ['fields' => ['id', 'name'], 'conditions' => ['CountryProvince.id' => $id]]);
 		if (empty($res)) {
 			$this->Flash->message(__('record del not exists'), 'error');
-			return $this->redirect(array('action' => 'index'));
+			return $this->redirect(['action' => 'index']);
 		}
 
 		$name = $res['CountryProvince']['name'];
 		if ($this->CountryProvince->delete($id)) {
 			$this->Flash->message(__('record del %s done', h($name)), 'success');
-			return $this->redirect(array('action' => 'index'));
+			return $this->redirect(['action' => 'index']);
 		} else {
 			$this->Flash->message(__('record del %s not done exception', $name), 'error');
-			return $this->redirect(array('action' => 'index'));
+			return $this->redirect(['action' => 'index']);
 		}
 	}
 
@@ -221,7 +221,7 @@ class CountryProvincesController extends DataAppController {
 		}
 
 		if (!empty($cid)) {
-			$this->paginate = Set::merge($this->paginate, array('conditions' => array('country_id' => $cid)));
+			$this->paginate = Set::merge($this->paginate, ['conditions' => ['country_id' => $cid]]);
 			$this->request->data['Filter']['id'] = $cid;
 		}
 	}

@@ -5,9 +5,9 @@
 <div class="search-box">
 <?php
 echo $this->Form->create();
-echo $this->Form->input('search', array('placeholder' => __('wildcardSearch %s and %s', '*', '?')));
-echo $this->Form->input('dir', array('label' => __('Direction'), 'options' => Language::directions(), 'empty' => Configure::read('Select.defaultBefore') . __('noSelection') . Configure::read('Select.defaultAfter')));
-echo $this->Form->submit(__('Search'), array());
+echo $this->Form->input('search', ['placeholder' => __('wildcardSearch %s and %s', '*', '?')]);
+echo $this->Form->input('dir', ['label' => __('Direction'), 'options' => Language::directions(), 'empty' => Configure::read('Select.defaultBefore') . __('noSelection') . Configure::read('Select.defaultAfter')]);
+echo $this->Form->submit(__('Search'), []);
 echo $this->Form->end();
 ?>
 </div>
@@ -22,7 +22,7 @@ echo $this->Form->end();
 	<th><?php echo $this->Paginator->sort('locale_fallback');?></th>
 	<th><?php echo $this->Paginator->sort('direction');?></th>
 	<th><?php echo $this->Paginator->sort('status');?></th>
-	<th><?php echo $this->Paginator->sort('modified', null, array('direction' => 'desc'));?></th>
+	<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
 	<th class="actions"><?php echo __('Actions');?></th>
 </tr>
 <?php
@@ -77,9 +77,9 @@ foreach ($languages as $language):
 			<?php echo $this->Datetime->niceDate($language['Language']['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $language['Language']['id']), array('escape' => false)); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $language['Language']['id']), array('escape' => false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $language['Language']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $language['Language']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $language['Language']['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $language['Language']['id']], ['escape' => false]); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $language['Language']['id']], ['escape' => false], __('Are you sure you want to delete # %s?', $language['Language']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -97,10 +97,10 @@ The language flags are actually country flags. Due to incompatabities between co
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add %s', __('Language')), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('Compare %s', __('Languages')), array('action' => 'compare_to_iso_list')); ?></li>
-		<li><?php echo $this->Html->link(__('Compare %s to core', __('Languages')), array('action' => 'compare_iso_list_to_core')); ?></li>
-		<li><?php echo $this->Html->link(__('Import %s from Core', __('Language')), array('action' => 'import_from_core'), array(), __('Sure?')); ?></li>
-		<li><?php echo $this->Html->link(__('Set primary languages active'), array('action' => 'set_primary_languages_active'), array(), __('Sure?')); ?></li>
+		<li><?php echo $this->Html->link(__('Add %s', __('Language')), ['action' => 'add']); ?></li>
+		<li><?php echo $this->Html->link(__('Compare %s', __('Languages')), ['action' => 'compare_to_iso_list']); ?></li>
+		<li><?php echo $this->Html->link(__('Compare %s to core', __('Languages')), ['action' => 'compare_iso_list_to_core']); ?></li>
+		<li><?php echo $this->Html->link(__('Import %s from Core', __('Language')), ['action' => 'import_from_core'], [], __('Sure?')); ?></li>
+		<li><?php echo $this->Html->link(__('Set primary languages active'), ['action' => 'set_primary_languages_active'], [], __('Sure?')); ?></li>
 	</ul>
 </div>
