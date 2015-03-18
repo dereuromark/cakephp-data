@@ -17,7 +17,7 @@ foreach ($extensions as $extension) {
 		echo $this->Form->input('file', ['type' => 'file']);
 	?>
 	</fieldset>
-<?php echo $this->Form->end('Submit');?>
+<?php echo $this->Form->submit('Submit'); echo $this->Form->end();?>
 </div>
 
 </div>

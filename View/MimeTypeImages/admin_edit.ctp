@@ -16,11 +16,11 @@
 		echo $this->Form->input('details', ['type' => 'textarea']);
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit'));?>
+<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('MimeTypeImage.id')], null, __('Are you sure you want to delete # %s?', $this->Form->value('MimeTypeImage.id'))); ?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('MimeTypeImage.id')], ['confirm' => __('Are you sure you want to delete # %s?', $this->Form->value('MimeTypeImage.id'))]); ?></li>
 		<li><?php echo $this->Html->link(__('List Mime Type Images'), ['action' => 'index']);?></li>
 	</ul>
 </div>

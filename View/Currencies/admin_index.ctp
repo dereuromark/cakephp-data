@@ -61,7 +61,7 @@ foreach ($currencies as $currency):
 			if ($currency['Currency']['base'] && !empty($baseCurrency)) {
 				echo $this->Format->yesNo($currency['Currency']['base'], 'Basis-Wert');
 			} else {
-				echo $this->Html->link($this->Format->cIcon('checkbox_ticked.gif', 'Zum Basis-Wert machen'), ['action' => 'base', $currency['Currency']['id']], ['escape' => false], 'Sicher?');
+				echo $this->Html->link($this->Format->cIcon('checkbox_ticked.gif', 'Zum Basis-Wert machen'), ['action' => 'base', $currency['Currency']['id']], ['escape' => false, 'confirm' => __('Sure?')]);
 			} ?>
 		</td>
 		<td>
@@ -70,7 +70,7 @@ foreach ($currencies as $currency):
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $currency['Currency']['id']], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $currency['Currency']['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $currency['Currency']['id']], ['escape' => false], __('Are you sure you want to delete # %s?', $currency['Currency']['id'])); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $currency['Currency']['id']], ['escape' => false, 'confirm' => __('Are you sure you want to delete # %s?', $currency['Currency']['id'])]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

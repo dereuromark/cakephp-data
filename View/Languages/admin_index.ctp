@@ -20,7 +20,9 @@ echo $this->Form->end();
 	<th><?php echo $this->Paginator->sort('code');?></th>
 	<th><?php echo $this->Paginator->sort('locale');?></th>
 	<th><?php echo $this->Paginator->sort('locale_fallback');?></th>
+	<?php if (isset($language['Language']['direction'])) { ?>
 	<th><?php echo $this->Paginator->sort('direction');?></th>
+	<?php } ?>
 	<th><?php echo $this->Paginator->sort('status');?></th>
 	<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
 	<th class="actions"><?php echo __('Actions');?></th>
@@ -67,9 +69,11 @@ foreach ($languages as $language):
 		<td>
 			<?php echo h($language['Language']['locale_fallback']); ?>
 		</td>
+		<?php if (isset($language['Language']['direction'])) { ?>
 		<td>
 			<?php echo h($language['Language']['direction']); ?>
 		</td>
+		<?php } ?>
 		<td>
 			<?php echo $this->Format->yesNo($language['Language']['status'], __('Active'), __('Inactive')); ?>
 		</td>
@@ -79,7 +83,7 @@ foreach ($languages as $language):
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $language['Language']['id']], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $language['Language']['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $language['Language']['id']], ['escape' => false], __('Are you sure you want to delete # %s?', $language['Language']['id'])); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $language['Language']['id']], ['escape' => false, 'confirm' => __('Are you sure you want to delete # %s?', $language['Language']['id'])]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

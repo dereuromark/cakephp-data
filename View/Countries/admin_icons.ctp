@@ -7,7 +7,7 @@
 <?php
 	foreach ($contriesWithoutIcons as $country) {
 		echo '<li>';
-		echo $this->Data->countryIcon(null) . ' ' . h($country['Country']['name']) . ' (' . $country['Country']['iso2'] . ', ' . $country['Country']['iso3'] . ') ' . $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $country['Country']['id']], ['escape' => false], 'Sicher?');
+		echo $this->Data->countryIcon(null) . ' ' . h($country['Country']['name']) . ' (' . $country['Country']['iso2'] . ', ' . $country['Country']['iso3'] . ') ' . $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $country['Country']['id']], ['escape' => false, 'confirm' => __('Sure?')]);
 		echo '</li>';
 	}
 ?>

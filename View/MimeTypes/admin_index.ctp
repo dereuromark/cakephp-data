@@ -11,7 +11,7 @@ echo $this->Paginator->counter([
 <div class="searchWrapper">
 <?php echo $this->Form->create('MimeType', ['action' => 'index']);?>
 <div class="floatLeft"><?php echo $this->Form->input('Form.search', ['label' => '(Teil)Suche:', 'value' => $searchStr]);?></div>
-<div class="floatLeft"><?php echo $this->Form->end(__('Submit'));?></div>
+<div class="floatLeft"><?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?></div>
 <?php
 if (!empty($searchStr)) {
 	echo '<div class="floatRight">' . $this->Html->link('Wieder alle anzeigen', ['action' => 'index', 'clear' => 'search']) . '</div>';
@@ -98,7 +98,7 @@ foreach ($mimeTypes as $mimeType):
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $mimeType['MimeType']['id']], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $mimeType['MimeType']['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $mimeType['MimeType']['id']], ['escape' => false], __('Are you sure you want to delete # %s?', $mimeType['MimeType']['id'])); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $mimeType['MimeType']['id']], ['escape' => false, 'confirm' => __('Are you sure you want to delete # %s?', $mimeType['MimeType']['id'])]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

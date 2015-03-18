@@ -11,7 +11,7 @@
 		//echo $this->Form->input('status');
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit'));?>
+<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
 </div>
 
 <br /><br />

@@ -56,7 +56,7 @@ foreach ($smileys as $smiley):
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $smiley['Smiley']['id']], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $smiley['Smiley']['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $smiley['Smiley']['id']], ['escape' => false], __('Are you sure you want to delete # %s?', $smiley['Smiley']['id'])); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $smiley['Smiley']['id']], ['escape' => false, 'confirm' => __('Are you sure you want to delete # %s?', $smiley['Smiley']['id'])]); ?>
 		</td>
 	</tr>
 <?php

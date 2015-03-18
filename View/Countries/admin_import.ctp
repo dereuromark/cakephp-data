@@ -31,7 +31,7 @@
 		}
 	?>
 	</fieldset>
-	<?php echo $this->Form->end(__('Submit'));?>
+	<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
 <?php } ?>
 
 
@@ -58,7 +58,7 @@
 		echo $this->Form->input('import_content', ['type' => 'textarea', 'rows' => 30]);
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit'));?>
+<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
 
 <?php } else { ?>
 

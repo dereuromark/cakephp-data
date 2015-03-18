@@ -44,7 +44,7 @@
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit %s', __('Language')), ['action' => 'edit', $language['Language']['id']]); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete %s', __('Language')), ['action' => 'delete', $language['Language']['id']], null, __('Are you sure you want to delete # %s?', $language['Language']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete %s', __('Language')), ['action' => 'delete', $language['Language']['id']], ['confirm' => __('Are you sure you want to delete # %s?', $language['Language']['id'])]); ?> </li>
 		<li><?php echo $this->Html->link(__('List %s', __('Languages')), ['action' => 'index']); ?> </li>
 	</ul>
 </div>

@@ -72,7 +72,7 @@ foreach ($addresses as $address):
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $address['Address']['id']], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $address['Address']['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $address['Address']['id']], ['escape' => false], __('Are you sure you want to delete # %s?', $address['Address']['id'])); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $address['Address']['id']], ['escape' => false, 'confirm' => __('Are you sure you want to delete # %s?', $address['Address']['id'])]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

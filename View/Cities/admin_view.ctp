@@ -60,7 +60,7 @@
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit %s', __('City')), ['action' => 'edit', $city['City']['id']]); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete %s', __('City')), ['action' => 'delete', $city['City']['id']], null, __('Are you sure you want to delete # %s?', $city['City']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete %s', __('City')), ['action' => 'delete', $city['City']['id']], ['confirm' => __('Are you sure you want to delete # %s?', $city['City']['id'])]); ?> </li>
 		<li><?php echo $this->Html->link(__('List %s', __('Cities')), ['action' => 'index']); ?> </li>
 	</ul>
 </div>

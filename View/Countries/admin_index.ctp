@@ -1,7 +1,7 @@
-<?php $this->Html->css('highslide/highslide', false); ?>
+<?php $this->Html->css('highslide/highslide', ['inline' => false]); ?>
 
-<?php $this->Html->script('highslide/highslide', false); ?>
-<?php $this->Html->script('highslide/highslide_config', false); ?>
+<?php $this->Html->script('highslide/highslide', ['inline' => false]); ?>
+<?php $this->Html->script('highslide/highslide_config', ['inline' => false]); ?>
 
 <div class="page index">
 <h2><?php echo __('Countries');?></h2>
@@ -90,7 +90,7 @@ foreach ($countries as $country):
 
 			<?php echo $this->Html->link($this->Format->cIcon(ICON_MAP, 'Koordinaten updaten'), ['action' => 'update_coordinates', $country['Country']['id']], ['escape' => false]); ?>
 
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $country['Country']['id']], ['escape' => false], __('Are you sure you want to delete # %s?', $country['Country']['id']), false); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $country['Country']['id']], ['escape' => false, 'confirm' => __('Are you sure you want to delete # %s?', $country['Country']['id'])]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

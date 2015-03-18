@@ -76,7 +76,7 @@ class DataHelper extends TextHelper {
 	 * @param string $icon iso2 code (e.g. 'de' or 'gb')
 	 * @return string
 	 */
-	public function countryIcon($icon = null, $returnFalseonFailure = false, $options = [], $attr = []) {
+	public function countryIcon($icon = null, $returnFalseOnFailure = false, $options = [], $attr = []) {
 		$ending = 'gif';
 		$image = 'unknown';
 
@@ -91,13 +91,13 @@ class DataHelper extends TextHelper {
 		$icon = mb_strtolower($icon);
 
 		if (empty($icon)) {
-			if ($returnFalseonFailure) {
+			if ($returnFalseOnFailure) {
 				return false;
 			}
 		} elseif (!file_exists($path . $icon . '.' . $ending)) {
 			trigger_error($path . $icon . '.' . $ending . ' missing', E_USER_NOTICE);
 
-			if ($returnFalseonFailure) {
+			if ($returnFalseOnFailure) {
 				return false;
 			}
 		} else {

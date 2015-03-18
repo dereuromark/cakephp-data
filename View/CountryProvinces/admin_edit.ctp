@@ -10,11 +10,11 @@
 
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit'));?>
+<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('CountryProvince.id')], ['escape' => false], __('Are you sure you want to delete # %s?', $this->Form->value('CountryProvince.id'))); ?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('CountryProvince.id')], ['escape' => false, 'confirm' => __('Are you sure you want to delete # %s?', $this->Form->value('CountryProvince.id'))]); ?></li>
 		<li><?php echo $this->Html->link(__('List %s', __('CountryProvinces')), ['action' => 'index']);?></li>
 		<li><?php echo $this->Html->link(__('List %s', __('Countries')), ['controller' => 'countries', 'action' => 'index']); ?> </li>
 		<li><?php echo $this->Html->link(__('Add %s', __('Country')), ['controller' => 'countries', 'action' => 'add']); ?> </li>

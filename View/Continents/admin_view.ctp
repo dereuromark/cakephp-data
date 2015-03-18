@@ -34,7 +34,7 @@
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit %s', __('Continent')), ['action' => 'edit', $continent['Continent']['id']]); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete %s', __('Continent')), ['action' => 'delete', $continent['Continent']['id']], null, __('Are you sure you want to delete # %s?', $continent['Continent']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete %s', __('Continent')), ['action' => 'delete', $continent['Continent']['id']], ['confirm' => __('Are you sure you want to delete # %s?', $continent['Continent']['id'])]); ?> </li>
 		<li><?php echo $this->Html->link(__('List %s', __('Continents')), ['action' => 'index']); ?> </li>
 		<li><?php echo $this->Html->link(__('List %s', __('Continents')), ['controller' => 'continents', 'action' => 'index']); ?> </li>
 		<li><?php echo $this->Html->link(__('List %s', __('Countries')), ['controller' => 'countries', 'action' => 'index']); ?> </li>
@@ -74,7 +74,7 @@
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), ['controller' => 'continents', 'action' => 'view', $childContinent['id']]); ?>
 				<?php echo $this->Html->link(__('Edit'), ['controller' => 'continents', 'action' => 'edit', $childContinent['id']]); ?>
-				<?php echo $this->Form->postLink(__('Delete'), ['controller' => 'continents', 'action' => 'delete', $childContinent['id']], null, __('Are you sure you want to delete # %s?', $childContinent['id'])); ?>
+				<?php echo $this->Form->postLink(__('Delete'), ['controller' => 'continents', 'action' => 'delete', $childContinent['id']], ['confirm' => __('Are you sure you want to delete # %s?', $childContinent['id'])]); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
@@ -139,7 +139,7 @@
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), ['controller' => 'countries', 'action' => 'view', $country['id']]); ?>
 				<?php echo $this->Html->link(__('Edit'), ['controller' => 'countries', 'action' => 'edit', $country['id']]); ?>
-				<?php echo $this->Form->postLink(__('Delete'), ['controller' => 'countries', 'action' => 'delete', $country['id']], null, __('Are you sure you want to delete # %s?', $country['id'])); ?>
+				<?php echo $this->Form->postLink(__('Delete'), ['controller' => 'countries', 'action' => 'delete', $country['id']], ['confirm' => __('Are you sure you want to delete # %s?', $country['id'])]); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>

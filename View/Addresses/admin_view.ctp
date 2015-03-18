@@ -75,7 +75,7 @@
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit %s', __('Address')), ['action' => 'edit', $address['Address']['id']]); ?> </li>
 		<li><?php echo $this->Html->link(__('Mark as %s', __('Used')), ['action' => 'mark_as_used', $address['Address']['id']]); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete %s', __('Address')), ['action' => 'delete', $address['Address']['id']], null, __('Are you sure you want to delete # %s?', $address['Address']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete %s', __('Address')), ['action' => 'delete', $address['Address']['id']], ['confirm' => __('Are you sure you want to delete # %s?', $address['Address']['id'])]); ?> </li>
 		<li><?php echo $this->Html->link(__('List %s', __('Addresses')), ['action' => 'index']); ?> </li>
 		<li><?php echo $this->Html->link(__('List %s', __('Countries')), ['controller' => 'countries', 'action' => 'index']); ?> </li>
 		<li><?php echo $this->Html->link(__('List %s', __('Country Provinces')), ['controller' => 'country_provinces', 'action' => 'index']); ?> </li>

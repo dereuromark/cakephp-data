@@ -10,7 +10,7 @@
 		echo $this->Form->input('min_accuracy', []);
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit'));?>
+<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
 </div>
 
 <div>

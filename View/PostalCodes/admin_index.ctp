@@ -51,7 +51,7 @@ foreach ($postalCodes as $postalCode): ?>
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $postalCode['PostalCode']['id']], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $postalCode['PostalCode']['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $postalCode['PostalCode']['id']], ['escape' => false], __('Are you sure you want to delete # %s?', $postalCode['PostalCode']['id'])); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $postalCode['PostalCode']['id']], ['escape' => false, 'confirm' => __('Are you sure you want to delete # %s?', $postalCode['PostalCode']['id'])]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

@@ -44,7 +44,7 @@
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit %s', __('Country')), ['action' => 'edit', $country['Country']['id']]); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Country'), ['action' => 'delete', $country['Country']['id']], ['escape' => false], __('Are you sure you want to delete # %s?', $country['Country']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete Country'), ['action' => 'delete', $country['Country']['id']], ['escape' => false, 'confirm' => __('Are you sure you want to delete # %s?', $country['Country']['id'])]); ?> </li>
 		<li><?php echo $this->Html->link(__('List %s', __('Countries')), ['action' => 'index']); ?> </li>
 		<li><?php echo $this->Html->link(__('List Country Provinces'), ['controller' => 'country_provinces', 'action' => 'index']); ?> </li>
 	</ul>

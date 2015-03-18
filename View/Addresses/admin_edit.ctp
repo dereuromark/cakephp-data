@@ -24,14 +24,14 @@
 		echo $this->Form->input('foreign_id', ['type' => 'text', 'empty' => [0 => ' - [ ' . __('noSelection') . ' ] - ']]);
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit'));?>
+<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
 </div>
 
 <br /><br />
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('Address.id')], null, __('Are you sure you want to delete # %s?', $this->Form->value('Address.id'))); ?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('Address.id')], ['confirm' => __('Are you sure you want to delete # %s?', $this->Form->value('Address.id'))]); ?></li>
 		<li><?php echo $this->Html->link(__('List %s', __('Addresses')), ['action' => 'index']);?></li>
 		<li><?php echo $this->Html->link(__('List %s', __('Countries')), ['controller' => 'countries', 'action' => 'index']); ?> </li>
 		<li><?php echo $this->Html->link(__('List %s', __('Country Provinces')), ['controller' => 'country_provinces', 'action' => 'index']); ?> </li>

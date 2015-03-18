@@ -14,14 +14,14 @@
 		echo $this->Form->input('active');
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit'));?>
+<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
 </div>
 
 <br /><br />
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('Smiley.id')], null, __('Are you sure you want to delete # %s?', $this->Form->value('Smiley.id'))); ?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('Smiley.id')], ['confirm' => __('Are you sure you want to delete # %s?', $this->Form->value('Smiley.id'))]); ?></li>
 		<li><?php echo $this->Html->link(__('List %s', __('Smileys')), ['action' => 'index']);?></li>
 	</ul>
 </div>
