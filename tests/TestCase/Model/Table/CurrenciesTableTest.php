@@ -17,6 +17,7 @@ class CurrenciesTableTest extends TestCase {
 		parent::setUp();
 
 		$this->Currencies = TableRegistry::get('Data.Currencies');
+		$this->Currencies->CurrencyLib = $this->getMock('Data\Lib\CurrencyLib');
 	}
 
 	/**
@@ -25,6 +26,29 @@ class CurrenciesTableTest extends TestCase {
 	 */
 	public function testBasicFind() {
 		$result = $this->Currencies->find()->first();
+		$this->assertNotEmpty($result);
+	}
+
+	/**
+	 *
+	 * @return void
+	 */
+	public function testBasicSave() {
+		$data = [
+			'EUR' => []
+		];
+		$this->Currencies->CurrencyLib->method('table')->willReturn($data);
+
+		$data = [
+			'name' => 'Euro',
+			'code' => 'EUR'
+		];
+		$this->Currencies->deleteAll($data);
+
+		$currency = $this->Currencies->newEntity($data);
+		$this->assertEmpty($currency->errors());
+
+		$result = $this->Currencies->save($currency);
 		$this->assertNotEmpty($result);
 	}
 

@@ -2,6 +2,8 @@
 namespace Data\Model\Table;
 
 use Tools\Model\Table\Table;
+use Data\Lib\CurrencyLib;
+use Cake\Utility\Hash;
 
 class CurrenciesTable extends Table {
 
@@ -33,6 +35,7 @@ class CurrenciesTable extends Table {
 			'available' => array(
 				'rule' => array('available'),
 				'message' => 'this currency is not available',
+				'provider' => 'table'
 			),
 		),
 		'value' => array('numeric'),
@@ -60,7 +63,7 @@ class CurrenciesTable extends Table {
 			if (isset($this->data['name']) && empty($this->data['name'])) {
 				if (!isset($this->CurrencyLib)) {
 					//App::import('Component', 'Data.Currency');
-					$this->CurrencyLib = new CurrencyComponent();
+					$this->CurrencyLib = new CurrencyLib();
 				}
 				$this->data['name'] = $this->CurrencyLib->getName($code, '');
 			}
@@ -80,6 +83,7 @@ class CurrenciesTable extends Table {
 		return $ret;
 	}
 
+	/*
 	public function beforeSave($options = array()) {
 		parent::beforeSave($options);
 		if (isset($this->data['name'])) {
@@ -90,15 +94,16 @@ class CurrenciesTable extends Table {
 
 		return true;
 	}
+	*/
 
 	/**
 	 * Model validation
 	 */
-	public function available() {
-		if (empty($this->data['code'])) {
+	public function available($value, $context) {
+		if (empty($value)) {
 			return false;
 		}
-		return $this->isAvailable($this->data['code']);
+		return $this->isAvailable($value);
 	}
 
 	/**
@@ -112,10 +117,8 @@ class CurrenciesTable extends Table {
 	/** model functions **/
 
 	public function updateValues() {
-		//TODO: move to Data lib!?
 		if (!isset($this->CurrencyLib)) {
-			App::import('Component', 'Data.Currency');
-			$this->CurrencyLib = new CurrencyComponent();
+			$this->CurrencyLib = new CurrencyLib();
 		}
 		# make sure we have up to date values
 		$this->CurrencyLib->reset();
@@ -138,13 +141,13 @@ class CurrenciesTable extends Table {
 	 */
 	public function foreignCurrencies($type = 'all', $options = array()) {
 		$defaults = array('conditions' => array($this->alias() . '.base' => 0));
-		$options = Set::merge($defaults, $options);
+		$options = Hash::merge($defaults, $options);
 		return $this->find($type, $options);
 	}
 
 	public function baseCurrency($options = array()) {
 		$defaults = array('conditions' => array($this->alias() . '.base' => 1));
-		$options = Set::merge($defaults, $options);
+		$options = Hash::merge($defaults, $options);
 		return $this->find('first', $options);
 	}
 
@@ -153,8 +156,7 @@ class CurrenciesTable extends Table {
 	 */
 	public function availableCurrencies() {
 		if (!isset($this->CurrencyLib)) {
-			App::import('Component', 'Data.Currency');
-			$this->CurrencyLib = new CurrencyComponent();
+			$this->CurrencyLib = new CurrencyLib();
 		}
 		$base = $this->baseCurrency();
 		if ($res = $this->CurrencyLib->table($base['code'], 4)) {

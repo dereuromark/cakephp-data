@@ -2,21 +2,18 @@
 namespace Data\Model\Table;
 
 use Cake\Core\Configure;
-//use Data\Lib\GeocodeLib;
+use Data\Geocode\Geocode;
 use Tools\Model\Table\Table;
-//use Tools\Lib\GeolocateLib;
 
 class CountriesTable extends Table {
 
 	public $order = array('sort' => 'DESC', 'name' => 'ASC');
 
-	//public $actsAs = array('Tools.Sortable');
-
 	public $validate = array(
 		'name' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
-				'message' => 'Manditory field',
+				'message' => 'Mandatory field',
 				'last' => true,
 			),
 			'isUnique' => array(
@@ -27,7 +24,7 @@ class CountriesTable extends Table {
 		'ori_name' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
-				'message' => 'Manditory field',
+				'message' => 'Mandatory field',
 				'last' => true,
 			),
 			'isUnique' => array(
@@ -80,6 +77,7 @@ class CountriesTable extends Table {
 		//'status' => array('type' => 'value')
 	);
 
+	/*
 	public function __construct($id = false, $table = false, $ds = null) {
 		if (Configure::read('Country.provinces') === false) {
 			unset($this->hasMany['CountryProvince']);
@@ -90,6 +88,7 @@ class CountriesTable extends Table {
 
 		parent::__construct($id, $table, $ds);
 	}
+	*/
 
 	/**
 	 * Country::active()
@@ -352,7 +351,7 @@ class CountriesTable extends Table {
 			return -1;
 		}
 		*/
-		$this->GeolocateLib = new GeolocateLib();
+		$this->GeolocateLib = new Geolocate();
 		if ($this->GeolocateLib->locate($ip)) {
 			$country = $this->GeolocateLib->getResult('country_code'); # iso2
 			if (!empty($country)) {
