@@ -92,40 +92,6 @@ class PostalCodesController extends DataAppController {
 		$this->render('geolocate');
 	}
 
-	public function admin_query() {
-		$this->GeocodeLib = new GeocodeLib();
-		$results = array();
-		if ($this->Common->isPosted()) {
-			$this->PostalCode->validate['address'] = array(
-				'notEmpty' => array(
-					'rule' => array('notEmpty'),
-					'message' => 'valErrMandatoryField',
-					'last' => true
-				));
-			$this->PostalCode->set($this->request->data);
-
-			$address = $this->request->data['PostalCode']['address'];
-			$settings = array(
-				'allow_inconclusive' => $this->request->data['PostalCode']['allow_inconclusive'],
-				'min_accuracy' => $this->request->data['PostalCode']['min_accuracy']
-			);
-			$this->GeocodeLib->setOptions($settings);
-
-			if ($this->PostalCode->validates() && $this->GeocodeLib->geocode($address)) {
-				$results = $this->GeocodeLib->getResult();
-			} else {
-				$this->Common->flashMessage(__('formContainsErrors'), 'error');
-			}
-		} else {
-			$this->request->data['PostalCode']['allow_inconclusive'] = 1;
-			$this->request->data['PostalCode']['min_accuracy'] = GeocodeLib::ACC_COUNTRY;
-		}
-
-		$this->helpers = array_merge($this->helpers, array('Tools.GoogleMapV3'));
-		$minAccuracies = $this->GeocodeLib->accuracyTypes();
-		$this->set(compact('results', 'minAccuracies'));
-	}
-
 	/**
 	 * @return void
 	 */
