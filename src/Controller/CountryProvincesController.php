@@ -44,14 +44,14 @@ class CountryProvincesController extends DataAppController {
 	 * @return void
 	 */
 	public function index($cid = null) {
-		$this->paginate['order'] = array('CountryProvince.name' => 'ASC');
-		$this->paginate['conditions'] = array('Country.status' => 1);
+		$this->paginate['order'] = array('CountryProvinces.name' => 'ASC');
+		//$this->paginate['conditions'] = array('Country.status' => 1);
 
 		$cid = $this->_processCountry($cid);
 
 		$countryProvinces = $this->paginate();
 
-		$countries = $this->CountryProvince->Country->active('list');
+		$countries = $this->CountryProvinces->Countries->active('list');
 		$this->set(compact('countryProvinces', 'countries'));
 	}
 

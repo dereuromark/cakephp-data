@@ -8,9 +8,9 @@
 	'div' => false,
 	'type' => 'select',
 	'empty' => array(-1 => '- [ ' . __('noRestriction') . ' ] -'),
-	'onchange' => 'changeSel(this,\'' . $this->Html->url(array('action' => 'index')) . '/index/\')',
+	'onchange' => 'changeSel(this,\'' . $this->Url->build(array('action' => 'index')) . '/index/\')',
 	/*
-	'onchange'=>'filter(this,\''.$this->Html->url(array(
+	'onchange'=>'filter(this,\''.$this->Url->build(array(
 				'filter'=>'on',
 				'sort'=>(!empty($filters['sort']) ? $filters['sort'] : ''),
 				'direction'=>(!empty($filters['direction']) ? $filters['direction'] : '')
@@ -40,20 +40,20 @@ foreach ($countryProvinces as $countryProvince):
 	<tr<?php echo $class;?>>
 
 		<td>
-			<?php echo $this->Data->countryIcon($countryProvince['Country']['iso2']) . ' ' . h($countryProvince['Country']['name']); ?>
+			<?php echo $this->Data->countryIcon($countryProvince->country['iso2']) . ' ' . h($countryProvince->country['name']); ?>
 		</td>
 		<td>
-			<?php echo h($countryProvince['CountryProvince']['name']); ?>
+			<?php echo h($countryProvince['name']); ?>
 		</td>
 		<td>
-			<?php echo h($countryProvince['CountryProvince']['abbr']); ?>
+			<?php echo h($countryProvince['abbr']); ?>
 		</td>
 
 		<td>
 			<?php
 			$coordinates = '';
-			if ((int)$countryProvince['CountryProvince']['lat'] != 0 || (int)$countryProvince['CountryProvince']['lat'] != 0) {
-				$coordinates = $countryProvince['CountryProvince']['lat'] . ',' . $countryProvince['CountryProvince']['lat'];
+			if ((int)$countryProvince['lat'] != 0 || (int)$countryProvince['lat'] != 0) {
+				$coordinates = $countryProvince['lat'] . ',' . $countryProvince['lat'];
 			}
 			echo $this->Format->yesNo((int)!empty($coordinates), $coordinates, 'keine hinterlegt');
 			?>
