@@ -21,26 +21,26 @@ foreach ($countries as $country):
 ?>
 	<tr<?php echo $class;?>>
 		<td>
-			<?php echo $this->Data->countryIcon($country['Country']['iso2']); ?>
+			<?php echo $this->Data->countryIcon($country['iso2']); ?>
 		</td>
 		<td>
-			<?php echo h($country['Country']['name']); ?>
+			<?php echo h($country['name']); ?>
 		</td>
 		<td>
-			<?php echo h($country['Country']['ori_name']); ?>
+			<?php echo h($country['ori_name']); ?>
 		</td>
 		<td>
-			<?php echo $country['Country']['iso2']; ?>
+			<?php echo $country['iso2']; ?>
 		</td>
 		<td>
-			<?php echo $country['Country']['iso3']; ?>
+			<?php echo $country['iso3']; ?>
 		</td>
 		<td>
-			<?php echo '+' . $country['Country']['country_code']; ?>
+			<?php echo '+' . $country['country_code']; ?>
 		</td>
 		<td>
-			<?php if (!empty($country['Country']['zip_length'])) {
-				echo $country['Country']['zip_length'];
+			<?php if (!empty($country['zip_length'])) {
+				echo $country['zip_length'];
 			} else {
 				echo '--';
 			} ?>
