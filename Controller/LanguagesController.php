@@ -31,7 +31,7 @@ class LanguagesController extends DataAppController {
 
 	public function admin_view($id = null) {
 		if (empty($id) || !($language = $this->Language->find('first', ['conditions' => ['Language.id' => $id]]))) {
-			$this->Flash->message(__('invalid record'), 'error');
+			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->set(compact('language'));
@@ -42,26 +42,26 @@ class LanguagesController extends DataAppController {
 			$this->Language->create();
 			if ($this->Language->save($this->request->data)) {
 				$var = $this->request->data['Language']['name'];
-				$this->Flash->message(__('record add %s saved', h($var)), 'success');
+				$this->Flash->success(__('record add %s saved', h($var)));
 				return $this->redirect(['action' => 'index']);
 			} else {
-				$this->Flash->message(__('formContainsErrors'), 'error');
+				$this->Flash->error(__('formContainsErrors'));
 			}
 		}
 	}
 
 	public function admin_edit($id = null) {
 		if (empty($id) || !($language = $this->Language->find('first', ['conditions' => ['Language.id' => $id]]))) {
-			$this->Flash->message(__('invalid record'), 'error');
+			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->Language->save($this->request->data)) {
 				$var = $this->request->data['Language']['name'];
-				$this->Flash->message(__('record edit %s saved', h($var)), 'success');
+				$this->Flash->success(__('record edit %s saved', h($var)));
 				return $this->redirect(['action' => 'index']);
 			} else {
-				$this->Flash->message(__('formContainsErrors'), 'error');
+				$this->Flash->error(__('formContainsErrors'));
 			}
 		}
 		if (empty($this->request->data)) {
@@ -72,15 +72,15 @@ class LanguagesController extends DataAppController {
 	public function admin_delete($id = null) {
 		$this->request->allowMethod('post');
 		if (empty($id) || !($language = $this->Language->find('first', ['conditions' => ['Language.id' => $id], 'fields' => ['id', 'name']]))) {
-			$this->Flash->message(__('invalid record'), 'error');
+			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Language->delete($id)) {
 			$var = $language['Language']['name'];
-			$this->Flash->message(__('record del %s done', h($var)), 'success');
+			$this->Flash->success(__('record del %s done', h($var)));
 			return $this->redirect(['action' => 'index']);
 		}
-		$this->Flash->message(__('record del %s not done exception', h($var)), 'error');
+		$this->Flash->error(__('record del %s not done exception', h($var)));
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 
@@ -115,13 +115,13 @@ class LanguagesController extends DataAppController {
 			}
 		}
 
-		$this->Flash->message($count . ' of ' . count($languages) . ' ' . __('languages added'), 'success');
+		$this->Flash->success($count . ' of ' . count($languages) . ' ' . __('languages added'));
 
 		$errorMessage = [];
 		foreach ($errors as $error) {
 			$errorMessage[] = $error['data']['language'] . ' (' . returns($error['errors']) . ')';
 		}
-		$this->Flash->message(__('not added') . ' ' . implode(', ', $errorMessage), 'warning');
+		$this->Flash->warning(__('not added') . ' ' . implode(', ', $errorMessage));
 		return $this->redirect(['action' => 'index']);
 		//pr($errors);
 	}
@@ -172,7 +172,7 @@ class LanguagesController extends DataAppController {
 		$languages = $this->Language->getPrimaryLanguages('list');
 		$this->Language->updateAll(['status' => Language::STATUS_ACTIVE], ['id' => array_keys($languages)]);
 
-		$this->Flash->message(__('%s of %s set active', $this->Language->getAffectedRows(), count($languages)), 'success');
+		$this->Flash->success(__('%s of %s set active', $this->Language->getAffectedRows(), count($languages)));
 		return $this->redirect(['action' => 'index']);
 	}
 

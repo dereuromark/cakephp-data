@@ -21,7 +21,7 @@ class SmileysController extends DataAppController {
 
 	public function admin_view($id = null) {
 		if (empty($id) || !($smiley = $this->Smiley->find('first', ['conditions' => ['Smiley.id' => $id]]))) {
-			$this->Flash->message(__('invalid record'), 'error');
+			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->set(compact('smiley'));
@@ -32,26 +32,26 @@ class SmileysController extends DataAppController {
 			$this->Smiley->create();
 			if ($this->Smiley->save($this->request->data)) {
 				$var = $this->Smiley->id; //$this->request->data['Smiley']['name'];
-				$this->Flash->message(__('record add %s saved', h($var)), 'success');
+				$this->Flash->success(__('record add %s saved', h($var)));
 				return $this->Common->autoRedirect(['action' => 'index']);
 			} else {
-				$this->Flash->message(__('formContainsErrors'), 'error');
+				$this->Flash->error(__('formContainsErrors'));
 			}
 		}
 	}
 
 	public function admin_edit($id = null) {
 		if (empty($id) || !($smiley = $this->Smiley->find('first', ['conditions' => ['Smiley.id' => $id]]))) {
-			$this->Flash->message(__('invalid record'), 'error');
+			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->Smiley->save($this->request->data)) {
 				$var = $id; //$this->request->data['Smiley']['name'];
-				$this->Flash->message(__('record edit %s saved', h($var)), 'success');
+				$this->Flash->success(__('record edit %s saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
 			} else {
-				$this->Flash->message(__('formContainsErrors'), 'error');
+				$this->Flash->error(__('formContainsErrors'));
 			}
 		}
 		if (empty($this->request->data)) {
@@ -62,15 +62,15 @@ class SmileysController extends DataAppController {
 	public function admin_delete($id = null) {
 		$this->request->allowMethod('post');
 		if (empty($id) || !($smiley = $this->Smiley->find('first', ['conditions' => ['Smiley.id' => $id], 'fields' => ['id']]))) {
-			$this->Flash->message(__('invalid record'), 'error');
+			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Smiley->delete($id)) {
 			$var = $smiley['Smiley']['id'];
-			$this->Flash->message(__('record del %s done', h($var)), 'success');
+			$this->Flash->success(__('record del %s done', h($var)));
 			return $this->redirect(['action' => 'index']);
 		}
-		$this->Flash->message(__('record del %s not done exception', h($var)), 'error');
+		$this->Flash->error(__('record del %s not done exception', h($var)));
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 

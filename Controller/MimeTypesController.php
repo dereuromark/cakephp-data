@@ -29,12 +29,12 @@ class MimeTypesController extends DataAppController {
 	public function view($id = null) {
 		$this->MimeType->recursive = 0;
 		if (empty($id)) {
-			$this->Flash->message(__('record invalid'),'error');
+			$this->Flash->error(__('record invalid'));
 			return $this->Common->autoRedirect(array('action'=>'index'));
 		}
 		$mimeType = $this->MimeType->get($id);
 		if (empty($mimeType)) {
-			$this->Flash->message(__('record not exists'),'error');
+			$this->Flash->error(__('record not exists'));
 			return $this->Common->autoRedirect(array('action'=>'index'));
 		}
 		$this->set(compact('mimeType'));
@@ -46,32 +46,32 @@ class MimeTypesController extends DataAppController {
 			if ($this->MimeType->save($this->request->data)) {
 				$id = $this->MimeType->id;
 				//$name = $this->request->data['MimeType']['name'];
-				$this->Flash->message(__('record add %s saved', $id),'success');
+				$this->Flash->success(__('record add %s saved', $id));
 				return $this->redirect(array('action'=>'index'));
 			} else {
-				$this->Flash->message(__('record add not saved'),'error');
+				$this->Flash->error(__('record add not saved'));
 			}
 		}
 	}
 
 	public function edit($id = null) {
 		if (empty($id)) {
-			$this->Flash->message(__('record invalid'),'error');
+			$this->Flash->error(__('record invalid'));
 			return $this->Common->autoRedirect(array('action'=>'index'));
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->MimeType->save($this->request->data)) {
 				//$name = $this->request->data['MimeType']['name'];
-				$this->Flash->message(__('record edit %s saved', $id),'success');
+				$this->Flash->success(__('record edit %s saved', $id));
 				return $this->redirect(array('action'=>'index'));
 			} else {
-				$this->Flash->message(__('record edit not saved'),'error');
+				$this->Flash->error(__('record edit not saved'));
 			}
 		}
 		if (empty($this->request->data)) {
 			$this->request->data = $this->MimeType->get($id);
 			if (empty($this->request->data)) { # still no record found
-				$this->Flash->message(__('record not exists'),'error');
+				$this->Flash->error(__('record not exists'));
 				return $this->redirect(array('action'=>'index'));
 			}
 		}
@@ -80,21 +80,21 @@ class MimeTypesController extends DataAppController {
 	public function delete($id = null) {
 		$this->request->allowMethod('post');
 		if (empty($id)) {
-			$this->Flash->message(__('record invalid'),'error');
+			$this->Flash->error(__('record invalid'));
 			return $this->Common->autoRedirect(array('action'=>'index'));
 		}
 		$res = $this->MimeType->find('first', array('fields'=>array('id'),'conditions'=>array('MimeType.id'=>$id)));
 		if (empty($res)) {
-			$this->Flash->message(__('record del not exists'),'error');
+			$this->Flash->error(__('record del not exists'));
 			return $this->Common->autoRedirect(array('action'=>'index'));
 		}
 
 		//$name = $res['MimeType']['name'];
 		if ($this->MimeType->delete($id)) {
-			$this->Flash->message(__('record del %s done', $id),'success');
+			$this->Flash->success(__('record del %s done', $id));
 			return $this->Common->autoRedirect(array('action'=>'index'));
 		} else {
-			$this->Flash->message(__('record del %s not done exception', $id),'error');
+			$this->Flash->error(__('record del %s not done exception', $id));
 			return $this->Common->autoRedirect(array('action'=>'index'));
 		}
 	}
@@ -157,7 +157,7 @@ class MimeTypesController extends DataAppController {
 			}
 		}
 		if (!empty($addedIcon)) {
-			$this->Flash->message(count($addedIcon) . ' File Extension Images added: ' . implode(', ', $addedIcon), 'success');
+			$this->Flash->success(count($addedIcon) . ' File Extension Images added: ' . implode(', ', $addedIcon));
 		}
 	}
 
@@ -265,12 +265,12 @@ class MimeTypesController extends DataAppController {
 	public function admin_view($id = null) {
 		$this->MimeType->recursive = 0;
 		if (empty($id)) {
-			$this->Flash->message(__('record invalid'), 'error');
+			$this->Flash->error(__('record invalid'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$mimeType = $this->MimeType->get($id);
 		if (empty($mimeType)) {
-			$this->Flash->message(__('record not exists'), 'error');
+			$this->Flash->error(__('record not exists'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->set(compact('mimeType'));
@@ -285,10 +285,10 @@ class MimeTypesController extends DataAppController {
 			if ($this->MimeType->save($this->request->data)) {
 				$id = $this->MimeType->id;
 				//$name = $this->request->data['MimeType']['name'];
-				$this->Flash->message(__('record add %s saved', $id), 'success');
+				$this->Flash->success(__('record add %s saved', $id));
 				return $this->redirect(['action' => 'index']);
 			} else {
-				$this->Flash->message(__('record add not saved'), 'error');
+				$this->Flash->error(__('record add not saved'));
 			}
 		} else {
 			$this->request->data['MimeType']['active'] = 1;
@@ -299,7 +299,7 @@ class MimeTypesController extends DataAppController {
 
 	public function admin_edit($id = null) {
 		if (empty($id)) {
-			$this->Flash->message(__('record invalid'), 'error');
+			$this->Flash->error(__('record invalid'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
@@ -308,16 +308,16 @@ class MimeTypesController extends DataAppController {
 
 			if ($this->MimeType->save($this->request->data)) {
 				//$name = $this->request->data['MimeType']['name'];
-				$this->Flash->message(__('record edit %s saved', $id), 'success');
+				$this->Flash->success(__('record edit %s saved', $id));
 				return $this->redirect(['action' => 'index']);
 			} else {
-				$this->Flash->message(__('record edit not saved'), 'error');
+				$this->Flash->error(__('record edit not saved'));
 			}
 		}
 		if (empty($this->request->data)) {
 			$this->request->data = $this->MimeType->get($id);
 			if (empty($this->request->data)) { # still no record found
-				$this->Flash->message(__('record not exists'), 'error');
+				$this->Flash->error(__('record not exists'));
 				return $this->redirect(['action' => 'index']);
 			}
 		}
@@ -328,21 +328,21 @@ class MimeTypesController extends DataAppController {
 	public function admin_delete($id = null) {
 		$this->request->allowMethod('post');
 		if (empty($id)) {
-			$this->Flash->message(__('record invalid'), 'error');
+			$this->Flash->error(__('record invalid'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$res = $this->MimeType->find('first', ['fields' => ['id'], 'conditions' => ['MimeType.id' => $id]]);
 		if (empty($res)) {
-			$this->Flash->message(__('record del not exists'), 'error');
+			$this->Flash->error(__('record del not exists'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 
 		//$name = $res['MimeType']['name'];
 		if ($this->MimeType->delete($id)) {
-			$this->Flash->message(__('record del %s done', $id), 'success');
+			$this->Flash->success(__('record del %s done', $id));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		} else {
-			$this->Flash->message(__('record del %s not done exception', $id), 'error');
+			$this->Flash->error(__('record del %s not done exception', $id));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 	}

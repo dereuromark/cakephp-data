@@ -36,7 +36,7 @@ class CitiesController extends DataAppController {
 	public function admin_view($id = null) {
 		$this->City->recursive = 0;
 		if (empty($id) || !($city = $this->City->find('first', ['conditions' => ['City.id' => $id]]))) {
-			$this->Flash->message(__('invalidRecord'), 'error');
+			$this->Flash->error(__('invalidRecord'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->set(compact('city'));
@@ -50,10 +50,10 @@ class CitiesController extends DataAppController {
 			$this->City->create();
 			if ($this->City->save($this->request->data)) {
 				$var = $this->request->data['City']['name'];
-				$this->Flash->message(__('record add %s saved', h($var)), 'success');
+				$this->Flash->success(__('record add %s saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
 			}
-			$this->Flash->message(__('formContainsErrors'), 'error');
+			$this->Flash->error(__('formContainsErrors'));
 
 		}
 
@@ -66,16 +66,16 @@ class CitiesController extends DataAppController {
 	 */
 	public function admin_edit($id = null) {
 		if (empty($id) || !($city = $this->City->find('first', ['conditions' => ['City.id' => $id]]))) {
-			$this->Flash->message(__('invalidRecord'), 'error');
+			$this->Flash->error(__('invalidRecord'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->City->save($this->request->data)) {
 				$var = $this->request->data['City']['name'];
-				$this->Flash->message(__('record edit %s saved', h($var)), 'success');
+				$this->Flash->success(__('record edit %s saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
 			}
-			$this->Flash->message(__('formContainsErrors'), 'error');
+			$this->Flash->error(__('formContainsErrors'));
 
 		} else {
 			$this->request->data = $city;
@@ -93,16 +93,16 @@ class CitiesController extends DataAppController {
 	public function admin_delete($id = null) {
 		$this->request->allowMethod(['post', 'delete']);
 		if (empty($id) || !($city = $this->City->find('first', ['conditions' => ['City.id' => $id], 'fields' => ['id', 'name']]))) {
-			$this->Flash->message(__('invalidRecord'), 'error');
+			$this->Flash->error(__('invalidRecord'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$var = $city['City']['name'];
 
 		if ($this->City->delete($id)) {
-			$this->Flash->message(__('record del %s done', h($var)), 'success');
+			$this->Flash->success(__('record del %s done', h($var)));
 			return $this->redirect(['action' => 'index']);
 		}
-		$this->Flash->message(__('record del %s not done exception', h($var)), 'error');
+		$this->Flash->error(__('record del %s not done exception', h($var)));
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 

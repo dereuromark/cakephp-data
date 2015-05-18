@@ -23,7 +23,7 @@ class AddressesController extends DataAppController {
 	public function view($id = null) {
 		$this->Address->recursive = 0;
 		if (empty($id) || !($address = $this->Address->find('first', array('conditions'=>array('Address.id'=>$id))))) {
-			$this->Flash->message(__('invalid record'), 'error');
+			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		$this->set(compact('address'));
@@ -34,10 +34,10 @@ class AddressesController extends DataAppController {
 			$this->Address->create();
 			if ($this->Address->save($this->request->data)) {
 				$var = $this->request->data['Address']['formatted_address'];
-				$this->Flash->message(__('record add %s saved', h($var)), 'success');
+				$this->Flash->success(__('record add %s saved', h($var)));
 				return $this->redirect(array('action' => 'index'));
 			}
-			$this->Flash->message(__('formContainsErrors'), 'error');
+			$this->Flash->error(__('formContainsErrors'));
 			}
 		}
 		$countries = $this->Address->Country->find('list');
@@ -50,16 +50,16 @@ class AddressesController extends DataAppController {
 
 	public function edit($id = null) {
 		if (empty($id) || !($address = $this->Address->find('first', array('conditions'=>array('Address.id'=>$id))))) {
-			$this->Flash->message(__('invalid record'), 'error');
+			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->Address->save($this->request->data)) {
 				$var = $this->request->data['Address']['formatted_address'];
-				$this->Flash->message(__('record edit %s saved', h($var)), 'success');
+				$this->Flash->success(__('record edit %s saved', h($var)));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Flash->message(__('formContainsErrors'), 'error');
+				$this->Flash->error(__('formContainsErrors'));
 			}
 		}
 		if (empty($this->request->data)) {
@@ -76,16 +76,16 @@ class AddressesController extends DataAppController {
 	public function delete($id = null) {
 		$this->request->allowMethod('post');
 		if (empty($id) || !($address = $this->Address->find('first', array('conditions'=>array('Address.id'=>$id), 'fields'=>array('id', 'formatted_address'))))) {
-			$this->Flash->message(__('invalid record'), 'error');
+			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(array('action'=>'index'));
 		}
 		$var = $address['Address']['formatted_address'];
 
 		if ($this->Address->delete($id)) {
-			$this->Flash->message(__('record del %s done', h($var)), 'success');
+			$this->Flash->success(__('record del %s done', h($var)));
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->Flash->message(__('record del %s not done exception', h($var)), 'error');
+		$this->Flash->error(__('record del %s not done exception', h($var)));
 		return $this->Common->autoRedirect(array('action' => 'index'));
 	}
 	*/
@@ -104,7 +104,7 @@ class AddressesController extends DataAppController {
 	public function admin_view($id = null) {
 		$this->Address->recursive = 0;
 		if (empty($id) || !($address = $this->Address->find('first', ['conditions' => ['Address.id' => $id]]))) {
-			$this->Flash->message(__('invalid record'), 'error');
+			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->set(compact('address'));
@@ -116,10 +116,10 @@ class AddressesController extends DataAppController {
 			$this->Address->create();
 			if ($this->Address->save($this->request->data)) {
 				$var = $this->request->data['Address']['formatted_address'];
-				$this->Flash->message(__('record add %s saved', h($var)), 'success');
+				$this->Flash->success(__('record add %s saved', h($var)));
 				return $this->redirect(['action' => 'index']);
 			}
-			$this->Flash->message(__('formContainsErrors'), 'error');
+			$this->Flash->error(__('formContainsErrors'));
 
 		} else {
 			# TODO: geolocate via IP? only for frontend
@@ -138,16 +138,16 @@ class AddressesController extends DataAppController {
 
 	public function admin_edit($id = null) {
 		if (empty($id) || !($address = $this->Address->find('first', ['conditions' => ['Address.id' => $id]]))) {
-			$this->Flash->message(__('invalid record'), 'error');
+			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->Address->save($this->request->data)) {
 				$var = $this->request->data['Address']['formatted_address'];
-				$this->Flash->message(__('record edit %s saved', h($var)), 'success');
+				$this->Flash->success(__('record edit %s saved', h($var)));
 				return $this->redirect(['action' => 'index']);
 			}
-			$this->Flash->message(__('formContainsErrors'), 'error');
+			$this->Flash->error(__('formContainsErrors'));
 
 		}
 		if (empty($this->request->data)) {
@@ -175,27 +175,27 @@ class AddressesController extends DataAppController {
 	public function admin_delete($id = null) {
 		$this->request->allowMethod('post');
 		if (empty($id) || !($address = $this->Address->find('first', ['conditions' => ['Address.id' => $id], 'fields' => ['id', 'formatted_address']]))) {
-			$this->Flash->message(__('invalid record'), 'error');
+			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$var = $address['Address']['formatted_address'];
 
 		if ($this->Address->delete($id)) {
-			$this->Flash->message(__('record del %s done', h($var)), 'success');
+			$this->Flash->success(__('record del %s done', h($var)));
 			return $this->redirect(['action' => 'index']);
 		}
-		$this->Flash->message(__('record del %s not done exception', h($var)), 'error');
+		$this->Flash->error(__('record del %s not done exception', h($var)));
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 
 	public function admin_mark_as_used($id = null) {
 		if (empty($id) || !($address = $this->Address->find('first', ['conditions' => ['Address.id' => $id], 'fields' => ['id', 'formatted_address']]))) {
-			$this->Flash->message(__('invalid record'), 'error');
+			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->Address->touch($id);
 		$var = $address['Address']['formatted_address'];
-		$this->Flash->message(__('Address \'%s\' marked as last used', h($var)), 'success');
+		$this->Flash->success(__('Address \'%s\' marked as last used', h($var)));
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 

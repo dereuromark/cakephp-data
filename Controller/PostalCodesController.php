@@ -121,7 +121,7 @@ class PostalCodesController extends DataAppController {
 			if ($this->PostalCode->validates() && $this->GeocodeLib->geocode($address)) {
 				$results = $this->GeocodeLib->getResult();
 			} else {
-				$this->Flash->message(__('formContainsErrors'), 'error');
+				$this->Flash->error(__('formContainsErrors'));
 			}
 		} else {
 			$this->request->data['PostalCode']['allow_inconclusive'] = 1;
@@ -141,7 +141,7 @@ class PostalCodesController extends DataAppController {
 		$this->PostalCode->bindModel(['belongsTo' => ['Country' => ['className' => 'Data.Country']]], false);
 
 		if (empty($id) || !($postalCode = $this->PostalCode->find('first', ['contain' => ['Country'], 'conditions' => ['PostalCode.id' => $id]]))) {
-			$this->Flash->message(__('invalidRecord'), 'error');
+			$this->Flash->error(__('invalidRecord'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 
@@ -156,10 +156,10 @@ class PostalCodesController extends DataAppController {
 			$this->PostalCode->create();
 			if ($this->PostalCode->save($this->request->data)) {
 				$var = $this->request->data['PostalCode']['code'];
-				$this->Flash->message(__('record add %s saved', h($var)), 'success');
+				$this->Flash->success(__('record add %s saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
 			} else {
-				$this->Flash->message(__('formContainsErrors'), 'error');
+				$this->Flash->error(__('formContainsErrors'));
 			}
 		}
 	}
@@ -169,16 +169,16 @@ class PostalCodesController extends DataAppController {
 	 */
 	public function admin_edit($id = null) {
 		if (empty($id) || !($postalCode = $this->PostalCode->find('first', ['conditions' => ['PostalCode.id' => $id]]))) {
-			$this->Flash->message(__('invalidRecord'), 'error');
+			$this->Flash->error(__('invalidRecord'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->PostalCode->save($this->request->data)) {
 				$var = $this->request->data['PostalCode']['code'];
-				$this->Flash->message(__('record edit %s saved', h($var)), 'success');
+				$this->Flash->success(__('record edit %s saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
 			} else {
-				$this->Flash->message(__('formContainsErrors'), 'error');
+				$this->Flash->error(__('formContainsErrors'));
 			}
 		}
 		if (empty($this->request->data)) {
@@ -192,16 +192,16 @@ class PostalCodesController extends DataAppController {
 	public function admin_delete($id = null) {
 		$this->request->allowMethod('post');
 		if (empty($id) || !($postalCode = $this->PostalCode->find('first', ['conditions' => ['PostalCode.id' => $id], 'fields' => ['id', 'code']]))) {
-			$this->Flash->message(__('invalidRecord'), 'error');
+			$this->Flash->error(__('invalidRecord'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$var = $postalCode['PostalCode']['code'];
 
 		if ($this->PostalCode->delete($id)) {
-			$this->Flash->message(__('record del %s done', h($var)), 'success');
+			$this->Flash->success(__('record del %s done', h($var)));
 			return $this->redirect(['action' => 'index']);
 		}
-		$this->Flash->message(__('record del %s not done exception', h($var)), 'error');
+		$this->Flash->error(__('record del %s not done exception', h($var)));
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 

@@ -43,7 +43,7 @@ class CountriesController extends DataAppController {
 		}
 
 		if ($useCache && ($iconNames = Cache::read('country_icon_names')) !== false) {
-			$this->Flash->message('Cache Used', 'info');
+			$this->Flash->info('Cache Used');
 			return $iconNames;
 		}
 		App::uses('Folder', 'Utility');
@@ -69,9 +69,9 @@ class CountriesController extends DataAppController {
 		set_time_limit(120);
 		$res = $this->Country->updateCoordinates($id);
 		if (!$res) {
-			$this->Flash->message(__('coordinates not updated'), 'error');
+			$this->Flash->error(__('coordinates not updated'));
 		} else {
-			$this->Flash->message(__('coordinates %s updated', $res), 'success');
+			$this->Flash->success(__('coordinates %s updated', $res));
 		}
 
 		$this->autoRender = false;
@@ -134,7 +134,7 @@ class CountriesController extends DataAppController {
 					}
 
 				}
-				$this->Flash->message(__('record import %s saved', $count), 'success');
+				$this->Flash->success(__('record import %s saved', $count));
 
 			} else {
 
@@ -211,12 +211,12 @@ class CountriesController extends DataAppController {
 		$this->Country->recursive = 0;
 		$id = (int)$id;
 		if ($id <= 0) {
-			$this->Flash->message(__('record invalid'), 'error');
+			$this->Flash->error(__('record invalid'));
 			return $this->redirect(['action' => 'index']);
 		}
 		$country = $this->Country->record($id);
 		if (empty($country)) {
-			$this->Flash->message(__('record not exists'), 'error');
+			$this->Flash->error(__('record not exists'));
 			return $this->redirect(['action' => 'index']);
 		}
 		$this->set(compact('country'));
@@ -228,32 +228,32 @@ class CountriesController extends DataAppController {
 			if ($this->Country->save($this->request->data)) {
 				$id = $this->Country->id;
 				//$name = $this->request->data['Country']['name'];
-				$this->Flash->message(__('record add %s saved', $id), 'success');
+				$this->Flash->success(__('record add %s saved', $id));
 				return $this->redirect(['action' => 'index']);
 			} else {
-				$this->Flash->message(__('record add not saved'), 'error');
+				$this->Flash->error(__('record add not saved'));
 			}
 		}
 	}
 
 	public function admin_edit($id = null) {
 		if (!$id || !($country = $this->Country->record($id))) {
-			$this->Flash->message(__('record invalid'), 'error');
+			$this->Flash->error(__('record invalid'));
 			return $this->redirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->Country->save($this->request->data)) {
 				$name = $country['Country']['name'];
-				$this->Flash->message(__('record edit %s saved', h($name)), 'success');
+				$this->Flash->success(__('record edit %s saved', h($name)));
 				return $this->redirect(['action' => 'index']);
 			} else {
-				$this->Flash->message(__('record edit not saved'), 'error');
+				$this->Flash->error(__('record edit not saved'));
 			}
 		}
 		if (empty($this->request->data)) {
 			$this->request->data = $country;
 			if (empty($this->request->data)) { # still no record found
-				$this->Flash->message(__('record not exists'), 'error');
+				$this->Flash->error(__('record not exists'));
 				return $this->redirect(['action' => 'index']);
 			}
 		}
@@ -262,28 +262,28 @@ class CountriesController extends DataAppController {
 	public function admin_delete($id = null) {
 		$id = (int)$id;
 		if ($id <= 0) {
-			$this->Flash->message(__('record invalid'), 'error');
+			$this->Flash->error(__('record invalid'));
 			return $this->redirect(['action' => 'index']);
 		}
 		$res = $this->Country->find('first', ['fields' => ['id'], 'conditions' => ['Country.id' => $id]]);
 		if (empty($res)) {
-			$this->Flash->message(__('record del not exists'), 'error');
+			$this->Flash->error(__('record del not exists'));
 			return $this->redirect(['action' => 'index']);
 		}
 
 		//$name = $res['Country']['name'];
 		if ($this->Country->delete($id)) {
-			$this->Flash->message(__('record del %s done', $id), 'success');
+			$this->Flash->success(__('record del %s done', $id));
 			return $this->redirect(['action' => 'index']);
 		} else {
-			$this->Flash->message(__('record del %s not done exception', $id), 'error');
+			$this->Flash->error(__('record del %s not done exception', $id));
 			return $this->redirect(['action' => 'index']);
 		}
 	}
 
 	public function admin_up($id = null) {
 		if (empty($id) || !($navigation = $this->Country->find('first', ['conditions' => ['Country.id' => $id]]))) {
-			$this->Flash->message(__('invalid record'), 'error');
+			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->Country->moveDown($id, 1);
@@ -292,7 +292,7 @@ class CountriesController extends DataAppController {
 
 	public function admin_down($id = null) {
 		if (empty($id) || !($navigation = $this->Country->find('first', ['conditions' => ['Country.id' => $id]]))) {
-			$this->Flash->message(__('invalid record'), 'error');
+			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->Country->moveUp($id, 1);
