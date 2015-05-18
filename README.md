@@ -1,5 +1,6 @@
 # CakePHP Data Plugin
-[![Build Status](https://api.travis-ci.org/dereuromark/cakephp-data.png?branch=cake3)](https://travis-ci.org/dereuromark/cakephp-data)
+[![Build Status](https://api.travis-ci.org/dereuromark/cakephp-data.svg)](https://travis-ci.org/dereuromark/cakephp-data)
+[![Coverage Status](https://coveralls.io/repos/dereuromark/cakephp-data/badge.png)](https://coveralls.io/r/dereuromark/cakephp-data)
 [![Minimum PHP Version](http://img.shields.io/badge/php-%3E%3D%205.4-8892BF.svg)](https://php.net/)
 [![License](https://poser.pugx.org/dereuromark/cakephp-data/license.png)](https://packagist.org/packages/dereuromark/cakephp-data)
 [![Total Downloads](https://poser.pugx.org/dereuromark/cakephp-data/d/total.png)](https://packagist.org/packages/dereuromark/cakephp-data)
@@ -13,7 +14,7 @@ Please note: New functionality has been tested against 3.x (current master and d
 Installing the Plugin is pretty much as with every other CakePHP Plugin.
 ```
 "require": {
-    "dereuromark/cakephp-data": "dev-cake3"
+    "dereuromark/cakephp-data": "dev-master"
 }
 ```
 
