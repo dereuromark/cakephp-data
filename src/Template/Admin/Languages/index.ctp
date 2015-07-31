@@ -4,9 +4,9 @@
 <?php if (Plugin::loaded('Search')) { ?>
 <div class="search-box">
 <?php
-echo $this->Form->create();
+echo $this->Form->create($language);
 echo $this->Form->input('search', array('placeholder' => __('wildcardSearch {0} and {1}', '*', '?')));
-echo $this->Form->input('dir', array('label' => __('Direction'), 'options' => Language::directions(), 'empty' => Configure::read('Select.defaultBefore') . __('noSelection') . Configure::read('Select.defaultAfter')));
+echo $this->Form->input('dir', array('label' => __('Direction'), 'options' => $language::directions(), 'empty' => Configure::read('Select.defaultBefore') . __('noSelection') . Configure::read('Select.defaultAfter')));
 echo $this->Form->submit(__('Search'), array());
 echo $this->Form->end();
 ?>
@@ -36,6 +36,7 @@ foreach ($languages as $language):
 	<tr<?php echo $class;?>>
 		<td>
 <?php
+if (false) {
 	$languageFlags = Cache::read('language_flags');
 	list($wwwPath, $path) = $this->Data->getCountryIconPaths();
 	if (!$languageFlags) {
@@ -50,6 +51,7 @@ foreach ($languages as $language):
 	if (!empty($language['Language']['code']) && in_array($language['Language']['code'] . '.gif', $languageFlags)) {
 		echo $this->Html->image($wwwPath . $language['Language']['code'] . '.gif');
 	}
+}	
 ?>
 		</td>
 		<td>
@@ -71,7 +73,7 @@ foreach ($languages as $language):
 			<?php echo h($language['Language']['direction']); ?>
 		</td>
 		<td>
-			<?php echo $this->Format->yesNo($language['Language']['status'], __('Active'), __('Inactive')); ?>
+			<?php echo $this->Format->yesNo($language['Language']['status'], ['onTitle' => __('Active'), 'offTitle' => __('Inactive')]); ?>
 		</td>
 		<td>
 			<?php echo $this->Time->niceDate($language['Language']['modified']); ?>

@@ -3,6 +3,7 @@ namespace Data\Controller\Admin;
 
 use Cake\Core\Plugin;
 use Data\Controller\DataAppController;
+use Data\Model\Entity\Language;
 
 class LanguagesController extends DataAppController {
 
@@ -16,14 +17,15 @@ class LanguagesController extends DataAppController {
 	public function index() {
 		if (Plugin::loaded('Search')) {
 			$this->Languages->addBehavior('Search.Searchable');
-			$this->Common->loadComponent(array('Search.Prg'));
+			$this->Common->loadComponent('Search.Prg');
 
 			$this->Prg->commonProcess();
 			$languages = $this->paginate($this->Languages->find('searchable', $this->Prg->parsedParams()));
 		}
 
+		$language = $this->Languages->newEntity();
 		$languages = $this->paginate();
-		$this->set(compact('languages'));
+		$this->set(compact('languages', 'language'));
 	}
 
 	public function view($id = null) {
@@ -35,16 +37,21 @@ class LanguagesController extends DataAppController {
 	}
 
 	public function add() {
+		$language = $this->Languages->newEntity();
+		
 		if ($this->Common->isPosted()) {
-			$this->Languages->create();
-			if ($this->Languages->save($this->request->data)) {
-				$var = $this->request->data['Language']['name'];
+			//$this->Languages->create();
+			$language = $this->Languages->patchEntity($language, $this->request->data);
+			if ($this->Languages->save($language)) {
+				$var = $this->request->data['name'];
 				$this->Common->flashMessage(__('record add {0} saved', h($var)), 'success');
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Common->flashMessage(__('formContainsErrors'), 'error');
 			}
 		}
+		
+		$this->set(compact('language'));
 	}
 
 	public function edit($id = null) {
@@ -54,7 +61,7 @@ class LanguagesController extends DataAppController {
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->Languages->save($this->request->data)) {
-				$var = $this->request->data['Language']['name'];
+				$var = $this->request->data['name'];
 				$this->Common->flashMessage(__('record edit {0} saved', h($var)), 'success');
 				return $this->redirect(array('action' => 'index'));
 			} else {
@@ -64,6 +71,8 @@ class LanguagesController extends DataAppController {
 		if (empty($this->request->data)) {
 			$this->request->data = $language;
 		}
+		
+		$this->set(compact('language'));
 	}
 
 	public function delete($id = null) {

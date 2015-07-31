@@ -159,10 +159,10 @@ class CountriesController extends DataAppController {
 	public function index() {
 		if (Plugin::loaded('Search')) {
 			$this->Country->addBehavior('Search.Searchable');
-			$this->Common->loadComponent(array('Search.Prg'));
+			$this->Common->loadComponent('Search.Prg');
 
 			$this->Prg->commonProcess();
-			$this->paginate['conditions'] = $this->Country->find('searchable', $this->Prg->parsedParams());
+			$countries = $this->paginate($this->Country->find('searchable', $this->Prg->parsedParams()));
 		}
 
 		$countries = $this->paginate();

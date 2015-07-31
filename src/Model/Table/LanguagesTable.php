@@ -204,26 +204,4 @@ class LanguagesTable extends Table {
 		return array('heading' => $heading, 'values' => $languages);
 	}
 
-	/**
-	 * Language::directions()
-	 *
-	 * @param mixed $value
-	 * @return mixed
-	 */
-	public static function directions($value = null) {
-		$options = array(
-			self::DIR_LTR => 'LTR',
-			self::DIR_RTL => 'RTL'
-		);
-		return parent::enum($value, $options);
-	}
-
-	const DIR_LTR = 0;
-
-	const DIR_RTL = 1;
-
-	const STATUS_ACTIVE = 1;
-
-	const STATUS_INACTIVE = 0;
-
 }

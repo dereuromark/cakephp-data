@@ -20,7 +20,7 @@ class PostalCodesController extends DataAppController {
 		$this->PostalCode->bindModel(array('belongsTo' => array('Country' => array('className' => 'Data.Country'))), false);
 
 		$this->PostalCode->addBehavior('Search.Searchable');
-		$this->Common->loadComponent(array('Search.Prg'));
+		$this->Common->loadComponent('Search.Prg');
 		$this->Prg->commonProcess();
 		$this->paginate['conditions'] = $this->PostalCode->find('searchable', $this->Prg->parsedParams());
 

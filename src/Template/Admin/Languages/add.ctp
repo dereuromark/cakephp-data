@@ -1,7 +1,7 @@
 <h2><?php echo __('Add {0}', __('Language')); ?></h2>
 
 <div class="page form">
-<?php echo $this->Form->create('Language');?>
+<?php echo $this->Form->create($language);?>
 	<fieldset>
 		<legend><?php echo __('Add {0}', __('Language')); ?></legend>
 	<?php
@@ -10,7 +10,7 @@
 		echo $this->Form->input('code');
 		echo $this->Form->input('locale');
 		echo $this->Form->input('locale_fallback');
-		echo $this->Form->input('direction', array('options' => Language::directions()));
+		echo $this->Form->input('direction', array('options' => $language::directions()));
 		//echo $this->Form->input('status');
 	?>
 	</fieldset>
