@@ -49,7 +49,7 @@ class CountriesController extends DataAppController {
 		}
 
 		if ($useCache && ($iconNames = Cache::read('country_icon_names')) !== false) {
-			$this->Common->flashMessage('Cache Used', 'info');
+			$this->Flash->info('Cache Used');
 			return $iconNames;
 		}
 		$handle = new Folder($this->imageFolder);

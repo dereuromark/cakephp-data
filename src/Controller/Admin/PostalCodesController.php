@@ -53,7 +53,7 @@ class PostalCodesController extends DataAppController {
 		$this->PostalCode->bindModel(array('belongsTo' => array('Country' => array('className' => 'Data.Country'))), false);
 
 		if (empty($id) || !($postalCode = $this->PostalCode->find('first', array('contain' => array('Country'), 'conditions' => array('PostalCode.id' => $id))))) {
-			$this->Common->flashMessage(__('invalidRecord'), 'error');
+			$this->Flash->error(__('invalidRecord'));
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 
@@ -68,10 +68,10 @@ class PostalCodesController extends DataAppController {
 			$this->PostalCode->create();
 			if ($this->PostalCode->save($this->request->data)) {
 				$var = $this->request->data['PostalCode']['code'];
-				$this->Common->flashMessage(__('record add {0} saved', h($var)), 'success');
+				$this->Flash->success(__('record add {0} saved', h($var)));
 				return $this->Common->postRedirect(array('action' => 'index'));
 			} else {
-				$this->Common->flashMessage(__('formContainsErrors'), 'error');
+				$this->Flash->error(__('formContainsErrors'));
 			}
 		}
 	}
@@ -81,16 +81,16 @@ class PostalCodesController extends DataAppController {
 	 */
 	public function edit($id = null) {
 		if (empty($id) || !($postalCode = $this->PostalCode->find('first', array('conditions' => array('PostalCode.id' => $id))))) {
-			$this->Common->flashMessage(__('invalidRecord'), 'error');
+			$this->Flash->error(__('invalidRecord'));
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->PostalCode->save($this->request->data)) {
 				$var = $this->request->data['PostalCode']['code'];
-				$this->Common->flashMessage(__('record edit {0} saved', h($var)), 'success');
+				$this->Flash->success(__('record edit {0} saved', h($var)));
 				return $this->Common->postRedirect(array('action' => 'index'));
 			} else {
-				$this->Common->flashMessage(__('formContainsErrors'), 'error');
+				$this->Flash->error(__('formContainsErrors'));
 			}
 		}
 		if (empty($this->request->data)) {
@@ -106,16 +106,16 @@ class PostalCodesController extends DataAppController {
 			throw new MethodNotAllowedException();
 		}
 		if (empty($id) || !($postalCode = $this->PostalCode->find('first', array('conditions' => array('PostalCode.id' => $id), 'fields' => array('id', 'code'))))) {
-			$this->Common->flashMessage(__('invalidRecord'), 'error');
+			$this->Flash->error(__('invalidRecord'));
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		$var = $postalCode['PostalCode']['code'];
 
 		if ($this->PostalCode->delete($id)) {
-			$this->Common->flashMessage(__('record del {0} done', h($var)), 'success');
+			$this->Flash->success(__('record del {0} done', h($var)));
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->Common->flashMessage(__('record del {0} not done exception', h($var)), 'error');
+		$this->Flash->error(__('record del {0} not done exception', h($var)));
 		return $this->Common->autoRedirect(array('action' => 'index'));
 	}
 

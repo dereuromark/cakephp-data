@@ -47,9 +47,9 @@ class CountryProvincesController extends DataAppController {
 		set_time_limit(120);
 		$res = $this->CountryProvince->updateCoordinates($id);
 		if (!$res) {
-			$this->Common->flashMessage(__('coordinates not updated'), 'error');
+			$this->Flash->error(__('coordinates not updated'));
 		} else {
-			$this->Common->flashMessage(__('coordinates {0} updated', $res), 'success');
+			$this->Flash->success(__('coordinates {0} updated', $res));
 		}
 
 		$this->autoRender = false;
@@ -80,12 +80,12 @@ class CountryProvincesController extends DataAppController {
 	 */
 	public function view($id = null) {
 		if (empty($id)) {
-			$this->Common->flashMessage(__('record invalid'), 'error');
+			$this->Flash->error(__('record invalid'));
 			return $this->redirect(array('action' => 'index'));
 		}
 		$countryProvince = $this->CountryProvince->get($id);
 		if (empty($countryProvince)) {
-			$this->Common->flashMessage(__('record not exists'), 'error');
+			$this->Flash->error(__('record not exists'));
 			return $this->redirect(array('action' => 'index'));
 		}
 		$this->set(compact('countryProvince'));
@@ -102,10 +102,10 @@ class CountryProvincesController extends DataAppController {
 			if ($this->CountryProvince->save($this->request->data)) {
 				$id = $this->CountryProvince->id;
 				$name = $this->request->data['CountryProvince']['name'];
-				$this->Common->flashMessage(__('record add {0} saved', h($name)), 'success');
+				$this->Flash->success(__('record add {0} saved', h($name)));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Common->flashMessage(__('record add not saved'), 'error');
+				$this->Flash->error(__('record add not saved'));
 			}
 		} else {
 			$cid = $this->Session->read('CountryProvince.cid');
@@ -125,22 +125,22 @@ class CountryProvincesController extends DataAppController {
 	 */
 	public function edit($id = null) {
 		if (empty($id)) {
-			$this->Common->flashMessage(__('record invalid'), 'error');
+			$this->Flash->error(__('record invalid'));
 			return $this->redirect(array('action' => 'index'));
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->CountryProvince->save($this->request->data)) {
 				$name = $this->request->data['CountryProvince']['name'];
-				$this->Common->flashMessage(__('record edit {0} saved', h($name)), 'success');
+				$this->Flash->success(__('record edit {0} saved', h($name)));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Common->flashMessage(__('record edit not saved'), 'error');
+				$this->Flash->error(__('record edit not saved'));
 			}
 		}
 		if (empty($this->request->data)) {
 			$this->request->data = $this->CountryProvince->get($id);
 			if (empty($this->request->data)) { # still no record found
-				$this->Common->flashMessage(__('record not exists'), 'error');
+				$this->Flash->error(__('record not exists'));
 				return $this->redirect(array('action' => 'index'));
 			}
 		}
@@ -159,21 +159,21 @@ class CountryProvincesController extends DataAppController {
 			throw new MethodNotAllowedException();
 		}
 		if (empty($id)) {
-			$this->Common->flashMessage(__('record invalid'), 'error');
+			$this->Flash->error(__('record invalid'));
 			return $this->redirect(array('action' => 'index'));
 		}
 		$res = $this->CountryProvince->find('first', array('fields' => array('id', 'name'), 'conditions' => array('CountryProvince.id' => $id)));
 		if (empty($res)) {
-			$this->Common->flashMessage(__('record del not exists'), 'error');
+			$this->Flash->error(__('record del not exists'));
 			return $this->redirect(array('action' => 'index'));
 		}
 
 		$name = $res['CountryProvince']['name'];
 		if ($this->CountryProvince->delete($id)) {
-			$this->Common->flashMessage(__('record del {0} done', h($name)), 'success');
+			$this->Flash->success(__('record del {0} done', h($name)));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Common->flashMessage(__('record del {0} not done exception', $name), 'error');
+			$this->Flash->error(__('record del {0} not done exception', $name));
 			return $this->redirect(array('action' => 'index'));
 		}
 	}
