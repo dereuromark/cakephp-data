@@ -1,23 +1,10 @@
 <div class="page index">
 
 <div class="floatRight">
-<?php echo __('Country');?>:&nbsp;&nbsp;
-<?php echo $this->Form->input('Filter.id', array(
-	'class' => 'filter',
-	'label' => false,
-	'div' => false,
-	'type' => 'select',
-	'empty' => array(-1 => '- [ ' . __('noRestriction') . ' ] -'),
-	'onchange' => 'changeSel(this,\'' . $this->Url->build(array('action' => 'index')) . '/index/\')',
-	/*
-	'onchange'=>'filter(this,\''.$this->Url->build(array(
-				'filter'=>'on',
-				'sort'=>(!empty($filters['sort']) ? $filters['sort'] : ''),
-				'direction'=>(!empty($filters['direction']) ? $filters['direction'] : '')
-				)).'/'.$filter_field.':\')',
-	*/
-	'options' => $countries));?>
-<div></div>
+
+	<div class="floatRight">
+		<?php echo $this->element('Data.CountryProvinces/search'); ?>
+	</div>
 </div>
 
 <h2><?php echo __('Country Provinces');?></h2>
@@ -55,7 +42,7 @@ foreach ($countryProvinces as $countryProvince):
 			if ((int)$countryProvince['lat'] != 0 || (int)$countryProvince['lat'] != 0) {
 				$coordinates = $countryProvince['lat'] . ',' . $countryProvince['lat'];
 			}
-			echo $this->Format->yesNo((int)!empty($coordinates), $coordinates, 'keine hinterlegt');
+			echo $this->Format->yesNo((int)!empty($coordinates), ['onTitle' => $coordinates, 'offTitle' => 'keine hinterlegt']);
 			?>
 		</td>
 	</tr>

@@ -3,6 +3,7 @@ namespace Data\Controller\Admin;
 
 use Data\Controller\DataAppController;
 use Cake\Event\Event;
+use Cake\Core\Plugin;
 
 class CountryProvincesController extends DataAppController {
 
@@ -25,10 +26,10 @@ class CountryProvincesController extends DataAppController {
 	public function updateSelect($id = null) {
 		//$this->autoRender = false;
 		if (!$this->request->is('post') || !$this->request->is('ajax')) {
-			die(__('not a valid request'));
+			throw new \Exception(__('not a valid request'));
 		}
 		$this->layout = 'ajax';
-		$countryProvinces = $this->CountryProvince->getListByCountry($id);
+		$countryProvinces = $this->CountryProvinces->getListByCountry($id);
 		$defaultFieldLabel = 'pleaseSelect';
 		if ($this->request->query('optional')) {
 			$defaultFieldLabel = 'doesNotMatter';
@@ -45,7 +46,7 @@ class CountryProvincesController extends DataAppController {
 	 */
 	public function updateCoordinates($id = null) {
 		set_time_limit(120);
-		$res = $this->CountryProvince->updateCoordinates($id);
+		$res = $this->CountryProvinces->updateCoordinates($id);
 		if (!$res) {
 			$this->Flash->error(__('coordinates not updated'));
 		} else {
@@ -65,11 +66,20 @@ class CountryProvincesController extends DataAppController {
 	public function index($cid = null) {
 		$cid = $this->_processCountry($cid);
 
-		$countryProvinces = $this->paginate();
-		$countries = $this->CountryProvince->Country->find('list');
+		if (Plugin::loaded('Search')) {
+			$this->CountryProvinces->addBehavior('Search.Searchable');
+			$this->Common->loadComponent('Search.Prg');
+
+			$this->Prg->commonProcess();
+			$countryProvinces = $this->paginate($this->CountryProvinces->find('searchable', $this->Prg->parsedParams()));
+		} else {
+			$countryProvinces = $this->paginate();
+		}
+
+		$countries = $this->CountryProvinces->Countries->find('list');
 
 		$this->set(compact('countryProvinces', 'countries'));
-		$this->Common->loadHelper(array('Geo.GoogleMapV3'));
+		$this->helpers[] = 'Geo.GoogleMapV3';
 	}
 
 	/**
@@ -83,7 +93,7 @@ class CountryProvincesController extends DataAppController {
 			$this->Flash->error(__('record invalid'));
 			return $this->redirect(array('action' => 'index'));
 		}
-		$countryProvince = $this->CountryProvince->get($id);
+		$countryProvince = $this->CountryProvinces->get($id);
 		if (empty($countryProvince)) {
 			$this->Flash->error(__('record not exists'));
 			return $this->redirect(array('action' => 'index'));
@@ -98,9 +108,9 @@ class CountryProvincesController extends DataAppController {
 	 */
 	public function add() {
 		if ($this->Common->isPosted()) {
-			$this->CountryProvince->create();
-			if ($this->CountryProvince->save($this->request->data)) {
-				$id = $this->CountryProvince->id;
+			$this->CountryProvinces->create();
+			if ($this->CountryProvinces->save($this->request->data)) {
+				$id = $this->CountryProvinces->id;
 				$name = $this->request->data['CountryProvince']['name'];
 				$this->Flash->success(__('record add {0} saved', h($name)));
 				return $this->redirect(array('action' => 'index'));
@@ -113,7 +123,7 @@ class CountryProvincesController extends DataAppController {
 				$this->request->data['CountryProvince']['country_id'] = $cid;
 			}
 		}
-		$countries = $this->CountryProvince->Country->find('list');
+		$countries = $this->CountryProvinces->Countries->find('list');
 		$this->set(compact('countries'));
 	}
 
@@ -129,7 +139,7 @@ class CountryProvincesController extends DataAppController {
 			return $this->redirect(array('action' => 'index'));
 		}
 		if ($this->Common->isPosted()) {
-			if ($this->CountryProvince->save($this->request->data)) {
+			if ($this->CountryProvinces->save($this->request->data)) {
 				$name = $this->request->data['CountryProvince']['name'];
 				$this->Flash->success(__('record edit {0} saved', h($name)));
 				return $this->redirect(array('action' => 'index'));
@@ -138,13 +148,13 @@ class CountryProvincesController extends DataAppController {
 			}
 		}
 		if (empty($this->request->data)) {
-			$this->request->data = $this->CountryProvince->get($id);
+			$this->request->data = $this->CountryProvinces->get($id);
 			if (empty($this->request->data)) { # still no record found
 				$this->Flash->error(__('record not exists'));
 				return $this->redirect(array('action' => 'index'));
 			}
 		}
-		$countries = $this->CountryProvince->Country->find('list');
+		$countries = $this->CountryProvinces->Countries->find('list');
 		$this->set(compact('countries'));
 	}
 
@@ -162,14 +172,14 @@ class CountryProvincesController extends DataAppController {
 			$this->Flash->error(__('record invalid'));
 			return $this->redirect(array('action' => 'index'));
 		}
-		$res = $this->CountryProvince->find('first', array('fields' => array('id', 'name'), 'conditions' => array('CountryProvince.id' => $id)));
+		$res = $this->CountryProvinces->find('first', array('fields' => array('id', 'name'), 'conditions' => array('CountryProvince.id' => $id)));
 		if (empty($res)) {
 			$this->Flash->error(__('record del not exists'));
 			return $this->redirect(array('action' => 'index'));
 		}
 
 		$name = $res['CountryProvince']['name'];
-		if ($this->CountryProvince->delete($id)) {
+		if ($this->CountryProvinces->delete($id)) {
 			$this->Flash->success(__('record del {0} done', h($name)));
 			return $this->redirect(array('action' => 'index'));
 		} else {

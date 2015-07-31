@@ -111,7 +111,7 @@ foreach ($locales as $key => $locale):
 		</td>
 		<td>
 			<?php
-				echo $this->Format->yesNo($exists, 'Existiert, aber falsch', 'Existiert nicht (mehr)');
+				echo $this->Format->yesNo($exists, ['onTitle' => 'Existiert, aber falsch', 'offTitle' => 'Existiert nicht (mehr)']);
 			?>&nbsp;
 			<?php
 				if ($exists) {

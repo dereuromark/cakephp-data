@@ -51,7 +51,7 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 		</td>
 		<td>
 			<span class="ajaxToggling" id="ajaxToggle-<?php echo $mimeTypeImage['MimeTypeImage']['id']?>">
-			<?php echo $this->Html->link($this->Format->yesNo($mimeTypeImage['MimeTypeImage']['active'], 'Active', 'Inactive', 1), array('action' => 'toggleActive', $mimeTypeImage['MimeTypeImage']['id']), array('escape' => false));?>
+			<?php echo $this->Html->link($this->Format->yesNo($mimeTypeImage['MimeTypeImage']['active'], ['onTitle' => 'Active', 'offTitle' => 'Inactive']), array('action' => 'toggleActive', $mimeTypeImage['MimeTypeImage']['id']), array('escape' => false));?>
 			</span>
 
 			<?php

@@ -42,12 +42,12 @@ foreach ($smileys as $smiley):
 		</td>
 		<td>
 			<span class="ajaxToggling" id="ajaxToggle-is_base-<?php echo $smiley['Smiley']['id']?>">
-			<?php echo $this->Html->link($this->Format->yesNo($smiley['Smiley']['is_base'], 'Ja', 'Nein'), array('action' => 'toggle', 'is_base', $smiley['Smiley']['id']), array('escape' => false)); ?>
+			<?php echo $this->Html->link($this->Format->yesNo($smiley['Smiley']['is_base'], ['onTitle' => 'Yes', 'offTitle' => 'No']), array('action' => 'toggle', 'is_base', $smiley['Smiley']['id']), array('escape' => false)); ?>
 			</span>
 		</td>
 		<td>
 			<span class="ajaxToggling" id="ajaxToggle-active-<?php echo $smiley['Smiley']['id']?>">
-			<?php echo $this->Html->link($this->Format->yesNo($smiley['Smiley']['active'], 'Aktiv', 'Inaktiv'), array('action' => 'toggle', 'active', $smiley['Smiley']['id']), array('escape' => false)); ?>
+			<?php echo $this->Html->link($this->Format->yesNo($smiley['Smiley']['active'], ['onTitle' => 'Active', 'offTitle' => 'Inactive']), array('action' => 'toggle', 'active', $smiley['Smiley']['id']), array('escape' => false)); ?>
 			</span>
 		</td>
 		<td>

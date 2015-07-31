@@ -242,8 +242,8 @@ class CountriesTable extends Table {
 				if (!empty($res['ori_name']) && $Geocoder->geocode($res['ori_name']) || $res['name'] != $res['ori_name'] && $Geocoder->geocode($res['name'])) {
 
 					$data = $Geocoder->getResult();
-					echo returns($res);
-					echo returns($data); die();
+					//echo returns($res);
+					//echo returns($data); die();
 					# seems to be very problematic: country "Georgien" results in "Georgia, USA"
 
 					$saveArray = array();

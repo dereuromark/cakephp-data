@@ -3,6 +3,8 @@ namespace Data\Controller;
 
 use Data\Controller\DataAppController;
 use Cake\Event\Event;
+use Cake\Utility\Hash;
+use Cake\Core\Plugin;
 
 class CountryProvincesController extends DataAppController {
 
@@ -25,7 +27,7 @@ class CountryProvincesController extends DataAppController {
 	public function update_select($id = null) {
 		//$this->autoRender = false;
 		if (!$this->request->is('post') || !$this->request->is('ajax')) {
-			die(__('not a valid request'));
+			throw new \Exception(__('not a valid request'));
 		}
 		$this->layout = 'ajax';
 		$countryProvinces = $this->CountryProvince->getListByCountry($id);
@@ -49,7 +51,15 @@ class CountryProvincesController extends DataAppController {
 
 		$cid = $this->_processCountry($cid);
 
-		$countryProvinces = $this->paginate();
+		if (Plugin::loaded('Search')) {
+			$this->CountryProvinces->addBehavior('Search.Searchable');
+			$this->Common->loadComponent('Search.Prg');
+
+			$this->Prg->commonProcess();
+			$countryProvinces = $this->paginate($this->CountryProvinces->find('searchable', $this->Prg->parsedParams()));
+		} else {
+			$countryProvinces = $this->paginate();
+		}
 
 		$countries = $this->CountryProvinces->Countries->active('list');
 		$this->set(compact('countryProvinces', 'countries'));
@@ -74,8 +84,8 @@ class CountryProvincesController extends DataAppController {
 		}
 
 		if (!empty($cid)) {
-			$this->paginate = Set::merge($this->paginate, array('conditions' => array('country_id' => $cid)));
-			$this->request->data['Filter']['id'] = $cid;
+			$this->paginate = Hash::merge($this->paginate, array('conditions' => array('country_id' => $cid)));
+			$this->request->data['id'] = $cid;
 		}
 	}
 

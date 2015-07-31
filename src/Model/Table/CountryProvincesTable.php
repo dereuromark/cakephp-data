@@ -53,6 +53,12 @@ class CountryProvincesTable extends Table {
 		));
 	}
 
+	public $filterArgs = array(
+		'search' => array('type' => 'like', 'field' => array('name', 'code')),
+		'active' => array('type' => 'value'),
+		'country_id'=> array('type' => 'value')
+	);
+
 	/**
 	 * Lat and lng + abbr if available!
 	 *
@@ -85,11 +91,14 @@ class CountryProvincesTable extends Table {
 				$this->id = $id;
 				if (!$this->save($saveArray, true, array('id', 'lat', 'lng', 'abbr', 'country_id'))) {
 					if ($data['country_province_code'] !== 'DC') {
+						/*
 						echo returns($this->id);
 						pr($res);
 						pr($data);
 						pr($saveArray);
 						die(returns($this->validationErrors));
+						*/
+						throw new \Exception('Update Error');
 					}
 				}
 				return true;

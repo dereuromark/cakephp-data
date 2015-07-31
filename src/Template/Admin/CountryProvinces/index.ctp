@@ -1,26 +1,10 @@
-<?php $this->Html->script('highslide/highslide.js', false)?>
-<?php $this->Html->script('highslide/highslide_config', false)?>
+<?php $this->Html->script('highslide/highslide.js')?>
+<?php $this->Html->script('highslide/highslide_config')?>
 
 <div class="page index">
 
 <div class="floatRight">
-<?php echo __('Country');?>:&nbsp;&nbsp;
-<?php echo $this->Form->input('Filter.id', array(
-	'class' => 'filter',
-	'label' => false,
-	'div' => false,
-	'type' => 'select',
-	'empty' => array(-1 => '- [ ' . __('noRestriction') . ' ] -'),
-	'onchange' => 'changeSel(this,\'' . $this->Html->url(array('action' => 'index')) . '/index/\')',
-	/*
-	'onchange'=>'filter(this,\''.$this->Html->url(array(
-				'filter'=>'on',
-				'sort'=>(!empty($filters['sort']) ? $filters['sort'] : ''),
-				'direction'=>(!empty($filters['direction']) ? $filters['direction'] : '')
-				)).'/'.$filter_field.':\')',
-	*/
-	'options' => $countries));?>
-<div></div>
+	<?php echo $this->element('Data.CountryProvinces/search'); ?>
 </div>
 
 <h2><?php echo __('Country Provinces');?></h2>
@@ -60,13 +44,13 @@ foreach ($countryProvinces as $countryProvince):
 			if ((int)$countryProvince['CountryProvince']['lat'] != 0 || (int)$countryProvince['CountryProvince']['lng'] != 0) {
 				$coordinates = $countryProvince['CountryProvince']['lat'] . ',' . $countryProvince['CountryProvince']['lng'];
 			}
-			echo $this->Format->yesNo((int)!empty($coordinates), $coordinates, 'keine hinterlegt');
+			echo $this->Format->yesNo((int)!empty($coordinates), ['onTitle' => $coordinates, 'offTitke' => 'keine hinterlegt']);
 
 			if (!empty($coordinates)) {
 				$markers = array();
 				$markers[] = array('lat' => $countryProvince['CountryProvince']['lat'], 'lng' => $countryProvince['CountryProvince']['lng'], 'color' => 'green');
 				$mapMarkers = $this->GoogleMapV3->staticMarkers($markers);
-				echo ' ' . $this->Html->link($this->Format->icon(ICON_DETAILS, ['title' => __('Show')]), $this->GoogleMapV3->staticMapUrl(array('center' => $countryProvince['CountryProvince']['lat'] . ',' . $countryProvince['CountryProvince']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 5)), array('id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false));
+				echo ' ' . $this->Html->link($this->Format->icon(ICON_DETAILS, [], ['title' => __('Show')]), $this->GoogleMapV3->staticMapUrl(array('center' => $countryProvince['CountryProvince']['lat'] . ',' . $countryProvince['CountryProvince']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 5)), array('id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false));
 			}
 
 			?>
@@ -78,7 +62,7 @@ foreach ($countryProvinces as $countryProvince):
 			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $countryProvince['CountryProvince']['id']), array('escape'=>false)); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $countryProvince['CountryProvince']['id']), array('escape' => false)); ?>
 
-			<?php echo $this->Html->link($this->Format->icon(ICON_MAP, ['title' => __('Koordinaten updaten')]), array('action' => 'update_coordinates', $countryProvince['CountryProvince']['id']), array('escape' => false)); ?>
+			<?php echo $this->Html->link($this->Format->icon('map-o', [], ['title' => __('Koordinaten updaten')]), array('action' => 'update_coordinates', $countryProvince['CountryProvince']['id']), array('escape' => false)); ?>
 
 			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $countryProvince['CountryProvince']['id']), array('escape' => false), __('Are you sure you want to delete # {0}?', $countryProvince['CountryProvince']['id']), false); ?>
 		</td>
