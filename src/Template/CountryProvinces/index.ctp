@@ -42,7 +42,7 @@ foreach ($countryProvinces as $countryProvince):
 			if ((int)$countryProvince['lat'] != 0 || (int)$countryProvince['lat'] != 0) {
 				$coordinates = $countryProvince['lat'] . ',' . $countryProvince['lat'];
 			}
-			echo $this->Format->yesNo((int)!empty($coordinates), ['onTitle' => $coordinates, 'offTitle' => 'keine hinterlegt']);
+			echo $this->Format->yesNo((int)!empty($coordinates), ['onTitle' => $coordinates, 'offTitle' => 'n/a']);
 			?>
 		</td>
 	</tr>

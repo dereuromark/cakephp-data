@@ -44,7 +44,7 @@ foreach ($countryProvinces as $countryProvince):
 			if ((int)$countryProvince['CountryProvince']['lat'] != 0 || (int)$countryProvince['CountryProvince']['lng'] != 0) {
 				$coordinates = $countryProvince['CountryProvince']['lat'] . ',' . $countryProvince['CountryProvince']['lng'];
 			}
-			echo $this->Format->yesNo((int)!empty($coordinates), ['onTitle' => $coordinates, 'offTitke' => 'keine hinterlegt']);
+			echo $this->Format->yesNo((int)!empty($coordinates), ['onTitle' => $coordinates, 'offTitke' => 'n/a']);
 
 			if (!empty($coordinates)) {
 				$markers = array();
