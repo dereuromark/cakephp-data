@@ -13,12 +13,12 @@
 		</dd>
 		<dt><?php echo __('Lat'); ?></dt>
 		<dd>
-			<?php echo $this->Numeric->format($postalCode['PostalCode']['lat']); ?>
+			<?php echo $this->Number->format($postalCode['PostalCode']['lat']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Lng'); ?></dt>
 		<dd>
-			<?php echo $this->Numeric->format($postalCode['PostalCode']['lng']); ?>
+			<?php echo $this->Number->format($postalCode['PostalCode']['lng']); ?>
 			&nbsp;
 		</dd>
 <?php if ((int)$postalCode['PostalCode']['lat'] || (int)$postalCode['PostalCode']['lng']) { ?>

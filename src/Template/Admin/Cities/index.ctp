@@ -28,7 +28,7 @@ foreach ($cities as $city) { ?>
 			<?php echo h($city['City']['postal_code']); ?>
 		</td>
 		<td>
-			<?php echo $this->Numeric->format($city['City']['lat']); ?>/<?php echo $this->Numeric->format($city['City']['lng']); ?>
+			<?php echo $this->Number->format($city['City']['lat']); ?>/<?php echo $this->Number->format($city['City']['lng']); ?>
 		</td>
 		<td>
 			<?php echo $this->Format->yesNo($city['City']['postal_code_unique']); ?>

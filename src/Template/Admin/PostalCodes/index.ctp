@@ -34,10 +34,10 @@ foreach ($postalCodes as $postalCode): ?>
 			<?php echo h($postalCode['PostalCode']['country_id']); ?>
 		</td>
 		<td>
-			<?php echo $this->Numeric->format($postalCode['PostalCode']['lat']); ?>
+			<?php echo $this->Number->format($postalCode['PostalCode']['lat']); ?>
 		</td>
 		<td>
-			<?php echo $this->Numeric->format($postalCode['PostalCode']['lng']); ?>
+			<?php echo $this->Number->format($postalCode['PostalCode']['lng']); ?>
 		</td>
 		<td>
 			<?php echo h($postalCode['PostalCode']['official_address']); ?>

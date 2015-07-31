@@ -1,7 +1,7 @@
 <div class="page index">
 <h2><?php echo __('Currencies');?></h2>
 
-<?php if (CakePlugin::loaded('Search')) { ?>
+<?php if (Plugin::loaded('Search')) { ?>
 <div class="search-box">
 <?php
 echo $this->Form->create();
@@ -50,18 +50,18 @@ foreach ($currencies as $currency):
 		</td>
 		<td>
 
-			<?php echo $this->Numeric->format($currency['Currency']['value'], 4); ?>
+			<?php echo $this->Number->format($currency['Currency']['value'], ['places' => 4]); ?>
 			<?php if ($currency['Currency']['value'] > 0) { ?>
-			<div class="reverse"><small>1 <?php echo h($currency['Currency']['code']); ?> = <?php echo $this->Numeric->format(1 / $currency['Currency']['value'], 4)?> <?php echo $baseCurrency['Currency']['code']; ?></small></div>
+			<div class="reverse"><small>1 <?php echo h($currency['Currency']['code']); ?> = <?php echo $this->Number->format(1 / $currency['Currency']['value'], ['places' => 4])?> <?php echo $baseCurrency['Currency']['code']; ?></small></div>
 			<?php } ?>
 		</td>
 		<td>
 			<span class="ajaxToggling" id="ajaxToggle-<?php echo $currency['Currency']['id']?>">
-			<?php echo $this->Html->link($this->Format->yesNo($currency['Currency']['active'], 'Aktiv', 'Inaktiv'), array('action' => 'toggle', 'active', $currency['Currency']['id']), array('escape' => false)); ?></span>&nbsp;&nbsp;<?php
+			<?php echo $this->Html->link($this->Format->yesNo($currency['Currency']['active'], ['onTitle' => __('Active'), 'offTitle' => __('Inactive')]), array('action' => 'toggle', 'active', $currency['Currency']['id']), array('escape' => false)); ?></span>&nbsp;&nbsp;<?php
 			if ($currency['Currency']['base'] && !empty($baseCurrency)) {
-				echo $this->Format->yesNo($currency['Currency']['base'], 'Basis-Wert');
+				echo $this->Format->yesNo($currency['Currency']['base'], ['onTitle' => __('Base value')]);
 			} else {
-				echo $this->Html->link($this->Format->cIcon('checkbox_ticked.gif', 'Zum Basis-Wert machen'), array('action' => 'base', $currency['Currency']['id']), array('escape' => false), 'Sicher?');
+				echo $this->Html->link($this->Format->icon('check-square-o', ['title' => __('Zum Basis-Wert machen')]), array('action' => 'base', $currency['Currency']['id']), array('escape' => false), 'Sicher?');
 			} ?>
 		</td>
 		<td>

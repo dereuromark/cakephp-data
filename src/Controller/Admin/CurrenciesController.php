@@ -6,31 +6,29 @@ use Data\Controller\DataAppController;
 
 class CurrenciesController extends DataAppController {
 
-	//public $helpers = array('Data.Numeric', 'Data.FormExt');
-
 	public $paginate = array('order' => array('Currency.base' => 'DESC', 'Currency.modified' => 'DESC'));
 
 	public function table() {
-		$currencies = $this->Currency->availableCurrencies();
+		$currencies = $this->Currencies->availableCurrencies();
 		$this->set(compact('currencies'));
 	}
 
 	public function update() {
-		$this->Currency->updateValues();
+		$this->Currencies->updateValues();
 		$this->Common->flashMessage('Currencies Updated', 'success');
 		return $this->Common->autoRedirect(array('action' => 'index'));
 	}
 
 	public function index() {
 		if (Plugin::loaded('Search')) {
-			$this->Currency->Behaviors->load('Search.Searchable');
-			$this->Common->loadComponent(array('Search.Prg'));
+			$this->Currencies->addBehavior('Search.Searchable');
+			$this->Common->loadComponent('Search.Prg');
 
 			$this->Prg->commonProcess();
-			$this->paginate['conditions'] = $this->Currency->parseCriteria($this->Prg->parsedParams());
+			$currencies = $this->paginate($this->Currencies->find('searchable', $this->Prg->parsedParams()));
+		} else {
+			$currencies = $this->paginate();
 		}
-
-		$currencies = $this->paginate();
 
 		$baseCurrency = array();
 		foreach ($currencies as $currency) {
@@ -40,7 +38,7 @@ class CurrenciesController extends DataAppController {
 			}
 		}
 		if (empty($baseCurrency)) {
-			$baseCurrency = $this->Currency->find('first', array('conditions' => array('base' => true)));
+			$baseCurrency = $this->Currencies->find('first', array('conditions' => array('base' => true)));
 			if (!$baseCurrency) {
 				$this->Common->flashMessage(__('noBaseCurrency'), 'warning');
 			}
@@ -54,7 +52,7 @@ class CurrenciesController extends DataAppController {
 			$this->Common->flashMessage(__('record invalid'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
-		$currency = $this->Currency->get($id);
+		$currency = $this->Currencies->get($id);
 		if (empty($currency)) {
 			$this->Common->flashMessage(__('record not exists'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
@@ -64,14 +62,14 @@ class CurrenciesController extends DataAppController {
 
 	public function add() {
 		if ($this->Common->isPosted()) {
-			$this->Currency->create();
-			if ($this->Currency->save($this->request->data)) {
-				$id = $this->Currency->id;
+			$this->Currencies->create();
+			if ($this->Currencies->save($this->request->data)) {
+				$id = $this->Currencies->id;
 				//$name = $this->request->data['Currency']['name'];
 				$this->Common->flashMessage(__('record add {0} saved', $id), 'success');
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->request->data = $this->Currency->data;
+				$this->request->data = $this->Currencies->data;
 
 				$this->Common->flashMessage(__('record add not saved'), 'error');
 			}
@@ -79,7 +77,7 @@ class CurrenciesController extends DataAppController {
 			$this->request->data['Currency']['decimal_places'] = 2;
 		}
 
-		$currencies = $this->Currency->currencyList();
+		$currencies = $this->Currencies->currencyList();
 		$this->set(compact('currencies'));
 	}
 
@@ -89,7 +87,7 @@ class CurrenciesController extends DataAppController {
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		if ($this->Common->isPosted()) {
-			if ($this->Currency->save($this->request->data)) {
+			if ($this->Currencies->save($this->request->data)) {
 				//$name = $this->request->data['Currency']['name'];
 				$this->Common->flashMessage(__('record edit {0} saved', $id), 'success');
 				return $this->redirect(array('action' => 'index'));
@@ -98,7 +96,7 @@ class CurrenciesController extends DataAppController {
 			}
 		}
 		if (empty($this->request->data)) {
-			$this->request->data = $this->Currency->get($id);
+			$this->request->data = $this->Currencies->get($id);
 			if (empty($this->request->data)) { # still no record found
 				$this->Common->flashMessage(__('record not exists'), 'error');
 				return $this->redirect(array('action' => 'index'));
@@ -114,14 +112,14 @@ class CurrenciesController extends DataAppController {
 			$this->Common->flashMessage(__('record invalid'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
-		$res = $this->Currency->find('first', array('fields' => array('id'), 'conditions' => array('Currency.id' => $id)));
+		$res = $this->Currencies->find('first', array('fields' => array('id'), 'conditions' => array('Currency.id' => $id)));
 		if (empty($res)) {
 			$this->Common->flashMessage(__('record del not exists'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 
 		//$name = $res['Currency']['name'];
-		if ($this->Currency->delete($id)) {
+		if ($this->Currencies->delete($id)) {
 			$this->Common->flashMessage(__('record del {0} done', $id), 'success');
 			return $this->redirect(array('action' => 'index'));
 		} else {
@@ -139,7 +137,7 @@ class CurrenciesController extends DataAppController {
 
 	public function _setAsPrimary($id) {
 		if (!empty($id)) {
-			$value = $this->Currency->setAsBase($id);
+			$value = $this->Currencies->setAsBase($id);
 		}
 
 		$name = '';

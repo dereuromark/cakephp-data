@@ -6,7 +6,7 @@
 <div class="page index">
 <h2><?php echo __('Countries');?></h2>
 
-<?php if (CakePlugin::loaded('Search')) { ?>
+<?php if (Plugin::loaded('Search')) { ?>
 <div class="search-box">
 <?php
 echo $this->Form->create();

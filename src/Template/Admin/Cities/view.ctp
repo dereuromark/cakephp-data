@@ -33,11 +33,11 @@
 		</dd>
 		<dt><?php echo __('Lat'); ?></dt>
 		<td>
-			<?php echo $this->Numeric->format($city['City']['lat']); ?>
+			<?php echo $this->Number->format($city['City']['lat']); ?>
 		</td>
 		<dt><?php echo __('Lng'); ?></dt>
 		<td>
-			<?php echo $this->Numeric->format($city['City']['lng']); ?>
+			<?php echo $this->Number->format($city['City']['lng']); ?>
 		</td>
 		<dt><?php echo __('Description'); ?></dt>
 		<dd>

@@ -66,7 +66,7 @@ foreach ($countryProvinces as $countryProvince):
 				$markers = array();
 				$markers[] = array('lat' => $countryProvince['CountryProvince']['lat'], 'lng' => $countryProvince['CountryProvince']['lng'], 'color' => 'green');
 				$mapMarkers = $this->GoogleMapV3->staticMarkers($markers);
-				echo ' ' . $this->Html->link($this->Format->cIcon(ICON_DETAILS, 'Zeigen'), $this->GoogleMapV3->staticMapUrl(array('center' => $countryProvince['CountryProvince']['lat'] . ',' . $countryProvince['CountryProvince']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 5)), array('id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false));
+				echo ' ' . $this->Html->link($this->Format->icon(ICON_DETAILS, ['title' => __('Show')]), $this->GoogleMapV3->staticMapUrl(array('center' => $countryProvince['CountryProvince']['lat'] . ',' . $countryProvince['CountryProvince']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 5)), array('id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false));
 			}
 
 			?>
@@ -78,7 +78,7 @@ foreach ($countryProvinces as $countryProvince):
 			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $countryProvince['CountryProvince']['id']), array('escape'=>false)); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $countryProvince['CountryProvince']['id']), array('escape' => false)); ?>
 
-			<?php echo $this->Html->link($this->Format->cIcon(ICON_MAP, 'Koordinaten updaten'), array('action' => 'update_coordinates', $countryProvince['CountryProvince']['id']), array('escape' => false)); ?>
+			<?php echo $this->Html->link($this->Format->icon(ICON_MAP, ['title' => __('Koordinaten updaten')]), array('action' => 'update_coordinates', $countryProvince['CountryProvince']['id']), array('escape' => false)); ?>
 
 			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $countryProvince['CountryProvince']['id']), array('escape' => false), __('Are you sure you want to delete # {0}?', $countryProvince['CountryProvince']['id']), false); ?>
 		</td>
