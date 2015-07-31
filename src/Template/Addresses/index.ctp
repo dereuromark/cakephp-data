@@ -1,7 +1,7 @@
 <div class="page index">
 <h2><?php echo __('Addresses');?></h2>
 
-<table class="list">
+<table class="table">
 <tr>
 	<th><?php echo $this->Paginator->sort('foreign_id');?></th>
 	<th><?php echo $this->Paginator->sort('model');?></th>

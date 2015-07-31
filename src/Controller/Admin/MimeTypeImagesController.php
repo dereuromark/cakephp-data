@@ -1,6 +1,6 @@
 <?php
 
-namespace Data\Controller;
+namespace Data\Controller\Admin;
 
 use App\Utility\Sanitize;
 use Cake\Utility\Folder;
@@ -10,7 +10,7 @@ class MimeTypeImagesController extends DataAppController {
 
 	public $paginate = array('order' => array('MimeTypeImage.modified' => 'DESC'));
 
-	public function admin_import() {
+	public function import() {
 
 		if ($this->Common->isPosted()) {
 
@@ -70,7 +70,7 @@ class MimeTypeImagesController extends DataAppController {
 		}
 	}
 
-	public function admin_allocate() {
+	public function allocate() {
 		$folder = new Folder(PATH_MIMETYPES . 'import' . DS);
 		$images = $folder->find('.*');
 
@@ -164,7 +164,7 @@ class MimeTypeImagesController extends DataAppController {
 		$this->set(compact('images'));
 	}
 
-	public function admin_index() {
+	public function index() {
 		$mimeTypeImages = $this->paginate();
 
 		/*
@@ -204,7 +204,7 @@ class MimeTypeImagesController extends DataAppController {
 		$this->set(compact('mimeTypeImages'));
 	}
 
-	public function admin_view($id = null) {
+	public function view($id = null) {
 		if (empty($id)) {
 			$this->Common->flashMessage(__('record invalid'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
@@ -276,7 +276,7 @@ class MimeTypeImagesController extends DataAppController {
 		return false;
 	}
 
-	public function admin_add() {
+	public function add() {
 		$folder = new Folder(PATH_MIMETYPES, true, 777);
 		//pr (substr(sprintf('%o', fileperms(PATH_IMAGES)), -4));
 
@@ -315,7 +315,7 @@ class MimeTypeImagesController extends DataAppController {
 		$this->set(compact('availableImages'));
 	}
 
-	public function admin_edit($id = null) {
+	public function edit($id = null) {
 		if (empty($id)) {
 			$this->Common->flashMessage(__('record invalid'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
@@ -357,7 +357,7 @@ class MimeTypeImagesController extends DataAppController {
 		$this->set(compact('availableImages'));
 	}
 
-	public function admin_delete($id = null) {
+	public function delete($id = null) {
 		if (!$this->Common->isPosted()) {
 			throw new MethodNotAllowedException();
 		}
@@ -396,7 +396,7 @@ class MimeTypeImagesController extends DataAppController {
 		}
 	}
 
-	public function admin_toggleActive($id = null) {
+	public function toggleActive($id = null) {
 		$this->toggleActive($id);
 	}
 
@@ -423,7 +423,7 @@ class MimeTypeImagesController extends DataAppController {
 	* deprecated/test functions
 	****************************************************************************************/
 
-	public function admin_manual_input() {
+	public function manual_input() {
 		$this->autoRender = false;
 
 		/* BEGINNING */

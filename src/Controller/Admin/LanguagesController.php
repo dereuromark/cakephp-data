@@ -1,5 +1,5 @@
 <?php
-namespace Data\Controller;
+namespace Data\Controller\Admin;
 
 use Cake\Core\Plugin;
 use Data\Controller\DataAppController;
@@ -13,7 +13,7 @@ class LanguagesController extends DataAppController {
 	 *
 	 * @return void
 	 */
-	public function admin_index() {
+	public function index() {
 		if (Plugin::loaded('Search')) {
 			$this->Language->Behaviors->load('Search.Searchable');
 			$this->Common->loadComponent(array('Search.Prg'));
@@ -26,7 +26,7 @@ class LanguagesController extends DataAppController {
 		$this->set(compact('languages'));
 	}
 
-	public function admin_view($id = null) {
+	public function view($id = null) {
 		if (empty($id) || !($language = $this->Language->find('first', array('conditions' => array('Language.id' => $id))))) {
 			$this->Common->flashMessage(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
@@ -34,7 +34,7 @@ class LanguagesController extends DataAppController {
 		$this->set(compact('language'));
 	}
 
-	public function admin_add() {
+	public function add() {
 		if ($this->Common->isPosted()) {
 			$this->Language->create();
 			if ($this->Language->save($this->request->data)) {
@@ -47,7 +47,7 @@ class LanguagesController extends DataAppController {
 		}
 	}
 
-	public function admin_edit($id = null) {
+	public function edit($id = null) {
 		if (empty($id) || !($language = $this->Language->find('first', array('conditions' => array('Language.id' => $id))))) {
 			$this->Common->flashMessage(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
@@ -66,7 +66,7 @@ class LanguagesController extends DataAppController {
 		}
 	}
 
-	public function admin_delete($id = null) {
+	public function delete($id = null) {
 		if (!$this->Common->isPosted()) {
 			throw new MethodNotAllowedException();
 		}
@@ -86,7 +86,7 @@ class LanguagesController extends DataAppController {
 	/**
 	 * Should only be done once at the very beginning
 	 */
-	public function admin_import_from_core() {
+	public function import_from_core() {
 		if (!empty($this->request->params['named']['reset'])) {
 			$this->Language->truncate();
 		}
@@ -128,7 +128,7 @@ class LanguagesController extends DataAppController {
 	/**
 	 * http://www.loc.gov/standards/iso639-2/php/code_list.php
 	 */
-	public function admin_compare_to_iso_list() {
+	public function compare_to_iso_list() {
 		$isoList = $this->Language->getOfficialIsoList();
 
 		$languages = $this->Language->find('all', array());
@@ -139,7 +139,7 @@ class LanguagesController extends DataAppController {
 	/**
 	 * http://www.loc.gov/standards/iso639-2/php/code_list.php
 	 */
-	public function admin_compare_iso_list_to_core() {
+	public function compare_iso_list_to_core() {
 		$isoList = $this->Language->getOfficialIsoList();
 
 		$languages = $this->Language->catalog();
@@ -167,7 +167,7 @@ class LanguagesController extends DataAppController {
 		$this->set(compact('isoList', 'languages', 'locales'));
 	}
 
-	public function admin_set_primary_languages_active() {
+	public function set_primary_languages_active() {
 		$languages = $this->Language->getPrimaryLanguages('list');
 		$this->Language->updateAll(array('status' => Language::STATUS_ACTIVE), array('id' => array_keys($languages)));
 

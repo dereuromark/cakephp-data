@@ -6,7 +6,7 @@ Core contains <?php echo count($locales);?> locales (with <?php echo count($lang
 <br /><br />
 
 <h3>Not in core</h3>
-<table class="list"><tr>
+<table class="table"><tr>
 	<th>&nbsp;</th>
 	<th><?php echo $isoList['heading'][0];?></th>
 	<th><?php echo $isoList['heading'][1];?></th>
@@ -55,7 +55,7 @@ foreach ($isoList['values'] as $language):
 
 
 <h3>Only in core or faulty</h3>
-<table class="list"><tr>
+<table class="table"><tr>
 	<th>&nbsp;</th>
 	<th><?php echo __('Language');?></th>
 	<th><?php echo __('Code');?></th>

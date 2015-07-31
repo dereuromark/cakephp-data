@@ -1,5 +1,5 @@
 <?php
-namespace Data\Controller;
+namespace Data\Controller\Admin;
 
 use Cake\Core\Configure;
 use Data\Controller\DataAppController;
@@ -13,13 +13,13 @@ class AddressesController extends DataAppController {
 		parent::beforeFilter($event);
 	}
 
-	public function admin_index() {
+	public function index() {
 		$addresses = $this->paginate();
 		$this->set(compact('addresses'));
 		$this->Common->loadHelper('Tools.GoogleMapV3');
 	}
 
-	public function admin_view($id = null) {
+	public function view($id = null) {
 		if (empty($id) || !($address = $this->Address->find('first', array('conditions' => array('Address.id' => $id))))) {
 			$this->Common->flashMessage(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
@@ -28,7 +28,7 @@ class AddressesController extends DataAppController {
 		$this->Common->loadHelper('Tools.GoogleMapV3');
 	}
 
-	public function admin_add() {
+	public function add() {
 		if ($this->Common->isPosted()) {
 			$this->Address->create();
 			if ($this->Address->save($this->request->data)) {
@@ -53,7 +53,7 @@ class AddressesController extends DataAppController {
 		$this->set(compact('countries', 'countryProvinces'));
 	}
 
-	public function admin_edit($id = null) {
+	public function edit($id = null) {
 		if (empty($id) || !($address = $this->Address->find('first', array('conditions' => array('Address.id' => $id))))) {
 			$this->Common->flashMessage(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
@@ -89,7 +89,7 @@ class AddressesController extends DataAppController {
 		$this->set(compact('countries', 'countryProvinces'));
 	}
 
-	public function admin_delete($id = null) {
+	public function delete($id = null) {
 		if (!$this->Common->isPosted()) {
 			throw new MethodNotAllowedException();
 		}
@@ -107,7 +107,7 @@ class AddressesController extends DataAppController {
 		return $this->Common->autoRedirect(array('action' => 'index'));
 	}
 
-	public function admin_mark_as_used($id = null) {
+	public function mark_as_used($id = null) {
 		if (empty($id) || !($address = $this->Address->find('first', array('conditions' => array('Address.id' => $id), 'fields' => array('id', 'formatted_address'))))) {
 			$this->Common->flashMessage(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
@@ -117,13 +117,5 @@ class AddressesController extends DataAppController {
 		$this->Common->flashMessage(__('Address \'{0}\' marked as last used', h($var)), 'success');
 		return $this->Common->autoRedirect(array('action' => 'index'));
 	}
-
-/****************************************************************************************
- * protected/interal functions
- ****************************************************************************************/
-
-/****************************************************************************************
- * deprecated/test functions
- ****************************************************************************************/
 
 }

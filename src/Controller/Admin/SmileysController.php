@@ -1,5 +1,5 @@
 <?php
-namespace Data\Controller;
+namespace Data\Controller\Admin;
 
 use Data\Controller\DataAppController;
 
@@ -7,12 +7,12 @@ class SmileysController extends DataAppController {
 
 	public $paginate = array('order' => array('Smiley.is_base' => 'DESC', 'Smiley.sort' => 'ASC'), 'limit' => 100);
 
-	public function admin_index() {
+	public function index() {
 		$smileys = $this->paginate();
 		$this->set(compact('smileys'));
 	}
 
-	public function admin_view($id = null) {
+	public function view($id = null) {
 		if (empty($id) || !($smiley = $this->Smiley->find('first', array('conditions' => array('Smiley.id' => $id))))) {
 			$this->Common->flashMessage(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
@@ -20,7 +20,7 @@ class SmileysController extends DataAppController {
 		$this->set(compact('smiley'));
 	}
 
-	public function admin_add() {
+	public function add() {
 		if ($this->Common->isPosted()) {
 			$this->Smiley->create();
 			if ($this->Smiley->save($this->request->data)) {
@@ -33,7 +33,7 @@ class SmileysController extends DataAppController {
 		}
 	}
 
-	public function admin_edit($id = null) {
+	public function edit($id = null) {
 		if (empty($id) || !($smiley = $this->Smiley->find('first', array('conditions' => array('Smiley.id' => $id))))) {
 			$this->Common->flashMessage(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
@@ -52,7 +52,7 @@ class SmileysController extends DataAppController {
 		}
 	}
 
-	public function admin_delete($id = null) {
+	public function delete($id = null) {
 		if (!$this->Common->isPosted()) {
 			throw new MethodNotAllowedException();
 		}
@@ -72,7 +72,7 @@ class SmileysController extends DataAppController {
 	/**
 	 * Toggle - ajax
 	 */
-	public function admin_toggle($field = null, $id = null) {
+	public function toggle($field = null, $id = null) {
 		 $fields = array('active');
 
 		if (!empty($field) && in_array($field, $fields) && !empty($id)) {

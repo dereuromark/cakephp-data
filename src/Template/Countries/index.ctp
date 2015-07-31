@@ -1,9 +1,9 @@
 <div class="page index">
 <h2><?php echo __('Countries');?></h2>
 
-<table class="list">
+<table class="table">
 <tr>
-	<th><?php echo $this->Paginator->sort('sort', $this->Format->cIcon('filter.gif'), array('escape' => false));?></th>
+	<th><?php echo $this->Paginator->sort('sort', $this->Format->icon('filter'), array('escape' => false));?></th>
 	<th><?php echo $this->Paginator->sort('name');?></th>
 	<th><?php echo $this->Paginator->sort('ori_name');?></th>
 	<th><?php echo $this->Paginator->sort('iso2');?></th>

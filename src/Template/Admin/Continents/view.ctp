@@ -43,7 +43,7 @@
 <div class="related">
 	<h3><?php echo __('Related {0}', __('Continents'));?></h3>
 	<?php if (!empty($continent['ChildContinent'])):?>
-	<table class="list">	<tr>
+	<table class="table">	<tr>
 		<th><?php echo __('Id'); ?></th>
 		<th><?php echo __('Name'); ?></th>
 		<th><?php echo __('Ori Name'); ?></th>
@@ -90,7 +90,7 @@
 <div class="related">
 	<h3><?php echo __('Related {0}', __('Countries'));?></h3>
 	<?php if (!empty($continent['Country'])):?>
-	<table class="list">	<tr>
+	<table class="table">	<tr>
 		<th><?php echo __('Id'); ?></th>
 		<th><?php echo __('Name'); ?></th>
 		<th><?php echo __('Ori Name'); ?></th>

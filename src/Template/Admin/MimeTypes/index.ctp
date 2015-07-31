@@ -31,7 +31,7 @@ if (!empty($searchStr) && !empty($allCount)) {
 </div>
 <br />
 
-<table class="list">
+<table class="table">
 <tr>
 	<th><?php echo __('Icon');?></th>
 	<th><?php echo $this->Paginator->sort('ext');?></th>

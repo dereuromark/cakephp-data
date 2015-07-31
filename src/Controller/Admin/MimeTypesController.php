@@ -1,5 +1,5 @@
 <?php
-namespace Data\Controller;
+namespace Data\Controller\Admin;
 
 use Cake\Utility\File;
 use Data\Controller\DataAppController;
@@ -19,7 +19,7 @@ class MimeTypesController extends DataAppController {
 	  * Experimental
 	  * needs writing rights on {webroot}/files/tmp
 	  */
-	public function admin_detect_by_extension() {
+	public function detect_by_extension() {
 
 		/*
 		# Warning (2): finfo_file(): supplied argument is not a valid file_info resource...
@@ -39,7 +39,7 @@ class MimeTypesController extends DataAppController {
 		$this->set(compact('extensions'));
 	}
 
-	public function admin_allocateByType() {
+	public function allocateByType() {
 		# get unused extensions?
 		$unusedIds = $this->MimeType->MimeTypeImage->unusedRecords($this->MimeType->table);
 
@@ -48,7 +48,7 @@ class MimeTypesController extends DataAppController {
 		$this->set(compact('unused'));
 	}
 
-	public function admin_allocate() {
+	public function allocate() {
 		# get unused extensions
 		// TODO
 
@@ -71,10 +71,10 @@ class MimeTypesController extends DataAppController {
 		}
 	}
 
-	public function admin_fromFile() {
+	public function fromFile() {
 	}
 
-	public function admin_fromCore() {
+	public function fromCore() {
 
 		if ($this->Common->isPosted()) {
 			# manual resolvement
@@ -113,7 +113,7 @@ class MimeTypesController extends DataAppController {
 		$this->set(compact('report', 'mimeTypes'));
 	}
 
-	public function admin_index() {
+	public function index() {
 		$conditions = $this->_searchConditions(array());
 		$this->paginate['conditions'] = $conditions;
 
@@ -169,7 +169,7 @@ class MimeTypesController extends DataAppController {
 		return $string;
 	}
 
-	public function admin_view($id = null) {
+	public function view($id = null) {
 		if (empty($id)) {
 			$this->Common->flashMessage(__('record invalid'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
@@ -182,7 +182,7 @@ class MimeTypesController extends DataAppController {
 		$this->set(compact('mimeType'));
 	}
 
-	public function admin_add() {
+	public function add() {
 		if ($this->Common->isPosted()) {
 			$this->request->data['MimeType']['name'] = ucwords($this->request->data['MimeType']['name']); //ucfirst()
 			$this->request->data['MimeType']['mime_type_image_id'] = (int)$this->request->data['MimeType']['mime_type_image_id'];
@@ -203,7 +203,7 @@ class MimeTypesController extends DataAppController {
 		$this->set(compact('mimeTypeImages'));
 	}
 
-	public function admin_edit($id = null) {
+	public function edit($id = null) {
 		if (empty($id)) {
 			$this->Common->flashMessage(__('record invalid'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
@@ -231,7 +231,7 @@ class MimeTypesController extends DataAppController {
 		$this->set(compact('mimeTypeImages'));
 	}
 
-	public function admin_delete($id = null) {
+	public function delete($id = null) {
 		if (!$this->Common->isPosted()) {
 			throw new MethodNotAllowedException();
 		}
@@ -255,7 +255,7 @@ class MimeTypesController extends DataAppController {
 		}
 	}
 
-	public function admin_toggleActive($id = null) {
+	public function toggleActive($id = null) {
 		$this->toggleActive($id);
 	}
 
@@ -274,7 +274,7 @@ class MimeTypesController extends DataAppController {
 		}
 	}
 
-	public function admin_manual_names() {
+	public function manual_names() {
 		$export = array();
 		$data = array();
 
@@ -351,7 +351,7 @@ class MimeTypesController extends DataAppController {
 		$this->autoRender = false;
 	}
 
-	public function admin_manual_input() {
+	public function manual_input() {
 		//$this->autoRender = false;
 		$count = 0;
 		$notSaved = 0;

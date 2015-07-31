@@ -1,5 +1,5 @@
 <?php
-namespace Data\Controller;
+namespace Data\Controller\Admin;
 
 use Cake\Core\Plugin;
 use Data\Controller\DataAppController;
@@ -10,33 +10,18 @@ class CurrenciesController extends DataAppController {
 
 	public $paginate = array('order' => array('Currency.base' => 'DESC', 'Currency.modified' => 'DESC'));
 
-	/**
-	 * @deprecated
-	 */
-	public function admin_list() {
-		$currencies = $this->Currency->availableCurrencies();
-		$res = array();
-		foreach ($currencies as $key => $currency) {
-			$x = array('id' => $key, 'name' => $key);
-			$res[] = $x;
-		}
-
-		echo json_encode(array('results' => $res));
-		die();
-	}
-
-	public function admin_table() {
+	public function table() {
 		$currencies = $this->Currency->availableCurrencies();
 		$this->set(compact('currencies'));
 	}
 
-	public function admin_update() {
+	public function update() {
 		$this->Currency->updateValues();
 		$this->Common->flashMessage('Currencies Updated', 'success');
 		return $this->Common->autoRedirect(array('action' => 'index'));
 	}
 
-	public function admin_index() {
+	public function index() {
 		if (Plugin::loaded('Search')) {
 			$this->Currency->Behaviors->load('Search.Searchable');
 			$this->Common->loadComponent(array('Search.Prg'));
@@ -64,7 +49,7 @@ class CurrenciesController extends DataAppController {
 		$this->set(compact('baseCurrency', 'currencies'));
 	}
 
-	public function admin_view($id = null) {
+	public function view($id = null) {
 		if (empty($id)) {
 			$this->Common->flashMessage(__('record invalid'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
@@ -77,7 +62,7 @@ class CurrenciesController extends DataAppController {
 		$this->set(compact('currency'));
 	}
 
-	public function admin_add() {
+	public function add() {
 		if ($this->Common->isPosted()) {
 			$this->Currency->create();
 			if ($this->Currency->save($this->request->data)) {
@@ -98,7 +83,7 @@ class CurrenciesController extends DataAppController {
 		$this->set(compact('currencies'));
 	}
 
-	public function admin_edit($id = null) {
+	public function edit($id = null) {
 		if (empty($id)) {
 			$this->Common->flashMessage(__('record invalid'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
@@ -121,7 +106,7 @@ class CurrenciesController extends DataAppController {
 		}
 	}
 
-	public function admin_delete($id = null) {
+	public function delete($id = null) {
 		if (!$this->Common->isPosted()) {
 			throw new MethodNotAllowedException();
 		}
@@ -148,7 +133,7 @@ class CurrenciesController extends DataAppController {
 	/**
 	 * Set as primary (base)
 	 */
-	public function admin_base($id = null) {
+	public function base($id = null) {
 		$this->_setAsPrimary($id);
 	}
 
@@ -170,7 +155,7 @@ class CurrenciesController extends DataAppController {
 	/**
 	 * Toggle - ajax
 	 */
-	public function admin_toggle($field = null, $id = null) {
+	public function toggle($field = null, $id = null) {
 		 $fields = array('active');
 
 		if (!empty($field) && in_array($field, $fields) && !empty($id)) {

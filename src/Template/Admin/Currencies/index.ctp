@@ -12,7 +12,7 @@ echo $this->Form->end();
 </div>
 <?php } ?>
 
-<table class="list">
+<table class="table">
 <tr>
 	<th><?php echo $this->Paginator->sort('name');?></th>
 	<th><?php echo $this->Paginator->sort('code');?></th>

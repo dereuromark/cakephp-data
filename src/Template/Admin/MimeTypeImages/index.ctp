@@ -6,7 +6,7 @@ echo $this->Paginator->counter(array(
 'format' => __('Page %page% of %pages%, showing %current% records out of %count% total')
 ));
 ?></p>
-<table class="list">
+<table class="table">
 <tr>
 	<th><?php echo __('Icon');?></th>
 	<th><?php echo $this->Paginator->sort('name');?></th>

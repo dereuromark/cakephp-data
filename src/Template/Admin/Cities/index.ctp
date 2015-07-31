@@ -1,7 +1,7 @@
 <div class="page index">
 	<h2><?php echo __('Cities');?></h2>
 
-	<table class="list">
+	<table class="table">
 		<tr>
 		<th><?php echo $this->Paginator->sort('country_id');?></th>
 		<th><?php echo $this->Paginator->sort('name');?></th>

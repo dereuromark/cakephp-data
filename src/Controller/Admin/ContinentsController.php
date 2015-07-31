@@ -1,12 +1,11 @@
 <?php
-namespace Data\Controller;
+namespace Data\Controller\Admin;
 
 use Data\Controller\DataAppController;
 
 class ContinentsController extends DataAppController {
 
 	public $paginate = array();
-
 
 	public function index() {
 		$continents = $this->paginate();
@@ -74,5 +73,13 @@ class ContinentsController extends DataAppController {
 		$this->Common->flashMessage(__('record del {0} not done exception', h($var)), 'error');
 		return $this->Common->autoRedirect(array('action' => 'index'));
 	}
+
+/****************************************************************************************
+ * protected/interal functions
+ ****************************************************************************************/
+
+/****************************************************************************************
+ * deprecated/test functions
+ ****************************************************************************************/
 
 }

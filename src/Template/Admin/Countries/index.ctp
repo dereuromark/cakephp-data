@@ -17,7 +17,7 @@ echo $this->Form->end();
 </div>
 <?php } ?>
 
-<table class="list">
+<table class="table">
 <tr>
 	<th>&nbsp;</th>
 	<th><?php echo $this->Paginator->sort('name');?></th>
@@ -70,7 +70,7 @@ foreach ($countries as $country):
 				$markers = array();
 				$markers[] = array('lat' => $country['Country']['lat'], 'lng' => $country['Country']['lng'], 'color' => 'green');
 				$mapMarkers = $this->GoogleMapV3->staticMarkers($markers);
-				echo ' ' . $this->Html->link($this->Format->cIcon(ICON_DETAILS, 'Zeigen'), $this->GoogleMapV3->staticMapUrl(array('center' => $country['Country']['lat'] . ',' . $country['Country']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 3)), array('id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false));
+				echo ' ' . $this->Html->link($this->Format->icon(ICON_DETAILS, 'Zeigen'), $this->GoogleMapV3->staticMapUrl(array('center' => $country['Country']['lat'] . ',' . $country['Country']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 3)), array('id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false));
 			}
 
 			?>
@@ -88,7 +88,7 @@ foreach ($countries as $country):
 			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $country['Country']['id']), array('escape'=>false)); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $country['Country']['id']), array('escape' => false)); ?>
 
-			<?php echo $this->Html->link($this->Format->cIcon(ICON_MAP, 'Koordinaten updaten'), array('action' => 'update_coordinates', $country['Country']['id']), array('escape' => false)); ?>
+			<?php echo $this->Html->link($this->Format->icon(ICON_MAP, 'Koordinaten updaten'), array('action' => 'update_coordinates', $country['Country']['id']), array('escape' => false)); ?>
 
 			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $country['Country']['id']), array('escape' => false), __('Are you sure you want to delete # {0}?', $country['Country']['id']), false); ?>
 		</td>

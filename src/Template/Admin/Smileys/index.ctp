@@ -1,7 +1,7 @@
 <div class="page index">
 <h2><?php echo __('Smileys');?></h2>
 
-<table class="list"><tr>
+<table class="table"><tr>
 	<th>&nbsp;</th>
 <?php if (false) { ?>
 	<th><?php echo $this->Paginator->sort('smiley_cat_id');?></th>

@@ -1,5 +1,5 @@
 <?php
-namespace Data\Controller;
+namespace Data\Controller\Admin;
 
 use Data\Controller\DataAppController;
 
@@ -14,7 +14,7 @@ class CitiesController extends DataAppController {
 	/**
 	 * @return void
 	 */
-	public function admin_index() {
+	public function index() {
 		$cities = $this->paginate();
 		$this->set(compact('cities'));
 	}
@@ -22,7 +22,7 @@ class CitiesController extends DataAppController {
 	/**
 	 * @return void
 	 */
-	public function admin_view($id = null) {
+	public function view($id = null) {
 		if (empty($id) || !($city = $this->City->find('first', array('conditions' => array('City.id' => $id))))) {
 			$this->Common->flashMessage(__('invalidRecord'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
@@ -33,7 +33,7 @@ class CitiesController extends DataAppController {
 	/**
 	 * @return void
 	 */
-	public function admin_add() {
+	public function add() {
 		if ($this->Common->isPosted()) {
 			$this->City->create();
 			if ($this->City->save($this->request->data)) {
@@ -52,7 +52,7 @@ class CitiesController extends DataAppController {
 	/**
 	 * @return void
 	 */
-	public function admin_edit($id = null) {
+	public function edit($id = null) {
 		if (empty($id) || !($city = $this->City->find('first', array('conditions' => array('City.id' => $id))))) {
 			$this->Common->flashMessage(__('invalidRecord'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
@@ -78,7 +78,7 @@ class CitiesController extends DataAppController {
 	 * @throws NotFoundException
 	 * @throws MethodNotAllowedException
 	 */
-	public function admin_delete($id = null) {
+	public function delete($id = null) {
 		$this->request->allowMethod(array('post', 'delete'));
 		if (empty($id) || !($city = $this->City->find('first', array('conditions' => array('City.id' => $id), 'fields' => array('id', 'name'))))) {
 			$this->Common->flashMessage(__('invalidRecord'), 'error');
