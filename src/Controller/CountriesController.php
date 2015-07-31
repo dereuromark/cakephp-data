@@ -4,7 +4,7 @@ namespace Data\Controller;
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
-use Cake\Utility\Folder;
+use Cake\Filesystem\Folder;
 use Data\Controller\DataAppController;
 use Cake\Event\Event;
 
@@ -199,17 +199,17 @@ class CountriesController extends DataAppController {
 	 */
 	public function admin_index() {
 		if (Plugin::loaded('Search')) {
-			$this->Country->Behaviors->load('Search.Searchable');
+			$this->Country->addBehavior('Search.Searchable');
 			$this->Common->loadComponent(array('Search.Prg'));
 
 			$this->Prg->commonProcess();
-			$this->paginate['conditions'] = $this->Country->parseCriteria($this->Prg->parsedParams());
+			$this->paginate['conditions'] = $this->Country->find('searchable', $this->Prg->parsedParams());
 		}
 
 		$countries = $this->paginate();
 		$this->set(compact('countries'));
 
-		$this->helpers = array_merge($this->helpers, array('Tools.GoogleMapV3'));
+		$this->helpers = array_merge($this->helpers, array('Geo.GoogleMapV3'));
 	}
 
 	public function admin_view($id = null) {

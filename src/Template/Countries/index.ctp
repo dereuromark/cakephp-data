@@ -53,14 +53,14 @@ foreach ($countries as $country):
 </div>
 
 <?php if (__('countryCodeExplanation') !== 'countryCodeExplanation') { ?>
-<br />
+<br/>
 Hinweis:
 <ul>
 <li><?php echo __('countryCodeExplanation')?></li>
 </ul>
 <?php } ?>
 
-<br />
+<br/>
 <span class="keyList"><?php echo __('Legend');?></span>
 <ul class="keyList">
 <li><?php echo $this->Data->countryIcon(null); ?> = Default Icon</li>

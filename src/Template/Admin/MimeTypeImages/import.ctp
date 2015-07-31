@@ -8,7 +8,7 @@
 	<?php if (empty($alreadyIn)) { ?>
 		- - -
 	 <?php } ?></ul>
-	 <br />
+	 <br/>
 
 		<?php echo count($fileExtensions)?> neue:
 	<?php
@@ -21,7 +21,7 @@
 
 	</fieldset>
 
-<br />
+<br/>
 
 <?php } ?>
 

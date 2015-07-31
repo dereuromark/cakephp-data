@@ -2,7 +2,7 @@
 namespace Data\Model\Table;
 
 use Cake\Model\Model;
-use Cake\Utility\File;
+use Cake\Filesystem\File;
 use Tools\Model\Table\Table;
 
 class MimeTypeImagesTable extends Table {

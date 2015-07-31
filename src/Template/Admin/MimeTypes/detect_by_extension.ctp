@@ -6,7 +6,7 @@ foreach ($extensions as $extension) {
 }
 ?>
 
-<br /><br />
+<br/><br/>
 
 <div class="MimeTypes">
 <?php echo $this->Form->create('MimeType', array('type' => 'file', 'action' => 'detectByExtension'));?>

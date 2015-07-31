@@ -9,7 +9,7 @@ foreach ($report['in'] as $r) {
 ?>
 
 <h2>Import MimeTypes from Core Media etc</h2>
-Currently Media View has <b><?php echo count($mimeTypes)?> MimeTypes</b> listed<br /><br />
+Currently Media View has <b><?php echo count($mimeTypes)?> MimeTypes</b> listed<br/><br/>
 
 <?php echo count($report['success'])?> wurden neu hingefügt, <?php echo count($report['in'])?> sind schon enthalten (<?php echo count($manualRes)?> davon bedürfen einer manuellen Klärung) sowie <?php echo count($report['error'])?> Fehler.
 

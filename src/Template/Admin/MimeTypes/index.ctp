@@ -29,7 +29,7 @@ if (!empty($searchStr) && !empty($allCount)) {
 }
 ?>
 </div>
-<br />
+<br/>
 
 <table class="table">
 <tr>
@@ -126,16 +126,16 @@ foreach ($mimeTypes as $mimeType):
 		<li><?php echo $this->Html->link(__('Import from File'), array('action' => 'fromFile')); ?></li>
 	</ul>
 </div>
-<br />
+<br/>
 <h3>Infos</h3>
-<b>Bei den Medientypen gibt es folgende:</b><br />
-text = für Textdateien<br />
-image = für Grafikdateien<br />
-video = für Videodateien<br />
-audio = für Sounddateien<br />
-application = für Dateien, die an ein bestimmtes Programm gebunden sind<br />
-multipart = für mehrteilige Daten<br />
-message = für Nachrichten<br />
-model = für Dateien, die mehrdimensionale Strukturen repräsentieren<br />
-<br />
+<b>Bei den Medientypen gibt es folgende:</b><br/>
+text = für Textdateien<br/>
+image = für Grafikdateien<br/>
+video = für Videodateien<br/>
+audio = für Sounddateien<br/>
+application = für Dateien, die an ein bestimmtes Programm gebunden sind<br/>
+multipart = für mehrteilige Daten<br/>
+message = für Nachrichten<br/>
+model = für Dateien, die mehrdimensionale Strukturen repräsentieren<br/>
+<br/>
 Subtypen für server-eigene Dateiformate, d.h. Dateitypen, die auf dem Server ausgeführt werden können, werden meist mit x- eingeleitet.

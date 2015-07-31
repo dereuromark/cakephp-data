@@ -1,9 +1,9 @@
 <div class="page index">
 <h2><?php echo __('Languages');?></h2>
 ISO List contains <?php echo count($isoList['values']); ?> languages.
-<br />
+<br/>
 Local DB contains <?php echo count($languages); ?> locales.
-<br /><br />
+<br/><br/>
 
 <table class="table"><tr>
 	<th>&nbsp;</th>
@@ -75,7 +75,7 @@ foreach ($isoList['values'] as $language):
 
 </div>
 
-<br /><br />
+<br/><br/>
 
 <div class="actions">
 	<ul>

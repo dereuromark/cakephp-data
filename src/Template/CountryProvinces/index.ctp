@@ -65,7 +65,7 @@ foreach ($countryProvinces as $countryProvince):
 <?php echo $this->element('Tools.pagination'); ?>
 </div>
 
-<br /><br />
+<br/><br/>
 
 <div class="actions">
 	<ul>

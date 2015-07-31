@@ -90,10 +90,10 @@ foreach ($languages as $language):
 
 </div>
 
-<br /><br />
-Important Note:<br />
+<br/><br/>
+Important Note:<br/>
 The language flags are actually country flags. Due to incompatabities between countries and languages they should not be used on public sites. They are only meant to be a help (eye catcher) for admin views.
-<br /><br />
+<br/><br/>
 
 <div class="actions">
 	<ul>

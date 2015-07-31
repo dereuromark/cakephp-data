@@ -2,7 +2,7 @@
 
 <?php if (isset($mimeTypes)) { ?>
 
-The imported data has <b><?php echo count($mimeTypes)?> MimeTypes</b> listed<br /><br />
+The imported data has <b><?php echo count($mimeTypes)?> MimeTypes</b> listed<br/><br/>
 
 <?php echo count($report['success'])?> wurden neu hingefügt, <?php echo count($report['in'])?> sind schon enthalten (<?php echo count($manualRes)?> davon bedürfen einer manuellen Klärung) sowie <?php echo count($report['error'])?> Fehler.
 
@@ -20,7 +20,7 @@ The imported data has <b><?php echo count($mimeTypes)?> MimeTypes</b> listed<br 
 <?php } ?>
 
 
-<br /><br />
+<br/><br/>
 
 <div class="actions">
 	<ul>

@@ -15,7 +15,7 @@
 <?php echo $this->Form->end(__('Submit'));?>
 </div>
 
-<br /><br />
+<br/><br/>
 
 <div class="actions">
 	<ul>

@@ -69,7 +69,7 @@ class CountryProvincesController extends DataAppController {
 		$countries = $this->CountryProvince->Country->find('list');
 
 		$this->set(compact('countryProvinces', 'countries'));
-		$this->Common->loadHelper(array('Tools.GoogleMapV3'));
+		$this->Common->loadHelper(array('Geo.GoogleMapV3'));
 	}
 
 	/**

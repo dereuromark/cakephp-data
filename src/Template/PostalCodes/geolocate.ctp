@@ -3,7 +3,7 @@
 
 <h2>Geolocate</h2>
 Funktioniert bisher nur in Cutting-Edge-Browsern wie Google Chrome (evtl noch Firefox).
-<br />
+<br/>
 Achtung: Muss man die Geo-Abfrage erst manuell erlauben. Ein Bestätigungs-Fenster ganz oben im Browser öffnet sich dazu (Öffnet es sich nicht, hat man es entweder global erlaubt oder der Browser ist zu alt)!!!
 <h3>Map</h3>
 
@@ -58,6 +58,6 @@ Für den Fall, dass es nicht klappt (keine Koordinaten ermittelbar): Serverseiti
 
 <h3>Hinweise</h3>
 Angeblich funktioniert das deshalb in den meisten Fällen so genau, da diese Geolocation Funktion über den Browser Informationen über WLAN Netze die in der Nähe sind sammelt und diese Daten mit einer Datenbank von WLAN Netzen abgeglichen werden (<a href="http://board.protecus.de/t39165.htm" rel="external">Details</a>). Falls jemand auch ohne WLAN-Netz daheim hausgenau gefunden wird, bitte melden! :)
-<br /><br />
+<br/><br/>
 
 Auf <a href="http://www.browsergeolocation.com/" rel="external">browsergeolocation.com/</a> steht, welche Browser geeignet sind.

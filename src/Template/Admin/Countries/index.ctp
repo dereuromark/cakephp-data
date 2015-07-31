@@ -108,13 +108,13 @@ foreach ($countries as $country):
 	</ul>
 </div>
 
-<br />
+<br/>
 Hinweis:
 <ul>
 <li><?__('countryCodeExplanation')?></li>
 </ul>
 
-<br />
+<br/>
 <span class="keyList">Legende:</span>
 <ul class="keyList">
 <li><?php echo $this->Data->countryIcon(null); ?> = Default Icon</li>

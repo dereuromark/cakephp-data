@@ -67,7 +67,7 @@ echo $this->GoogleMapV3->script();
 
 <h3>Reverse Geocoding</h3>
 Auf die Karte klicken, um Area Code zu erhalten
-<br />//TODO
+<br/>//TODO
 <div>
 
 </div>

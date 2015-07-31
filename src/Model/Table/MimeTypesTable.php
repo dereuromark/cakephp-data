@@ -116,7 +116,7 @@ class MimeTypesTable extends Table {
 		}
 		# notify admin
 		//App::import('Controller', 'Data.MimeTypes');
-		$this->Email = new EmailLib();
+		$this->Email = new Email();
 		$this->Email->to(Configure::read('Config.adminEmail'), Configure::read('Config.adminEmailname'));
 		$this->Email->replyTo(Configure::read('Config.adminEmail'), Configure::read('Config.adminEmailname'));
 

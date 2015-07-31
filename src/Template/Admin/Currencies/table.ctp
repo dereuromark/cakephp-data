@@ -8,7 +8,7 @@
 
 </div>
 
-<br /><br />
+<br/><br/>
 
 <div class="actions">
 	<ul>

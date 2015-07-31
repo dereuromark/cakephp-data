@@ -19,10 +19,10 @@ class PostalCodesController extends DataAppController {
 	public function index() {
 		$this->PostalCode->bindModel(array('belongsTo' => array('Country' => array('className' => 'Data.Country'))), false);
 
-		$this->PostalCode->Behaviors->load('Search.Searchable');
+		$this->PostalCode->addBehavior('Search.Searchable');
 		$this->Common->loadComponent(array('Search.Prg'));
 		$this->Prg->commonProcess();
-		$this->paginate['conditions'] = $this->PostalCode->parseCriteria($this->Prg->parsedParams());
+		$this->paginate['conditions'] = $this->PostalCode->find('searchable', $this->Prg->parsedParams());
 
 		$postalCodes = $this->paginate();
 
@@ -42,7 +42,7 @@ class PostalCodesController extends DataAppController {
 		}
 
 		$this->set(compact('ipData'));
-		$this->helpers = array_merge($this->helpers, array('Tools.GoogleMapV3'));
+		$this->helpers = array_merge($this->helpers, array('Geo.GoogleMapV3'));
 		$this->render('geolocate');
 	}
 

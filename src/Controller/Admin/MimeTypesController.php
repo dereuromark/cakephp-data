@@ -1,7 +1,7 @@
 <?php
 namespace Data\Controller\Admin;
 
-use Cake\Utility\File;
+use Cake\Filesystem\File;
 use Data\Controller\DataAppController;
 use Tools\Lib\MimeLib;
 

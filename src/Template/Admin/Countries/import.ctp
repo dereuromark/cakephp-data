@@ -51,7 +51,7 @@
 		echo $this->Form->input('import_record_separator', array('options' => Country::separators(), 'empty' => array(0 => 'Eigenen Separator verwenden')));
 		echo $this->Form->input('import_record_separator_custom', array('label' => 'Eigener Separator'));
 
-		echo 'Für Pattern verwendbar: &nbsp;&nbsp; <b>{TAB}</b>, <b>{SPACE}</b>, <b>benutzerdefinierte Trennzeichen</b>, <b>%*s</b> (Überspringen), <b>%s</b> (ohne Leerzeichen), <b>%[^.]s</b> (mit Leerzeichen)<br>
+		echo 'Für Pattern verwendbar: &nbsp;&nbsp; <b>{TAB}</b>, <b>{SPACE}</b>, <b>benutzerdefinierte Trennzeichen</b>, <b>%*s</b> (Überspringen), <b>%s</b> (ohne Leerzeichen), <b>%[^.]s</b> (mit Leerzeichen)<br/>
 		Alles, wofür %name zutrifft, verwendet wird, der Rest geht verloren. Was als Separator ausgewählt wurde (zum Trennen der einzelnen Datensätze), kann logischerweise nicht mehr im Pattern verwendet werden (zum Herausfiltern des Namens)!';
 		echo BR;
 		echo BR;
@@ -67,7 +67,7 @@
 <?php } ?>
 </div>
 
-<br /><br />
+<br/><br/>
 
 <div class="actions">
 	<ul>

@@ -2,7 +2,7 @@
 <h2>Auto-Allocate Images to Extensions</h2>
 
 
-<br /><br />
+<br/><br/>
 
 <div class="actions">
 	<ul>

@@ -3,7 +3,7 @@
 namespace Data\Controller\Admin;
 
 use App\Utility\Sanitize;
-use Cake\Utility\Folder;
+use Cake\Filesystem\Folder;
 use Data\Controller\DataAppController;
 
 class MimeTypeImagesController extends DataAppController {

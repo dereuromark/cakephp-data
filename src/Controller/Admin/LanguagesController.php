@@ -15,11 +15,11 @@ class LanguagesController extends DataAppController {
 	 */
 	public function index() {
 		if (Plugin::loaded('Search')) {
-			$this->Language->Behaviors->load('Search.Searchable');
+			$this->Languages->addBehavior('Search.Searchable');
 			$this->Common->loadComponent(array('Search.Prg'));
 
 			$this->Prg->commonProcess();
-			$this->paginate['conditions'] = $this->Language->parseCriteria($this->Prg->parsedParams());
+			$languages = $this->paginate($this->Languages->find('searchable', $this->Prg->parsedParams()));
 		}
 
 		$languages = $this->paginate();
@@ -27,7 +27,7 @@ class LanguagesController extends DataAppController {
 	}
 
 	public function view($id = null) {
-		if (empty($id) || !($language = $this->Language->find('first', array('conditions' => array('Language.id' => $id))))) {
+		if (empty($id) || !($language = $this->Languages->find('first', array('conditions' => array('Language.id' => $id))))) {
 			$this->Common->flashMessage(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
@@ -36,8 +36,8 @@ class LanguagesController extends DataAppController {
 
 	public function add() {
 		if ($this->Common->isPosted()) {
-			$this->Language->create();
-			if ($this->Language->save($this->request->data)) {
+			$this->Languages->create();
+			if ($this->Languages->save($this->request->data)) {
 				$var = $this->request->data['Language']['name'];
 				$this->Common->flashMessage(__('record add {0} saved', h($var)), 'success');
 				return $this->redirect(array('action' => 'index'));
@@ -48,12 +48,12 @@ class LanguagesController extends DataAppController {
 	}
 
 	public function edit($id = null) {
-		if (empty($id) || !($language = $this->Language->find('first', array('conditions' => array('Language.id' => $id))))) {
+		if (empty($id) || !($language = $this->Languages->find('first', array('conditions' => array('Language.id' => $id))))) {
 			$this->Common->flashMessage(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
 		if ($this->Common->isPosted()) {
-			if ($this->Language->save($this->request->data)) {
+			if ($this->Languages->save($this->request->data)) {
 				$var = $this->request->data['Language']['name'];
 				$this->Common->flashMessage(__('record edit {0} saved', h($var)), 'success');
 				return $this->redirect(array('action' => 'index'));
@@ -70,11 +70,11 @@ class LanguagesController extends DataAppController {
 		if (!$this->Common->isPosted()) {
 			throw new MethodNotAllowedException();
 		}
-		if (empty($id) || !($language = $this->Language->find('first', array('conditions' => array('Language.id' => $id), 'fields' => array('id', 'name'))))) {
+		if (empty($id) || !($language = $this->Languages->find('first', array('conditions' => array('Language.id' => $id), 'fields' => array('id', 'name'))))) {
 			$this->Common->flashMessage(__('invalid record'), 'error');
 			return $this->Common->autoRedirect(array('action' => 'index'));
 		}
-		if ($this->Language->delete($id)) {
+		if ($this->Languages->delete($id)) {
 			$var = $language['Language']['name'];
 			$this->Common->flashMessage(__('record del {0} done', h($var)), 'success');
 			return $this->redirect(array('action' => 'index'));
@@ -88,14 +88,14 @@ class LanguagesController extends DataAppController {
 	 */
 	public function import_from_core() {
 		if (!empty($this->request->params['named']['reset'])) {
-			$this->Language->truncate();
+			$this->Languages->truncate();
 		}
-		//$languages = $this->Language->iso3ToIso2();
-		$languages = $this->Language->catalog();
+		//$languages = $this->Languages->iso3ToIso2();
+		$languages = $this->Languages->catalog();
 		$count = 0;
 		$errors = array();
 		foreach ($languages as $language) {
-			if (!($code = $this->Language->iso3ToIso2($language['localeFallback']))) {
+			if (!($code = $this->Languages->iso3ToIso2($language['localeFallback']))) {
 				$code = '';
 			}
 			$data = array(
@@ -106,11 +106,11 @@ class LanguagesController extends DataAppController {
 				'locale_fallback' => $language['localeFallback'],
 				'direction' => $language['direction']
 			);
-			$this->Language->create();
-			if ($this->Language->save($data)) {
+			$this->Languages->create();
+			if ($this->Languages->save($data)) {
 				$count++;
 			} else {
-				$errors[] = array('data' => $language, 'errors' => $this->Language->validationErrors);
+				$errors[] = array('data' => $language, 'errors' => $this->Languages->validationErrors);
 			}
 		}
 
@@ -129,9 +129,9 @@ class LanguagesController extends DataAppController {
 	 * http://www.loc.gov/standards/iso639-2/php/code_list.php
 	 */
 	public function compare_to_iso_list() {
-		$isoList = $this->Language->getOfficialIsoList();
+		$isoList = $this->Languages->getOfficialIsoList();
 
-		$languages = $this->Language->find('all', array());
+		$languages = $this->Languages->find('all', array());
 
 		$this->set(compact('isoList', 'languages'));
 	}
@@ -140,9 +140,9 @@ class LanguagesController extends DataAppController {
 	 * http://www.loc.gov/standards/iso639-2/php/code_list.php
 	 */
 	public function compare_iso_list_to_core() {
-		$isoList = $this->Language->getOfficialIsoList();
+		$isoList = $this->Languages->getOfficialIsoList();
 
-		$languages = $this->Language->catalog();
+		$languages = $this->Languages->catalog();
 		$locales = array();
 		foreach ($languages as $key => $value) {
 			if (strlen($key) === 2) {
@@ -168,10 +168,10 @@ class LanguagesController extends DataAppController {
 	}
 
 	public function set_primary_languages_active() {
-		$languages = $this->Language->getPrimaryLanguages('list');
-		$this->Language->updateAll(array('status' => Language::STATUS_ACTIVE), array('id' => array_keys($languages)));
+		$languages = $this->Languages->getPrimaryLanguages('list');
+		$this->Languages->updateAll(array('status' => Language::STATUS_ACTIVE), array('id' => array_keys($languages)));
 
-		$this->Common->flashMessage(__('{0} of {1} set active', $this->Language->getAffectedRows(), count($languages)), 'success');
+		$this->Common->flashMessage(__('{0} of {1} set active', $this->Languages->getAffectedRows(), count($languages)), 'success');
 		return $this->redirect(array('action' => 'index'));
 	}
 

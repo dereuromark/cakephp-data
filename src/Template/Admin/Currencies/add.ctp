@@ -16,7 +16,7 @@
 <?php echo $this->Form->end(__('Submit'));?>
 </div>
 
-<br />
+<br/>
 
 Wird nur der Code angegeben, wird versucht, den Name automatisch dazu zu finden.
 Das selbe gilt für den aktuellen Wechselkurs.

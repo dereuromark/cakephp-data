@@ -1,9 +1,9 @@
 <div class="page index">
 <h2><?php echo __('Languages');?></h2>
 ISO List contains <?php echo count($isoList['values']); ?> languages.
-<br />
+<br/>
 Core contains <?php echo count($locales);?> locales (with <?php echo count($languages); ?> regional locales).
-<br /><br />
+<br/><br/>
 
 <h3>Not in core</h3>
 <table class="table"><tr>
@@ -130,7 +130,7 @@ foreach ($locales as $key => $locale):
 
 </div>
 
-<br /><br />
+<br/><br/>
 
 <div class="actions">
 	<ul>

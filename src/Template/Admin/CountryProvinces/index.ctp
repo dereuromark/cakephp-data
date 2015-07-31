@@ -91,7 +91,7 @@ foreach ($countryProvinces as $countryProvince):
 
 <div class="actions">
 	<ul>
-<?php if (true || Auth::hasRole(ROLE_SUPERADMIN)) { ?>
+<?php if (true || $this->AuthUser->hasRole(ROLE_SUPERADMIN)) { ?>
 		<li><?php echo $this->Html->link(__('Update Coordinates'), array('action' => 'update_coordinates')); ?></li>
 <?php } ?>
 		<li><?php echo $this->Html->link(__('Add Country Province'), array('action' => 'add')); ?></li>
