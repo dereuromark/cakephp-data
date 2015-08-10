@@ -80,7 +80,7 @@ foreach ($countryProvinces as $countryProvince):
 
 			<?php echo $this->Html->link($this->Format->cIcon(ICON_MAP, 'Koordinaten updaten'), ['action' => 'update_coordinates', $countryProvince['CountryProvince']['id']], ['escape' => false]); ?>
 
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $countryProvince['CountryProvince']['id']], ['escape' => false], __('Are you sure you want to delete # %s?', $countryProvince['CountryProvince']['id']), false); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $countryProvince['CountryProvince']['id']], ['escape' => false, 'confirm' => __('Are you sure you want to delete # %s?', $countryProvince['CountryProvince']['id'])]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

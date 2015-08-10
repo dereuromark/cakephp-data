@@ -1,5 +1,6 @@
 <?php
 App::uses('DataAppModel', 'Data.Model');
+App::uses('CurrencyComponent', 'Data.Lib');
 
 class Currency extends DataAppModel {
 
@@ -57,7 +58,6 @@ class Currency extends DataAppModel {
 			# intelligent autocomplete
 			if (isset($this->data[$this->alias]['name']) && empty($this->data[$this->alias]['name'])) {
 				if (!isset($this->CurrencyLib)) {
-					App::import('Component', 'Data.Currency');
 					$this->CurrencyLib = new CurrencyComponent();
 				}
 				$this->data[$this->alias]['name'] = $this->CurrencyLib->getName($code, '');
@@ -65,7 +65,6 @@ class Currency extends DataAppModel {
 
 			if (isset($this->data[$this->alias]['value']) && $this->data[$this->alias]['value'] == 0) {
 				if (!isset($this->CurrencyLib)) {
-					App::import('Component', 'Data.Currency');
 					$this->CurrencyLib = new CurrencyComponent();
 				}
 				$currencies = $this->availableCurrencies();
@@ -112,7 +111,6 @@ class Currency extends DataAppModel {
 	public function updateValues() {
 		//TODO: move to Data lib!?
 		if (!isset($this->CurrencyLib)) {
-			App::import('Component', 'Data.Currency');
 			$this->CurrencyLib = new CurrencyComponent();
 		}
 		# make sure we have up to date values
@@ -151,7 +149,6 @@ class Currency extends DataAppModel {
 	 */
 	public function availableCurrencies() {
 		if (!isset($this->CurrencyLib)) {
-			App::import('Component', 'Data.Currency');
 			$this->CurrencyLib = new CurrencyComponent();
 		}
 		$base = $this->baseCurrency();
