@@ -24,7 +24,7 @@ class CountryProvinceHelperComponent extends Component {
 			$this->Controller->Countries = TableRegistry::get('Data.Countries');
 		}
 		$countries = $this->Controller->Countries->getList();
-		$countryProvinces = array();
+		$countryProvinces = [];
 
 		if ($model === null) {
 			$model = $this->Controller->modelClass;

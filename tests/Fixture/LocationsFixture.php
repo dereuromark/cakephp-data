@@ -14,7 +14,7 @@ class LocationsFixture extends TestFixture {
 	 *
 	 * @var array
 	 */
-	public $fields = array(
+	public $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10],
 		'country_province_id' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10],
 		'country_id' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10, 'comment' => 'redundance purposely'],
@@ -28,15 +28,15 @@ class LocationsFixture extends TestFixture {
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
 		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM']
-	);
+	];
 
 	/**
 	 * Records
 	 *
 	 * @var array
 	 */
-	public $records = array(
-		array(
+	public $records = [
+		[
 			'id' => 1,
 			'country_province_id' => 1,
 			'country_id' => 1,
@@ -48,8 +48,8 @@ class LocationsFixture extends TestFixture {
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
 			'modified' => '2012-12-26 17:20:20'
-		),
-		array(
+		],
+		[
 			'id' => 2,
 			'country_province_id' => 2,
 			'country_id' => 2,
@@ -61,8 +61,8 @@ class LocationsFixture extends TestFixture {
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
 			'modified' => '2012-12-26 17:20:20'
-		),
-		array(
+		],
+		[
 			'id' => 3,
 			'country_province_id' => 3,
 			'country_id' => 3,
@@ -74,8 +74,8 @@ class LocationsFixture extends TestFixture {
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
 			'modified' => '2012-12-26 17:20:20'
-		),
-		array(
+		],
+		[
 			'id' => 4,
 			'country_province_id' => 4,
 			'country_id' => 4,
@@ -87,8 +87,8 @@ class LocationsFixture extends TestFixture {
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
 			'modified' => '2012-12-26 17:20:20'
-		),
-		array(
+		],
+		[
 			'id' => 5,
 			'country_province_id' => 5,
 			'country_id' => 5,
@@ -100,8 +100,8 @@ class LocationsFixture extends TestFixture {
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
 			'modified' => '2012-12-26 17:20:20'
-		),
-		array(
+		],
+		[
 			'id' => 6,
 			'country_province_id' => 6,
 			'country_id' => 6,
@@ -113,8 +113,8 @@ class LocationsFixture extends TestFixture {
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
 			'modified' => '2012-12-26 17:20:20'
-		),
-		array(
+		],
+		[
 			'id' => 7,
 			'country_province_id' => 7,
 			'country_id' => 7,
@@ -126,8 +126,8 @@ class LocationsFixture extends TestFixture {
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
 			'modified' => '2012-12-26 17:20:20'
-		),
-		array(
+		],
+		[
 			'id' => 8,
 			'country_province_id' => 8,
 			'country_id' => 8,
@@ -139,8 +139,8 @@ class LocationsFixture extends TestFixture {
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
 			'modified' => '2012-12-26 17:20:20'
-		),
-		array(
+		],
+		[
 			'id' => 9,
 			'country_province_id' => 9,
 			'country_id' => 9,
@@ -152,8 +152,8 @@ class LocationsFixture extends TestFixture {
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
 			'modified' => '2012-12-26 17:20:20'
-		),
-		array(
+		],
+		[
 			'id' => 10,
 			'country_province_id' => 10,
 			'country_id' => 10,
@@ -165,6 +165,6 @@ class LocationsFixture extends TestFixture {
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
 			'modified' => '2012-12-26 17:20:20'
-		),
-	);
+		],
+	];
 }

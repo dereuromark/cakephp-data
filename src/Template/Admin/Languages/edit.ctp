@@ -11,7 +11,7 @@
 		echo $this->Form->input('code');
 		echo $this->Form->input('locale');
 		echo $this->Form->input('locale_fallback');
-		echo $this->Form->input('direction', array('options' => $language::directions()));
+		echo $this->Form->input('direction', ['options' => $language::directions()]);
 		echo $this->Form->input('status');
 	?>
 	</fieldset>
@@ -22,7 +22,7 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Language.id')), null, __('Are you sure you want to delete # {0}?', $this->Form->value('Language.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Languages')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('Language.id')], null, __('Are you sure you want to delete # {0}?', $this->Form->value('Language.id'))); ?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Languages')), ['action' => 'index']);?></li>
 	</ul>
 </div>

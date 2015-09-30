@@ -16,7 +16,7 @@
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Currency.id')), array('escape' => false), __('Are you sure you want to delete # {0}?', $this->Form->value('Currency.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Currencies')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('Currency.id')], ['escape' => false], __('Are you sure you want to delete # {0}?', $this->Form->value('Currency.id'))); ?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Currencies')), ['action' => 'index']);?></li>
 	</ul>
 </div>

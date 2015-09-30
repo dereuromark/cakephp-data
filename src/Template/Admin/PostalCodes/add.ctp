@@ -18,6 +18,6 @@
 <div class="actions">
 	<ul>
 
-		<li><?php echo $this->Html->link(__('List {0}', __('Postal Codes')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Postal Codes')), ['action' => 'index']);?></li>
 	</ul>
 </div>

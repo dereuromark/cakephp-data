@@ -8,7 +8,7 @@ use Cake\Core\Plugin;
 
 class CountryProvincesController extends DataAppController {
 
-	public $paginate = array('order' => array('CountryProvince.modified' => 'DESC'));
+	public $paginate = ['order' => ['CountryProvince.modified' => 'DESC']];
 
 	public function beforeFilter(Event $event) {
 		parent::beforeFilter($event);
@@ -29,7 +29,7 @@ class CountryProvincesController extends DataAppController {
 		if (!$this->request->is('post') || !$this->request->is('ajax')) {
 			throw new \Exception(__('not a valid request'));
 		}
-		$this->layout = 'ajax';
+		$this->viewBuilder()->layout('ajax');
 		$countryProvinces = $this->CountryProvince->getListByCountry($id);
 		$defaultFieldLabel = 'pleaseSelect';
 		if ($this->request->query('optional')) {
@@ -46,7 +46,7 @@ class CountryProvincesController extends DataAppController {
 	 * @return void
 	 */
 	public function index($cid = null) {
-		$this->paginate['order'] = array('CountryProvinces.name' => 'ASC');
+		$this->paginate['order'] = ['CountryProvinces.name' => 'ASC'];
 		//$this->paginate['conditions'] = array('Country.status' => 1);
 
 		$cid = $this->_processCountry($cid);
@@ -84,7 +84,7 @@ class CountryProvincesController extends DataAppController {
 		}
 
 		if (!empty($cid)) {
-			$this->paginate = Hash::merge($this->paginate, array('conditions' => array('country_id' => $cid)));
+			$this->paginate = Hash::merge($this->paginate, ['conditions' => ['country_id' => $cid]]);
 			$this->request->data['id'] = $cid;
 		}
 	}

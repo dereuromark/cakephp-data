@@ -11,7 +11,7 @@ if (!defined('FILE_CACHE')) {
 
 class MimeTypeHelper extends Helper {
 
-	public $helpers = array('Html');
+	public $helpers = ['Html'];
 
 	public $types = null;
 
@@ -28,7 +28,7 @@ class MimeTypeHelper extends Helper {
 			$this->getTypes();
 		}
 
-		$default = array('ext' => $ext, 'name' => 'Datei');
+		$default = ['ext' => $ext, 'name' => 'Datei'];
 
 		foreach ($this->types as $t) {
 
@@ -60,7 +60,7 @@ class MimeTypeHelper extends Helper {
 			$filename = $attr['filename'];
 			unset($attr['filename']);
 		}
-		$imageAttr = array('class' => 'help', 'title' => $icon['name'] . ' (' . $filename . '.' . $icon['ext'] . ')', 'alt' => $icon['ext'], 'height' => '16');
+		$imageAttr = ['class' => 'help', 'title' => $icon['name'] . ' (' . $filename . '.' . $icon['ext'] . ')', 'alt' => $icon['ext'], 'height' => '16'];
 		if (!empty($attr) && is_array($attr)) {
 			$imageAttr = array_merge($imageAttr, $attr);
 		}
@@ -102,17 +102,17 @@ class MimeTypeHelper extends Helper {
 		if (!$handle->exists()) {
 			# create and fill: ext||type||name||img (array serialized? separated by ||?)
 			$MimeTypes = TableRegistry::get('Data.MimeTypes');
-			$mimeTypes = $MimeTypes->find('all', array('fields' => array('name', 'ext', 'type', 'MimeTypeImages.name', 'MimeTypeImages.ext'), 'conditions' => array('MimeTypes.active' => 1), 'contain' => array('MimeTypeImages')));
+			$mimeTypes = $MimeTypes->find('all', ['fields' => ['name', 'ext', 'type', 'MimeTypeImages.name', 'MimeTypeImages.ext'], 'conditions' => ['MimeTypes.active' => 1], 'contain' => ['MimeTypeImages']]);
 
-			$content = array();
+			$content = [];
 			foreach ($mimeTypes as $m) {
 				$img = (!empty($m->mime_type_image['ext']) ? $m->mime_type_image['name'] . '.' . $m->mime_type_image['ext'] : '');
-				$content[] = array(
+				$content[] = [
 					'ext' => $m['ext'],
 					'name' => $m['name'],
 					'type' => $m['type'],
 					'img' => $img,
-				);
+				];
 			}
 			# add special types? (file not found icon, default fallback icon, generic file ext icon...)
 
@@ -123,11 +123,11 @@ class MimeTypeHelper extends Helper {
 			//$handle->open('r', true);
 			$content = $handle->read();
 			if ($content === false) {
-				return array();
+				return [];
 			}
 			$content = @unserialize($content);
 			if ($content === false || !is_array($content)) {
-				return array();
+				return [];
 			}
 		}
 		return $content;

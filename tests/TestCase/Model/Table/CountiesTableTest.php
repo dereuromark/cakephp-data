@@ -7,9 +7,9 @@ use Cake\ORM\TableRegistry;
 
 class CountiesTableTest extends TestCase {
 
-	public $fixtures = array(
+	public $fixtures = [
 		'plugin.data.counties', 'plugin.data.states',
-	);
+	];
 
 	public $Counties;
 
@@ -35,9 +35,9 @@ class CountiesTableTest extends TestCase {
 	 * @return void
 	 */
 	public function testBasicSave() {
-		$data = array(
+		$data = [
 			'name' => 'Foo Bar'
-		);
+		];
 		$entity = $this->Counties->newEntity($data);
 		$this->assertEmpty($entity->errors());
 

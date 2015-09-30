@@ -8,9 +8,9 @@ use Cake\ORM\TableRegistry;
 
 class CitiesTableTest extends TestCase {
 
-	public $fixtures = array(
+	public $fixtures = [
 		'plugin.data.cities'
-	);
+	];
 
 	public $Cities;
 

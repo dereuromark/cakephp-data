@@ -14,7 +14,7 @@ class MimeTypesFixture extends TestFixture {
 	 *
 	 * @var array
 	 */
-	public $fields = array(
+	public $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'unsigned' => true],
 		'name' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 100, 'collate' => 'utf8_unicode_ci', 'comment' => 'Program Name', 'charset' => 'utf8'],
 		'ext' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 20, 'collate' => 'utf8_unicode_ci', 'comment' => 'extension (lowercase!)', 'charset' => 'utf8'],
@@ -29,15 +29,15 @@ class MimeTypesFixture extends TestFixture {
 		'alt_type' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 200, 'collate' => 'utf8_unicode_ci', 'comment' => 'alternate (sometimes there is more than one type)', 'charset' => 'utf8'],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
 		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM']
-	);
+	];
 
 	/**
 	 * Records
 	 *
 	 * @var array
 	 */
-	public $records = array(
-		array(
+	public $records = [
+		[
 			'id' => 1,
 			'name' => 'Lorem ipsum dolor sit amet',
 			'ext' => 'Lorem ipsum dolor ',
@@ -50,6 +50,6 @@ class MimeTypesFixture extends TestFixture {
 			'sort' => 1,
 			'mime_type_image_id' => 1,
 			'alt_type' => 'Lorem ipsum dolor sit amet'
-		)
-	);
+		]
+	];
 }

@@ -7,9 +7,9 @@ use Cake\ORM\TableRegistry;
 
 class SmileysTableTest extends TestCase {
 
-	public $fixtures = array(
+	public $fixtures = [
 		'plugin.data.smileys'
-	);
+	];
 
 	public function setUp() {
 		parent::setUp();

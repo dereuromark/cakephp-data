@@ -12,7 +12,7 @@ use Cake\Utility\Inflector;
  */
 class DataHelper extends Helper {
 
-	public $helpers = array('Html');
+	public $helpers = ['Html'];
 
 	/**
 	 * FormatHelper::countryAndProvince()
@@ -21,7 +21,7 @@ class DataHelper extends Helper {
 	 * @param mixed $options
 	 * @return string
 	 */
-	public function countryAndProvince($array, $options = array()) {
+	public function countryAndProvince($array, $options = []) {
 		$res = '<span class="help" title="%s">%s</span>';
 
 		$options += ['separator' => '&nbsp;'];
@@ -73,7 +73,7 @@ class DataHelper extends Helper {
 			$wwwPath = '/data/img/country_flags/';
 			$path = Plugin::path('Data') . 'webroot' . DS . 'img' . DS . 'country_flags' . DS;
 		}
-		return array($wwwPath, $path);
+		return [$wwwPath, $path];
 	}
 
 	/**
@@ -85,7 +85,7 @@ class DataHelper extends Helper {
 	 * @param string $icon iso2 code (e.g. 'de' or 'gb')
 	 * @return string
 	 */
-	public function countryIcon($icon = null, $returnFalseonFailure = false, $options = array(), $attr = array()) {
+	public function countryIcon($icon = null, $returnFalseonFailure = false, $options = [], $attr = []) {
 		$ending = 'gif';
 		$image = 'unknown';
 
@@ -122,10 +122,10 @@ class DataHelper extends Helper {
 	 * @param mixed $options
 	 * @return string
 	 */
-	public function languageFlag($iso2, $options = array()) {
+	public function languageFlag($iso2, $options = []) {
 		$flag = '';
 
-		$defaults = array('alt' => $iso2, 'title' => strtoupper($iso2));
+		$defaults = ['alt' => $iso2, 'title' => strtoupper($iso2)];
 		$options = array_merge($defaults, $options);
 
 		$flag .= $this->Html->image('language_flags/' . strtolower($iso2) . '.gif', $options);

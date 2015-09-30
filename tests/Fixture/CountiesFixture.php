@@ -16,7 +16,7 @@ class CountiesFixture extends TestFixture {
 	 *
 	 * @var array
 	 */
-	public $fields = array(
+	public $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'collate' => null, 'comment' => ''],
 		'official_id' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 9, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
 		'country_id' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10, 'collate' => null, 'comment' => ''],
@@ -31,15 +31,15 @@ class CountiesFixture extends TestFixture {
 		//'_indexes' => ['country' => ['unique' => 0, 'columns' => 'country_id'], 'state_id' => ['unique' => 0, 'columns' => 'state_id'], 'rank' => ['unique' => 0, 'columns' => 'rank']],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']], 'official_id' => ['type' => 'unique', 'columns' => 'official_id'], 'slug' => ['type' => 'unique', 'columns' => 'slug']],
 		'_options' => []
-	);
+	];
 
 	/**
 	 * Records
 	 *
 	 * @var array
 	 */
-	public $records = array(
-		array(
+	public $records = [
+		[
 			'id' => '1',
 			'official_id' => '01-0-01',
 			'country_id' => '1',
@@ -51,8 +51,8 @@ class CountiesFixture extends TestFixture {
 			'single_city' => 1,
 			'rank' => '1',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '2',
 			'official_id' => '01-0-02',
 			'country_id' => '1',
@@ -64,8 +64,8 @@ class CountiesFixture extends TestFixture {
 			'single_city' => 1,
 			'rank' => '3',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '3',
 			'official_id' => '01-0-03',
 			'country_id' => '1',
@@ -77,8 +77,8 @@ class CountiesFixture extends TestFixture {
 			'single_city' => 1,
 			'rank' => '4',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '4',
 			'official_id' => '01-0-04',
 			'country_id' => '1',
@@ -90,8 +90,8 @@ class CountiesFixture extends TestFixture {
 			'single_city' => 1,
 			'rank' => '5',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '5',
 			'official_id' => '02-0-00',
 			'country_id' => '1',
@@ -103,8 +103,8 @@ class CountiesFixture extends TestFixture {
 			'single_city' => 1,
 			'rank' => '0',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '6',
 			'official_id' => '03-1-01',
 			'country_id' => '1',
@@ -116,8 +116,8 @@ class CountiesFixture extends TestFixture {
 			'single_city' => 1,
 			'rank' => '2',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '7',
 			'official_id' => '03-1-02',
 			'country_id' => '1',
@@ -129,8 +129,8 @@ class CountiesFixture extends TestFixture {
 			'single_city' => 1,
 			'rank' => '34',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '8',
 			'official_id' => '03-1-03',
 			'country_id' => '1',
@@ -142,8 +142,8 @@ class CountiesFixture extends TestFixture {
 			'single_city' => 1,
 			'rank' => '45',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '9',
 			'official_id' => '03-4-01',
 			'country_id' => '1',
@@ -155,8 +155,8 @@ class CountiesFixture extends TestFixture {
 			'single_city' => 1,
 			'rank' => '6',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '10',
 			'official_id' => '03-4-02',
 			'country_id' => '1',
@@ -168,6 +168,6 @@ class CountiesFixture extends TestFixture {
 			'single_city' => 1,
 			'rank' => '8',
 			'modified' => '0000-00-00 00:00:00'
-		),
-	);
+		],
+	];
 }

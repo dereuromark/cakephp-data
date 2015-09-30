@@ -56,6 +56,6 @@ foreach ($countryProvinces as $countryProvince):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['controller' => 'countries', 'action' => 'index']); ?> </li>
 	</ul>
 </div>

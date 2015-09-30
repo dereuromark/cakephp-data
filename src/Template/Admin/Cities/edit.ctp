@@ -7,7 +7,7 @@
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('country_id');
-		echo $this->Form->input('official_id', array('type' => 'text'));
+		echo $this->Form->input('official_id', ['type' => 'text']);
 
 		if (Configure::read('City.County') !== false) {
 			echo $this->Form->input('county_id');
@@ -29,7 +29,7 @@
 <div class="actions">
 	<ul>
 
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('City.id')), null, __('Are you sure you want to delete # {0}?', $this->Form->value('City.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Cities')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('City.id')], null, __('Are you sure you want to delete # {0}?', $this->Form->value('City.id'))); ?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Cities')), ['action' => 'index']);?></li>
 	</ul>
 </div>

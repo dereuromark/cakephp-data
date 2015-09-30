@@ -11,15 +11,15 @@ use Cake\Network\Http\Client;
  */
 class CurrencyBitcoinLib {
 
-	public $settings = array(
+	public $settings = [
 		'currency' => 'EUR', # set to NULL or empty for all
 		'api' => 'bitmarket', # bitmarket or bitcoincharts
-	);
+	];
 
 	/**
 	 * @see https://bitmarket.eu/api
 	 */
-	public function bitmarket($options = array()) {
+	public function bitmarket($options = []) {
 		$options += $this->settings;
 		$url = 'https://bitmarket.eu/api/ticker';
 		$res = $this->_getBitmarket($url);
@@ -41,14 +41,14 @@ class CurrencyBitcoinLib {
 	 *
 	 * @see http://bitcoincharts.com/about/markets-api/
 	 */
-	public function bitcoincharts($options = array()) {
+	public function bitcoincharts($options = []) {
 		$options += $this->settings;
 		$url = 'http://api.bitcoincharts.com/v1/markets.json';
 		$res = $this->_getBitcoincharts($url);
 		if (!$res) {
 			return false;
 		}
-		$array = array();
+		$array = [];
 		foreach ($res as $val) {
 			$array[$val['currency']] = $val;
 			unset($array[$val['currency']]['currency']);
@@ -68,7 +68,7 @@ class CurrencyBitcoinLib {
 	 * - currency
 	 * - api
 	 */
-	public function rate($options = array()) {
+	public function rate($options = []) {
 		$options += $this->settings;
 		$res = $this->{$options['api']}($options);
 

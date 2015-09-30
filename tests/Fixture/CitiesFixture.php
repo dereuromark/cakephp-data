@@ -14,7 +14,7 @@ class CitiesFixture extends TestFixture {
 	 *
 	 * @var array
 	 */
-	public $fields = array(
+	public $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'collate' => null, 'comment' => ''],
 		'name' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 30, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
 		'slug' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 40, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
@@ -25,15 +25,15 @@ class CitiesFixture extends TestFixture {
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
 		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM']
-	);
+	];
 
 	/**
 	 * Records
 	 *
 	 * @var array
 	 */
-	public $records = array(
-		array(
+	public $records = [
+		[
 			'id' => '1',
 			'name' => 'München',
 			'slug' => 'muenchen',
@@ -42,8 +42,8 @@ class CitiesFixture extends TestFixture {
 			'active' => 1,
 			'created' => '0000-00-00 00:00:00',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '3',
 			'name' => 'Stuttgart',
 			'slug' => 'Stuttgart',
@@ -52,6 +52,6 @@ class CitiesFixture extends TestFixture {
 			'active' => 1,
 			'created' => '2011-10-07 16:48:05',
 			'modified' => '0000-00-00 00:00:00'
-		),
-	);
+		],
+	];
 }

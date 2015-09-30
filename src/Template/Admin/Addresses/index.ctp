@@ -27,11 +27,11 @@ foreach ($addresses as $address):
 ?>
 	<tr<?php echo $class;?>>
 		<td>
-			<?php echo $this->Html->link($address['Country']['name'], array('controller' => 'countries', 'action' => 'view', $address['Country']['id'])); ?>
+			<?php echo $this->Html->link($address['Country']['name'], ['controller' => 'countries', 'action' => 'view', $address['Country']['id']]); ?>
 		</td>
 <?php if (Configure::read('Address.CountryProvince')) { ?>
 		<td>
-			<?php echo $this->Html->link($address['CountryProvince']['name'], array('controller' => 'country_provinces', 'action' => 'view', $address['CountryProvince']['id'])); ?>
+			<?php echo $this->Html->link($address['CountryProvince']['name'], ['controller' => 'country_provinces', 'action' => 'view', $address['CountryProvince']['id']]); ?>
 		</td>
 <?php } ?>
 		<td>
@@ -56,10 +56,10 @@ foreach ($addresses as $address):
 					echo '/';
 					echo number_format($address['Address']['lng'], 1, ',', '.');
 
-					$markers = array();
-					$markers[] = array('lat' => $address['Address']['lat'], 'lng' => $address['Address']['lng'], 'color' => 'green');
+					$markers = [];
+					$markers[] = ['lat' => $address['Address']['lat'], 'lng' => $address['Address']['lng'], 'color' => 'green'];
 					$mapMarkers = $this->GoogleMapV3->staticMarkers($markers);
-					echo $this->Html->link($this->Format->icon(ICON_DETAILS, 'Zeigen'), $this->GoogleMapV3->staticMapUrl(array('center' => $address['Address']['lat'] . ',' . $address['Address']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 12)), array('id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false));
+					echo $this->Html->link($this->Format->icon(ICON_DETAILS, 'Zeigen'), $this->GoogleMapV3->staticMapUrl(['center' => $address['Address']['lat'] . ',' . $address['Address']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 12]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
 				}
 			 ?>
 		</td>
@@ -70,9 +70,9 @@ foreach ($addresses as $address):
 			<?php echo h($address['Address']['formatted_address']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $address['Address']['id']), array('escape' => false)); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $address['Address']['id']), array('escape' => false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $address['Address']['id']), array('escape' => false), __('Are you sure you want to delete # {0}?', $address['Address']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $address['Address']['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $address['Address']['id']], ['escape' => false]); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $address['Address']['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $address['Address']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -87,8 +87,8 @@ foreach ($addresses as $address):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add {0}', __('Address')), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), array('controller' => 'countries', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Country Provinces')), array('controller' => 'country_provinces', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('Add {0}', __('Address')), ['action' => 'add']); ?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['controller' => 'countries', 'action' => 'index']); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Country Provinces')), ['controller' => 'country_provinces', 'action' => 'index']); ?> </li>
 	</ul>
 </div>

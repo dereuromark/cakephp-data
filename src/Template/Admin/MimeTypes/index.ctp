@@ -3,18 +3,18 @@
 <p>
 <?php
 
-echo $this->Paginator->counter(array(
+echo $this->Paginator->counter([
 'format' => __('Page %page% of %pages%, showing %current% records out of %count% total')
-));
+]);
 ?></p>
 
 <div class="searchWrapper">
-<?php echo $this->Form->create('MimeType', array('action' => 'index'));?>
-<div class="floatLeft"><?php echo $this->Form->input('Form.search', array('label' => '(Teil)Suche:', 'value' => $searchStr));?></div>
+<?php echo $this->Form->create('MimeType', ['action' => 'index']);?>
+<div class="floatLeft"><?php echo $this->Form->input('Form.search', ['label' => '(Teil)Suche:', 'value' => $searchStr]);?></div>
 <div class="floatLeft"><?php echo $this->Form->end(__('Submit'));?></div>
 <?php
 if (!empty($searchStr)) {
-	echo '<div class="floatRight">' . $this->Html->link('Wieder alle anzeigen', array('action' => 'index', 'clear' => 'search')) . '</div>';
+	echo '<div class="floatRight">' . $this->Html->link('Wieder alle anzeigen', ['action' => 'index', 'clear' => 'search']) . '</div>';
 }
 ?>
 <?php
@@ -39,8 +39,8 @@ if (!empty($searchStr) && !empty($allCount)) {
 	<th><?php echo $this->Paginator->sort('type');?></th>
 	<th><?php echo $this->Paginator->sort('active');?></th>
 	<th><?php echo $this->Paginator->sort('core');?></th>
-	<th><?php echo $this->Paginator->sort('created', null, array('direction' => 'desc'));?></th>
-	<th><?php echo $this->Paginator->sort('modified', null, array('direction' => 'desc'));?></th>
+	<th><?php echo $this->Paginator->sort('created', null, ['direction' => 'desc']);?></th>
+	<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
 	<th class="actions"><?php echo __('Actions');?></th>
 </tr>
 <?php
@@ -61,7 +61,7 @@ foreach ($mimeTypes as $mimeType):
 				$fileExt = (!empty($mimeType['MimeTypeImage']['ext'])?$mimeType['MimeTypeImage']['ext']:'png');
 				$title = (!empty($mimeType['MimeTypeImage']['ext'])?$fileName . '.' . $fileExt:'Kein Image festgelegt...');
 
-				$icon = $this->Html->image(IMG_MIMETYPES . $fileName . '.' . $fileExt, array('title' => $title, 'alt' => $fileName . '.' . $fileExt));
+				$icon = $this->Html->image(IMG_MIMETYPES . $fileName . '.' . $fileExt, ['title' => $title, 'alt' => $fileName . '.' . $fileExt]);
 			}
 			echo $icon;
 
@@ -83,7 +83,7 @@ foreach ($mimeTypes as $mimeType):
 		</td>
 		<td>
 			<span class="ajaxToggling" id="ajaxToggle-<?php echo $mimeType['MimeType']['id']?>">
-			<?php echo $this->Html->link($this->Format->yesNo($mimeType['MimeType']['active'], ['onTitle' => 'Active', 'offTitle' => 'Inactive']), array('action' => 'toggleActive', $mimeType['MimeType']['id']), array('escape' => false));?>
+			<?php echo $this->Html->link($this->Format->yesNo($mimeType['MimeType']['active'], ['onTitle' => 'Active', 'offTitle' => 'Inactive']), ['action' => 'toggleActive', $mimeType['MimeType']['id']], ['escape' => false]);?>
 			</span>
 		</td>
 		<td>
@@ -96,34 +96,34 @@ foreach ($mimeTypes as $mimeType):
 			<?php echo $this->Time->niceDate($mimeType['MimeType']['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), array('action' => 'view', $mimeType['MimeType']['id']), array('escape' => false)); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), array('action' => 'edit', $mimeType['MimeType']['id']), array('escape' => false)); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), array('action' => 'delete', $mimeType['MimeType']['id']), array('escape' => false), __('Are you sure you want to delete # {0}?', $mimeType['MimeType']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $mimeType['MimeType']['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $mimeType['MimeType']['id']], ['escape' => false]); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $mimeType['MimeType']['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $mimeType['MimeType']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
 </table>
 </div>
 <div class="paging">
-	<?php echo $this->Paginator->first(__('first'), array());?>
+	<?php echo $this->Paginator->first(__('first'), []);?>
  |
-	<?php echo $this->Paginator->prev(__('previous'), array(), null, array('class' => 'disabled'));?>
+	<?php echo $this->Paginator->prev(__('previous'), [], null, ['class' => 'disabled']);?>
  |
-	<?php echo $this->Paginator->numbers(array('separator' => PAGINATOR_SEPARATOR));?>
+	<?php echo $this->Paginator->numbers(['separator' => PAGINATOR_SEPARATOR]);?>
  |
-	<?php echo $this->Paginator->next(__('next'), array(), null, array('class' => 'disabled'));?>
+	<?php echo $this->Paginator->next(__('next'), [], null, ['class' => 'disabled']);?>
 
  |
-	<?php echo $this->Paginator->last(__('last'), array());?>
+	<?php echo $this->Paginator->last(__('last'), []);?>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add Mime Type'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('Add Mime Type'), ['action' => 'add']); ?></li>
 
-		<li><?php echo $this->Html->link(__('(Auto-) Allocate Icons by Extension'), array('action' => 'allocate')); ?></li>
-		<li><?php echo $this->Html->link(__('Allocate Icons by Type (Groups)'), array('action' => 'allocateByType')); ?></li>
-		<li><?php echo $this->Html->link(__('Import from Core Media View'), array('action' => 'fromCore')); ?></li>
-		<li><?php echo $this->Html->link(__('Import from File'), array('action' => 'fromFile')); ?></li>
+		<li><?php echo $this->Html->link(__('(Auto-) Allocate Icons by Extension'), ['action' => 'allocate']); ?></li>
+		<li><?php echo $this->Html->link(__('Allocate Icons by Type (Groups)'), ['action' => 'allocateByType']); ?></li>
+		<li><?php echo $this->Html->link(__('Import from Core Media View'), ['action' => 'fromCore']); ?></li>
+		<li><?php echo $this->Html->link(__('Import from File'), ['action' => 'fromFile']); ?></li>
 	</ul>
 </div>
 <br/>

@@ -1,5 +1,5 @@
 <?php
-$manualRes = array();
+$manualRes = [];
 foreach ($report['in'] as $r) {
 	if ($r['type'] != $r['oldType']) {
 		$manualRes[] = $r;
@@ -31,6 +31,6 @@ Currently Media View has <b><?php echo count($mimeTypes)?> MimeTypes</b> listed<
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List Mime Types'), array('action' => 'index'));?></li>
+		<li><?php echo $this->Html->link(__('List Mime Types'), ['action' => 'index']);?></li>
 	</ul>
 </div>

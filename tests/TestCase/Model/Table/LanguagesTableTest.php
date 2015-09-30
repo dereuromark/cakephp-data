@@ -8,9 +8,9 @@ use Tools\TestSuite\TestCase;
 
 class LanguagesTableTest extends TestCase {
 
-	public $fixtures = array(
+	public $fixtures = [
 		'plugin.data.languages'
-	);
+	];
 
 	public $Languages;
 

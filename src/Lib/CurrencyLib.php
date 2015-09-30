@@ -71,7 +71,7 @@ class CurrencyLib {
 	 */
 	public function table($base = 'EUR', $decimals = 2) {
 		//Create array to holds rates
-		$rateTable = array();
+		$rateTable = [];
 		//Get rate table array
 		$rates = $this->_retrieveCurrencies();
 
@@ -103,7 +103,7 @@ class CurrencyLib {
 			if (!empty($history[$date])) {
 				return $history[$date];
 			}
-			return array();
+			return [];
 		}
 		return $history;
 	}
@@ -170,7 +170,7 @@ class CurrencyLib {
 		// Filter down to just the rates
 		$dates = $currencies['Envelope']['Cube']['Cube'];
 
-		$historyList = array();
+		$historyList = [];
 		foreach ($dates as $date) {
 			$time = $date['@time'];
 			foreach ($date['Cube'] as $currency) {
@@ -201,7 +201,7 @@ class CurrencyLib {
 		$currencies = $currencies['Envelope']['Cube']['Cube']['Cube'];
 
 		//Create an array to hold the rates
-		$currencyList = array();
+		$currencyList = [];
 		//European Central bank gives us everything against Euro so add this manually
 		$currencyList[$this->baseCurrency] = 1;
 		//Now iterate through and add the rates provided
@@ -220,7 +220,7 @@ class CurrencyLib {
 
 	protected function _getBitcoin() {
 		$Btc = new CurrencyBitcoinLib();
-		return $Btc->rate(array('currency' => $this->baseCurrency));
+		return $Btc->rate(['currency' => $this->baseCurrency]);
 	}
 
 	/**
@@ -254,7 +254,7 @@ class CurrencyLib {
 		return Xml::toArray($CurrencyXml);
 	}
 
-	public $currencies = array(
+	public $currencies = [
 		'AFA' => 'Afghanistan Afghani',
 		'ALL' => 'Albanian Lek',
 		'DZD' => 'Algerian Dinar',
@@ -406,6 +406,6 @@ class CurrencyLib {
 		'YUM' => 'Yugoslav Dinar',
 		'ZMK' => 'Zambian Kwacha',
 		'ZWD' => 'Zimbabwe Dollar',
-	);
+	];
 
 }

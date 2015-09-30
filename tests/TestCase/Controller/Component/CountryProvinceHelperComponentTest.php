@@ -10,7 +10,7 @@ use Cake\Controller\Controller;
 
 class CountryProvinceHelperComponentTest extends TestCase {
 
-	public $fixtures = array('plugin.data.countries', 'plugin.data.country_provinces');
+	public $fixtures = ['plugin.data.countries', 'plugin.data.country_provinces'];
 
 	public function setUp() {
 		parent::setUp();

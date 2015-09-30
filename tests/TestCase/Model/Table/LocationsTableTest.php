@@ -7,9 +7,9 @@ use Tools\TestSuite\TestCase;
 
 class LocationsTableTest extends TestCase {
 
-	public $fixtures = array(
+	public $fixtures = [
 		'plugin.data.locations'
-	);
+	];
 
 	public $Locations;
 

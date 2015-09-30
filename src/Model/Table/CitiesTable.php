@@ -6,24 +6,24 @@ use Tools\Model\Table\Table;
 
 class CitiesTable extends Table {
 
-	public $order = array('name' => 'ASC');
+	public $order = ['name' => 'ASC'];
 
-	public $validate = array(
-		'name' => array(
+	public $validate = [
+		'name' => [
 			'notEmpty',
-		)
-	);
+		]
+	];
 
-	public $actsAs = array('Tools.Slugged' => array('label' => 'name', 'mode' => 'ascii', 'case' => 'low', 'unique' => true, 'overwrite' => false));
+	public $actsAs = ['Tools.Slugged' => ['label' => 'name', 'mode' => 'ascii', 'case' => 'low', 'unique' => true, 'overwrite' => false]];
 
-	public $hasMany = array(
-			'District' => array('className' => 'Data.District')
-	);
+	public $hasMany = [
+			'District' => ['className' => 'Data.District']
+	];
 
-	public $belongsTo = array(
-		'County' => array('className' => 'Data.County'),
-		'Country' => array('className' => 'Data.Country')
-	);
+	public $belongsTo = [
+		'County' => ['className' => 'Data.County'],
+		'Country' => ['className' => 'Data.Country']
+	];
 
 	public function __construct($id = false, $table = false, $ds = null) {
 		if (Configure::read('City.District') === false) {
@@ -37,21 +37,21 @@ class CitiesTable extends Table {
 	}
 
 	public function autoCompleteName($name) {
-		$options = array(
-			'conditions' => array(
+		$options = [
+			'conditions' => [
 				$this->alias() . '.name LIKE' => $name . '%'
-			),
-			'fields' => array('id', 'postal_code', 'name')
-		);
+			],
+			'fields' => ['id', 'postal_code', 'name']
+		];
 		return $this->find('all', $options);
 	}
 
 	public function largeCities($country, $limit = 0) {
-		$options = array(
-			'conditions' => array($this->alias() . '.country_id' => $country),
-			'order' => array($this->alias() . '.citizens' => 'desc'),
+		$options = [
+			'conditions' => [$this->alias() . '.country_id' => $country],
+			'order' => [$this->alias() . '.citizens' => 'desc'],
 			'limit' => $limit
-		);
+		];
 
 		return $this->find('all', $options);
 	}
@@ -61,7 +61,7 @@ class CitiesTable extends Table {
 		if (!isset($matches[0]) || strlen($matches[0]) !== 5) {
 			return false;
 		}
-		return $this->find('all', array('conditions' => array('City.postal_code LIKE' => $matches[0])));
+		return $this->find('all', ['conditions' => ['City.postal_code LIKE' => $matches[0]]]);
 	}
 
 	public function getCityToPostalCode($postalCode) {

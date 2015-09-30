@@ -7,9 +7,9 @@ use Tools\TestSuite\TestCase;
 
 class PostalCodesTableTest extends TestCase {
 
-	public $fixtures = array(
+	public $fixtures = [
 		'plugin.data.postal_codes'
-	);
+	];
 
 	public $PostalCodes;
 

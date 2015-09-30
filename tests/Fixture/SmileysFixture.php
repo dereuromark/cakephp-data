@@ -6,7 +6,7 @@ use Cake\TestSuite\Fixture\TestFixture;
 
 class SmileysFixture extends TestFixture {
 
-	public $fields = array(
+	public $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10],
 		'smiley_cat_id' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10],
 		'smiley_path' => ['type' => 'string', 'null' => false],
@@ -20,10 +20,10 @@ class SmileysFixture extends TestFixture {
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
 		'_options' => []
-	);
+	];
 
-	public $records = array(
-		array(
+	public $records = [
+		[
 			'id' => 1,
 			'smiley_cat_id' => 1,
 			'smiley_path' => 'Lorem ipsum dolor sit amet',
@@ -35,6 +35,6 @@ class SmileysFixture extends TestFixture {
 			'active' => 1,
 			'created' => '2010-06-02 01:33:59',
 			'modified' => '2010-06-02 01:33:59'
-		),
-	);
+		],
+	];
 }

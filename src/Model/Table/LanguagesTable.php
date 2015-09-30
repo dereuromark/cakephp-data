@@ -15,59 +15,59 @@ use Tools\Model\Table\Table;
  */
 class LanguagesTable extends Table {
 
-	public $order = array('name' => 'ASC');
+	public $order = ['name' => 'ASC'];
 
-	public $validate = array(
-		'name' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+	public $validate = [
+		'name' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
-			),
-		),
-		'ori_name' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			],
+		],
+		'ori_name' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
-			),
-		),
-		'code' => array(
+			],
+		],
+		'code' => [
 			/*
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
 				'message' => 'valErrMandatoryField',
 			),
 			*/
-		),
-		'locale' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+		],
+		'locale' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
 				'last' => true
-			),
-			'isUnique' => array(
-				'rule' => array('isUnique'),
+			],
+			'isUnique' => [
+				'rule' => ['isUnique'],
 				'message' => 'valErrRecordNameExists',
-			),
-		),
-		'locale_fallback' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			],
+		],
+		'locale_fallback' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
 				'last' => true
-			),
-		),
-		'status' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+			],
+		],
+		'status' => [
+			'numeric' => [
+				'rule' => ['numeric'],
 				'message' => 'valErrMandatoryField',
-			),
-		),
-	);
+			],
+		],
+	];
 
-	public $filterArgs = array(
-		'search' => array('type' => 'like', 'field' => array('name', 'ori_name', 'code', 'locale', 'locale_fallback')),
-		'dir' => array('type' => 'value', 'field' => 'direction')
-	);
+	public $filterArgs = [
+		'search' => ['type' => 'like', 'field' => ['name', 'ori_name', 'code', 'locale', 'locale_fallback']],
+		'dir' => ['type' => 'value', 'field' => 'direction']
+	];
 
 	/**
 	 * For language switch etc
@@ -75,9 +75,9 @@ class LanguagesTable extends Table {
 	 * @return array
 	 */
 	public function getActive($type = 'all') {
-		$options = array(
-			'conditions' => array('status' => self::STATUS_ACTIVE),
-		);
+		$options = [
+			'conditions' => ['status' => self::STATUS_ACTIVE],
+		];
 		return $this->find($type, $options);
 	}
 
@@ -88,10 +88,10 @@ class LanguagesTable extends Table {
 	 * @param array $customOptions
 	 * @return array
 	 */
-	public function getPrimaryLanguages($type = 'all', $customOptions = array()) {
-		$options = array(
-			'conditions' => array('locale_fallback = locale'),
-		);
+	public function getPrimaryLanguages($type = 'all', $customOptions = []) {
+		$options = [
+			'conditions' => ['locale_fallback = locale'],
+		];
 		return $this->find($type, $options);
 	}
 
@@ -101,9 +101,9 @@ class LanguagesTable extends Table {
 	 *
 	 * @return array
 	 */
-	public function getList($conditions = array()) {
-		$res = $this->find('all', array('group' => array('code'), 'conditions' => $conditions, 'fields' => array('id', 'name')));
-		$ret = array();
+	public function getList($conditions = []) {
+		$res = $this->find('all', ['group' => ['code'], 'conditions' => $conditions, 'fields' => ['id', 'name']]);
+		$ret = [];
 		foreach ($res as $language) {
 			$ret[$language['id']] = $language['name'];
 		}
@@ -115,9 +115,9 @@ class LanguagesTable extends Table {
 	 *
 	 * @return array
 	 */
-	public function codeList($conditions = array()) {
-		$res = $this->find('all', array('group' => array('code'), 'conditions' => $conditions, 'fields' => array('code', 'name')));
-		$ret = array();
+	public function codeList($conditions = []) {
+		$res = $this->find('all', ['group' => ['code'], 'conditions' => $conditions, 'fields' => ['code', 'name']]);
+		$ret = [];
 		foreach ($res as $language) {
 			$ret[$language['code']] = $language['name'];
 		}
@@ -174,10 +174,10 @@ class LanguagesTable extends Table {
 
 			$languageArray[($max - 1)] = array_shift(explode(' ', $languageArray[($max - 1)]));
 			foreach ($languageArray as $key => $val) {
-				$languageArray[$key] = trim(str_replace(array("&lt;", "&gt;", '&amp;', '&#039;', '&quot;', '&nbsp;'), array("<", ">", '&', '\'', '"', ' '), $val));
+				$languageArray[$key] = trim(str_replace(["&lt;", "&gt;", '&amp;', '&#039;', '&quot;', '&nbsp;'], ["<", ">", '&', '\'', '"', ' '], $val));
 			}
 
-			$languages = array();
+			$languages = [];
 			for ($i = 0; $i < $max; $i = $i + 4) {
 				$iso3 = $languageArray[$i];
 				if (isset($languages[$iso3])) {
@@ -194,14 +194,14 @@ class LanguagesTable extends Table {
 						$iso3 = trim(array_shift(explode('(', $val)));
 					}
 				}
-				$languages[$iso3] = array('iso3' => $iso3, 'iso2' => $iso2, 'ori_name' => $languageArray[$i + 2]);
+				$languages[$iso3] = ['iso3' => $iso3, 'iso2' => $iso2, 'ori_name' => $languageArray[$i + 2]];
 			}
 
-			$heading = array('ISO 639-2 Code (alpha3)', 'ISO 639-1 Code (alpha2)', 'English name of Language');
+			$heading = ['ISO 639-2 Code (alpha3)', 'ISO 639-1 Code (alpha2)', 'English name of Language'];
 			break;
 		}
 
-		return array('heading' => $heading, 'values' => $languages);
+		return ['heading' => $heading, 'values' => $languages];
 	}
 
 }

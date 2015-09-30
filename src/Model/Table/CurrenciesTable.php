@@ -7,48 +7,48 @@ use Cake\Utility\Hash;
 
 class CurrenciesTable extends Table {
 
-	public $order = array('base' => 'DESC', 'code' => 'ASC');
+	public $order = ['base' => 'DESC', 'code' => 'ASC'];
 
-	public $validate = array(
-		'name' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+	public $validate = [
+		'name' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
 				'last' => true
-			),
-			'isUnique' => array(
-				'rule' => array('isUnique'),
+			],
+			'isUnique' => [
+				'rule' => ['isUnique'],
 				'message' => 'key already exists',
-			),
-		),
-		'code' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			],
+		],
+		'code' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
 				'last' => true
-			),
-			'isUnique' => array(
-				'rule' => array('isUnique'),
+			],
+			'isUnique' => [
+				'rule' => ['isUnique'],
 				'message' => 'key already exists',
 				'last' => true
-			),
-			'available' => array(
-				'rule' => array('available'),
+			],
+			'available' => [
+				'rule' => ['available'],
 				'message' => 'this currency is not available',
 				'provider' => 'table'
-			),
-		),
-		'value' => array('numeric'),
-		'base' => array('numeric'),
-		'decimal_places' => array('numeric'),
-	);
+			],
+		],
+		'value' => ['numeric'],
+		'base' => ['numeric'],
+		'decimal_places' => ['numeric'],
+	];
 
-	public $filterArgs = array(
-		'search' => array('type' => 'like', 'field' => array('name', 'code')),
-		'active' => array('type' => 'value')
-	);
+	public $filterArgs = [
+		'search' => ['type' => 'like', 'field' => ['name', 'code']],
+		'active' => ['type' => 'value']
+	];
 
-	public function beforeValidate($options = array()) {
+	public function beforeValidate($options = []) {
 		$ret = parent::beforeValidate($options);
 
 		if (isset($this->data['value'])) {
@@ -139,14 +139,14 @@ class CurrenciesTable extends Table {
 	/**
 	 * All except base one
 	 */
-	public function foreignCurrencies($type = 'all', $options = array()) {
-		$defaults = array('conditions' => array($this->alias() . '.base' => 0));
+	public function foreignCurrencies($type = 'all', $options = []) {
+		$defaults = ['conditions' => [$this->alias() . '.base' => 0]];
 		$options = Hash::merge($defaults, $options);
 		return $this->find($type, $options);
 	}
 
-	public function baseCurrency($options = array()) {
-		$defaults = array('conditions' => array($this->alias() . '.base' => 1));
+	public function baseCurrency($options = []) {
+		$defaults = ['conditions' => [$this->alias() . '.base' => 1]];
 		$options = Hash::merge($defaults, $options);
 		return $this->find('first', $options);
 	}
@@ -162,7 +162,7 @@ class CurrenciesTable extends Table {
 		if ($res = $this->CurrencyLib->table($base['code'], 4)) {
 			return $res;
 		}
-		return array();
+		return [];
 	}
 
 	/**

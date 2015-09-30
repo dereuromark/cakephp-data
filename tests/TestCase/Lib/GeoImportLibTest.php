@@ -12,7 +12,7 @@ use Cake\Cache\Cache;
  */
 class GeoImportLibTest extends TestCase {
 
-	public $fixtures = array('plugin.data.countries');
+	public $fixtures = ['plugin.data.countries'];
 
 	public $GeoImport;
 

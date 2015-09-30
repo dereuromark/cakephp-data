@@ -10,7 +10,7 @@ class MimeTypeHelperTest extends TestCase {
 
 	public $MimeTypeHelper;
 
-	public $fixtures = array('plugin.Data.MimeTypes', 'plugin.Data.MimeTypeImages');
+	public $fixtures = ['plugin.Data.MimeTypes', 'plugin.Data.MimeTypeImages'];
 
 	public function setUp() {
 		parent::setUp();

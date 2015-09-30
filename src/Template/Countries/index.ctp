@@ -3,13 +3,13 @@
 
 <table class="table">
 <tr>
-	<th><?php echo $this->Paginator->sort('sort', $this->Format->icon('filter'), array('escape' => false));?></th>
+	<th><?php echo $this->Paginator->sort('sort', $this->Format->icon('filter'), ['escape' => false]);?></th>
 	<th><?php echo $this->Paginator->sort('name');?></th>
 	<th><?php echo $this->Paginator->sort('ori_name');?></th>
 	<th><?php echo $this->Paginator->sort('iso2');?></th>
 	<th><?php echo $this->Paginator->sort('iso3');?></th>
 	<th><?php echo $this->Paginator->sort('country_code');?></th>
-	<th><?php echo $this->Paginator->sort('zip_length', null, array('direction' => 'desc'));?></th>
+	<th><?php echo $this->Paginator->sort('zip_length', null, ['direction' => 'desc']);?></th>
 </tr>
 <?php
 $i = 0;

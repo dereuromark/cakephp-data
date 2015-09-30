@@ -10,7 +10,7 @@ use Cake\Event\Event;
 
 class CountriesController extends DataAppController {
 
-	public $paginate = array('order' => array('Country.sort' => 'DESC'));
+	public $paginate = ['order' => ['Country.sort' => 'DESC']];
 
 	public function beforeFilter(Event $event) {
 		parent::beforeFilter($event);
@@ -55,7 +55,7 @@ class CountriesController extends DataAppController {
 		$handle = new Folder($this->imageFolder);
 		$icons = $handle->read(true, true);
 
-		$iconNames = array();
+		$iconNames = [];
 		foreach ($icons[1] as $icon) { # only use files (not folders)
 			$iconNames[] = strtoupper(extractPathInfo('filename', $icon));
 		}

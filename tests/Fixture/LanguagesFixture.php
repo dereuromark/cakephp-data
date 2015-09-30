@@ -14,7 +14,7 @@ class LanguagesFixture extends TestFixture {
 	 *
 	 * @var array
 	 */
-	public $fields = array(
+	public $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'collate' => null, 'comment' => ''],
 		'name' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 40, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
 		'ori_name' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 40, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
@@ -28,15 +28,15 @@ class LanguagesFixture extends TestFixture {
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
 		'_options' => []
-	);
+	];
 
 	/**
 	 * Records
 	 *
 	 * @var array
 	 */
-	public $records = array(
-		array(
+	public $records = [
+		[
 			'id' => '25',
 			'name' => 'Deutsch',
 			'ori_name' => 'German',
@@ -48,8 +48,8 @@ class LanguagesFixture extends TestFixture {
 			'status' => '0',
 			'sort' => '0',
 			'modified' => '2011-07-17 15:23:08'
-		),
-		array(
+		],
+		[
 			'id' => '2',
 			'name' => 'Arabic',
 			'ori_name' => 'Arabic',
@@ -61,8 +61,8 @@ class LanguagesFixture extends TestFixture {
 			'status' => '0',
 			'sort' => '0',
 			'modified' => '2011-07-17 15:23:08'
-		),
-		array(
+		],
+		[
 			'id' => '3',
 			'name' => 'Arabic (U.A.E.)',
 			'ori_name' => 'Arabic (U.A.E.)',
@@ -74,8 +74,8 @@ class LanguagesFixture extends TestFixture {
 			'status' => '0',
 			'sort' => '0',
 			'modified' => '2011-07-17 15:23:08'
-		),
-		array(
+		],
+		[
 			'id' => '4',
 			'name' => 'Arabic (Bahrain)',
 			'ori_name' => 'Arabic (Bahrain)',
@@ -87,8 +87,8 @@ class LanguagesFixture extends TestFixture {
 			'status' => '0',
 			'sort' => '0',
 			'modified' => '2011-07-17 15:23:08'
-		),
-		array(
+		],
+		[
 			'id' => '5',
 			'name' => 'Arabic (Algeria)',
 			'ori_name' => 'Arabic (Algeria)',
@@ -100,8 +100,8 @@ class LanguagesFixture extends TestFixture {
 			'status' => '0',
 			'sort' => '0',
 			'modified' => '2011-07-17 15:23:08'
-		),
-		array(
+		],
+		[
 			'id' => '6',
 			'name' => 'Arabic (Egypt)',
 			'ori_name' => 'Arabic (Egypt)',
@@ -113,8 +113,8 @@ class LanguagesFixture extends TestFixture {
 			'status' => '0',
 			'sort' => '0',
 			'modified' => '2011-07-17 15:23:08'
-		),
-		array(
+		],
+		[
 			'id' => '7',
 			'name' => 'Arabic (Iraq)',
 			'ori_name' => 'Arabic (Iraq)',
@@ -126,8 +126,8 @@ class LanguagesFixture extends TestFixture {
 			'status' => '0',
 			'sort' => '0',
 			'modified' => '2011-07-17 15:23:08'
-		),
-		array(
+		],
+		[
 			'id' => '8',
 			'name' => 'Arabic (Jordan)',
 			'ori_name' => 'Arabic (Jordan)',
@@ -139,8 +139,8 @@ class LanguagesFixture extends TestFixture {
 			'status' => '0',
 			'sort' => '0',
 			'modified' => '2011-07-17 15:23:08'
-		),
-		array(
+		],
+		[
 			'id' => '9',
 			'name' => 'Arabic (Kuwait)',
 			'ori_name' => 'Arabic (Kuwait)',
@@ -152,8 +152,8 @@ class LanguagesFixture extends TestFixture {
 			'status' => '0',
 			'sort' => '0',
 			'modified' => '2011-07-17 15:23:08'
-		),
-		array(
+		],
+		[
 			'id' => '10',
 			'name' => 'Arabic (Lebanon)',
 			'ori_name' => 'Arabic (Lebanon)',
@@ -165,6 +165,6 @@ class LanguagesFixture extends TestFixture {
 			'status' => '0',
 			'sort' => '0',
 			'modified' => '2011-07-17 15:23:08'
-		),
-	);
+		],
+	];
 }

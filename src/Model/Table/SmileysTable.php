@@ -6,65 +6,65 @@ use Tools\Model\Table\Table;
 
 class SmileysTable extends Table {
 
-	public $order = array('is_base' => 'DESC', 'sort' => 'DESC');
+	public $order = ['is_base' => 'DESC', 'sort' => 'DESC'];
 
-	public $validate = array(
-		'smiley_cat_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+	public $validate = [
+		'smiley_cat_id' => [
+			'numeric' => [
+				'rule' => ['numeric'],
 				'message' => 'valErrMandatoryField'
-			),
-		),
-		'smiley_path' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			],
+		],
+		'smiley_path' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField'
-			),
-		),
-		'title' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			],
+		],
+		'title' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
-			),
-		),
-		'prim_code' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			],
+		],
+		'prim_code' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
 				'last' => true,
-			),
-			'uniqueCode' => array(
-				'rule' => array('validateUniqueCode'),
+			],
+			'uniqueCode' => [
+				'rule' => ['validateUniqueCode'],
 				'message' => 'This code already exists'
-			),
-		),
-		'sec_code' => array(
-			'uniqueCode' => array(
-				'rule' => array('validateUniqueCode'),
+			],
+		],
+		'sec_code' => [
+			'uniqueCode' => [
+				'rule' => ['validateUniqueCode'],
 				'message' => 'This code already exists'
-			),
-		),
-		'is_base' => array(
-			'boolean' => array(
-				'rule' => array('boolean'),
+			],
+		],
+		'is_base' => [
+			'boolean' => [
+				'rule' => ['boolean'],
 				'message' => 'valErrMandatoryField'
-			),
-		),
-		'sort' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+			],
+		],
+		'sort' => [
+			'numeric' => [
+				'rule' => ['numeric'],
 				'message' => 'valErrMandatoryField'
-			),
-		),
-		'active' => array(
-			'boolean' => array(
-				'rule' => array('boolean'),
+			],
+		],
+		'active' => [
+			'boolean' => [
+				'rule' => ['boolean'],
 				'message' => 'valErrMandatoryField'
-			),
-		),
-	);
+			],
+		],
+	];
 
-	public $belongsTo = array(
+	public $belongsTo = [
 		/*
 		'SmileyCat' => array(
 			'className' => 'SmileyCat',
@@ -74,7 +74,7 @@ class SmileysTable extends Table {
 			'order' => ''
 		)
 		*/
-	);
+	];
 
 	/**
 	 * Export list of smileys for textarea fields etc
@@ -82,15 +82,15 @@ class SmileysTable extends Table {
 	 * category not yet supported
 	 */
 	public function getList($category = null) {
-		$conditions = array($this->alias() . '.active' => 1);
+		$conditions = [$this->alias() . '.active' => 1];
 		if (!empty($category)) {
 			$conditions['category_id'] = $category;
 		}
 
-		$res = $this->find('all', array(
-			'fields' => array('prim_code', 'sec_code', 'smiley_path', 'title', 'is_base'),
+		$res = $this->find('all', [
+			'fields' => ['prim_code', 'sec_code', 'smiley_path', 'title', 'is_base'],
 			'conditions' => $conditions
-		));
+		]);
 		return $res;
 	}
 
@@ -101,27 +101,27 @@ class SmileysTable extends Table {
 	 */
 	public function export($category = null) {
 		$smileys = $this->getList($category);
-		$res = array();
+		$res = [];
 
 		$path = '/Data/img/smileys/default/';
 		foreach ($smileys as $smiley) {
 			if (!empty($smiley['prim_code'])) {
-				$res[] = array(
+				$res[] = [
 					'code' => $smiley['prim_code'],
 					'path' => Plugin::path('Data') . 'webroot' . DS . 'img' . DS . 'smileys' . DS . 'default' . DS . $smiley['smiley_path'],
 					'url' => $path . $smiley['smiley_path'],
 					'title' => $smiley['title'],
 					'base' => $smiley['is_base']
-				);
+				];
 			}
 			if (!empty($smiley['sec_code'])) {
-				$res[] = array(
+				$res[] = [
 					'code' => $smiley['sec_code'],
 					'path' => Plugin::path('Data') . 'webroot' . DS . 'img' . DS . 'smileys' . DS . 'default' . DS . $smiley['smiley_path'],
 					'url' => $path . $smiley['smiley_path'],
 					'title' => $smiley['title'],
 					'base' => $smiley['is_base']
-				);
+				];
 			}
 		}
 		return $res;
@@ -132,10 +132,10 @@ class SmileysTable extends Table {
 		if (empty($code)) {
 			return true;
 		}
-		if ($this->find('first', array(
-			'fields' => array('id'),
-			'conditions' => array('OR' => array(array($this->alias() . '.prim_code' => $code, array($this->alias() . '.sec_code' => $code))))
-		))) {
+		if ($this->find('first', [
+			'fields' => ['id'],
+			'conditions' => ['OR' => [[$this->alias() . '.prim_code' => $code, [$this->alias() . '.sec_code' => $code]]]]
+		])) {
 			return false;
 		}
 		return true;

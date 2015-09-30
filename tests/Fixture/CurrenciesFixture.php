@@ -16,7 +16,7 @@ class CurrenciesFixture extends TestFixture {
 	 *
 	 * @var array
 	 */
-	public $fields = array(
+	public $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'collate' => null, 'comment' => ''],
 		'name' => ['type' => 'string', 'null' => false, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
 		'code' => ['type' => 'string', 'null' => false, 'length' => 3, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
@@ -29,15 +29,15 @@ class CurrenciesFixture extends TestFixture {
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
 		'_options' => []
-	);
+	];
 
 	/**
 	 * Records
 	 *
 	 * @var array
 	 */
-	public $records = array(
-		array(
+	public $records = [
+		[
 			'id' => '1',
 			'name' => 'US Dollar',
 			'code' => 'USD',
@@ -48,8 +48,8 @@ class CurrenciesFixture extends TestFixture {
 			'base' => 0,
 			'active' => 1,
 			'modified' => '2011-07-16 15:12:33'
-		),
-		array(
+		],
+		[
 			'id' => '2',
 			'name' => 'Euro',
 			'code' => 'EUR',
@@ -60,8 +60,8 @@ class CurrenciesFixture extends TestFixture {
 			'base' => 1,
 			'active' => 1,
 			'modified' => '2009-11-23 12:45:15'
-		),
-		array(
+		],
+		[
 			'id' => '3',
 			'name' => 'British Pounds',
 			'code' => 'GBP',
@@ -72,8 +72,8 @@ class CurrenciesFixture extends TestFixture {
 			'base' => 0,
 			'active' => 1,
 			'modified' => '2011-07-16 15:12:33'
-		),
-		array(
+		],
+		[
 			'id' => '4',
 			'name' => 'Schweizer Franken',
 			'code' => 'CHF',
@@ -84,8 +84,8 @@ class CurrenciesFixture extends TestFixture {
 			'base' => 0,
 			'active' => 1,
 			'modified' => '2011-07-16 15:12:33'
-		),
-		array(
+		],
+		[
 			'id' => '5',
 			'name' => 'Australien Dollar',
 			'code' => 'AUD',
@@ -96,8 +96,8 @@ class CurrenciesFixture extends TestFixture {
 			'base' => 0,
 			'active' => 0,
 			'modified' => '2011-07-16 15:12:33'
-		),
-		array(
+		],
+		[
 			'id' => '6',
 			'name' => 'Canadian Dollar',
 			'code' => 'CAD',
@@ -108,8 +108,8 @@ class CurrenciesFixture extends TestFixture {
 			'base' => 0,
 			'active' => 0,
 			'modified' => '2011-07-16 15:12:33'
-		),
-		array(
+		],
+		[
 			'id' => '7',
 			'name' => 'Japanese Yen',
 			'code' => 'JPY',
@@ -120,8 +120,8 @@ class CurrenciesFixture extends TestFixture {
 			'base' => 0,
 			'active' => 0,
 			'modified' => '2011-07-16 15:12:33'
-		),
-		array(
+		],
+		[
 			'id' => '9',
 			'name' => 'Mexican Peso',
 			'code' => 'MXN',
@@ -132,8 +132,8 @@ class CurrenciesFixture extends TestFixture {
 			'base' => 0,
 			'active' => 0,
 			'modified' => '2011-07-16 15:12:33'
-		),
-		array(
+		],
+		[
 			'id' => '10',
 			'name' => 'Norwegian Krone',
 			'code' => 'NOK',
@@ -144,8 +144,8 @@ class CurrenciesFixture extends TestFixture {
 			'base' => 0,
 			'active' => 0,
 			'modified' => '2011-07-16 15:12:33'
-		),
-		array(
+		],
+		[
 			'id' => '11',
 			'name' => 'Swedish Krona',
 			'code' => 'SEK',
@@ -156,6 +156,6 @@ class CurrenciesFixture extends TestFixture {
 			'base' => 0,
 			'active' => 0,
 			'modified' => '2011-07-16 15:12:33'
-		),
-	);
+		],
+	];
 }

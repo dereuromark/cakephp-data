@@ -14,7 +14,7 @@ class MimeTypeImagesFixture extends TestFixture {
 	 *
 	 * @var array
 	 */
-	public $fields = array(
+	public $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'unsigned' => true],
 		'name' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 100, 'collate' => 'utf8_unicode_ci', 'comment' => 'extension (e.g. jpg)', 'charset' => 'utf8'],
 		'ext' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 20, 'collate' => 'utf8_unicode_ci', 'comment' => 'extension (lowercase!) of real image (exe.gif -> gif)', 'charset' => 'utf8'],
@@ -24,15 +24,15 @@ class MimeTypeImagesFixture extends TestFixture {
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
 		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM']
-	);
+	];
 
 	/**
 	 * Records
 	 *
 	 * @var array
 	 */
-	public $records = array(
-		array(
+	public $records = [
+		[
 			'id' => 1,
 			'name' => 'Lorem ipsum dolor sit amet',
 			'ext' => 'Lorem ipsum dolor ',
@@ -40,6 +40,6 @@ class MimeTypeImagesFixture extends TestFixture {
 			'details' => 'Lorem ipsum dolor sit amet',
 			'created' => '2014-07-23 14:06:49',
 			'modified' => '2014-07-23 14:06:49'
-		)
-	);
+		]
+	];
 }

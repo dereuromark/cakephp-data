@@ -7,9 +7,9 @@ use Tools\TestSuite\TestCase;
 
 class CountriesTableTest extends TestCase {
 
-	public $fixtures = array(
+	public $fixtures = [
 		'plugin.data.countries'
-	);
+	];
 
 	public $Countries;
 

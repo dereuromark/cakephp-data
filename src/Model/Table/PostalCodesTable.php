@@ -7,11 +7,11 @@ class PostalCodesTable extends Table {
 
 	public $displayField = 'code';
 
-	public $order = array('code' => 'ASC');
+	public $order = ['code' => 'ASC'];
 
-	public $actsAs = array('Geo.Geocoder' => array('min_accuracy' => 2, 'address' => array('code', 'country_name'), 'formatted_address' => 'official_address', 'real' => false, 'before' => 'validate', 'allow_inconclusive' => true));
+	public $actsAs = ['Geo.Geocoder' => ['min_accuracy' => 2, 'address' => ['code', 'country_name'], 'formatted_address' => 'official_address', 'real' => false, 'before' => 'validate', 'allow_inconclusive' => true]];
 
-	public $validate = array(
+	public $validate = [
 		/*
 		'code' => array('notEmpty'),
 
@@ -30,17 +30,17 @@ class PostalCodesTable extends Table {
 
 		),
 		*/
-	);
+	];
 
-	public $filterArgs = array(
-		'code' => array('type' => 'like', 'before' => false, 'after' => false),
-		'country' => array('type' => 'value'),
-	);
+	public $filterArgs = [
+		'code' => ['type' => 'like', 'before' => false, 'after' => false],
+		'country' => ['type' => 'value'],
+	];
 
-	public function findNearest($lat, $lng, $type = 'all', $options = array()) {
-		$this->virtualFields = array('distance' => $this->_latLng($lat, $lng));
-		$options['conditions']['OR'] = array($this->alias() . '.lat<>0', $this->alias() . '.lng<>0');
-		$options['order'] = array('distance' => 'ASC');
+	public function findNearest($lat, $lng, $type = 'all', $options = []) {
+		$this->virtualFields = ['distance' => $this->_latLng($lat, $lng)];
+		$options['conditions']['OR'] = [$this->alias() . '.lat<>0', $this->alias() . '.lng<>0'];
+		$options['order'] = ['distance' => 'ASC'];
 
 		return $this->find($type, $options);
 	}
@@ -53,29 +53,29 @@ class PostalCodesTable extends Table {
 			'SIN( PI()/2 - RADIANS(90 - ' . $lat . '))) ';
 	}
 
-	public function searchLocation($code, $countryId = null, $options = array()) {
+	public function searchLocation($code, $countryId = null, $options = []) {
 		if (!empty($options['exact'])) {
 			if (!empty($options['term'])) {
 				$term = sprintf($options['term'], $code);
 			} else {
 				$term = $code . '%';
 			}
-			$search = array('PostalCode.code LIKE' => "$term");
+			$search = ['PostalCode.code LIKE' => "$term"];
 		} else {
-			$search = array('PostalCode.code' => $code);
+			$search = ['PostalCode.code' => $code];
 		}
 
 		if ($countryId) {
 			$search['PostalCode.country_id'] = (int)$country;
 		}
 
-		$options = array(
+		$options = [
 			//'fields' => array('Company.*'),
 			'conditions' => $search,
 			'limit' => 15,
 			//'order'=>'Company.name',
-			'contain' => array()
-		);
+			'contain' => []
+		];
 		return $this->find('all', $options);
 	}
 
@@ -83,9 +83,9 @@ class PostalCodesTable extends Table {
 	 * Postal codes per country
 	 */
 	public function stats() {
-		$res = array();
+		$res = [];
 
-		$list = $this->find('all', array('fields' => array('COUNT(*) as count', 'country_id'), 'group' => 'country_id'));
+		$list = $this->find('all', ['fields' => ['COUNT(*) as count', 'country_id'], 'group' => 'country_id']);
 
 		foreach ($list as $x) {
 			$res[$x['country_id']] = $x[0]['count'];

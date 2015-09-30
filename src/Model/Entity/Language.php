@@ -12,10 +12,10 @@ class Language extends Entity {
 	 * @return mixed
 	 */
 	public static function directions($value = null) {
-		$options = array(
+		$options = [
 			self::DIR_LTR => 'LTR',
 			self::DIR_RTL => 'RTL'
-		);
+		];
 		return parent::enum($value, $options);
 	}
 

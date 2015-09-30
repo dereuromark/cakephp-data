@@ -7,9 +7,9 @@ use Tools\TestSuite\TestCase;
 
 class CurrenciesTableTest extends TestCase {
 
-	public $fixtures = array(
+	public $fixtures = [
 		'plugin.data.currencies'
-	);
+	];
 
 	public $Currencies;
 

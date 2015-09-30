@@ -7,9 +7,9 @@ use Tools\TestSuite\TestCase;
 
 class MimeTypeImagesTableTest extends TestCase {
 
-	public $fixtures = array(
+	public $fixtures = [
 		'plugin.data.mime_type_images'
-	);
+	];
 
 	public $MimeTypeImages;
 

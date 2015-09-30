@@ -16,7 +16,7 @@ class CountriesFixture extends TestFixture {
 	 *
 	 * @var array
 	 */
-	public $fields = array(
+	public $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'collate' => null, 'comment' => ''],
 		'name' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 64, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
 		'ori_name' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 64, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
@@ -36,15 +36,15 @@ class CountriesFixture extends TestFixture {
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
 		'_options' => []
-	);
+	];
 
 	/**
 	 * Records
 	 *
 	 * @var array
 	 */
-	public $records = array(
-		array(
+	public $records = [
+		[
 			'id' => '1',
 			'name' => 'Deutschland',
 			'ori_name' => 'Deutschland',
@@ -62,8 +62,8 @@ class CountriesFixture extends TestFixture {
 			'address_format' => ':name :street_address D-:postcode :city :country',
 			'status' => '1',
 			'modified' => '2010-06-06 00:19:04'
-		),
-		array(
+		],
+		[
 			'id' => '2',
 			'name' => 'Österreich',
 			'ori_name' => 'Österreich',
@@ -81,8 +81,8 @@ class CountriesFixture extends TestFixture {
 			'address_format' => '',
 			'status' => '1',
 			'modified' => '2010-06-06 00:19:04'
-		),
-		array(
+		],
+		[
 			'id' => '3',
 			'name' => 'Schweiz',
 			'ori_name' => 'Schweiz',
@@ -100,8 +100,8 @@ class CountriesFixture extends TestFixture {
 			'address_format' => '',
 			'status' => '1',
 			'modified' => '2010-06-06 00:19:04'
-		),
-		array(
+		],
+		[
 			'id' => '4',
 			'name' => 'Belgien',
 			'ori_name' => 'Belgium',
@@ -119,8 +119,8 @@ class CountriesFixture extends TestFixture {
 			'address_format' => '',
 			'status' => '1',
 			'modified' => '2010-06-06 00:19:09'
-		),
-		array(
+		],
+		[
 			'id' => '5',
 			'name' => 'Niederlande',
 			'ori_name' => 'Netherlands',
@@ -138,8 +138,8 @@ class CountriesFixture extends TestFixture {
 			'address_format' => '',
 			'status' => '1',
 			'modified' => '2010-06-06 00:19:40'
-		),
-		array(
+		],
+		[
 			'id' => '6',
 			'name' => 'Dänemark',
 			'ori_name' => 'Denmark',
@@ -157,8 +157,8 @@ class CountriesFixture extends TestFixture {
 			'address_format' => '',
 			'status' => '1',
 			'modified' => '2010-06-06 00:19:14'
-		),
-		array(
+		],
+		[
 			'id' => '7',
 			'name' => 'Luxemburg',
 			'ori_name' => 'Luxembourg',
@@ -176,8 +176,8 @@ class CountriesFixture extends TestFixture {
 			'address_format' => '',
 			'status' => '1',
 			'modified' => '2010-06-06 00:19:34'
-		),
-		array(
+		],
+		[
 			'id' => '8',
 			'name' => 'Frankreich',
 			'ori_name' => 'France',
@@ -195,8 +195,8 @@ class CountriesFixture extends TestFixture {
 			'address_format' => '',
 			'status' => '1',
 			'modified' => '2010-06-06 00:19:17'
-		),
-		array(
+		],
+		[
 			'id' => '9',
 			'name' => 'Großbritannien',
 			'ori_name' => 'United Kingdom (Great Britian)',
@@ -214,8 +214,8 @@ class CountriesFixture extends TestFixture {
 			'address_format' => '',
 			'status' => '1',
 			'modified' => '2010-06-06 00:19:19'
-		),
-		array(
+		],
+		[
 			'id' => '12',
 			'name' => 'Ukraine',
 			'ori_name' => 'Ukraine',
@@ -233,6 +233,6 @@ class CountriesFixture extends TestFixture {
 			'address_format' => '',
 			'status' => '1',
 			'modified' => '2010-06-06 00:19:57'
-		),
-	);
+		],
+	];
 }

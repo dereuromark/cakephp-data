@@ -12,13 +12,13 @@
 	<?php
 		echo $this->Form->input('id');
 
-		echo $this->Form->input('ext', array('after' => ' Z.B. \'exe\' für *.exe Dateien'));
-		echo $this->Form->input('name', array('label' => 'Programm/Name', 'after' => ' Bezeichnung'));
+		echo $this->Form->input('ext', ['after' => ' Z.B. \'exe\' für *.exe Dateien']);
+		echo $this->Form->input('name', ['label' => 'Programm/Name', 'after' => ' Bezeichnung']);
 
-		echo $this->Form->input('type', array('label' => 'Mime-Type'));
-		echo $this->Form->input('alt_type', array('label' => 'Alternative'));
+		echo $this->Form->input('type', ['label' => 'Mime-Type']);
+		echo $this->Form->input('alt_type', ['label' => 'Alternative']);
 
-		echo $this->Form->input('mime_type_image_id', array('empty' => ' - [ n/a ] - ', 'class' => 'customselect', 'style' => 'width:300px'));
+		echo $this->Form->input('mime_type_image_id', ['empty' => ' - [ n/a ] - ', 'class' => 'customselect', 'style' => 'width:300px']);
 
 		echo $this->Form->input('active');
 	?>
@@ -27,7 +27,7 @@
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('MimeType.id')), null, __('Are you sure you want to delete # {0}?', $this->Form->value('MimeType.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Mime Types'), array('action' => 'index'));?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('MimeType.id')], null, __('Are you sure you want to delete # {0}?', $this->Form->value('MimeType.id'))); ?></li>
+		<li><?php echo $this->Html->link(__('List Mime Types'), ['action' => 'index']);?></li>
 	</ul>
 </div>

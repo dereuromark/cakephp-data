@@ -16,7 +16,7 @@ class StatesFixture extends TestFixture {
 	 *
 	 * @var array
 	 */
-	public $fields = array(
+	public $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'collate' => null, 'comment' => ''],
 		'country_id' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10, 'collate' => null, 'comment' => ''],
 		'name' => ['type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
@@ -28,15 +28,15 @@ class StatesFixture extends TestFixture {
 		//'_indexes' => ['slug' => ['unique' => 0, 'columns' => 'slug']],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
 		'_options' => []
-	);
+	];
 
 	/**
 	 * Records
 	 *
 	 * @var array
 	 */
-	public $records = array(
-		array(
+	public $records = [
+		[
 			'id' => '1',
 			'country_id' => '1',
 			'name' => 'Schleswig-Holstein',
@@ -45,8 +45,8 @@ class StatesFixture extends TestFixture {
 			'lng' => '0.000000',
 			'slug' => 'schleswig-holstein',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '2',
 			'country_id' => '1',
 			'name' => 'Hamburg',
@@ -55,8 +55,8 @@ class StatesFixture extends TestFixture {
 			'lng' => '0.000000',
 			'slug' => 'hamburg',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '3',
 			'country_id' => '1',
 			'name' => 'Niedersachsen',
@@ -65,8 +65,8 @@ class StatesFixture extends TestFixture {
 			'lng' => '0.000000',
 			'slug' => 'niedersachsen',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '4',
 			'country_id' => '1',
 			'name' => 'Bremen',
@@ -75,8 +75,8 @@ class StatesFixture extends TestFixture {
 			'lng' => '0.000000',
 			'slug' => 'bremen',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '5',
 			'country_id' => '1',
 			'name' => 'Nordrhein-Westfalen',
@@ -85,8 +85,8 @@ class StatesFixture extends TestFixture {
 			'lng' => '0.000000',
 			'slug' => 'nordrhein-westfalen',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '6',
 			'country_id' => '1',
 			'name' => 'Hessen',
@@ -95,8 +95,8 @@ class StatesFixture extends TestFixture {
 			'lng' => '0.000000',
 			'slug' => 'hessen',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '7',
 			'country_id' => '1',
 			'name' => 'Rheinland-Pfalz',
@@ -105,8 +105,8 @@ class StatesFixture extends TestFixture {
 			'lng' => '0.000000',
 			'slug' => 'rheinland-pfalz',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '8',
 			'country_id' => '1',
 			'name' => 'Baden-Württemberg',
@@ -115,8 +115,8 @@ class StatesFixture extends TestFixture {
 			'lng' => '0.000000',
 			'slug' => 'baden-wuerttemberg',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '9',
 			'country_id' => '1',
 			'name' => 'Bayern',
@@ -125,8 +125,8 @@ class StatesFixture extends TestFixture {
 			'lng' => '0.000000',
 			'slug' => 'bayern',
 			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
+		],
+		[
 			'id' => '10',
 			'country_id' => '1',
 			'name' => 'Saarland',
@@ -135,6 +135,6 @@ class StatesFixture extends TestFixture {
 			'lng' => '0.000000',
 			'slug' => 'saarland',
 			'modified' => '0000-00-00 00:00:00'
-		),
-	);
+		],
+	];
 }

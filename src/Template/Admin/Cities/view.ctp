@@ -59,8 +59,8 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit {0}', __('City')), array('action' => 'edit', $city['City']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete {0}', __('City')), array('action' => 'delete', $city['City']['id']), null, __('Are you sure you want to delete # {0}?', $city['City']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Cities')), array('action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('Edit {0}', __('City')), ['action' => 'edit', $city['City']['id']]); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete {0}', __('City')), ['action' => 'delete', $city['City']['id']], null, __('Are you sure you want to delete # {0}?', $city['City']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Cities')), ['action' => 'index']); ?> </li>
 	</ul>
 </div>

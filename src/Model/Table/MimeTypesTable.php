@@ -9,48 +9,48 @@ use Tools\Model\Table\Table;
 
 class MimeTypesTable extends Table {
 
-	public $order = array('modified' => 'DESC');
+	public $order = ['modified' => 'DESC'];
 
-	public $validate = array(
-		'name' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+	public $validate = [
+		'name' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
-			),
-		),
-		'ext' => array(
-			'isUnique' => array(
+			],
+		],
+		'ext' => [
+			'isUnique' => [
 				'rule' => 'isUnique',
 				'message' => 'Already exists',
-			),
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			],
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
 				'allowEmpty' => false,
 				//'required' => true
-			),
-		),
-		'type' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			],
+		],
+		'type' => [
+			'notEmpty' => [
+				'rule' => ['notEmpty'],
 				'message' => 'valErrMandatoryField',
-			),
-		),
-		'active' => array('numeric'),
-		'mime_type_image_id' => array('numeric'),
-	);
+			],
+		],
+		'active' => ['numeric'],
+		'mime_type_image_id' => ['numeric'],
+	];
 
-	public $belongsTo = array(
-		'MimeTypeImage' => array(
+	public $belongsTo = [
+		'MimeTypeImage' => [
 			'className' => 'Data.MimeTypeImage',
 			'foreignKey' => 'mime_type_image_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-	);
+		],
+	];
 
-	public function beforeSave($options = array()) {
+	public function beforeSave($options = []) {
 		parent::beforeSave($options);
 		if (isset($this->data['ext'])) {
 			$this->data['ext'] = mb_strtolower($this->data['ext']);
@@ -62,7 +62,7 @@ class MimeTypesTable extends Table {
 		return true;
 	}
 
-	public function afterSave($created, $options = array()) {
+	public function afterSave($created, $options = []) {
 		parent::afterSave($created, $options);
 
 		$this->cleanUp();
@@ -80,7 +80,7 @@ class MimeTypesTable extends Table {
 	}
 
 	public function mimeTypes($inactiveOnes = false) {
-		$options = array('conditions' => array($this->alias() . '.ext' => $ext));
+		$options = ['conditions' => [$this->alias() . '.ext' => $ext]];
 		if ($inactiveOnes !== true) {
 			$options['conditions'][$this->alias() . '.active'] = 1;
 		}
@@ -89,9 +89,9 @@ class MimeTypesTable extends Table {
 
 	public function mimeTypeExists($ext = null) {
 		if (empty($ext)) {
-			return array();
+			return [];
 		}
-		return $this->find('first', array('conditions' => array($this->alias() . '.ext' => $ext)));
+		return $this->find('first', ['conditions' => [$this->alias() . '.ext' => $ext]]);
 	}
 
 	/**
@@ -108,7 +108,7 @@ class MimeTypesTable extends Table {
 			return $this->saveField('sort', $type['sort'] + 1);
 		}
 		# insert this new extension
-		$data = array('ext' => $ext, 'name' => 'auto-added', 'sort' => 1);
+		$data = ['ext' => $ext, 'name' => 'auto-added', 'sort' => 1];
 		$this->create();
 		if (!$this->save($data)) {
 			$this->log('problem with pushing new mimeType');

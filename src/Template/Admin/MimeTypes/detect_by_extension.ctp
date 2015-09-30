@@ -9,12 +9,12 @@ foreach ($extensions as $extension) {
 <br/><br/>
 
 <div class="MimeTypes">
-<?php echo $this->Form->create('MimeType', array('type' => 'file', 'action' => 'detectByExtension'));?>
+<?php echo $this->Form->create('MimeType', ['type' => 'file', 'action' => 'detectByExtension']);?>
 
 	<fieldset>
 		<legend><?php echo __('Test');?></legend>
 	<?php
-		echo $this->Form->input('file', array('type' => 'file'));
+		echo $this->Form->input('file', ['type' => 'file']);
 	?>
 	</fieldset>
 <?php echo $this->Form->end('Submit');?>

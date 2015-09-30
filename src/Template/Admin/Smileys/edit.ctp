@@ -21,7 +21,7 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Smiley.id')), null, __('Are you sure you want to delete # {0}?', $this->Form->value('Smiley.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Smileys')), array('action' => 'index'));?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('Smiley.id')], null, __('Are you sure you want to delete # {0}?', $this->Form->value('Smiley.id'))); ?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Smileys')), ['action' => 'index']);?></li>
 	</ul>
 </div>
