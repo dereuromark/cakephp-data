@@ -1,5 +1,6 @@
 <?php
 App::uses('DataAppController', 'Data.Controller');
+App::uses('Folder', 'Utility');
 
 class CountriesController extends DataAppController {
 
@@ -38,7 +39,7 @@ class CountriesController extends DataAppController {
 
 	protected function _icons() {
 		$useCache = true;
-		if (!empty($this->request->params['named']['reset'])) {
+		if (!empty($this->request->query['reset'])) {
 			$useCache = false;
 		}
 
@@ -46,7 +47,7 @@ class CountriesController extends DataAppController {
 			$this->Flash->info('Cache Used');
 			return $iconNames;
 		}
-		App::uses('Folder', 'Utility');
+
 		$handle = new Folder($this->imageFolder);
 		$icons = $handle->read(true, true);
 

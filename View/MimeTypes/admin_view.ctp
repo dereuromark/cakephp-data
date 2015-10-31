@@ -1,28 +1,28 @@
 <div class="page view">
 <h2><?php echo __('Mime Type');?></h2>
-	<dl><?php $i = 0; $class = ' class="altrow"';?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Name'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+	<dl>
+		<dt><?php echo __('Name'); ?></dt>
+		<dd>
 			<?php echo h($mimeType['MimeType']['name']); ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Type'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+		<dt><?php echo __('Type'); ?></dt>
+		<dd>
 			<?php echo h($mimeType['MimeType']['type']); ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Active'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+		<dt><?php echo __('Active'); ?></dt>
+		<dd>
 			<?php echo h($mimeType['MimeType']['active']); ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Created'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+		<dt><?php echo __('Created'); ?></dt>
+		<dd>
 			<?php echo $this->Datetime->niceDate($mimeType['MimeType']['created']); ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Modified'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+		<dt><?php echo __('Modified'); ?></dt>
+		<dd>
 			<?php echo $this->Datetime->niceDate($mimeType['MimeType']['modified']); ?>
 			&nbsp;
 		</dd>

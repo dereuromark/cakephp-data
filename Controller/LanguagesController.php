@@ -88,7 +88,7 @@ class LanguagesController extends DataAppController {
 	 * Should only be done once at the very beginning
 	 */
 	public function admin_import_from_core() {
-		if (!empty($this->request->params['named']['reset'])) {
+		if (!empty($this->request->query['reset'])) {
 			$this->Language->truncate();
 		}
 		//$languages = $this->Language->iso3ToIso2();

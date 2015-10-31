@@ -1,28 +1,28 @@
 <div class="page view">
 <h2><?php echo __('Continent');?></h2>
-	<dl><?php $i = 0; $class = ' class="altrow"';?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Name'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+	<dl>
+		<dt><?php echo __('Name'); ?></dt>
+		<dd>
 			<?php echo h($continent['Continent']['name']); ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Ori Name'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+		<dt><?php echo __('Ori Name'); ?></dt>
+		<dd>
 			<?php echo h($continent['Continent']['ori_name']); ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Parent Continent'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+		<dt><?php echo __('Parent Continent'); ?></dt>
+		<dd>
 			<?php echo $this->Html->link($continent['ParentContinent']['name'], ['controller' => 'continents', 'action' => 'view', $continent['ParentContinent']['id']]); ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Status'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+		<dt><?php echo __('Status'); ?></dt>
+		<dd>
 			<?php echo h($continent['Continent']['status']); ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Modified'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+		<dt><?php echo __('Modified'); ?></dt>
+		<dd>
 			<?php echo $this->Datetime->niceDate($continent['Continent']['modified']); ?>
 			&nbsp;
 		</dd>

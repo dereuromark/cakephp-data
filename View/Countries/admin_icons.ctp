@@ -30,6 +30,6 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Reset Cache'), ['action' => 'icons', 'reset' => 1]); ?></li>
+		<li><?php echo $this->Html->link(__('Reset Cache'), ['action' => 'icons', '?' => ['reset' => 1]]); ?></li>
 	</ul>
 </div>

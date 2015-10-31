@@ -115,7 +115,7 @@ class Location extends DataAppModel {
 			return false;
 		}
 		if (Validation::ip($ip)) {
-			App::import('Vendor', 'geoip', ['file' => 'geoip' . DS . 'geoip.php']);
+			App::import('Vendor', 'Data.geoip', ['file' => 'geoip' . DS . 'geoip.php']);
 			$gi = Net_GeoIP::getInstance(APP . 'vendors' . DS . 'geoip' . DS . 'GeoLiteCity.dat');
 			$record = $gi->lookupLocation($ip);
 			$gi->close();

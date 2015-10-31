@@ -14,7 +14,7 @@ echo $this->Paginator->counter([
 <div class="floatLeft"><?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?></div>
 <?php
 if (!empty($searchStr)) {
-	echo '<div class="floatRight">' . $this->Html->link('Wieder alle anzeigen', ['action' => 'index', 'clear' => 'search']) . '</div>';
+	echo '<div class="floatRight">' . $this->Html->link('Wieder alle anzeigen', ['action' => 'index', '?' => ['clear' => 'search']]) . '</div>';
 }
 ?>
 <?php
