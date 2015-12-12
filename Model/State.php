@@ -52,7 +52,7 @@ class State extends DataAppModel {
 	];
 
 	public function getStateId($conditions) {
-		if ($id = $this->field('id', $conditions)) {
+		if ($id = $this->fieldByConditions('id', $conditions)) {
 			return $id;
 		}
 		$this->create();

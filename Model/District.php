@@ -44,7 +44,7 @@ class District extends DataAppModel {
 		parent::beforeValidate($options);
 
 		if (!empty($this->data[$this->alias]['name']) && !empty($this->data[$this->alias]['city_id'])) {
-			$city = $this->City->field('name', ['id' => $this->data[$this->alias]['city_id']]);
+			$city = $this->City->fieldByConditions('name', ['id' => $this->data[$this->alias]['city_id']]);
 			$this->data[$this->alias]['address'] = $this->data[$this->alias]['name'] . ', ' . $city;
 		}
 

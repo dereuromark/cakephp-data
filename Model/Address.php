@@ -196,7 +196,7 @@ class Address extends DataAppModel {
 
 		# add country name for geocoder
 		if (!empty($this->data[$this->alias]['country_id'])) {
-			$this->data[$this->alias]['country'] = $this->Country->field('name', ['id' => $this->data[$this->alias]['country_id']]);
+			$this->data[$this->alias]['country'] = $this->Country->fieldByConditions('name', ['id' => $this->data[$this->alias]['country_id']]);
 		}
 		if (!empty($this->data[$this->alias]['postal_code'])) {
 			unset($this->validate['city']['notEmpty']);

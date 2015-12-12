@@ -1,6 +1,7 @@
 <?php
 App::uses('DataAppModel', 'Data.Model');
 App::uses('GeocodeLib', 'Data.Lib');
+App::uses('GeolocateLib', 'Tools.Lib');
 
 class Country extends DataAppModel {
 
@@ -225,7 +226,6 @@ class Country extends DataAppModel {
 	//TODO: test
 
 	public function updateAbbr($id = null) {
-		App::uses('GeocodeLib', 'Tools.Lib');
 		$Geocoder = new GeocodeLib();
 
 		$override = false;
@@ -297,7 +297,6 @@ class Country extends DataAppModel {
 	 * @deprecated but seems to have better lat/lng for countries...
 	 */
 	public function updateCoordinates($id = null) {
-		App::uses('GeocodeLib', 'Tools.Lib');
 		$Geocoder = new GeocodeLib();
 		//$Geocoder->setup();
 
@@ -354,20 +353,11 @@ class Country extends DataAppModel {
 	 * @return int country or -1 on error
 	 */
 	public function guessByIp($ip = null) {
-		/*
-		if ($ip === null) {
-			$ip = env('REMOTE_ADDR');
-		}
-		if (empty($ip)) {
-			return -1;
-		}
-		*/
-		App::uses('GeolocateLib', 'Tools.Lib');
 		$this->GeolocateLib = new GeolocateLib();
 		if ($this->GeolocateLib->locate($ip)) {
 			$country = $this->GeolocateLib->getResult('country_code'); # iso2
 			if (!empty($country)) {
-				$c = $this->field('id', [$this->alias . '.iso2' => $country]);
+				$c = $this->fieldByConditions('id', [$this->alias . '.iso2' => $country]);
 				if (!empty($c)) {
 					return $c;
 				}
