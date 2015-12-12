@@ -21,13 +21,10 @@ if (isset($ipData['lng'])) {
 
 echo $this->GoogleMapV3->map(['zoom' => $zoom, 'geolocate' => true, 'lat' => $lat, 'lng' => $lng]);
 
-
 $title = 'Eigene Position';
 $content = 'Eigene Position';
 
 $this->GoogleMapV3->addMarker(['lat' => $lat, 'lng' => $lng, 'title' => $title, 'content' => $content]);
-
-
 
 $js = 'initialLocation = new google.maps.LatLng(lat, lng);';
 $js .= 'gMarkers0[0].setPosition(initialLocation);';
@@ -37,9 +34,7 @@ $js .= '$(".geoResults").html(lat + ", " + lng);';
 
 $this->GoogleMapV3->geolocateCallback($js);
 
-
 echo $this->GoogleMapV3->script();
-
 
 ?>
 

@@ -18,8 +18,6 @@
 				echo $this->Html->image(IMG_MIMETYPES . 'import/' . $image, ['title' => $image]);
 				echo ' ' . $image;
 
-
-
 				echo BR;
 			}
 

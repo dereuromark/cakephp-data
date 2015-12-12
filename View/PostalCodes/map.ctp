@@ -54,12 +54,10 @@ foreach ($postalCodes as $code) {
 		$lng = ($code[0]['lng_sum'] / $code[0]['count']);
 	}
 
-
 	$this->GoogleMapV3->addMarker(['lat' => $lat, 'lng' => $lng, 'title' => $title, 'content' => $content]);
 }
 
 echo $this->GoogleMapV3->script();
-
 
 //pr($postalCodes);
 

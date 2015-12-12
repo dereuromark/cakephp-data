@@ -7,7 +7,7 @@
 		<th><?php echo $this->Paginator->sort('name');?></th>
 		<th><?php echo $this->Paginator->sort('citizens');?></th>
 		<th><?php echo $this->Paginator->sort('postal_code');?></th>
-		<th><?php echo ('Coordinates');?></th>
+		<th><?php echo __('Coordinates');?></th>
 		<th><?php echo $this->Paginator->sort('postal_code_unique');?></th>
 		<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
 		<th class="actions"><?php echo __('Actions');?></th>

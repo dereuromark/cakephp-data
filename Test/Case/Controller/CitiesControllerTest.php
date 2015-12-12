@@ -26,7 +26,7 @@ class CitiesControllerTest extends ControllerTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->CitiesController = new CitiesController(new CakeRequest, new CakeResponse);
+		$this->CitiesController = new CitiesController(new CakeRequest(), new CakeResponse());
 	}
 
 	public function testObject() {

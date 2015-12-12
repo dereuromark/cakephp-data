@@ -45,7 +45,7 @@ class DataHelper extends TextHelper {
 	 */
 	public function getCountryIconPaths() {
 		if ($specific = Configure::read('Country.imagePath')) {
-			list ($plugin, $specificPath) = pluginSplit($specific);
+			list($plugin, $specificPath) = pluginSplit($specific);
 			if (substr($specificPath, 0, 1) !== '/') {
 				$specificPath = '/img/' . $specific;
 			}

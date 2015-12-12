@@ -124,8 +124,6 @@ class MimeTypeImage extends DataAppModel {
 		return false;
 	}
 
-/** Static Enums **/
-
 	/**
 	 * Static Model::method()
 	 * ALLOWED EXTENSIONS

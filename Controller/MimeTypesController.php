@@ -104,10 +104,10 @@ class MimeTypesController extends DataAppController {
  * ADMIN functions
  ****************************************************************************************/
 
-		/**
-	  * Experimental
-	  * needs writing rights on {webroot}/files/tmp
-	  */
+	/**
+	 * Experimental
+	 * needs writing rights on {webroot}/files/tmp
+	 */
 	public function admin_detect_by_extension() {
 
 		/*
@@ -214,7 +214,7 @@ class MimeTypesController extends DataAppController {
 		$this->set(compact('mimeTypes'));
 	}
 
-	 function _searchConditions($conditions = []) {
+	 protected function _searchConditions($conditions = []) {
 		$model = $this->MimeType->alias;
 
 		$sessionSearch = $this->Session->read($model . '.search');

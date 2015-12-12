@@ -58,8 +58,8 @@ foreach ($mimeTypes as $mimeType):
 
 			if (!empty($mimeType['MimeTypeImage']['id'])) { // && !empty($mimeType['MimeTypeImage']['ext'])
 				$fileName = $mimeType['MimeTypeImage']['name'];
-				$fileExt = (!empty($mimeType['MimeTypeImage']['ext'])?$mimeType['MimeTypeImage']['ext']:'png');
-				$title = (!empty($mimeType['MimeTypeImage']['ext'])?$fileName . '.' . $fileExt:'Kein Image festgelegt...');
+				$fileExt = (!empty($mimeType['MimeTypeImage']['ext']) ? $mimeType['MimeTypeImage']['ext'] : 'png');
+				$title = (!empty($mimeType['MimeTypeImage']['ext']) ? $fileName . '.' . $fileExt : 'Kein Image festgelegt...');
 
 				$icon = $this->Html->image(IMG_MIMETYPES . $fileName . '.' . $fileExt, ['title' => $title, 'alt' => $fileName . '.' . $fileExt]);
 			}
