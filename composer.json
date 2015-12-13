@@ -18,6 +18,9 @@
 		"dereuromark/cakephp-tools": "dev-master",
 		"dereuromark/cakephp-geo": "dev-master"
 	},
+	"require-dev": {
+		"yangqi/htmldom": "dev-master"
+	},
 	"autoload": {
 		"psr-4": {
 			"Data\\": "src"
