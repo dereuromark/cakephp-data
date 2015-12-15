@@ -14,7 +14,6 @@ class SmileysController extends DataAppController {
  ****************************************************************************************/
 
 	public function admin_index() {
-		$this->Smiley->recursive = 0;
 		$smileys = $this->paginate();
 		$this->set(compact('smileys'));
 	}

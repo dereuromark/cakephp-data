@@ -1,5 +1,6 @@
 <?php
 App::uses('DataAppController', 'Data.Controller');
+App::uses('MimeLib', 'Tools.Lib');
 
 /**
  * @link http://en.wikipedia.org/wiki/List_of_file_formats_(alphabetical)
@@ -9,7 +10,7 @@ App::uses('DataAppController', 'Data.Controller');
  */
 class MimeTypesController extends DataAppController {
 
-	public $paginate = ['order' => ['MimeType.modified' => 'DESC']];
+	public $paginate = ['order' => ['modified' => 'DESC']];
 
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -119,7 +120,6 @@ class MimeTypesController extends DataAppController {
 		*/
 
 		# try to let PHP detect the mime type by ajax uploading some on the fly created files
-		App::uses('File', 'Utility');
 		$extensions = ['gif', 'pdf', 'exe', 'ooooooo', '7z', 'vcf', 'csv'];
 		foreach ($extensions as $extension) {
 			//$handler = new File(WWW_ROOT.'files'.DS.'tmp'.DS.'test.'.$extension, true, 0777);
@@ -171,7 +171,6 @@ class MimeTypesController extends DataAppController {
 
 		}
 
-		App::uses('MimeLib', 'Tools.Lib');
 		$Mime = new MimeLib();
 		$mimeTypes = $Mime->getMimeTypes(true);
 
@@ -205,8 +204,6 @@ class MimeTypesController extends DataAppController {
 	}
 
 	public function admin_index() {
-		$this->MimeType->recursive = 0;
-
 		$conditions = $this->_searchConditions([]);
 		$this->paginate['conditions'] = $conditions;
 
@@ -263,7 +260,6 @@ class MimeTypesController extends DataAppController {
 	}
 
 	public function admin_view($id = null) {
-		$this->MimeType->recursive = 0;
 		if (empty($id)) {
 			$this->Flash->error(__('record invalid'));
 			return $this->Common->autoRedirect(['action' => 'index']);
@@ -506,7 +502,6 @@ class MimeTypesController extends DataAppController {
 		if (!empty($export)) {
 			$this->set('exportArray', $export);
 			/*
-			App::uses('File', 'Utility');
 			$file = new File(TMP.'mime_types_'.time().'.txt');
 			$file->open('w', true);
 			$file->write(serialize($export), 'w', true);

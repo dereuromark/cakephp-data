@@ -32,7 +32,6 @@ class CountriesController extends DataAppController {
 	 * @return void
 	 */
 	public function index() {
-		$this->Country->recursive = 0;
 		$countries = $this->paginate();
 		$this->set(compact('countries'));
 	}
@@ -209,7 +208,6 @@ class CountriesController extends DataAppController {
 	}
 
 	public function admin_view($id = null) {
-		$this->Country->recursive = 0;
 		$id = (int)$id;
 		if ($id <= 0) {
 			$this->Flash->error(__('record invalid'));

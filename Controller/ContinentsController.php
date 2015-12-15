@@ -14,7 +14,8 @@ class ContinentsController extends DataAppController {
  ****************************************************************************************/
 
 	public function index() {
-		$this->Continent->recursive = 0;
+		$this->paginate['contain'] = ['ParentContinent'];
+
 		$continents = $this->paginate();
 		$this->set(compact('continents'));
 	}
@@ -84,13 +85,14 @@ class ContinentsController extends DataAppController {
  ****************************************************************************************/
 
 	public function admin_index() {
-		$this->Continent->recursive = 0;
+		$this->paginate['contain'] = ['ParentContinent'];
+
 		$continents = $this->paginate();
 		$this->set(compact('continents'));
 	}
 
 	public function admin_view($id = null) {
-		if (empty($id) || !($continent = $this->Continent->find('first', ['conditions' => ['Continent.id' => $id]]))) {
+		if (empty($id) || !($continent = $this->Continent->find('first', ['contain' => ['ParentContinent'], 'conditions' => ['Continent.id' => $id]]))) {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}

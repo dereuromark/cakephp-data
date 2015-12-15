@@ -56,20 +56,16 @@ class PostalCodesController extends DataAppController {
 		$this->helpers = array_merge($this->helpers, ['Tools.GoogleMapV3']);
 	}
 
-/****************************************************************************************
- * ADMIN functions
- ****************************************************************************************/
-
 	/**
 	 * @return void
 	 */
 	public function admin_index() {
 		$this->PostalCode->bindModel(['belongsTo' => ['Country' => ['className' => 'Data.Country']]], false);
-		$this->PostalCode->recursive = 0;
 
 		$this->PostalCode->Behaviors->load('Search.Searchable');
 		$this->Common->loadComponent(['Search.Prg']);
 		$this->Prg->commonProcess();
+		$this->paginate['contain'] = ['Country'];
 		$this->paginate['conditions'] = $this->PostalCode->parseCriteria($this->Prg->parsedParams());
 
 		$postalCodes = $this->paginate();
@@ -132,7 +128,6 @@ class PostalCodesController extends DataAppController {
 	 * @return void
 	 */
 	public function admin_view($id = null) {
-		$this->PostalCode->recursive = 0;
 		$this->PostalCode->bindModel(['belongsTo' => ['Country' => ['className' => 'Data.Country']]], false);
 
 		if (empty($id) || !($postalCode = $this->PostalCode->find('first', ['contain' => ['Country'], 'conditions' => ['PostalCode.id' => $id]]))) {

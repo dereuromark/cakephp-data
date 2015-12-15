@@ -41,7 +41,7 @@ class CountryProvincesController extends DataAppController {
 	 * @return void
 	 */
 	public function index($cid = null) {
-		$this->CountryProvince->recursive = 0;
+		$this->paginate['contain'] = ['Country'];
 		$this->paginate['order'] = ['CountryProvince.name' => 'ASC'];
 		$this->paginate['conditions'] = ['Country.status' => 1];
 
@@ -85,7 +85,7 @@ class CountryProvincesController extends DataAppController {
 	public function admin_index($cid = null) {
 		$cid = $this->_processCountry($cid);
 
-		$this->CountryProvince->recursive = 0;
+		$this->paginate['contain'] = ['Country'];
 		$countryProvinces = $this->paginate();
 		$countries = $this->CountryProvince->Country->find('list');
 
@@ -100,16 +100,8 @@ class CountryProvincesController extends DataAppController {
 	 * @return void
 	 */
 	public function admin_view($id = null) {
-		$this->CountryProvince->recursive = 0;
-		if (empty($id)) {
-			$this->Flash->error(__('record invalid'));
-			return $this->redirect(['action' => 'index']);
-		}
-		$countryProvince = $this->CountryProvince->record($id);
-		if (empty($countryProvince)) {
-			$this->Flash->error(__('record not exists'));
-			return $this->redirect(['action' => 'index']);
-		}
+		$countryProvince = $this->CountryProvince->get($id, ['contain' => ['Country']]);
+
 		$this->set(compact('countryProvince'));
 	}
 

@@ -15,8 +15,6 @@ class LanguagesController extends DataAppController {
 	 * @return void
 	 */
 	public function admin_index() {
-		$this->Language->recursive = 0;
-
 		if (CakePlugin::loaded('Search')) {
 			$this->Language->Behaviors->load('Search.Searchable');
 			$this->Common->loadComponent(['Search.Prg']);
