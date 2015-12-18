@@ -149,9 +149,8 @@ class MimeTypesController extends DataAppController {
 			$fileExt = $type['MimeType']['ext'];
 			$image = $this->MimeType->MimeTypeImage->find('first', ['conditions' => ['MimeTypeImage.name' => $fileExt]]);
 			if (!empty($image)) {
-				$this->MimeType->id = $type['MimeType']['id'];
-				//$data = array()
-				if ($this->MimeType->saveField('mime_type_image_id', $image['MimeTypeImage']['id'])) {
+				$id = $type['MimeType']['id'];
+				if ($this->MimeType->saveFieldById($id, 'mime_type_image_id', $image['MimeTypeImage']['id'])) {
 					$addedIcon[] = $fileExt . ' ' . CHAR_ARROWS . ' ' . $image['MimeTypeImage']['name'] . '.' . (!empty($image['MimeTypeImage']['ext']) ? $image['MimeTypeImage']['ext'] : '?');
 				}
 			}

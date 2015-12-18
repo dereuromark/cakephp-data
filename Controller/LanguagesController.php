@@ -170,7 +170,7 @@ class LanguagesController extends DataAppController {
 
 	public function admin_set_primary_languages_active() {
 		$languages = $this->Language->getPrimaryLanguages('list');
-		$this->Language->updateAll(['status' => Language::STATUS_ACTIVE], ['id' => array_keys($languages)]);
+		$this->Language->updateAllJoinless(['status' => Language::STATUS_ACTIVE], ['id' => array_keys($languages)]);
 
 		$this->Flash->success(__('%s of %s set active', $this->Language->getAffectedRows(), count($languages)));
 		return $this->redirect(['action' => 'index']);

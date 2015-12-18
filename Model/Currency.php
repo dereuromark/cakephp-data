@@ -121,8 +121,8 @@ class Currency extends DataAppModel {
 		foreach ($currencies as $currency) {
 			$value = $this->CurrencyLib->convert(1, $base[$this->alias]['code'], $currency[$this->alias]['code'], 4);
 			if ($value !== false) {
-				$this->id = $currency[$this->alias]['id'];
-				$this->saveField('value', $value);
+				$id = $currency[$this->alias]['id'];
+				$this->saveFieldById($id, 'value', $value);
 			} else {
 				$this->log('Invalid Currency ' . $currency[$this->alias]['code'], 'warning');
 			}

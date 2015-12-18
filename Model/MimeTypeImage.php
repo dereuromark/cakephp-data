@@ -75,9 +75,8 @@ class MimeTypeImage extends DataAppModel {
 
 			$types = $this->MimeType->find('all', ['fields' => ['id'], 'conditions' => ['mime_type_image_id' => $this->_del[$this->alias]['id']]]);
 			foreach ($types as $type) {
-				$this->MimeType->id = $type[$this->MimeType->alias]['id'];
-				$this->MimeType->saveField('mime_type_image_id', 0);
-				//pr ($type[$this->MimeType->alias]['id'].' del success');
+				$id = $type[$this->MimeType->alias]['id'];
+				$this->MimeType->saveFieldById($id, 'mime_type_image_id', 0);
 			}
 		}
 

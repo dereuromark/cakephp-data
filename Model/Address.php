@@ -275,7 +275,7 @@ class Address extends DataAppModel {
 	 * Update last used timestamp
 	 */
 	public function touch($addressId) {
-		$this->updateAll([$this->alias . '.last_used' => 'NOW()'], [$this->alias . '.id' => $addressId]);
+		$this->updateAllJoinless([$this->alias . '.last_used' => 'NOW()'], [$this->alias . '.id' => $addressId]);
 	}
 
 	/**
