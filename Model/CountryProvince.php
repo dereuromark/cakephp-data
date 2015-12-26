@@ -1,5 +1,6 @@
 <?php
 App::uses('DataAppModel', 'Data.Model');
+App::uses('GeocodeLib', 'Tools.Lib');
 
 /**
  * @deprecated - use State instead
@@ -58,7 +59,6 @@ class CountryProvince extends DataAppModel {
 	 * - otherwise: specific update
 	 */
 	public function updateCoordinates($id = null) {
-		App::uses('GeocodeLib', 'Tools.Lib');
 		$geocoder = new GeocodeLib();
 
 		$override = false;
