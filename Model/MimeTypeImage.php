@@ -1,5 +1,6 @@
 <?php
 App::uses('DataAppModel', 'Data.Model');
+App::uses('File', 'Utility');
 
 class MimeTypeImage extends DataAppModel {
 
@@ -86,7 +87,6 @@ class MimeTypeImage extends DataAppModel {
 	}
 
 	public function cleanUp() {
-		App::uses('File', 'Utility');
 		$handle = new File(FILES . 'mime_types.txt');
 		$handle->delete();
 	}

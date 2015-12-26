@@ -1,4 +1,7 @@
 <?php
+App::uses('HtmlDomLib', 'Tools.Lib');
+App::uses('HttpSocketLib', 'Tools.Lib');
+
 /**
  * Import data into Country model
  *
@@ -39,7 +42,6 @@ class GeoImportLib {
 			$res = file_get_contents(TMP . 'import.txt');
 		} else {
 			$content = $this->_getFromUrl($url);
-			App::uses('HtmlDomLib', 'Tools.Lib');
 			$HtmlDom = new HtmlDomLib();
 			$res = $HtmlDom->domFromString($content)->find('textarea', 0)->innertext;
 		}
@@ -96,7 +98,6 @@ class GeoImportLib {
 				$res = file_get_contents(TMP . 'import.txt');
 			} else {
 				$content = $this->_getFromUrl($url);
-				App::uses('HtmlDomLib', 'Tools.Lib');
 				$HtmlDom = new HtmlDomLib();
 				$res = $HtmlDom->domFromString($content)->find('textarea', 0)->innertext;
 			}
@@ -185,7 +186,6 @@ class GeoImportLib {
 			$res = file_get_contents(TMP . 'import.txt');
 		} else {
 			$content = $this->_getFromUrl($url);
-			App::uses('HtmlDomLib', 'Tools.Lib');
 			$HtmlDom = new HtmlDomLib();
 			$res = $HtmlDom->domFromString($content)->find('textarea', 0)->innertext;
 		}
@@ -250,7 +250,6 @@ class GeoImportLib {
 		if ($cache = Cache::read('geo_import_' . md5($url))) {
 			return $cache;
 		}
-		App::uses('HttpSocketLib', 'Tools.Lib');
 		$HttpSocket = new HttpSocketLib();
 		$res = $HttpSocket->fetch($url);
 		Cache::write('geo_import_' . md5($url), $res);

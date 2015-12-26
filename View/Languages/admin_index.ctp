@@ -1,3 +1,6 @@
+<?php
+App::uses('Folder', 'Utility');
+?>
 <div class="page index">
 <h2><?php echo __('Languages');?></h2>
 
@@ -41,8 +44,6 @@ foreach ($languages as $language):
 	$languageFlags = Cache::read('language_flags');
 	list($wwwPath, $path) = $this->Data->getCountryIconPaths();
 	if (!$languageFlags) {
-		App::uses('Folder', 'Utility');
-
 		$handle = new Folder($path);
 		$languageFlags = $handle->read(true, true);
 		$languageFlags = $languageFlags[1];
