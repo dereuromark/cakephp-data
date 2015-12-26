@@ -9,10 +9,6 @@ class AddressesController extends DataAppController {
 		parent::beforeFilter();
 	}
 
-/****************************************************************************************
- * USER functions
- ****************************************************************************************/
-
 	/*
 	public function index() {
 		$this->Address->recursive = 0;
@@ -95,15 +91,23 @@ class AddressesController extends DataAppController {
  ****************************************************************************************/
 
 	public function admin_index() {
-		$this->Address->recursive = 0;
+		$this->paginate['contain'] = ['Country'];
+		if (Configure::read('Address.CountryProvince')) {
+			$this->paginate['contain'][] = ['CountryProvince'];
+		}
+
 		$addresses = $this->paginate();
 		$this->set(compact('addresses'));
 		$this->Common->loadHelper('Tools.GoogleMapV3');
 	}
 
 	public function admin_view($id = null) {
-		$this->Address->recursive = 0;
-		if (empty($id) || !($address = $this->Address->find('first', ['conditions' => ['Address.id' => $id]]))) {
+		$contain = ['Country'];
+		if (Configure::read('Address.CountryProvince')) {
+			$contain[] = ['CountryProvince'];
+		}
+
+		if (empty($id) || !($address = $this->Address->find('first', ['contain' => $contain, 'conditions' => ['Address.id' => $id]]))) {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
@@ -198,13 +202,5 @@ class AddressesController extends DataAppController {
 		$this->Flash->success(__('Address \'%s\' marked as last used', h($var)));
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
-
-/****************************************************************************************
- * protected/interal functions
- ****************************************************************************************/
-
-/****************************************************************************************
- * deprecated/test functions
- ****************************************************************************************/
 
 }

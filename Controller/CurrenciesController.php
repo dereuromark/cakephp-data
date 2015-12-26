@@ -38,8 +38,6 @@ class CurrenciesController extends DataAppController {
 	}
 
 	public function admin_index() {
-		$this->Currency->recursive = 0;
-
 		if (CakePlugin::loaded('Search')) {
 			$this->Currency->Behaviors->load('Search.Searchable');
 			$this->Common->loadComponent(['Search.Prg']);
@@ -68,7 +66,6 @@ class CurrenciesController extends DataAppController {
 	}
 
 	public function admin_view($id = null) {
-		$this->Currency->recursive = 0;
 		if (empty($id)) {
 			$this->Flash->error(__('record invalid'));
 			return $this->Common->autoRedirect(['action' => 'index']);

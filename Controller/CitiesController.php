@@ -7,25 +7,18 @@ App::uses('DataAppController', 'Data.Controller');
  */
 class CitiesController extends DataAppController {
 
-	public $paginate = ['order' => ['City.modified' => 'DESC']];
+	public $paginate = ['order' => ['modified' => 'DESC']];
 
 	public function beforeFilter() {
 		parent::beforeFilter();
 	}
 
-/****************************************************************************************
- * USER functions
- ****************************************************************************************/
-
-/****************************************************************************************
- * ADMIN functions
- ****************************************************************************************/
-
 	/**
 	 * @return void
 	 */
 	public function admin_index() {
-		$this->City->recursive = 0;
+		$this->paginate['contain'] = ['Country'];
+
 		$cities = $this->paginate();
 		$this->set(compact('cities'));
 	}
@@ -34,7 +27,6 @@ class CitiesController extends DataAppController {
 	 * @return void
 	 */
 	public function admin_view($id = null) {
-		$this->City->recursive = 0;
 		if (empty($id) || !($city = $this->City->find('first', ['conditions' => ['City.id' => $id]]))) {
 			$this->Flash->error(__('invalidRecord'));
 			return $this->Common->autoRedirect(['action' => 'index']);

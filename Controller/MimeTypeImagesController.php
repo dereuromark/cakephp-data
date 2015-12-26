@@ -1,10 +1,12 @@
 <?php
 
 App::uses('DataAppController', 'Data.Controller');
+App::uses('Utility', 'Tools.Utility');
+App::uses('Folder', 'Utility');
 
 class MimeTypeImagesController extends DataAppController {
 
-	public $paginate = ['order' => ['MimeTypeImage.modified' => 'DESC']];
+	public $paginate = ['order' => ['modified' => 'DESC']];
 
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -13,9 +15,7 @@ class MimeTypeImagesController extends DataAppController {
 	}
 
 	public function admin_import() {
-
 		if ($this->Common->isPosted()) {
-
 			if (!empty($this->request->data['MimeTypeImage']['extensions'])) {
 				$successfullyInserted = [];
 				if (is_array($this->request->data['MimeTypeImage']['extensions'])) {
@@ -38,17 +38,16 @@ class MimeTypeImagesController extends DataAppController {
 			if (!empty($this->request->data['MimeTypeImage']['import'])) {
 				$alreadyIn = [];
 
-				$extensions = CommonComponent::parseList($this->request->data['MimeTypeImage']['import'], ',');
+				$extensions = Utility::tokenize($this->request->data['MimeTypeImage']['import'], ',');
 				//$extensions = array_unique($extensions);
 				$fileExtensions = [];
-				App::uses('Sanitize', 'Utility');
 
 				foreach ($extensions as $extension) {
 					# is it "exe" or "someName.exe"?
 					if (mb_strstr($extension, '.') !== false) {
 						$extension = extractPathInfo('ext', $extension);
 					}
-					$extension = mb_strtolower(Sanitize::paranoid($extension));
+					$extension = mb_strtolower($extension);
 
 					if (empty($extension) || in_array($extension, $fileExtensions) || in_array($extension, $alreadyIn)) {
 						continue;
@@ -74,8 +73,6 @@ class MimeTypeImagesController extends DataAppController {
 	}
 
 	public function admin_allocate() {
-		App::uses('Sanitize', 'Utility');
-		App::uses('Folder', 'Utility');
 		$folder = new Folder(PATH_MIMETYPES . 'import' . DS);
 		$images = $folder->find('.*');
 
@@ -83,9 +80,9 @@ class MimeTypeImagesController extends DataAppController {
 		$renameSuccess = [];
 
 		foreach ($images as $key => $image) {
-			$fileName = mb_strtolower(Sanitize::paranoid(extractPathInfo('file', $image)));
-			$ext = mb_strtolower(Sanitize::paranoid(extractPathInfo('ext', $image)));
-			# TODO: check on valid ext, Sanitize fileName
+			$fileName = mb_strtolower(extractPathInfo('file', $image));
+			$ext = mb_strtolower(extractPathInfo('ext', $image));
+			# TODO: check on valid ext
 
 			if ($dbImage = $this->MimeTypeImage->find('first', ['conditions' => ['name' => $fileName]])) {
 				if (empty($dbImage['MimeTypeImage']['ext']) || !file_exists(PATH_MIMETYPES . $dbImage['MimeTypeImage']['name'] . '.' . $dbImage['MimeTypeImage']['ext'])) {
@@ -124,8 +121,8 @@ class MimeTypeImagesController extends DataAppController {
 
 					$filename = $this->request->data['MimeTypeImage']['filenames'][$key];
 					$ext = extractPathInfo('ext', $filename);
-					$ext = mb_strtolower(Sanitize::paranoid($ext));
-					$name = mb_strtolower(Sanitize::paranoid($image));
+					$ext = mb_strtolower($ext);
+					$name = mb_strtolower($image);
 					if (empty($name) || empty($ext)) {
 						$this->Flash->error(' \'' . $filename . ' \': \'' . $name . '\' not a valid extension name, or \'' . $ext . '\' not a valid image file extension...');
 						continue;
@@ -169,11 +166,11 @@ class MimeTypeImagesController extends DataAppController {
 	}
 
 	public function admin_index() {
-		$this->MimeTypeImage->recursive = 1;
+		$this->paginate['contain'] = ['MimeType'];
+
 		$mimeTypeImages = $this->paginate();
 
 		/*
-		App::uses('Folder', 'Utility');
 		$folder = new Folder(PATH_MIMETYPES);
 		$images = $folder->find('.*');
 		*/
@@ -211,7 +208,6 @@ class MimeTypeImagesController extends DataAppController {
 	}
 
 	public function admin_view($id = null) {
-		$this->MimeTypeImage->recursive = 0;
 		if (empty($id)) {
 			$this->Flash->error(__('record invalid'));
 			return $this->Common->autoRedirect(['action' => 'index']);
@@ -228,7 +224,7 @@ class MimeTypeImagesController extends DataAppController {
 	 * Upload new Icon/Image (auto resize to height:16px and convert if desired)
 	 * used by add() and edit()
 	 *
-	 * @return void
+	 * @return bool Result
 	 */
 	protected function _uploadImage($file = null) {
 		$this->_uploadError = 'Undefined Error';
@@ -240,8 +236,7 @@ class MimeTypeImagesController extends DataAppController {
 			'png'];
 
 		$image = $file['name'];
-		App::uses('Sanitize', 'Utility');
-		$ext = mb_strtolower(Sanitize::paranoid(extractPathInfo('ext', $image)));
+		$ext = mb_strtolower(extractPathInfo('ext', $image));
 
 		if (empty($ext) || !in_array($ext, $this->_allowedTypes)) {
 			$this->_uploadError = 'Invalid File Type';
@@ -285,7 +280,6 @@ class MimeTypeImagesController extends DataAppController {
 	}
 
 	public function admin_add() {
-		App::uses('Folder', 'Utility');
 		$folder = new Folder(PATH_MIMETYPES, true, 777);
 		//pr (substr(sprintf('%o', fileperms(PATH_IMAGES)), -4));
 
@@ -315,7 +309,6 @@ class MimeTypeImagesController extends DataAppController {
 			$this->request->data['MimeTypeImage']['active'] = 1;
 		}
 
-		App::uses('Folder', 'Utility');
 		$folder = new Folder(PATH_MIMETYPES . 'import' . DS);
 		$images = $folder->find('.*');
 		$availableImages = [];
@@ -358,7 +351,6 @@ class MimeTypeImagesController extends DataAppController {
 			}
 		}
 
-		App::uses('Folder', 'Utility');
 		$folder = new Folder(PATH_MIMETYPES . 'import' . DS);
 		$images = $folder->find('.*');
 		$availableImages = [];
