@@ -134,13 +134,13 @@ class Currency extends DataAppModel {
 	 */
 	public function foreignCurrencies($type = 'all', $options = []) {
 		$defaults = ['conditions' => [$this->alias . '.base' => 0]];
-		$options = Set::merge($defaults, $options);
+		$options = Hash::merge($defaults, $options);
 		return $this->find($type, $options);
 	}
 
 	public function baseCurrency($options = []) {
 		$defaults = ['conditions' => [$this->alias . '.base' => 1]];
-		$options = Set::merge($defaults, $options);
+		$options = Hash::merge($defaults, $options);
 		return $this->find('first', $options);
 	}
 

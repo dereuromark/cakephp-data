@@ -119,7 +119,7 @@ class CurrencyComponent extends Component {
 
 		//Cache
 		$this->_store($historyList, 'history');
-		return $currencyList;
+		return $historyList;
 	}
 
 	protected function _retrieveCurrencies() {

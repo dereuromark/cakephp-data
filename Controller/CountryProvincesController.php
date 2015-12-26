@@ -213,7 +213,7 @@ class CountryProvincesController extends DataAppController {
 		}
 
 		if (!empty($cid)) {
-			$this->paginate = Set::merge($this->paginate, ['conditions' => ['country_id' => $cid]]);
+			$this->paginate = Hash::merge($this->paginate, ['conditions' => ['country_id' => $cid]]);
 			$this->request->data['Filter']['id'] = $cid;
 		}
 	}
