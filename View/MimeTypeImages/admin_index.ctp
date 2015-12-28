@@ -97,17 +97,8 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 <?php endforeach; ?>
 </table>
 </div>
-<div class="paging">
-	<?php echo $this->Paginator->first(__('first'), []);?>
- |
-	<?php echo $this->Paginator->prev(__('previous'), [], null, ['class' => 'disabled']);?>
- |
-	<?php echo $this->Paginator->numbers(['separator' => PAGINATOR_SEPARATOR]);?>
- |
-	<?php echo $this->Paginator->next(__('next'), [], null, ['class' => 'disabled']);?>
-
- |
-	<?php echo $this->Paginator->last(__('last'), []);?>
+<div class="pagination-container">
+	<?php echo $this->element('Tools.pagination'); ?>
 </div>
 <div class="actions">
 	<ul>
