@@ -2,7 +2,6 @@
 namespace Data\Model\Table;
 
 use Cake\Core\Configure;
-use Cake\Model\Model;
 use Tools\Model\Table\Table;
 
 if (!defined('CLASS_USERS')) {

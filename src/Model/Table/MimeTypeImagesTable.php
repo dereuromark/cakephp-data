@@ -1,7 +1,6 @@
 <?php
 namespace Data\Model\Table;
 
-use Cake\Model\Model;
 use Cake\Filesystem\File;
 use Tools\Model\Table\Table;
 
