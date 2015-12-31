@@ -38,7 +38,7 @@ class LanguagesController extends DataAppController {
 
 	public function add() {
 		$language = $this->Languages->newEntity();
-		
+
 		if ($this->Common->isPosted()) {
 			//$this->Languages->create();
 			$language = $this->Languages->patchEntity($language, $this->request->data);
@@ -50,7 +50,7 @@ class LanguagesController extends DataAppController {
 				$this->Flash->error(__('formContainsErrors'));
 			}
 		}
-		
+
 		$this->set(compact('language'));
 	}
 
@@ -71,7 +71,7 @@ class LanguagesController extends DataAppController {
 		if (empty($this->request->data)) {
 			$this->request->data = $language;
 		}
-		
+
 		$this->set(compact('language'));
 	}
 
@@ -178,9 +178,9 @@ class LanguagesController extends DataAppController {
 
 	public function set_primary_languages_active() {
 		$languages = $this->Languages->getPrimaryLanguages('list');
-		$this->Languages->updateAll(['status' => Language::STATUS_ACTIVE], ['id' => array_keys($languages)]);
+		$count = $this->Languages->updateAll(['status' => Language::STATUS_ACTIVE], ['id' => array_keys($languages)]);
 
-		$this->Flash->success(__('{0} of {1} set active', $this->Languages->getAffectedRows(), count($languages)));
+		$this->Flash->success(__('{0} of {1} set active', $count, count($languages)));
 		return $this->redirect(['action' => 'index']);
 	}
 
