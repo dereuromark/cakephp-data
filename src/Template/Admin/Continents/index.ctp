@@ -17,7 +17,7 @@ foreach ($continents as $continent):
 		$class = ' class="altrow"';
 	}
 ?>
-	<tr<?php echo $class;?>>
+	<tr>
 		<td>
 			<?php echo h($continent['Continent']['name']); ?>
 		</td>

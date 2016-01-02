@@ -51,7 +51,7 @@ foreach ($mimeTypes as $mimeType):
 		$class = ' class="altrow"';
 	}
 ?>
-	<tr<?php echo $class;?>>
+	<tr>
 		<td>
 			<?php
 			$icon = '---';

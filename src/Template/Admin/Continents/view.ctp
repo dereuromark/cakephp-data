@@ -62,7 +62,7 @@
 				$class = ' class="altrow"';
 			}
 		?>
-		<tr<?php echo $class;?>>
+		<tr>
 			<td><?php echo $childContinent['id'];?></td>
 			<td><?php echo $childContinent['name'];?></td>
 			<td><?php echo $childContinent['ori_name'];?></td>
@@ -118,7 +118,7 @@
 				$class = ' class="altrow"';
 			}
 		?>
-		<tr<?php echo $class;?>>
+		<tr>
 			<td><?php echo $country['id'];?></td>
 			<td><?php echo $country['name'];?></td>
 			<td><?php echo $country['ori_name'];?></td>

@@ -11,8 +11,8 @@ class CurrenciesTable extends Table {
 
 	public $validate = [
 		'name' => [
-			'notEmpty' => [
-				'rule' => ['notEmpty'],
+			'notBlank' => [
+				'rule' => ['notBlank'],
 				'message' => 'valErrMandatoryField',
 				'last' => true
 			],
@@ -22,8 +22,8 @@ class CurrenciesTable extends Table {
 			],
 		],
 		'code' => [
-			'notEmpty' => [
-				'rule' => ['notEmpty'],
+			'notBlank' => [
+				'rule' => ['notBlank'],
 				'message' => 'valErrMandatoryField',
 				'last' => true
 			],

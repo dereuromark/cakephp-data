@@ -2,8 +2,9 @@
 namespace Data\Model\Table;
 
 use Cake\Core\Configure;
-use Data\Geocode\Geocode;
+use Geo\Geocode\Geocode;
 use Tools\Model\Table\Table;
+use ToolsExtra\Lib\GeolocateLib;
 
 class CountriesTable extends Table {
 
@@ -11,8 +12,8 @@ class CountriesTable extends Table {
 
 	public $validate = [
 		'name' => [
-			'notEmpty' => [
-				'rule' => ['notEmpty'],
+			'notBlank' => [
+				'rule' => ['notBlank'],
 				'message' => 'Mandatory field',
 				'last' => true,
 			],
@@ -22,8 +23,8 @@ class CountriesTable extends Table {
 			],
 		],
 		'ori_name' => [
-			'notEmpty' => [
-				'rule' => ['notEmpty'],
+			'notBlank' => [
+				'rule' => ['notBlank'],
 				'message' => 'Mandatory field',
 				'last' => true,
 			],
@@ -47,7 +48,7 @@ class CountriesTable extends Table {
 			],
 		],
 		'country_code' => ['numeric'],
-		//'special' => array('notEmpty'),
+		//'special' => array('notBlank'),
 		//'sort' => array('numeric')
 	];
 
@@ -126,7 +127,7 @@ class CountriesTable extends Table {
 	 * @return bool Success
 	 */
 	public function updateCoordinatesNew($id = null) {
-		$Geocoder = new GeocodeLib();
+		$Geocoder = new Geocode();
 
 		$override = false;
 		if ($id == -1) {
@@ -351,7 +352,7 @@ class CountriesTable extends Table {
 			return -1;
 		}
 		*/
-		$this->GeolocateLib = new Geolocate();
+		$this->GeolocateLib = new GeolocateLib();
 		if ($this->GeolocateLib->locate($ip)) {
 			$country = $this->GeolocateLib->getResult('country_code'); # iso2
 			if (!empty($country)) {

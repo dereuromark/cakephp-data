@@ -57,8 +57,8 @@ class AddressesTable extends Table {
 			],
 		],
 		'postal_code' => [
-			'notEmpty' => [
-				'rule' => ['notEmpty'],
+			'notBlank' => [
+				'rule' => ['notBlank'],
 				'message' => 'valErrMandatoryField',
 				'last' => true
 			],
@@ -68,8 +68,8 @@ class AddressesTable extends Table {
 			],
 		],
 		'city' => [
-			'notEmpty' => [
-				'rule' => ['notEmpty'],
+			'notBlank' => [
+				'rule' => ['notBlank'],
 				'message' => 'valErrMandatoryField'
 			],
 		],
@@ -206,9 +206,9 @@ class AddressesTable extends Table {
 			$this->data['country'] = $this->Country->field('name', ['id' => $this->data['country_id']]);
 		}
 		if (!empty($this->data['postal_code'])) {
-			unset($this->validate['city']['notEmpty']);
+			unset($this->validate['city']['notBlank']);
 		} elseif (!empty($this->data['city'])) {
-			unset($this->validate['postal_code']['notEmpty']);
+			unset($this->validate['postal_code']['notBlank']);
 		}
 
 		if (isset($this->data['foreign_id']) && empty($this->data['foreign_id'])) {

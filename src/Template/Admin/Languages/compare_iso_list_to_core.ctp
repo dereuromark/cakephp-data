@@ -26,7 +26,7 @@ foreach ($isoList['values'] as $language):
 	}
 
 ?>
-	<tr<?php echo $class;?>>
+	<tr>
 		<td>
 <?php
 ?>
@@ -89,7 +89,7 @@ foreach ($locales as $key => $locale):
 	//debug($locale);
 
 ?>
-	<tr<?php echo $class;?>>
+	<tr>
 		<td>
 <?php
 ?>

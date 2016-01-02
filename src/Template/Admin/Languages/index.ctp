@@ -33,7 +33,7 @@ foreach ($languages as $language):
 		$class = ' class="altrow"';
 	}
 ?>
-	<tr<?php echo $class;?>>
+	<tr>
 		<td>
 <?php
 if (false) {
@@ -51,7 +51,7 @@ if (false) {
 	if (!empty($language['Language']['code']) && in_array($language['Language']['code'] . '.gif', $languageFlags)) {
 		echo $this->Html->image($wwwPath . $language['Language']['code'] . '.gif');
 	}
-}	
+}
 ?>
 		</td>
 		<td>

@@ -21,7 +21,7 @@ foreach ($isoList['values'] as $language):
 		$class = ' class="altrow"';
 	}
 ?>
-	<tr<?php echo $class;?>>
+	<tr>
 		<td>
 <?php
 	$languageFlags = Cache::read('language_flags');

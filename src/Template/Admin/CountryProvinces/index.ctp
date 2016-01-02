@@ -26,7 +26,7 @@ foreach ($countryProvinces as $countryProvince):
 		$class = ' class="altrow"';
 	}
 ?>
-	<tr<?php echo $class;?>>
+	<tr>
 
 		<td>
 			<?php echo $this->Data->countryIcon($countryProvince['Country']['iso2']); ?> <?php echo $this->Html->link($countryProvince['Country']['name'], ['controller' => 'countries', 'action' => 'view', $countryProvince['Country']['id']]); ?>

@@ -13,11 +13,11 @@ class PostalCodesTable extends Table {
 
 	public $validate = [
 		/*
-		'code' => array('notEmpty'),
+		'code' => array('notBlank'),
 
 		'official_address' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			'notBlank' => array(
+				'rule' => array('notBlank'),
 				'message' => 'valErrMandatoryField',
 				'last' => true
 			),

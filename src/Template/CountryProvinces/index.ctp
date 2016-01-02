@@ -24,7 +24,7 @@ foreach ($countryProvinces as $countryProvince):
 		$class = ' class="altrow"';
 	}
 ?>
-	<tr<?php echo $class;?>>
+	<tr>
 
 		<td>
 			<?php echo $this->Data->countryIcon($countryProvince->country['iso2']) . ' ' . h($countryProvince->country['name']); ?>

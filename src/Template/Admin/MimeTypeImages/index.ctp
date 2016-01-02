@@ -39,7 +39,7 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 	}
 
 ?>
-	<tr<?php echo $class;?>>
+	<tr>
 		<td>
 			<?php echo $image; ?>
 		</td>

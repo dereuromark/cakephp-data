@@ -2,8 +2,8 @@
 namespace Data\Controller;
 
 use Data\Controller\DataAppController;
-use Tools\Lib\GeocodeLib;
-use Tools\Lib\GeolocateLib;
+use ToolsExtra\Lib\GeocodeLib;
+use ToolsExtra\Lib\GeolocateLib;
 
 /**
  * PostalCodes Controller

@@ -13,8 +13,8 @@ class DistrictsTable extends Table {
 
 	public $validate = [
 		'name' => [
-			'notEmpty' => [
-				'rule' => ['notEmpty'],
+			'notBlank' => [
+				'rule' => ['notBlank'],
 				'message' => 'valErrMandatoryField',
 			],
 		],

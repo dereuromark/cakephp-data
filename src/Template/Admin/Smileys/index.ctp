@@ -22,7 +22,7 @@ foreach ($smileys as $smiley):
 		$class = ' class="altrow"';
 	}
 ?>
-	<tr<?php echo $class;?>>
+	<tr>
 		<td>
 			<?php echo $this->Html->imageIfExists('/data/img/smileys/default/' . $smiley['Smiley']['smiley_path'])?>
 		</td>

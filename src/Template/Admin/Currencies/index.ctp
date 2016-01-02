@@ -32,7 +32,7 @@ foreach ($currencies as $currency):
 		$class = ' class="altrow"';
 	}
 ?>
-	<tr<?php echo $class;?>>
+	<tr>
 		<td>
 			<?php echo h($currency['Currency']['name']); ?>
 		</td>

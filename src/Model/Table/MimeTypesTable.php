@@ -13,8 +13,8 @@ class MimeTypesTable extends Table {
 
 	public $validate = [
 		'name' => [
-			'notEmpty' => [
-				'rule' => ['notEmpty'],
+			'notBlank' => [
+				'rule' => ['notBlank'],
 				'message' => 'valErrMandatoryField',
 			],
 		],
@@ -23,16 +23,16 @@ class MimeTypesTable extends Table {
 				'rule' => 'isUnique',
 				'message' => 'Already exists',
 			],
-			'notEmpty' => [
-				'rule' => ['notEmpty'],
+			'notBlank' => [
+				'rule' => ['notBlank'],
 				'message' => 'valErrMandatoryField',
 				'allowEmpty' => false,
 				//'required' => true
 			],
 		],
 		'type' => [
-			'notEmpty' => [
-				'rule' => ['notEmpty'],
+			'notBlank' => [
+				'rule' => ['notBlank'],
 				'message' => 'valErrMandatoryField',
 			],
 		],

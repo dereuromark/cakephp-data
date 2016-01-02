@@ -38,7 +38,7 @@ foreach ($countries as $country):
 		$class = ' class="altrow"';
 	}
 ?>
-	<tr<?php echo $class;?>>
+	<tr>
 		<td>
 			<?php echo $this->Data->countryIcon($country['Country']['iso2']); ?>
 		</td>

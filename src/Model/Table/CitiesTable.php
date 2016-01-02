@@ -10,7 +10,7 @@ class CitiesTable extends Table {
 
 	public $validate = [
 		'name' => [
-			'notEmpty',
+			'notBlank',
 		]
 	];
 

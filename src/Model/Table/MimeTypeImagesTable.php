@@ -15,8 +15,8 @@ class MimeTypeImagesTable extends Table {
 				'message' => 'valErrMandatoryField',
 				//'required' => true
 			],
-			'notEmpty' => [
-				'rule' => ['notEmpty'],
+			'notBlank' => [
+				'rule' => ['notBlank'],
 				'message' => 'valErrMandatoryField',
 				//'required' => true
 			],
