@@ -1,15 +1,8 @@
 <div class="page index">
 <h2><?php echo __('Mime Types');?></h2>
-<p>
-<?php
-
-echo $this->Paginator->counter([
-'format' => __('Page %page% of %pages%, showing %current% records out of %count% total')
-]);
-?></p>
 
 <div class="searchWrapper">
-<?php echo $this->Form->create('MimeType', ['action' => 'index']);?>
+<?php echo $this->Form->create();?>
 <div class="floatLeft"><?php echo $this->Form->input('Form.search', ['label' => '(Teil)Suche:', 'value' => $searchStr]);?></div>
 <div class="floatLeft"><?php echo $this->Form->end(__('Submit'));?></div>
 <?php
@@ -103,19 +96,10 @@ foreach ($mimeTypes as $mimeType):
 	</tr>
 <?php endforeach; ?>
 </table>
-</div>
-<div class="paging">
-	<?php echo $this->Paginator->first(__('first'), []);?>
- |
-	<?php echo $this->Paginator->prev(__('previous'), [], null, ['class' => 'disabled']);?>
- |
-	<?php echo $this->Paginator->numbers(['separator' => PAGINATOR_SEPARATOR]);?>
- |
-	<?php echo $this->Paginator->next(__('next'), [], null, ['class' => 'disabled']);?>
 
- |
-	<?php echo $this->Paginator->last(__('last'), []);?>
+	<?php echo $this->element('Tools.pagination'); ?>
 </div>
+
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('Add Mime Type'), ['action' => 'add']); ?></li>

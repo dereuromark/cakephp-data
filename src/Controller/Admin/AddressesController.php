@@ -2,6 +2,7 @@
 namespace Data\Controller\Admin;
 
 use Cake\Core\Configure;
+use Cake\Network\Exception\MethodNotAllowedException;
 use Data\Controller\DataAppController;
 use Cake\Event\Event;
 
@@ -16,7 +17,7 @@ class AddressesController extends DataAppController {
 	public function index() {
 		$addresses = $this->paginate();
 		$this->set(compact('addresses'));
-		$this->Common->loadHelper('Geo.GoogleMapV3');
+		$this->helpers[] = 'Geo.GoogleMapV3';
 	}
 
 	public function view($id = null) {
@@ -25,7 +26,7 @@ class AddressesController extends DataAppController {
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->set(compact('address'));
-		$this->Common->loadHelper('Geo.GoogleMapV3');
+		$this->helpers[] = 'Geo.GoogleMapV3';
 	}
 
 	public function add() {
@@ -89,10 +90,15 @@ class AddressesController extends DataAppController {
 		$this->set(compact('countries', 'countryProvinces'));
 	}
 
+	/**
+	 * @param int|null $id
+	 * @return \Cake\Network\Response|null
+	 */
 	public function delete($id = null) {
 		if (!$this->Common->isPosted()) {
 			throw new MethodNotAllowedException();
 		}
+
 		if (empty($id) || !($address = $this->Address->find('first', ['conditions' => ['Address.id' => $id], 'fields' => ['id', 'formatted_address']]))) {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);

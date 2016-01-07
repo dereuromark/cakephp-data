@@ -1,11 +1,6 @@
 <div class="page index">
 <h2><?php echo __('Mime Type Images');?></h2>
-<p>
-<?php
-echo $this->Paginator->counter([
-'format' => __('Page %page% of %pages%, showing %current% records out of %count% total')
-]);
-?></p>
+
 <table class="table">
 <tr>
 	<th><?php echo __('Icon');?></th>
@@ -89,25 +84,14 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 				if (isset($imageWidth) && isset($imageHeight) && $imageWidth != 16 && $imageHeight != 16) {
 					echo $this->Format->icon('expand', ['title' => __('Größe ist nicht 16x16, sondern ' . $imageWidth . 'x' . $imageHeight . '! Anpassen...')]);
 				} elseif (empty($mimeTypeImage['MimeTypeImage']['ext']) || !empty($mimeTypeImage['MimeTypeImage']['warning'])) {
-					echo $this->Html->link($this->Format->icon('google.gif', 'Bei Google suchen'), 'http://images.google.de/images?q=' . $mimeTypeImage['MimeTypeImage']['name'] . '+imagesize%3A16x16&btnG=Bilder-Suche', ['escape' => false]);
+					echo $this->Html->link($this->Format->cIcon('google.gif', 'Bei Google suchen'), 'http://images.google.de/images?q=' . $mimeTypeImage['MimeTypeImage']['name'] . '+imagesize%3A16x16&btnG=Bilder-Suche', ['escape' => false]);
 				}
 			?>
 		</td>
 	</tr>
 <?php endforeach; ?>
 </table>
-</div>
-<div class="paging">
-	<?php echo $this->Paginator->first(__('first'), []);?>
- |
-	<?php echo $this->Paginator->prev(__('previous'), [], null, ['class' => 'disabled']);?>
- |
-	<?php echo $this->Paginator->numbers(['separator' => PAGINATOR_SEPARATOR]);?>
- |
-	<?php echo $this->Paginator->next(__('next'), [], null, ['class' => 'disabled']);?>
-
- |
-	<?php echo $this->Paginator->last(__('last'), []);?>
+<?php echo $this->element('Tools.pagination'); ?>
 </div>
 <div class="actions">
 	<ul>
