@@ -5,6 +5,7 @@ namespace Data\Controller\Admin;
 use App\Utility\Sanitize;
 use Cake\Filesystem\Folder;
 use Data\Controller\DataAppController;
+use Tools\Utility\Utility;
 
 class MimeTypeImagesController extends DataAppController {
 
@@ -36,16 +37,16 @@ class MimeTypeImagesController extends DataAppController {
 			if (!empty($this->request->data['MimeTypeImage']['import'])) {
 				$alreadyIn = [];
 
-				$extensions = CommonComponent::parseList($this->request->data['MimeTypeImage']['import'], ',');
+				$extensions = Utility::tokenize($this->request->data['MimeTypeImage']['import'], ',');
 				//$extensions = array_unique($extensions);
 				$fileExtensions = [];
 
 				foreach ($extensions as $extension) {
 					# is it "exe" or "someName.exe"?
 					if (mb_strstr($extension, '.') !== false) {
-						$extension = extractPathInfo('ext', $extension);
+						$extension = extractPathInfo($extension, 'ext');
 					}
-					$extension = mb_strtolower(Sanitize::paranoid($extension));
+					$extension = mb_strtolower($extension);
 
 					if (empty($extension) || in_array($extension, $fileExtensions) || in_array($extension, $alreadyIn)) {
 						continue;
@@ -78,8 +79,8 @@ class MimeTypeImagesController extends DataAppController {
 		$renameSuccess = [];
 
 		foreach ($images as $key => $image) {
-			$fileName = mb_strtolower(Sanitize::paranoid(extractPathInfo('file', $image)));
-			$ext = mb_strtolower(Sanitize::paranoid(extractPathInfo('ext', $image)));
+			$fileName = mb_strtolower(extractPathInfo($image, 'file'));
+			$ext = mb_strtolower(extractPathInfo($image, 'ext'));
 			# TODO: check on valid ext, Sanitize fileName
 
 			if ($dbImage = $this->MimeTypeImage->find('first', ['conditions' => ['name' => $fileName]])) {
@@ -118,9 +119,9 @@ class MimeTypeImagesController extends DataAppController {
 					}
 
 					$filename = $this->request->data['MimeTypeImage']['filenames'][$key];
-					$ext = extractPathInfo('ext', $filename);
-					$ext = mb_strtolower(Sanitize::paranoid($ext));
-					$name = mb_strtolower(Sanitize::paranoid($image));
+					$ext = extractPathInfo($filename, 'ext');
+					$ext = mb_strtolower($ext);
+					$name = mb_strtolower($image);
 					if (empty($name) || empty($ext)) {
 						$this->Flash->error(' \'' . $filename . ' \': \'' . $name . '\' not a valid extension name, or \'' . $ext . '\' not a valid image file extension...');
 						continue;
@@ -232,7 +233,7 @@ class MimeTypeImagesController extends DataAppController {
 			'png'];
 
 		$image = $file['name'];
-		$ext = mb_strtolower(Sanitize::paranoid(extractPathInfo('ext', $image)));
+		$ext = mb_strtolower(extractPathInfo($image, 'ext'));
 
 		if (empty($ext) || !in_array($ext, $this->_allowedTypes)) {
 			$this->_uploadError = 'Invalid File Type';

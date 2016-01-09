@@ -9,8 +9,8 @@
 				echo $this->Form->input('MimeTypeImage.imgs.' . $id, ['type' => 'checkbox', 'label' => false, 'div' => false]);
 
 				echo ' ';
-				$imageName = extractPathInfo('file', $image);
-				$imageName = mb_strtolower(Sanitize::paranoid($imageName));
+				$imageName = extractPathInfo($image, 'file');
+				$imageName = mb_strtolower($imageName);
 
 				echo $this->Form->input('MimeTypeImage.names.' . $id, ['value' => $imageName, 'after' => '', 'div' => false, 'label' => false]);
 				echo $this->Form->input('MimeTypeImage.filenames.' . $id, ['value' => $image, 'type' => 'hidden']);

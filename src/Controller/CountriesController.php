@@ -57,11 +57,11 @@ class CountriesController extends DataAppController {
 
 		$iconNames = [];
 		foreach ($icons[1] as $icon) { # only use files (not folders)
-			$iconNames[] = strtoupper(extractPathInfo('filename', $icon));
+			$iconNames[] = strtoupper(extractPathInfo($icon, 'filename'));
 		}
 		Cache::write('country_icon_names', $iconNames);
 
 		return $iconNames;
 	}
-	
+
 }
