@@ -70,7 +70,7 @@ foreach ($countries as $country):
 				$markers = [];
 				$markers[] = ['lat' => $country['Country']['lat'], 'lng' => $country['Country']['lng'], 'color' => 'green'];
 				$mapMarkers = $this->GoogleMapV3->staticMarkers($markers);
-				echo ' ' . $this->Html->link($this->Format->cIcon(ICON_DETAILS, 'Zeigen'), $this->GoogleMapV3->staticMapUrl(['center' => $country['Country']['lat'] . ',' . $country['Country']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 3]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
+				echo ' ' . $this->Html->link($this->Format->cIcon(ICON_DETAILS, ['title' => 'Zeigen']), $this->GoogleMapV3->staticMapUrl(['center' => $country['Country']['lat'] . ',' . $country['Country']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 3]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
 			}
 
 			?>
@@ -88,7 +88,7 @@ foreach ($countries as $country):
 			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $country['Country']['id']), array('escape'=>false)); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $country['Country']['id']], ['escape' => false]); ?>
 
-			<?php echo $this->Html->link($this->Format->cIcon(ICON_MAP, 'Koordinaten updaten'), ['action' => 'update_coordinates', $country['Country']['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Format->cIcon(ICON_MAP, ['title' => 'Koordinaten updaten']), ['action' => 'update_coordinates', $country['Country']['id']], ['escape' => false]); ?>
 
 			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $country['Country']['id']], ['escape' => false, 'confirm' => __('Are you sure you want to delete # %s?', $country['Country']['id'])]); ?>
 		</td>

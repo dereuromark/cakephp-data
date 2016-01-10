@@ -66,7 +66,7 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 			<?php $count = count($mimeTypeImage['MimeType']);
 				if ($count > 0) {
 					echo $count . ' &nbsp; ';
-					echo $this->Format->icon('details', null, null, null, ['class' => 'hand', 'id' => 'details_' . $mimeTypeImage['MimeTypeImage']['id']]);
+					echo $this->Format->icon('details', [], ['class' => 'hand', 'id' => 'details_' . $mimeTypeImage['MimeTypeImage']['id']]);
 				} else {
 					echo '---';
 				}
@@ -87,7 +87,7 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $mimeTypeImage['MimeTypeImage']['id']], ['escape' => false, 'confirm' => __('Are you sure you want to delete # %s?', $mimeTypeImage['MimeTypeImage']['id'])]); ?>
 			<?php
 				if (isset($imageWidth) && isset($imageHeight) && $imageWidth != 16 && $imageHeight != 16) {
-					echo $this->Format->cIcon(ICON_SIZE, 'Größe ist nicht 16x16, sondern ' . $imageWidth . 'x' . $imageHeight . '! Anpassen...');
+					echo $this->Format->cIcon(ICON_SIZE, ['title' => 'Größe ist nicht 16x16, sondern ' . $imageWidth . 'x' . $imageHeight . '! Anpassen...']);
 				} elseif (empty($mimeTypeImage['MimeTypeImage']['ext']) || !empty($mimeTypeImage['MimeTypeImage']['warning'])) {
 					echo $this->Html->link($this->Format->cIcon('google.gif', 'Bei Google suchen'), 'http://images.google.de/images?q=' . $mimeTypeImage['MimeTypeImage']['name'] . '+imagesize%3A16x16&btnG=Bilder-Suche', ['escape' => false]);
 				}
