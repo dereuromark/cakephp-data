@@ -57,9 +57,9 @@ foreach ($currencies as $currency):
 		</td>
 		<td>
 			<span class="ajaxToggling" id="ajaxToggle-<?php echo $currency['Currency']['id']?>">
-			<?php echo $this->Html->link($this->Format->yesNo($currency['Currency']['active'], 'Aktiv', 'Inaktiv'), ['action' => 'toggle', 'active', $currency['Currency']['id']], ['escape' => false]); ?></span>&nbsp;&nbsp;<?php
+			<?php echo $this->Html->link($this->Format->yesNo($currency['Currency']['active'], ['onTitle' => __('Active'), 'offTitle' => __('Inactive')]), ['action' => 'toggle', 'active', $currency['Currency']['id']], ['escape' => false]); ?></span>&nbsp;&nbsp;<?php
 			if ($currency['Currency']['base'] && !empty($baseCurrency)) {
-				echo $this->Format->yesNo($currency['Currency']['base'], 'Basis-Wert');
+				echo $this->Format->yesNo($currency['Currency']['base'], ['onTitle' => __('Base value')]);
 			} else {
 				echo $this->Html->link($this->Format->cIcon('checkbox_ticked.gif', 'Zum Basis-Wert machen'), ['action' => 'base', $currency['Currency']['id']], ['escape' => false, 'confirm' => __('Sure?')]);
 			} ?>

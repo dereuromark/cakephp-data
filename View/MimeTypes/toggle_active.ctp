@@ -1,1 +1,1 @@
-<?php echo $this->Html->link($this->Format->yesNo($ajaxToggle['MimeType']['active'], 'Active', 'Inactive', 1), ['action' => 'toggleActive', $ajaxToggle['MimeType']['id']], ['escape' => false]);
+<?php echo $this->Html->link($this->Format->yesNo($ajaxToggle['MimeType']['active'], ['onTitle' => 'Active', 'offTitle' => 'Inactive']), ['action' => 'toggleActive', $ajaxToggle['MimeType']['id']], ['escape' => false]);

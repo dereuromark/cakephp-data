@@ -83,7 +83,7 @@ foreach ($mimeTypes as $mimeType):
 		</td>
 		<td>
 			<span class="ajaxToggling" id="ajaxToggle-<?php echo $mimeType['MimeType']['id']?>">
-			<?php echo $this->Html->link($this->Format->yesNo($mimeType['MimeType']['active'], 'Active', 'Inactive', 1), ['action' => 'toggleActive', $mimeType['MimeType']['id']], ['escape' => false]);?>
+			<?php echo $this->Html->link($this->Format->yesNo($mimeType['MimeType']['active'], ['onTitle' => 'Active', 'offTitle' => 'Inactive']), ['action' => 'toggleActive', $mimeType['MimeType']['id']], ['escape' => false]);?>
 			</span>
 		</td>
 		<td>

@@ -76,7 +76,7 @@ foreach ($languages as $language):
 		</td>
 		<?php } ?>
 		<td>
-			<?php echo $this->Format->yesNo($language['Language']['status'], __('Active'), __('Inactive')); ?>
+			<?php echo $this->Format->yesNo($language['Language']['status'], ['onTitle' => __('Active'), 'offTitle' => __('Inactive')]); ?>
 		</td>
 		<td>
 			<?php echo $this->Datetime->niceDate($language['Language']['modified']); ?>

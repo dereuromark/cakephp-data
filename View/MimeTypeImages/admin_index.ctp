@@ -51,7 +51,7 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 		</td>
 		<td>
 			<span class="ajaxToggling" id="ajaxToggle-<?php echo $mimeTypeImage['MimeTypeImage']['id']?>">
-			<?php echo $this->Html->link($this->Format->yesNo($mimeTypeImage['MimeTypeImage']['active'], 'Active', 'Inactive', 1), ['action' => 'toggleActive', $mimeTypeImage['MimeTypeImage']['id']], ['escape' => false]);?>
+			<?php echo $this->Html->link($this->Format->yesNo($mimeTypeImage['MimeTypeImage']['active'], ['onTitle' => __('Active'), 'offTitle' => __('Inactive')]), ['action' => 'toggleActive', $mimeTypeImage['MimeTypeImage']['id']], ['escape' => false]);?>
 			</span>
 
 			<?php
@@ -89,7 +89,7 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 				if (isset($imageWidth) && isset($imageHeight) && $imageWidth != 16 && $imageHeight != 16) {
 					echo $this->Format->cIcon(ICON_SIZE, ['title' => 'Größe ist nicht 16x16, sondern ' . $imageWidth . 'x' . $imageHeight . '! Anpassen...']);
 				} elseif (empty($mimeTypeImage['MimeTypeImage']['ext']) || !empty($mimeTypeImage['MimeTypeImage']['warning'])) {
-					echo $this->Html->link($this->Format->cIcon('google.gif', 'Bei Google suchen'), 'http://images.google.de/images?q=' . $mimeTypeImage['MimeTypeImage']['name'] . '+imagesize%3A16x16&btnG=Bilder-Suche', ['escape' => false]);
+					echo $this->Html->link($this->Format->cIcon('google.gif', ['title' => 'Bei Google suchen']), 'http://images.google.de/images?q=' . $mimeTypeImage['MimeTypeImage']['name'] . '+imagesize%3A16x16&btnG=Bilder-Suche', ['escape' => false]);
 				}
 			?>
 		</td>
