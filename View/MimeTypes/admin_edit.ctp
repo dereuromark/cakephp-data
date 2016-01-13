@@ -1,4 +1,4 @@
-<?php $this->Html->script('jquery/plugins/jquery.dd.js', false);?>
+<?php $this->Html->script('jquery/plugins/jquery.dd.js', ['inline' => false]);?>
 <script type="text/javascript">
 	var imagePath = baseurl + 'img/<?php echo IMG_MIMETYPES?>';
 </script>

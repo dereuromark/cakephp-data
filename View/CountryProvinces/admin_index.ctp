@@ -1,5 +1,5 @@
-<?php $this->Html->script('highslide/highslide.js', false)?>
-<?php $this->Html->script('highslide/highslide_config', false)?>
+<?php $this->Html->script('highslide/highslide.js', ['inline' => false])?>
+<?php $this->Html->script('highslide/highslide_config', ['inline' => false])?>
 
 <div class="page index">
 
