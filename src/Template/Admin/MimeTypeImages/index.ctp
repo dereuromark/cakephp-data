@@ -51,7 +51,7 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 
 			<?php
 				if (!empty($mimeTypeImage['MimeTypeImage']['warning'])) {
-				echo ' ' . $this->Format->icon('warning', 'Icon konnte nicht gefunden werden!');
+				echo ' ' . $this->Format->icon('warning', ['title' => 'Icon konnte nicht gefunden werden!']);
 				}
 
 			?>
