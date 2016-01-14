@@ -22,7 +22,7 @@
 
 <h2><?php echo __('Country Provinces');?></h2>
 
-<table class="list">
+<table class="table list">
 <tr>
 	<th><?php echo $this->Paginator->sort('country_id');?></th>
 	<th><?php echo $this->Paginator->sort('name');?></th>

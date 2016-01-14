@@ -8,7 +8,7 @@ ISO List contains <?php echo count($isoList['values']); ?> languages.
 Local DB contains <?php echo count($languages); ?> locales.
 <br /><br />
 
-<table class="list"><tr>
+<table class="table list"><tr>
 	<th>&nbsp;</th>
 	<th><?php echo $isoList['heading'][0];?></th>
 	<th><?php echo $isoList['heading'][1];?></th>

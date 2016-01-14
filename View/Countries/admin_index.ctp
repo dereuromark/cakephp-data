@@ -17,7 +17,7 @@ echo $this->Form->end();
 </div>
 <?php } ?>
 
-<table class="list">
+<table class="table list">
 <tr>
 	<th>&nbsp;</th>
 	<th><?php echo $this->Paginator->sort('name');?></th>

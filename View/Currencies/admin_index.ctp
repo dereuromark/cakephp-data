@@ -12,7 +12,7 @@ echo $this->Form->end();
 </div>
 <?php } ?>
 
-<table class="list">
+<table class="table list">
 <tr>
 	<th><?php echo $this->Paginator->sort('name');?></th>
 	<th><?php echo $this->Paginator->sort('code');?></th>
@@ -61,7 +61,7 @@ foreach ($currencies as $currency):
 			if ($currency['Currency']['base'] && !empty($baseCurrency)) {
 				echo $this->Format->yesNo($currency['Currency']['base'], ['onTitle' => __('Base value')]);
 			} else {
-				echo $this->Html->link($this->Format->cIcon('checkbox_ticked.gif', 'Zum Basis-Wert machen'), ['action' => 'base', $currency['Currency']['id']], ['escape' => false, 'confirm' => __('Sure?')]);
+				echo $this->Html->link($this->Format->cIcon('checkbox_ticked.gif', ['title' => 'Zum Basis-Wert machen']), ['action' => 'base', $currency['Currency']['id']], ['escape' => false, 'confirm' => __('Sure?')]);
 			} ?>
 		</td>
 		<td>

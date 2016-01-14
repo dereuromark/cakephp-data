@@ -1,7 +1,7 @@
 <div class="page index">
 <h2><?php echo __('Countries');?></h2>
 
-<table class="list">
+<table class="table list">
 <tr>
 	<th><?php echo $this->Paginator->sort('sort', $this->Format->cIcon(ICON_ORDER), ['escape' => false]);?></th>
 	<th><?php echo $this->Paginator->sort('name');?></th>

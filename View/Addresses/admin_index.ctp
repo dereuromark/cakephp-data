@@ -1,7 +1,7 @@
 <div class="page index">
 <h2><?php echo __('Addresses');?></h2>
 
-<table class="list">
+<table class="table list">
 <tr>
 	<th><?php echo $this->Paginator->sort('country_id');?></th>
 <?php if (Configure::read('Address.CountryProvince')) { ?>
@@ -59,7 +59,7 @@ foreach ($addresses as $address):
 					$markers = [];
 					$markers[] = ['lat' => $address['Address']['lat'], 'lng' => $address['Address']['lng'], 'color' => 'green'];
 					$mapMarkers = $this->GoogleMapV3->staticMarkers($markers);
-					echo $this->Html->link($this->Format->cIcon(ICON_DETAILS, ['title' => 'Zeigen']), $this->GoogleMapV3->staticMapUrl(['center' => $address['Address']['lat'] . ',' . $address['Address']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 12]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
+					echo $this->Html->link($this->Format->cIcon(ICON_DETAILS, ['title' => __('Show')]), $this->GoogleMapV3->staticMapUrl(['center' => $address['Address']['lat'] . ',' . $address['Address']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 12]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
 				}
 			 ?>
 		</td>

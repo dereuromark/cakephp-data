@@ -6,7 +6,7 @@ echo $this->Paginator->counter([
 'format' => __('Page %page% of %pages%, showing %current% records out of %count% total')
 ]);
 ?></p>
-<table class="list">
+<table class="table list">
 <tr>
 	<th><?php echo __('Icon');?></th>
 	<th><?php echo $this->Paginator->sort('name');?></th>
@@ -56,7 +56,7 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 
 			<?php
 				if (!empty($mimeTypeImage['MimeTypeImage']['warning'])) {
-				echo ' ' . $this->Format->icon('warning', 'Icon konnte nicht gefunden werden!');
+				echo ' ' . $this->Format->icon('warning', ['title' => 'Icon konnte nicht gefunden werden!']);
 				}
 
 			?>

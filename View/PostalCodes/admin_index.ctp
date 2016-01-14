@@ -12,7 +12,7 @@
 
 	<h2><?php echo __('Postal Codes');?></h2>
 
-	<table class="list">
+	<table class="table list">
 		<tr>
 		<th><?php echo $this->Paginator->sort('code');?></th>
 		<th><?php echo $this->Paginator->sort('country_id');?></th>
