@@ -109,7 +109,7 @@ class MimeTypeHelper extends AppHelper {
 			# add special types? (file not found icon, default fallback icon, generic file ext icon...)
 
 			if (!$handle->write(serialize($content), 'w', true)) {
-				die('ERROR');
+				throw new CakeException('ERROR writing');
 			}
 		} else {
 			//$handle->open('r', true);

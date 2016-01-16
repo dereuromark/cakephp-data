@@ -83,11 +83,7 @@ class CountryProvince extends DataAppModel {
 				$this->id = $id;
 				if (!$this->save($saveArray, true, ['id', 'lat', 'lng', 'abbr', 'country_id'])) {
 					if ($data['country_province_code'] !== 'DC') {
-						echo returns($this->id);
-						pr($res);
-						pr($data);
-						pr($saveArray);
-						die(returns($this->validationErrors));
+						throw new CakeException(print_r($this->validationErrors, true));
 					}
 				}
 				return true;
@@ -132,11 +128,7 @@ class CountryProvince extends DataAppModel {
 						//pr($data); pr($geocoder->debug()); die();
 
 						if ($data['country_province_code'] !== 'DC') {
-							echo returns($this->id);
-							pr($res);
-							pr($data);
-							pr($saveArray);
-							die(returns($this->validationErrors));
+							throw new CakeException(print_r($this->validationErrors, true));
 						}
 					}
 					$geocoder->pause();

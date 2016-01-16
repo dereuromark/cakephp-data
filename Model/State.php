@@ -52,18 +52,23 @@ class State extends DataAppModel {
 		]
 	];
 
-	public function getStateId($conditions) {
+	/**
+	 * @param array $conditions
+	 * @return int
+	 * @throws \Exception
+	 */
+	public function getStateId(array $conditions) {
 		if ($id = $this->fieldByConditions('id', $conditions)) {
 			return $id;
 		}
 		$this->create();
 		$this->set($conditions);
 
-		if ($this->save(null, false)) {
+		if ($this->save(null, ['validate' => false])) {
 			return $this->id;
-		} else {
-			die('ERROR: ' . returns($this->validationErrors));
 		}
+
+		throw new Exception(print_r($this->validationErrors, true));
 	}
 
 	public function getListByCountry($cid = null) {
@@ -112,13 +117,9 @@ class State extends DataAppModel {
 				}
 
 				$this->id = $id;
-				if (!$this->save($saveArray, true, ['id', 'lat', 'lng', 'abbr', 'country_id'])) {
+				if (!$this->save($saveArray, ['fieldList' => ['id', 'lat', 'lng', 'abbr', 'country_id']])) {
 					if ($data['country_province_code'] !== 'DC') {
-						echo returns($this->id);
-						pr($res);
-						pr($data);
-						pr($saveArray);
-						die(returns($this->validationErrors));
+						throw new CakeException(print_r($this->validationErrors, true));
 					}
 				}
 				return true;
@@ -151,7 +152,7 @@ class State extends DataAppModel {
 					}
 
 					$this->id = $res[$this->alias]['id'];
-					if ($this->save($saveArray, true, ['lat', 'lng', 'abbr', 'country_id'])) {
+					if ($this->save($saveArray, ['fieldList' => ['lat', 'lng', 'abbr', 'country_id']])) {
 						$count++;
 
 						if (!empty($saveArray['abbr']) && $saveArray['abbr'] != $res[$this->alias]['abbr']) {
@@ -163,11 +164,7 @@ class State extends DataAppModel {
 						//pr($data); pr($geocoder->debug()); die();
 
 						if ($data['country_province_code'] !== 'DC') {
-							echo returns($this->id);
-							pr($res);
-							pr($data);
-							pr($saveArray);
-							die(returns($this->validationErrors));
+							throw new CakeException(print_r($this->validationErrors, true));
 						}
 					}
 					$geocoder->pause();

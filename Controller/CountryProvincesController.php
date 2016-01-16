@@ -22,7 +22,7 @@ class CountryProvincesController extends DataAppController {
 	public function update_select($id = null) {
 		//$this->autoRender = false;
 		if (!$this->Common->isPosted() || !$this->request->is('ajax')) {
-			die(__('not a valid request'));
+			throw new MethodNotAllowedException(__('not a valid request'));
 		}
 		$this->layout = 'ajax';
 		$countryProvinces = $this->CountryProvince->getListByCountry($id);

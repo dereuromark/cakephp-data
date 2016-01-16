@@ -153,17 +153,16 @@ class Country extends DataAppModel {
 
 				if (!empty($data['country_code']) && mb_strlen($data['country_code']) === 3 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
 					$saveArray['iso3'] = $data['country_code'];
-					die(returns($saveArray));
+					throw new CakeException(print_r($saveArray, true));
 
 				} elseif (!empty($data['country_code']) && mb_strlen($data['country_code']) === 2 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
 					$saveArray['iso2'] = $data['country_code'];
-					die(returns($saveArray));
+					throw new CakeException(print_r($saveArray, true));
 				}
 
 				$this->id = $id;
-				if (!$this->save($saveArray, true, ['lat', 'lng', 'iso2', 'iso3'])) {
-					echo returns($this->id);
-					pr($res); pr($data); pr($saveArray); die(returns($this->validationErrors));
+				if (!$this->save($saveArray, ['fieldList' => ['lat', 'lng', 'iso2', 'iso3']])) {
+					throw new CakeException($this->id);
 				}
 				return true;
 			}
@@ -181,8 +180,7 @@ class Country extends DataAppModel {
 				if (!empty($res[$this->alias]['ori_name']) && $Geocoder->geocode($res[$this->alias]['ori_name']) || $res[$this->alias]['name'] != $res[$this->alias]['ori_name'] && $Geocoder->geocode($res[$this->alias]['name'])) {
 
 					$data = $Geocoder->getResult();
-					echo returns($res);
-					echo returns($data); die();
+					throw new CakeException('todo');
 					# seems to be very problematic: country "Georgien" results in "Georgia, USA"
 
 					$saveArray = [];
@@ -192,15 +190,15 @@ class Country extends DataAppModel {
 
 					if (!empty($data['country_code']) && mb_strlen($data['country_code']) === 3 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
 						$saveArray['iso3'] = $data['country_code'];
-						//die(returns($saveArray));
+						//die(print_r($saveArray));
 
 					} elseif (!empty($data['country_code']) && mb_strlen($data['country_code']) === 2 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
 						$saveArray['iso2'] = $data['country_code'];
-						//die(returns($saveArray));
+						//die(print_r($saveArray));
 					}
 
 					$this->id = $res[$this->alias]['id'];
-					if ($this->save($saveArray, true, ['lat', 'lng', 'iso2', 'iso3'])) {
+					if ($this->save($saveArray, ['fieldList' => ['lat', 'lng', 'iso2', 'iso3']])) {
 						$count++;
 
 						if (!empty($saveArray['iso2']) && $saveArray['iso2'] != $res[$this->alias]['iso2']) {
@@ -252,18 +250,17 @@ class Country extends DataAppModel {
 				if (!empty($res[$this->alias]['ori_name']) && $Geocoder->geocode($res[$this->alias]['ori_name']) || $res[$this->alias]['name'] != $res[$this->alias]['ori_name'] && $Geocoder->geocode($res[$this->alias]['name'])) {
 
 					$data = $Geocoder->getResult();
-					echo returns($res);
-					echo returns($data); die();
+					throw new CakeException('todo');
 					# seems to be very problematic: country "Georgien" results in "Georgia, USA"
 
 					$saveArray = [];
 					if (!empty($data['country_code']) && mb_strlen($data['country_code']) === 3 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
 						$saveArray['iso3'] = $data['country_code'];
-						//die(returns($saveArray));
+						//die(print_r($saveArray));
 
 					} elseif (!empty($data['country_code']) && mb_strlen($data['country_code']) === 2 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
 						$saveArray['iso2'] = $data['country_code'];
-						//die(returns($saveArray));
+						//die(print_r($saveArray));
 					}
 
 					$this->id = $res[$this->alias]['id'];
@@ -315,7 +312,7 @@ class Country extends DataAppModel {
 			$res = $this->find('first', ['fields' => [$this->alias . '.id', $this->alias . '.name', $this->alias . '.ori_name'], 'conditions' => [$this->alias . '.id' => $id], 'contain' => []]);
 			if (!empty($res[$this->alias]['ori_name']) && ($data = $Geocoder->geocode($res[$this->alias]['ori_name'])) || $res[$this->alias]['name'] != $res[$this->alias]['ori_name'] && ($data = $Geocoder->geocode($res[$this->alias]['name']))) {
 
-				//echo returns($data); echo returns($Geocoder->debug()); die();
+				//echo print_r($data); echo print_r($Geocoder->debug()); die();
 
 				$this->id = $id;
 				$this->save($data, true, ['lat', 'lng']);
@@ -327,13 +324,13 @@ class Country extends DataAppModel {
 			$count = 0;
 			foreach ($results as $res) {
 				if (!empty($res[$this->alias]['ori_name']) && ($data = $Geocoder->geocode($res[$this->alias]['ori_name'])) || $res[$this->alias]['name'] != $res[$this->alias]['ori_name'] && ($data = $Geocoder->geocode($res[$this->alias]['name']))) {
-					//echo returns($data); echo returns($Geocoder->debug()); die();
+					//echo print_r($data); echo print_r($Geocoder->debug()); die();
 
 					$this->id = $res[$this->alias]['id'];
 					if ($this->save($data, true, ['lat', 'lng'])) {
 						$count++;
 					} else {
-						//echo returns($data); echo returns($Geocoder->debug()); die();
+						//echo print_r($data); echo print_r($Geocoder->debug()); die();
 					}
 					$Geocoder->pause();
 				}

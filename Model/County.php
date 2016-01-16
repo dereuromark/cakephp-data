@@ -17,7 +17,7 @@ class County extends DataAppModel {
 		$this->create();
 
 		$this->set($data);
-		return $this->save(null, false);
+		return $this->save(null, ['validate' => false]);
 	}
 
 	/*
