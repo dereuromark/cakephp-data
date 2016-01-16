@@ -97,7 +97,7 @@ foreach ($languages as $language):
 
 <br /><br />
 Important Note:<br />
-The language flags are actually country flags. Due to incompatabities between countries and languages they should not be used on public sites. They are only meant to be a help (eye catcher) for admin views.
+The language flags are actually country flags. Due to incompatibilities between countries and languages they should not be used on public sites. They are only meant to be a help (eye catcher) for admin views.
 <br /><br />
 
 <div class="actions">
@@ -105,7 +105,7 @@ The language flags are actually country flags. Due to incompatabities between co
 		<li><?php echo $this->Html->link(__('Add %s', __('Language')), ['action' => 'add']); ?></li>
 		<li><?php echo $this->Html->link(__('Compare %s', __('Languages')), ['action' => 'compare_to_iso_list']); ?></li>
 		<li><?php echo $this->Html->link(__('Compare %s to core', __('Languages')), ['action' => 'compare_iso_list_to_core']); ?></li>
-		<li><?php echo $this->Html->link(__('Import %s from Core', __('Language')), ['action' => 'import_from_core'], [], __('Sure?')); ?></li>
-		<li><?php echo $this->Html->link(__('Set primary languages active'), ['action' => 'set_primary_languages_active'], [], __('Sure?')); ?></li>
+		<li><?php echo $this->Html->link(__('Import %s from Core', __('Language')), ['action' => 'import_from_core'], ['confirm' => __('Sure?')]); ?></li>
+		<li><?php echo $this->Html->link(__('Set primary languages active'), ['action' => 'set_primary_languages_active'], ['confirm' => __('Sure?')]); ?></li>
 	</ul>
 </div>
