@@ -1,11 +1,6 @@
 <div class="page index">
 <h2><?php echo __('Mime Type Images');?></h2>
-<p>
-<?php
-echo $this->Paginator->counter([
-'format' => __('Page %page% of %pages%, showing %current% records out of %count% total')
-]);
-?></p>
+
 <table class="table list">
 <tr>
 	<th><?php echo __('Icon');?></th>

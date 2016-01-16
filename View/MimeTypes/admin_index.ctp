@@ -1,12 +1,6 @@
 <div class="page index">
 <h2><?php echo __('Mime Types');?></h2>
-<p>
-<?php
 
-echo $this->Paginator->counter([
-'format' => __('Page %page% of %pages%, showing %current% records out of %count% total')
-]);
-?></p>
 
 <div class="searchWrapper">
 <?php echo $this->Form->create('MimeType', ['action' => 'index']);?>
