@@ -5,7 +5,7 @@ App::uses('GeolocateLib', 'Tools.Lib');
 
 class Country extends DataAppModel {
 
-	public $order = ['Country.sort' => 'DESC', 'Country.name' => 'ASC'];
+	public $order = ['sort' => 'DESC', 'name' => 'ASC'];
 
 	public $actsAs = ['Tools.Sortable'];
 
@@ -264,7 +264,7 @@ class Country extends DataAppModel {
 					}
 
 					$this->id = $res[$this->alias]['id'];
-					if ($this->save($saveArray, true, ['iso2', 'iso3'])) {
+					if ($this->save($saveArray, ['fieldList' => ['iso2', 'iso3']])) {
 						$count++;
 
 						if (!empty($saveArray['iso2']) && $saveArray['iso2'] != $res[$this->alias]['iso2']) {
@@ -315,7 +315,7 @@ class Country extends DataAppModel {
 				//echo print_r($data); echo print_r($Geocoder->debug()); die();
 
 				$this->id = $id;
-				$this->save($data, true, ['lat', 'lng']);
+				$this->save($data, ['fieldList' => ['lat', 'lng']]);
 				return true;
 			}
 		} else {
@@ -327,7 +327,7 @@ class Country extends DataAppModel {
 					//echo print_r($data); echo print_r($Geocoder->debug()); die();
 
 					$this->id = $res[$this->alias]['id'];
-					if ($this->save($data, true, ['lat', 'lng'])) {
+					if ($this->save($data, ['fieldList' => ['lat', 'lng']])) {
 						$count++;
 					} else {
 						//echo print_r($data); echo print_r($Geocoder->debug()); die();

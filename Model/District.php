@@ -7,7 +7,7 @@ class District extends DataAppModel {
 		'min_accuracy' => 3, 'address' => ['address'], 'before' => 'save', 'real' => false, 'required' => false
 	], 'Data.Slugged' => ['mode' => 'ascii', 'case' => 'low']];
 
-	public $order = ['District.name' => 'ASC'];
+	public $order = ['name' => 'ASC'];
 
 	public $validate = [
 		'name' => [

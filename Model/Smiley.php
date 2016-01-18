@@ -3,7 +3,7 @@ App::uses('DataAppModel', 'Data.Model');
 
 class Smiley extends DataAppModel {
 
-	public $order = ['Smiley.is_base' => 'DESC', 'Smiley.sort' => 'DESC'];
+	public $order = ['is_base' => 'DESC', 'sort' => 'DESC'];
 
 	public $validate = [
 		'smiley_cat_id' => [

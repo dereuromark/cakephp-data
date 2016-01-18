@@ -7,7 +7,7 @@ App::uses('GeocodeLib', 'Tools.Lib');
  */
 class CountryProvince extends DataAppModel {
 
-	public $order = ['CountryProvince.name' => 'ASC'];
+	public $order = ['name' => 'ASC'];
 
 	public $validate = [
 		'country_id' => ['numeric'],
@@ -81,7 +81,7 @@ class CountryProvince extends DataAppModel {
 				}
 
 				$this->id = $id;
-				if (!$this->save($saveArray, true, ['id', 'lat', 'lng', 'abbr', 'country_id'])) {
+				if (!$this->save($saveArray, ['fieldList' => ['id', 'lat', 'lng', 'abbr', 'country_id']])) {
 					if ($data['country_province_code'] !== 'DC') {
 						throw new CakeException(print_r($this->validationErrors, true));
 					}
@@ -116,7 +116,7 @@ class CountryProvince extends DataAppModel {
 					}
 
 					$this->id = $res[$this->alias]['id'];
-					if ($this->save($saveArray, true, ['lat', 'lng', 'abbr', 'country_id'])) {
+					if ($this->save($saveArray, ['fieldList' => ['lat', 'lng', 'abbr', 'country_id']])) {
 						$count++;
 
 						if (!empty($saveArray['abbr']) && $saveArray['abbr'] != $res[$this->alias]['abbr']) {

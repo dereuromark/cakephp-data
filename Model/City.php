@@ -3,7 +3,7 @@ App::uses('DataAppModel', 'Data.Model');
 
 class City extends DataAppModel {
 
-	public $order = ['City.name' => 'ASC'];
+	public $order = ['name' => 'ASC'];
 
 	public $validate = [
 		'name' => [

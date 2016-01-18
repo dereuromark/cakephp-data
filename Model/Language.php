@@ -11,7 +11,7 @@ App::uses('HtmlDomLib', 'Tools.Lib');
  */
 class Language extends DataAppModel {
 
-	public $order = ['Language.name' => 'ASC'];
+	public $order = ['name' => 'ASC'];
 
 	public $validate = [
 		'name' => [

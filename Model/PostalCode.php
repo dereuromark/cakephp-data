@@ -5,7 +5,7 @@ class PostalCode extends DataAppModel {
 
 	public $displayField = 'code';
 
-	public $order = ['PostalCode.code' => 'ASC'];
+	public $order = ['code' => 'ASC'];
 
 	public $actsAs = ['Tools.Geocoder' => ['min_accuracy' => 2, 'address' => ['code', 'country_name'], 'formatted_address' => 'official_address', 'real' => false, 'before' => 'validate', 'allow_inconclusive' => true]];
 

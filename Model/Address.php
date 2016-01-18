@@ -7,7 +7,7 @@ class Address extends DataAppModel {
 
 	public $actsAs = ['Tools.Geocoder' => ['real' => false, 'override' => true, 'allow_inconclusive' => true]]; //'before'=>'validate'
 
-	public $order = ['Address.type_id' => 'ASC', 'Address.formatted_address' => 'ASC'];
+	public $order = ['type_id' => 'ASC', 'formatted_address' => 'ASC'];
 
 	public $config = [];
 

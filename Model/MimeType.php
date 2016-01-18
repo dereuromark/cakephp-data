@@ -5,7 +5,7 @@ App::uses('EmailLib', 'Tools.Lib');
 
 class MimeType extends DataAppModel {
 
-	public $order = ['MimeType.modified' => 'DESC'];
+	public $order = ['modified' => 'DESC'];
 
 	public $validate = [
 		'name' => [

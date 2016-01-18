@@ -4,7 +4,7 @@ App::uses('File', 'Utility');
 
 class MimeTypeImage extends DataAppModel {
 
-	public $order = ['MimeTypeImage.modified' => 'DESC'];
+	public $order = ['modified' => 'DESC'];
 
 	public $validate = [
 		'name' => [ # e.g. "exe"

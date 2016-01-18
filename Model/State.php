@@ -6,7 +6,7 @@ class State extends DataAppModel {
 
 	public $actsAs = ['Tools.Slugged' => ['case' => 'low', 'mode' => 'ascii', 'unique' => false, 'overwrite' => false]];
 
-	public $order = ['State.name' => 'ASC'];
+	public $order = ['name' => 'ASC'];
 
 	public $validate = [
 		'country_id' => ['numeric'],

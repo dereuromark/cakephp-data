@@ -4,7 +4,7 @@ App::uses('CurrencyComponent', 'Data.Lib');
 
 class Currency extends DataAppModel {
 
-	public $order = ['Currency.base' => 'DESC', 'Currency.code' => 'ASC'];
+	public $order = ['base' => 'DESC', 'code' => 'ASC'];
 
 	public $validate = [
 		'name' => [

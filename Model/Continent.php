@@ -5,7 +5,7 @@ class Continent extends DataAppModel {
 
 	public $actsAs = ['Tree'];
 
-	public $order = ['Continent.name' => 'ASC'];
+	public $order = ['name' => 'ASC'];
 
 	public $validate = [
 		'name' => [
