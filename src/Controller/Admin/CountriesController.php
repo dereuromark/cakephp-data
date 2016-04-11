@@ -168,7 +168,7 @@ class CountriesController extends DataAppController {
 		$countries = $this->paginate();
 		$this->set(compact('countries'));
 
-		$this->helpers = array_merge($this->helpers, ['Geo.GoogleMapV3']);
+		$this->helpers = array_merge($this->helpers, ['Geo.GoogleMap']);
 	}
 
 	public function view($id = null) {

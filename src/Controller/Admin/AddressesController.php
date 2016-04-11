@@ -17,7 +17,7 @@ class AddressesController extends DataAppController {
 	public function index() {
 		$addresses = $this->paginate();
 		$this->set(compact('addresses'));
-		$this->helpers[] = 'Geo.GoogleMapV3';
+		$this->helpers[] = 'Geo.GoogleMap';
 	}
 
 	public function view($id = null) {
@@ -26,7 +26,7 @@ class AddressesController extends DataAppController {
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->set(compact('address'));
-		$this->helpers[] = 'Geo.GoogleMapV3';
+		$this->helpers[] = 'Geo.GoogleMap';
 	}
 
 	public function add() {

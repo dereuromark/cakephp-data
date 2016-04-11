@@ -42,7 +42,7 @@ class PostalCodesController extends DataAppController {
 		}
 
 		$this->set(compact('ipData'));
-		$this->helpers = array_merge($this->helpers, ['Geo.GoogleMapV3']);
+		$this->helpers = array_merge($this->helpers, ['Geo.GoogleMap']);
 		$this->render('geolocate');
 	}
 
