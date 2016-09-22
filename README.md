@@ -1,9 +1,9 @@
 # CakePHP Data Plugin
 [![Build Status](https://api.travis-ci.org/dereuromark/cakephp-data.svg)](https://travis-ci.org/dereuromark/cakephp-data)
-[![Coverage Status](https://coveralls.io/repos/dereuromark/cakephp-data/badge.png)](https://coveralls.io/r/dereuromark/cakephp-data)
+[![Coverage Status](https://coveralls.io/repos/dereuromark/cakephp-data/badge.svg)](https://coveralls.io/r/dereuromark/cakephp-data)
 [![Minimum PHP Version](http://img.shields.io/badge/php-%3E%3D%205.4-8892BF.svg)](https://php.net/)
-[![License](https://poser.pugx.org/dereuromark/cakephp-data/license.png)](https://packagist.org/packages/dereuromark/cakephp-data)
-[![Total Downloads](https://poser.pugx.org/dereuromark/cakephp-data/d/total.png)](https://packagist.org/packages/dereuromark/cakephp-data)
+[![License](https://poser.pugx.org/dereuromark/cakephp-data/license.svg)](https://packagist.org/packages/dereuromark/cakephp-data)
+[![Total Downloads](https://poser.pugx.org/dereuromark/cakephp-data/d/total.svg)](https://packagist.org/packages/dereuromark/cakephp-data)
 [![Coding Standards](https://img.shields.io/badge/cs-PSR--2--R-yellow.svg)](https://github.com/php-fig-rectified/fig-rectified-standards)
 
 A Cake3.x Plugin containing several useful data models that can be used in many projects.
