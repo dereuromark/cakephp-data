@@ -24,13 +24,13 @@ class CountryProvincesController extends DataAppController {
 	 *
 	 * @return void
 	 */
-	public function update_select($id = null) {
+	public function updateSelect($id = null) {
 		//$this->autoRender = false;
 		if (!$this->request->is('post') || !$this->request->is('ajax')) {
 			throw new \Exception(__('not a valid request'));
 		}
 		$this->viewBuilder()->layout('ajax');
-		$countryProvinces = $this->CountryProvince->getListByCountry($id);
+		$countryProvinces = $this->CountryProvinces->getListByCountry($id);
 		$defaultFieldLabel = 'pleaseSelect';
 		if ($this->request->query('optional')) {
 			$defaultFieldLabel = 'doesNotMatter';
@@ -49,17 +49,10 @@ class CountryProvincesController extends DataAppController {
 		$this->paginate['order'] = ['CountryProvinces.name' => 'ASC'];
 		//$this->paginate['conditions'] = array('Country.status' => 1);
 
-		$cid = $this->_processCountry($cid);
+		$this->_processCountry($cid);
 
-		if (Plugin::loaded('Search')) {
-			$this->CountryProvinces->addBehavior('Search.Searchable');
-			$this->Common->loadComponent('Search.Prg');
-
-			$this->Prg->commonProcess();
-			$countryProvinces = $this->paginate($this->CountryProvinces->find('searchable', $this->Prg->parsedParams()));
-		} else {
-			$countryProvinces = $this->paginate();
-		}
+		$query = $this->CountryProvinces->find();
+		$countryProvinces = $this->paginate($query);
 
 		$countries = $this->CountryProvinces->Countries->active('list');
 		$this->set(compact('countryProvinces', 'countries'));

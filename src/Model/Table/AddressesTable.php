@@ -292,7 +292,7 @@ class AddressesTable extends Table {
 	 */
 	public function getByType($type = 'all', $id = null, $addressType = null) {
 		if ($id === null) {
-			$id = UID;
+			$id = $this->AuthUser->id();
 		}
 		if ($addressType === null) {
 			$addressType = self::TYPE_MAIN;
