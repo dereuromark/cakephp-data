@@ -23,7 +23,8 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Data\\": "src"
+			"Data\\": "src",
+			"Data\\Test\\Fixture": "tests/Fixture"
 		}
 	},
 	"autoload-dev": {
