@@ -16,7 +16,7 @@
 		"php": ">=5.5",
 		"cakephp/cakephp": "~3.2",
 		"dereuromark/cakephp-tools": "~1.1",
-		"dereuromark/cakephp-geo": "dev-master"
+		"dereuromark/cakephp-geo": "~1.0"
 	},
 	"require-dev": {
 		"yangqi/htmldom": "dev-master"
