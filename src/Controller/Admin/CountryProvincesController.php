@@ -118,7 +118,7 @@ class CountryProvincesController extends DataAppController {
 				$this->Flash->error(__('record add not saved'));
 			}
 		} else {
-			$cid = $this->Session->read('CountryProvince.cid');
+			$cid = $this->request->session()->read('CountryProvince.cid');
 			if (!empty($cid)) {
 				$this->request->data['CountryProvince']['country_id'] = $cid;
 			}
@@ -201,13 +201,13 @@ class CountryProvincesController extends DataAppController {
 		$saveCid = true;
 		if (empty($cid)) {
 			$saveCid = false;
-			$cid = $this->Session->read('CountryProvince.cid');
+			$cid = $this->request->session()->read('CountryProvince.cid');
 		}
 		if (!empty($cid) && $cid < 0) {
-			$this->Session->delete('CountryProvince.cid');
+			$this->request->session()->delete('CountryProvince.cid');
 			$cid = null;
 		} elseif (!empty($cid) && $saveCid) {
-			$this->Session->write('CountryProvince.cid', $cid);
+			$this->request->session()->write('CountryProvince.cid', $cid);
 		}
 
 		if (!empty($cid)) {

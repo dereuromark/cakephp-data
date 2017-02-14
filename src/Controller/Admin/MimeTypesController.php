@@ -124,12 +124,12 @@ class MimeTypesController extends DataAppController {
 	 function _searchConditions($conditions = []) {
 		$model = $this->MimeType->alias;
 
-		$sessionSearch = $this->Session->read($model . '.search');
+		$sessionSearch = $this->request->session()->read($model . '.search');
 		$fieldStr = '';
 		$searchStr = '';
 
 		if (!empty($this->request->params['named']['clear']) && $this->request->params['named']['clear'] === 'search') {
-			$this->Session->delete($model . '.search');
+			$this->request->session()->delete($model . '.search');
 		} else {
 
 		if (!empty($this->request->data) && !empty($this->request->data['Form']['field'])) {
@@ -152,7 +152,7 @@ class MimeTypesController extends DataAppController {
 		$this->set(compact('fields', 'searchStr'));
 
 		if (!empty($searchStr)) {
-			$this->Session->write($model . '.search', ['search' => $searchStr, 'field' => $fieldStr]);
+			$this->request->session()->write($model . '.search', ['search' => $searchStr, 'field' => $fieldStr]);
 
 			$conditions['or'][$model . '.name LIKE'] = '%' . $searchStr . '%';
 			$conditions['or'][$model . '.ext LIKE'] = '%' . $searchStr . '%';

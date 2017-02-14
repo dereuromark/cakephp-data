@@ -6,7 +6,7 @@ use Cake\Event\Event;
 
 class DataAppController extends AppController {
 
-	public $components = ['Session', 'Tools.Common'];
+	public $components = ['Tools.Common'];
 
 	public $helpers = ['Tools.Common', 'Tools.Format', 'Tools.Time', 'Tools.Number', 'Tools.Text', 'Data.Data'];
 

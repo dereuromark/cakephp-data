@@ -31,14 +31,14 @@ class PostalCodesController extends DataAppController {
 	}
 
 	public function geolocate() {
-		if (($ipData = $this->Session->read('GeoLocation.data')) === null) {
+		if (($ipData = $this->request->session()->read('GeoLocation.data')) === null) {
 			$this->GeolocateLib = new GeolocateLib();
 			if ($this->GeolocateLib->locate()) {
 				$ipData = $this->GeolocateLib->getResult();
 			} else {
 				$ipData = [];
 			}
-			$this->Session->write('GeoLocation.data', $ipData);
+			$this->request->session()->write('GeoLocation.data', $ipData);
 		}
 
 		$this->set(compact('ipData'));

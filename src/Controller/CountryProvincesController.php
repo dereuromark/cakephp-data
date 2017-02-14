@@ -10,6 +10,9 @@ class CountryProvincesController extends DataAppController {
 
 	public $paginate = ['order' => ['CountryProvince.modified' => 'DESC']];
 
+	/**
+	 * @param Event $event
+	 */
 	public function beforeFilter(Event $event) {
 		parent::beforeFilter($event);
 
@@ -67,13 +70,13 @@ class CountryProvincesController extends DataAppController {
 		$saveCid = true;
 		if (empty($cid)) {
 			$saveCid = false;
-			$cid = $this->Session->read('CountryProvince.cid');
+			$cid = $this->request->session()->read('CountryProvince.cid');
 		}
 		if (!empty($cid) && $cid < 0) {
-			$this->Session->delete('CountryProvince.cid');
+			$this->request->session()->delete('CountryProvince.cid');
 			$cid = null;
 		} elseif (!empty($cid) && $saveCid) {
-			$this->Session->write('CountryProvince.cid', $cid);
+			$this->request->session()->write('CountryProvince.cid', $cid);
 		}
 
 		if (!empty($cid)) {
