@@ -200,7 +200,7 @@ class AddressesTable extends Table {
 
 		# add country name for geocoder
 		if (!empty($this->data['country_id'])) {
-			$this->data['country'] = $this->Country->field('name', ['id' => $this->data['country_id']]);
+			$this->data['country'] = $this->Countries->fieldByConditions('name', ['id' => $this->data['country_id']]);
 		}
 		if (!empty($this->data['postal_code'])) {
 			unset($this->validate['city']['notBlank']);

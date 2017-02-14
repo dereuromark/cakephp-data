@@ -48,6 +48,11 @@ class CurrenciesTable extends Table {
 		'active' => ['type' => 'value']
 	];
 
+	/**
+	 * @var CurrencyLib
+	 */
+	protected $CurrencyLib;
+
 	public function beforeValidate($options = []) {
 		$ret = parent::beforeValidate($options);
 
@@ -130,10 +135,10 @@ class CurrenciesTable extends Table {
 		foreach ($currencies as $currency) {
 			$value = $this->CurrencyLib->convert(1, $base['code'], $currency['code'], 4);
 			if ($value !== false) {
-				$this->id = $currency['id'];
-				$this->saveField('value', $value);
+				$id = $currency['id'];
+				$this->saveField($id, 'value', $value);
 			} else {
-				$this->log('Invalid Currency ' . $currency['code'], 'warning');
+				//$this->log('Invalid Currency ' . $currency['code'], 'warning');
 			}
 		}
 	}

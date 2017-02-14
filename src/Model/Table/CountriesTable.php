@@ -356,7 +356,7 @@ class CountriesTable extends Table {
 		if ($this->GeolocateLib->locate($ip)) {
 			$country = $this->GeolocateLib->getResult('country_code'); # iso2
 			if (!empty($country)) {
-				$c = $this->field('id', [$this->alias() . '.iso2' => $country]);
+				$c = $this->fieldByConditions('id', [$this->alias() . '.iso2' => $country]);
 				if (!empty($c)) {
 					return $c;
 				}

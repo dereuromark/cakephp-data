@@ -3,6 +3,7 @@ namespace Data\Model\Table;
 
 use Cake\Core\Configure;
 use Cake\Filesystem\File;
+use Tools\Mailer\Email;
 use Tools\Model\Table\Table;
 use Tools\Network\Email\Email;
 
@@ -98,23 +99,23 @@ class MimeTypesTable extends Table {
 	 * could be done on every upload/download = automagic sort by priority
 	 *
 	 * @param string|null $ext
-	 * @return void
+	 * @return bool
 	 */
 	public function push($ext = null) {
 		$type = $this->mimeTypeExists($ext);
 		if (!empty($type)) {
-			$this->id = $type['id'];
-			return $this->saveField('sort', $type['sort'] + 1);
+			$id = $type['id'];
+			return $this->saveField($id, 'sort', $type['sort'] + 1);
 		}
 		# insert this new extension
 		$data = ['ext' => $ext, 'name' => 'auto-added', 'sort' => 1];
-		$this->create();
-		if (!$this->save($data)) {
-			$this->log('problem with pushing new mimeType');
+		//$this->create();
+		$mimeType = $this->newEntity($data);
+		if (!$this->save($mimeType)) {
+			//$this->log('problem with pushing new mimeType');
 			return false;
 		}
 		# notify admin
-		//App::import('Controller', 'Data.MimeTypes');
 		$this->Email = new Email();
 		$this->Email->to(Configure::read('Config.adminEmail'), Configure::read('Config.adminEmailname'));
 		$this->Email->replyTo(Configure::read('Config.adminEmail'), Configure::read('Config.adminEmailname'));
@@ -126,7 +127,7 @@ class MimeTypesTable extends Table {
 		$this->Email->viewVars(compact('text'));
 
 		if (!$this->Email->send()) {
-			$this->log('problem with mailing to admin after pushing mimeType');
+			//$this->log('problem with mailing to admin after pushing mimeType');
 		}
 
 		return true;

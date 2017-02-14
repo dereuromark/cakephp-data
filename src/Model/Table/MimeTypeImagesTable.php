@@ -78,8 +78,8 @@ class MimeTypeImagesTable extends Table {
 
 			$types = $this->MimeType->find('all', ['fields' => ['id'], 'conditions' => ['mime_type_image_id' => $this->_del['id']]]);
 			foreach ($types as $type) {
-				$this->MimeType->id = $type[$this->MimeType->alias]['id'];
-				$this->MimeType->saveField('mime_type_image_id', 0);
+				$id = $type[$this->MimeType->alias]['id'];
+				$this->MimeType->saveField($id, 'mime_type_image_id', 0);
 				//pr ($type[$this->MimeType->alias]['id'].' del success');
 			}
 		}
