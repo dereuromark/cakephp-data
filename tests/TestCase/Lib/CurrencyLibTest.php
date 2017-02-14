@@ -7,6 +7,14 @@ use Tools\TestSuite\TestCase;
 
 class CurrencyLibTest extends TestCase {
 
+	/**
+	 * @var \Data\Lib\CurrencyLib|\PHPUnit_Framework_MockObject_MockObject
+	 */
+	protected $CurrencyLib;
+
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 
@@ -14,8 +22,6 @@ class CurrencyLibTest extends TestCase {
 	}
 
 	/**
-	 * CurrencyLibTest::testStartReset()
-	 *
 	 * @return void
 	 */
 	public function testStartReset() {
@@ -23,8 +29,6 @@ class CurrencyLibTest extends TestCase {
 	}
 
 	/**
-	 * CurrencyLibTest::testConvert()
-	 *
 	 * @return void
 	 */
 	public function testConvert() {
@@ -37,8 +41,6 @@ class CurrencyLibTest extends TestCase {
 	}
 
 	/**
-	 * CurrencyLibTest::testIsAvailable()
-	 *
 	 * @return void
 	 */
 	public function testIsAvailable() {
@@ -50,8 +52,6 @@ class CurrencyLibTest extends TestCase {
 	}
 
 	/**
-	 * CurrencyLibTest::testTable()
-	 *
 	 * @return void
 	 */
 	public function testTable() {
@@ -65,8 +65,6 @@ class CurrencyLibTest extends TestCase {
 	}
 
 	/**
-	 * CurrencyLibTest::testHistory()
-	 *
 	 * @return void
 	 */
 	public function testHistory() {
@@ -75,8 +73,6 @@ class CurrencyLibTest extends TestCase {
 	}
 
 	/**
-	 * CurrencyLibTest::testReset()
-	 *
 	 * @return void
 	 */
 	public function testReset() {

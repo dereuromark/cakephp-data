@@ -14,9 +14,9 @@
 	],
 	"require": {
 		"php": ">=5.5",
-		"cakephp/cakephp": "~3.2",
-		"dereuromark/cakephp-tools": "~1.1",
-		"dereuromark/cakephp-geo": "~1.0"
+		"cakephp/cakephp": "^3.2",
+		"dereuromark/cakephp-tools": "^1.1",
+		"dereuromark/cakephp-geo": "^1.0"
 	},
 	"require-dev": {
 		"yangqi/htmldom": "dev-master"
@@ -30,10 +30,17 @@
 	"autoload-dev": {
 		"psr-4": {
 			"Data\\Test\\": "tests",
+			"TestApp\\": "tests/test_app/src",
 			"Cake\\Test\\": "vendor/cakephp/cakephp/tests"
 		}
 	},
 	"support": {
 		"source": "https://github.com/dereuromark/cakephp-data"
+	},
+	"scripts": {
+		"setup": "[ ! -f phpunit.phar ] && wget https://phar.phpunit.de/phpunit.phar",
+		"test": "php phpunit.phar",
+		"cs-check": "phpcs -p --standard=vendor/fig-r/psr2r-sniffer/PSR2R/ruleset.xml --ignore=/cakephp-data/vendor/,/tmp/,/logs/,/tests/test_files/ --extensions=php ./",
+		"cs-fix": "phpcbf -v --standard=vendor/fig-r/psr2r-sniffer/PSR2R/ruleset.xml --ignore=/cakephp-data/vendor/,/tmp/,/logs/,/tests/test_files --extensions=php ./"
 	}
 }

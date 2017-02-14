@@ -70,7 +70,7 @@ foreach ($countries as $country):
 				$markers = [];
 				$markers[] = ['lat' => $country['Country']['lat'], 'lng' => $country['Country']['lng'], 'color' => 'green'];
 				$mapMarkers = $this->GoogleMap->staticMarkers($markers);
-				echo ' ' . $this->Html->link($this->Format->icon(ICON_DETAILS, [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $country['Country']['lat'] . ',' . $country['Country']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 3]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
+				echo ' ' . $this->Html->link($this->Format->icon('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $country['Country']['lat'] . ',' . $country['Country']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 3]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
 			}
 
 			?>

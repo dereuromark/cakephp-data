@@ -4,6 +4,7 @@ namespace Data\Model\Table;
 use App\I18n\L10n;
 use Cake\Cache\Cache;
 use Cake\Core\App;
+use Data\Model\Entity\Language;
 use Tools\HtmlDom\HtmlDom;
 use Tools\Model\Table\Table;
 
@@ -76,7 +77,7 @@ class LanguagesTable extends Table {
 	 */
 	public function getActive($type = 'all') {
 		$options = [
-			'conditions' => ['status' => self::STATUS_ACTIVE],
+			'conditions' => ['status' => Language::STATUS_ACTIVE],
 		];
 		return $this->find($type, $options);
 	}

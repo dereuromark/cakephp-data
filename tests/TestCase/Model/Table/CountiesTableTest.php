@@ -36,6 +36,8 @@ class CountiesTableTest extends TestCase {
 	 */
 	public function testBasicSave() {
 		$data = [
+			'official_id' => 'foobar',
+			'rank' => 5,
 			'name' => 'Foo Bar'
 		];
 		$entity = $this->Counties->newEntity($data);

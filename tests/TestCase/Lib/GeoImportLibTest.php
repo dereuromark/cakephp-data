@@ -12,10 +12,19 @@ use Cake\Cache\Cache;
  */
 class GeoImportLibTest extends TestCase {
 
+	/**
+	 * @var array
+	 */
 	public $fixtures = ['plugin.data.countries'];
 
+	/**
+	 * @var \Data\Lib\GeoImportLib|\PHPUnit_Framework_MockObject_MockObject
+	 */
 	public $GeoImport;
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 
@@ -24,13 +33,16 @@ class GeoImportLibTest extends TestCase {
 			return;
 		}
 
-		$this->GeoImport = $this->getMock('Data\Lib\GeoImportLib', ['_getFromUrl']);
+		$this->GeoImport = $this->getMockBuilder('Data\Lib\GeoImportLib')->setMethods(['_getFromUrl'])->getMock();
 		$this->path = Plugin::path('Data') . 'tests' . DS . 'test_files' . DS . 'html' . DS;
 		// Liste-der-St-C3-A4dte-in-der-Schweiz-action-edit-section-4.html
 
 		Cache::clear();
 	}
 
+	/**
+	 * @return void
+	 */
 	public function testImportCountiesCH() {
 		if (!$this->isDebug()) {
 			$this->GeoImport->expects($this->once())
@@ -43,6 +55,9 @@ class GeoImportLibTest extends TestCase {
 		//debug($res);
 	}
 
+	/**
+	 * @return void
+	 */
 	public function testImportCH() {
 		if (!$this->isDebug()) {
 			$this->GeoImport->expects($this->at(0))

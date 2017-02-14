@@ -8,6 +8,14 @@ use Cake\Core\Plugin;
 
 class CurrencyBitcoinLibTest extends TestCase {
 
+	/**
+	 * @var \Data\Lib\CurrencyBitcoinLib|\PHPUnit_Framework_MockObject_MockObject
+	 */
+	protected $CurrencyBitcoin;
+
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 
@@ -16,7 +24,7 @@ class CurrencyBitcoinLibTest extends TestCase {
 			return;
 		}
 
-		$this->CurrencyBitcoin = $this->getMock('Data\Lib\CurrencyBitcoinLib', ['_get']);
+		$this->CurrencyBitcoin = $this->getMockBuilder('Data\Lib\CurrencyBitcoinLib')->setMethods(['_get'])->getMock();
 		$this->path = Plugin::path('Data') . 'tests' . DS . 'test_files' . DS . 'json' . DS;
 	}
 

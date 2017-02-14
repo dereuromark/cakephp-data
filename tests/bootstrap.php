@@ -1,8 +1,5 @@
 <?php
 
-require dirname(__DIR__) . '/vendor/cakephp/cakephp/src/basics.php';
-require dirname(__DIR__) . '/vendor/autoload.php';
-
 if (!defined('DS')) {
 	define('DS', DIRECTORY_SEPARATOR);
 }
@@ -13,30 +10,26 @@ if (!defined('WINDOWS')) {
 		define('WINDOWS', false);
 	}
 }
-
-define('ROOT', dirname(__DIR__));
-define('APP_DIR', 'src');
-
-define('APP', rtrim(sys_get_temp_dir(), DS) . DS . APP_DIR . DS);
-if (!is_dir(APP)) {
-	mkdir(APP, 0770, true);
-}
-
-define('TMP', ROOT . DS . 'tmp' . DS);
-if (!is_dir(TMP)) {
-	mkdir(TMP, 0770, true);
-}
-
-define('CONFIG', dirname(__FILE__) . DS . 'config' . DS);
-define('LOGS', TMP . 'logs' . DS);
-define('CACHE', TMP . 'cache' . DS);
-
-define('CAKE_CORE_INCLUDE_PATH', ROOT . '/vendor/cakephp/cakephp');
-define('CORE_PATH', CAKE_CORE_INCLUDE_PATH . DS);
+// Path constants to a few helpful things.
+define('ROOT', dirname(__DIR__) . DS);
+define('CAKE_CORE_INCLUDE_PATH', ROOT . 'vendor' . DS . 'cakephp' . DS . 'cakephp');
+define('CORE_PATH', ROOT . 'vendor' . DS . 'cakephp' . DS . 'cakephp' . DS);
 define('CAKE', CORE_PATH . 'src' . DS);
+define('TESTS', ROOT . 'tests');
+define('APP', ROOT . 'tests' . DS . 'test_app' . DS);
+define('APP_DIR', 'test_app');
+define('WEBROOT_DIR', 'webroot');
+define('TMP', sys_get_temp_dir() . DS);
+define('CONFIG', APP . 'config' . DS);
+define('WWW_ROOT', APP);
+define('CACHE', TMP);
+define('LOGS', TMP);
+
+require ROOT . '/vendor/autoload.php';
+require CORE_PATH . 'config/bootstrap.php';
 
 Cake\Core\Configure::write('App', [
-	'namespace' => 'App'
+	'namespace' => 'TestApp'
 ]);
 
 Cake\Core\Configure::write('debug', true);
@@ -64,9 +57,9 @@ $cache = [
 
 Cake\Cache\Cache::config($cache);
 
-//needed?
-Cake\Core\Plugin::load('Data', ['path' => ROOT . DS]);
-//Cake\Core\Plugin::load('Tools', ['path' => ROOT . DS . 'plugins' . DS . 'Tools' . DS]);
+Cake\Core\Plugin::load('Data', ['path' => ROOT . DS, 'autoload' => true, 'routes' => true]);
+
+class_alias(\Cake\Controller\Controller::class, 'App\Controller\AppController');
 
 // Ensure default test connection is defined
 if (!getenv('db_class')) {

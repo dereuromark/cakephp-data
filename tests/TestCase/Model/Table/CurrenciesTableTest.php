@@ -7,21 +7,29 @@ use Tools\TestSuite\TestCase;
 
 class CurrenciesTableTest extends TestCase {
 
+	/**
+	 * @var array
+	 */
 	public $fixtures = [
 		'plugin.data.currencies'
 	];
 
+	/**
+	 * @var \Data\Model\Table\CurrenciesTable
+	 */
 	public $Currencies;
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 
 		$this->Currencies = TableRegistry::get('Data.Currencies');
-		$this->Currencies->CurrencyLib = $this->getMock('Data\Lib\CurrencyLib');
+		$this->Currencies->CurrencyLib = $this->getMockBuilder('Data\Lib\CurrencyLib')->getMock();
 	}
 
 	/**
-	 *
 	 * @return void
 	 */
 	public function testBasicFind() {

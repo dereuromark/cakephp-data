@@ -8,18 +8,19 @@ use Cake\Event\Event;
 
 class AddressesController extends DataAppController {
 
-	public $paginate = [];
-
-	public function beforeFilter(Event $event) {
-		parent::beforeFilter($event);
-	}
-
+	/**
+	 * @return void
+	 */
 	public function index() {
 		$addresses = $this->paginate();
 		$this->set(compact('addresses'));
 		$this->helpers[] = 'Geo.GoogleMap';
 	}
 
+	/**
+	 * @param int|null $id
+	 * @return \Cake\Network\Response|null
+	 */
 	public function view($id = null) {
 		if (empty($id) || !($address = $this->Address->find('first', ['conditions' => ['Address.id' => $id]]))) {
 			$this->Flash->error(__('invalid record'));
@@ -29,11 +30,14 @@ class AddressesController extends DataAppController {
 		$this->helpers[] = 'Geo.GoogleMap';
 	}
 
+	/**
+	 * @return \Cake\Network\Response|null
+	 */
 	public function add() {
 		if ($this->Common->isPosted()) {
 			$this->Address->create();
 			if ($this->Address->save($this->request->data)) {
-				$var = $this->request->data['Address']['formatted_address'];
+				$var = $this->request->data['formatted_address'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
 				return $this->redirect(['action' => 'index']);
 			}
@@ -42,7 +46,7 @@ class AddressesController extends DataAppController {
 		} else {
 			# TODO: geolocate via IP? only for frontend
 			$options = ['Country.iso2' => 'DE'];
-			$this->request->data['Address']['country_id'] = $this->Address->Country->field('id', $options);
+			$this->request->data['country_id'] = $this->Address->Country->field('id', $options);
 		}
 
 		$countries = $this->Address->Country->find('list');
@@ -61,7 +65,7 @@ class AddressesController extends DataAppController {
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->Address->save($this->request->data)) {
-				$var = $this->request->data['Address']['formatted_address'];
+				$var = $this->request->data['formatted_address'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
 				return $this->redirect(['action' => 'index']);
 			}
@@ -103,7 +107,7 @@ class AddressesController extends DataAppController {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
-		$var = $address['Address']['formatted_address'];
+		$var = $address['formatted_address'];
 
 		if ($this->Address->delete($id)) {
 			$this->Flash->success(__('record del {0} done', h($var)));
@@ -119,7 +123,7 @@ class AddressesController extends DataAppController {
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->Address->touch($id);
-		$var = $address['Address']['formatted_address'];
+		$var = $address['formatted_address'];
 		$this->Flash->success(__('Address \'{0}\' marked as last used', h($var)));
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}

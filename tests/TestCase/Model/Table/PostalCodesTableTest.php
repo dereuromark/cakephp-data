@@ -7,12 +7,21 @@ use Tools\TestSuite\TestCase;
 
 class PostalCodesTableTest extends TestCase {
 
+	/**
+	 * @var array
+	 */
 	public $fixtures = [
 		'plugin.data.postal_codes'
 	];
 
+	/**
+	 * @var \Data\Model\Table\PostalCodesTable
+	 */
 	public $PostalCodes;
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 

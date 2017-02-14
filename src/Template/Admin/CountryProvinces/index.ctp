@@ -50,7 +50,7 @@ foreach ($countryProvinces as $countryProvince):
 				$markers = [];
 				$markers[] = ['lat' => $countryProvince['CountryProvince']['lat'], 'lng' => $countryProvince['CountryProvince']['lng'], 'color' => 'green'];
 				$mapMarkers = $this->GoogleMap->staticMarkers($markers);
-				echo ' ' . $this->Html->link($this->Format->icon(ICON_DETAILS, [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $countryProvince['CountryProvince']['lat'] . ',' . $countryProvince['CountryProvince']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 5]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
+				echo ' ' . $this->Html->link($this->Format->icon('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $countryProvince['CountryProvince']['lat'] . ',' . $countryProvince['CountryProvince']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 5]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
 			}
 
 			?>

@@ -59,7 +59,7 @@ foreach ($addresses as $address):
 					$markers = [];
 					$markers[] = ['lat' => $address['Address']['lat'], 'lng' => $address['Address']['lng'], 'color' => 'green'];
 					$mapMarkers = $this->GoogleMap->staticMarkers($markers);
-					echo $this->Html->link($this->Format->icon(ICON_DETAILS, 'Zeigen'), $this->GoogleMap->staticMapUrl(['center' => $address['Address']['lat'] . ',' . $address['Address']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 12]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
+					echo $this->Html->link($this->Format->icon('view', 'Zeigen'), $this->GoogleMap->staticMapUrl(['center' => $address['Address']['lat'] . ',' . $address['Address']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 12]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
 				}
 			 ?>
 		</td>

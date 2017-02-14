@@ -2,7 +2,8 @@
 
 namespace Data\Test\TestCase\Model\Table;
 
-use Data\Model\Address;
+use App\Model\Entity\Address;
+use App\Model\Table\AddressesTable;
 use Tools\TestSuite\TestCase;
 use Cake\ORM\TableRegistry;
 
@@ -12,6 +13,9 @@ class AddressesTableTest extends TestCase {
 		'plugin.data.addresses'
 	];
 
+	/**
+	 * @var AddressesTable
+	 */
 	public $Addresses;
 
 	public function setUp() {
@@ -30,4 +34,11 @@ class AddressesTableTest extends TestCase {
 		$this->assertNotEmpty($result);
 	}
 
+	/**
+	 * @return void
+	 */
+	public function testAdd() {
+		$result = $this->Addresses->add(1, 1, Address::TYPE_TO, ['email' => 'foo@bar.de']);
+		debug($result);
+	}
 }
