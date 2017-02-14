@@ -2,16 +2,22 @@
 
 namespace Data\Test\TestCase\Model\Table;
 
-use Data\Model\City;
-use Tools\TestSuite\TestCase;
 use Cake\ORM\TableRegistry;
+use Data\Model\Table\CitiesTable;
+use Tools\TestSuite\TestCase;
 
 class CitiesTableTest extends TestCase {
 
+	/**
+	 * @var array
+	 */
 	public $fixtures = [
 		'plugin.data.cities'
 	];
 
+	/**
+	 * @var CitiesTable
+	 */
 	public $Cities;
 
 	public function setUp() {

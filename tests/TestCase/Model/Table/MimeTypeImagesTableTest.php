@@ -7,6 +7,9 @@ use Tools\TestSuite\TestCase;
 
 class MimeTypeImagesTableTest extends TestCase {
 
+	/**
+	 * @var array
+	 */
 	public $fixtures = [
 		'plugin.data.mime_type_images'
 	];
@@ -20,7 +23,6 @@ class MimeTypeImagesTableTest extends TestCase {
 	}
 
 	/**
-	 *
 	 * @return void
 	 */
 	public function testBasicFind() {

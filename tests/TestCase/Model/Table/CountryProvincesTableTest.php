@@ -7,6 +7,9 @@ use Tools\TestSuite\TestCase;
 
 class CountryProvincesTableTest extends TestCase {
 
+	/**
+	 * @var array
+	 */
 	public $fixtures = [
 		'plugin.data.country_provinces'
 	];
@@ -20,11 +23,11 @@ class CountryProvincesTableTest extends TestCase {
 	}
 
 	/**
-	 *
 	 * @return void
 	 */
 	public function testBasicFind() {
 		$result = $this->CountryProvinces->find()->first();
 		$this->assertNotEmpty($result);
 	}
+
 }

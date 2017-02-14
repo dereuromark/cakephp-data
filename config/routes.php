@@ -1,8 +1,10 @@
 <?php
 
-use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
+use Cake\Routing\Route\DashedRoute;
+
+Router::reload();
 
 Router::prefix('admin', function (RouteBuilder $routes) {
 		$routes->plugin('Data', function (RouteBuilder $routes) {

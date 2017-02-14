@@ -5,7 +5,6 @@ use Cake\TestSuite\Fixture\TestFixture;
 
 /**
  * CitiesFixture
- *
  */
 class CitiesFixture extends TestFixture {
 
@@ -54,4 +53,5 @@ class CitiesFixture extends TestFixture {
 			'modified' => '0000-00-00 00:00:00'
 		],
 	];
+
 }

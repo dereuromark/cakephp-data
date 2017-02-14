@@ -2,12 +2,14 @@
 
 namespace Data\Test\TestCase\Model\Table;
 
-use Data\Model\District;
-use Tools\TestSuite\TestCase;
 use Cake\ORM\TableRegistry;
+use Tools\TestSuite\TestCase;
 
 class DistrictsTableTest extends TestCase {
 
+	/**
+	 * @var array
+	 */
 	public $fixtures = [
 		'plugin.data.districts'
 	];
@@ -21,7 +23,6 @@ class DistrictsTableTest extends TestCase {
 	}
 
 	/**
-	 *
 	 * @return void
 	 */
 	public function testBasicFind() {

@@ -1,19 +1,20 @@
 <?php
 namespace Data\Controller\Admin;
 
-use Data\Controller\DataAppController;
-use Cake\Event\Event;
 use Cake\Core\Plugin;
+use Cake\Event\Event;
+use Data\Controller\DataAppController;
+use Exception;
 
 class CountryProvincesController extends DataAppController {
 
-	public $paginate = ['order' => ['CountryProvince.modified' => 'DESC']];
+	public $paginate = ['order' => ['CountryProvinces.modified' => 'DESC']];
 
 	public function beforeFilter(Event $event) {
 		parent::beforeFilter($event);
 
 		if (isset($this->Auth)) {
-			$this->Auth->allow('index', 'update_select');
+			$this->Auth->allow(['index', 'update_select']);
 		}
 	}
 
@@ -26,7 +27,7 @@ class CountryProvincesController extends DataAppController {
 	public function updateSelect($id = null) {
 		//$this->autoRender = false;
 		if (!$this->request->is('post') || !$this->request->is('ajax')) {
-			throw new \Exception(__('not a valid request'));
+			throw new Exception(__('not a valid request'));
 		}
 		$this->viewBuilder()->layout('ajax');
 		$countryProvinces = $this->CountryProvinces->getListByCountry($id);
@@ -114,9 +115,9 @@ class CountryProvincesController extends DataAppController {
 				$name = $this->request->data['CountryProvince']['name'];
 				$this->Flash->success(__('record add {0} saved', h($name)));
 				return $this->redirect(['action' => 'index']);
-			} else {
-				$this->Flash->error(__('record add not saved'));
 			}
+
+			$this->Flash->error(__('record add not saved'));
 		} else {
 			$cid = $this->request->session()->read('CountryProvince.cid');
 			if (!empty($cid)) {
@@ -143,9 +144,9 @@ class CountryProvincesController extends DataAppController {
 				$name = $this->request->data['CountryProvince']['name'];
 				$this->Flash->success(__('record edit {0} saved', h($name)));
 				return $this->redirect(['action' => 'index']);
-			} else {
-				$this->Flash->error(__('record edit not saved'));
 			}
+
+			$this->Flash->error(__('record edit not saved'));
 		}
 		if (empty($this->request->data)) {
 			$this->request->data = $this->CountryProvinces->get($id);
@@ -182,10 +183,10 @@ class CountryProvincesController extends DataAppController {
 		if ($this->CountryProvinces->delete($id)) {
 			$this->Flash->success(__('record del {0} done', h($name)));
 			return $this->redirect(['action' => 'index']);
-		} else {
-			$this->Flash->error(__('record del {0} not done exception', $name));
-			return $this->redirect(['action' => 'index']);
 		}
+
+		$this->Flash->error(__('record del {0} not done exception', $name));
+		return $this->redirect(['action' => 'index']);
 	}
 
 	/****************************************************************************************

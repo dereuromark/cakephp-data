@@ -2,16 +2,32 @@
 
 namespace Data\Test\TestCase\Controller\Component;
 
+use Cake\Controller\ComponentRegistry;
+use Cake\Controller\Controller;
+use Cake\Event\Event;
 use Data\Controller\Component\CountryProvinceHelperComponent;
 use Tools\TestSuite\TestCase;
-use Cake\Controller\ComponentRegistry;
-use Cake\Event\Event;
-use Cake\Controller\Controller;
 
 class CountryProvinceHelperComponentTest extends TestCase {
 
+	/**
+	 * @var array
+	 */
 	public $fixtures = ['plugin.data.countries', 'plugin.data.country_provinces'];
 
+	/**
+	 * @var \App\Controller\AppController
+	 */
+	public $Controller;
+
+	/**
+	 * @var CountryProvinceHelperComponent
+	 */
+	public $CountryProvinceHelper;
+
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 
@@ -19,20 +35,24 @@ class CountryProvinceHelperComponentTest extends TestCase {
 		$this->CountryProvinceHelper = new CountryProvinceHelperComponent(new ComponentRegistry($this->Controller));
 	}
 
+	/**
+	 * @return void
+	 */
 	public function tearDown() {
 		parent::tearDown();
 	}
 
 	/**
-	 * CountryProvinceHelperComponentTest::testProvideData()
-	 *
 	 * @return void
 	 */
 	public function testProvideData() {
 		$event = new Event('Controller.startup', $this->Controller);
 		$this->CountryProvinceHelper->startup($event);
-		$result = $this->CountryProvinceHelper->provideData();
-		//debug($result);
+		$this->CountryProvinceHelper->provideData();
+
+		$viewVars = $this->Controller->viewVars;
+		$this->assertNotEmpty($viewVars['countries']);
+		$this->assertNotEmpty($viewVars['countryProvinces']);
 	}
 
 }

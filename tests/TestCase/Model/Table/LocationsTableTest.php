@@ -7,6 +7,9 @@ use Tools\TestSuite\TestCase;
 
 class LocationsTableTest extends TestCase {
 
+	/**
+	 * @var array
+	 */
 	public $fixtures = [
 		'plugin.data.locations'
 	];
@@ -20,7 +23,6 @@ class LocationsTableTest extends TestCase {
 	}
 
 	/**
-	 *
 	 * @return void
 	 */
 	public function testBasicFind() {

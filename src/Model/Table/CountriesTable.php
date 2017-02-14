@@ -1,10 +1,10 @@
 <?php
 namespace Data\Model\Table;
 
-use Cake\Core\Configure;
+use Exception;
 use Geo\Geocode\Geocode;
-use Tools\Model\Table\Table;
 use ToolsExtra\Lib\GeolocateLib;
+use Tools\Model\Table\Table;
 
 class CountriesTable extends Table {
 
@@ -99,7 +99,7 @@ class CountriesTable extends Table {
 	 * @return array
 	 */
 	public function active($type = 'all', $customOptions = []) {
-		$options = ['conditions' => [$this->alias() . '.status' => 1], ];
+		$options = ['conditions' => [$this->alias() . '.status' => 1]];
 		if (!empty($customOptions)) {
 			$options = array_merge($options, $customOptions);
 		}
@@ -121,7 +121,7 @@ class CountriesTable extends Table {
 	/**
 	 * Lat and lng + abbr if available!
 	 *
-	 * @param id
+	 * @param id|null
 	 * - NULL: update all records with missing coordinates only
 	 * - otherwise: specific update
 	 * @return bool Success
@@ -145,18 +145,18 @@ class CountriesTable extends Table {
 
 				if (!empty($data['country_code']) && mb_strlen($data['country_code']) === 3 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
 					$saveArray['iso3'] = $data['country_code'];
-					throw new \Exception(returns($saveArray));
+					throw new Exception(returns($saveArray));
 
 				} elseif (!empty($data['country_code']) && mb_strlen($data['country_code']) === 2 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
 					$saveArray['iso2'] = $data['country_code'];
-					throw new \Exception(returns($saveArray));
+					throw new Exception(returns($saveArray));
 				}
 
 				$this->id = $id;
 				if (!$this->save($saveArray, true, ['lat', 'lng', 'iso2', 'iso3'])) {
 					//echo returns($this->id);
 					//pr($res); pr($data); pr($saveArray); die(returns($this->validationErrors));
-					throw new \Exception();
+					throw new Exception();
 				}
 				return true;
 			}
@@ -282,7 +282,7 @@ class CountriesTable extends Table {
 	}
 
 	/**
-	 * @param id
+	 * @param id|null
 	 * - NULL: update all records with missing coordinates only
 	 * - otherwise: specific update
 	 * @deprecated but seems to have better lat/lng for countries...

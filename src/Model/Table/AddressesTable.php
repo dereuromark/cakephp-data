@@ -123,7 +123,8 @@ class AddressesTable extends Table {
 		],
 	];
 
-	public function __construct($id = false, $table = false, $ds = null) {
+	public function __construct(array $config = []) {
+		parent::__construct($config);
 
 		if ($config = Configure::read('Address')) {
 			$vars = ['displayField', 'order', 'actsAs', 'validate', 'belongsTo'];
@@ -140,18 +141,14 @@ class AddressesTable extends Table {
 			if (!empty($config['debug'])) {
 				$this->actsAs['Tools.Jsonable'] = ['fields' => ['debug'], 'map' => ['geocoder_result']];
 			}
-
-			$this->config = $config;
 		}
-
-		parent::__construct($id, $table, $ds);
 	}
 
 	public function primaryUnique(&$data) {
-		if (empty($this->data['foreign_id']) || $this->data['address_type_id'] != self::TYPE_MAIN) {
+		if (empty($this->data['foreign_id']) || $this->data['address_type_id'] != static::TYPE_MAIN) {
 			return true;
 		}
-		$conditions = ['foreign_id' => $this->data['foreign_id'], 'address_type_id' => self::TYPE_MAIN];
+		$conditions = ['foreign_id' => $this->data['foreign_id'], 'address_type_id' => static::TYPE_MAIN];
 		if (!empty($this->data['id'])) {
 			$conditions['user_id !='] = $this->data['id'];
 		}
@@ -280,22 +277,24 @@ class AddressesTable extends Table {
 
 	/**
 	 * Update last used timestamp
+	 *
+	 * @return void
 	 */
 	public function touch($addressId) {
 		$this->updateAll([$this->alias() . '.last_used' => 'NOW()'], [$this->alias() . '.id' => $addressId]);
 	}
 
 	/**
-	 * @param findType (defaults to all)
-	 * @param id (foreign id)
-	 * @param addressType (defaults to MAIN)
+	 * @param findType|string (defaults to all)
+	 * @param id|null (foreign id)
+	 * @param addressType|null (defaults to MAIN)
 	 */
 	public function getByType($type = 'all', $id = null, $addressType = null) {
 		if ($id === null) {
 			$id = $this->AuthUser->id();
 		}
 		if ($addressType === null) {
-			$addressType = self::TYPE_MAIN;
+			$addressType = static::TYPE_MAIN;
 		}
 		return $this->find($type, ['conditions' => ['foreign_id' => $id, 'address_type_id' => $addressType]]);
 	}
@@ -305,8 +304,8 @@ class AddressesTable extends Table {
 	 */
 	public static function addressTypes($value = null) {
 		$options = [
-			self::TYPE_MAIN => __('Main Residence'),
-			self::TYPE_OTHER => __('Other'),
+			static::TYPE_MAIN => __('Main Residence'),
+			static::TYPE_OTHER => __('Other'),
 
 		];
 		return parent::enum($value, $options);

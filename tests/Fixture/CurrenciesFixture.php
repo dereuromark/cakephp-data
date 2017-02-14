@@ -4,10 +4,8 @@ namespace Data\Test\Fixture;
 
 use Cake\TestSuite\Fixture\TestFixture;
 
-
 /**
  * CurrenciesFixture
- *
  */
 class CurrenciesFixture extends TestFixture {
 
@@ -158,4 +156,5 @@ class CurrenciesFixture extends TestFixture {
 			'modified' => '2011-07-16 15:12:33'
 		],
 	];
+
 }

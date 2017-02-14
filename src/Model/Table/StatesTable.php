@@ -63,9 +63,9 @@ class StatesTable extends Table {
 
 		if ($this->save(null, false)) {
 			return $this->id;
-		} else {
-			die('ERROR: ' . returns($this->validationErrors));
 		}
+
+		die('ERROR: ' . returns($this->validationErrors));
 	}
 
 	public function getListByCountry($cid = null) {
@@ -87,7 +87,7 @@ class StatesTable extends Table {
 	/**
 	 * Lat and lng + abbr if available!
 	 *
-	 * @param id
+	 * @param id|null
 	 * - NULL: update all records with missing coordinates only
 	 * - otherwise: specific update
 	 */

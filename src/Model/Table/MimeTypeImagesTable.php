@@ -126,7 +126,9 @@ class MimeTypeImagesTable extends Table {
 		return false;
 	}
 
-/** Static Enums **/
+	/**
+ * Static Enums
+ **/
 
 	/**
 	 * Static Model::method()
@@ -147,4 +149,5 @@ class MimeTypeImagesTable extends Table {
 		}
 		return $options;
 	}
+
 }

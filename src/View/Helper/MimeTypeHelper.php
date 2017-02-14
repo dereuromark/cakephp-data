@@ -1,9 +1,10 @@
 <?php
 namespace Data\View\Helper;
 
-use Cake\View\Helper;
 use Cake\Filesystem\File;
 use Cake\ORM\TableRegistry;
+use Cake\View\Helper;
+use Exception;
 
 if (!defined('FILE_CACHE')) {
 	define('FILE_CACHE', TMP);
@@ -11,16 +12,24 @@ if (!defined('FILE_CACHE')) {
 
 class MimeTypeHelper extends Helper {
 
+	/**
+	 * @var array
+	 */
 	public $helpers = ['Html'];
 
+	/**
+	 * @var array|null
+	 */
 	public $types = null;
 
 	/**
 	 * Special attr: filename (is then used in title instead of *)
 	 *
+	 * @param string|null $ext
+	 * @param array $attr
 	 * @return string
 	 */
-	public function icon($ext = null, $attr = null) {
+	public function icon($ext = null, $attr = []) {
 		if (empty($ext)) {
 			return '';
 		}
@@ -31,30 +40,27 @@ class MimeTypeHelper extends Helper {
 		$default = ['ext' => $ext, 'name' => 'Datei'];
 
 		foreach ($this->types as $t) {
-
 			if ($t['ext'] == $ext) {
 				if (!empty($t['img'])) {
 					return $this->formatIcon($t, $attr);
-				} else {
-					if (!empty($t['name'])) {
-						$default['name'] = $t['name'];
-					}
-					return $this->formatIcon($default, $attr);
 				}
-			}
 
+				if (!empty($t['name'])) {
+					$default['name'] = $t['name'];
+				}
+				return $this->formatIcon($default, $attr);
+			}
 		}
+
 		return $this->formatIcon($default, $attr);
 	}
 
 	/**
-	 * MimeTypeHelper::formatIcon()
-	 *
-	 * @param mixed $icon
-	 * @param mixed $attr
+	 * @param array $icon
+	 * @param array $attr
 	 * @return string
 	 */
-	public function formatIcon($icon = null, $attr = null) {
+	public function formatIcon($icon = null, $attr = []) {
 		$filename = '*';
 		if (!empty($attr['filename'])) {
 			$filename = $attr['filename'];
@@ -73,9 +79,12 @@ class MimeTypeHelper extends Helper {
 		return $this->Html->image($image, $imageAttr);
 	}
 
+	/**
+	 * @return array
+	 */
 	public function types() {
 		$this->getTypes();
-		return $this->types;
+		return (array)$this->types;
 	}
 
 	/**
@@ -117,7 +126,7 @@ class MimeTypeHelper extends Helper {
 			# add special types? (file not found icon, default fallback icon, generic file ext icon...)
 
 			if (!$handle->write(serialize($content), 'w', true)) {
-				throw new \Exception('Write error');
+				throw new Exception('Write error');
 			}
 		} else {
 			//$handle->open('r', true);

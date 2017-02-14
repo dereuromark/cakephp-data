@@ -2,11 +2,14 @@
 
 namespace Data\Test\TestCase\Model\Table;
 
-use Tools\TestSuite\TestCase;
 use Cake\ORM\TableRegistry;
+use Tools\TestSuite\TestCase;
 
 class SmileysTableTest extends TestCase {
 
+	/**
+	 * @var array
+	 */
 	public $fixtures = [
 		'plugin.data.smileys'
 	];
@@ -18,7 +21,6 @@ class SmileysTableTest extends TestCase {
 	}
 
 	/**
-	 *
 	 * @return void
 	 */
 	public function testBasicFind() {

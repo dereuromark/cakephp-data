@@ -3,7 +3,6 @@ namespace Data\Model\Table;
 
 use App\I18n\L10n;
 use Cake\Cache\Cache;
-use Cake\Core\App;
 use Data\Model\Entity\Language;
 use Tools\HtmlDom\HtmlDom;
 use Tools\Model\Table\Table;
@@ -12,7 +11,6 @@ use Tools\Model\Table\Table;
  * Languages and their locales
  * for details see
  * http://www.loc.gov/standards/iso639-2/php/code_list.php
- *
  */
 class LanguagesTable extends Table {
 
@@ -128,7 +126,7 @@ class LanguagesTable extends Table {
 	/**
 	 * Maps ISO 639-3 to I10n::__l10nCatalog (iso2?)
 	 *
-	 * @param lang: iso3
+	 * @param lang:|null iso3
 	 * @return lang: iso2
 	 */
 	public function iso3ToIso2($iso3 = null) {
@@ -146,7 +144,7 @@ class LanguagesTable extends Table {
 	}
 
 	/**
-	 * @param lang: iso2 or iso3
+	 * @param lang:|null iso2 or iso3
 	 * @return mixed: string if lang passed (or false on failure) - or complete array if null is passed
 	 */
 	public function catalog($lang = null) {
@@ -175,7 +173,7 @@ class LanguagesTable extends Table {
 
 			$languageArray[($max - 1)] = array_shift(explode(' ', $languageArray[($max - 1)]));
 			foreach ($languageArray as $key => $val) {
-				$languageArray[$key] = trim(str_replace(["&lt;", "&gt;", '&amp;', '&#039;', '&quot;', '&nbsp;'], ["<", ">", '&', '\'', '"', ' '], $val));
+				$languageArray[$key] = trim(str_replace(['&lt;', '&gt;', '&amp;', '&#039;', '&quot;', '&nbsp;'], ['<', '>', '&', '\'', '"', ' '], $val));
 			}
 
 			$languages = [];

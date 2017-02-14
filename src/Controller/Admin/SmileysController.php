@@ -27,9 +27,9 @@ class SmileysController extends DataAppController {
 				$var = $this->Smiley->id; //$this->request->data['Smiley']['name'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
 				return $this->Common->autoRedirect(['action' => 'index']);
-			} else {
-				$this->Flash->error(__('formContainsErrors'));
 			}
+
+			$this->Flash->error(__('formContainsErrors'));
 		}
 	}
 
@@ -43,9 +43,9 @@ class SmileysController extends DataAppController {
 				$var = $id; //$this->request->data['Smiley']['name'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
-			} else {
-				$this->Flash->error(__('formContainsErrors'));
 			}
+
+			$this->Flash->error(__('formContainsErrors'));
 		}
 		if (empty($this->request->data)) {
 			$this->request->data = $smiley;

@@ -3,10 +3,8 @@ namespace Data\Test\Fixture;
 
 use Cake\TestSuite\Fixture\TestFixture;
 
-
 /**
  * CountryProvincesFixture
- *
  */
 class CountryProvincesFixture extends TestFixture {
 
@@ -124,4 +122,5 @@ class CountryProvincesFixture extends TestFixture {
 			'modified' => '2009-11-27 04:10:49'
 		],
 	];
+
 }

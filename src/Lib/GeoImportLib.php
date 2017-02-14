@@ -1,7 +1,6 @@
 <?php
 /**
  * Import data into Country model
- *
  */
 namespace Data\Lib;
 

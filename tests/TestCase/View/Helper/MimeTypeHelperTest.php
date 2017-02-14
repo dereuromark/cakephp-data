@@ -8,10 +8,19 @@ use Tools\TestSuite\TestCase;
 
 class MimeTypeHelperTest extends TestCase {
 
+	/**
+	 * @var \Data\View\Helper\MimeTypeHelper
+	 */
 	public $MimeTypeHelper;
 
+	/**
+	 * @var array
+	 */
 	public $fixtures = ['plugin.Data.MimeTypes', 'plugin.Data.MimeTypeImages'];
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 
@@ -19,13 +28,11 @@ class MimeTypeHelperTest extends TestCase {
 	}
 
 	/**
-	 * MimeTypeHelperTest::testGetTypes()
-	 *
 	 * @return void
 	 */
 	public function testGetTypes() {
 		$result = $this->MimeTypeHelper->getTypes();
-		//debug($result);
+		$this->assertFalse($result);
 		//$this->assertInstanceOf('MimeTypeHelper', $this->MimeTypeHelper);
 	}
 

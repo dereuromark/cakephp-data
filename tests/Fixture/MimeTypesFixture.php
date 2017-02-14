@@ -1,7 +1,6 @@
 <?php
 /**
  * MimeTypesFixture
- *
  */
 namespace Data\Test\Fixture;
 
@@ -52,4 +51,5 @@ class MimeTypesFixture extends TestFixture {
 			'alt_type' => 'Lorem ipsum dolor sit amet'
 		]
 	];
+
 }

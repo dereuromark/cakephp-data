@@ -3,10 +3,8 @@ namespace Data\Test\Fixture;
 
 use Cake\TestSuite\Fixture\TestFixture;
 
-
 /**
  * PostalCodesFixture
- *
  */
 class PostalCodesFixture extends TestFixture {
 
@@ -16,7 +14,7 @@ class PostalCodesFixture extends TestFixture {
 	 * @var array
 	 */
 	public $fields = [
-		'id' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 36],
+		'id' => ['type' => 'uuid', 'null' => false, 'default' => null, 'length' => 36],
 		'code' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 5],
 		'country_id' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 2, 'collate' => null],
 		'lat' => ['type' => 'float', 'null' => false, 'default' => '0.0000', 'length' => '9,4', 'collate' => null],
@@ -34,15 +32,16 @@ class PostalCodesFixture extends TestFixture {
 	 * @var array
 	 */
 	public $records = [
-	/*
-		'id' => '1',
-		'code' => '81234',
-		'country_id' => 1,
-		'lat' => 11,
-		'lng' => 12,
-		'official_adress' => 'Foo bar',
-		'created' => null,
-		'modified' => null
-	*/
+		[
+			'id' => 'e23',
+			'code' => '81234',
+			'country_id' => 1,
+			'lat' => 11,
+			'lng' => 12,
+			'official_address' => 'Foo bar',
+			'created' => null,
+			'modified' => null,
+		],
 	];
+
 }

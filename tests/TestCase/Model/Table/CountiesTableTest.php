@@ -2,11 +2,14 @@
 
 namespace Data\Test\TestCase\Model\Table;
 
-use Tools\TestSuite\TestCase;
 use Cake\ORM\TableRegistry;
+use Tools\TestSuite\TestCase;
 
 class CountiesTableTest extends TestCase {
 
+	/**
+	 * @var array
+	 */
 	public $fixtures = [
 		'plugin.data.counties', 'plugin.data.states',
 	];

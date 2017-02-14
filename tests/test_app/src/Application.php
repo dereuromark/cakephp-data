@@ -1,6 +1,6 @@
 <?php
 
-namespace TestApp;
+namespace App;
 
 use Cake\Http\BaseApplication;
 use Cake\Routing\Middleware\RoutingMiddleware;

@@ -2,16 +2,22 @@
 
 namespace Data\Test\TestCase\Model\Table;
 
-use Data\Model\State;
-use Tools\TestSuite\TestCase;
 use Cake\ORM\TableRegistry;
+use Data\Model\Table\StatesTable;
+use Tools\TestSuite\TestCase;
 
 class StatesTableTest extends TestCase {
 
+	/**
+	 * @var array
+	 */
 	public $fixtures = [
 		'plugin.data.states'
 	];
 
+	/**
+	 * @var StatesTable
+	 */
 	public $States;
 
 	public function setUp() {
@@ -21,8 +27,6 @@ class StatesTableTest extends TestCase {
 	}
 
 	/**
-	 * StatesTableTest::testBasicFind()
-	 *
 	 * @return void
 	 */
 	public function testBasicFind() {

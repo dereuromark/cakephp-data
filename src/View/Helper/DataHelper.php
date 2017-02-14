@@ -1,14 +1,13 @@
 <?php
 namespace Data\View\Helper;
 
-use Cake\View\Helper;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Utility\Inflector;
+use Cake\View\Helper;
 
 /**
  * DataHelper with basic html snippets
- *
  */
 class DataHelper extends Helper {
 
@@ -82,7 +81,7 @@ class DataHelper extends Helper {
 	 * Custom paths possible:
 	 * 'imagePath' => 'PluginName./img/country_flags/',
 	 *
-	 * @param string $icon iso2 code (e.g. 'de' or 'gb')
+	 * @param string|null $icon iso2 code (e.g. 'de' or 'gb')
 	 * @return string
 	 */
 	public function countryIcon($icon = null, $returnFalseOnFailure = false, $options = [], $attr = []) {

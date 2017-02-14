@@ -26,19 +26,23 @@ class PostalCodesTableTest extends TestCase {
 		parent::setUp();
 
 		$this->PostalCodes = TableRegistry::get('Data.PostalCodes');
-
-		$entity = $this->PostalCodes->newEntity(['code' => '81222']);
-		$this->assertEmpty($entity->errors());
-		$result = $this->PostalCodes->save($entity);
-		$this->assertNotEmpty($result);
 	}
 
 	/**
-	 *
 	 * @return void
 	 */
 	public function testBasicFind() {
 		$result = $this->PostalCodes->find()->first();
+		$this->assertNotEmpty($result);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testBasicSave() {
+		$entity = $this->PostalCodes->newEntity(['code' => '81222']);
+		$this->assertEmpty($entity->errors());
+		$result = $this->PostalCodes->save($entity);
 		$this->assertNotEmpty($result);
 	}
 

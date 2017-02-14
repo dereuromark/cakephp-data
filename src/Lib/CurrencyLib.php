@@ -48,7 +48,7 @@ class CurrencyLib {
 	 * @param $amount float
 	 * @param $fromCurrency string
 	 * @param $toCurrency string
-	 * @param $decimals integer[optional]default=2
+	 * @param $decimals|int integer[optional]default=2
 	 */
 	public function convert($amount, $fromCurrency, $toCurrency, $decimals = 2) {
 		//Get the rate table
@@ -65,8 +65,8 @@ class CurrencyLib {
 	 * Returns an array of rates in comparison the the $base currency given to $decimals
 	 * number of decimal places.
 	 *
-	 * @param $base string[optional]default='EUR'
-	 * @param $decimals integer[optional]default=2
+	 * @param $base|string string[optional]default='EUR'
+	 * @param $decimals|int integer[optional]default=2
 	 * @return array table or boolean FALSE on failure
 	 */
 	public function table($base = 'EUR', $decimals = 2) {
@@ -94,7 +94,7 @@ class CurrencyLib {
 	/**
 	 * CurrencyLib::history()
 	 *
-	 * @param string $date Date in Format XXXX-XX-XX
+	 * @param string|null $date Date in Format XXXX-XX-XX
 	 * @return array
 	 */
 	public function history($date = null) {
@@ -112,7 +112,7 @@ class CurrencyLib {
 	 * CurrencyComponent::isAvailable()
 	 *
 	 * @param mixed $currency
-	 * @return boolean Success.
+	 * @return bool Success.
 	 */
 	public function isAvailable($currency) {
 		$rates = $this->_retrieveCurrencies();
@@ -121,7 +121,7 @@ class CurrencyLib {
 
 	/**
 	 * @param string $name: "" (none), "history", "full" (both)
-	 * @return boolean Success.
+	 * @return bool Success.
 	 */
 	public function reset($name = 'full') {
 		if ($name === 'full') {
@@ -165,7 +165,7 @@ class CurrencyLib {
 			return $historyList;
 		}
 
-		$currencies = $this->_loadXml(self::URL_HISTORY);
+		$currencies = $this->_loadXml(static::URL_HISTORY);
 
 		// Filter down to just the rates
 		$dates = $currencies['Envelope']['Cube']['Cube'];
@@ -195,7 +195,7 @@ class CurrencyLib {
 		}
 
 		// Retrieve rates as an XML object
-		$currencies = $this->_loadXml(self::URL);
+		$currencies = $this->_loadXml(static::URL);
 
 		//Filter down to just the rates
 		$currencies = $currencies['Envelope']['Cube']['Cube']['Cube'];
@@ -225,6 +225,7 @@ class CurrencyLib {
 
 	/**
 	 * @param string $name: "" (none), "history", "full" (both)
+	 * @return void
 	 */
 	protected function _store($currencyList, $name = '') {
 		$this->cacheFileUsed = false;

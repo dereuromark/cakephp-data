@@ -5,11 +5,13 @@ use Data\Controller\DataAppController;
 
 /**
  * Cities Controller
- *
  */
 class CitiesController extends DataAppController {
 
-	public $paginate = ['order' => ['City.modified' => 'DESC']];
+	/**
+	 * @var array
+	 */
+	public $paginate = ['order' => ['Cities.modified' => 'DESC']];
 
 	/**
 	 * @return void

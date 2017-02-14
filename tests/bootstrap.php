@@ -29,7 +29,7 @@ require ROOT . '/vendor/autoload.php';
 require CORE_PATH . 'config/bootstrap.php';
 
 Cake\Core\Configure::write('App', [
-	'namespace' => 'TestApp'
+	'namespace' => 'App'
 ]);
 
 Cake\Core\Configure::write('debug', true);
@@ -58,8 +58,6 @@ $cache = [
 Cake\Cache\Cache::config($cache);
 
 Cake\Core\Plugin::load('Data', ['path' => ROOT . DS, 'autoload' => true, 'routes' => true]);
-
-class_alias(\Cake\Controller\Controller::class, 'App\Controller\AppController');
 
 // Ensure default test connection is defined
 if (!getenv('db_class')) {

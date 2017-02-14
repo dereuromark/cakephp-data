@@ -1,23 +1,27 @@
 <?php
 namespace Data\Controller;
 
-use Data\Controller\DataAppController;
 use Cake\Event\Event;
 use Cake\Utility\Hash;
-use Cake\Core\Plugin;
+use Data\Controller\DataAppController;
+use Exception;
 
 class CountryProvincesController extends DataAppController {
 
-	public $paginate = ['order' => ['CountryProvince.modified' => 'DESC']];
+	/**
+	 * @var array
+	 */
+	public $paginate = ['order' => ['CountryProvinces.modified' => 'DESC']];
 
 	/**
-	 * @param Event $event
+	 * @param \Cake\Event\Event $event
+	 * @return void
 	 */
 	public function beforeFilter(Event $event) {
 		parent::beforeFilter($event);
 
 		if (isset($this->Auth)) {
-			$this->Auth->allow('index', 'update_select');
+			$this->Auth->allow(['index', 'update_select']);
 		}
 	}
 
@@ -25,12 +29,13 @@ class CountryProvincesController extends DataAppController {
 	 * Ajax function
 	 * new: optional true/false for default field label
 	 *
+	 * @param int|null $id
 	 * @return void
 	 */
 	public function updateSelect($id = null) {
 		//$this->autoRender = false;
 		if (!$this->request->is('post') || !$this->request->is('ajax')) {
-			throw new \Exception(__('not a valid request'));
+			throw new Exception(__('not a valid request'));
 		}
 		$this->viewBuilder()->layout('ajax');
 		$countryProvinces = $this->CountryProvinces->getListByCountry($id);
@@ -43,8 +48,6 @@ class CountryProvincesController extends DataAppController {
 	}
 
 	/**
-	 * CountryProvincesController::index()
-	 *
 	 * @param mixed $cid
 	 * @return void
 	 */

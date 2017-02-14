@@ -5,14 +5,19 @@ use Data\Controller\DataAppController;
 
 class ContinentsController extends DataAppController {
 
-	public $paginate = [];
-
-
+	/**
+	 * @return void
+	 */
 	public function index() {
 		$continents = $this->paginate();
 		$this->set(compact('continents'));
 	}
 
+	/**
+	 * @param int|null $id
+	 *
+	 * @return mixed
+	 */
 	public function view($id = null) {
 		if (empty($id) || !($continent = $this->Continent->find('first', ['conditions' => ['Continent.id' => $id]]))) {
 			$this->Flash->error(__('invalid record'));
@@ -21,6 +26,9 @@ class ContinentsController extends DataAppController {
 		$this->set(compact('continent'));
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function add() {
 		if ($this->Common->isPosted()) {
 			$this->Continent->create();
@@ -28,9 +36,9 @@ class ContinentsController extends DataAppController {
 				$var = $this->request->data['Continent']['name'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
-			} else {
-				$this->Flash->error(__('formContainsErrors'));
 			}
+
+			$this->Flash->error(__('formContainsErrors'));
 		}
 		$parents = [0 => __('Root')] + $this->Continent->ParentContinent->find('treeList', ['spacer' => '» ']);
 		$this->set(compact('parents'));
@@ -46,9 +54,9 @@ class ContinentsController extends DataAppController {
 				$var = $this->request->data['Continent']['name'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
-			} else {
-				$this->Flash->error(__('formContainsErrors'));
 			}
+
+			$this->Flash->error(__('formContainsErrors'));
 		}
 		if (empty($this->request->data)) {
 			$this->request->data = $continent;

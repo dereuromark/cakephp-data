@@ -53,11 +53,10 @@ class LocationsTable extends Table {
 
 	/**
 	 * @param string $location
-	 * @param int $countryId
+	 * @param int|null $countryId
 	 * @return array location on success, false otherwise
 	 */
 	public function getLocation($locationName, $countryId = null) {
-
 		$country = !empty($countryId) ? ', ' . Country::addressList($countryId) : __('Germany');
 		$countryId = !empty($countryId) ? $countryId : 1;
 

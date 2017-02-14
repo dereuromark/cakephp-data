@@ -2,10 +2,10 @@
 
 namespace Data\Test\TestCase\Lib;
 
-use Tools\TestSuite\TestCase;
-use Data\Lib\GeoImportLib;
-use Cake\Core\Plugin;
 use Cake\Cache\Cache;
+use Cake\Core\Plugin;
+use Data\Lib\GeoImportLib;
+use Tools\TestSuite\TestCase;
 
 /**
  * GeoImportLib test

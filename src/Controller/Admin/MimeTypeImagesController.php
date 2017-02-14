@@ -2,7 +2,6 @@
 
 namespace Data\Controller\Admin;
 
-use App\Utility\Sanitize;
 use Cake\Filesystem\Folder;
 use Data\Controller\DataAppController;
 use Tools\Utility\Utility;
@@ -12,7 +11,6 @@ class MimeTypeImagesController extends DataAppController {
 	public $paginate = ['order' => ['MimeTypeImage.modified' => 'DESC']];
 
 	public function import() {
-
 		if ($this->Common->isPosted()) {
 
 			if (!empty($this->request->data['MimeTypeImage']['extensions'])) {
@@ -299,9 +297,9 @@ class MimeTypeImagesController extends DataAppController {
 				//$name = $this->request->data['MimeTypeImage']['name'];
 				$this->Flash->success(__('record add {0} saved', $id));
 				return $this->redirect(['action' => 'index']);
-			} else {
-				$this->Flash->error(__('record add not saved'));
 			}
+
+			$this->Flash->error(__('record add not saved'));
 		} else {
 			$this->request->data['MimeTypeImage']['active'] = 1;
 		}
@@ -336,9 +334,9 @@ class MimeTypeImagesController extends DataAppController {
 				//$name = $this->request->data['MimeTypeImage']['name'];
 				$this->Flash->success(__('record edit {0} saved', $id));
 				return $this->redirect(['action' => 'index']);
-			} else {
-				$this->Flash->error(__('record edit not saved'));
 			}
+
+			$this->Flash->error(__('record edit not saved'));
 		}
 		if (empty($this->request->data)) {
 			$this->request->data = $this->MimeTypeImage->get($id);
@@ -390,10 +388,10 @@ class MimeTypeImagesController extends DataAppController {
 
 			$this->Flash->success(__('record del {0} done', $fileName));
 			return $this->Common->autoRedirect(['action' => 'index']);
-		} else {
-			$this->Flash->error(__('record del {0} not done exception', $fileName));
-			return $this->Common->autoRedirect(['action' => 'index']);
 		}
+
+		$this->Flash->error(__('record del {0} not done exception', $fileName));
+		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 
 	public function toggleActive($id = null) {

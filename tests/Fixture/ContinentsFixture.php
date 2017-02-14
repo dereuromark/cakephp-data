@@ -31,4 +31,5 @@ class ContinentsFixture extends TestFixture {
 			'modified' => '2011-07-15 19:47:38'
 		],
 	];
+
 }

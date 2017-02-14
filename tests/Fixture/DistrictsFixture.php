@@ -1,7 +1,6 @@
 <?php
 /**
  * DistrictsFixture
- *
  */
 namespace Data\Test\Fixture;
 

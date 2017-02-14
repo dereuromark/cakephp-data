@@ -1,7 +1,6 @@
 <?php
 /**
  * LocationsFixture
- *
  */
 namespace Data\Test\Fixture;
 
@@ -167,4 +166,5 @@ class LocationsFixture extends TestFixture {
 			'modified' => '2012-12-26 17:20:20'
 		],
 	];
+
 }

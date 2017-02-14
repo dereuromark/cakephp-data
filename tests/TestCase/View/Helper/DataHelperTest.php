@@ -8,8 +8,14 @@ use Tools\TestSuite\TestCase;
 
 class DataHelperTest extends TestCase {
 
+	/**
+	 * @var DataHelper
+	 */
 	public $DataHelper;
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 
@@ -17,8 +23,6 @@ class DataHelperTest extends TestCase {
 	}
 
 	/**
-	 * DataHelperTest::test()
-	 *
 	 * @return void
 	 */
 	public function testCountryAndProvince() {

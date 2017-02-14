@@ -27,9 +27,9 @@ class ContinentsController extends DataAppController {
 				$var = $this->request->data['Continent']['name'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
-			} else {
-				$this->Flash->error(__('formContainsErrors'));
 			}
+
+			$this->Flash->error(__('formContainsErrors'));
 		}
 		$parents = [0 => __('Root')] + $this->Continent->ParentContinent->find('treeList', ['spacer' => '» ']);
 		$this->set(compact('parents'));
@@ -45,9 +45,9 @@ class ContinentsController extends DataAppController {
 				$var = $this->request->data['Continent']['name'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
-			} else {
-				$this->Flash->error(__('formContainsErrors'));
 			}
+
+			$this->Flash->error(__('formContainsErrors'));
 		}
 		if (empty($this->request->data)) {
 			$this->request->data = $continent;

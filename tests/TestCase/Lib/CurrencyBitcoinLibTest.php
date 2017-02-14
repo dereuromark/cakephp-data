@@ -2,9 +2,9 @@
 
 namespace Data\Test\TestCase\Lib;
 
+use Cake\Core\Plugin;
 use Data\Lib\CurrencyBitcoinLib;
 use Tools\TestSuite\TestCase;
-use Cake\Core\Plugin;
 
 class CurrencyBitcoinLibTest extends TestCase {
 

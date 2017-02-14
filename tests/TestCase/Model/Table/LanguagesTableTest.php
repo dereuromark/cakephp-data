@@ -3,11 +3,13 @@
 namespace Data\Test\TestCase\Model;
 
 use Cake\ORM\TableRegistry;
-use Data\Model\Language;
 use Tools\TestSuite\TestCase;
 
 class LanguagesTableTest extends TestCase {
 
+	/**
+	 * @var array
+	 */
 	public $fixtures = [
 		'plugin.data.languages'
 	];
@@ -26,4 +28,5 @@ class LanguagesTableTest extends TestCase {
 	}
 
 	//TODO
+
 }

@@ -5,7 +5,6 @@ use Cake\TestSuite\Fixture\TestFixture;
 
 /**
  * LanguagesFixture
- *
  */
 class LanguagesFixture extends TestFixture {
 
@@ -167,4 +166,5 @@ class LanguagesFixture extends TestFixture {
 			'modified' => '2011-07-17 15:23:08'
 		],
 	];
+
 }

@@ -17,7 +17,7 @@ class DataAppController extends AppController {
 	public $helpers = ['Tools.Common', 'Tools.Format', 'Tools.Time', 'Tools.Number', 'Tools.Text', 'Data.Data'];
 
 	/**
-	 * @param Event $event
+	 * @param \Cake\Event\Event $event
 	 * @return void
 	 */
 	public function beforeFilter(Event $event) {
@@ -27,4 +27,5 @@ class DataAppController extends AppController {
 			$this->Auth->allow();
 		}
 	}
+
 }

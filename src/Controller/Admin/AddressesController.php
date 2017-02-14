@@ -4,8 +4,10 @@ namespace Data\Controller\Admin;
 use Cake\Core\Configure;
 use Cake\Network\Exception\MethodNotAllowedException;
 use Data\Controller\DataAppController;
-use Cake\Event\Event;
 
+/**
+ * @property \Data\Model\Table\AddressesTable $Addresses
+ */
 class AddressesController extends DataAppController {
 
 	/**
@@ -22,7 +24,7 @@ class AddressesController extends DataAppController {
 	 * @return \Cake\Network\Response|null
 	 */
 	public function view($id = null) {
-		if (empty($id) || !($address = $this->Address->find('first', ['conditions' => ['Address.id' => $id]]))) {
+		if (empty($id) || !($address = $this->Address->find('first', ['conditions' => ['Addresses.id' => $id]]))) {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
@@ -34,10 +36,11 @@ class AddressesController extends DataAppController {
 	 * @return \Cake\Network\Response|null
 	 */
 	public function add() {
+		$address = $this->Addresses->newEntity();
 		if ($this->Common->isPosted()) {
-			$this->Address->create();
-			if ($this->Address->save($this->request->data)) {
-				$var = $this->request->data['formatted_address'];
+			$address = $this->Addresses->patchEntity($address, $this->request->data);
+			if ($this->Address->save($address)) {
+				$var = $address['formatted_address'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
 				return $this->redirect(['action' => 'index']);
 			}
@@ -45,8 +48,8 @@ class AddressesController extends DataAppController {
 
 		} else {
 			# TODO: geolocate via IP? only for frontend
-			$options = ['Country.iso2' => 'DE'];
-			$this->request->data['country_id'] = $this->Address->Country->field('id', $options);
+			$options = ['Countries.iso2' => 'DE'];
+			$this->request->data['country_id'] = $this->Address->Country->fieldByConditions('id', $options);
 		}
 
 		$countries = $this->Address->Country->find('list');
@@ -59,7 +62,7 @@ class AddressesController extends DataAppController {
 	}
 
 	public function edit($id = null) {
-		if (empty($id) || !($address = $this->Address->find('first', ['conditions' => ['Address.id' => $id]]))) {
+		if (empty($id) || !($address = $this->Address->find('first', ['conditions' => ['Addresses.id' => $id]]))) {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
@@ -85,10 +88,10 @@ class AddressesController extends DataAppController {
 				$this->set('models', $belongsTo);
 			}
 		}
-		$countries = $this->Address->Country->find('list');
+		$countries = $this->Addresses->Countries->find('list');
 		$countryProvinces = [];
 		if (Configure::read('Address.CountryProvince')) {
-			$countryProvinces = $this->Address->CountryProvince->find('list');
+			$countryProvinces = $this->Addresses->CountryProvinces->find('list');
 		}
 
 		$this->set(compact('countries', 'countryProvinces'));
@@ -103,7 +106,7 @@ class AddressesController extends DataAppController {
 			throw new MethodNotAllowedException();
 		}
 
-		if (empty($id) || !($address = $this->Address->find('first', ['conditions' => ['Address.id' => $id], 'fields' => ['id', 'formatted_address']]))) {
+		if (empty($id) || !($address = $this->Address->find('first', ['conditions' => ['Addresses.id' => $id], 'fields' => ['id', 'formatted_address']]))) {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}

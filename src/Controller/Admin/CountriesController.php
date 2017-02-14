@@ -1,12 +1,10 @@
 <?php
 namespace Data\Controller\Admin;
 
-use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
-use Cake\Filesystem\Folder;
-use Data\Controller\DataAppController;
 use Cake\Event\Event;
+use Data\Controller\DataAppController;
 
 class CountriesController extends DataAppController {
 
@@ -20,7 +18,6 @@ class CountriesController extends DataAppController {
 		} else {
 			$this->imageFolder = Plugin::path('Data') . DS . 'webroot' . DS . 'img' . DS . 'country_flags' . DS;
 		}
-
 	}
 
 	/**
@@ -193,9 +190,9 @@ class CountriesController extends DataAppController {
 				//$name = $this->request->data['Country']['name'];
 				$this->Flash->success(__('record add {0} saved', $id));
 				return $this->redirect(['action' => 'index']);
-			} else {
-				$this->Flash->error(__('record add not saved'));
 			}
+
+			$this->Flash->error(__('record add not saved'));
 		}
 	}
 
@@ -209,9 +206,9 @@ class CountriesController extends DataAppController {
 				$name = $country['Country']['name'];
 				$this->Flash->success(__('record edit {0} saved', h($name)));
 				return $this->redirect(['action' => 'index']);
-			} else {
-				$this->Flash->error(__('record edit not saved'));
 			}
+
+			$this->Flash->error(__('record edit not saved'));
 		}
 		if (empty($this->request->data)) {
 			$this->request->data = $country;
@@ -238,10 +235,10 @@ class CountriesController extends DataAppController {
 		if ($this->Countries->delete($id)) {
 			$this->Flash->success(__('record del {0} done', $id));
 			return $this->redirect(['action' => 'index']);
-		} else {
-			$this->Flash->error(__('record del {0} not done exception', $id));
-			return $this->redirect(['action' => 'index']);
 		}
+
+		$this->Flash->error(__('record del {0} not done exception', $id));
+		return $this->redirect(['action' => 'index']);
 	}
 
 	public function up($id = null) {
@@ -278,6 +275,7 @@ class CountriesController extends DataAppController {
 	 * - http://www.geonames.org/countries/ - http://api.geonames.org/postalCodeCountryInfo?username=demo
 	 * - http://www.pixelenvision.com/1708/zip-postal-code-validation-regex-php-code-for-12-countries/
 	 *
+	 * @return void
 	 */
 	public function validate() {
 		$countries = $this->Countries->find('all');

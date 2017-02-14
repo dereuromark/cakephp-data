@@ -37,4 +37,5 @@ class SmileysFixture extends TestFixture {
 			'modified' => '2010-06-02 01:33:59'
 		],
 	];
+
 }

@@ -3,14 +3,21 @@
 namespace Data\Test\TestCase\Model\Table;
 
 use Cake\ORM\TableRegistry;
+use Data\Model\Table\ContinentsTable;
 use Tools\TestSuite\TestCase;
 
 class ContinentsTableTest extends TestCase {
 
+	/**
+	 * @var array
+	 */
 	public $fixtures = [
 		'plugin.data.continents'
 	];
 
+	/**
+	 * @var ContinentsTable
+	 */
 	public $Continents;
 
 	public function setUp() {
@@ -20,8 +27,6 @@ class ContinentsTableTest extends TestCase {
 	}
 
 	/**
-	 * ContinentsTableTest::testBasicFind()
-	 *
 	 * @return void
 	 */
 	public function testBasicFind() {

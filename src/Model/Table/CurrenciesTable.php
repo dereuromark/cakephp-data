@@ -1,9 +1,9 @@
 <?php
 namespace Data\Model\Table;
 
-use Tools\Model\Table\Table;
-use Data\Lib\CurrencyLib;
 use Cake\Utility\Hash;
+use Data\Lib\CurrencyLib;
+use Tools\Model\Table\Table;
 
 class CurrenciesTable extends Table {
 
@@ -114,7 +114,9 @@ class CurrenciesTable extends Table {
 		return array_key_exists(mb_strtoupper($code), $currencies);
 	}
 
-	/** model functions **/
+	/**
+	 * model functions
+	 **/
 
 	public function updateValues() {
 		if (!isset($this->CurrencyLib)) {

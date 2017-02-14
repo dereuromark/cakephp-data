@@ -4,10 +4,8 @@ namespace Data\Test\Fixture;
 
 use Cake\TestSuite\Fixture\TestFixture;
 
-
 /**
  * StatesFixture
- *
  */
 class StatesFixture extends TestFixture {
 
@@ -137,4 +135,5 @@ class StatesFixture extends TestFixture {
 			'modified' => '0000-00-00 00:00:00'
 		],
 	];
+
 }

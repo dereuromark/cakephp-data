@@ -18,6 +18,8 @@ class CountryProvinceHelperComponent extends Component {
 
 	/**
 	 * Call in methods where needed
+	 *
+	 * @return void
 	 */
 	public function provideData($ignoreProvinces = false, $model = null, $defaultValue = 0) {
 		if (!isset($this->Controller->Countries)) {

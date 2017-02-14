@@ -99,6 +99,7 @@ class CurrencyBitcoinLib {
 	 * Historic trade data
 	 *
 	 * @see http://bitcoincharts.com/about/markets-api/
+	 * @return void
 	 */
 	public function trades() {
 		//TODO

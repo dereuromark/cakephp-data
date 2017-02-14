@@ -3,6 +3,7 @@
 namespace Data\Test\TestCase\Controller\Admin;
 
 use Cake\ORM\TableRegistry;
+use Cake\Routing\Router;
 use Tools\TestSuite\IntegrationTestCase;
 
 /**
@@ -21,6 +22,8 @@ class AddressesControllerTest extends IntegrationTestCase {
 	 */
 	public function setUp() {
 		parent::setUp();
+
+		//dd(Router::routes());
 	}
 
 	/**

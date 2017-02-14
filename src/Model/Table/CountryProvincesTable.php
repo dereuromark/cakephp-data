@@ -2,6 +2,7 @@
 namespace Data\Model\Table;
 
 //use Tools\Lib\GeocodeLib;
+use Exception;
 use Tools\Model\Table\Table;
 
 /**
@@ -56,13 +57,13 @@ class CountryProvincesTable extends Table {
 	public $filterArgs = [
 		'search' => ['type' => 'like', 'field' => ['name', 'code']],
 		'active' => ['type' => 'value'],
-		'country_id'=> ['type' => 'value']
+		'country_id' => ['type' => 'value']
 	];
 
 	/**
 	 * Lat and lng + abbr if available!
 	 *
-	 * @param id
+	 * @param id|null
 	 * - NULL: update all records with missing coordinates only
 	 * - otherwise: specific update
 	 */
@@ -98,7 +99,7 @@ class CountryProvincesTable extends Table {
 						pr($saveArray);
 						die(returns($this->validationErrors));
 						*/
-						throw new \Exception('Update Error');
+						throw new Exception('Update Error');
 					}
 				}
 				return true;

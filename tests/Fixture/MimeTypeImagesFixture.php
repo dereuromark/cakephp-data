@@ -1,7 +1,6 @@
 <?php
 /**
  * MimeTypeImagesFixture
- *
  */
 namespace Data\Test\Fixture;
 
@@ -42,4 +41,5 @@ class MimeTypeImagesFixture extends TestFixture {
 			'modified' => '2014-07-23 14:06:49'
 		]
 	];
+
 }

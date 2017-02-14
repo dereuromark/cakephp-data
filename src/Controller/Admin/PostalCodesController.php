@@ -2,12 +2,10 @@
 namespace Data\Controller\Admin;
 
 use Data\Controller\DataAppController;
-use Geo\Geocode\Geocode;
 use ToolsExtra\Lib\GeolocateLib;
 
 /**
  * PostalCodes Controller
- *
  */
 class PostalCodesController extends DataAppController {
 
@@ -70,9 +68,9 @@ class PostalCodesController extends DataAppController {
 				$var = $this->request->data['PostalCode']['code'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
-			} else {
-				$this->Flash->error(__('formContainsErrors'));
 			}
+
+			$this->Flash->error(__('formContainsErrors'));
 		}
 	}
 
@@ -89,9 +87,9 @@ class PostalCodesController extends DataAppController {
 				$var = $this->request->data['PostalCode']['code'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
-			} else {
-				$this->Flash->error(__('formContainsErrors'));
 			}
+
+			$this->Flash->error(__('formContainsErrors'));
 		}
 		if (empty($this->request->data)) {
 			$this->request->data = $postalCode;

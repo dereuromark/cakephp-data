@@ -46,9 +46,9 @@ class LanguagesController extends DataAppController {
 				$var = $this->request->data['name'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
 				return $this->redirect(['action' => 'index']);
-			} else {
-				$this->Flash->error(__('formContainsErrors'));
 			}
+
+			$this->Flash->error(__('formContainsErrors'));
 		}
 
 		$this->set(compact('language'));
@@ -64,9 +64,9 @@ class LanguagesController extends DataAppController {
 				$var = $this->request->data['name'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
 				return $this->redirect(['action' => 'index']);
-			} else {
-				$this->Flash->error(__('formContainsErrors'));
 			}
+
+			$this->Flash->error(__('formContainsErrors'));
 		}
 		if (empty($this->request->data)) {
 			$this->request->data = $language;
@@ -136,6 +136,8 @@ class LanguagesController extends DataAppController {
 
 	/**
 	 * http://www.loc.gov/standards/iso639-2/php/code_list.php
+	 *
+	 * @return void
 	 */
 	public function compare_to_iso_list() {
 		$isoList = $this->Languages->getOfficialIsoList();
@@ -147,6 +149,8 @@ class LanguagesController extends DataAppController {
 
 	/**
 	 * http://www.loc.gov/standards/iso639-2/php/code_list.php
+	 *
+	 * @return void
 	 */
 	public function compare_iso_list_to_core() {
 		$isoList = $this->Languages->getOfficialIsoList();

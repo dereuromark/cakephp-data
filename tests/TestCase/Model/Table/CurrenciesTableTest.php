@@ -38,7 +38,6 @@ class CurrenciesTableTest extends TestCase {
 	}
 
 	/**
-	 *
 	 * @return void
 	 */
 	public function testBasicSave() {

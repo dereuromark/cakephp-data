@@ -1,11 +1,10 @@
 <?php
 namespace Data\Model\Table;
 
-use Cake\Core\App;
 use Cake\Core\Configure;
 use Cake\Filesystem\File;
-use Tools\Network\Email\Email;
 use Tools\Model\Table\Table;
+use Tools\Network\Email\Email;
 
 class MimeTypesTable extends Table {
 
@@ -98,7 +97,7 @@ class MimeTypesTable extends Table {
 	 * Push this type up in the "usage ranking" (sort)
 	 * could be done on every upload/download = automagic sort by priority
 	 *
-	 * @param string $ext
+	 * @param string|null $ext
 	 * @return void
 	 */
 	public function push($ext = null) {
