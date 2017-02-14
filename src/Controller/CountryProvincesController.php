@@ -49,6 +49,7 @@ class CountryProvincesController extends DataAppController {
 	 * @return void
 	 */
 	public function index($cid = null) {
+		$this->paginate['contain'] = ['Countries'];
 		$this->paginate['order'] = ['CountryProvinces.name' => 'ASC'];
 		//$this->paginate['conditions'] = array('Country.status' => 1);
 
