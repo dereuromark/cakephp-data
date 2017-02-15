@@ -49,7 +49,7 @@ class CurrenciesTable extends Table {
 	];
 
 	/**
-	 * @var CurrencyLib
+	 * @var \Data\Lib\CurrencyLib
 	 */
 	public $CurrencyLib;
 

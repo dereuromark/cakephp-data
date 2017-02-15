@@ -21,7 +21,7 @@ class CountryProvinceHelperComponentTest extends TestCase {
 	public $Controller;
 
 	/**
-	 * @var CountryProvinceHelperComponent
+	 * @var \Data\Controller\Component\CountryProvinceHelperComponent
 	 */
 	public $CountryProvinceHelper;
 

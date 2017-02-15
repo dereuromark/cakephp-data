@@ -56,7 +56,7 @@ class MimeTypeHelper extends Helper {
 	}
 
 	/**
-	 * @param array $icon
+	 * @param array|null $icon
 	 * @param array $attr
 	 * @return string
 	 */

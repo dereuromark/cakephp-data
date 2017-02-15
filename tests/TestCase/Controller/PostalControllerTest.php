@@ -4,7 +4,6 @@ namespace Data\Test\TestCase\Controller;
 
 use Cake\Database\Driver\Mysql;
 use Cake\ORM\TableRegistry;
-use Cake\Routing\Router;
 use Tools\TestSuite\IntegrationTestCase;
 
 /**

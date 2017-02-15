@@ -9,7 +9,7 @@ use Tools\TestSuite\TestCase;
 class DataHelperTest extends TestCase {
 
 	/**
-	 * @var DataHelper
+	 * @var \Data\View\Helper\DataHelper
 	 */
 	public $DataHelper;
 

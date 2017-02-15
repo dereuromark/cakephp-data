@@ -2,7 +2,6 @@
 namespace Data\Controller\Admin;
 
 use Data\Controller\DataAppController;
-use Tools\Lib\MimeLib;
 use Tools\Utility\Mime;
 
 /**
