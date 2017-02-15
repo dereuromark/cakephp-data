@@ -58,6 +58,7 @@ $cache = [
 Cake\Cache\Cache::config($cache);
 
 Cake\Core\Plugin::load('Data', ['path' => ROOT . DS, 'autoload' => true, 'routes' => true]);
+Cake\Core\Plugin::load('Tools', ['path' => ROOT . DS . 'vendor/dereuromark/cakephp-tools/', 'autoload' => true, 'bootstrap' => false]);
 
 // Ensure default test connection is defined
 if (!getenv('db_class')) {

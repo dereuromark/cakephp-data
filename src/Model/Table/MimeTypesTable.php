@@ -5,7 +5,6 @@ use Cake\Core\Configure;
 use Cake\Filesystem\File;
 use Tools\Mailer\Email;
 use Tools\Model\Table\Table;
-use Tools\Network\Email\Email;
 
 class MimeTypesTable extends Table {
 
@@ -79,19 +78,29 @@ class MimeTypesTable extends Table {
 		$Handle->delete();
 	}
 
+	/**
+	 * @param bool $inactiveOnes
+	 *
+	 * @return \Cake\ORM\Query
+	 */
 	public function mimeTypes($inactiveOnes = false) {
-		$options = ['conditions' => [$this->alias() . '.ext' => $ext]];
+		$options = ['conditions' => []];
 		if ($inactiveOnes !== true) {
 			$options['conditions'][$this->alias() . '.active'] = 1;
 		}
-		return $this->find('first', $options);
+		return $this->find('all', $options);
 	}
 
-	public function mimeTypeExists($ext = null) {
+	/**
+	 * @param null $ext
+	 *
+	 * @return \Cake\ORM\Query|null
+	 */
+	public function findMimeType($ext = null) {
 		if (empty($ext)) {
-			return [];
+			return null;
 		}
-		return $this->find('first', ['conditions' => [$this->alias() . '.ext' => $ext]]);
+		return $this->find('all', ['conditions' => [$this->alias() . '.ext' => $ext]])->first();
 	}
 
 	/**
@@ -102,8 +111,8 @@ class MimeTypesTable extends Table {
 	 * @return bool
 	 */
 	public function push($ext = null) {
-		$type = $this->mimeTypeExists($ext);
-		if (!empty($type)) {
+		$type = $this->findMimeType($ext);
+		if ($type) {
 			$id = $type['id'];
 			return $this->saveField($id, 'sort', $type['sort'] + 1);
 		}

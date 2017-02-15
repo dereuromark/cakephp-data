@@ -51,7 +51,7 @@ class CurrenciesTable extends Table {
 	/**
 	 * @var CurrencyLib
 	 */
-	protected $CurrencyLib;
+	public $CurrencyLib;
 
 	public function beforeValidate($options = []) {
 		$ret = parent::beforeValidate($options);
@@ -75,8 +75,7 @@ class CurrenciesTable extends Table {
 
 			if (isset($this->data['value']) && $this->data['value'] == 0) {
 				if (!isset($this->CurrencyLib)) {
-					//App::import('Component', 'Data.Currency');
-					$this->CurrencyLib = new CurrencyComponent();
+					$this->CurrencyLib = new CurrencyLib();
 				}
 				$currencies = $this->availableCurrencies();
 				if (array_key_exists($code, $currencies)) {

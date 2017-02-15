@@ -126,6 +126,7 @@ class AddressesTable extends Table {
 	public function __construct(array $config = []) {
 		parent::__construct($config);
 
+		return;
 		if ($config = Configure::read('Address')) {
 			$vars = ['displayField', 'order', 'actsAs', 'validate', 'belongsTo'];
 			foreach ($vars as $var) {
@@ -298,20 +299,5 @@ class AddressesTable extends Table {
 		}
 		return $this->find($type, ['conditions' => ['foreign_id' => $id, 'address_type_id' => $addressType]]);
 	}
-
-	/**
-	 * Static Model::method()
-	 */
-	public static function addressTypes($value = null) {
-		$options = [
-			static::TYPE_MAIN => __('Main Residence'),
-			static::TYPE_OTHER => __('Other'),
-
-		];
-		return parent::enum($value, $options);
-	}
-
-	const TYPE_MAIN = 1;
-	const TYPE_OTHER = 9;
 
 }

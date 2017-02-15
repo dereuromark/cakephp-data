@@ -1,3 +1,9 @@
+<?php
+/**
+ * @property \Cake\View\View $this
+ */
+use Cake\Core\Configure;
+?>
 <div class="page index">
 <h2><?php echo __('Addresses');?></h2>
 
@@ -18,12 +24,8 @@
 	<th class="actions"><?php echo __('Actions');?></th>
 </tr>
 <?php
-$i = 0;
+/** @var \Data\Model\Entity\Address[] $addresses */
 foreach ($addresses as $address):
-	$class = null;
-	if ($i++ % 2 == 0) {
-		$class = ' class="altrow"';
-	}
 ?>
 	<tr>
 		<td>
