@@ -1,7 +1,7 @@
 # CakePHP Data Plugin
 [![Build Status](https://api.travis-ci.org/dereuromark/cakephp-data.svg)](https://travis-ci.org/dereuromark/cakephp-data)
 [![Coverage Status](https://coveralls.io/repos/dereuromark/cakephp-data/badge.svg)](https://coveralls.io/r/dereuromark/cakephp-data)
-[![Minimum PHP Version](http://img.shields.io/badge/php-%3E%3D%205.4-8892BF.svg)](https://php.net/)
+[![Minimum PHP Version](http://img.shields.io/badge/php-%3E%3D%205.5-8892BF.svg)](https://php.net/)
 [![License](https://poser.pugx.org/dereuromark/cakephp-data/license.svg)](https://packagist.org/packages/dereuromark/cakephp-data)
 [![Total Downloads](https://poser.pugx.org/dereuromark/cakephp-data/d/total.svg)](https://packagist.org/packages/dereuromark/cakephp-data)
 [![Coding Standards](https://img.shields.io/badge/cs-PSR--2--R-yellow.svg)](https://github.com/php-fig-rectified/fig-rectified-standards)
@@ -13,9 +13,7 @@ Please note: New functionality has been tested against 3.x (current master and d
 ## How to include
 Installing the Plugin is pretty much as with every other CakePHP Plugin.
 ```
-"require": {
-    "dereuromark/cakephp-data": "dev-master"
-}
+composer require dereuromark/cakephp-data:dev-master
 ```
 
 Make sure you have `Plugin::load('Data')` or `Plugin::loadAll()` in your bootstrap.
@@ -25,7 +23,7 @@ That's it. It should be up and running.
 ### Possible Dependencies
 
 - Tools plugin
-- CakeDC search plugin (optional, if you want basic filtering)
+- FOC Search plugin (optional, if you want basic filtering)
 
 ## Disclaimer
 Use at your own risk. Please provide any fixes or enhancements via issue or better pull request.

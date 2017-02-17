@@ -2,6 +2,7 @@
 namespace Data\Model\Table;
 
 use Cake\Core\Configure;
+use Data\Model\Entity\Address;
 use Tools\Model\Table\Table;
 
 if (!defined('CLASS_USERS')) {
@@ -146,10 +147,10 @@ class AddressesTable extends Table {
 	}
 
 	public function primaryUnique(&$data) {
-		if (empty($this->data['foreign_id']) || $this->data['address_type_id'] != static::TYPE_MAIN) {
+		if (empty($this->data['foreign_id']) || $this->data['address_type_id'] != Address::TYPE_MAIN) {
 			return true;
 		}
-		$conditions = ['foreign_id' => $this->data['foreign_id'], 'address_type_id' => static::TYPE_MAIN];
+		$conditions = ['foreign_id' => $this->data['foreign_id'], 'address_type_id' => Address::TYPE_MAIN];
 		if (!empty($this->data['id'])) {
 			$conditions['user_id !='] = $this->data['id'];
 		}
@@ -282,22 +283,19 @@ class AddressesTable extends Table {
 	 * @return void
 	 */
 	public function touch($addressId) {
-		$this->updateAll([$this->alias() . '.last_used' => 'NOW()'], [$this->alias() . '.id' => $addressId]);
+		$this->updateAll(['last_used = NOW()'], ['id' => $addressId]);
 	}
 
 	/**
-	 * @param findType|string (defaults to all)
-	 * @param id|null (foreign id)
 	 * @param addressType|null (defaults to MAIN)
+	 * @param id|null (foreign id)
+	 * @return \Cake\ORM\Query
 	 */
-	public function getByType($type = 'all', $id = null, $addressType = null) {
-		if ($id === null) {
-			$id = $this->AuthUser->id();
-		}
+	public function getByType($addressType = null, $id = null) {
 		if ($addressType === null) {
-			$addressType = static::TYPE_MAIN;
+			$addressType = Address::TYPE_MAIN;
 		}
-		return $this->find($type, ['conditions' => ['foreign_id' => $id, 'address_type_id' => $addressType]]);
+		return $this->find()->where(['foreign_id' => $id, 'address_type_id' => $addressType]);
 	}
 
 }
