@@ -48,10 +48,10 @@ class AddressesController extends DataAppController {
 		} else {
 			# TODO: geolocate via IP? only for frontend
 			$options = ['Countries.iso2' => 'DE'];
-			$this->request->data['country_id'] = $this->Address->Country->fieldByConditions('id', $options);
+			$this->request->data['country_id'] = $this->Address->Countries->fieldByConditions('id', $options);
 		}
 
-		$countries = $this->Address->Country->find('list');
+		$countries = $this->Address->Countries->find('list');
 		$countryProvinces = [];
 		if (Configure::read('Address.CountryProvince')) {
 			$countryProvinces = $this->Address->CountryProvince->find('list');

@@ -24,7 +24,7 @@ class PostalCodesController extends DataAppController {
 
 		$postalCodes = $this->paginate();
 
-		$countries = $this->PostalCodes->Country->find('list');
+		$countries = $this->PostalCodes->Countries->find('list');
 		$this->set(compact('postalCodes', 'countries'));
 	}
 

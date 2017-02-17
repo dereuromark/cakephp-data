@@ -46,7 +46,7 @@ class DistrictsTable extends Table {
 		parent::beforeValidate($options);
 
 		if (!empty($this->data['name']) && !empty($this->data['city_id'])) {
-			$city = $this->City->fieldByConditions('name', ['id' => $this->data['city_id']]);
+			$city = $this->Cities->fieldByConditions('name', ['id' => $this->data['city_id']]);
 			$this->data['address'] = $this->data['name'] . ', ' . $city;
 		}
 
@@ -64,7 +64,7 @@ class DistrictsTable extends Table {
 			'conditions' => [
 				//$this->alias.'.lat <>' => 0,
 				//$this->alias.'.lng <>' => 0,
-				$this->City->alias . '.slug' => $citySlug,
+				$this->Cities->alias . '.slug' => $citySlug,
 			],
 			'fields' => [$this->alias() . '.slug', $this->alias() . '.name'],
 		];

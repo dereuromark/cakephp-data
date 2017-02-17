@@ -78,8 +78,8 @@ class CountryProvincesTable extends Table {
 
 		if (!empty($id)) {
 			$res = $this->find('first', ['conditions' => [$this->alias() . '.id' => $id], 'contain' => ['Country.name']]);
-			if (!empty($res['name']) && !empty($res[$this->Country->alias]['name']) && $geocoder->geocode($res['name'] .
-				', ' . $res[$this->Country->alias]['name'])) {
+			if (!empty($res['name']) && !empty($res[$this->Countries->alias]['name']) && $geocoder->geocode($res['name'] .
+				', ' . $res[$this->Countries->alias]['name'])) {
 
 				$data = $geocoder->getResult();
 				//pr($data); die();
@@ -116,8 +116,8 @@ class CountryProvincesTable extends Table {
 			$count = 0;
 
 			foreach ($results as $res) {
-				if (!empty($res['name']) && !empty($res[$this->Country->alias]['name']) && $geocoder->geocode($res['name'] .
-					', ' . $res[$this->Country->alias]['name'])) {
+				if (!empty($res['name']) && !empty($res[$this->Countries->alias]['name']) && $geocoder->geocode($res['name'] .
+					', ' . $res[$this->Countries->alias]['name'])) {
 
 					$data = $geocoder->getResult();
 					//pr($data); die();

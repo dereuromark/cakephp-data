@@ -66,16 +66,18 @@ Cake\Core\Plugin::load('Tools', ['path' => ROOT . DS . 'vendor/dereuromark/cakep
 // Ensure default test connection is defined
 if (!getenv('db_class')) {
 	putenv('db_class=Cake\Database\Driver\Sqlite');
+}
+if (!getenv('db_dsn')) {
 	putenv('db_dsn=sqlite::memory:');
 }
 
-if (WINDOWS) {
+if (strpos(getenv('db_class'), 'MySql') !== false) {
 	Cake\Datasource\ConnectionManager::config('test', [
 		'className' => 'Cake\Database\Connection',
 		'driver' => 'Cake\Database\Driver\Mysql',
 		'database' => 'cake_test',
 		'username' => 'root',
-		'password' => '',
+		'password' => 'secret',
 		'timezone' => 'UTC',
 		'quoteIdentifiers' => true,
 		'cacheMetadata' => true,

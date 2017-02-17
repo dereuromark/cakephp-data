@@ -164,7 +164,7 @@ class AddressesTable extends Table {
 	 */
 	public function correspondsWithCountry(&$data) {
 		if (!empty($this->data['postal_code'])) {
-			$res = $this->Country->find('first', [
+			$res = $this->Countries->find('first', [
 				'conditions' => ['Country.id' => $this->data['country_id']]
 			]);
 			if (empty($res)) {
@@ -185,7 +185,7 @@ class AddressesTable extends Table {
 		if (!$this->config['CountryProvince'] || !isset($this->data['country_id']) || !isset($this->data['country_province_id'])) {
 			return true;
 		}
-		$res = $this->Country->CountryProvince->find('list', [
+		$res = $this->Countries->CountryProvince->find('list', [
 			'conditions' => ['country_id' => $this->data['country_id']]
 		]);
 		if (empty($res) || array_shift($data) == 0) {
@@ -245,7 +245,7 @@ class AddressesTable extends Table {
 			if ($this->config['CountryProvince']) {
 				if (isset($this->data['country_province_id']) && !empty($this->data['country_province_id']) && !empty($this->data['geocoder_result']['country_province_code'])) {
 					//$this->data['country_province_id']
-					$countryProvince = $this->Country->CountryProvince->find('first', ['conditions' => ['CountryProvince.id' => $this->data['country_province_id']]]);
+					$countryProvince = $this->Countries->CountryProvince->find('first', ['conditions' => ['CountryProvince.id' => $this->data['country_province_id']]]);
 					if (!empty($countryProvince) && strlen($countryProvince['CountryProvince']['abbr']) === strlen($this->data['geocoder_result']['country_province_code']) && $countryProvince['CountryProvince']['abbr'] != $this->data['geocoder_result']['country_province_code']) {
 						$this->invalidate('country_province_id', 'Als Bundesland wurde für diese Adresse \'' . h($this->data['geocoder_result']['country_province']) . '\' erwartet - du hast aber \'' . h($countryProvince['CountryProvince']['name']) . '\' angegeben. Liegt denn deine Adresse tatsächlich in einem anderen Bundesland? Dann gebe bitte die genaue PLZ und Ort an, damit das Bundesland dazu auch korrekt identifiziert werden kann.');
 						return false;
@@ -253,7 +253,7 @@ class AddressesTable extends Table {
 
 				# enter new id
 				} elseif (isset($this->data['country_province_id']) && !empty($this->data['geocoder_result']['country_province_code'])) {
-					$countryProvince = $this->Country->CountryProvince->find('first', ['conditions' => ['OR' => ['CountryProvince.abbr' => $this->data['geocoder_result']['country_province_code'], 'CountryProvince.name' => $this->data['geocoder_result']['country_province']]]]);
+					$countryProvince = $this->Countries->CountryProvince->find('first', ['conditions' => ['OR' => ['CountryProvince.abbr' => $this->data['geocoder_result']['country_province_code'], 'CountryProvince.name' => $this->data['geocoder_result']['country_province']]]]);
 					if (!empty($countryProvince)) {
 						$this->data['country_province_id'] = $countryProvince['CountryProvince']['id'];
 					}
@@ -262,7 +262,7 @@ class AddressesTable extends Table {
 
 			# enter new id
 			if (isset($this->data['country_id']) && empty($this->data['country_id']) && !empty($this->data['geocoder_result']['country_code'])) {
-				$country = $this->Country->find('first', ['conditions' => ['Country.iso2' => $this->data['geocoder_result']['country_code']]]);
+				$country = $this->Countries->find('first', ['conditions' => ['Country.iso2' => $this->data['geocoder_result']['country_code']]]);
 				if (!empty($country)) {
 					$this->data['country_id'] = $country['Country']['id'];
 				}

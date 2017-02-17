@@ -26,7 +26,7 @@ class CitiesController extends DataAppController {
 	 * @return \Cake\Network\Response|null
 	 */
 	public function view($id = null) {
-		if (empty($id) || !($city = $this->City->find('first', ['conditions' => ['City.id' => $id]]))) {
+		if (empty($id) || !($city = $this->Cities->find('first', ['conditions' => ['City.id' => $id]]))) {
 			$this->Flash->error(__('invalidRecord'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
@@ -38,8 +38,8 @@ class CitiesController extends DataAppController {
 	 */
 	public function add() {
 		if ($this->Common->isPosted()) {
-			$this->City->create();
-			if ($this->City->save($this->request->data)) {
+			$this->Cities->create();
+			if ($this->Cities->save($this->request->data)) {
 				$var = $this->request->data['name'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
@@ -48,7 +48,7 @@ class CitiesController extends DataAppController {
 
 		}
 
-		$countries = $this->City->Country->find('list');
+		$countries = $this->Cities->Countries->find('list');
 		$this->set(compact('countries'));
 	}
 
@@ -57,12 +57,12 @@ class CitiesController extends DataAppController {
 	 * @return \Cake\Network\Response|null
 	 */
 	public function edit($id = null) {
-		if (empty($id) || !($city = $this->City->find('first', ['conditions' => ['City.id' => $id]]))) {
+		if (empty($id) || !($city = $this->Cities->find('first', ['conditions' => ['City.id' => $id]]))) {
 			$this->Flash->error(__('invalidRecord'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
-			if ($this->City->save($this->request->data)) {
+			if ($this->Cities->save($this->request->data)) {
 				$var = $this->request->data['name'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
@@ -72,7 +72,7 @@ class CitiesController extends DataAppController {
 		} else {
 			$this->request->data = $city;
 		}
-		$countries = $this->City->Country->find('list');
+		$countries = $this->Cities->Countries->find('list');
 		$this->set(compact('countries'));
 	}
 
@@ -83,13 +83,13 @@ class CitiesController extends DataAppController {
 	public function delete($id = null) {
 		$this->request->allowMethod(['post', 'delete']);
 
-		if (empty($id) || !($city = $this->City->find('first', ['conditions' => ['City.id' => $id], 'fields' => ['id', 'name']]))) {
+		if (empty($id) || !($city = $this->Cities->find('first', ['conditions' => ['City.id' => $id], 'fields' => ['id', 'name']]))) {
 			$this->Flash->error(__('invalidRecord'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$var = $city['name'];
 
-		if ($this->City->delete($id)) {
+		if ($this->Cities->delete($id)) {
 			$this->Flash->success(__('record del {0} done', h($var)));
 			return $this->redirect(['action' => 'index']);
 		}

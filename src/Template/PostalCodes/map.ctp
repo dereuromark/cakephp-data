@@ -33,25 +33,28 @@ $zoom = $zooms[$numbers];
 
 $mapOptions = ['zoom' => $zoom];
 if (!empty($overviewCode)) {
-	$mapOptions['lat'] = $overviewCode['PostalCode']['lat'];
-	$mapOptions['lng'] = $overviewCode['PostalCode']['lng'];
+	$mapOptions['lat'] = $overviewCode['lat'];
+	$mapOptions['lng'] = $overviewCode['lng'];
 }
 echo $this->GoogleMap->map(['map' => $mapOptions]);
 
-foreach ($postalCodes as $code) {
-	$title = $code[0]['sub'];
-	$lat = $code['PostalCode']['lat'];
-	$lng = $code['PostalCode']['lng'];
+/**
+ * @var \Data\Model\Entity\PostalCode[] $postalCodes
+ */
+foreach ($postalCodes as $postalCode) {
+	$title = $postalCode['sub'];
+	$lat = $postalCode['lat'];
+	$lng = $postalCode['lng'];
 
-	$content = 'Area Code <b>' . $title . '</b>' . BR . $code[0]['count'] . ' codes for this area';
+	$content = 'Area Code <b>' . $title . '</b>' . '<br>' . $postalCode['count'] . ' codes for this area';
 	$content .= ' ' . $this->Html->link($this->Format->icon('map'), $this->GoogleMap->mapUrl(['to' => $lat . ',' . $lng]), ['escape' => false]);
 
 	# more correct average location
-	if (isset($code[0]['lat_sum'])) {
-		$lat = ($code[0]['lat_sum'] / $code[0]['count']);
+	if (isset($postalCode['lat_sum'])) {
+		$lat = ($postalCode['lat_sum'] / $postalCode['count']);
 	}
-	if (isset($code[0]['lng_sum'])) {
-		$lng = ($code[0]['lng_sum'] / $code[0]['count']);
+	if (isset($postalCode['lng_sum'])) {
+		$lng = ($postalCode['lng_sum'] / $postalCode['count']);
 	}
 
 
