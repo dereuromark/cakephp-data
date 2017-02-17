@@ -14,13 +14,11 @@ class CurrenciesController extends DataAppController {
 	 */
 	public $paginate = ['order' => ['Currencies.base' => 'DESC', 'Currencies.modified' => 'DESC']];
 
-	public function initialize()
-	{
+	/**
+	 * @return void
+	 */
+	public function initialize() {
 		parent::initialize();
-
-		if (Plugin::loaded('Search')) {
-
-		}
 	}
 
 
@@ -35,13 +33,11 @@ class CurrenciesController extends DataAppController {
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 
+	/**
+	 * @return void
+	 */
 	public function index() {
-		if (Plugin::loaded('Search')) {
-			$query = $this->Currencies->find('search', ['search' => $this->request->query]);
-			$currencies = $this->paginate($query);
-		} else {
-			$currencies = $this->paginate();
-		}
+		$currencies = $this->paginate();
 
 		$baseCurrency = [];
 		foreach ($currencies as $currency) {

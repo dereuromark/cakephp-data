@@ -19,6 +19,7 @@ class CurrenciesTable extends Table {
 			'isUnique' => [
 				'rule' => ['isUnique'],
 				'message' => 'key already exists',
+				'provider' => 'table',
 			],
 		],
 		'code' => [
@@ -30,7 +31,8 @@ class CurrenciesTable extends Table {
 			'isUnique' => [
 				'rule' => ['isUnique'],
 				'message' => 'key already exists',
-				'last' => true
+				'last' => true,
+				'provider' => 'table',
 			],
 			'available' => [
 				'rule' => ['available'],

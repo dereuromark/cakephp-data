@@ -9,17 +9,6 @@ use Cake\Core\Plugin;
 <h2><?php
 	echo __('Currencies');?></h2>
 
-<?php if (Plugin::loaded('Search')) { ?>
-<div class="search-box">
-<?php
-echo $this->Form->create();
-echo $this->Form->input('search', ['placeholder' => __('wildcardSearch {0} and {1}', '*', '?')]);
-echo $this->Form->submit(__('Search'), []);
-echo $this->Form->end();
-?>
-</div>
-<?php } ?>
-
 <table class="table">
 <tr>
 	<th><?php echo $this->Paginator->sort('name');?></th>

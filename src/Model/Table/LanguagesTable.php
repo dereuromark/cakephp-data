@@ -3,6 +3,7 @@ namespace Data\Model\Table;
 
 use App\I18n\L10n;
 use Cake\Cache\Cache;
+use Cake\Core\Plugin;
 use Data\Model\Entity\Language;
 use Tools\HtmlDom\HtmlDom;
 use Tools\Model\Table\Table;
@@ -11,6 +12,8 @@ use Tools\Model\Table\Table;
  * Languages and their locales
  * for details see
  * http://www.loc.gov/standards/iso639-2/php/code_list.php
+ *
+ * @mixin \Search\Model\Behavior\SearchBehavior
  */
 class LanguagesTable extends Table {
 
@@ -46,6 +49,7 @@ class LanguagesTable extends Table {
 			'isUnique' => [
 				'rule' => ['isUnique'],
 				'message' => 'valErrRecordNameExists',
+				'provider' => 'table',
 			],
 		],
 		'locale_fallback' => [
@@ -63,10 +67,22 @@ class LanguagesTable extends Table {
 		],
 	];
 
-	public $filterArgs = [
-		'search' => ['type' => 'like', 'field' => ['name', 'ori_name', 'code', 'locale', 'locale_fallback']],
-		'dir' => ['type' => 'value', 'field' => 'direction']
-	];
+	/**
+	 * @param array $config
+	 * @return void
+	 */
+	public function initialize(array $config) {
+		parent::initialize($config);
+
+		if (!Plugin::loaded('Search')) {
+			return;
+		}
+
+		$this->addBehavior('Search.Search');
+		$this->searchManager()
+			->value('dir', ['field' => 'direction'])
+			->like('search', ['field' => ['name', 'ori_name', 'code', 'locale', 'locale_fallback']]);
+	}
 
 	/**
 	 * For language switch etc

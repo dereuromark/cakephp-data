@@ -15,9 +15,10 @@ class StatesTable extends Table {
 		'country_id' => ['numeric'],
 		'abbr' => [
 			'validateUnique' => [
-				'rule' => ['validateUnique', ['country_id']],
+				'rule' => ['validateUnique', ['scope' => ['country_id']]],
 				'message' => 'valErrRecordNameExists',
-				'allowEmpty' => true
+				'allowEmpty' => true,
+				'provider' => 'table',
 			],
 		],
 		'name' => [
@@ -27,8 +28,9 @@ class StatesTable extends Table {
 				'last' => true
 			],
 			'isUnique' => [
-				'rule' => ['validateUnique', ['country_id']],
+				'rule' => ['validateUnique', ['scope' => ['country_id']]],
 				'message' => 'valErrRecordNameExists',
+				'provider' => 'table',
 			],
 		],
 	];

@@ -10,21 +10,31 @@ class LanguagesController extends DataAppController {
 	public $paginate = ['order' => ['Language.name' => 'ASC']];
 
 	/**
-	 * LanguagesController::admin_index()
-	 *
+	 * @return void
+	 */
+	public function initialize() {
+		parent::initialize();
+
+		if (Plugin::loaded('Search')) {
+			$this->loadComponent('Search.Prg', [
+				'actions' => ['index']
+			]);
+		}
+	}
+
+	/**
 	 * @return void
 	 */
 	public function index() {
 		if (Plugin::loaded('Search')) {
-			//$this->Languages->addBehavior('Search.Searchable');
-			//$this->Common->loadComponent('Search.Prg');
-
-			//$this->Prg->commonProcess();
-			//$languages = $this->paginate($this->Languages->find('searchable', $this->Prg->parsedParams()));
+			$query = $this->Languages->find('search', ['search' => $this->request->query]);
+			$languages = $this->paginate($query);
+		} else {
+			$languages = $this->paginate();
 		}
 
 		$language = $this->Languages->newEntity();
-		$languages = $this->paginate();
+
 		$this->set(compact('languages', 'language'));
 	}
 

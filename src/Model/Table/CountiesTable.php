@@ -5,21 +5,30 @@ use Tools\Model\Table\Table;
 
 class CountiesTable extends Table {
 
-	public $actsAs = ['Tools.Slugged' => ['case' => 'low', 'mode' => 'ascii', 'unique' => false, 'overwrite' => false]];
+	/**
+	 * @var array
+	 */
+	public $actsAs = [
+		'Tools.Slugged' => ['case' => 'low', 'mode' => 'ascii', 'unique' => false, 'overwrite' => false]
+	];
 
+	/**
+	 * @var array
+	 */
 	public $hasMany = [
 		'City' => ['className' => 'Data.City']
 	];
 
+	/**
+	 * @var array
+	 */
 	public $belongsTo = [
 		'State' => ['className' => 'Data.State']
 	];
 
 	/**
-	 * CountiesTable::initCounty()
-	 *
 	 * @param mixed $data
-	 * @return
+	 * @return bool|\Cake\Datasource\EntityInterface
 	 */
 	public function initCounty($data) {
 		$entity = $this->newEntity($data);

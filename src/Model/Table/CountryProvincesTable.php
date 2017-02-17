@@ -16,9 +16,10 @@ class CountryProvincesTable extends Table {
 		'country_id' => ['numeric'],
 		'abbr' => [
 			'validateUnique' => [
-				'rule' => ['validateUnique', ['country_id']],
+				'rule' => ['validateUnique', ['scope' => ['country_id']]],
 				'message' => 'this kind of record already exists for this country',
-				'allowEmpty' => true
+				'allowEmpty' => true,
+				'provider' => 'table',
 			],
 		],
 		'name' => [
@@ -28,8 +29,9 @@ class CountryProvincesTable extends Table {
 				'last' => true
 			],
 			'isUnique' => [
-				'rule' => ['validateUnique', ['country_id']],
+				'rule' => ['validateUnique', ['scope' => ['country_id']]],
 				'message' => 'this kind of record already exists for this country',
+				'provider' => 'table',
 			],
 		],
 	];

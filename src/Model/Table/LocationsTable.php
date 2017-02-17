@@ -19,8 +19,9 @@ class LocationsTable extends Table {
 				'last' => true
 			],
 			'unique' => [
-				'rule' => ['validateUnique', ['country_id']],
+				'rule' => ['validateUnique', ['scope' => ['country_id']]],
 				'message' => 'valErrRecordNameExists',
+				'provider' => 'table',
 			],
 		],
 		'country_id' => [

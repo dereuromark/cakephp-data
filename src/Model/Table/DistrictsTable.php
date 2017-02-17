@@ -60,11 +60,11 @@ class DistrictsTable extends Table {
 	 */
 	public function getDistrictsByCity($citySlug, $type = 'all') {
 		$options = [
-			'contain' => ['City.slug'],
+			'contain' => ['Cities'],
 			'conditions' => [
 				//$this->alias.'.lat <>' => 0,
 				//$this->alias.'.lng <>' => 0,
-				$this->Cities->alias . '.slug' => $citySlug,
+				$this->Cities->alias() . '.slug' => $citySlug,
 			],
 			'fields' => [$this->alias() . '.slug', $this->alias() . '.name'],
 		];

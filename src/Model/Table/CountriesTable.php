@@ -20,6 +20,7 @@ class CountriesTable extends Table {
 			'isUnique' => [
 				'rule' => ['isUnique'],
 				'message' => 'record (with this name) already exists',
+				'provider' => 'table',
 			],
 		],
 		'ori_name' => [
@@ -31,6 +32,7 @@ class CountriesTable extends Table {
 			'isUnique' => [
 				'rule' => ['isUnique'],
 				'message' => 'record (with this name) already exists',
+				'provider' => 'table',
 			],
 		],
 		'iso2' => [
@@ -38,6 +40,7 @@ class CountriesTable extends Table {
 				'rule' => ['isUnique'],
 				'allowEmpty' => true,
 				'message' => 'record (with this name) already exists',
+				'provider' => 'table',
 			],
 		],
 		'iso3' => [
@@ -45,6 +48,7 @@ class CountriesTable extends Table {
 				'rule' => ['isUnique'],
 				'allowEmpty' => true,
 				'message' => 'record (with this name) already exists',
+				'provider' => 'table',
 			],
 		],
 		'country_code' => ['numeric'],

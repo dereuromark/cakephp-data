@@ -28,7 +28,8 @@ class AddressesTable extends Table {
 			],
 			'fitsToCountry' => [
 				'rule' => ['fitsToCountry'],
-				'message' => 'The province seems not be fit to the chosen country'
+				'message' => 'The province seems not be fit to the chosen country',
+				'provider' => 'table',
 			],
 		],
 		'country_id' => [
@@ -48,13 +49,15 @@ class AddressesTable extends Table {
 			'primaryUnique' => [
 				'rule' => ['primaryUnique'],
 				'message' => 'Es darf nur eine Adresse "Haupt-Wohnsitz" sein, bitte einen anderen Typ wählen',
-				'last' => true
+				'last' => true,
+				'provider' => 'table',
 			],
 		],
 		'foreign_id' => [
 			'validateKey' => [
 				'rule' => ['validateKey'],
-				'message' => 'valErrInvalidKey'
+				'message' => 'valErrInvalidKey',
+				'provider' => 'table',
 			],
 		],
 		'postal_code' => [
@@ -66,6 +69,7 @@ class AddressesTable extends Table {
 			'correspondsWithCountry' => [
 				'rule' => ['correspondsWithCountry'],
 				'message' => 'The zip code seems not to have the correct length',
+				'provider' => 'table',
 			],
 		],
 		'city' => [
@@ -78,9 +82,10 @@ class AddressesTable extends Table {
 		],
 		'formatted_address' => [
 			'validateUnique' => [
-				'rule' => ['validateUnique', ['foreign_id', 'model']],
+				'rule' => ['validateUnique', ['scope' => ['foreign_id', 'model']]],
 				'allowEmpty' => true,
-				'message' => 'valErrRecordNameExists'
+				'message' => 'valErrRecordNameExists',
+				'provider' => 'table',
 			],
 		],
 		'lat' => [

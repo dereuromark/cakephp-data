@@ -25,15 +25,20 @@ class CitiesTable extends Table {
 		'Country' => ['className' => 'Data.Country']
 	];
 
-	public function __construct($id = false, $table = false, $ds = null) {
+	/**
+	 * @param array $config
+	 */
+	public function __construct(array $config = []) {
+		parent::__construct($config);
+
+		return;
+
 		if (Configure::read('City.District') === false) {
 			unset($this->hasMany['District']);
 		}
 		if (Configure::read('City.County') === false) {
 			unset($this->belongsTo['County']);
 		}
-
-		parent::__construct($id, $table, $ds);
 	}
 
 	public function autoCompleteName($name) {
@@ -61,7 +66,7 @@ class CitiesTable extends Table {
 		if (!isset($matches[0]) || strlen($matches[0]) !== 5) {
 			return false;
 		}
-		return $this->find('all', ['conditions' => ['City.postal_code LIKE' => $matches[0]]]);
+		return $this->find('all', ['conditions' => ['Cities.postal_code LIKE' => $matches[0]]]);
 	}
 
 	public function getCityToPostalCode($postalCode) {
