@@ -37,7 +37,7 @@ class PostalControllerTest extends IntegrationTestCase {
 	 * @return void
 	 */
 	public function testMap() {
-		$connectionConfig = TableRegistry::get('Data.PostalCodes')->getConnection()->config();
+		$connectionConfig = TableRegistry::get('Data.PostalCodes')->connection()->config();
 		$this->skipIf($connectionConfig['driver'] !== Mysql::class, 'Only for MySQL');
 
 		$this->get(['plugin' => 'Data', 'controller' => 'PostalCodes', 'action' => 'map']);
