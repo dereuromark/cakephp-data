@@ -1,3 +1,12 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+use Cake\Core\Plugin;
+use Cake\Cache\Cache;
+use Cake\Filesystem\Folder;
+?>
+
 <div class="page index">
 <h2><?php echo __('Languages');?></h2>
 ISO List contains <?php echo count($isoList['values']); ?> languages.
@@ -26,7 +35,6 @@ foreach ($isoList['values'] as $language):
 <?php
 	$languageFlags = Cache::read('language_flags');
 	if (!$languageFlags) {
-		App::uses('Folder', 'Utility');
 		$handle = new Folder(Plugin::path('Tools') . 'webroot' . DS . 'img' . DS . 'country_flags');
 		$languageFlags = $handle->read(true, true);
 		$languageFlags = $languageFlags[1];

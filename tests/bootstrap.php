@@ -29,7 +29,10 @@ require ROOT . '/vendor/autoload.php';
 require CORE_PATH . 'config/bootstrap.php';
 
 Cake\Core\Configure::write('App', [
-	'namespace' => 'App'
+	'namespace' => 'App',
+	'paths' => [
+		'templates' => [ROOT . DS . 'tests' . DS . 'test_app' . DS . 'src' . DS . 'Template' . DS],
+	],
 ]);
 
 Cake\Core\Configure::write('debug', true);
@@ -58,7 +61,7 @@ $cache = [
 Cake\Cache\Cache::config($cache);
 
 Cake\Core\Plugin::load('Data', ['path' => ROOT . DS, 'autoload' => true, 'routes' => true]);
-Cake\Core\Plugin::load('Tools', ['path' => ROOT . DS . 'vendor/dereuromark/cakephp-tools/', 'autoload' => true, 'bootstrap' => false]);
+Cake\Core\Plugin::load('Tools', ['path' => ROOT . DS . 'vendor/dereuromark/cakephp-tools/', 'autoload' => true, 'bootstrap' => true]);
 
 // Ensure default test connection is defined
 if (!getenv('db_class')) {

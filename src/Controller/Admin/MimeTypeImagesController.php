@@ -356,9 +356,7 @@ class MimeTypeImagesController extends DataAppController {
 	}
 
 	public function delete($id = null) {
-		if (!$this->Common->isPosted()) {
-			throw new MethodNotAllowedException();
-		}
+		$this->request->allowMethod('post');
 		if (empty($id)) {
 			$this->Flash->error(__('record invalid'));
 			return $this->Common->autoRedirect(['action' => 'index']);
@@ -377,6 +375,7 @@ class MimeTypeImagesController extends DataAppController {
 		$name = $fileName . '.' . $fileExt;
 		if ($this->MimeTypeImage->delete($id)) {
 			# remove icon -> archive?
+			/*
 			if (!@rename(PATH_MIMETYPES . $name, PATH_MIMETYPES . 'archive' . DS . $name)) {
 				//@copy...
 				//@unlink(PATH_MIMETYPES.$name);
@@ -385,6 +384,7 @@ class MimeTypeImagesController extends DataAppController {
 			} else {
 				$this->Flash->success(__('old icon {0} moved to \'archive\'', $name));
 			}
+			*/
 
 			$this->Flash->success(__('record del {0} done', $fileName));
 			return $this->Common->autoRedirect(['action' => 'index']);
@@ -392,10 +392,6 @@ class MimeTypeImagesController extends DataAppController {
 
 		$this->Flash->error(__('record del {0} not done exception', $fileName));
 		return $this->Common->autoRedirect(['action' => 'index']);
-	}
-
-	public function toggleActive($id = null) {
-		$this->toggleActive($id);
 	}
 
 	public function toggleActive($id = null) {
@@ -413,15 +409,7 @@ class MimeTypeImagesController extends DataAppController {
 		}
 	}
 
-	/****************************************************************************************
-	* protected/internal functions
-	****************************************************************************************/
-
-	/****************************************************************************************
-	* deprecated/test functions
-	****************************************************************************************/
-
-	public function manual_input() {
+	public function manualInput() {
 		$this->autoRender = false;
 
 		/* BEGINNING */

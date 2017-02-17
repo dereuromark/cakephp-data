@@ -15,16 +15,16 @@ class PostalCodesController extends DataAppController {
 	 * @return void
 	 */
 	public function index() {
-		$this->PostalCode->bindModel(['belongsTo' => ['Country' => ['className' => 'Data.Country']]], false);
+		//$this->PostalCodes->bindModel(['belongsTo' => ['Country' => ['className' => 'Data.Country']]], false);
 
-		//$this->PostalCode->addBehavior('Search.Searchable');
+		//$this->PostalCodes->addBehavior('Search.Searchable');
 		//$this->Common->loadComponent('Search.Prg');
 		//$this->Prg->commonProcess();
-		$this->paginate['conditions'] = $this->PostalCode->find('search', ['search' => $this->request->query]);
+		//$this->paginate['conditions'] = $this->PostalCodes->find('search', ['search' => $this->request->query]);
 
 		$postalCodes = $this->paginate();
 
-		$countries = $this->PostalCode->Country->find('list');
+		$countries = $this->PostalCodes->Country->find('list');
 		$this->set(compact('postalCodes', 'countries'));
 	}
 
@@ -48,9 +48,9 @@ class PostalCodesController extends DataAppController {
 	 * @return void
 	 */
 	public function view($id = null) {
-		$this->PostalCode->bindModel(['belongsTo' => ['Country' => ['className' => 'Data.Country']]], false);
+		$this->PostalCodes->bindModel(['belongsTo' => ['Country' => ['className' => 'Data.Country']]], false);
 
-		if (empty($id) || !($postalCode = $this->PostalCode->find('first', ['contain' => ['Country'], 'conditions' => ['PostalCode.id' => $id]]))) {
+		if (empty($id) || !($postalCode = $this->PostalCodes->find('first', ['contain' => ['Country'], 'conditions' => ['PostalCode.id' => $id]]))) {
 			$this->Flash->error(__('invalidRecord'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
@@ -63,66 +63,57 @@ class PostalCodesController extends DataAppController {
 	 */
 	public function add() {
 		if ($this->Common->isPosted()) {
-			$this->PostalCode->create();
-			if ($this->PostalCode->save($this->request->data)) {
-				$var = $this->request->data['PostalCode']['code'];
+			$this->PostalCodes->create();
+			if ($this->PostalCodes->save($this->request->data)) {
+				$var = $this->request->data['code'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
 			}
 
 			$this->Flash->error(__('formContainsErrors'));
 		}
+
+		$this->set(compact('postalCode'));
 	}
 
 	/**
-	 * @return void
+	 * @param int|null $id
+	 * @return \Cake\Network\Response|null
 	 */
 	public function edit($id = null) {
-		if (empty($id) || !($postalCode = $this->PostalCode->find('first', ['conditions' => ['PostalCode.id' => $id]]))) {
+		if (empty($id) || !($postalCode = $this->PostalCodes->find('first', ['conditions' => ['PostalCode.id' => $id]]))) {
 			$this->Flash->error(__('invalidRecord'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
-			if ($this->PostalCode->save($this->request->data)) {
-				$var = $this->request->data['PostalCode']['code'];
+			if ($this->PostalCodes->save($this->request->data)) {
+				$var = $this->request->data['code'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
 			}
 
 			$this->Flash->error(__('formContainsErrors'));
 		}
-		if (empty($this->request->data)) {
-			$this->request->data = $postalCode;
-		}
+
+		$this->set(compact('postalCode'));
 	}
 
 	/**
-	 * @return void
+	 * @param int|null $id
+	 * @return \Cake\Network\Response|null
 	 */
 	public function delete($id = null) {
-		if (!$this->Common->isPosted()) {
-			throw new MethodNotAllowedException();
-		}
-		if (empty($id) || !($postalCode = $this->PostalCode->find('first', ['conditions' => ['PostalCode.id' => $id], 'fields' => ['id', 'code']]))) {
-			$this->Flash->error(__('invalidRecord'));
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
-		$var = $postalCode['PostalCode']['code'];
+		$this->request->allowMethod('post');
 
-		if ($this->PostalCode->delete($id)) {
+		$postalCode = $this->PostalCodes->get($id);
+		$var = $postalCode['code'];
+
+		if ($this->PostalCodes->delete($id)) {
 			$this->Flash->success(__('record del {0} done', h($var)));
 			return $this->redirect(['action' => 'index']);
 		}
 		$this->Flash->error(__('record del {0} not done exception', h($var)));
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
-
-/****************************************************************************************
- * protected/interal functions
- ****************************************************************************************/
-
-/****************************************************************************************
- * deprecated/test functions
- ****************************************************************************************/
 
 }

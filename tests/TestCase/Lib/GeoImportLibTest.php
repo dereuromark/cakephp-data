@@ -33,7 +33,7 @@ class GeoImportLibTest extends TestCase {
 			return;
 		}
 
-		$this->GeoImport = $this->getMockBuilder('Data\Lib\GeoImportLib')->setMethods(['_getFromUrl'])->getMock();
+		$this->GeoImport = $this->getMockBuilder(GeoImportLib::class)->setMethods(['_getFromUrl'])->getMock();
 		$this->path = Plugin::path('Data') . 'tests' . DS . 'test_files' . DS . 'html' . DS;
 		// Liste-der-St-C3-A4dte-in-der-Schweiz-action-edit-section-4.html
 

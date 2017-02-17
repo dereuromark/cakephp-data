@@ -5,7 +5,7 @@
 namespace Data\Lib;
 
 use Cake\Cache\Cache;
-use Cake\Network\Http\Client;
+use Cake\Http\Client;
 use Cake\ORM\TableRegistry;
 use Tools\HtmlDom\HtmlDom;
 

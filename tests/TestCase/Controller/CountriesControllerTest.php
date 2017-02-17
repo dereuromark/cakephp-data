@@ -1,19 +1,19 @@
 <?php
 
-namespace Data\Test\TestCase\Controller\Admin;
+namespace Data\Test\TestCase\Controller;
 
 use Cake\ORM\TableRegistry;
 use Tools\TestSuite\IntegrationTestCase;
 
 /**
  */
-class AddressesControllerTest extends IntegrationTestCase {
+class CountriesControllerTest extends IntegrationTestCase {
 
 	/**
 	 * @var array
 	 */
 	public $fixtures = [
-		'plugin.data.addresses'
+		'plugin.data.Countries'
 	];
 
 	/**
@@ -36,7 +36,7 @@ class AddressesControllerTest extends IntegrationTestCase {
 	 * @return void
 	 */
 	public function testIndex() {
-		$this->get(['prefix' => 'admin', 'plugin' => 'Data', 'controller' => 'Addresses', 'action' => 'index']);
+		$this->get(['plugin' => 'Data', 'controller' => 'Countries', 'action' => 'index']);
 		$this->assertResponseCode(200);
 		$this->assertNoRedirect();
 	}

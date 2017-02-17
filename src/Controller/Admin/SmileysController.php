@@ -5,7 +5,12 @@ use Data\Controller\DataAppController;
 
 class SmileysController extends DataAppController {
 
-	public $paginate = ['order' => ['Smiley.is_base' => 'DESC', 'Smiley.sort' => 'ASC'], 'limit' => 100];
+	/**
+	 * @var array
+	 */
+	public $paginate = [
+		'order' => ['Smileys.is_base' => 'DESC', 'Smileys.sort' => 'ASC'], 'limit' => 100
+	];
 
 	public function index() {
 		$smileys = $this->paginate();
@@ -31,6 +36,8 @@ class SmileysController extends DataAppController {
 
 			$this->Flash->error(__('formContainsErrors'));
 		}
+
+		$this->set(compact('smiley'));
 	}
 
 	public function edit($id = null) {
@@ -47,15 +54,13 @@ class SmileysController extends DataAppController {
 
 			$this->Flash->error(__('formContainsErrors'));
 		}
-		if (empty($this->request->data)) {
-			$this->request->data = $smiley;
-		}
+
+		$this->set(compact('smiley'));
 	}
 
 	public function delete($id = null) {
-		if (!$this->Common->isPosted()) {
-			throw new MethodNotAllowedException();
-		}
+		$this->request->allowMethod('post');
+
 		if (empty($id) || !($smiley = $this->Smiley->find('first', ['conditions' => ['Smiley.id' => $id], 'fields' => ['id']]))) {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);

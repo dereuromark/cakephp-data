@@ -1,7 +1,7 @@
 <?php
 namespace Data\Lib;
 
-use Cake\Network\Http\Client;
+use Cake\Http\Client;
 
 /**
  * Use Webservices to get current rates etc

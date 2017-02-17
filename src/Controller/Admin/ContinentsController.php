@@ -57,9 +57,8 @@ class ContinentsController extends DataAppController {
 	}
 
 	public function delete($id = null) {
-		if (!$this->Common->isPosted()) {
-			throw new MethodNotAllowedException();
-		}
+		$this->request->allowMethod('post');
+
 		if (empty($id) || !($continent = $this->Continent->find('first', ['conditions' => ['Continent.id' => $id], 'fields' => ['id', 'name']]))) {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);

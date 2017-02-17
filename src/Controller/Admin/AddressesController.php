@@ -2,7 +2,6 @@
 namespace Data\Controller\Admin;
 
 use Cake\Core\Configure;
-use Cake\Network\Exception\MethodNotAllowedException;
 use Data\Controller\DataAppController;
 
 /**
@@ -102,9 +101,7 @@ class AddressesController extends DataAppController {
 	 * @return \Cake\Network\Response|null
 	 */
 	public function delete($id = null) {
-		if (!$this->Common->isPosted()) {
-			throw new MethodNotAllowedException();
-		}
+		$this->request->allowMethod('post');
 
 		if (empty($id) || !($address = $this->Address->find('first', ['conditions' => ['Addresses.id' => $id], 'fields' => ['id', 'formatted_address']]))) {
 			$this->Flash->error(__('invalid record'));
@@ -120,7 +117,7 @@ class AddressesController extends DataAppController {
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 
-	public function mark_as_used($id = null) {
+	public function markAsUsed($id = null) {
 		if (empty($id) || !($address = $this->Address->find('first', ['conditions' => ['Address.id' => $id], 'fields' => ['id', 'formatted_address']]))) {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);

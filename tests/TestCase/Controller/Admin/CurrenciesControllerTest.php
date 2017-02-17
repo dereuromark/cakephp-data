@@ -7,13 +7,13 @@ use Tools\TestSuite\IntegrationTestCase;
 
 /**
  */
-class AddressesControllerTest extends IntegrationTestCase {
+class CurrenciesControllerTest extends IntegrationTestCase {
 
 	/**
 	 * @var array
 	 */
 	public $fixtures = [
-		'plugin.data.addresses'
+		'plugin.data.Currencies'
 	];
 
 	/**
@@ -36,7 +36,7 @@ class AddressesControllerTest extends IntegrationTestCase {
 	 * @return void
 	 */
 	public function testIndex() {
-		$this->get(['prefix' => 'admin', 'plugin' => 'Data', 'controller' => 'Addresses', 'action' => 'index']);
+		$this->get(['prefix' => 'admin', 'plugin' => 'Data', 'controller' => 'Currencies', 'action' => 'index']);
 		$this->assertResponseCode(200);
 		$this->assertNoRedirect();
 	}

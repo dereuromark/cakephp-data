@@ -16,11 +16,11 @@ class LanguagesController extends DataAppController {
 	 */
 	public function index() {
 		if (Plugin::loaded('Search')) {
-			$this->Languages->addBehavior('Search.Searchable');
-			$this->Common->loadComponent('Search.Prg');
+			//$this->Languages->addBehavior('Search.Searchable');
+			//$this->Common->loadComponent('Search.Prg');
 
-			$this->Prg->commonProcess();
-			$languages = $this->paginate($this->Languages->find('searchable', $this->Prg->parsedParams()));
+			//$this->Prg->commonProcess();
+			//$languages = $this->paginate($this->Languages->find('searchable', $this->Prg->parsedParams()));
 		}
 
 		$language = $this->Languages->newEntity();
@@ -29,7 +29,7 @@ class LanguagesController extends DataAppController {
 	}
 
 	public function view($id = null) {
-		if (empty($id) || !($language = $this->Languages->find('first', ['conditions' => ['Language.id' => $id]]))) {
+		if (empty($id) || !($language = $this->Languages->find('first', ['conditions' => ['Languages.id' => $id]]))) {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
@@ -55,7 +55,7 @@ class LanguagesController extends DataAppController {
 	}
 
 	public function edit($id = null) {
-		if (empty($id) || !($language = $this->Languages->find('first', ['conditions' => ['Language.id' => $id]]))) {
+		if (empty($id) || !($language = $this->Languages->find('first', ['conditions' => ['Languages.id' => $id]]))) {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
@@ -76,10 +76,9 @@ class LanguagesController extends DataAppController {
 	}
 
 	public function delete($id = null) {
-		if (!$this->Common->isPosted()) {
-			throw new MethodNotAllowedException();
-		}
-		if (empty($id) || !($language = $this->Languages->find('first', ['conditions' => ['Language.id' => $id], 'fields' => ['id', 'name']]))) {
+		$this->request->allowMethod('post');
+
+		if (empty($id) || !($language = $this->Languages->find('first', ['conditions' => ['Languages.id' => $id], 'fields' => ['id', 'name']]))) {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
@@ -95,8 +94,8 @@ class LanguagesController extends DataAppController {
 	/**
 	 * Should only be done once at the very beginning
 	 */
-	public function import_from_core() {
-		if (!empty($this->request->params['named']['reset'])) {
+	public function importFromCore() {
+		if (!empty($this->request->query['reset'])) {
 			$this->Languages->truncate();
 		}
 		//$languages = $this->Languages->iso3ToIso2();

@@ -1,3 +1,13 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ *
+ * @var \Data\Model\Entity\Language $language
+ * @var \Data\Model\Entity\Language[] $languages
+ */
+use Cake\Core\Plugin;
+?>
+
 <div class="page index">
 <h2><?php echo __('Languages');?></h2>
 
@@ -26,62 +36,42 @@ echo $this->Form->end();
 	<th class="actions"><?php echo __('Actions');?></th>
 </tr>
 <?php
-$i = 0;
 foreach ($languages as $language):
-	$class = null;
-	if ($i++ % 2 == 0) {
-		$class = ' class="altrow"';
-	}
 ?>
 	<tr>
 		<td>
 <?php
-if (false) {
-	$languageFlags = Cache::read('language_flags');
-	list($wwwPath, $path) = $this->Data->getCountryIconPaths();
-	if (!$languageFlags) {
-		App::uses('Folder', 'Utility');
-
-		$handle = new Folder($path);
-		$languageFlags = $handle->read(true, true);
-		$languageFlags = $languageFlags[1];
-		Cache::write('language_flags', $languageFlags);
-	}
-
-	if (!empty($language['Language']['code']) && in_array($language['Language']['code'] . '.gif', $languageFlags)) {
-		echo $this->Html->image($wwwPath . $language['Language']['code'] . '.gif');
-	}
-}
+	echo $this->Data->languageFlag($language['code']);
 ?>
 		</td>
 		<td>
-			<?php echo h($language['Language']['name']); ?>
+			<?php echo h($language['name']); ?>
 		</td>
 		<td>
-			<?php echo h($language['Language']['ori_name']); ?>
+			<?php echo h($language['ori_name']); ?>
 		</td>
 		<td>
-			<?php echo h($language['Language']['code']); ?>
+			<?php echo h($language['code']); ?>
 		</td>
 		<td>
-			<?php echo h($language['Language']['locale']); ?>
+			<?php echo h($language['locale']); ?>
 		</td>
 		<td>
-			<?php echo h($language['Language']['locale_fallback']); ?>
+			<?php echo h($language['locale_fallback']); ?>
 		</td>
 		<td>
-			<?php echo h($language['Language']['direction']); ?>
+			<?php echo h($language['direction']); ?>
 		</td>
 		<td>
-			<?php echo $this->Format->yesNo($language['Language']['status'], ['onTitle' => __('Active'), 'offTitle' => __('Inactive')]); ?>
+			<?php echo $this->Format->yesNo($language['status'], ['onTitle' => __('Active'), 'offTitle' => __('Inactive')]); ?>
 		</td>
 		<td>
-			<?php echo $this->Time->niceDate($language['Language']['modified']); ?>
+			<?php echo $this->Time->niceDate($language['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $language['Language']['id']], ['escape' => false]); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $language['Language']['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $language['Language']['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $language['Language']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $language['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $language['id']], ['escape' => false]); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $language['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $language['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

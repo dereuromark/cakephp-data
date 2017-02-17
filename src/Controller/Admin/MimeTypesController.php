@@ -132,22 +132,22 @@ class MimeTypesController extends DataAppController {
 		$fieldStr = '';
 		$searchStr = '';
 
-		if (!empty($this->request->params['named']['clear']) && $this->request->params['named']['clear'] === 'search') {
+		if (!empty($this->request->query['clear']) && $this->request->query['clear'] === 'search') {
 			$this->request->session()->delete($model . '.search');
 		} else {
 
 		if (!empty($this->request->data) && !empty($this->request->data['Form']['field'])) {
 			$fieldStr = $this->request->data['Form']['field'];
-		} elseif (!empty($this->request->params['named']['field'])) {
-			$fieldStr = $this->request->params['named']['field'];
+		} elseif (!empty($this->request->query['field'])) {
+			$fieldStr = $this->request->query['field'];
 		} elseif (!empty($sessionSearch['field'])) {
 			$fieldStr = $sessionSearch['field'];
 		}
 
 		if (!empty($this->request->data) && !empty($this->request->data['Form']['search'])) {
 			$searchStr = $this->request->data['Form']['search'];
-		} elseif (!empty($this->request->params['named']['search'])) {
-			$searchStr = $this->request->params['named']['search'];
+		} elseif (!empty($this->request->query['search'])) {
+			$searchStr = $this->request->query['search'];
 		} elseif (!empty($sessionSearch['search'])) {
 			$searchStr = $sessionSearch['search'];
 		}
@@ -236,9 +236,7 @@ class MimeTypesController extends DataAppController {
 	}
 
 	public function delete($id = null) {
-		if (!$this->Common->isPosted()) {
-			throw new MethodNotAllowedException();
-		}
+		$this->request->allowMethod('post');
 		if (empty($id)) {
 			$this->Flash->error(__('record invalid'));
 			return $this->Common->autoRedirect(['action' => 'index']);

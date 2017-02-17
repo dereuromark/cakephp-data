@@ -1,8 +1,10 @@
 <?php
 namespace Data\View\Helper;
 
+use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
+use Cake\Filesystem\Folder;
 use Cake\Utility\Inflector;
 use Cake\View\Helper;
 
@@ -11,13 +13,19 @@ use Cake\View\Helper;
  */
 class DataHelper extends Helper {
 
+	/**
+	 * @var array
+	 */
 	public $helpers = ['Html'];
 
 	/**
-	 * FormatHelper::countryAndProvince()
-	 *
-	 * @param mixed $array
-	 * @param mixed $options
+	 * @var array|null
+	 */
+	protected $languageFlags;
+
+	/**
+	 * @param array $array
+	 * @param array $options
 	 * @return string
 	 */
 	public function countryAndProvince($array, $options = []) {
@@ -47,8 +55,6 @@ class DataHelper extends Helper {
 	}
 
 	/**
-	 * DataHelper::getCountryIconPaths()
-	 *
 	 * @return array with wwwPath and path
 	 */
 	public function getCountryIconPaths() {
@@ -82,6 +88,9 @@ class DataHelper extends Helper {
 	 * 'imagePath' => 'PluginName./img/country_flags/',
 	 *
 	 * @param string|null $icon iso2 code (e.g. 'de' or 'gb')
+	 * @param bool $returnFalseOnFailure
+	 * @param array $options
+	 * @param array $attr
 	 * @return string
 	 */
 	public function countryIcon($icon = null, $returnFalseOnFailure = false, $options = [], $attr = []) {
@@ -115,8 +124,6 @@ class DataHelper extends Helper {
 	}
 
 	/**
-	 * FormatHelper::languageFlag()
-	 *
 	 * @param mixed $iso2
 	 * @param mixed $options
 	 * @return string
@@ -125,10 +132,43 @@ class DataHelper extends Helper {
 		$flag = '';
 
 		$defaults = ['alt' => $iso2, 'title' => strtoupper($iso2)];
-		$options = array_merge($defaults, $options);
+		$options += $defaults;
 
-		$flag .= $this->Html->image('language_flags/' . strtolower($iso2) . '.gif', $options);
+		$languageFlags = $this->getAvailableLanguageFlags();
+
+		$name = strtolower($iso2) . '.gif';
+		if (!in_array($name, $languageFlags)) {
+			return $flag;
+		}
+
+		$flag .= $this->Html->image('language_flags/' . $name, $options);
 		return $flag;
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function getAvailableLanguageFlags() {
+		if (isset($this->languageFlags)) {
+			return $this->languageFlags;
+		}
+
+		$flags = Cache::read('language_flags');
+		if ($flags !== false) {
+			$this->languageFlags = $flags;
+
+			return $this->languageFlags;
+		}
+
+		list($wwwPath, $path) = $this->getCountryIconPaths();
+		$handle = new Folder($path);
+		$languageFlags = $handle->read(true, true);
+		$languageFlags = $languageFlags[1];
+		Cache::write('language_flags', $languageFlags);
+
+		$this->languageFlags = $languageFlags;
+
+		return $languageFlags;
 	}
 
 }

@@ -21,12 +21,10 @@ class CountriesController extends DataAppController {
 	}
 
 	/**
-	 * CountriesController::admin_update_coordinates()
-	 *
 	 * @param mixed $id
 	 * @return void
 	 */
-	public function update_coordinates($id = null) {
+	public function updateCoordinates($id = null) {
 		set_time_limit(120);
 		$res = $this->Countries->updateCoordinates($id);
 		if (!$res) {
@@ -149,20 +147,16 @@ class CountriesController extends DataAppController {
 	}
 
 	/**
-	 * CountriesController::admin_index()
-	 *
 	 * @return void
 	 */
 	public function index() {
 		if (Plugin::loaded('Search')) {
-			$this->Countries->addBehavior('Search.Searchable');
-			$this->Common->loadComponent('Search.Prg');
-
-			$this->Prg->commonProcess();
-			$countries = $this->paginate($this->Countries->find('searchable', $this->Prg->parsedParams()));
+			$query = $this->Countries->find('search', ['search' => $this->request->query]);
+			$countries = $this->paginate($query);
+		} else {
+			$countries = $this->paginate();
 		}
 
-		$countries = $this->paginate();
 		$this->set(compact('countries'));
 
 		$this->helpers = array_merge($this->helpers, ['Geo.GoogleMap']);

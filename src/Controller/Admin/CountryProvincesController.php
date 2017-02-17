@@ -68,11 +68,11 @@ class CountryProvincesController extends DataAppController {
 		$cid = $this->_processCountry($cid);
 
 		if (Plugin::loaded('Search')) {
-			$this->CountryProvinces->addBehavior('Search.Searchable');
-			$this->Common->loadComponent('Search.Prg');
+			//$this->CountryProvinces->addBehavior('Search.Searchable');
+			//$this->Common->loadComponent('Search.Prg');
 
-			$this->Prg->commonProcess();
-			$countryProvinces = $this->paginate($this->CountryProvinces->find('searchable', $this->Prg->parsedParams()));
+			//$this->Prg->commonProcess();
+			//$countryProvinces = $this->paginate($this->CountryProvinces->find('searchable', $this->Prg->parsedParams()));
 		} else {
 			$countryProvinces = $this->paginate();
 		}
@@ -163,12 +163,11 @@ class CountryProvincesController extends DataAppController {
 	 * CountryProvincesController::admin_delete()
 	 *
 	 * @param mixed $id
-	 * @return void
+	 * @return \Cake\Network\Response|null
 	 */
 	public function delete($id = null) {
-		if (!$this->Common->isPosted()) {
-			throw new MethodNotAllowedException();
-		}
+		$this->request->allowMethod('post');
+
 		if (empty($id)) {
 			$this->Flash->error(__('record invalid'));
 			return $this->redirect(['action' => 'index']);
@@ -212,7 +211,7 @@ class CountryProvincesController extends DataAppController {
 		}
 
 		if (!empty($cid)) {
-			$this->paginate = Set::merge($this->paginate, ['conditions' => ['country_id' => $cid]]);
+			$this->paginate = ['conditions' => ['country_id' => $cid]] + $this->paginate;
 			$this->request->data['Filter']['id'] = $cid;
 		}
 	}

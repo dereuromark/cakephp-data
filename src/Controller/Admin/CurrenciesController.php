@@ -4,9 +4,25 @@ namespace Data\Controller\Admin;
 use Cake\Core\Plugin;
 use Data\Controller\DataAppController;
 
+/**
+ * @property \Data\Model\Table\CurrenciesTable $Currencies
+ */
 class CurrenciesController extends DataAppController {
 
-	public $paginate = ['order' => ['Currency.base' => 'DESC', 'Currency.modified' => 'DESC']];
+	/**
+	 * @var array
+	 */
+	public $paginate = ['order' => ['Currencies.base' => 'DESC', 'Currencies.modified' => 'DESC']];
+
+	public function initialize()
+	{
+		parent::initialize();
+
+		if (Plugin::loaded('Search')) {
+
+		}
+	}
+
 
 	public function table() {
 		$currencies = $this->Currencies->availableCurrencies();
@@ -21,11 +37,8 @@ class CurrenciesController extends DataAppController {
 
 	public function index() {
 		if (Plugin::loaded('Search')) {
-			$this->Currencies->addBehavior('Search.Searchable');
-			$this->Common->loadComponent('Search.Prg');
-
-			$this->Prg->commonProcess();
-			$currencies = $this->paginate($this->Currencies->find('searchable', $this->Prg->parsedParams()));
+			$query = $this->Currencies->find('search', ['search' => $this->request->query]);
+			$currencies = $this->paginate($query);
 		} else {
 			$currencies = $this->paginate();
 		}
@@ -105,9 +118,8 @@ class CurrenciesController extends DataAppController {
 	}
 
 	public function delete($id = null) {
-		if (!$this->Common->isPosted()) {
-			throw new MethodNotAllowedException();
-		}
+		$this->request->allowMethod('post');
+
 		if (empty($id)) {
 			$this->Flash->error(__('record invalid'));
 			return $this->Common->autoRedirect(['action' => 'index']);

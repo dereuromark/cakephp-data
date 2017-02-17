@@ -33,12 +33,12 @@ class CountryProvincesController extends DataAppController {
 	 * @return void
 	 */
 	public function updateSelect($id = null) {
-		//$this->autoRender = false;
 		if (!$this->request->is('post') || !$this->request->is('ajax')) {
 			throw new Exception(__('not a valid request'));
 		}
 		$this->viewBuilder()->layout('ajax');
 		$countryProvinces = $this->CountryProvinces->getListByCountry($id);
+
 		$defaultFieldLabel = 'pleaseSelect';
 		if ($this->request->query('optional')) {
 			$defaultFieldLabel = 'doesNotMatter';

@@ -10,8 +10,15 @@ use Data\Controller\DataAppController;
 
 class CountriesController extends DataAppController {
 
-	public $paginate = ['order' => ['Country.sort' => 'DESC']];
+	/**
+	 * @var array
+	 */
+	public $paginate = ['order' => ['Countries.sort' => 'DESC']];
 
+	/**
+	 * @param Event $event
+	 * @return void
+	 */
 	public function beforeFilter(Event $event) {
 		parent::beforeFilter($event);
 
@@ -33,8 +40,6 @@ class CountriesController extends DataAppController {
 	}
 
 	/**
-	 * CountriesController::index()
-	 *
 	 * @return void
 	 */
 	public function index() {
@@ -44,7 +49,7 @@ class CountriesController extends DataAppController {
 
 	protected function _icons() {
 		$useCache = true;
-		if (!empty($this->request->params['named']['reset'])) {
+		if (!empty($this->request->query['reset'])) {
 			$useCache = false;
 		}
 

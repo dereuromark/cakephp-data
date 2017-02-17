@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+use Cake\Core\Plugin;
+?>
+
 <?php $this->Html->css('highslide/highslide'); ?>
 
 <?php $this->Html->script('highslide/highslide'); ?>

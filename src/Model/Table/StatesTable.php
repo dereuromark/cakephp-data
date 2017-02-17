@@ -1,6 +1,7 @@
 <?php
 namespace Data\Model\Table;
 
+use Geo\Geocoder\Geocoder;
 use Tools\Lib\GeocodeLib;
 use Tools\Model\Table\Table;
 
@@ -68,7 +69,12 @@ class StatesTable extends Table {
 		die('ERROR: ' . returns($this->validationErrors));
 	}
 
-	public function getListByCountry($cid = null) {
+	/**
+	 * @param int $cid
+	 *
+	 * @return array|\Cake\ORM\Query
+	 */
+	public function getListByCountry($cid) {
 		if (empty($cid)) {
 			return [];
 		}
@@ -92,7 +98,7 @@ class StatesTable extends Table {
 	 * - otherwise: specific update
 	 */
 	public function updateCoordinates($id = null) {
-		$geocoder = new GeocodeLib();
+		$geocoder = new Geocoder();
 
 		$override = false;
 		if ($id == -1) {

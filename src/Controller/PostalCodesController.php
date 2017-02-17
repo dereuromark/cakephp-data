@@ -13,7 +13,7 @@ class PostalCodesController extends DataAppController {
 	 */
 	public function map() {
 		if ($this->Common->isPosted()) {
-			$term = $this->request->data['PostalCode']['code'];
+			$term = $this->request->data['code'];
 
 		} else {
 			$term = '';
