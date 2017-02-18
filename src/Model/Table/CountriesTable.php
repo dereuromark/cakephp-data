@@ -6,10 +6,9 @@ use Exception;
 use Geo\Geocode\Geocode;
 use Tools\Model\Table\Table;
 
-/*
-*
-* @mixin \Search\Model\Behavior\SearchBehavior
-*/
+/**
+ * @mixin \Search\Model\Behavior\SearchBehavior
+ */
 class CountriesTable extends Table {
 
 	public $order = ['sort' => 'DESC', 'name' => 'ASC'];

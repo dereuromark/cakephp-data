@@ -1,8 +1,12 @@
 <?php
 namespace Data\Model\Table;
 
+use Cake\Core\Plugin;
 use Tools\Model\Table\Table;
 
+/**
+ * @mixin \Search\Model\Behavior\SearchBehavior
+ */
 class PostalCodesTable extends Table {
 
 	public $displayField = 'code';
@@ -32,27 +36,30 @@ class PostalCodesTable extends Table {
 		*/
 	];
 
-	public $filterArgs = [
-		'code' => ['type' => 'like', 'before' => false, 'after' => false],
-		'country' => ['type' => 'value'],
-	];
+	/**
+	 * @param array $config
+	 * @return void
+	 */
+	public function initialize(array $config) {
+		parent::initialize($config);
 
-	public function findNearest($lat, $lng, $type = 'all', $options = []) {
-		$this->virtualFields = ['distance' => $this->_latLng($lat, $lng)];
-		$options['conditions']['OR'] = [$this->alias() . '.lat<>0', $this->alias() . '.lng<>0'];
-		$options['order'] = ['distance' => 'ASC'];
+		if (!Plugin::loaded('Search')) {
+			return;
+		}
 
-		return $this->find($type, $options);
+		$this->addBehavior('Search.Search');
+		$this->searchManager()
+			->like('code', ['before' => false, 'after' => false])
+			->value('country');
 	}
-
-	public function _latLng($lat, $lng) {
-		return '6371.04 * ACOS( COS( PI()/2 - RADIANS(90 - ' . $this->alias() . '.lat)) * ' .
-			'COS( PI()/2 - RADIANS(90 - ' . $lat . ')) * ' .
-			'COS( RADIANS(' . $this->alias() . '.lng) - RADIANS(' . $lng . ')) + ' .
-			'SIN( PI()/2 - RADIANS(90 - ' . $this->alias() . '.lat)) * ' .
-			'SIN( PI()/2 - RADIANS(90 - ' . $lat . '))) ';
-	}
-
+	
+	/**
+	 * @param $code
+	 * @param null $countryId
+	 * @param array $options
+	 *
+	 * @return \Cake\ORM\Query
+	 */
 	public function searchLocation($code, $countryId = null, $options = []) {
 		if (!empty($options['exact'])) {
 			if (!empty($options['term'])) {
@@ -60,21 +67,19 @@ class PostalCodesTable extends Table {
 			} else {
 				$term = $code . '%';
 			}
-			$search = ['PostalCode.code LIKE' => "$term"];
+			$search = ['code LIKE' => "$term"];
 		} else {
-			$search = ['PostalCode.code' => $code];
+			$search = ['code' => $code];
 		}
 
 		if ($countryId) {
-			$search['PostalCode.country_id'] = (int)$country;
+			$search['country_id'] = (int)$countryId;
 		}
 
 		$options = [
-			//'fields' => array('Company.*'),
 			'conditions' => $search,
 			'limit' => 15,
 			//'order'=>'Company.name',
-			'contain' => []
 		];
 		return $this->find('all', $options);
 	}
@@ -85,10 +90,15 @@ class PostalCodesTable extends Table {
 	public function stats() {
 		$res = [];
 
-		$list = $this->find('all', ['fields' => ['COUNT(*) as count', 'country_id'], 'group' => 'country_id']);
+		$query = $this->find();
+		$list = $query
+			->select(['count' => $query->count(), 'country_id'])
+			->group('country_id')
+			->hydrate(false)
+			->all();
 
 		foreach ($list as $x) {
-			$res[$x['country_id']] = $x[0]['count'];
+			$res[$x['country_id']] = (int)$x['count'];
 		}
 
 		return $res;

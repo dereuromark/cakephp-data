@@ -3,6 +3,7 @@
 namespace Data\Test\TestCase\Model\Table;
 
 use Cake\ORM\TableRegistry;
+use Data\Lib\CurrencyLib;
 use Tools\TestSuite\TestCase;
 
 class CurrenciesTableTest extends TestCase {
@@ -26,7 +27,7 @@ class CurrenciesTableTest extends TestCase {
 		parent::setUp();
 
 		$this->Currencies = TableRegistry::get('Data.Currencies');
-		$this->Currencies->CurrencyLib = $this->getMockBuilder('Data\Lib\CurrencyLib')->getMock();
+		$this->Currencies->CurrencyLib = $this->getMockBuilder(CurrencyLib::class)->getMock();
 	}
 
 	/**
@@ -53,10 +54,36 @@ class CurrenciesTableTest extends TestCase {
 		$this->Currencies->deleteAll($data);
 
 		$currency = $this->Currencies->newEntity($data);
-		$this->assertEmpty($currency->errors());
+		$this->assertEmpty($currency->errors(), print_r($currency->errors(), true));
 
 		$result = $this->Currencies->save($currency);
-		$this->assertNotEmpty($result);
+		$this->assertNotEmpty($result, print_r($currency->errors(), true));
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testBeforeMarshal() {
+		$data = [
+			'USD' => []
+		];
+		$this->Currencies->CurrencyLib->method('table')->willReturn($data);
+
+		$this->Currencies->truncate();
+
+		$data = [
+			'name' => 'Dollar',
+			'code' => 'usd'
+		];
+		$currency = $this->Currencies->newEntity($data);
+		$result = $this->Currencies->save($currency);
+		$this->assertNotEmpty($result, print_r($currency->errors(), true));
+
+		$this->assertSame('USD', $result->code);
+
+		$currency = $this->Currencies->newEntity($data);
+		$result = $this->Currencies->save($currency);
+		$this->assertFalse($result);
 	}
 
 }

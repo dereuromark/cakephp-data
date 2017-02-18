@@ -6,6 +6,9 @@ use Cake\Utility\Hash;
 use Data\Controller\DataAppController;
 use Exception;
 
+/**
+ * @deprecated Use States instead.
+ */
 class CountryProvincesController extends DataAppController {
 
 	/**

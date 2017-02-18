@@ -33,4 +33,14 @@ class StatesTableTest extends TestCase {
 		$this->assertNotEmpty($result);
 	}
 
+	/**
+	 * @return void
+	 */
+	public function testGetStateId() {
+		$state = $this->States->find()->first();
+
+		$id = $this->States->getStateId(['abbr' => $state->abbr]);
+		$this->assertSame($state->id, $id);
+	}
+
 }

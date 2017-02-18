@@ -46,4 +46,20 @@ class PostalCodesTableTest extends TestCase {
 		$this->assertNotEmpty($result);
 	}
 
+	/**
+	 * @return void
+	 */
+	public function testSearchLocation() {
+		$result = $this->PostalCodes->searchLocation('81234')->first();
+		$this->assertNotEmpty($result);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testStats() {
+		$result = $this->PostalCodes->stats();
+		$this->assertSame([1 => 1], $result);
+	}
+
 }

@@ -1,6 +1,7 @@
 <?php
 namespace Data\Model\Table;
 
+use Cake\Network\Exception\InternalErrorException;
 use Geo\Geocoder\Geocoder;
 use Tools\Lib\GeocodeLib;
 use Tools\Model\Table\Table;
@@ -57,18 +58,24 @@ class StatesTable extends Table {
 		]
 	];
 
+	/**
+	 * @param array $conditions
+	 *
+	 * @return int
+	 */
 	public function getStateId($conditions) {
-		if ($id = $this->field('id', $conditions)) {
+		$id = $this->fieldByConditions('id', $conditions);
+		if ($id) {
 			return $id;
 		}
-		$this->create();
-		$this->set($conditions);
+		
+		$state = $this->newEntity($conditions);
 
-		if ($this->save(null, false)) {
-			return $this->id;
+		if ($this->save($state)) {
+			return $state->id;
 		}
 
-		die('ERROR: ' . returns($this->validationErrors));
+		throw new InternalErrorException(returns($state->errors()));
 	}
 
 	/**
@@ -165,19 +172,18 @@ class StatesTable extends Table {
 						$count++;
 
 						if (!empty($saveArray['abbr']) && $saveArray['abbr'] != $res['abbr']) {
-							$this->log('Abbr for country province \'' . $data['country_province'] . '\' changed from \'' . $res['abbr'] . '\' to \'' . $saveArray['abbr'] .
-								'\'', LOG_NOTICE);
+							//$this->log('Abbr for country province \'' . $data['country_province'] . '\' changed from \'' . $res['abbr'] . '\' to \'' . $saveArray['abbr'] .'\'', LOG_NOTICE);
 						}
 
 					} else {
 						//pr($data); pr($geocoder->debug()); die();
 
 						if ($data['country_province_code'] !== 'DC') {
-							echo returns($this->id);
-							pr($res);
-							pr($data);
-							pr($saveArray);
-							die(returns($this->validationErrors));
+							//echo returns($this->id);
+							//pr($res);
+							//pr($data);
+							//pr($saveArray);
+							//die(returns($this->validationErrors));
 						}
 					}
 					$geocoder->pause();
