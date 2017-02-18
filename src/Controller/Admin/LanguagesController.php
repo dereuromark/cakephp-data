@@ -7,7 +7,10 @@ use Data\Model\Entity\Language;
 
 class LanguagesController extends DataAppController {
 
-	public $paginate = ['order' => ['Language.name' => 'ASC']];
+	/**
+	 * @var array
+	 */
+	public $paginate = ['order' => ['Languages.name' => 'ASC']];
 
 	/**
 	 * @return void

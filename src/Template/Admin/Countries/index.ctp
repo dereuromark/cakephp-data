@@ -38,66 +38,61 @@ echo $this->Form->end();
 	<th class="actions"><?php echo __('Actions');?></th>
 </tr>
 <?php
-$i = 0;
 foreach ($countries as $country):
-	$class = null;
-	if ($i++ % 2 == 0) {
-		$class = ' class="altrow"';
-	}
 ?>
 	<tr>
 		<td>
-			<?php echo $this->Data->countryIcon($country['Country']['iso2']); ?>
+			<?php echo $this->Data->countryIcon($country['iso2']); ?>
 		</td>
 		<td>
-			<?php echo $this->Html->link($country['Country']['name'], ['controller' => 'country_provinces', 'action' => 'index', $country['Country']['id']]); ?>
+			<?php echo $this->Html->link($country['name'], ['controller' => 'country_provinces', 'action' => 'index', $country['id']]); ?>
 		</td>
 		<td>
-			<?php echo h($country['Country']['ori_name']); ?>
+			<?php echo h($country['ori_name']); ?>
 		</td>
 		<td>
-			<?php echo $country['Country']['iso2']; ?>
+			<?php echo $country['iso2']; ?>
 		</td>
 		<td>
-			<?php echo $country['Country']['iso3']; ?>
+			<?php echo $country['iso3']; ?>
 		</td>
 		<td>
-			<?php echo '+' . $country['Country']['country_code']; ?>
+			<?php echo '+' . $country['country_code']; ?>
 		</td>
 
 		<td>
 			<?php
 			$coordinates = '';
-			if ((int)$country['Country']['lat'] != 0 || (int)$country['Country']['lng'] != 0) {
-				$coordinates = $country['Country']['lat'] . ',' . $country['Country']['lng'];
+			if ((int)$country['lat'] != 0 || (int)$country['lng'] != 0) {
+				$coordinates = $country['lat'] . ',' . $country['lng'];
 			}
 			echo $this->Format->yesNo((int)!empty($coordinates), ['onTitle' => $coordinates, 'offTitle' => __('n/a')]);
 
 			if (!empty($coordinates)) {
 				$markers = [];
-				$markers[] = ['lat' => $country['Country']['lat'], 'lng' => $country['Country']['lng'], 'color' => 'green'];
+				$markers[] = ['lat' => $country['lat'], 'lng' => $country['lng'], 'color' => 'green'];
 				$mapMarkers = $this->GoogleMap->staticMarkers($markers);
-				echo ' ' . $this->Html->link($this->Format->icon('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $country['Country']['lat'] . ',' . $country['Country']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 3]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
+				echo ' ' . $this->Html->link($this->Format->icon('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $country['lat'] . ',' . $country['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 3]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
 			}
 
 			?>
 		</td>
 
 		<td>
-			<?php echo $country['Country']['sort']; ?>
+			<?php echo $country['sort']; ?>
 		</td>
 		<td>
-			<?php echo $this->Time->niceDate($country['Country']['modified']); ?>
+			<?php echo $this->Time->niceDate($country['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('up'), ['action' => 'up', $country['Country']['id']], ['escape' => false]); ?>
-			<?php echo $this->Html->link($this->Format->icon('down'), ['action' => 'down', $country['Country']['id']], ['escape' => false]); ?>
-			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $country['Country']['id']), array('escape'=>false)); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $country['Country']['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Format->icon('up'), ['action' => 'up', $country['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Format->icon('down'), ['action' => 'down', $country['id']], ['escape' => false]); ?>
+			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $country['id']), array('escape'=>false)); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $country['id']], ['escape' => false]); ?>
 
-			<?php echo $this->Html->link($this->Format->icon('map-o', [], ['title' => __('Koordinaten updaten')]), ['action' => 'update_coordinates', $country['Country']['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Format->icon('map-o', [], ['title' => __('Koordinaten updaten')]), ['action' => 'update_coordinates', $country['id']], ['escape' => false]); ?>
 
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $country['Country']['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $country['Country']['id']), false); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $country['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $country['id']), false); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

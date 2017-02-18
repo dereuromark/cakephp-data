@@ -1,11 +1,15 @@
 <?php
 namespace Data\Model\Table;
 
+use Cake\Core\Plugin;
 use Exception;
 use Geo\Geocode\Geocode;
-use ToolsExtra\Lib\GeolocateLib;
 use Tools\Model\Table\Table;
 
+/*
+*
+* @mixin \Search\Model\Behavior\SearchBehavior
+*/
 class CountriesTable extends Table {
 
 	public $order = ['sort' => 'DESC', 'name' => 'ASC'];
@@ -77,10 +81,21 @@ class CountriesTable extends Table {
 		],
 	];
 
-	public $filterArgs = [
-		'search' => ['type' => 'like', 'field' => ['name', 'ori_name', 'iso2', 'iso3', 'country_code']],
-		//'status' => array('type' => 'value')
-	];
+	/**
+	 * @param array $config
+	 * @return void
+	 */
+	public function initialize(array $config) {
+		parent::initialize($config);
+
+		if (!Plugin::loaded('Search')) {
+			return;
+		}
+
+		$this->addBehavior('Search.Search');
+		$this->searchManager()
+			->like('search', ['field' => ['name', 'ori_name', 'iso2', 'iso3', 'country_code']]);
+	}
 
 	/*
 	public function __construct($id = false, $table = false, $ds = null) {
