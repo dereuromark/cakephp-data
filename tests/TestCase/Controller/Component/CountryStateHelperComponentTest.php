@@ -8,7 +8,7 @@ use Cake\Event\Event;
 use Data\Controller\Component\CountryStateHelperComponent;
 use Tools\TestSuite\TestCase;
 
-class CountryProvinceHelperComponentTest extends TestCase {
+class CountryStateHelperComponentTest extends TestCase {
 
 	/**
 	 * @var array
@@ -52,7 +52,7 @@ class CountryProvinceHelperComponentTest extends TestCase {
 
 		$viewVars = $this->Controller->viewVars;
 		$this->assertNotEmpty($viewVars['countries']);
-		$this->assertNotEmpty($viewVars['countryProvinces']);
+		$this->assertNotEmpty($viewVars['states']);
 	}
 
 }
