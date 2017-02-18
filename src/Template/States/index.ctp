@@ -3,7 +3,7 @@
 <div class="floatRight">
 
 	<div class="floatRight">
-		<?php echo $this->element('Data.CountryProvinces/search'); ?>
+		<?php echo $this->element('Data.States/search'); ?>
 	</div>
 </div>
 
@@ -17,30 +17,26 @@
 	<th><?php echo __('Coordinates');?></th>
 </tr>
 <?php
-$i = 0;
-foreach ($countryProvinces as $countryProvince):
-	$class = null;
-	if ($i++ % 2 == 0) {
-		$class = ' class="altrow"';
-	}
+/** @var \Data\Model\Entity\State[] $states */
+foreach ($states as $state):
 ?>
 	<tr>
 
 		<td>
-			<?php echo $this->Data->countryIcon($countryProvince->country['iso2']) . ' ' . h($countryProvince->country['name']); ?>
+			<?php echo $this->Data->countryIcon($state->country['iso2']) . ' ' . h($state->country['name']); ?>
 		</td>
 		<td>
-			<?php echo h($countryProvince['name']); ?>
+			<?php echo h($state['name']); ?>
 		</td>
 		<td>
-			<?php echo h($countryProvince['abbr']); ?>
+			<?php echo h($state['abbr']); ?>
 		</td>
 
 		<td>
 			<?php
 			$coordinates = '';
-			if ((int)$countryProvince['lat'] != 0 || (int)$countryProvince['lat'] != 0) {
-				$coordinates = $countryProvince['lat'] . ',' . $countryProvince['lat'];
+			if ((int)$state['lat'] != 0 || (int)$state['lat'] != 0) {
+				$coordinates = $state['lat'] . ',' . $state['lat'];
 			}
 			echo $this->Format->yesNo((int)!empty($coordinates), ['onTitle' => $coordinates, 'offTitle' => 'n/a']);
 			?>
@@ -56,6 +52,6 @@ foreach ($countryProvinces as $countryProvince):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['controller' => 'countries', 'action' => 'index']); ?> </li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['controller' => 'Countries', 'action' => 'index']); ?> </li>
 	</ul>
 </div>

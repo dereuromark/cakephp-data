@@ -40,14 +40,14 @@ class StatesController extends DataAppController {
 			throw new Exception(__('not a valid request'));
 		}
 		$this->viewBuilder()->layout('ajax');
-		$States = $this->States->getListByCountry($id);
+		$states = $this->States->getListByCountry($id);
 
 		$defaultFieldLabel = 'pleaseSelect';
 		if ($this->request->query('optional')) {
 			$defaultFieldLabel = 'doesNotMatter';
 		}
 
-		$this->set(compact('States', 'defaultFieldLabel'));
+		$this->set(compact('states', 'defaultFieldLabel'));
 	}
 
 	/**
@@ -62,10 +62,10 @@ class StatesController extends DataAppController {
 		$this->_processCountry($cid);
 
 		$query = $this->States->find();
-		$States = $this->paginate($query);
+		$states = $this->paginate($query);
 
 		$countries = $this->States->Countries->findActive()->find('list');
-		$this->set(compact('States', 'countries'));
+		$this->set(compact('states', 'countries'));
 	}
 
 	/**

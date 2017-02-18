@@ -7,13 +7,13 @@ use Tools\TestSuite\IntegrationTestCase;
 
 /**
  */
-class CountryProvincesControllerTest extends IntegrationTestCase {
+class StatesControllerTest extends IntegrationTestCase {
 
 	/**
 	 * @var array
 	 */
 	public $fixtures = [
-		'plugin.data.CountryProvinces',
+		'plugin.data.states',
 		'plugin.data.Countries'
 	];
 
@@ -37,7 +37,7 @@ class CountryProvincesControllerTest extends IntegrationTestCase {
 	 * @return void
 	 */
 	public function testIndex() {
-		$this->get(['plugin' => 'Data', 'controller' => 'CountryProvinces', 'action' => 'index']);
+		$this->get(['plugin' => 'Data', 'controller' => 'States', 'action' => 'index']);
 		$this->assertResponseCode(200);
 		$this->assertNoRedirect();
 	}
@@ -53,7 +53,7 @@ class CountryProvincesControllerTest extends IntegrationTestCase {
 		]);
 		$_ENV['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
 
-		$this->post(['plugin' => 'Data', 'controller' => 'CountryProvinces', 'action' => 'updateSelect'], []);
+		$this->post(['plugin' => 'Data', 'controller' => 'States', 'action' => 'updateSelect'], []);
 		$this->assertResponseCode(200);
 
 		//$content = $this->_response->body();

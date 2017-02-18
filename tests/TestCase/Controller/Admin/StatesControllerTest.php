@@ -7,14 +7,14 @@ use Tools\TestSuite\IntegrationTestCase;
 
 /**
  */
-class CountryProvincesControllerTest extends IntegrationTestCase {
+class StatesControllerTest extends IntegrationTestCase {
 
 	/**
 	 * @var array
 	 */
 	public $fixtures = [
 		'plugin.data.Countries',
-		'plugin.data.CountryProvinces',
+		'plugin.data.States',
 	];
 
 	/**
@@ -37,7 +37,7 @@ class CountryProvincesControllerTest extends IntegrationTestCase {
 	 * @return void
 	 */
 	public function testIndex() {
-		$this->get(['prefix' => 'admin', 'plugin' => 'Data', 'controller' => 'CountryProvinces', 'action' => 'index']);
+		$this->get(['prefix' => 'admin', 'plugin' => 'Data', 'controller' => 'States', 'action' => 'index']);
 		$this->assertResponseCode(200);
 		$this->assertNoRedirect();
 	}

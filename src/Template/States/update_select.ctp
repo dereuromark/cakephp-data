@@ -1,9 +1,9 @@
 <?php
 use Cake\Core\Configure;
 
-if (!empty($countryProvinces)) {
+if (!empty($states)) {
 	echo '<option value="">' . Configure::read('Select.default_before') . __($defaultFieldLabel) . Configure::read('Select.default_after') . '</option>';
-	foreach ($countryProvinces as $k => $v) {
+	foreach ($states as $k => $v) {
 	echo '<option value="' . $k . '">' . h($v) . '</option>';
 	}
 } else {

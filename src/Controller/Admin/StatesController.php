@@ -30,7 +30,7 @@ class StatesController extends DataAppController {
 			throw new Exception(__('not a valid request'));
 		}
 		$this->viewBuilder()->layout('ajax');
-		$States = $this->States->getListByCountry($id);
+		$states = $this->States->getListByCountry($id);
 		$defaultFieldLabel = 'pleaseSelect';
 		if ($this->request->query('optional')) {
 			$defaultFieldLabel = 'doesNotMatter';
@@ -72,14 +72,14 @@ class StatesController extends DataAppController {
 			//$this->Common->loadComponent('Search.Prg');
 
 			//$this->Prg->commonProcess();
-			//$States = $this->paginate($this->States->find('searchable', $this->Prg->parsedParams()));
+			//$states = $this->paginate($this->States->find('searchable', $this->Prg->parsedParams()));
 		} else {
-			$States = $this->paginate();
+			$states = $this->paginate();
 		}
 
 		$countries = $this->States->Countries->find('list');
 
-		$this->set(compact('States', 'countries'));
+		$this->set(compact('states', 'countries'));
 		$this->helpers[] = 'Geo.GoogleMap';
 	}
 
@@ -99,18 +99,18 @@ class StatesController extends DataAppController {
 			$this->Flash->error(__('record not exists'));
 			return $this->redirect(['action' => 'index']);
 		}
-		$this->set(compact('State'));
+		$this->set(compact('state'));
 	}
 
 	/**
-	 * StatesController::admin_add()
-	 *
-	 * @return void
+	 * @return \Cake\Network\Response|null
 	 */
 	public function add() {
+		$state = $this->States->newEntity();
+
 		if ($this->Common->isPosted()) {
-			$this->States->create();
-			if ($this->States->save($this->request->data)) {
+			$state = $this->States->patchEntity($state, $this->request->data);
+			if ($this->States->save($state)) {
 				$id = $this->States->id;
 				$name = $this->request->data['State']['name'];
 				$this->Flash->success(__('record add {0} saved', h($name)));
@@ -118,19 +118,13 @@ class StatesController extends DataAppController {
 			}
 
 			$this->Flash->error(__('record add not saved'));
-		} else {
-			$cid = $this->request->session()->read('State.cid');
-			if (!empty($cid)) {
-				$this->request->data['State']['country_id'] = $cid;
-			}
 		}
+
 		$countries = $this->States->Countries->find('list');
-		$this->set(compact('countries'));
+		$this->set(compact('state', 'countries'));
 	}
 
 	/**
-	 * StatesController::admin_edit()
-	 *
 	 * @param mixed $id
 	 * @return void
 	 */
@@ -156,29 +150,19 @@ class StatesController extends DataAppController {
 			}
 		}
 		$countries = $this->States->Countries->find('list');
-		$this->set(compact('countries'));
+		$this->set(compact('state', 'countries'));
 	}
 
 	/**
-	 * StatesController::admin_delete()
-	 *
 	 * @param mixed $id
 	 * @return \Cake\Network\Response|null
 	 */
 	public function delete($id = null) {
 		$this->request->allowMethod('post');
 
-		if (empty($id)) {
-			$this->Flash->error(__('record invalid'));
-			return $this->redirect(['action' => 'index']);
-		}
-		$res = $this->States->find('first', ['fields' => ['id', 'name'], 'conditions' => ['State.id' => $id]]);
-		if (empty($res)) {
-			$this->Flash->error(__('record del not exists'));
-			return $this->redirect(['action' => 'index']);
-		}
+		$state = $this->States->get($id);
 
-		$name = $res['name'];
+		$name = $state['name'];
 		if ($this->States->delete($id)) {
 			$this->Flash->success(__('record del {0} done', h($name)));
 			return $this->redirect(['action' => 'index']);
@@ -187,10 +171,6 @@ class StatesController extends DataAppController {
 		$this->Flash->error(__('record del {0} not done exception', $name));
 		return $this->redirect(['action' => 'index']);
 	}
-
-	/****************************************************************************************
-	* protected/internal functions
-	****************************************************************************************/
 
 	/**
 	 * For both index views
