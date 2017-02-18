@@ -25,7 +25,7 @@ See http://sandbox.dereuromark.de/export
 ## How to include
 Installing the plugin is pretty much as with every other CakePHP Plugin.
 ```
-composer require dereuromark/cakephp-data:dev-master
+composer require dereuromark/cakephp-data
 ```
 
 Make sure you have `Plugin::load('Data')` or `Plugin::loadAll()` in your bootstrap.
