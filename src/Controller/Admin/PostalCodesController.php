@@ -7,6 +7,9 @@ use ToolsExtra\Lib\GeolocateLib;
 /**
  * PostalCodes Controller
  */
+/**
+ * @property \Data\Model\Table\PostalCodesTable $PostalCodes
+ */
 class PostalCodesController extends DataAppController {
 
 	public $paginate = [];

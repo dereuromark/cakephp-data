@@ -3,6 +3,9 @@ namespace Data\Controller\Admin;
 
 use Data\Controller\DataAppController;
 
+/**
+ * @property \Data\Model\Table\ContinentsTable $Continents
+ */
 class ContinentsController extends DataAppController {
 
 	public $paginate = [];

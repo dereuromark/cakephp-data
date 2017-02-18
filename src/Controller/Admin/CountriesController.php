@@ -7,6 +7,9 @@ use Cake\Event\Event;
 use Data\Controller\DataAppController;
 use Data\Model\Entity\Country;
 
+/**
+ * @property \Data\Model\Table\CountriesTable $Countries
+ */
 class CountriesController extends DataAppController {
 
 	/**

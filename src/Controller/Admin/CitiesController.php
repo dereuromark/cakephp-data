@@ -6,6 +6,9 @@ use Data\Controller\DataAppController;
 /**
  * Cities Controller
  */
+/**
+ * @property \Data\Model\Table\CitiesTable $Cities
+ */
 class CitiesController extends DataAppController {
 
 	/**

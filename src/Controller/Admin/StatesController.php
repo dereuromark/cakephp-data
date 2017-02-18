@@ -6,6 +6,9 @@ use Cake\Event\Event;
 use Data\Controller\DataAppController;
 use Exception;
 
+/**
+ * @property \Data\Model\Table\StatesTable $States
+ */
 class StatesController extends DataAppController {
 
 	public $paginate = ['order' => ['States.modified' => 'DESC']];

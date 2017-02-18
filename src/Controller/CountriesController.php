@@ -8,6 +8,9 @@ use Cake\Event\Event;
 use Cake\Filesystem\Folder;
 use Data\Controller\DataAppController;
 
+/**
+ * @property \Data\Model\Table\CountriesTable $Countries
+ */
 class CountriesController extends DataAppController {
 
 	/**

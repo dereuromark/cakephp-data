@@ -5,6 +5,9 @@ use Cake\Core\Plugin;
 use Data\Controller\DataAppController;
 use Data\Model\Entity\Language;
 
+/**
+ * @property \Data\Model\Table\LanguagesTable $Languages
+ */
 class LanguagesController extends DataAppController {
 
 	/**

@@ -6,6 +6,9 @@ use Cake\Filesystem\Folder;
 use Data\Controller\DataAppController;
 use Tools\Utility\Utility;
 
+/**
+ * @property \Data\Model\Table\MimeTypeImagesTable $MimeTypeImages
+ */
 class MimeTypeImagesController extends DataAppController {
 
 	public $paginate = ['order' => ['MimeTypeImage.modified' => 'DESC']];
