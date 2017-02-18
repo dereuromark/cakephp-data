@@ -19,7 +19,7 @@ class CountriesController extends DataAppController {
 	public $paginate = ['order' => ['Countries.sort' => 'DESC']];
 
 	/**
-	 * @param Event $event
+	 * @param \Cake\Event\Event $event
 	 * @return void
 	 */
 	public function beforeFilter(Event $event) {

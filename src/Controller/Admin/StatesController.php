@@ -30,7 +30,7 @@ class StatesController extends DataAppController {
 	}
 
 	/**
-	 * @param Event $event
+	 * @param \Cake\Event\Event $event
 	 * @return void
 	 */
 	public function beforeFilter(Event $event) {
@@ -65,7 +65,7 @@ class StatesController extends DataAppController {
 	 * new: optional true/false for default field label
 	 *
 	 * @param int|null $id
-	 * @throws Exception
+	 * @throws \Exception
 	 * @return \Cake\Network\Response|null
 	 */
 	public function updateSelect($id = null) {

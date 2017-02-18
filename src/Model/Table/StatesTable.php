@@ -4,7 +4,6 @@ namespace Data\Model\Table;
 use Cake\Core\Plugin;
 use Cake\Network\Exception\InternalErrorException;
 use Geo\Geocoder\Geocoder;
-use Tools\Lib\GeocodeLib;
 use Tools\Model\Table\Table;
 
 /**
@@ -117,9 +116,8 @@ class StatesTable extends Table {
 	/**
 	 * Lat and lng + abbr if available!
 	 *
-	 * @param id|null
-	 * - NULL: update all records with missing coordinates only
-	 * - otherwise: specific update
+	 * @param int|null $id
+	 * @return int|bool
 	 */
 	public function updateCoordinates($id = null) {
 		$geocoder = new Geocoder();

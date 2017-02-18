@@ -3,6 +3,7 @@
 namespace Data\Test\TestCase\Model\Table;
 
 use Cake\ORM\TableRegistry;
+use Data\Model\Table\MimeTypeImagesTable;
 use Tools\TestSuite\TestCase;
 
 class MimeTypeImagesTableTest extends TestCase {
@@ -14,6 +15,9 @@ class MimeTypeImagesTableTest extends TestCase {
 		'plugin.data.mime_type_images'
 	];
 
+	/**
+	 * @var MimeTypeImagesTable
+	 */
 	public $MimeTypeImages;
 
 	public function setUp() {

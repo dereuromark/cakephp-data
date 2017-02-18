@@ -4,7 +4,6 @@ namespace Data\Model\Table;
 use ArrayObject;
 use Cake\Core\Configure;
 use Cake\Event\Event;
-use Cake\Filesystem\File;
 use Cake\ORM\Entity;
 use Tools\Mailer\Email;
 use Tools\Model\Table\Table;
@@ -53,8 +52,8 @@ class MimeTypesTable extends Table {
 	];
 
 	/**
-	 * @param Event $event
-	 * @param Entity $entity
+	 * @param \Cake\Event\Event $event
+	 * @param \Cake\ORM\Entity $entity
 	 *
 	 * @return bool
 	 */

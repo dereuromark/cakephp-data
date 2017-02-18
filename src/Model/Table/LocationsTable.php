@@ -36,8 +36,8 @@ class LocationsTable extends Table {
 	];
 
 	/**
-	 * @param Event $event
-	 * @param Entity $entity
+	 * @param \Cake\Event\Event $event
+	 * @param \Cake\ORM\Entity $entity
 	 * @return bool|void
 	 */
 	public function beforeSave(Event $event, Entity $entity) {

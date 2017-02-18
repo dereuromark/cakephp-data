@@ -5,7 +5,6 @@ namespace Data\Test\TestCase\Controller\Component;
 use Cake\Controller\ComponentRegistry;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
-use Data\Controller\Component\CountryProvinceHelperComponent;
 use Data\Controller\Component\CountryStateHelperComponent;
 use Tools\TestSuite\TestCase;
 

@@ -1,7 +1,6 @@
 <?php
 namespace Data\Controller\Admin;
 
-use Cake\Core\Plugin;
 use Data\Controller\DataAppController;
 
 /**
@@ -20,7 +19,6 @@ class CurrenciesController extends DataAppController {
 	public function initialize() {
 		parent::initialize();
 	}
-
 
 	public function table() {
 		$currencies = $this->Currencies->availableCurrencies();
@@ -128,6 +126,7 @@ class CurrenciesController extends DataAppController {
 	/**
 	 * Set as primary (base)
 	 *
+	 * @param int|null $id
 	 * @return void
 	 */
 	public function base($id = null) {
@@ -151,6 +150,10 @@ class CurrenciesController extends DataAppController {
 
 	/**
 	 * Toggle - ajax
+	 *
+	 * @param null $field
+	 * @param null $id
+	 * @return void
 	 */
 	public function toggle($field = null, $id = null) {
 		 $fields = ['active'];

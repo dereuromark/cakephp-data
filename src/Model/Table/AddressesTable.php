@@ -170,7 +170,6 @@ class AddressesTable extends Table {
 	 * Zip Codes
 	 */
 	public function correspondsWithCountry($data) {
-
 		if (!empty($entity['postal_code'])) {
 			$res = $this->Countries->find('first', [
 				'conditions' => ['Country.id' => $entity['country_id']]

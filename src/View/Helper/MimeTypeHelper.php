@@ -129,12 +129,11 @@ class MimeTypeHelper extends Helper {
 				throw new Exception('Write error');
 			}
 		} else {
-			//$handle->open('r', true);
 			$content = $handle->read();
 			if ($content === false) {
 				return [];
 			}
-			$content = @unserialize($content);
+			$content = unserialize($content);
 			if ($content === false || !is_array($content)) {
 				return [];
 			}

@@ -12,8 +12,6 @@ use ToolsExtra\Lib\GeolocateLib;
  */
 class PostalCodesController extends DataAppController {
 
-	public $paginate = [];
-
 	/**
 	 * @return void
 	 */

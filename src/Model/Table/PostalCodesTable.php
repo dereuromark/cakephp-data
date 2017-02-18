@@ -9,16 +9,29 @@ use Tools\Model\Table\Table;
  */
 class PostalCodesTable extends Table {
 
+	/**
+	 * @var string
+	 */
 	public $displayField = 'code';
 
+	/**
+	 * @var array
+	 */
 	public $order = ['code' => 'ASC'];
 
-	public $actsAs = ['Geo.Geocoder' => ['min_accuracy' => 2, 'address' => ['code', 'country_name'], 'formatted_address' => 'official_address', 'real' => false, 'before' => 'validate', 'allow_inconclusive' => true]];
+	/**
+	 * @var array
+	 */
+	public $actsAs = [
+		'Geo.Geocoder' => ['min_accuracy' => 2, 'address' => ['code', 'country_name'], 'formatted_address' => 'official_address', 'real' => false, 'before' => 'validate', 'allow_inconclusive' => true]
+	];
 
+	/**
+	 * @var array
+	 */
 	public $validate = [
-		/*
 		'code' => array('notBlank'),
-
+		/*
 		'official_address' => array(
 			'notBlank' => array(
 				'rule' => array('notBlank'),
@@ -52,7 +65,7 @@ class PostalCodesTable extends Table {
 			->like('code', ['before' => false, 'after' => false])
 			->value('country');
 	}
-	
+
 	/**
 	 * @param $code
 	 * @param null $countryId

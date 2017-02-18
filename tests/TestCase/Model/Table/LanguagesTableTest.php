@@ -3,6 +3,7 @@
 namespace Data\Test\TestCase\Model;
 
 use Cake\ORM\TableRegistry;
+use Data\Model\Table\LanguagesTable;
 use Tools\TestSuite\TestCase;
 
 class LanguagesTableTest extends TestCase {
@@ -14,6 +15,9 @@ class LanguagesTableTest extends TestCase {
 		'plugin.data.languages'
 	];
 
+	/**
+	 * @var LanguagesTable
+	 */
 	public $Languages;
 
 	public function setUp() {

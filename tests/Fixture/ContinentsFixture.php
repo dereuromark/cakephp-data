@@ -6,6 +6,9 @@ use Cake\TestSuite\Fixture\TestFixture;
 
 class ContinentsFixture extends TestFixture {
 
+	/**
+	 * @var array
+	 */
 	public $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10],
 		'name' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 64, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'],
@@ -19,6 +22,9 @@ class ContinentsFixture extends TestFixture {
 		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM']
 	];
 
+	/**
+	 * @var array
+	 */
 	public $records = [
 		[
 			'id' => 1,

@@ -20,6 +20,9 @@ class AddressesTableTest extends TestCase {
 	 */
 	public $Addresses;
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 

@@ -11,15 +11,18 @@ use Tools\Utility\Utility;
  */
 class MimeTypeImagesController extends DataAppController {
 
-	public $paginate = ['order' => ['MimeTypeImage.modified' => 'DESC']];
+	/**
+	 * @var array
+	 */
+	public $paginate = ['order' => ['MimeTypeImages.modified' => 'DESC']];
 
 	public function import() {
 		if ($this->Common->isPosted()) {
 
-			if (!empty($this->request->data['MimeTypeImage']['extensions'])) {
+			if (!empty($this->request->data['extensions'])) {
 				$successfullyInserted = [];
-				if (is_array($this->request->data['MimeTypeImage']['extensions'])) {
-					foreach ($this->request->data['MimeTypeImage']['extensions'] as $ext) {
+				if (is_array($this->request->data['extensions'])) {
+					foreach ($this->request->data['extensions'] as $ext) {
 						$this->MimeTypeImage->create();
 						$data = ['name' => $ext, 'active' => 1];
 						if ($this->MimeTypeImage->save($data)) {
@@ -35,10 +38,10 @@ class MimeTypeImagesController extends DataAppController {
 				}
 			}
 
-			if (!empty($this->request->data['MimeTypeImage']['import'])) {
+			if (!empty($this->request->data['import'])) {
 				$alreadyIn = [];
 
-				$extensions = Utility::tokenize($this->request->data['MimeTypeImage']['import'], ',');
+				$extensions = Utility::tokenize($this->request->data['import'], ',');
 				//$extensions = array_unique($extensions);
 				$fileExtensions = [];
 
@@ -66,7 +69,7 @@ class MimeTypeImagesController extends DataAppController {
 
 			}
 
-			if (empty($this->request->data['MimeTypeImage']['extensions']) && empty($this->request->data['MimeTypeImage']['import'])) {
+			if (empty($this->request->data['extensions']) && empty($this->request->data['import'])) {
 				$this->Flash->warning('Nothing selected');
 			}
 		}
@@ -111,15 +114,15 @@ class MimeTypeImagesController extends DataAppController {
 		}
 
 		$renameSuccess = [];
-		if (!empty($this->request->data['MimeTypeImage']['imgs']) && !empty($this->request->data['MimeTypeImage']['names'])) {
-			if (is_array($this->request->data['MimeTypeImage']['imgs']) && is_array($this->request->data['MimeTypeImage']['names']) && is_array($this->
-				request->data['MimeTypeImage']['filenames'])) {
-				foreach ($this->request->data['MimeTypeImage']['names'] as $key => $image) {
-					if (empty($this->request->data['MimeTypeImage']['imgs'][$key]) || empty($this->request->data['MimeTypeImage']['filenames'][$key])) {
+		if (!empty($this->request->data['imgs']) && !empty($this->request->data['names'])) {
+			if (is_array($this->request->data['imgs']) && is_array($this->request->data['names']) && is_array($this->
+				request->data['filenames'])) {
+				foreach ($this->request->data['names'] as $key => $image) {
+					if (empty($this->request->data['imgs'][$key]) || empty($this->request->data['filenames'][$key])) {
 						continue;
 					}
 
-					$filename = $this->request->data['MimeTypeImage']['filenames'][$key];
+					$filename = $this->request->data['filenames'][$key];
 					$ext = extractPathInfo($filename, 'ext');
 					$ext = mb_strtolower($ext);
 					$name = mb_strtolower($image);
@@ -147,9 +150,9 @@ class MimeTypeImagesController extends DataAppController {
 					if (rename(PATH_MIMETYPES . 'import' . DS . $filename, PATH_MIMETYPES . $name . '.' . $ext) && $this->MimeTypeImage->allocate($recordId, $name,
 						$ext)) {
 						$renameSuccess[] = $name . '.' . $ext;
-						unset($this->request->data['MimeTypeImage']['imgs'][$key]);
-						unset($this->request->data['MimeTypeImage']['names'][$key]);
-						unset($this->request->data['MimeTypeImage']['filenames'][$key]);
+						unset($this->request->data['imgs'][$key]);
+						unset($this->request->data['names'][$key]);
+						unset($this->request->data['filenames'][$key]);
 						unset($images[$key]);
 					} else {
 						$this->log('ERROR in mimetype allocation on import');
@@ -174,16 +177,16 @@ class MimeTypeImagesController extends DataAppController {
 		*/
 
 		foreach ($mimeTypeImages as $key => $m) {
-			if (!empty($m['MimeTypeImage']['ext'])) {
+			if (!empty($m['ext'])) {
 				# should have an icon
-				if (!file_exists(PATH_MIMETYPES . $m['MimeTypeImage']['name'] . '.' . $m['MimeTypeImage']['ext'])) {
-					$mimeTypeImages[$key]['MimeTypeImage']['warning'] = 1; # missing icon
+				if (!file_exists(PATH_MIMETYPES . $m['name'] . '.' . $m['ext'])) {
+					$mimeTypeImages[$key]['warning'] = 1; # missing icon
 				}
 
 				# remove from our found list (not working with pagination)
 				/*
 				foreach ($images as $key => $image) {
-					if ($image == $m['MimeTypeImage']['name'].'.'.$m['MimeTypeImage']['ext']) {
+					if ($image == $m['name'].'.'.$m['ext']) {
 						unset($images[$key]);
 						break;
 					}
@@ -195,8 +198,8 @@ class MimeTypeImagesController extends DataAppController {
 		# any files left = should not be there any more (not working with pagination)
 		if (!empty($images)) {
 			foreach ($images as $image) {
-				rename(PATH_MIMETYPES . $m['MimeTypeImage']['name'] . '.' . $m['MimeTypeImage']['ext'], PATH_MIMETYPES . 'archive' . DS . $m['MimeTypeImage']['name'] .
-					'.' . $m['MimeTypeImage']['ext']);
+				rename(PATH_MIMETYPES . $m['name'] . '.' . $m['ext'], PATH_MIMETYPES . 'archive' . DS . $m['name'] .
+					'.' . $m['ext']);
 			}
 			$this->Flash->info(count($images) . ' Icon-Dateien vorhanden, obwohl kein Datensatz dazu (verschoben nach Archiv): ' . implode(', ',
 				$images));
@@ -241,28 +244,28 @@ class MimeTypeImagesController extends DataAppController {
 			return false;
 		}
 
-		if (empty($this->request->data['MimeTypeImage']['name'])) {
+		if (empty($this->request->data['name'])) {
 			$this->_uploadError = 'No MimeTypeImage Name given';
 			return false;
 		}
 
-		$fileName = $this->request->data['MimeTypeImage']['name'];
+		$fileName = $this->request->data['name'];
 
-		if (!array_key_exists($ext, MimeTypeImage::extensions()) || (!empty($this->request->data['MimeTypeImage']['ext']) && $this->request->data['MimeTypeImage']['ext'] !=
+		if (!array_key_exists($ext, MimeTypeImage::extensions()) || (!empty($this->request->data['ext']) && $this->request->data['ext'] !=
 			$ext)) {
 			# re-render
 			$this->Flash->success(__('re-rendered'));
 
 			/*
-			if (!empty($this->request->data['MimeTypeImage']['ext'])) {
-			$ext = $this->request->data['MimeTypeImage']['ext'];
+			if (!empty($this->request->data['ext'])) {
+			$ext = $this->request->data['ext'];
 			} elseif (array_key_exists($ext, MimeTypeImage::extensions()) {
 			$ext = '';
 			}
 			*/
 
 		}
-		$this->request->data['MimeTypeImage']['ext'] = $ext;
+		$this->request->data['ext'] = $ext;
 
 		# save new extension
 
@@ -285,11 +288,11 @@ class MimeTypeImagesController extends DataAppController {
 			$this->MimeTypeImage->create();
 
 			# upload new image, if given...
-			if (!empty($this->request->data['MimeTypeImage']['file']['tmp_name'])) {
+			if (!empty($this->request->data['file']['tmp_name'])) {
 				$this->MimeTypeImage->set($this->request->data);
 				$this->MimeTypeImage->validates();
 
-				if (!$this->_uploadImage($this->request->data['MimeTypeImage']['file'])) {
+				if (!$this->_uploadImage($this->request->data['file'])) {
 					$error = true;
 					$this->MimeTypeImage->invalidate('file', $this->_uploadError);
 				}
@@ -297,14 +300,14 @@ class MimeTypeImagesController extends DataAppController {
 
 			if (empty($error) && $this->MimeTypeImage->save($this->request->data)) {
 				$id = $this->MimeTypeImage->id;
-				//$name = $this->request->data['MimeTypeImage']['name'];
+				//$name = $this->request->data['name'];
 				$this->Flash->success(__('record add {0} saved', $id));
 				return $this->redirect(['action' => 'index']);
 			}
 
 			$this->Flash->error(__('record add not saved'));
 		} else {
-			$this->request->data['MimeTypeImage']['active'] = 1;
+			$this->request->data['active'] = 1;
 		}
 
 		$folder = new Folder(PATH_MIMETYPES . 'import' . DS);
@@ -323,18 +326,18 @@ class MimeTypeImagesController extends DataAppController {
 		}
 		if ($this->Common->isPosted()) {
 			# upload new image, if given...
-			if (!empty($this->request->data['MimeTypeImage']['file']['tmp_name'])) {
+			if (!empty($this->request->data['file']['tmp_name'])) {
 				$this->MimeTypeImage->set($this->request->data);
 				$this->MimeTypeImage->validates();
 
-				if (!$this->_uploadImage($this->request->data['MimeTypeImage']['file'])) {
+				if (!$this->_uploadImage($this->request->data['file'])) {
 					$error = true;
 					$this->MimeTypeImage->invalidate('file', $this->_uploadError);
 				}
 			}
 
 			if ($this->MimeTypeImage->save($this->request->data)) {
-				//$name = $this->request->data['MimeTypeImage']['name'];
+				//$name = $this->request->data['name'];
 				$this->Flash->success(__('record edit {0} saved', $id));
 				return $this->redirect(['action' => 'index']);
 			}

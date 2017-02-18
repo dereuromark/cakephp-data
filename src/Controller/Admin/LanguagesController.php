@@ -123,15 +123,15 @@ class LanguagesController extends DataAppController {
 				$code = '';
 			}
 			$data = [
-				'name' => $language['language'],
-				'ori_name' => $language['language'],
+				'name' => $language,
+				'ori_name' => $language,
 				'code' => $code,
 				'locale' => $language['locale'],
 				'locale_fallback' => $language['localeFallback'],
 				'direction' => $language['direction']
 			];
-			$this->Languages->create();
-			if ($this->Languages->save($data)) {
+			$language = $this->Languages->newEntity($data);
+			if ($this->Languages->save($language)) {
 				$count++;
 			} else {
 				$errors[] = ['data' => $language, 'errors' => $this->Languages->validationErrors];
@@ -142,7 +142,7 @@ class LanguagesController extends DataAppController {
 
 		$errorMessage = [];
 		foreach ($errors as $error) {
-			$errorMessage[] = $error['data']['language'] . ' (' . returns($error['errors']) . ')';
+			$errorMessage[] = $error['data'] . ' (' . returns($error['errors']) . ')';
 		}
 		$this->Flash->warning(__('not added') . ' ' . implode(', ', $errorMessage));
 		return $this->redirect(['action' => 'index']);

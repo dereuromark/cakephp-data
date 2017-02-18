@@ -1,6 +1,7 @@
 <?php
 namespace Data\Model\Table;
 
+use ArrayObject;
 use Cake\Core\Plugin;
 use Cake\Event\Event;
 use Cake\ORM\Entity;
@@ -73,7 +74,7 @@ class CurrenciesTable extends Table {
 			->value('active');
 	}
 
-	public function beforeMarshal(Event $event, \ArrayObject $data, \ArrayObject $options) {
+	public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options) {
 		if (isset($data['value'])) {
 			$data['value'] = (float)$data['value'];
 		}
@@ -103,8 +104,8 @@ class CurrenciesTable extends Table {
 	}
 
 	/**
-	 * @param Event $event
-	 * @param Entity $entity
+	 * @param \Cake\Event\Event $event
+	 * @param \Cake\ORM\Entity $entity
 	 *
 	 * @return bool
 	 */

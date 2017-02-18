@@ -8,8 +8,6 @@ use Data\Controller\DataAppController;
  */
 class ContinentsController extends DataAppController {
 
-	public $paginate = [];
-
 	public function index() {
 		$continents = $this->paginate();
 		$this->set(compact('continents'));

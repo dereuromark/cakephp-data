@@ -16,7 +16,7 @@ class CountryStateHelperComponent extends Component {
 	public $Controller;
 
 	/**
-	 * @param Event $event
+	 * @param \Cake\Event\Event $event
 	 * @return void
 	 */
 	public function startup(Event $event) {

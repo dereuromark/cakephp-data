@@ -3,7 +3,6 @@ namespace Data\Controller;
 
 use Cake\Core\Plugin;
 use Cake\Event\Event;
-use Cake\Utility\Hash;
 use Data\Controller\DataAppController;
 use Exception;
 

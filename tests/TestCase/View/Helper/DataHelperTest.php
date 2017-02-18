@@ -47,4 +47,5 @@ class DataHelperTest extends TestCase {
 		$expected = '<img src="/language_flags/de.gif" alt="de" title="DE"/>';
 		$this->assertSame($expected, $result);
 	}
+
 }

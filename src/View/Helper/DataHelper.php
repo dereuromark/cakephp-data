@@ -27,7 +27,8 @@ class DataHelper extends Helper {
 	 * @return array with wwwPath and path
 	 */
 	public function getCountryIconPaths() {
-		if ($specific = Configure::read('Country.imagePath')) {
+		$specific = Configure::read('Country.imagePath');
+		if ($specific) {
 			list ($plugin, $specificPath) = pluginSplit($specific);
 			if (substr($specificPath, 0, 1) !== '/') {
 				$specificPath = '/img/' . $specific;
