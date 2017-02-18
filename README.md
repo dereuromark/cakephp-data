@@ -8,10 +8,20 @@
 
 A Cake3.x Plugin containing several useful data models that can be used in many projects.
 
-Please note: New functionality has been tested against 3.x (current master and dev) only. Please upgrade if possible.
+## Features
+- Continents => Countries => States => Counties => Districts => Cities
+- Postal Codes
+- Addresses
+- Locations (geocodable)
+- MimeTypes and MimeTypeImages
+- Languages
+- Currencies
+
+Both schema and data.
+
 
 ## How to include
-Installing the Plugin is pretty much as with every other CakePHP Plugin.
+Installing the plugin is pretty much as with every other CakePHP Plugin.
 ```
 composer require dereuromark/cakephp-data:dev-master
 ```
