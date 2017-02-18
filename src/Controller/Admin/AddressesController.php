@@ -109,7 +109,7 @@ class AddressesController extends DataAppController {
 		}
 		$var = $address['formatted_address'];
 
-		if ($this->Addresses->delete($id)) {
+		if ($this->Addresses->delete($address)) {
 			$this->Flash->success(__('record del {0} done', h($var)));
 			return $this->redirect(['action' => 'index']);
 		}

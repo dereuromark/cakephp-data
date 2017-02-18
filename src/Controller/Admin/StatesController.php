@@ -11,8 +11,28 @@ use Exception;
  */
 class StatesController extends DataAppController {
 
+	/**
+	 * @var array
+	 */
 	public $paginate = ['order' => ['States.modified' => 'DESC']];
 
+	/**
+	 * @return void
+	 */
+	public function initialize() {
+		parent::initialize();
+
+		if (Plugin::loaded('Search')) {
+			$this->loadComponent('Search.Prg', [
+				'actions' => ['index']
+			]);
+		}
+	}
+
+	/**
+	 * @param Event $event
+	 * @return void
+	 */
 	public function beforeFilter(Event $event) {
 		parent::beforeFilter($event);
 
@@ -22,10 +42,31 @@ class StatesController extends DataAppController {
 	}
 
 	/**
+	 * @return \Cake\Network\Response|null
+	 */
+	public function index() {
+		$this->paginate['contain'] = ['Countries'];
+
+		if (Plugin::loaded('Search')) {
+			$query = $this->States->find('search', ['search' => $this->request->query]);
+			$states = $this->paginate($query);
+		} else {
+			$states = $this->paginate();
+		}
+
+		$countries = $this->States->Countries->find('list');
+
+		$this->set(compact('states', 'countries'));
+		$this->helpers[] = 'Geo.GoogleMap';
+	}
+
+	/**
 	 * Ajax function
 	 * new: optional true/false for default field label
 	 *
-	 * @return void
+	 * @param int|null $id
+	 * @throws Exception
+	 * @return \Cake\Network\Response|null
 	 */
 	public function updateSelect($id = null) {
 		//$this->autoRender = false;
@@ -39,14 +80,12 @@ class StatesController extends DataAppController {
 			$defaultFieldLabel = 'doesNotMatter';
 		}
 
-		$this->set(compact('States', 'defaultFieldLabel'));
+		$this->set(compact('states', 'defaultFieldLabel'));
 	}
 
 	/**
-	 * StatesController::admin_update_coordinates()
-	 *
-	 * @param mixed $id
-	 * @return void
+	 * @param int|null $id
+	 * @return \Cake\Network\Response|null
 	 */
 	public function updateCoordinates($id = null) {
 		set_time_limit(120);
@@ -62,42 +101,15 @@ class StatesController extends DataAppController {
 	}
 
 	/**
-	 * StatesController::admin_index()
-	 *
-	 * @param mixed $cid
-	 * @return void
-	 */
-	public function index($cid = null) {
-		$cid = $this->_processCountry($cid);
-
-		if (Plugin::loaded('Search')) {
-			//$this->States->addBehavior('Search.Searchable');
-			//$this->Common->loadComponent('Search.Prg');
-
-			//$this->Prg->commonProcess();
-			//$states = $this->paginate($this->States->find('searchable', $this->Prg->parsedParams()));
-		} else {
-			$states = $this->paginate();
-		}
-
-		$countries = $this->States->Countries->find('list');
-
-		$this->set(compact('states', 'countries'));
-		$this->helpers[] = 'Geo.GoogleMap';
-	}
-
-	/**
-	 * StatesController::admin_view()
-	 *
-	 * @param mixed $id
-	 * @return void
+	 * @param int|null $id
+	 * @return \Cake\Network\Response|null
 	 */
 	public function view($id = null) {
 		if (empty($id)) {
 			$this->Flash->error(__('record invalid'));
 			return $this->redirect(['action' => 'index']);
 		}
-		$State = $this->States->get($id);
+		$state = $this->States->get($id);
 		if (empty($State)) {
 			$this->Flash->error(__('record not exists'));
 			return $this->redirect(['action' => 'index']);
@@ -115,7 +127,7 @@ class StatesController extends DataAppController {
 			$state = $this->States->patchEntity($state, $this->request->data);
 			if ($this->States->save($state)) {
 				$id = $this->States->id;
-				$name = $this->request->data['State']['name'];
+				$name = $this->request->data['name'];
 				$this->Flash->success(__('record add {0} saved', h($name)));
 				return $this->redirect(['action' => 'index']);
 			}
@@ -129,16 +141,16 @@ class StatesController extends DataAppController {
 
 	/**
 	 * @param mixed $id
-	 * @return void
+	 * @return \Cake\Network\Response|null
 	 */
 	public function edit($id = null) {
-		if (empty($id)) {
-			$this->Flash->error(__('record invalid'));
-			return $this->redirect(['action' => 'index']);
-		}
+		$state = $this->States->get($id);
+
 		if ($this->Common->isPosted()) {
-			if ($this->States->save($this->request->data)) {
-				$name = $this->request->data['State']['name'];
+			$state = $this->States->patchEntity($state, $this->request->data);
+
+			if ($this->States->save($state)) {
+				$name = $this->request->data['name'];
 				$this->Flash->success(__('record edit {0} saved', h($name)));
 				return $this->redirect(['action' => 'index']);
 			}
@@ -157,7 +169,7 @@ class StatesController extends DataAppController {
 	}
 
 	/**
-	 * @param mixed $id
+	 * @param int|null $id
 	 * @return \Cake\Network\Response|null
 	 */
 	public function delete($id = null) {
@@ -166,7 +178,7 @@ class StatesController extends DataAppController {
 		$state = $this->States->get($id);
 
 		$name = $state['name'];
-		if ($this->States->delete($id)) {
+		if ($this->States->delete($state)) {
 			$this->Flash->success(__('record del {0} done', h($name)));
 			return $this->redirect(['action' => 'index']);
 		}

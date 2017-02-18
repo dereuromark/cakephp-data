@@ -230,18 +230,14 @@ class MimeTypesController extends DataAppController {
 
 	public function delete($id = null) {
 		$this->request->allowMethod('post');
-		if (empty($id)) {
-			$this->Flash->error(__('record invalid'));
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
-		$res = $this->MimeType->find('first', ['fields' => ['id'], 'conditions' => ['MimeType.id' => $id]]);
+
+		$mimeType = $this->MimeType->find('first', ['fields' => ['id'], 'conditions' => ['MimeType.id' => $id]]);
 		if (empty($res)) {
 			$this->Flash->error(__('record del not exists'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 
-		//$name = $res['name'];
-		if ($this->MimeType->delete($id)) {
+		if ($this->MimeType->delete($mimeType)) {
 			$this->Flash->success(__('record del {0} done', $id));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}

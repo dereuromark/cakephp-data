@@ -25,20 +25,26 @@ class DataHelperTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function testCountryAndProvince() {
-		$data = [
-			'Country' => [
-				'iso2' => 'de',
-				'name' => 'Deutschland'
-			],
-			'CountryProvince' => [
-				'abbr' => 'BAY',
-				'name' => 'Bayern'
-			]
-		];
-		$result = $this->DataHelper->countryAndProvince($data);
-		$expected = '<span class="help" title="Deutschland - Bayern"><img src="/data/img/country_flags/de.gif" alt=""/>&nbsp;BAY</span>';
-		$this->assertEquals($expected, $result);
+	public function testGetCountryIconPaths() {
+		$result = $this->DataHelper->getCountryIconPaths();
+		$this->assertNotEmpty($result);
 	}
 
+	/**
+	 * @return void
+	 */
+	public function testCountryIcon() {
+		$result = $this->DataHelper->countryIcon('de');
+		$expected = '<img src="/data/img/country_flags/de.gif" alt="de" title="DE"/>';
+		$this->assertSame($expected, $result);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testLanguageFlag() {
+		$result = $this->DataHelper->languageFlag('de');
+		$expected = '<img src="/language_flags/de.gif" alt="de" title="DE"/>';
+		$this->assertSame($expected, $result);
+	}
 }

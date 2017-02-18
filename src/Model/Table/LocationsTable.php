@@ -3,6 +3,8 @@ namespace Data\Model\Table;
 
 use Cake\Core\App;
 use Cake\Core\Configure;
+use Cake\Event\Event;
+use Cake\ORM\Entity;
 use Data\Model\Country;
 use Tools\Model\Table\Table;
 use Tools\Utility\Utility;
@@ -34,22 +36,19 @@ class LocationsTable extends Table {
 	];
 
 	/**
-	 * Location::beforeSave()
-	 *
-	 * @param mixed $options
-	 * @return bool Success
+	 * @param Event $event
+	 * @param Entity $entity
+	 * @return bool|void
 	 */
-	public function beforeSave($options = []) {
-		parent::beforeSave($options);
+	public function beforeSave(Event $event, Entity $entity) {
+		return;
 
 		$additional = ['locality', 'sublocality'];
 		foreach ($additional as $field) {
-			if (!empty($this->data['geocoder_result'][$field])) {
-				$this->data[$field] = $this->data['geocoder_result'][$field];
+			if (!empty($entity['geocoder_result'][$field])) {
+				$entity[$field] = $entity['geocoder_result'][$field];
 			}
 		}
-
-		return true;
 	}
 
 	/**

@@ -92,7 +92,7 @@ class CitiesController extends DataAppController {
 		}
 		$var = $city['name'];
 
-		if ($this->Cities->delete($id)) {
+		if ($this->Cities->delete($city)) {
 			$this->Flash->success(__('record del {0} done', h($var)));
 			return $this->redirect(['action' => 'index']);
 		}

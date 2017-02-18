@@ -15,7 +15,7 @@ class LocationsFixture extends TestFixture {
 	 */
 	public $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10],
-		'country_province_id' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10],
+		'state_id' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10],
 		'country_id' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10, 'comment' => 'redundance purposely'],
 		'postal_code' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 10, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'],
 		'city' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 80, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'],
@@ -37,7 +37,7 @@ class LocationsFixture extends TestFixture {
 	public $records = [
 		[
 			'id' => 1,
-			'country_province_id' => 1,
+			'state_id' => 1,
 			'country_id' => 1,
 			'postal_code' => 'Lorem ip',
 			'city' => 'Lorem ipsum dolor sit amet',
@@ -50,7 +50,7 @@ class LocationsFixture extends TestFixture {
 		],
 		[
 			'id' => 2,
-			'country_province_id' => 2,
+			'state_id' => 2,
 			'country_id' => 2,
 			'postal_code' => 'Lorem ip',
 			'city' => 'Lorem ipsum dolor sit amet',
@@ -63,7 +63,7 @@ class LocationsFixture extends TestFixture {
 		],
 		[
 			'id' => 3,
-			'country_province_id' => 3,
+			'state_id' => 3,
 			'country_id' => 3,
 			'postal_code' => 'Lorem ip',
 			'city' => 'Lorem ipsum dolor sit amet',
@@ -76,7 +76,7 @@ class LocationsFixture extends TestFixture {
 		],
 		[
 			'id' => 4,
-			'country_province_id' => 4,
+			'state_id' => 4,
 			'country_id' => 4,
 			'postal_code' => 'Lorem ip',
 			'city' => 'Lorem ipsum dolor sit amet',
@@ -89,7 +89,7 @@ class LocationsFixture extends TestFixture {
 		],
 		[
 			'id' => 5,
-			'country_province_id' => 5,
+			'state_id' => 5,
 			'country_id' => 5,
 			'postal_code' => 'Lorem ip',
 			'city' => 'Lorem ipsum dolor sit amet',
@@ -102,7 +102,7 @@ class LocationsFixture extends TestFixture {
 		],
 		[
 			'id' => 6,
-			'country_province_id' => 6,
+			'state_id' => 6,
 			'country_id' => 6,
 			'postal_code' => 'Lorem ip',
 			'city' => 'Lorem ipsum dolor sit amet',
@@ -115,7 +115,7 @@ class LocationsFixture extends TestFixture {
 		],
 		[
 			'id' => 7,
-			'country_province_id' => 7,
+			'state_id' => 7,
 			'country_id' => 7,
 			'postal_code' => 'Lorem ip',
 			'city' => 'Lorem ipsum dolor sit amet',
@@ -128,7 +128,7 @@ class LocationsFixture extends TestFixture {
 		],
 		[
 			'id' => 8,
-			'country_province_id' => 8,
+			'state_id' => 8,
 			'country_id' => 8,
 			'postal_code' => 'Lorem ip',
 			'city' => 'Lorem ipsum dolor sit amet',
@@ -141,7 +141,7 @@ class LocationsFixture extends TestFixture {
 		],
 		[
 			'id' => 9,
-			'country_province_id' => 9,
+			'state_id' => 9,
 			'country_id' => 9,
 			'postal_code' => 'Lorem ip',
 			'city' => 'Lorem ipsum dolor sit amet',
@@ -154,7 +154,7 @@ class LocationsFixture extends TestFixture {
 		],
 		[
 			'id' => 10,
-			'country_province_id' => 10,
+			'state_id' => 10,
 			'country_id' => 10,
 			'postal_code' => 'Lorem ip',
 			'city' => 'Lorem ipsum dolor sit amet',

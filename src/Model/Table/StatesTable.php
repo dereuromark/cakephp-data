@@ -1,11 +1,15 @@
 <?php
 namespace Data\Model\Table;
 
+use Cake\Core\Plugin;
 use Cake\Network\Exception\InternalErrorException;
 use Geo\Geocoder\Geocoder;
 use Tools\Lib\GeocodeLib;
 use Tools\Model\Table\Table;
 
+/**
+ * @mixin \Search\Model\Behavior\SearchBehavior
+ */
 class StatesTable extends Table {
 
 	public $actsAs = ['Tools.Slugged' => ['case' => 'low', 'mode' => 'ascii', 'unique' => false, 'overwrite' => false]];
@@ -59,6 +63,23 @@ class StatesTable extends Table {
 	];
 
 	/**
+	 * @param array $config
+	 * @return void
+	 */
+	public function initialize(array $config) {
+		parent::initialize($config);
+
+		if (!Plugin::loaded('Search')) {
+			return;
+		}
+
+		$this->addBehavior('Search.Search');
+		$this->searchManager()
+			->value('country_id')
+			->like('search', ['field' => ['name', 'abbr']]);
+	}
+
+	/**
 	 * @param array $conditions
 	 *
 	 * @return int
@@ -68,7 +89,7 @@ class StatesTable extends Table {
 		if ($id) {
 			return $id;
 		}
-		
+
 		$state = $this->newEntity($conditions);
 
 		if ($this->save($state)) {
@@ -81,7 +102,7 @@ class StatesTable extends Table {
 	/**
 	 * @param int $cid
 	 *
-	 * @return array|\Cake\ORM\Query
+	 * @return array
 	 */
 	public function getListByCountry($cid) {
 		if (empty($cid)) {
@@ -90,13 +111,7 @@ class StatesTable extends Table {
 		return $this->find('list', [
 			'conditions' => [$this->alias() . '.country_id' => $cid],
 			'order' => [$this->alias() . '.name' => 'ASC']
-		]);
-	}
-
-	public function afterSave($created, $options = []) {
-		if ($created) {
-			$this->updateCoordinates($this->id);
-		}
+		])->toArray();
 	}
 
 	/**
@@ -117,8 +132,8 @@ class StatesTable extends Table {
 
 		if (!empty($id)) {
 			$res = $this->find('first', ['conditions' => [$this->alias() . '.id' => $id], 'contain' => ['Country.name']]);
-			if (!empty($res['name']) && !empty($res[$this->Countries->alias]['name']) && $geocoder->geocode($res['name'] .
-				', ' . $res[$this->Countries->alias]['name'])) {
+			if (!empty($res['name']) && !empty($res->countries['name']) && $geocoder->geocode($res['name'] .
+				', ' . $res->countries['name'])) {
 
 				$data = $geocoder->getResult();
 				//pr($data); die();
@@ -147,13 +162,13 @@ class StatesTable extends Table {
 				$conditions = [$this->alias() . '.lat' => 0, $this->alias() . '.lng' => 0];
 			}
 
-			$results = $this->find('all', ['conditions' => $conditions, 'contain' => ['Country.name'], 'order' => ['CountryProvince.modified' =>
+			$results = $this->find('all', ['conditions' => $conditions, 'contain' => ['Country.name'], 'order' => ['modified' =>
 				'ASC']]);
 			$count = 0;
 
 			foreach ($results as $res) {
-				if (!empty($res['name']) && !empty($res[$this->Countries->alias]['name']) && $geocoder->geocode($res['name'] .
-					', ' . $res[$this->Countries->alias]['name'])) {
+				if (!empty($res['name']) && !empty($res->countries['name']) && $geocoder->geocode($res['name'] .
+					', ' . $res->countries['name'])) {
 
 					$data = $geocoder->getResult();
 					//pr($data); die();

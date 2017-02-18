@@ -37,8 +37,7 @@ class MimeTypeImagesTable extends Table {
 		]
 	];
 
-	public function beforeSave($options = []) {
-		parent::beforeSave($options);
+	public function beforeSave(Event $event, Entity $entity) {
 		if (isset($this->data['name'])) {
 			$this->data['name'] = mb_strtolower($this->data['name']);
 		}

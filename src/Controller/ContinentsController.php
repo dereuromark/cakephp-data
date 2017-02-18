@@ -77,7 +77,7 @@ class ContinentsController extends DataAppController {
 		}
 		$var = $continent['name'];
 
-		if ($this->Continent->delete($id)) {
+		if ($this->Continent->delete($continent)) {
 			$this->Flash->success(__('record del {0} done', h($var)));
 			return $this->redirect(['action' => 'index']);
 		}

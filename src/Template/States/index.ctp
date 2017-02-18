@@ -7,7 +7,7 @@
 	</div>
 </div>
 
-<h2><?php echo __('Country Provinces');?></h2>
+<h2><?php echo __('States');?></h2>
 
 <table class="table">
 <tr>

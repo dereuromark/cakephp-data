@@ -1,5 +1,5 @@
-<?php $this->Html->script('highslide/highslide.js')?>
-<?php $this->Html->script('highslide/highslide_config')?>
+<?php //$this->Html->script('highslide/highslide.js')?>
+<?php //$this->Html->script('highslide/highslide_config')?>
 
 <div class="page index">
 
@@ -7,7 +7,7 @@
 	<?php echo $this->element('Data.States/search'); ?>
 </div>
 
-<h2><?php echo __('Country Provinces');?></h2>
+<h2><?php echo __('States');?></h2>
 
 <table class="table">
 <tr>
@@ -54,10 +54,9 @@ foreach ($states as $state):
 			<?php echo $this->Time->niceDate($state['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $countryProvince['id']), array('escape'=>false)); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $state['id']], ['escape' => false]); ?>
 
-			<?php echo $this->Html->link($this->Format->icon('map-o', [], ['title' => __('Koordinaten updaten')]), ['action' => 'update_coordinates', $state['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Format->icon('map-o', [], ['title' => __('Update coordinates')]), ['action' => 'updateCoordinates', $state['id']], ['escape' => false]); ?>
 
 			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $state['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $state['id']), false); ?>
 		</td>
@@ -71,9 +70,9 @@ foreach ($states as $state):
 <div class="actions">
 	<ul>
 <?php if (true || $this->AuthUser->hasRole(ROLE_SUPERADMIN)) { ?>
-		<li><?php echo $this->Html->link(__('Update Coordinates'), ['action' => 'update_coordinates']); ?></li>
+		<li><?php echo $this->Html->link(__('Update Coordinates'), ['action' => 'updateCoordinates']); ?></li>
 <?php } ?>
-		<li><?php echo $this->Html->link(__('Add Country Province'), ['action' => 'add']); ?></li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['controller' => 'countries', 'action' => 'index']); ?> </li>
+		<li><?php echo $this->Html->link(__('Add State'), ['action' => 'add']); ?></li>
+		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['controller' => 'Countries', 'action' => 'index']); ?> </li>
 	</ul>
 </div>

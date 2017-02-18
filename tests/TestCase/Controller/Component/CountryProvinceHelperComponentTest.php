@@ -6,6 +6,7 @@ use Cake\Controller\ComponentRegistry;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Data\Controller\Component\CountryProvinceHelperComponent;
+use Data\Controller\Component\CountryStateHelperComponent;
 use Tools\TestSuite\TestCase;
 
 class CountryProvinceHelperComponentTest extends TestCase {
@@ -13,7 +14,7 @@ class CountryProvinceHelperComponentTest extends TestCase {
 	/**
 	 * @var array
 	 */
-	public $fixtures = ['plugin.data.countries', 'plugin.data.country_provinces'];
+	public $fixtures = ['plugin.data.countries', 'plugin.data.states'];
 
 	/**
 	 * @var \App\Controller\AppController
@@ -21,9 +22,9 @@ class CountryProvinceHelperComponentTest extends TestCase {
 	public $Controller;
 
 	/**
-	 * @var \Data\Controller\Component\CountryProvinceHelperComponent
+	 * @var \Data\Controller\Component\CountryStateHelperComponent
 	 */
-	public $CountryProvinceHelper;
+	public $CountryStateHelperComponent;
 
 	/**
 	 * @return void
@@ -32,7 +33,7 @@ class CountryProvinceHelperComponentTest extends TestCase {
 		parent::setUp();
 
 		$this->Controller = new Controller();
-		$this->CountryProvinceHelper = new CountryProvinceHelperComponent(new ComponentRegistry($this->Controller));
+		$this->CountryStateHelperComponent = new CountryStateHelperComponent(new ComponentRegistry($this->Controller));
 	}
 
 	/**
@@ -47,8 +48,8 @@ class CountryProvinceHelperComponentTest extends TestCase {
 	 */
 	public function testProvideData() {
 		$event = new Event('Controller.startup', $this->Controller);
-		$this->CountryProvinceHelper->startup($event);
-		$this->CountryProvinceHelper->provideData();
+		$this->CountryStateHelperComponent->startup($event);
+		$this->CountryStateHelperComponent->provideData();
 
 		$viewVars = $this->Controller->viewVars;
 		$this->assertNotEmpty($viewVars['countries']);

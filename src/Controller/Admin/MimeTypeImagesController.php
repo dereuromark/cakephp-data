@@ -360,14 +360,11 @@ class MimeTypeImagesController extends DataAppController {
 
 	public function delete($id = null) {
 		$this->request->allowMethod('post');
-		if (empty($id)) {
-			$this->Flash->error(__('record invalid'));
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
-		$res = $this->MimeTypeImage->find('first', ['fields' => [
+
+		$mimeTypeImage = $this->MimeTypeImage->find('first', ['fields' => [
 				'id',
 				'name',
-				'ext'], 'conditions' => ['MimeTypeImage.id' => $id]]);
+				'ext'], 'conditions' => ['id' => $id]]);
 		if (empty($res)) {
 			$this->Flash->error(__('record del not exists'));
 			return $this->Common->autoRedirect(['action' => 'index']);
@@ -376,19 +373,7 @@ class MimeTypeImagesController extends DataAppController {
 		$fileName = $res['name'];
 		$fileExt = $res['ext'];
 		$name = $fileName . '.' . $fileExt;
-		if ($this->MimeTypeImage->delete($id)) {
-			# remove icon -> archive?
-			/*
-			if (!@rename(PATH_MIMETYPES . $name, PATH_MIMETYPES . 'archive' . DS . $name)) {
-				//@copy...
-				//@unlink(PATH_MIMETYPES.$name);
-				# strange: "rename" seems to work but still throws an error (copy + unlink as well)
-				//$this->Flash->warning(__('could not move the old icon {0} to \'archive\'...', $name));
-			} else {
-				$this->Flash->success(__('old icon {0} moved to \'archive\'', $name));
-			}
-			*/
-
+		if ($this->MimeTypeImage->delete($mimeTypeImage)) {
 			$this->Flash->success(__('record del {0} done', $fileName));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}

@@ -1,6 +1,7 @@
 <?php
 namespace Data\Controller;
 
+use Cake\Core\Plugin;
 use Cake\Event\Event;
 use Cake\Utility\Hash;
 use Data\Controller\DataAppController;
@@ -17,6 +18,19 @@ class StatesController extends DataAppController {
 	public $paginate = ['order' => ['States.modified' => 'DESC']];
 
 	/**
+	 * @return void
+	 */
+	public function initialize() {
+		parent::initialize();
+
+		if (Plugin::loaded('Search')) {
+			$this->loadComponent('Search.Prg', [
+				'actions' => ['index']
+			]);
+		}
+	}
+
+	/**
 	 * @param \Cake\Event\Event $event
 	 * @return void
 	 */
@@ -26,6 +40,25 @@ class StatesController extends DataAppController {
 		if (isset($this->Auth)) {
 			$this->Auth->allow(['index', 'update_select']);
 		}
+	}
+
+	/**
+	 * @param mixed $cid
+	 * @return void
+	 */
+	public function index($cid = null) {
+		$this->paginate['contain'] = ['Countries'];
+		$this->paginate['order'] = ['States.name' => 'ASC'];
+
+		if (Plugin::loaded('Search')) {
+			$query = $this->States->find('search', ['search' => $this->request->query]);
+			$states = $this->paginate($query);
+		} else {
+			$states = $this->paginate();
+		}
+
+		$countries = $this->States->Countries->findActive()->find('list');
+		$this->set(compact('states', 'countries'));
 	}
 
 	/**
@@ -48,48 +81,6 @@ class StatesController extends DataAppController {
 		}
 
 		$this->set(compact('states', 'defaultFieldLabel'));
-	}
-
-	/**
-	 * @param mixed $cid
-	 * @return void
-	 */
-	public function index($cid = null) {
-		$this->paginate['contain'] = ['Countries'];
-		$this->paginate['order'] = ['States.name' => 'ASC'];
-		//$this->paginate['conditions'] = array('Country.status' => 1);
-
-		$this->_processCountry($cid);
-
-		$query = $this->States->find();
-		$states = $this->paginate($query);
-
-		$countries = $this->States->Countries->findActive()->find('list');
-		$this->set(compact('states', 'countries'));
-	}
-
-	/**
-	 * For both index views
-	 *
-	 * @return void
-	 */
-	protected function _processCountry($cid) {
-		$saveCid = true;
-		if (empty($cid)) {
-			$saveCid = false;
-			$cid = $this->request->session()->read('State.cid');
-		}
-		if (!empty($cid) && $cid < 0) {
-			$this->request->session()->delete('State.cid');
-			$cid = null;
-		} elseif (!empty($cid) && $saveCid) {
-			$this->request->session()->write('State.cid', $cid);
-		}
-
-		if (!empty($cid)) {
-			$this->paginate = Hash::merge($this->paginate, ['conditions' => ['country_id' => $cid]]);
-			$this->request->data['id'] = $cid;
-		}
 	}
 
 }

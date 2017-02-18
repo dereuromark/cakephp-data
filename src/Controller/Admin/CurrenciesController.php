@@ -114,20 +114,9 @@ class CurrenciesController extends DataAppController {
 	}
 
 	public function delete($id = null) {
-		$this->request->allowMethod('post');
+		$currency = $this->Currencies->get($id);
 
-		if (empty($id)) {
-			$this->Flash->error(__('record invalid'));
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
-		$res = $this->Currencies->find('first', ['fields' => ['id'], 'conditions' => ['Currency.id' => $id]]);
-		if (empty($res)) {
-			$this->Flash->error(__('record del not exists'));
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
-
-		//$name = $res['name'];
-		if ($this->Currencies->delete($id)) {
+		if ($this->Currencies->delete($currency)) {
 			$this->Flash->success(__('record del {0} done', $id));
 			return $this->redirect(['action' => 'index']);
 		}

@@ -1,8 +1,11 @@
 <?php
 namespace Data\Model\Table;
 
+use ArrayObject;
 use Cake\Core\Configure;
+use Cake\Event\Event;
 use Cake\Filesystem\File;
+use Cake\ORM\Entity;
 use Tools\Mailer\Email;
 use Tools\Model\Table\Table;
 
@@ -49,33 +52,32 @@ class MimeTypesTable extends Table {
 		],
 	];
 
-	public function beforeSave($options = []) {
-		parent::beforeSave($options);
-		if (isset($this->data['ext'])) {
-			$this->data['ext'] = mb_strtolower($this->data['ext']);
+	/**
+	 * @param Event $event
+	 * @param Entity $entity
+	 *
+	 * @return bool
+	 */
+	public function beforeSave(Event $event, Entity $entity) {
+		if (isset($entity['ext'])) {
+			$entity['ext'] = mb_strtolower($entity['ext']);
 		}
-		if (isset($this->data['name'])) {
-			$this->data['name'] = ucwords($this->data['name']);
+		if (isset($entity['name'])) {
+			$entity['name'] = ucwords($entity['name']);
 		}
-
-		return true;
 	}
 
-	public function afterSave($created, $options = []) {
-		parent::afterSave($created, $options);
-
+	public function _afterSave($created, $options = []) {
 		$this->cleanUp();
 	}
 
 	public function afterDelete(Event $event, Entity $entity, ArrayObject $options) {
-		parent::afterDelete();
-
 		$this->cleanUp();
 	}
 
 	public function cleanUp() {
-		$Handle = new File(FILES . 'mime_types.txt');
-		$Handle->delete();
+		//$Handle = new File(FILES . 'mime_types.txt');
+		//$Handle->delete();
 	}
 
 	/**

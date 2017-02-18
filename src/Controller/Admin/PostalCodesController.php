@@ -111,7 +111,7 @@ class PostalCodesController extends DataAppController {
 		$postalCode = $this->PostalCodes->get($id);
 		$var = $postalCode['code'];
 
-		if ($this->PostalCodes->delete($id)) {
+		if ($this->PostalCodes->delete($postalCode)) {
 			$this->Flash->success(__('record del {0} done', h($var)));
 			return $this->redirect(['action' => 'index']);
 		}

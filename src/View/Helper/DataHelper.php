@@ -24,37 +24,6 @@ class DataHelper extends Helper {
 	protected $languageFlags;
 
 	/**
-	 * @param array $array
-	 * @param array $options
-	 * @return string
-	 */
-	public function countryAndProvince($array, $options = []) {
-		$res = '<span class="help" title="%s">%s</span>';
-
-		$options += ['separator' => '&nbsp;'];
-
-		$countryTitle = '';
-		if (!empty($array->country['name'])) {
-			$country = $array->country['iso2'];
-			$countryTitle .= h($array->country['name']) . '';
-		} else {
-			$country = '';
-		}
-
-		if (!empty($array->countryProvince['name'])) {
-			$countyProvince = h($array->countryProvince['abbr']);
-			$countryTitle .= (!empty($countryTitle) ? ' - ' : '') . h($array->countryProvince['name']);
-		} else {
-			$countyProvince = '';
-			$countryTitle .= '';
-		}
-
-		$content = $this->countryIcon($country) . $options['separator'] . $countyProvince;
-		$res = sprintf($res, $countryTitle, $content);
-		return $res;
-	}
-
-	/**
 	 * @return array with wwwPath and path
 	 */
 	public function getCountryIconPaths() {
@@ -93,7 +62,7 @@ class DataHelper extends Helper {
 	 * @param array $attr
 	 * @return string
 	 */
-	public function countryIcon($icon = null, $returnFalseOnFailure = false, $options = [], $attr = []) {
+	public function countryIcon($icon, $returnFalseOnFailure = false, $options = [], $attr = []) {
 		$ending = 'gif';
 		$image = 'unknown';
 
@@ -120,12 +89,16 @@ class DataHelper extends Helper {
 		} else {
 			$image = $icon;
 		}
+
+		$defaults = ['alt' => $icon, 'title' => strtoupper($icon)];
+		$attr += $defaults;
+
 		return $this->Html->image($wwwPath . $image . '.' . $ending, $attr);
 	}
 
 	/**
-	 * @param mixed $iso2
-	 * @param mixed $options
+	 * @param string $iso2
+	 * @param array $options
 	 * @return string
 	 */
 	public function languageFlag($iso2, $options = []) {

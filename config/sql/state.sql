@@ -1,5 +1,5 @@
--- country_provinces
-CREATE TABLE IF NOT EXISTS `{prefix}country_provinces` (
+-- states
+CREATE TABLE IF NOT EXISTS `{prefix}states` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `country_id` int(10) unsigned NOT NULL DEFAULT '0',
   `abbr` varchar(3) COLLATE utf8_unicode_ci NOT NULL,

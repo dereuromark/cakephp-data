@@ -241,19 +241,9 @@ class CountriesController extends DataAppController {
 	 * @return \Cake\Network\Response|null
 	 */
 	public function delete($id = null) {
-		$id = (int)$id;
-		if ($id <= 0) {
-			$this->Flash->error(__('record invalid'));
-			return $this->redirect(['action' => 'index']);
-		}
-		$res = $this->Countries->find('first', ['fields' => ['id'], 'conditions' => ['Countries.id' => $id]]);
-		if (empty($res)) {
-			$this->Flash->error(__('record del not exists'));
-			return $this->redirect(['action' => 'index']);
-		}
+		$country = $this->Countries->get($id);
 
-		//$name = $res['name'];
-		if ($this->Countries->delete($id)) {
+		if ($this->Countries->delete($country)) {
 			$this->Flash->success(__('record del {0} done', $id));
 			return $this->redirect(['action' => 'index']);
 		}
@@ -262,6 +252,7 @@ class CountriesController extends DataAppController {
 		return $this->redirect(['action' => 'index']);
 	}
 
+	/*
 	public function up($id = null) {
 		if (empty($id) || !($navigation = $this->Countries->find('first', ['conditions' => ['Countries.id' => $id]]))) {
 			$this->Flash->error(__('invalid record'));
@@ -279,6 +270,7 @@ class CountriesController extends DataAppController {
 		$this->Countries->moveUp($id, 1);
 		return $this->redirect(['action' => 'index']);
 	}
+	*/
 
 	/**
 	 * Validate

@@ -98,7 +98,7 @@ class LanguagesController extends DataAppController {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
-		if ($this->Languages->delete($id)) {
+		if ($this->Languages->delete($language)) {
 			$var = $language['name'];
 			$this->Flash->success(__('record del {0} done', h($var)));
 			return $this->redirect(['action' => 'index']);

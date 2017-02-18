@@ -3,6 +3,7 @@ namespace Data\Model\Table;
 
 use Cake\Core\Plugin;
 use Cake\Event\Event;
+use Cake\ORM\Entity;
 use Cake\Utility\Hash;
 use Data\Lib\CurrencyLib;
 use Tools\Model\Table\Table;
@@ -101,12 +102,15 @@ class CurrenciesTable extends Table {
 		}
 	}
 
-	public function beforeSave($options = array()) {
-		parent::beforeSave($options);
-		if (isset($data['name'])) {
-			$data['name'] = ucwords($data['name']);
-
-			# intelligent autocomplete
+	/**
+	 * @param Event $event
+	 * @param Entity $entity
+	 *
+	 * @return bool
+	 */
+	public function beforeSave(Event $event, Entity $entity) {
+		if (isset($entity['name'])) {
+			$entity['name'] = ucwords($entity['name']);
 		}
 
 		return true;
