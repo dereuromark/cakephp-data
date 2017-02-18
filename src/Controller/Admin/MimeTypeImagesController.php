@@ -82,10 +82,10 @@ class MimeTypeImagesController extends DataAppController {
 			# TODO: check on valid ext, Sanitize fileName
 
 			if ($dbImage = $this->MimeTypeImage->find('first', ['conditions' => ['name' => $fileName]])) {
-				if (empty($dbImage['MimeTypeImage']['ext']) || !file_exists(PATH_MIMETYPES . $dbImage['MimeTypeImage']['name'] . '.' . $dbImage['MimeTypeImage']['ext'])) {
+				if (empty($dbImage['ext']) || !file_exists(PATH_MIMETYPES . $dbImage['name'] . '.' . $dbImage['ext'])) {
 
-					if (rename(PATH_MIMETYPES . 'import' . DS . $image, PATH_MIMETYPES . $dbImage['MimeTypeImage']['name'] . '.' . $ext) && $this->
-						MimeTypeImage->allocate($dbImage['MimeTypeImage']['id'], $fileName, $ext)) {
+					if (rename(PATH_MIMETYPES . 'import' . DS . $image, PATH_MIMETYPES . $dbImage['name'] . '.' . $ext) && $this->
+						MimeTypeImage->allocate($dbImage['id'], $fileName, $ext)) {
 						$renameSuccess[] = $fileName . '.' . $ext;
 						unset($images[$key]);
 					} else {
@@ -128,8 +128,8 @@ class MimeTypeImagesController extends DataAppController {
 					$recordId = null;
 
 					if ($dbImage = $this->MimeTypeImage->find('first', ['conditions' => ['name' => $name]])) {
-						if (empty($dbImage['MimeTypeImage']['ext']) || !file_exists(PATH_MIMETYPES . $dbImage['MimeTypeImage']['name'] . '.' . $dbImage['MimeTypeImage']['ext'])) {
-							$recordId = $dbImage['MimeTypeImage']['id'];
+						if (empty($dbImage['ext']) || !file_exists(PATH_MIMETYPES . $dbImage['name'] . '.' . $dbImage['ext'])) {
+							$recordId = $dbImage['id'];
 						} else {
 							$this->Flash->error(' \'' . $filename . ' \': extension \'' . $name . '\' already exists with an image present...');
 							continue;
@@ -370,8 +370,8 @@ class MimeTypeImagesController extends DataAppController {
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 
-		$fileName = $res['MimeTypeImage']['name'];
-		$fileExt = $res['MimeTypeImage']['ext'];
+		$fileName = $res['name'];
+		$fileExt = $res['ext'];
 		$name = $fileName . '.' . $fileExt;
 		if ($this->MimeTypeImage->delete($id)) {
 			# remove icon -> archive?

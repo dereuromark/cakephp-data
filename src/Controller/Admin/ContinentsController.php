@@ -63,7 +63,7 @@ class ContinentsController extends DataAppController {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
-		$var = $continent['Continent']['name'];
+		$var = $continent['name'];
 
 		if ($this->Continent->delete($id)) {
 			$this->Flash->success(__('record del {0} done', h($var)));
@@ -72,13 +72,5 @@ class ContinentsController extends DataAppController {
 		$this->Flash->error(__('record del {0} not done exception', h($var)));
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
-
-/****************************************************************************************
- * protected/interal functions
- ****************************************************************************************/
-
-/****************************************************************************************
- * deprecated/test functions
- ****************************************************************************************/
 
 }

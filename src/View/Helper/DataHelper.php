@@ -34,16 +34,16 @@ class DataHelper extends Helper {
 		$options += ['separator' => '&nbsp;'];
 
 		$countryTitle = '';
-		if (!empty($array['Country']['name'])) {
-			$country = $array['Country']['iso2'];
-			$countryTitle .= h($array['Country']['name']) . '';
+		if (!empty($array->country['name'])) {
+			$country = $array->country['iso2'];
+			$countryTitle .= h($array->country['name']) . '';
 		} else {
 			$country = '';
 		}
 
-		if (!empty($array['CountryProvince']['name'])) {
-			$countyProvince = h($array['CountryProvince']['abbr']);
-			$countryTitle .= (!empty($countryTitle) ? ' - ' : '') . h($array['CountryProvince']['name']);
+		if (!empty($array->countryProvince['name'])) {
+			$countyProvince = h($array->countryProvince['abbr']);
+			$countryTitle .= (!empty($countryTitle) ? ' - ' : '') . h($array->countryProvince['name']);
 		} else {
 			$countyProvince = '';
 			$countryTitle .= '';

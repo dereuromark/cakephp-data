@@ -96,7 +96,7 @@ class LanguagesController extends DataAppController {
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Languages->delete($id)) {
-			$var = $language['Language']['name'];
+			$var = $language['name'];
 			$this->Flash->success(__('record del {0} done', h($var)));
 			return $this->redirect(['action' => 'index']);
 		}

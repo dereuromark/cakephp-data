@@ -41,7 +41,7 @@ class CurrenciesController extends DataAppController {
 
 		$baseCurrency = [];
 		foreach ($currencies as $currency) {
-			if ($currency['Currency']['base']) {
+			if ($currency['base']) {
 				$baseCurrency = $currency;
 				break;
 			}
@@ -126,7 +126,7 @@ class CurrenciesController extends DataAppController {
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 
-		//$name = $res['Currency']['name'];
+		//$name = $res['name'];
 		if ($this->Currencies->delete($id)) {
 			$this->Flash->success(__('record del {0} done', $id));
 			return $this->redirect(['action' => 'index']);

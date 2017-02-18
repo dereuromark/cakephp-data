@@ -58,15 +58,15 @@ class MimeTypesController extends DataAppController {
 
 		//$images = $this->MimeType->MimeTypeImage->find('all', array('conditions'=>array('active'=>1)));
 		$addedIcon = [];
-		$types = $this->MimeType->find('all', ['conditions' => ['MimeType.mime_type_image_id' => 0]]);
+		$types = $this->MimeType->find('all', ['conditions' => ['MimeTypes.mime_type_image_id' => 0]]);
 		foreach ($types as $type) {
-			$fileExt = $type['MimeType']['ext'];
-			$image = $this->MimeType->MimeTypeImage->find('first', ['conditions' => ['MimeTypeImage.name' => $fileExt]]);
+			$fileExt = $type['ext'];
+			$image = $this->MimeType->MimeTypeImage->find('first', ['conditions' => ['MimeTypeImages.name' => $fileExt]]);
 			if (!empty($image)) {
-				$id = $type['MimeType']['id'];
+				$id = $type['id'];
 				//$data = array()
-				if ($this->MimeType->saveField($id, 'mime_type_image_id', $image['MimeTypeImage']['id'])) {
-					$addedIcon[] = $fileExt . ' ' . CHAR_ARROWS . ' ' . $image['MimeTypeImage']['name'] . '.' . (!empty($image['MimeTypeImage']['ext']) ? $image['MimeTypeImage']['ext'] : '?');
+				if ($this->MimeType->saveField($id, 'mime_type_image_id', $image['id'])) {
+					$addedIcon[] = $fileExt . ' ' . CHAR_ARROWS . ' ' . $image['name'] . '.' . (!empty($image['ext']) ? $image['ext'] : '?');
 				}
 			}
 		}
@@ -93,7 +93,7 @@ class MimeTypesController extends DataAppController {
 				$mimeType = array_shift($mimeType);
 			}
 			if ($mime = $this->MimeType->mimeTypeExists($ext)) {
-				$report['in'][] = ['ext' => $ext, 'type' => $mimeType, 'oldType' => $mime['MimeType']['type']];
+				$report['in'][] = ['ext' => $ext, 'type' => $mimeType, 'oldType' => $mime['type']];
 				continue;
 			}
 
@@ -166,13 +166,6 @@ class MimeTypesController extends DataAppController {
 		return $conditions;
 	 }
 
-	public function prepSearchString($string = null, $allowWildCard = false) {
-		# not working due to cakes \ => \\ safe string modifications (extra escaping) prior to db query...
-		$string = str_replace('%', '\%', $string);
-		$string = str_replace('_', '\_', $string);
-		return $string;
-	}
-
 	public function view($id = null) {
 		if (empty($id)) {
 			$this->Flash->error(__('record invalid'));
@@ -188,20 +181,20 @@ class MimeTypesController extends DataAppController {
 
 	public function add() {
 		if ($this->Common->isPosted()) {
-			$this->request->data['MimeType']['name'] = ucwords($this->request->data['MimeType']['name']); //ucfirst()
-			$this->request->data['MimeType']['mime_type_image_id'] = (int)$this->request->data['MimeType']['mime_type_image_id'];
+			$this->request->data['name'] = ucwords($this->request->data['name']); //ucfirst()
+			$this->request->data['mime_type_image_id'] = (int)$this->request->data['mime_type_image_id'];
 
 			$this->MimeType->create();
 			if ($this->MimeType->save($this->request->data)) {
 				$id = $this->MimeType->id;
-				//$name = $this->request->data['MimeType']['name'];
+				//$name = $this->request->data['name'];
 				$this->Flash->success(__('record add {0} saved', $id));
 				return $this->redirect(['action' => 'index']);
 			}
 
 			$this->Flash->error(__('record add not saved'));
 		} else {
-			$this->request->data['MimeType']['active'] = 1;
+			$this->request->data['active'] = 1;
 		}
 		$mimeTypeImages = $this->MimeType->MimeTypeImage->findList();
 		$this->set(compact('mimeTypeImages'));
@@ -213,11 +206,11 @@ class MimeTypesController extends DataAppController {
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
-			$this->request->data['MimeType']['name'] = ucwords($this->request->data['MimeType']['name']); //ucfirst()
-			$this->request->data['MimeType']['mime_type_image_id'] = (int)$this->request->data['MimeType']['mime_type_image_id'];
+			$this->request->data['name'] = ucwords($this->request->data['name']); //ucfirst()
+			$this->request->data['mime_type_image_id'] = (int)$this->request->data['mime_type_image_id'];
 
 			if ($this->MimeType->save($this->request->data)) {
-				//$name = $this->request->data['MimeType']['name'];
+				//$name = $this->request->data['name'];
 				$this->Flash->success(__('record edit {0} saved', $id));
 				return $this->redirect(['action' => 'index']);
 			}
@@ -247,7 +240,7 @@ class MimeTypesController extends DataAppController {
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 
-		//$name = $res['MimeType']['name'];
+		//$name = $res['name'];
 		if ($this->MimeType->delete($id)) {
 			$this->Flash->success(__('record del {0} done', $id));
 			return $this->Common->autoRedirect(['action' => 'index']);
@@ -331,19 +324,19 @@ class MimeTypesController extends DataAppController {
 				continue;
 			}
 
-			if (empty($record['MimeType']['name']) || strtolower($record['MimeType']['name']) == strtolower($record['MimeType']['type'])) {
+			if (empty($record['name']) || strtolower($record['name']) == strtolower($record['type'])) {
 				//$this->MimeType->create();
-				$this->MimeType->id = $record['MimeType']['id'];
+				$this->MimeType->id = $record['id'];
 				if (true && $res = $this->MimeType->save($data)) {
 					echo 'OK:';
 					echo $res;
-					echo BR;
+					//echo BR;
 				} else {
 					pr($this->MimeType->validationErrors);
-					echo BR;
+					//echo BR;
 				}
 			}
-			echo BR;
+			//echo BR;
 		}
 
 		$this->autoRender = false;
@@ -360,7 +353,7 @@ class MimeTypesController extends DataAppController {
 		$data = [];
 
 		foreach ($result as $r) {
-			$array = explode(TB, $r);
+			$array = explode("\t", $r);
 
 				$type = trim($array[1]);
 				$ext = trim($array[0]);
@@ -377,12 +370,12 @@ class MimeTypesController extends DataAppController {
 				$record = $this->MimeType->find('first', ['conditions' => ['ext' => $d['ext']]]);
 			}
 
-			if (!empty($record['MimeType']['type']) && $record['MimeType']['type'] != $d['type']) {
-				echo BR;
+			if (!empty($record['type']) && $record['type'] != $d['type']) {
+				//echo BR;
 				echo '<b>' . $d['ext'] . ' (DIFF TYPES!):</b>';
-				pr($record);
-				pr($d);
-				echo BR;
+				//pr($record);
+				//pr($d);
+				//echo BR;
 			}
 
 			if (true) {
@@ -403,10 +396,10 @@ class MimeTypesController extends DataAppController {
 		}
 
 		if ($count > 0) {
-			echo $count . ' neue eingefügt!' . BR;
+			echo $count . ' neue eingefügt!'; //BR;
 		}
 		if ($notSaved > 0) {
-			echo $notSaved . ' nicht eingefügt!' . BR;
+			echo $notSaved . ' nicht eingefügt!'; //BR;
 		}
 
 		if (!empty($export)) {

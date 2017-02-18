@@ -178,7 +178,7 @@ class CountryProvincesController extends DataAppController {
 			return $this->redirect(['action' => 'index']);
 		}
 
-		$name = $res['CountryProvince']['name'];
+		$name = $res['name'];
 		if ($this->CountryProvinces->delete($id)) {
 			$this->Flash->success(__('record del {0} done', h($name)));
 			return $this->redirect(['action' => 'index']);
