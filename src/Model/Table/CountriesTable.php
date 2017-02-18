@@ -1,7 +1,11 @@
 <?php
 namespace Data\Model\Table;
 
+use ArrayObject;
+use Cake\Core\Configure;
 use Cake\Core\Plugin;
+use Cake\Event\Event;
+use Cake\ORM\Entity;
 use Exception;
 use Geo\Geocode\Geocode;
 use Tools\Model\Table\Table;
@@ -59,26 +63,21 @@ class CountriesTable extends Table {
 		//'sort' => array('numeric')
 	];
 
-	public $hasMany = [
-		'CountryProvince' => [
-			'className' => 'Data.CountryProvince',
-			'foreignKey' => 'country_id',
-			'dependent' => true, # !!!
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-		],
-		'State' => [
-			'className' => 'Data.State',
-			'foreignKey' => 'country_id',
-			'dependent' => true, # !!!
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-		],
-	];
+	/**
+	 * @param array $config
+	 */
+	public function __construct(array $config) {
+		parent::__construct($config);
+
+		if (Configure::read('Country.State') === false) {
+			return;
+		}
+
+		$this->hasMany('States', [
+			'className' => 'Data.States',
+			'dependent' => true,
+		]);
+	}
 
 	/**
 	 * @param array $config
@@ -93,47 +92,15 @@ class CountriesTable extends Table {
 
 		$this->addBehavior('Search.Search');
 		$this->searchManager()
-			->like('search', ['field' => ['name', 'ori_name', 'iso2', 'iso3', 'country_code']]);
-	}
-
-	/*
-	public function __construct($id = false, $table = false, $ds = null) {
-		if (Configure::read('Country.provinces') === false) {
-			unset($this->hasMany['CountryProvince']);
-		}
-		if (Configure::read('Country.State') !== true) {
-			unset($this->hasMany['State']);
-		}
-
-		parent::__construct($id, $table, $ds);
-	}
-	*/
-
-	/**
-	 * Country::active()
-	 *
-	 * @param string $type
-	 * @param mixed $customOptions
-	 * @return array
-	 */
-	public function active($type = 'all', $customOptions = []) {
-		$options = ['conditions' => [$this->alias() . '.status' => 1]];
-		if (!empty($customOptions)) {
-			$options = array_merge($options, $customOptions);
-		}
-		return $this->find($type, $options);
+			->like('search', ['field' => ['name', 'ori_name', 'iso2', 'iso3', 'country_code'], 'colType' => ['country_code' => 'string']]);
 	}
 
 	/**
-	 * Country::getList()
-	 *
-	 * @return array
+	 * @param array $options
+	 * @return \Cake\ORM\Query
 	 */
-	public function getList() {
-		$options = [
-			//'conditions'=>array('active'=>1),
-		];
-		return $this->find('list', $options);
+	public function findActive(array $options = []) {
+		return $this->find('all', $options)->where([$this->alias() . '.status' => true]);
 	}
 
 	/**
@@ -170,7 +137,7 @@ class CountriesTable extends Table {
 					throw new Exception(returns($saveArray));
 				}
 
-				$this->id = $id;
+				//$this->id = $id;
 				if (!$this->save($saveArray, true, ['lat', 'lng', 'iso2', 'iso3'])) {
 					//echo returns($this->id);
 					//pr($res); pr($data); pr($saveArray); die(returns($this->validationErrors));
@@ -300,62 +267,6 @@ class CountriesTable extends Table {
 	}
 
 	/**
-	 * @param id|null
-	 * - NULL: update all records with missing coordinates only
-	 * - otherwise: specific update
-	 * @deprecated but seems to have better lat/lng for countries...
-	 */
-	public function updateCoordinates($id = null) {
-		$Geocoder = new GeocodeLib();
-		//$Geocoder->setup();
-
-		$override = false;
-		if ($id == -1) {
-			$id = '';
-			$override = true;
-		}
-
-		$conditions = [];
-		if (!$override) {
-			$conditions = [$this->alias() . '.lat' => 0, $this->alias() . '.lng' => 0];
-		}
-
-		if (!empty($id)) {
-			$res = $this->find('first', ['fields' => [$this->alias() . '.id', $this->alias() . '.name', $this->alias() . '.ori_name'], 'conditions' => [$this->alias() . '.id' => $id], 'contain' => []]);
-			if (!empty($res['ori_name']) && ($data = $Geocoder->geocode($res['ori_name'])) || $res['name'] != $res['ori_name'] && ($data = $Geocoder->geocode($res['name']))) {
-
-				//echo returns($data); echo returns($Geocoder->debug()); die();
-
-				$this->id = $id;
-				$this->save($data, true, ['lat', 'lng']);
-				return true;
-			}
-		} else {
-
-			$results = $this->find('all', ['fields' => [$this->alias() . '.id', $this->alias() . '.name', $this->alias() . '.ori_name'], 'conditions' => $conditions, 'contain' => []]);
-			$count = 0;
-			foreach ($results as $res) {
-				if (!empty($res['ori_name']) && ($data = $Geocoder->geocode($res['ori_name'])) || $res['name'] != $res['ori_name'] && ($data = $Geocoder->geocode($res['name']))) {
-					//echo returns($data); echo returns($Geocoder->debug()); die();
-
-					$this->id = $res['id'];
-					if ($this->save($data, true, ['lat', 'lng'])) {
-						$count++;
-					} else {
-						//echo returns($data); echo returns($Geocoder->debug()); die();
-					}
-					$Geocoder->pause();
-				}
-			}
-
-			return $count;
-		}
-
-		//$this->save($data, true, array('city','id','lat','lng'));
-		return false;
-	}
-
-	/**
 	 * Try to guess the country of the user
 	 * - time sensitive (only works in a certain timeframe < 24h)
 	 *
@@ -383,9 +294,9 @@ class CountriesTable extends Table {
 		return -1;
 	}
 
-	public function afterSave($created, $options = []) {
-		if ($created) {
-			$this->updateCoordinates($this->id);
+	public function afterSave(Event $event, Entity $entity, ArrayObject $options) {
+		if ($entity->isNew()) {
+			//$this->updateCoordinates($entity);
 		}
 	}
 

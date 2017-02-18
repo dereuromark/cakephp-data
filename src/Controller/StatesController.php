@@ -7,14 +7,14 @@ use Data\Controller\DataAppController;
 use Exception;
 
 /**
- * @deprecated Use States instead.
+ *
  */
-class CountryProvincesController extends DataAppController {
+class StatesController extends DataAppController {
 
 	/**
 	 * @var array
 	 */
-	public $paginate = ['order' => ['CountryProvinces.modified' => 'DESC']];
+	public $paginate = ['order' => ['States.modified' => 'DESC']];
 
 	/**
 	 * @param \Cake\Event\Event $event
@@ -40,14 +40,14 @@ class CountryProvincesController extends DataAppController {
 			throw new Exception(__('not a valid request'));
 		}
 		$this->viewBuilder()->layout('ajax');
-		$countryProvinces = $this->CountryProvinces->getListByCountry($id);
+		$States = $this->States->getListByCountry($id);
 
 		$defaultFieldLabel = 'pleaseSelect';
 		if ($this->request->query('optional')) {
 			$defaultFieldLabel = 'doesNotMatter';
 		}
 
-		$this->set(compact('countryProvinces', 'defaultFieldLabel'));
+		$this->set(compact('States', 'defaultFieldLabel'));
 	}
 
 	/**
@@ -56,16 +56,16 @@ class CountryProvincesController extends DataAppController {
 	 */
 	public function index($cid = null) {
 		$this->paginate['contain'] = ['Countries'];
-		$this->paginate['order'] = ['CountryProvinces.name' => 'ASC'];
+		$this->paginate['order'] = ['States.name' => 'ASC'];
 		//$this->paginate['conditions'] = array('Country.status' => 1);
 
 		$this->_processCountry($cid);
 
-		$query = $this->CountryProvinces->find();
-		$countryProvinces = $this->paginate($query);
+		$query = $this->States->find();
+		$States = $this->paginate($query);
 
-		$countries = $this->CountryProvinces->Countries->active('list');
-		$this->set(compact('countryProvinces', 'countries'));
+		$countries = $this->States->Countries->findActive()->find('list');
+		$this->set(compact('States', 'countries'));
 	}
 
 	/**
@@ -77,13 +77,13 @@ class CountryProvincesController extends DataAppController {
 		$saveCid = true;
 		if (empty($cid)) {
 			$saveCid = false;
-			$cid = $this->request->session()->read('CountryProvince.cid');
+			$cid = $this->request->session()->read('State.cid');
 		}
 		if (!empty($cid) && $cid < 0) {
-			$this->request->session()->delete('CountryProvince.cid');
+			$this->request->session()->delete('State.cid');
 			$cid = null;
 		} elseif (!empty($cid) && $saveCid) {
-			$this->request->session()->write('CountryProvince.cid', $cid);
+			$this->request->session()->write('State.cid', $cid);
 		}
 
 		if (!empty($cid)) {

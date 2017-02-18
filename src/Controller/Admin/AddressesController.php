@@ -23,7 +23,7 @@ class AddressesController extends DataAppController {
 	 * @return \Cake\Network\Response|null
 	 */
 	public function view($id = null) {
-		if (empty($id) || !($address = $this->Address->find('first', ['conditions' => ['Addresses.id' => $id]]))) {
+		if (empty($id) || !($address = $this->Addresses->find('first', ['conditions' => ['Addresses.id' => $id]]))) {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
@@ -38,7 +38,7 @@ class AddressesController extends DataAppController {
 		$address = $this->Addresses->newEntity();
 		if ($this->Common->isPosted()) {
 			$address = $this->Addresses->patchEntity($address, $this->request->data);
-			if ($this->Address->save($address)) {
+			if ($this->Addresses->save($address)) {
 				$var = $address['formatted_address'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
 				return $this->redirect(['action' => 'index']);
@@ -48,25 +48,25 @@ class AddressesController extends DataAppController {
 		} else {
 			# TODO: geolocate via IP? only for frontend
 			$options = ['Countries.iso2' => 'DE'];
-			$this->request->data['country_id'] = $this->Address->Countries->fieldByConditions('id', $options);
+			$this->request->data['country_id'] = $this->Addresses->Countries->fieldByConditions('id', $options);
 		}
 
-		$countries = $this->Address->Countries->find('list');
+		$countries = $this->Addresses->Countries->find('list');
 		$countryProvinces = [];
-		if (Configure::read('Address.CountryProvince')) {
-			$countryProvinces = $this->Address->CountryProvince->find('list');
+		if (Configure::read('Address.State')) {
+			$countryProvinces = $this->Addresses->States->find('list');
 		}
 
 		$this->set(compact('countries', 'countryProvinces'));
 	}
 
 	public function edit($id = null) {
-		if (empty($id) || !($address = $this->Address->find('first', ['conditions' => ['Addresses.id' => $id]]))) {
+		if (empty($id) || !($address = $this->Addresses->find('first', ['conditions' => ['Addresses.id' => $id]]))) {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
-			if ($this->Address->save($this->request->data)) {
+			if ($this->Addresses->save($this->request->data)) {
 				$var = $this->request->data['formatted_address'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
 				return $this->redirect(['action' => 'index']);
@@ -77,7 +77,7 @@ class AddressesController extends DataAppController {
 		if (empty($this->request->data)) {
 			$this->request->data = $address;
 			$belongsTo = ['' => ' - keine Auswahl - '];
-			foreach ($this->Address->belongsTo as $b => $content) {
+			foreach ($this->Addresses->belongsTo as $b => $content) {
 				if ($b === 'Country') {
 					continue;
 				}
@@ -103,13 +103,13 @@ class AddressesController extends DataAppController {
 	public function delete($id = null) {
 		$this->request->allowMethod('post');
 
-		if (empty($id) || !($address = $this->Address->find('first', ['conditions' => ['Addresses.id' => $id], 'fields' => ['id', 'formatted_address']]))) {
+		if (empty($id) || !($address = $this->Addresses->find('first', ['conditions' => ['Addresses.id' => $id], 'fields' => ['id', 'formatted_address']]))) {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$var = $address['formatted_address'];
 
-		if ($this->Address->delete($id)) {
+		if ($this->Addresses->delete($id)) {
 			$this->Flash->success(__('record del {0} done', h($var)));
 			return $this->redirect(['action' => 'index']);
 		}
@@ -118,11 +118,11 @@ class AddressesController extends DataAppController {
 	}
 
 	public function markAsUsed($id = null) {
-		if (empty($id) || !($address = $this->Address->find('first', ['conditions' => ['Address.id' => $id], 'fields' => ['id', 'formatted_address']]))) {
+		if (empty($id) || !($address = $this->Addresses->find('first', ['conditions' => ['Address.id' => $id], 'fields' => ['id', 'formatted_address']]))) {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
-		$this->Address->touch($id);
+		$this->Addresses->touch($id);
 		$var = $address['formatted_address'];
 		$this->Flash->success(__('Address \'{0}\' marked as last used', h($var)));
 		return $this->Common->autoRedirect(['action' => 'index']);

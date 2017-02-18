@@ -3,6 +3,7 @@
 namespace Data\Test\TestCase\Model\Table;
 
 use Cake\ORM\TableRegistry;
+use Data\Model\Table\CountriesTable;
 use Tools\TestSuite\TestCase;
 
 class CountriesTableTest extends TestCase {
@@ -11,11 +12,18 @@ class CountriesTableTest extends TestCase {
 	 * @var array
 	 */
 	public $fixtures = [
-		'plugin.data.countries'
+		'plugin.data.countries',
+		'plugin.data.states'
 	];
 
+	/**
+	 * @var CountriesTable
+	 */
 	public $Countries;
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 
@@ -23,12 +31,25 @@ class CountriesTableTest extends TestCase {
 	}
 
 	/**
-	 * CountriesTableTest::testBasicFind()
-	 *
 	 * @return void
 	 */
 	public function testBasicFind() {
-		$result = $this->Countries->find()->first();
+		$result = $this->Countries->find()->contain(['States'])->first();
+		$this->assertNotEmpty($result);
+		$this->assertNotEmpty($result->states);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testBasicSave() {
+		$country = $this->Countries->newEntity([
+			'name' => 'Foo Bar',
+			'ori_name' => 'Foo Bar',
+			'iso2' => 'FB',
+			'iso3' => 'FBR',
+		]);
+		$result = $this->Countries->save($country);
 		$this->assertNotEmpty($result);
 	}
 
