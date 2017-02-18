@@ -19,6 +19,7 @@
 		"dereuromark/cakephp-geo": "^1.0"
 	},
 	"require-dev": {
+		"phpunit/phpunit": "<6.0",
 		"friendsofcake/search": "^2.3",
 		"yangqi/htmldom": "dev-master",
 		"fig-r/psr2r-sniffer": "dev-master"

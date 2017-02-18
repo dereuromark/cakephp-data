@@ -19,6 +19,8 @@ A Cake3.x Plugin containing several useful data models that can be used in many 
 
 Both schema and data.
 
+## Demo
+See http://sandbox.dereuromark.de/export
 
 ## How to include
 Installing the plugin is pretty much as with every other CakePHP Plugin.
