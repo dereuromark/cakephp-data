@@ -27,6 +27,15 @@ class CountiesTableTest extends TestCase {
 	}
 
 	/**
+	 * @return void
+	 */
+	public function tearDown() {
+		parent::tearDown();
+
+		TableRegistry::clear();
+	}
+
+	/**
 	 * CountiesTableTest::testBasicFind()
 	 *
 	 * @return void

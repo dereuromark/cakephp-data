@@ -26,6 +26,15 @@ class CitiesTableTest extends TestCase {
 	}
 
 	/**
+	 * @return void
+	 */
+	public function tearDown() {
+		parent::tearDown();
+
+		TableRegistry::clear();
+	}
+
+	/**
 	 * CitiesTableTest::testBasicFind()
 	 *
 	 * @return void

@@ -32,6 +32,15 @@ class CountriesTableTest extends TestCase {
 	/**
 	 * @return void
 	 */
+	public function tearDown() {
+		parent::tearDown();
+
+		TableRegistry::clear();
+	}
+
+	/**
+	 * @return void
+	 */
 	public function testBasicFind() {
 		$result = $this->Countries->find()->contain(['States'])->first();
 		$this->assertNotEmpty($result);

@@ -52,6 +52,34 @@ class DataHelper extends Helper {
 	}
 
 	/**
+	 * @return array with wwwPath and path
+	 */
+	public function getLanguageIconPaths() {
+		$specific = Configure::read('Language.imagePath');
+		if (!$specific) {
+			return $this->getCountryIconPaths();
+		}
+
+		list ($plugin, $specificPath) = pluginSplit($specific);
+		if (substr($specificPath, 0, 1) !== '/') {
+			$specificPath = '/img/' . $specific;
+		}
+		$wwwPath = $specificPath;
+		if ($plugin) {
+			$wwwPath = '/' . Inflector::underscore($plugin) . '/' . $wwwPath;
+		}
+		if ($plugin) {
+			$path = Plugin::path($plugin) . 'webroot' . DS;
+		} else {
+			$path = WWW_ROOT;
+		}
+		$specificPath = str_replace('/', DS, $specificPath);
+		$path .= trim($specificPath, DS) . DS;
+
+		return [$wwwPath, $path];
+	}
+
+	/**
 	 * Country icons
 	 *
 	 * Custom paths possible:
@@ -134,7 +162,7 @@ class DataHelper extends Helper {
 			return $this->languageFlags;
 		}
 
-		list($wwwPath, $path) = $this->getCountryIconPaths();
+		list($wwwPath, $path) = $this->getLanguageIconPaths();
 		$handle = new Folder($path);
 		$languageFlags = $handle->read(true, true);
 		$languageFlags = $languageFlags[1];

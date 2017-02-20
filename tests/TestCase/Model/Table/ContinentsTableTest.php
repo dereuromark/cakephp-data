@@ -28,6 +28,15 @@ class ContinentsTableTest extends TestCase {
 	/**
 	 * @return void
 	 */
+	public function tearDown() {
+		parent::tearDown();
+
+		TableRegistry::clear();
+	}
+
+	/**
+	 * @return void
+	 */
 	public function testBasicFind() {
 		$result = $this->Continents->find()->first();
 		$this->assertNotEmpty($result);
