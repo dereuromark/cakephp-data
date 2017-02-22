@@ -27,6 +27,5 @@
 	<ul>
 		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('Country.id')], ['escape' => false], __('Are you sure you want to delete # {0}?', $this->Form->value('Country.id'))); ?></li>
 		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['action' => 'index']);?></li>
-		<li><?php echo $this->Html->link(__('List Country Provinces'), ['controller' => 'country_provinces', 'action' => 'index']); ?> </li>
 	</ul>
 </div>

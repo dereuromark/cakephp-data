@@ -7,8 +7,8 @@
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('country_id', ['empty' => ' - [ ' . __('noSelection') . ' ] - ']);
-	if (Configure::read('Address.CountryProvince')) {
-		echo $this->Form->input('country_province_id', ['empty' => ' - [ ' . __('noSelection') . ' ] - ']);
+	if (Configure::read('Address.State')) {
+		echo $this->Form->input('state_id', ['empty' => ' - [ ' . __('noSelection') . ' ] - ']);
 	}
 		echo $this->Form->input('first_name');
 		echo $this->Form->input('last_name');
@@ -33,7 +33,5 @@
 	<ul>
 		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('Address.id')], null, __('Are you sure you want to delete # {0}?', $this->Form->value('Address.id'))); ?></li>
 		<li><?php echo $this->Html->link(__('List {0}', __('Addresses')), ['action' => 'index']);?></li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['controller' => 'countries', 'action' => 'index']); ?> </li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Country Provinces')), ['controller' => 'country_provinces', 'action' => 'index']); ?> </li>
 	</ul>
 </div>

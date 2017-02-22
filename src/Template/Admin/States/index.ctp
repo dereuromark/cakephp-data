@@ -69,7 +69,7 @@ foreach ($states as $state):
 
 <div class="actions">
 	<ul>
-<?php if (true || $this->AuthUser->hasRole(ROLE_SUPERADMIN)) { ?>
+<?php if (true || $this->AuthUser->hasRole('admin')) { ?>
 		<li><?php echo $this->Html->link(__('Update Coordinates'), ['action' => 'updateCoordinates']); ?></li>
 <?php } ?>
 		<li><?php echo $this->Html->link(__('Add State'), ['action' => 'add']); ?></li>

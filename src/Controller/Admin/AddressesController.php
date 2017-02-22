@@ -66,8 +66,10 @@ class AddressesController extends DataAppController {
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
-			if ($this->Addresses->save($this->request->data)) {
-				$var = $this->request->data['formatted_address'];
+			$address = $this->Addresses->patchEntity($address, $this->request->data);
+
+			if ($this->Addresses->save($address)) {
+				$var = $address['formatted_address'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
 				return $this->redirect(['action' => 'index']);
 			}
@@ -88,12 +90,12 @@ class AddressesController extends DataAppController {
 			}
 		}
 		$countries = $this->Addresses->Countries->find('list');
-		$countryProvinces = [];
-		if (Configure::read('Address.CountryProvince')) {
-			$countryProvinces = $this->Addresses->CountryProvinces->find('list');
+		$states = [];
+		if (Configure::read('Address.State')) {
+			$states = $this->Addresses->States->find('list');
 		}
 
-		$this->set(compact('countries', 'countryProvinces'));
+		$this->set(compact('countries', 'states'));
 	}
 
 	/**

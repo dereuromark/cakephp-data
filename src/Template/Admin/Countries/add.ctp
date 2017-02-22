@@ -25,6 +25,5 @@
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['action' => 'index']);?></li>
-		<li><?php echo $this->Html->link(__('List Country Provinces'), ['controller' => 'country_provinces', 'action' => 'index']); ?> </li>
 	</ul>
 </div>

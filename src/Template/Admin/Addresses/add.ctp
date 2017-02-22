@@ -6,7 +6,7 @@
 		<legend><?php echo __('Add {0}', __('Address')); ?></legend>
 	<?php
 		echo $this->Form->input('country_id', ['empty' => [0 => ' - [ ' . __('noSelection') . ' ] - ']]);
-	if (Configure::read('Address.CountryProvince')) {
+	if (Configure::read('Address.State')) {
 		echo $this->Form->input('country_province_id', ['empty' => [0 => ' - [ ' . __('noSelection') . ' ] - ']]);
 	}
 		echo $this->Form->input('first_name');
@@ -31,7 +31,5 @@
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('List {0}', __('Addresses')), ['action' => 'index']);?></li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['controller' => 'countries', 'action' => 'index']); ?> </li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Country Provinces')), ['controller' => 'country_provinces', 'action' => 'index']); ?> </li>
 	</ul>
 </div>

@@ -114,9 +114,9 @@ class AddressesTable extends Table {
 			'order' => ''
 		],
 		# redundant:
-		'CountryProvince' => [
-			'className' => 'Data.CountryProvince',
-			'foreignKey' => 'country_province_id',
+		'State' => [
+			'className' => 'Data.State',
+			'foreignKey' => 'state_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

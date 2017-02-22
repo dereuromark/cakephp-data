@@ -7,10 +7,10 @@
 			<?php echo $this->Html->link($address['Country']['name'], ['controller' => 'countries', 'action' => 'view', $address['Country']['id']]); ?>
 			&nbsp;
 		</dd>
-<?php if (Configure::read('Address.CountryProvince')) { ?>
+<?php if (Configure::read('Address.State')) { ?>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Country Province'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Html->link($address['CountryProvince']['name'], ['controller' => 'country_provinces', 'action' => 'view', $address['CountryProvince']['id']]); ?>
+			<?php echo $this->Html->link($address['State']['name'], ['controller' => 'States', 'action' => 'view', $address['State']['id']]); ?>
 			&nbsp;
 		</dd>
 <?php } ?>
@@ -77,7 +77,5 @@
 		<li><?php echo $this->Html->link(__('Mark as {0}', __('Used')), ['action' => 'mark_as_used', $address['Address']['id']]); ?> </li>
 		<li><?php echo $this->Form->postLink(__('Delete {0}', __('Address')), ['action' => 'delete', $address['Address']['id']], null, __('Are you sure you want to delete # {0}?', $address['Address']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('List {0}', __('Addresses')), ['action' => 'index']); ?> </li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['controller' => 'countries', 'action' => 'index']); ?> </li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Country Provinces')), ['controller' => 'country_provinces', 'action' => 'index']); ?> </li>
 	</ul>
 </div>

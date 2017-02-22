@@ -10,7 +10,7 @@ use Cake\Core\Configure;
 <table class="table">
 <tr>
 	<th><?php echo $this->Paginator->sort('country_id');?></th>
-<?php if (Configure::read('Address.CountryProvince')) { ?>
+<?php if (Configure::read('Address.State')) { ?>
 	<th><?php echo $this->Paginator->sort('country_province_id');?></th>
 <?php } ?>
 	<th><?php echo $this->Paginator->sort('first_name');?></th>
@@ -31,50 +31,50 @@ foreach ($addresses as $address):
 		<td>
 			<?php echo $this->Html->link($address['Country']['name'], ['controller' => 'countries', 'action' => 'view', $address['Country']['id']]); ?>
 		</td>
-<?php if (Configure::read('Address.CountryProvince')) { ?>
+<?php if (Configure::read('Address.State')) { ?>
 		<td>
-			<?php echo $this->Html->link($address['CountryProvince']['name'], ['controller' => 'country_provinces', 'action' => 'view', $address['CountryProvince']['id']]); ?>
+			<?php echo $this->Html->link($address['State']['name'], ['controller' => 'states', 'action' => 'view', $address['State']['id']]); ?>
 		</td>
 <?php } ?>
 		<td>
-			<?php echo h($address['Address']['first_name']); ?>
+			<?php echo h($address['first_name']); ?>
 		</td>
 		<td>
-			<?php echo h($address['Address']['last_name']); ?>
+			<?php echo h($address['last_name']); ?>
 		</td>
 		<td>
-			<?php echo h($address['Address']['street']); ?>
+			<?php echo h($address['street']); ?>
 		</td>
 		<td>
-			<?php echo h($address['Address']['postal_code']); ?>
+			<?php echo h($address['postal_code']); ?>
 		</td>
 		<td>
-			<?php echo h($address['Address']['city']); ?>
+			<?php echo h($address['city']); ?>
 		</td>
 		<td>
 			<?php
-				if ((int)$address['Address']['lat'] != 0 || (int)$address['Address']['lng'] != 0) {
-					echo number_format($address['Address']['lat'], 1, ',', '.');
+				if ((int)$address['lat'] != 0 || (int)$address['lng'] != 0) {
+					echo number_format($address['lat'], 1, ',', '.');
 					echo '/';
-					echo number_format($address['Address']['lng'], 1, ',', '.');
+					echo number_format($address['lng'], 1, ',', '.');
 
 					$markers = [];
-					$markers[] = ['lat' => $address['Address']['lat'], 'lng' => $address['Address']['lng'], 'color' => 'green'];
+					$markers[] = ['lat' => $address['lat'], 'lng' => $address['lng'], 'color' => 'green'];
 					$mapMarkers = $this->GoogleMap->staticMarkers($markers);
-					echo $this->Html->link($this->Format->icon('view', 'Zeigen'), $this->GoogleMap->staticMapUrl(['center' => $address['Address']['lat'] . ',' . $address['Address']['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 12]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
+					echo $this->Html->link($this->Format->icon('view', 'Zeigen'), $this->GoogleMap->staticMapUrl(['center' => $address['lat'] . ',' . $address['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 12]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
 				}
 			 ?>
 		</td>
 		<td>
-			<?php echo $this->Time->niceDate($address['Address']['last_used']); ?>
+			<?php echo $this->Time->niceDate($address['last_used']); ?>
 		</td>
 		<td>
-			<?php echo h($address['Address']['formatted_address']); ?>
+			<?php echo h($address['formatted_address']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $address['Address']['id']], ['escape' => false]); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $address['Address']['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $address['Address']['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $address['Address']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $address['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $address['id']], ['escape' => false]); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $address['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $address['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -90,7 +90,5 @@ foreach ($addresses as $address):
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('Add {0}', __('Address')), ['action' => 'add']); ?></li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['controller' => 'countries', 'action' => 'index']); ?> </li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Country Provinces')), ['controller' => 'country_provinces', 'action' => 'index']); ?> </li>
 	</ul>
 </div>
