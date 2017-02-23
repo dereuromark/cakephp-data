@@ -56,6 +56,10 @@ class PostalCodesTable extends Table {
 	public function initialize(array $config) {
 		parent::initialize($config);
 
+		$this->belongsTo('Countries', [
+			'className' => 'Data.Countries'
+		]);
+
 		if (!Plugin::loaded('Search')) {
 			return;
 		}

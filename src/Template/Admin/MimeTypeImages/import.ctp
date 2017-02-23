@@ -1,5 +1,5 @@
 <div class="page form">
-<?php echo $this->Form->create('MimeTypeImage', ['url' => '/' . $this->request->url]);?>
+<?php echo $this->Form->create($mimeTypeImage);?>
 
 <?php if (!empty($alreadyIn) || !empty($fileExtensions)) { ?>
 	<fieldset>

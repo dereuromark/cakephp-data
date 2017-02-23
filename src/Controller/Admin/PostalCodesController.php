@@ -16,22 +16,18 @@ class PostalCodesController extends DataAppController {
 	 * @return void
 	 */
 	public function index() {
-		//$this->PostalCodes->bindModel(['belongsTo' => ['Country' => ['className' => 'Data.Country']]], false);
+		$query = $this->PostalCodes->find('search', ['search' => $this->request->query]);
 
-		//$this->PostalCodes->addBehavior('Search.Searchable');
-		//$this->Common->loadComponent('Search.Prg');
-		//$this->Prg->commonProcess();
-		//$this->paginate['conditions'] = $this->PostalCodes->find('search', ['search' => $this->request->query]);
-
-		$postalCodes = $this->paginate();
+		$postalCodes = $this->paginate($query);
 
 		$countries = $this->PostalCodes->Countries->find('list');
 		$this->set(compact('postalCodes', 'countries'));
 	}
 
+	/*
 	public function geolocate() {
 		if (($ipData = $this->request->session()->read('GeoLocation.data')) === null) {
-			$this->GeolocateLib = new GeolocateLib();
+			$this->GeolocateLib = new Geolocater();
 			if ($this->GeolocateLib->locate()) {
 				$ipData = $this->GeolocateLib->getResult();
 			} else {
@@ -44,14 +40,14 @@ class PostalCodesController extends DataAppController {
 		$this->helpers = array_merge($this->helpers, ['Geo.GoogleMap']);
 		$this->render('geolocate');
 	}
+	*/
 
 	/**
-	 * @return void
+	 * @param int|null $id
+	 * @return \Cake\Network\Response|null
 	 */
 	public function view($id = null) {
-		$this->PostalCodes->bindModel(['belongsTo' => ['Country' => ['className' => 'Data.Country']]], false);
-
-		if (empty($id) || !($postalCode = $this->PostalCodes->find('first', ['contain' => ['Country'], 'conditions' => ['PostalCode.id' => $id]]))) {
+		if (empty($id) || !($postalCode = $this->PostalCodes->find('first', ['contain' => ['Countries'], 'conditions' => ['PostalCodes.id' => $id]]))) {
 			$this->Flash->error(__('invalidRecord'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
@@ -60,13 +56,15 @@ class PostalCodesController extends DataAppController {
 	}
 
 	/**
-	 * @return void
+	 * @return \Cake\Network\Response|null
 	 */
 	public function add() {
+		$postalCode = $this->PostalCodes->newEntity();
+
 		if ($this->Common->isPosted()) {
-			$this->PostalCodes->create();
-			if ($this->PostalCodes->save($this->request->data)) {
-				$var = $this->request->data['code'];
+			$postalCode = $this->PostalCodes->patchEntity($postalCode, $this->request->data);
+			if ($this->PostalCodes->save($postalCode)) {
+				$var = $postalCode['code'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
 			}
@@ -87,8 +85,10 @@ class PostalCodesController extends DataAppController {
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
-			if ($this->PostalCodes->save($this->request->data)) {
-				$var = $this->request->data['code'];
+			$postalCode = $this->PostalCodes->patchEntity($postalCode, $this->request->data);
+
+			if ($this->PostalCodes->save($postalCode)) {
+				$var = $postalCode['code'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
 			}
