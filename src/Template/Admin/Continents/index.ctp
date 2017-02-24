@@ -19,21 +19,21 @@ foreach ($continents as $continent):
 ?>
 	<tr>
 		<td>
-			<?php echo h($continent['Continent']['name']); ?>
+			<?php echo h($continent['name']); ?>
 		</td>
 		<td>
-			<?php echo h($continent['Continent']['ori_name']); ?>
+			<?php echo h($continent['ori_name']); ?>
 		</td>
 		<td>
 			<?php echo $this->Html->link($continent['ParentContinent']['name'], ['controller' => 'continents', 'action' => 'view', $continent['ParentContinent']['id']]); ?>
 		</td>
 		<td>
-			<?php echo $this->Time->niceDate($continent['Continent']['modified']); ?>
+			<?php echo $this->Time->niceDate($continent['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $continent['Continent']['id']], ['escape' => false]); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $continent['Continent']['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $continent['Continent']['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $continent['Continent']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $continent['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $continent['id']], ['escape' => false]); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $continent['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $continent['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

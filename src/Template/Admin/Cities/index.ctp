@@ -19,27 +19,27 @@ foreach ($cities as $city) { ?>
 			<?php echo h($city['Country']['name']); ?>
 		</td>
 		<td>
-			<?php echo h($city['City']['name']); ?>
+			<?php echo h($city['name']); ?>
 		</td>
 		<td>
-			<?php echo h($city['City']['citizens']); ?>
+			<?php echo h($city['citizens']); ?>
 		</td>
 		<td>
-			<?php echo h($city['City']['postal_code']); ?>
+			<?php echo h($city['postal_code']); ?>
 		</td>
 		<td>
-			<?php echo $this->Number->format($city['City']['lat']); ?>/<?php echo $this->Number->format($city['City']['lng']); ?>
+			<?php echo $this->Number->format($city['lat']); ?>/<?php echo $this->Number->format($city['lng']); ?>
 		</td>
 		<td>
-			<?php echo $this->Format->yesNo($city['City']['postal_code_unique']); ?>
+			<?php echo $this->Format->yesNo($city['postal_code_unique']); ?>
 		</td>
 		<td>
-			<?php echo $this->Time->niceDate($city['City']['modified']); ?>
+			<?php echo $this->Time->niceDate($city['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $city['City']['id']], ['escape' => false]); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $city['City']['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $city['City']['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $city['City']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $city['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $city['id']], ['escape' => false]); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $city['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $city['id'])); ?>
 		</td>
 	</tr>
 <?php } ?>

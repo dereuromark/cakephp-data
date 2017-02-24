@@ -1,6 +1,7 @@
 <?php
 namespace Data\Controller\Admin;
 
+use Cake\Core\Plugin;
 use Data\Controller\DataAppController;
 use ToolsExtra\Lib\GeolocateLib;
 
@@ -16,9 +17,12 @@ class PostalCodesController extends DataAppController {
 	 * @return void
 	 */
 	public function index() {
-		$query = $this->PostalCodes->find('search', ['search' => $this->request->query]);
-
-		$postalCodes = $this->paginate($query);
+		if (Plugin::loaded('Search')) {
+			$query = $this->PostalCodes->find('search', ['search' => $this->request->query]);
+			$postalCodes = $this->paginate($query);
+		} else {
+			$postalCodes = $this->paginate();
+		}
 
 		$countries = $this->PostalCodes->Countries->find('list');
 		$this->set(compact('postalCodes', 'countries'));

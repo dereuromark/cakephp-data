@@ -3,12 +3,12 @@
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Name'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo h($continent['Continent']['name']); ?>
+			<?php echo h($continent['name']); ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Ori Name'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo h($continent['Continent']['ori_name']); ?>
+			<?php echo h($continent['ori_name']); ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Parent Continent'); ?></dt>
@@ -18,12 +18,12 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Status'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo h($continent['Continent']['status']); ?>
+			<?php echo h($continent['status']); ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Modified'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Time->niceDate($continent['Continent']['modified']); ?>
+			<?php echo $this->Time->niceDate($continent['modified']); ?>
 			&nbsp;
 		</dd>
 	</dl>
@@ -33,122 +33,9 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit {0}', __('Continent')), ['action' => 'edit', $continent['Continent']['id']]); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete {0}', __('Continent')), ['action' => 'delete', $continent['Continent']['id']], null, __('Are you sure you want to delete # {0}?', $continent['Continent']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('Edit {0}', __('Continent')), ['action' => 'edit', $continent['id']]); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete {0}', __('Continent')), ['action' => 'delete', $continent['id']], null, __('Are you sure you want to delete # {0}?', $continent['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('List {0}', __('Continents')), ['action' => 'index']); ?> </li>
 		<li><?php echo $this->Html->link(__('List {0}', __('Continents')), ['controller' => 'continents', 'action' => 'index']); ?> </li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['controller' => 'countries', 'action' => 'index']); ?> </li>
 	</ul>
-</div>
-<div class="related">
-	<h3><?php echo __('Related {0}', __('Continents'));?></h3>
-	<?php if (!empty($continent['ChildContinent'])):?>
-	<table class="table">	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Name'); ?></th>
-		<th><?php echo __('Ori Name'); ?></th>
-		<th><?php echo __('Parent Id'); ?></th>
-		<th><?php echo __('Lft'); ?></th>
-		<th><?php echo __('Rght'); ?></th>
-		<th><?php echo __('Status'); ?></th>
-		<th><?php echo __('Modified'); ?></th>
-		<th class="actions"><?php echo __('Actions');?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($continent['ChildContinent'] as $childContinent):
-			$class = null;
-			if ($i++ % 2 == 0) {
-				$class = ' class="altrow"';
-			}
-		?>
-		<tr>
-			<td><?php echo $childContinent['id'];?></td>
-			<td><?php echo $childContinent['name'];?></td>
-			<td><?php echo $childContinent['ori_name'];?></td>
-			<td><?php echo $childContinent['parent_id'];?></td>
-			<td><?php echo $childContinent['lft'];?></td>
-			<td><?php echo $childContinent['rght'];?></td>
-			<td><?php echo $childContinent['status'];?></td>
-			<td><?php echo $childContinent['modified'];?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), ['controller' => 'continents', 'action' => 'view', $childContinent['id']]); ?>
-				<?php echo $this->Html->link(__('Edit'), ['controller' => 'continents', 'action' => 'edit', $childContinent['id']]); ?>
-				<?php echo $this->Form->postLink(__('Delete'), ['controller' => 'continents', 'action' => 'delete', $childContinent['id']], null, __('Are you sure you want to delete # {0}?', $childContinent['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
-
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('Add {0}', __('Child Continent')), ['controller' => 'continents', 'action' => 'add']);?> </li>
-		</ul>
-	</div>
-</div>
-<div class="related">
-	<h3><?php echo __('Related {0}', __('Countries'));?></h3>
-	<?php if (!empty($continent['Country'])):?>
-	<table class="table">	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Name'); ?></th>
-		<th><?php echo __('Ori Name'); ?></th>
-		<th><?php echo __('Iso2'); ?></th>
-		<th><?php echo __('Iso3'); ?></th>
-		<th><?php echo __('Continent Id'); ?></th>
-		<th><?php echo __('Country Code'); ?></th>
-		<th><?php echo __('Eu Member'); ?></th>
-		<th><?php echo __('Special'); ?></th>
-		<th><?php echo __('Zip Length'); ?></th>
-		<th><?php echo __('Zip Regexp'); ?></th>
-		<th><?php echo __('Sort'); ?></th>
-		<th><?php echo __('Lat'); ?></th>
-		<th><?php echo __('Lng'); ?></th>
-		<th><?php echo __('Address Format'); ?></th>
-		<th><?php echo __('Status'); ?></th>
-		<th><?php echo __('Modified'); ?></th>
-		<th class="actions"><?php echo __('Actions');?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($continent['Country'] as $country):
-			$class = null;
-			if ($i++ % 2 == 0) {
-				$class = ' class="altrow"';
-			}
-		?>
-		<tr>
-			<td><?php echo $country['id'];?></td>
-			<td><?php echo $country['name'];?></td>
-			<td><?php echo $country['ori_name'];?></td>
-			<td><?php echo $country['iso2'];?></td>
-			<td><?php echo $country['iso3'];?></td>
-			<td><?php echo $country['continent_id'];?></td>
-			<td><?php echo $country['country_code'];?></td>
-			<td><?php echo $country['eu_member'];?></td>
-			<td><?php echo $country['special'];?></td>
-			<td><?php echo $country['zip_length'];?></td>
-			<td><?php echo $country['zip_regexp'];?></td>
-			<td><?php echo $country['sort'];?></td>
-			<td><?php echo $country['lat'];?></td>
-			<td><?php echo $country['lng'];?></td>
-			<td><?php echo $country['address_format'];?></td>
-			<td><?php echo $country['status'];?></td>
-			<td><?php echo $country['modified'];?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), ['controller' => 'countries', 'action' => 'view', $country['id']]); ?>
-				<?php echo $this->Html->link(__('Edit'), ['controller' => 'countries', 'action' => 'edit', $country['id']]); ?>
-				<?php echo $this->Form->postLink(__('Delete'), ['controller' => 'countries', 'action' => 'delete', $country['id']], null, __('Are you sure you want to delete # {0}?', $country['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
-
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('Add {0}', __('Country')), ['controller' => 'countries', 'action' => 'add']);?> </li>
-		</ul>
-	</div>
 </div>
