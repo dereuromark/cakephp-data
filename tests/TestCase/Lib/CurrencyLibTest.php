@@ -59,7 +59,7 @@ class CurrencyLibTest extends TestCase {
 		$this->assertTrue(is_array($is) && !empty($is));
 
 		$is = $this->CurrencyLib->table('XYZ');
-		$this->assertFalse($is);
+		$this->assertNull($is);
 
 		$this->assertTrue($this->CurrencyLib->cacheFileUsed());
 	}

@@ -5,7 +5,6 @@ use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\ORM\Entity;
 use Cake\Validation\Validation;
-use Data\Model\Country;
 use Tools\Model\Table\Table;
 use Tools\Utility\Utility;
 
@@ -148,7 +147,7 @@ class LocationsTable extends Table {
 	 */
 	public static function findIp() {
 		if ((int)Configure::read('debug') > 1) {
-			$ip = Configure::read('App.defaultIp')
+			$ip = Configure::read('App.defaultIp');
 			if ($ip) {
 				return $ip;
 			}
