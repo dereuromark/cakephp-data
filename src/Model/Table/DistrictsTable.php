@@ -5,12 +5,21 @@ use Tools\Model\Table\Table;
 
 class DistrictsTable extends Table {
 
+	/**
+	 * @var array
+	 */
 	public $actsAs = ['Geo.Geocoder' => [
 		'min_accuracy' => 3, 'address' => ['address'], 'before' => 'save', 'real' => false, 'required' => false
 	], 'Tools.Slugged' => ['mode' => 'ascii', 'case' => 'low']];
 
+	/**
+	 * @var array
+	 */
 	public $order = ['name' => 'ASC'];
 
+	/**
+	 * @var array
+	 */
 	public $validate = [
 		'name' => [
 			'notBlank' => [
@@ -26,6 +35,9 @@ class DistrictsTable extends Table {
 		],
 	];
 
+	/**
+	 * @var array
+	 */
 	public $belongsTo = [
 		'City' => [
 			'className' => 'Data.City',
@@ -37,12 +49,10 @@ class DistrictsTable extends Table {
 	];
 
 	/**
-	 * District::beforeValidate()
-	 *
 	 * @param array $options
 	 * @return bool Success
 	 */
-	public function beforeValidate($options = []) {
+	public function _beforeValidate($options = []) {
 		parent::beforeValidate($options);
 
 		if (!empty($this->data['name']) && !empty($this->data['city_id'])) {
@@ -56,7 +66,9 @@ class DistrictsTable extends Table {
 	/**
 	 * For start page
 	 *
-	 * @return array
+	 * @param string $citySlug
+	 * @param string $type
+	 * @return \Cake\ORM\Query
 	 */
 	public function getDistrictsByCity($citySlug, $type = 'all') {
 		$options = [

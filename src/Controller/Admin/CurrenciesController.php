@@ -151,9 +151,9 @@ class CurrenciesController extends DataAppController {
 	/**
 	 * Toggle - ajax
 	 *
-	 * @param null $field
-	 * @param null $id
-	 * @return void
+	 * @param string|null $field
+	 * @param int|null $id
+	 * @return \Cake\Network\Response|null
 	 */
 	public function toggle($field = null, $id = null) {
 		 $fields = ['active'];
@@ -162,8 +162,6 @@ class CurrenciesController extends DataAppController {
 			$value = $this->{$this->modelClass}->toggleField($field, $id);
 
 		}
-
-		//$this->request->isAll(array('post', 'ajax'))
 
 		# http get request + redirect
 		if (!$this->request->is('ajax')) {
@@ -178,6 +176,7 @@ class CurrenciesController extends DataAppController {
 			$this->set('ajaxToggle', $value);
 			$this->set(compact('field', 'model'));
 
+			//FIXME
 			$this->render('admin_toggle', 'ajax');
 		}
 	}

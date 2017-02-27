@@ -1,13 +1,22 @@
 <?php
 namespace Data\Model\Table;
 
+use ArrayObject;
+use Cake\Event\Event;
 use Cake\Filesystem\File;
+use Cake\ORM\Entity;
 use Tools\Model\Table\Table;
 
 class MimeTypeImagesTable extends Table {
 
+	/**
+	 * @var array
+	 */
 	public $order = ['modified' => 'DESC'];
 
+	/**
+	 * @var array
+	 */
 	public $validate = [
 		'name' => [ # e.g. "exe"
 			'isUnique' => [
@@ -25,6 +34,9 @@ class MimeTypeImagesTable extends Table {
 		'active' => ['numeric']
 	];
 
+	/**
+	 * @var array
+	 */
 	public $hasMany = [
 		'MimeType' => [
 			'className' => 'Data.MimeType',
@@ -37,12 +49,18 @@ class MimeTypeImagesTable extends Table {
 		]
 	];
 
+	/**
+	 * @param \Cake\Event\Event $event
+	 * @param \Cake\ORM\Entity $entity
+	 *
+	 * @return bool
+	 */
 	public function beforeSave(Event $event, Entity $entity) {
-		if (isset($this->data['name'])) {
-			$this->data['name'] = mb_strtolower($this->data['name']);
+		if (isset($entity['name'])) {
+			$entity['name'] = mb_strtolower($entity['name']);
 		}
-		if (isset($this->data['ext'])) {
-			$this->data['ext'] = mb_strtolower($this->data['ext']);
+		if (isset($entity['ext'])) {
+			$entity['ext'] = mb_strtolower($entity['ext']);
 		}
 
 		return true;
@@ -93,6 +111,9 @@ class MimeTypeImagesTable extends Table {
 		$handle->delete();
 	}
 
+	/**
+	 * @return array
+	 */
 	public function findAsList() {
 		$list = [];
 		$images = $this->find('all', ['conditions' => ['active' => 1]]); // ,'contain'=>'MimeType.id'
@@ -103,6 +124,13 @@ class MimeTypeImagesTable extends Table {
 		return $list;
 	}
 
+	/**
+	 * @param int|null $id
+	 * @param string|null $fileName
+	 * @param string|null $ext
+	 *
+	 * @return bool
+	 */
 	public function allocate($id = null, $fileName = null, $ext = null) {
 		if (empty($fileName) && empty($id) || empty($ext)) {
 			return false;
@@ -110,15 +138,14 @@ class MimeTypeImagesTable extends Table {
 
 		if (empty($id)) {
 			# new entry
-			$this->create();
 			$data = ['name' => $fileName, 'ext' => $ext, 'active' => 1];
-			if ($this->save($data)) {
+			$mimeTypeImage = $this->newEntity($data);
+			if ($this->save($mimeTypeImage)) {
 				return true;
 			}
 		} else {
-			$this->id = $id;
 			$data = ['ext' => $ext];
-			if ($this->save($data)) {
+			if ($this->updateAll($data, ['id' => $id])) {
 				return true;
 			}
 		}
@@ -126,14 +153,12 @@ class MimeTypeImagesTable extends Table {
 	}
 
 	/**
- * Static Enums
- **/
-
-	/**
-	 * Static Model::method()
 	 * ALLOWED EXTENSIONS
+	 *
+	 * @param string|null $value
+	 * @return array|mixed|string
 	 */
-	public function extensions($value = null) {
+	public static function extensions($value = null) {
 		$options = [
 			'gif' => __('GIF (*.gif)'),
 			'png' => __('PNG (*.png)'),

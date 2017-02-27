@@ -30,7 +30,7 @@ class PostalCodesTable extends Table {
 	 * @var array
 	 */
 	public $validate = [
-		'code' => array('notBlank'),
+		'code' => ['notBlank'],
 		/*
 		'official_address' => array(
 			'notBlank' => array(
@@ -71,8 +71,8 @@ class PostalCodesTable extends Table {
 	}
 
 	/**
-	 * @param $code
-	 * @param null $countryId
+	 * @param string $code
+	 * @param int|null $countryId
 	 * @param array $options
 	 *
 	 * @return \Cake\ORM\Query
@@ -96,13 +96,14 @@ class PostalCodesTable extends Table {
 		$options = [
 			'conditions' => $search,
 			'limit' => 15,
-			//'order'=>'Company.name',
 		];
 		return $this->find('all', $options);
 	}
 
 	/**
 	 * Postal codes per country
+	 *
+	 * @return array
 	 */
 	public function stats() {
 		$res = [];

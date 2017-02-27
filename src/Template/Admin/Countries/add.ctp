@@ -11,7 +11,7 @@
 		echo $this->Form->input('special');
 		echo $this->Form->input('address_format', ['type' => 'textarea']);
 		echo '<div class="input checkbox">Platzhalter sind :name :street_address :postcode :city :country</div>';
-		echo BR;
+		echo '<br/>';
 
 		//echo $this->Form->input('sort');
 		echo $this->Form->input('status', ['type' => 'checkbox', 'label' => 'Aktiv']);

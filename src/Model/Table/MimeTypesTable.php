@@ -10,8 +10,14 @@ use Tools\Model\Table\Table;
 
 class MimeTypesTable extends Table {
 
+	/**
+	 * @var array
+	 */
 	public $order = ['modified' => 'DESC'];
 
+	/**
+	 * @var array
+	 */
 	public $validate = [
 		'name' => [
 			'notBlank' => [
@@ -41,6 +47,9 @@ class MimeTypesTable extends Table {
 		'mime_type_image_id' => ['numeric'],
 	];
 
+	/**
+	 * @var array
+	 */
 	public $belongsTo = [
 		'MimeTypeImage' => [
 			'className' => 'Data.MimeTypeImage',
@@ -70,6 +79,12 @@ class MimeTypesTable extends Table {
 		$this->cleanUp();
 	}
 
+	/**
+	 * @param \Cake\Event\Event $event
+	 * @param \Cake\ORM\Entity $entity
+	 * @param \ArrayObject $options
+	 * @return void
+	 */
 	public function afterDelete(Event $event, Entity $entity, ArrayObject $options) {
 		$this->cleanUp();
 	}
@@ -93,7 +108,7 @@ class MimeTypesTable extends Table {
 	}
 
 	/**
-	 * @param null $ext
+	 * @param string|null $ext
 	 *
 	 * @return \Cake\ORM\Query|null
 	 */

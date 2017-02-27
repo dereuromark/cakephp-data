@@ -4,6 +4,7 @@ namespace Data\Controller\Admin;
 
 use Cake\Filesystem\Folder;
 use Data\Controller\DataAppController;
+use Data\Model\Table\MimeTypeImagesTable;
 use Tools\Utility\Utility;
 
 /**
@@ -16,6 +17,9 @@ class MimeTypeImagesController extends DataAppController {
 	 */
 	public $paginate = ['order' => ['MimeTypeImages.modified' => 'DESC']];
 
+	/**
+	 * @return void
+	 */
 	public function import() {
 		if ($this->Common->isPosted()) {
 
@@ -75,6 +79,9 @@ class MimeTypeImagesController extends DataAppController {
 		}
 	}
 
+	/**
+	 * @return void
+	 */
 	public function allocate() {
 		$folder = new Folder(PATH_MIMETYPES . 'import' . DS);
 		$images = $folder->find('.*');
@@ -87,7 +94,8 @@ class MimeTypeImagesController extends DataAppController {
 			$ext = mb_strtolower(extractPathInfo($image, 'ext'));
 			# TODO: check on valid ext, Sanitize fileName
 
-			if ($dbImage = $this->MimeTypeImage->find('first', ['conditions' => ['name' => $fileName]])) {
+			$dbImage = $this->MimeTypeImage->find('first', ['conditions' => ['name' => $fileName]]);
+			if ($dbImage) {
 				if (empty($dbImage['ext']) || !file_exists(PATH_MIMETYPES . $dbImage['name'] . '.' . $dbImage['ext'])) {
 
 					if (rename(PATH_MIMETYPES . 'import' . DS . $image, PATH_MIMETYPES . $dbImage['name'] . '.' . $ext) && $this->
@@ -132,8 +140,9 @@ class MimeTypeImagesController extends DataAppController {
 					}
 
 					$recordId = null;
-
-					if ($dbImage = $this->MimeTypeImage->find('first', ['conditions' => ['name' => $name]])) {
+					
+					$dbImage = $this->MimeTypeImage->find('first', ['conditions' => ['name' => $name]]);
+					if ($dbImage) {
 						if (empty($dbImage['ext']) || !file_exists(PATH_MIMETYPES . $dbImage['name'] . '.' . $dbImage['ext'])) {
 							$recordId = $dbImage['id'];
 						} else {
@@ -168,6 +177,9 @@ class MimeTypeImagesController extends DataAppController {
 		$this->set(compact('images'));
 	}
 
+	/**
+	 * @return void
+	 */
 	public function index() {
 		$mimeTypeImages = $this->paginate();
 
@@ -208,6 +220,11 @@ class MimeTypeImagesController extends DataAppController {
 		$this->set(compact('mimeTypeImages'));
 	}
 
+	/**
+	 * @param string|null $id
+	 *
+	 * @return mixed
+	 */
 	public function view($id = null) {
 		if (empty($id)) {
 			$this->Flash->error(__('record invalid'));
@@ -225,7 +242,8 @@ class MimeTypeImagesController extends DataAppController {
 	 * Upload new Icon/Image (auto resize to height:16px and convert if desired)
 	 * used by add() and edit()
 	 *
-	 * @return void
+	 * @param string|null $file
+	 * @return bool
 	 */
 	protected function _uploadImage($file = null) {
 		$this->_uploadError = 'Undefined Error';
@@ -251,7 +269,7 @@ class MimeTypeImagesController extends DataAppController {
 
 		$fileName = $this->request->data['name'];
 
-		if (!array_key_exists($ext, MimeTypeImage::extensions()) || (!empty($this->request->data['ext']) && $this->request->data['ext'] !=
+		if (!array_key_exists($ext, MimeTypeImagesTable::extensions()) || (!empty($this->request->data['ext']) && $this->request->data['ext'] !=
 			$ext)) {
 			# re-render
 			$this->Flash->success(__('re-rendered'));

@@ -3,7 +3,6 @@
 namespace Data\Test\TestCase\Model\Table;
 
 use Cake\ORM\TableRegistry;
-use Data\Model\Table\MimeTypesTable;
 use Tools\TestSuite\TestCase;
 
 class MimeTypesTableTest extends TestCase {
@@ -16,7 +15,7 @@ class MimeTypesTableTest extends TestCase {
 	];
 
 	/**
-	 * @var MimeTypesTable
+	 * @var \Data\Model\Table\MimeTypesTable
 	 */
 	public $MimeTypes;
 

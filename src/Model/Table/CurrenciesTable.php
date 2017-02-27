@@ -14,8 +14,14 @@ use Tools\Model\Table\Table;
  */
 class CurrenciesTable extends Table {
 
+	/**
+	 * @var array
+	 */
 	public $order = ['base' => 'DESC', 'code' => 'ASC'];
 
+	/**
+	 * @var array
+	 */
 	public $validate = [
 		'name' => [
 			'notBlank' => [
@@ -74,6 +80,12 @@ class CurrenciesTable extends Table {
 			->value('active');
 	}
 
+	/**
+	 * @param \Cake\Event\Event $event
+	 * @param \ArrayObject $data
+	 * @param \ArrayObject $options
+	 * @return void
+	 */
 	public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options) {
 		if (isset($data['value'])) {
 			$data['value'] = (float)$data['value'];
@@ -119,6 +131,10 @@ class CurrenciesTable extends Table {
 
 	/**
 	 * Model validation
+	 *
+	 * @param string $value
+	 * @param array $context
+	 * @return bool
 	 */
 	public function available($value, $context) {
 		if (empty($value)) {
@@ -139,9 +155,8 @@ class CurrenciesTable extends Table {
 	}
 
 	/**
-	 * model functions
-	 **/
-
+	 * @return void
+	 */
 	public function updateValues() {
 		if (!isset($this->CurrencyLib)) {
 			$this->CurrencyLib = new CurrencyLib();
@@ -150,7 +165,7 @@ class CurrenciesTable extends Table {
 		$this->CurrencyLib->reset();
 
 		$base = $this->baseCurrency();
-		$currencies = $this->foreignCurrencies();
+		$currencies = $this->foreignCurrencies()->all();
 		foreach ($currencies as $currency) {
 			$value = $this->CurrencyLib->convert(1, $base['code'], $currency['code'], 4);
 			if ($value !== false) {
@@ -164,13 +179,21 @@ class CurrenciesTable extends Table {
 
 	/**
 	 * All except base one
+	 *
+	 * @param array $options
+	 * @return \Cake\ORM\Query
 	 */
-	public function foreignCurrencies($type = 'all', $options = []) {
+	public function foreignCurrencies($options = []) {
 		$defaults = ['conditions' => [$this->alias() . '.base' => 0]];
 		$options = Hash::merge($defaults, $options);
-		return $this->find($type, $options);
+		return $this->find('all', $options);
 	}
 
+	/**
+	 * @param array $options
+	 *
+	 * @return \Cake\ORM\Query
+	 */
 	public function baseCurrency($options = []) {
 		$defaults = ['conditions' => [$this->alias() . '.base' => 1]];
 		$options = Hash::merge($defaults, $options);
@@ -179,6 +202,8 @@ class CurrenciesTable extends Table {
 
 	/**
 	 * For calculation etc
+	 *
+	 * @return array
 	 */
 	public function availableCurrencies() {
 		if (!isset($this->CurrencyLib)) {
@@ -194,13 +219,16 @@ class CurrenciesTable extends Table {
 
 	/**
 	 * For user selection
+	 *
+	 * @return array
 	 */
 	public function currencyList() {
 		$res = $this->availableCurrencies();
 		foreach ($res as $key => $val) {
 			$val = $key;
 
-			if ($valExt = $this->CurrencyLib->getName($key)) {
+			$valExt = $this->CurrencyLib->getName($key);
+			if ($valExt) {
 				$val .= ' - ' . $valExt;
 			}
 

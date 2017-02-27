@@ -7,7 +7,7 @@ use Cake\Core\Plugin;
 use Cake\Event\Event;
 use Cake\ORM\Entity;
 use Exception;
-use Geo\Geocode\Geocode;
+use Geo\Geocoder\Geocoder;
 use Tools\Model\Table\Table;
 
 /**
@@ -15,8 +15,14 @@ use Tools\Model\Table\Table;
  */
 class CountriesTable extends Table {
 
+	/**
+	 * @var array
+	 */
 	public $order = ['sort' => 'DESC', 'name' => 'ASC'];
 
+	/**
+	 * @var array
+	 */
 	public $validate = [
 		'name' => [
 			'notBlank' => [
@@ -106,13 +112,14 @@ class CountriesTable extends Table {
 	/**
 	 * Lat and lng + abbr if available!
 	 *
-	 * @param id|null
+	 * @param int|null $id Id
 	 * - NULL: update all records with missing coordinates only
 	 * - otherwise: specific update
 	 * @return bool Success
+	 * @throws \Exception
 	 */
 	public function updateCoordinatesNew($id = null) {
-		$Geocoder = new Geocode();
+		$Geocoder = new Geocoder();
 
 		$override = false;
 		if ($id == -1) {
@@ -138,7 +145,7 @@ class CountriesTable extends Table {
 				}
 
 				//$this->id = $id;
-				if (!$this->save($saveArray, true, ['lat', 'lng', 'iso2', 'iso3'])) {
+				if (!$this->saveArray($saveArray, ['fields' => ['lat', 'lng', 'iso2', 'iso3']])) {
 					//echo returns($this->id);
 					//pr($res); pr($data); pr($saveArray); die(returns($this->validationErrors));
 					throw new Exception();
@@ -176,20 +183,20 @@ class CountriesTable extends Table {
 					}
 
 					$this->id = $res['id'];
-					if ($this->save($saveArray, true, ['lat', 'lng', 'iso2', 'iso3'])) {
+					if ($this->save($saveArray, ['fields' => ['lat', 'lng', 'iso2', 'iso3']])) {
 						$count++;
 
 						if (!empty($saveArray['iso2']) && $saveArray['iso2'] != $res['iso2']) {
-							$this->log('Iso2 for country \'' . $data['country'] . '\' changed from \'' . $res['iso2'] . '\' to \'' . $saveArray['iso2'] . '\'', LOG_NOTICE);
+							//$this->log('Iso2 for country \'' . $data['country'] . '\' changed from \'' . $res['iso2'] . '\' to \'' . $saveArray['iso2'] . '\'', LOG_NOTICE);
 						}
 						if (!empty($saveArray['iso3']) && $saveArray['iso3'] != $res['iso3']) {
-							$this->log('Iso3 for country \'' . $data['country'] . '\' changed from \'' . $res['iso3'] . '\' to \'' . $saveArray['iso3'] . '\'', LOG_NOTICE);
+							//$this->log('Iso3 for country \'' . $data['country'] . '\' changed from \'' . $res['iso3'] . '\' to \'' . $saveArray['iso3'] . '\'', LOG_NOTICE);
 						}
 
 					} else {
 						//pr($data); pr($Geocoder->debug()); die();
 					}
-					$Geocoder->pause();
+					//$Geocoder->pause();
 				}
 			}
 
@@ -202,7 +209,7 @@ class CountriesTable extends Table {
 	//TODO: test
 
 	public function updateAbbr($id = null) {
-		$Geocoder = new GeocodeLib();
+		$Geocoder = new Geocoder();
 
 		$override = false;
 		if ($id == -1) {
@@ -212,7 +219,7 @@ class CountriesTable extends Table {
 
 		if (!empty($id)) {
 			$res = $this->find('first', ['conditions' => [$this->alias() . '.id' => $id], 'contain' => []]);
-			if (!empty($res['ori_name']) && $Geocoder->geocode($res['ori_name']) || $res['name'] != $res['ori_name'] && $Geocoder->geocode($res['name'])) {
+			if (!empty($res['ori_name']) && $data = $Geocoder->geocode($res['ori_name']) || $res['name'] != $res['ori_name'] && $data = $Geocoder->geocode($res['name'])) {
 
 			}
 		} else {
@@ -225,9 +232,9 @@ class CountriesTable extends Table {
 
 			$count = 0;
 			foreach ($results as $res) {
-				if (!empty($res['ori_name']) && $Geocoder->geocode($res['ori_name']) || $res['name'] != $res['ori_name'] && $Geocoder->geocode($res['name'])) {
+				if (!empty($res['ori_name']) && $data = $Geocoder->geocode($res['ori_name']) || $res['name'] != $res['ori_name'] && $data = $Geocoder->geocode($res['name'])) {
 
-					$data = $Geocoder->getResult();
+					//$data = $Geocoder->getResult();
 					//echo returns($res);
 					//echo returns($data); die();
 					# seems to be very problematic: country "Georgien" results in "Georgia, USA"
@@ -270,6 +277,7 @@ class CountriesTable extends Table {
 	 * Try to guess the country of the user
 	 * - time sensitive (only works in a certain timeframe < 24h)
 	 *
+	 * @param string|null $ip
 	 * @return int country or -1 on error
 	 */
 	public function guessByIp($ip = null) {
@@ -294,6 +302,12 @@ class CountriesTable extends Table {
 		return -1;
 	}
 
+	/**
+	 * @param \Cake\Event\Event $event
+	 * @param \Cake\ORM\Entity $entity
+	 * @param \ArrayObject $options
+	 * @return void
+	 */
 	public function afterSave(Event $event, Entity $entity, ArrayObject $options) {
 		if ($entity->isNew()) {
 			//$this->updateCoordinates($entity);
@@ -311,8 +325,12 @@ class CountriesTable extends Table {
 		return 0;
 	}
 
-	//not in use
-
+	/**
+	 * @param int $id
+	 * @param string $default
+	 *
+	 * @return mixed|string
+	 */
 	public function getIsoById($id, $default = '') {
 		$match = [1 => 'DE', 2 => 'AT', 3 => 'CH'];
 
@@ -323,7 +341,7 @@ class CountriesTable extends Table {
 	}
 
 	public function getDefaultCountry() {
-		return $this->getIdByIso(TLD);
+		return $this->getIdByIso(); //TLD
 	}
 
 	const STATUS_ACTIVE = 1;

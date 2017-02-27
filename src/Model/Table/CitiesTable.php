@@ -6,20 +6,35 @@ use Tools\Model\Table\Table;
 
 class CitiesTable extends Table {
 
+	/**
+	 * @var array
+	 */
 	public $order = ['name' => 'ASC'];
 
+	/**
+	 * @var array
+	 */
 	public $validate = [
 		'name' => [
 			'notBlank',
 		]
 	];
 
+	/**
+	 * @var array
+	 */
 	public $actsAs = ['Tools.Slugged' => ['label' => 'name', 'mode' => 'ascii', 'case' => 'low', 'unique' => true, 'overwrite' => false]];
 
+	/**
+	 * @var array
+	 */
 	public $hasMany = [
 			'District' => ['className' => 'Data.District']
 	];
 
+	/**
+	 * @var array
+	 */
 	public $belongsTo = [
 		'County' => ['className' => 'Data.County'],
 		'Country' => ['className' => 'Data.Country']
@@ -29,18 +44,21 @@ class CitiesTable extends Table {
 	 * @param array $config
 	 */
 	public function __construct(array $config = []) {
-		parent::__construct($config);
-
-		return;
-
 		if (Configure::read('City.District') === false) {
 			unset($this->hasMany['District']);
 		}
 		if (Configure::read('City.County') === false) {
 			unset($this->belongsTo['County']);
 		}
+
+		parent::__construct($config);
 	}
 
+	/**
+	 * @param string $name
+	 *
+	 * @return \Cake\ORM\Query
+	 */
 	public function autoCompleteName($name) {
 		$options = [
 			'conditions' => [
@@ -51,6 +69,12 @@ class CitiesTable extends Table {
 		return $this->find('all', $options);
 	}
 
+	/**
+	 * @param int $country
+	 * @param int $limit
+	 *
+	 * @return \Cake\ORM\Query
+	 */
 	public function largeCities($country, $limit = 0) {
 		$options = [
 			'conditions' => [$this->alias() . '.country_id' => $country],
@@ -61,20 +85,28 @@ class CitiesTable extends Table {
 		return $this->find('all', $options);
 	}
 
+	/**
+	 * @param string $postalCode
+	 *
+	 * @return \Cake\ORM\Query|null
+	 */
 	public function getCitiesToPostalCode($postalCode) {
 		preg_match("/\d+/", $postalCode, $matches);
 		if (!isset($matches[0]) || strlen($matches[0]) !== 5) {
-			return false;
+			return null;
 		}
 		return $this->find('all', ['conditions' => ['Cities.postal_code LIKE' => $matches[0]]]);
 	}
 
+	/**
+	 * @param string $postalCode
+	 *
+	 * @return \Cake\Datasource\ResultSetInterface|null
+	 */
 	public function getCityToPostalCode($postalCode) {
-		$result = $this->getCitiesToPostalCode($postalCode);
-		if (!$result || count($result) !== 1) {
-			return false;
-		}
-		return $result[0];
+		$result = $this->getCitiesToPostalCode($postalCode)->first();
+
+		return $result;
 	}
 
 }

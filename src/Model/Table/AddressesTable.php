@@ -2,7 +2,9 @@
 namespace Data\Model\Table;
 
 use Cake\Core\Configure;
+use Cake\Event\Event;
 use Cake\I18n\Time;
+use Cake\ORM\Entity;
 use Data\Model\Entity\Address;
 use Tools\Model\Table\Table;
 
@@ -12,14 +14,24 @@ if (!defined('CLASS_USERS')) {
 
 class AddressesTable extends Table {
 
+	/**
+	 * @var string
+	 */
 	public $displayField = 'formatted_address';
 
+	/**
+	 * @var array
+	 */
 	public $actsAs = ['Geo.Geocoder' => ['real' => false, 'override' => true, 'allow_inconclusive' => true]]; //'before'=>'validate'
 
+	/**
+	 * @var array
+	 */
 	public $order = ['type_id' => 'ASC', 'formatted_address' => 'ASC'];
 
-	public $config = [];
-
+	/**
+	 * @var array
+	 */
 	public $validate = [
 		'state_id' => [
 			'numeric' => [
@@ -105,6 +117,9 @@ class AddressesTable extends Table {
 		],
 	];
 
+	/**
+	 * @var array
+	 */
 	public $belongsTo = [
 		'Country' => [
 			'className' => 'Data.Country',
@@ -130,11 +145,15 @@ class AddressesTable extends Table {
 		],
 	];
 
+	/**
+	 * @param array $config
+	 */
 	public function __construct(array $config = []) {
 		parent::__construct($config);
 
 		return;
-		if ($config = Configure::read('Address')) {
+		$config = Configure::read('Address');
+		if ($config) {
 			$vars = ['displayField', 'order', 'actsAs', 'validate', 'belongsTo'];
 			foreach ($vars as $var) {
 				if (isset($config[$var])) {
@@ -152,6 +171,11 @@ class AddressesTable extends Table {
 		}
 	}
 
+	/**
+	 * @param string $data
+	 *
+	 * @return bool
+	 */
 	public function primaryUnique(&$data) {
 		if (empty($entity['foreign_id']) || $entity['address_type_id'] != Address::TYPE_MAIN) {
 			return true;
@@ -168,6 +192,9 @@ class AddressesTable extends Table {
 
 	/**
 	 * Zip Codes
+	 *
+	 * @param string $data
+	 * @return bool
 	 */
 	public function correspondsWithCountry($data) {
 		if (!empty($entity['postal_code'])) {
@@ -187,6 +214,9 @@ class AddressesTable extends Table {
 
 	/**
 	 * Validation of country_province_id
+	 *
+	 * @param string $data
+	 * @return bool
 	 */
 	public function fitsToCountry($data) {
 		if (!$this->config || !isset($entity['country_id']) || !isset($entity['country_province_id'])) {
@@ -203,7 +233,7 @@ class AddressesTable extends Table {
 		return true;
 	}
 
-	public function beforeValidate($options = []) {
+	public function _beforeValidate($options = []) {
 		parent::beforeValidate($options);
 
 		# add country name for geocoder
@@ -231,6 +261,12 @@ class AddressesTable extends Table {
 		return true;
 	}
 
+	/**
+	 * @param \Cake\Event\Event $event
+	 * @param \Cake\ORM\Entity $entity
+	 *
+	 * @return bool
+	 */
 	public function beforeSave(Event $event, Entity $entity) {
 		if (!empty($entity['formatted_address']) && !empty($entity['geocoder_result'])) {
 			# fix city/plz?
@@ -292,8 +328,8 @@ class AddressesTable extends Table {
 	}
 
 	/**
-	 * @param addressType|null (defaults to MAIN)
-	 * @param id|null (foreign id)
+	 * @param int|null $addressType Address Type (defaults to MAIN)
+	 * @param int|null $id Id (foreign id)
 	 * @return \Cake\ORM\Query
 	 */
 	public function getByType($addressType = null, $id = null) {

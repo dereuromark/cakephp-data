@@ -25,7 +25,8 @@ class CountriesController extends DataAppController {
 	public function beforeFilter(Event $event) {
 		parent::beforeFilter($event);
 
-		if ($specific = Configure::read('Country.image_path')) {
+		$specific = Configure::read('Country.image_path');
+		if ($specific) {
 			$this->imageFolder = WWW_ROOT . 'img' . DS . $specific . DS;
 		} else {
 			$this->imageFolder = Plugin::path('Data') . DS . 'webroot' . DS . 'img' . DS . 'country_flags' . DS;

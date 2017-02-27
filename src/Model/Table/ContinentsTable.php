@@ -5,10 +5,19 @@ use Tools\Model\Table\Table;
 
 class ContinentsTable extends Table {
 
+	/**
+	 * @var array
+	 */
 	public $actsAs = ['Tree'];
 
+	/**
+	 * @var array
+	 */
 	public $order = ['name' => 'ASC'];
 
+	/**
+	 * @var array
+	 */
 	public $validate = [
 		'name' => [
 			'notBlank' => [
@@ -48,6 +57,9 @@ class ContinentsTable extends Table {
 		],
 	];
 
+	/**
+	 * @var array
+	 */
 	public $belongsTo = [
 		'ParentContinent' => [
 			'className' => 'Continent',
@@ -58,6 +70,9 @@ class ContinentsTable extends Table {
 		]
 	];
 
+	/**
+	 * @var array
+	 */
 	public $hasMany = [
 		'ChildContinent' => [
 			'className' => 'Continent',

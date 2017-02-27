@@ -11,6 +11,9 @@ use Cake\Http\Client;
  */
 class CurrencyBitcoinLib {
 
+	/**
+	 * @var array
+	 */
 	public $settings = [
 		'currency' => 'EUR', # set to NULL or empty for all
 		'api' => 'bitmarket', # bitmarket or bitcoincharts
@@ -18,6 +21,8 @@ class CurrencyBitcoinLib {
 
 	/**
 	 * @see https://bitmarket.eu/api
+	 * @param array $options
+	 * @return bool
 	 */
 	public function bitmarket($options = []) {
 		$options += $this->settings;
@@ -40,6 +45,8 @@ class CurrencyBitcoinLib {
 	 * Working
 	 *
 	 * @see http://bitcoincharts.com/about/markets-api/
+	 * @param array $options
+	 * @return array|bool
 	 */
 	public function bitcoincharts($options = []) {
 		$options += $this->settings;
@@ -67,6 +74,7 @@ class CurrencyBitcoinLib {
 	 * @param array $options
 	 * - currency
 	 * - api
+	 * @return bool|float
 	 */
 	public function rate($options = []) {
 		$options += $this->settings;
@@ -88,7 +96,7 @@ class CurrencyBitcoinLib {
 	/**
 	 * Calc BTC relative to 1 baseCurrency
 	 *
-	 * @param float $value
+	 * @param float $current
 	 * @return float relativeValue
 	 */
 	public function calcRate($current) {
@@ -106,9 +114,7 @@ class CurrencyBitcoinLib {
 	}
 
 	/**
-	 * CurrencyBitcoinLib::_getBitmarket()
-	 *
-	 * @param mixed $url
+	 * @param string $url
 	 * @return string|bool
 	 */
 	protected function _getBitmarket($url) {
@@ -122,9 +128,7 @@ class CurrencyBitcoinLib {
 	}
 
 	/**
-	 * CurrencyBitcoinLib::_getBitcoincharts()
-	 *
-	 * @param mixed $url
+	 * @param string $url
 	 * @return string|bool
 	 */
 	protected function _getBitcoincharts($url) {
@@ -138,9 +142,7 @@ class CurrencyBitcoinLib {
 	}
 
 	/**
-	 * CurrencyBitcoinLib::_get()
-	 *
-	 * @param mixed $url
+	 * @param string $url
 	 * @return string|bool
 	 */
 	protected function _get($url) {

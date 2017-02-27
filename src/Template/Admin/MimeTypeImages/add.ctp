@@ -4,13 +4,13 @@
 		<legend><?php echo __('Add Mime Type Image');?></legend>
 	<?php
 		echo $this->Form->input('name');
-		echo BR;
+		echo '<br/>';
 
 		echo $this->Form->input('file', ['type' => 'file', 'after' => ' Wird automatisch auf 16px Höhe verkleinert']);
 		echo $this->Form->input('image', ['type' => 'select', 'options' => $availableImages, 'empty' => '- [ n/a ] -']);
-		echo $this->Form->input('ext', ['options' => MimeTypeImage::extensions(), 'empty' => '- [ n/a ] -']);
+		echo $this->Form->input('ext', ['options' => \Data\Model\Table\MimeTypeImagesTable::extensions(), 'empty' => '- [ n/a ] -']);
 
-		echo BR;
+		echo '<br/>';
 		echo $this->Form->input('active');
 		echo $this->Form->input('details', ['type' => 'textarea']);
 	?>

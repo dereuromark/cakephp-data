@@ -190,6 +190,8 @@ class StatesController extends DataAppController {
 	/**
 	 * For both index views
 	 *
+	 * @deprecated
+	 * @param int $cid
 	 * @return void
 	 */
 	protected function _processCountry($cid) {

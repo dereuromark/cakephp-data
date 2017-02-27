@@ -3,7 +3,6 @@
 namespace Data\Test\TestCase\Model\Table;
 
 use Cake\ORM\TableRegistry;
-use Data\Model\Table\CountriesTable;
 use Tools\TestSuite\TestCase;
 
 class CountiesTableTest extends TestCase {
@@ -16,7 +15,7 @@ class CountiesTableTest extends TestCase {
 	];
 
 	/**
-	 * @var CountriesTable
+	 * @var \Data\Model\Table\CountriesTable
 	 */
 	public $Counties;
 

@@ -3,7 +3,6 @@ namespace Data\Controller\Admin;
 
 use Cake\Core\Plugin;
 use Data\Controller\DataAppController;
-use ToolsExtra\Lib\GeolocateLib;
 
 /**
  * PostalCodes Controller

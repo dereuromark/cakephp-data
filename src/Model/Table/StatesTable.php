@@ -11,10 +11,19 @@ use Tools\Model\Table\Table;
  */
 class StatesTable extends Table {
 
+	/**
+	 * @var array
+	 */
 	public $actsAs = ['Tools.Slugged' => ['case' => 'low', 'mode' => 'ascii', 'unique' => false, 'overwrite' => false]];
 
+	/**
+	 * @var array
+	 */
 	public $order = ['name' => 'ASC'];
 
+	/**
+	 * @var array
+	 */
 	public $validate = [
 		'country_id' => ['numeric'],
 		'abbr' => [
@@ -39,6 +48,9 @@ class StatesTable extends Table {
 		],
 	];
 
+	/**
+	 * @var array
+	 */
 	public $hasMany = [
 		'County' => [
 			'className' => 'Data.County',
@@ -51,6 +63,9 @@ class StatesTable extends Table {
 		]
 	];
 
+	/**
+	 * @var array
+	 */
 	public $belongsTo = [
 		'Country' => [
 			'className' => 'Data.Country',

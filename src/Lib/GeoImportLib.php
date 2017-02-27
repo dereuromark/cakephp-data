@@ -11,12 +11,20 @@ use Tools\HtmlDom\HtmlDom;
 
 class GeoImportLib {
 
+	/**
+	 * @var \Data\Model\Table\CountriesTable
+	 */
 	public $Countries;
 
 	public function __construct() {
 		$this->Countries = TableRegistry::get('Data.Countries');
 	}
 
+	/**
+	 * @param string $countryCode
+	 *
+	 * @return array|null
+	 */
 	public function import($countryCode = 'AT') {
 		switch ($countryCode) {
 			case 'AT':
@@ -244,7 +252,8 @@ class GeoImportLib {
 		if ($resetCache) {
 			Cache::delete('geo_import_' . md5($url));
 		}
-		if ($cache = Cache::read('geo_import_' . md5($url))) {
+		$cache = Cache::read('geo_import_' . md5($url));
+		if ($cache) {
 			return $cache;
 		}
 		$HttpSocket = new Client();
@@ -255,6 +264,11 @@ class GeoImportLib {
 		return $res->body;
 	}
 
+	/**
+	 * @param string $row
+	 *
+	 * @return string
+	 */
 	protected function _parse($row) {
 		if (($pos = strpos($row, '[[')) !== false) {
 			$row = substr($row, $pos + 2);

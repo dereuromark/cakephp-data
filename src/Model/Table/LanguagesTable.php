@@ -1,12 +1,12 @@
 <?php
 namespace Data\Model\Table;
 
-use App\I18n\L10n;
 use Cake\Cache\Cache;
 use Cake\Core\Plugin;
 use Data\Model\Entity\Language;
 use Tools\HtmlDom\HtmlDom;
 use Tools\Model\Table\Table;
+use Tools\Utility\L10n;
 
 /**
  * Languages and their locales
@@ -17,8 +17,19 @@ use Tools\Model\Table\Table;
  */
 class LanguagesTable extends Table {
 
+	/**
+	 * @var array
+	 */
 	public $order = ['name' => 'ASC'];
 
+	/**
+	 * @var \Tools\Utility\L10n
+	 */
+	public $L10n;
+
+	/**
+	 * @var array
+	 */
 	public $validate = [
 		'name' => [
 			'notBlank' => [
@@ -87,7 +98,8 @@ class LanguagesTable extends Table {
 	/**
 	 * For language switch etc
 	 *
-	 * @return array
+	 * @param string $type
+	 * @return \Cake\ORM\Query
 	 */
 	public function getActive($type = 'all') {
 		$options = [
@@ -97,11 +109,9 @@ class LanguagesTable extends Table {
 	}
 
 	/**
-	 * Language::getPrimaryLanguages()
-	 *
 	 * @param string $type
 	 * @param array $customOptions
-	 * @return array
+	 * @return \Cake\ORM\Query
 	 */
 	public function getPrimaryLanguages($type = 'all', $customOptions = []) {
 		$options = [
@@ -114,6 +124,7 @@ class LanguagesTable extends Table {
 	 * FIXME: can have errors due to group and wrong locales
 	 * 1 => Deutsch, ...
 	 *
+	 * @param array $conditions
 	 * @return array
 	 */
 	public function getList($conditions = []) {
@@ -128,6 +139,7 @@ class LanguagesTable extends Table {
 	/**
 	 * DE => Deutsch, ...
 	 *
+	 * @param array $conditions
 	 * @return array
 	 */
 	public function codeList($conditions = []) {
@@ -142,26 +154,27 @@ class LanguagesTable extends Table {
 	/**
 	 * Maps ISO 639-3 to I10n::__l10nCatalog (iso2?)
 	 *
-	 * @param lang:|null iso3
-	 * @return lang: iso2
+	 * @param string|null $iso3 Language
+	 * @return string|null Lang: iso2
 	 */
 	public function iso3ToIso2($iso3 = null) {
 		if (!isset($this->L10n)) {
 			$this->L10n = new L10n();
 		}
-		$languages = $this->L10n->__l10nMap;
+		//FIXME
+		$languages = $this->L10n->_l10nMap;
 		if ($iso3) {
 			if (array_key_exists($iso3, $languages)) {
 				return $languages[$iso3];
 			}
-			return false;
+			return null;
 		}
 		return $languages;
 	}
 
 	/**
-	 * @param lang:|null iso2 or iso3
-	 * @return mixed: string if lang passed (or false on failure) - or complete array if null is passed
+	 * @param string|null $lang lang: iso2 or iso3
+	 * @return array|null String if lang passed (or false on failure) - or complete array if null is passed
 	 */
 	public function catalog($lang = null) {
 		if (!isset($this->L10n)) {
@@ -171,7 +184,7 @@ class LanguagesTable extends Table {
 	}
 
 	/**
-	 * @return Array 2d heading and values
+	 * @return array Array 2d heading and values
 	 */
 	public function getOfficialIsoList() {
 		$this->HtmlDom = new HtmlDom();

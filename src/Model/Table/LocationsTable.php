@@ -1,18 +1,24 @@
 <?php
 namespace Data\Model\Table;
 
-use Cake\Core\App;
 use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\ORM\Entity;
+use Cake\Validation\Validation;
 use Data\Model\Country;
 use Tools\Model\Table\Table;
 use Tools\Utility\Utility;
 
 class LocationsTable extends Table {
 
+	/**
+	 * @var array
+	 */
 	public $actsAs = ['Geo.Geocoder' => ['min_accuracy' => 4, 'address' => ['name', 'country_name'], 'formatted_address' => 'formatted_address', 'real' => false, 'before' => 'validate', 'allow_inconclusive' => true, 'expect' => []]]; //'postal_code', 'locality', 'sublocality', 'street_address'
 
+	/**
+	 * @var array
+	 */
 	public $validate = [
 		'name' => [
 			'notBlank' => [
@@ -52,7 +58,7 @@ class LocationsTable extends Table {
 	}
 
 	/**
-	 * @param string $location
+	 * @param string $locationName
 	 * @param int|null $countryId
 	 * @return array location on success, false otherwise
 	 */
@@ -81,11 +87,14 @@ class LocationsTable extends Table {
 	}
 
 	/**
-	 * @return array
+	 * @param float $lat
+	 * @param float $lng
+	 * @param int $limit
+	 * @return \Cake\ORM\Query|null
 	 */
 	public function findLocationByCoordinates($lat, $lng, $limit = 1) {
 		if (!is_numeric($lat) || !is_numeric($lng) || !is_numeric($limit)) {
-			return false;
+			return null;
 		}
 		$conditions = [
 			'Location.lat<>0',
@@ -111,7 +120,7 @@ class LocationsTable extends Table {
 	}
 
 	/**
-	 * @return array or boolean false
+	 * @return \Cake\ORM\Query|false
 	 */
 	public function findLocationByIp() {
 		$ip = $this->findIp();
@@ -119,7 +128,7 @@ class LocationsTable extends Table {
 			return false;
 		}
 		if (Validation::ip($ip)) {
-			App::import('Vendor', 'geoip', ['file' => 'geoip' . DS . 'geoip.php']);
+			//App::import('Vendor', 'geoip', ['file' => 'geoip' . DS . 'geoip.php']);
 			$gi = Net_GeoIP::getInstance(APP . 'vendors' . DS . 'geoip' . DS . 'GeoLiteCity.dat');
 			$record = $gi->lookupLocation($ip);
 			$gi->close();
@@ -139,7 +148,8 @@ class LocationsTable extends Table {
 	 */
 	public static function findIp() {
 		if ((int)Configure::read('debug') > 1) {
-			if ($ip = Configure::read('App.defaultIp')) {
+			$ip = Configure::read('App.defaultIp')
+			if ($ip) {
 				return $ip;
 			}
 			return '127.0.0.1';

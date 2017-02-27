@@ -27,7 +27,7 @@
 				echo h($this->request->data['Error'][$key]['name']) . BR;
 
 			}
-			echo BR;
+			echo '<br/>';
 		}
 	?>
 	</fieldset>
@@ -53,8 +53,8 @@
 
 		echo 'Für Pattern verwendbar: &nbsp;&nbsp; <b>{TAB}</b>, <b>{SPACE}</b>, <b>benutzerdefinierte Trennzeichen</b>, <b>%*s</b> (Überspringen), <b>%s</b> (ohne Leerzeichen), <b>%[^.]s</b> (mit Leerzeichen)<br/>
 		Alles, wofür %name zutrifft, verwendet wird, der Rest geht verloren. Was als Separator ausgewählt wurde (zum Trennen der einzelnen Datensätze), kann logischerweise nicht mehr im Pattern verwendet werden (zum Herausfiltern des Namens)!';
-		echo BR;
-		echo BR;
+		echo '<br/>';
+		echo '<br/>';
 		echo $this->Form->input('import_content', ['type' => 'textarea', 'rows' => 30]);
 	?>
 	</fieldset>

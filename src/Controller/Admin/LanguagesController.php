@@ -109,6 +109,8 @@ class LanguagesController extends DataAppController {
 
 	/**
 	 * Should only be done once at the very beginning
+	 *
+	 * @return \Cake\Network\Response|null
 	 */
 	public function importFromCore() {
 		if (!empty($this->request->query['reset'])) {
@@ -146,7 +148,6 @@ class LanguagesController extends DataAppController {
 		}
 		$this->Flash->warning(__('not added') . ' ' . implode(', ', $errorMessage));
 		return $this->redirect(['action' => 'index']);
-		//pr($errors);
 	}
 
 	/**
@@ -154,7 +155,7 @@ class LanguagesController extends DataAppController {
 	 *
 	 * @return void
 	 */
-	public function compare_to_iso_list() {
+	public function compareToIsoList() {
 		$isoList = $this->Languages->getOfficialIsoList();
 
 		$languages = $this->Languages->find('all', []);
@@ -167,7 +168,7 @@ class LanguagesController extends DataAppController {
 	 *
 	 * @return void
 	 */
-	public function compare_iso_list_to_core() {
+	public function compareIsoListToCore() {
 		$isoList = $this->Languages->getOfficialIsoList();
 
 		$languages = $this->Languages->catalog();
@@ -190,12 +191,13 @@ class LanguagesController extends DataAppController {
 			$locales[$baseLocale]['regional'][] = $value;
 		}
 
-		//die(debug($locales));
-
 		$this->set(compact('isoList', 'languages', 'locales'));
 	}
 
-	public function set_primary_languages_active() {
+	/**
+	 * @return \Cake\Network\Response|null
+	 */
+	public function setPrimaryLanguagesActive() {
 		$languages = $this->Languages->getPrimaryLanguages('list');
 		$count = $this->Languages->updateAll(['status' => Language::STATUS_ACTIVE], ['id' => array_keys($languages)]);
 

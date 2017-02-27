@@ -27,7 +27,7 @@ class CountryStateHelperComponent extends Component {
 	 * Call in methods where needed
 	 *
 	 * @param bool $ignoreStates
-	 * @param null $model
+	 * @param string|null $model
 	 * @param int $defaultValue
 	 * @return void
 	 */
