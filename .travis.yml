@@ -31,25 +31,25 @@ before_script:
   - composer self-update
   - composer install --prefer-source --no-interaction
 
-  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE cakephp_test;'; fi"
+  - if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE cakephp_test;'; fi
 
-  - sh -c "if [ '$PHPCS' = '1' ]; then pear channel-discover pear.cakephp.org; fi"
-  - sh -c "if [ '$PHPCS' = '1' ]; then pear install --alldeps cakephp/CakePHP_CodeSniffer; fi"
+  - if [ '$PHPCS' = '1' ]; then pear channel-discover pear.cakephp.org; fi
+  - if [ '$PHPCS' = '1' ]; then pear install --alldeps cakephp/CakePHP_CodeSniffer; fi
 
   - if [[ $PHPCS != 1 ]]; then composer require phpunit/phpunit:"^4.0|^5.0|^6.0"; fi
 
-  - sh -c "if [ '$COVERALLS' = '1' ]; then composer require --dev satooshi/php-coveralls:dev-master; fi"
-  - sh -c "if [ '$COVERALLS' = '1' ]; then mkdir -p build/logs; fi"
+  - if [ '$COVERALLS' = '1' ]; then composer require --dev satooshi/php-coveralls:dev-master; fi
+  - if [ '$COVERALLS' = '1' ]; then mkdir -p build/logs; fi
 
   - phpenv rehash
   - set +H
   - cp phpunit.xml.dist phpunit.xml
 
 script:
-  - sh -c "if [ '$COVERALLS' = '1' ]; then vendor/bin/phpunit --coverage-clover build/logs/clover.xml; fi"
-  - sh -c "if [ '$COVERALLS' = '1' ]; then php vendor/bin/coveralls -c .coveralls.yml -v; fi"
-  - sh -c "if [ '$DEFAULT' = '1' ]; then vendor/bin/phpunit; fi"
-  - sh -c "if [ '$PHPCS' = '1' ]; then phpcs -p --extensions=php --standard=CakePHP --ignore=vendor --ignore=Test --ignore=docs . ; fi"
+  - if [ '$COVERALLS' = '1' ]; then vendor/bin/phpunit --coverage-clover build/logs/clover.xml; fi
+  - if [ '$COVERALLS' = '1' ]; then php vendor/bin/coveralls -c .coveralls.yml -v; fi
+  - if [ '$DEFAULT' = '1' ]; then vendor/bin/phpunit; fi
+  - if [ '$PHPCS' = '1' ]; then phpcs -p --extensions=php --standard=vendor/fig-r/psr2r-sniffer/PSR2R/ruleset.xml --ignore=/vendor/,/docs/,/tests/test_files/ . ; fi
 
 notifications:
   email: false
