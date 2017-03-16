@@ -3,6 +3,19 @@ namespace Data\Model\Entity;
 
 use Tools\Model\Entity\Entity;
 
+/**
+ * @property int $id
+ * @property int $category_id
+ * @property int $address_type_id
+ * @property int $location_id
+ * @property string $c_o
+ * @property string $details
+ * @property string $admin_details
+ * @property \Cake\I18n\Time $created
+ * @property \Cake\I18n\Time $modified
+ * @property string $contact_id
+ * @property string $address
+ */
 class Address extends Entity {
 
 	/**

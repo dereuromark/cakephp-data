@@ -12,6 +12,15 @@ if (!defined('CLASS_USERS')) {
 	define('CLASS_USERS', 'Users');
 }
 
+/**
+ * @method \Data\Model\Entity\Address get($primaryKey, $options = [])
+ * @method \Data\Model\Entity\Address newEntity($data = null, array $options = [])
+ * @method \Data\Model\Entity\Address[] newEntities(array $data, array $options = [])
+ * @method \Data\Model\Entity\Address|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\Address patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \Data\Model\Entity\Address[] patchEntities($entities, array $data, array $options = [])
+ * @method \Data\Model\Entity\Address findOrCreate($search, callable $callback = null, $options = [])
+ */
 class AddressesTable extends Table {
 
 	/**
