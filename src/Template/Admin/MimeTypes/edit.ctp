@@ -1,4 +1,7 @@
-<?php $this->Html->script('jquery/plugins/jquery.dd.js');?>
+<?php /**
+ * @var \App\View\AppView $this
+ */
+$this->Html->script('jquery/plugins/jquery.dd.js');?>
 <script type="text/javascript">
 	var imagePath = baseurl + 'img/<?php echo IMG_MIMETYPES?>';
 </script>

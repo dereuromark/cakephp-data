@@ -3,6 +3,19 @@ namespace Data\Model\Entity;
 
 use Tools\Model\Entity\Entity;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $ori_name
+ * @property string $code
+ * @property string $iso3
+ * @property string $iso2
+ * @property string $locale
+ * @property string $locale_fallback
+ * @property int $status
+ * @property int $sort
+ * @property \Cake\I18n\Time $modified
+ */
 class Language extends Entity {
 
 	/**

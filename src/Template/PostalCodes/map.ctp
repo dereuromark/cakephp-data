@@ -1,4 +1,7 @@
-<?php $this->Html->script($this->GoogleMap->apiUrl(), ['inline' => false])?>
+<?php /**
+ * @var \App\View\AppView $this
+ */
+$this->Html->script($this->GoogleMap->apiUrl(), ['inline' => false])?>
 
 <h2>Area Codes</h2>
 <h3>Map</h3>

@@ -8,6 +8,9 @@ use Cake\ORM\Entity;
 use Tools\Mailer\Email;
 use Tools\Model\Table\Table;
 
+/**
+ * @property \Data\Model\Table\MimeTypeImagesTable|\Cake\ORM\Association\BelongsTo $MimeTypeImages
+ */
 class MimeTypesTable extends Table {
 
 	/**

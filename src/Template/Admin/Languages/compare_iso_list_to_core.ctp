@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
 <div class="page index">
 <h2><?php echo __('Languages');?></h2>
 ISO List contains <?php echo count($isoList['values']); ?> languages.

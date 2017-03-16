@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var \App\View\AppView $this
+ */
 $manualRes = [];
 foreach ($report['in'] as $r) {
 	if ($r['type'] != $r['oldType']) {

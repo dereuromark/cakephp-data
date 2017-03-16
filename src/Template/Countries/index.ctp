@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var \Data\Model\Entity\Country[] $countries
+ */
+?>
 <div class="page index">
 <h2><?php echo __('Countries');?></h2>
 

@@ -14,6 +14,13 @@ use Tools\Utility\L10n;
  * http://www.loc.gov/standards/iso639-2/php/code_list.php
  *
  * @mixin \Search\Model\Behavior\SearchBehavior
+ * @method \Data\Model\Entity\Language get($primaryKey, $options = [])
+ * @method \Data\Model\Entity\Language newEntity($data = null, array $options = [])
+ * @method \Data\Model\Entity\Language[] newEntities(array $data, array $options = [])
+ * @method \Data\Model\Entity\Language|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\Language patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \Data\Model\Entity\Language[] patchEntities($entities, array $data, array $options = [])
+ * @method \Data\Model\Entity\Language findOrCreate($search, callable $callback = null, $options = [])
  */
 class LanguagesTable extends Table {
 

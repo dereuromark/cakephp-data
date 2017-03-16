@@ -1,4 +1,7 @@
-<?php echo $this->Form->create(); ?>
+<?php /**
+ * @var \App\View\AppView $this
+ */
+echo $this->Form->create(); ?>
 <?php echo __('Country');?>:&nbsp;&nbsp;
 <?php echo $this->Form->input('country_id', [
 	'class' => 'filter',

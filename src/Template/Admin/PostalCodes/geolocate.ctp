@@ -1,4 +1,7 @@
-<?php $this->Html->script($this->GoogleMap->apiUrl(), ['inline' => false])?>
+<?php /**
+ * @var \App\View\AppView $this
+ */
+$this->Html->script($this->GoogleMap->apiUrl(), ['inline' => false])?>
 <?php $this->Html->script($this->GoogleMap->gearsUrl(), ['inline' => false])?>
 
 <h2>Geolocate</h2>

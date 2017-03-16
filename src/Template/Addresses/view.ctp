@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
 <div class="page view">
 <h2><?php echo __('Address');?></h2>
 	<dl><?php $i = 0; $class = ' class="altrow"';?>

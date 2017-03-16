@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
 <div class="page view">
 <h2><?php echo __('Postal Code');?></h2>
 	<dl>

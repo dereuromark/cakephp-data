@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var \Data\Model\Entity\PostalCode[] $postalCodes
+ */
+?>
 <div class="page index">
 
 <div class="searchBox" style="float: right;">

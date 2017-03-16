@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
 <h2>Icons</h2>
 <?php echo count($countries); ?> Länder - <?php echo count($icons); ?> Icons
 

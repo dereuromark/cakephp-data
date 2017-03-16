@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
 
 <h2>Allocate Images By Shared Types</h2>
 

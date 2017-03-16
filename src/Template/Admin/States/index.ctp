@@ -1,4 +1,8 @@
-<?php //$this->Html->script('highslide/highslide.js')?>
+<?php /**
+ * @var \App\View\AppView $this
+ * @var \Data\Model\Entity\State[] $states
+ */
+//$this->Html->script('highslide/highslide.js')?>
 <?php //$this->Html->script('highslide/highslide_config')?>
 
 <div class="page index">

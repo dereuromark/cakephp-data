@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
 <div class="page form">
 <h2><?php echo __('Add {0}', __('City')); ?></h2>
 

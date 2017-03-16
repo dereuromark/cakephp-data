@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
 <h2><?php echo __('Add {0}', __('Continent')); ?></h2>
 
 <div class="page form">

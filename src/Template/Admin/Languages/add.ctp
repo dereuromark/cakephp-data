@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var \Data\Model\Entity\Language $language
+ */
+?>
 <h2><?php echo __('Add {0}', __('Language')); ?></h2>
 
 <div class="page form">

@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var \Data\Model\Entity\State $state
+ */
+?>
 <div class="page form">
 <?php echo $this->Form->create($state);?>
 	<fieldset>

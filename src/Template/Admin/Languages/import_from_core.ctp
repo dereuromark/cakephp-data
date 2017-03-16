@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
 <h2><?php echo __('Import {0}', __('Languages')); ?></h2>
 
 <div class="page form">

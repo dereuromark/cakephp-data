@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
 <div class="page form">
 <h2>Schnell-Import von Ländern</h2>
 

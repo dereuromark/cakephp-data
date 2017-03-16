@@ -7,6 +7,9 @@ use Cake\Filesystem\File;
 use Cake\ORM\Entity;
 use Tools\Model\Table\Table;
 
+/**
+ * @property \Data\Model\Table\MimeTypesTable|\Cake\ORM\Association\HasMany $MimeTypes
+ */
 class MimeTypeImagesTable extends Table {
 
 	/**

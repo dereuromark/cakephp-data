@@ -1,5 +1,8 @@
 <?php
 /**
+ * @var \Data\Model\Entity\Country[] $countries
+ */
+/**
  * @var \App\View\AppView $this
  */
 use Cake\Core\Plugin;

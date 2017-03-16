@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
 
 <h2>Auto-Allocate Images to Extensions</h2>
 

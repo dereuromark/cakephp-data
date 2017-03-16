@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
 <h2>Import MimeTypes from File etc</h2>
 
 <?php if (isset($mimeTypes)) { ?>
