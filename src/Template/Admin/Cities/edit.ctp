@@ -14,7 +14,7 @@
 		echo $this->Form->input('country_id');
 		echo $this->Form->input('official_id', ['type' => 'text']);
 
-		if (Configure::read('City.County') !== false) {
+		if (Configure::read('Data.City.County') !== false) {
 			echo $this->Form->input('county_id');
 		}
 

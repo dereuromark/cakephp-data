@@ -11,7 +11,7 @@
 		<legend><?php echo __('Add {0}', __('Address')); ?></legend>
 	<?php
 		echo $this->Form->input('country_id', ['empty' => [0 => ' - [ ' . __('noSelection') . ' ] - ']]);
-	if (Configure::read('Address.State')) {
+	if (Configure::read('Data.Address.State')) {
 		echo $this->Form->input('country_province_id', ['empty' => [0 => ' - [ ' . __('noSelection') . ' ] - ']]);
 	}
 		echo $this->Form->input('first_name');

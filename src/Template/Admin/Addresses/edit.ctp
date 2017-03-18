@@ -12,7 +12,7 @@
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('country_id', ['empty' => ' - [ ' . __('noSelection') . ' ] - ']);
-	if (Configure::read('Address.State')) {
+	if (Configure::read('Data.Address.State')) {
 		echo $this->Form->input('state_id', ['empty' => ' - [ ' . __('noSelection') . ' ] - ']);
 	}
 		echo $this->Form->input('first_name');

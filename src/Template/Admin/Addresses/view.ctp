@@ -12,7 +12,7 @@
 			<?php echo $this->Html->link($address['Country']['name'], ['controller' => 'countries', 'action' => 'view', $address['Country']['id']]); ?>
 			&nbsp;
 		</dd>
-<?php if (Configure::read('Address.State')) { ?>
+<?php if (Configure::read('Data.Address.State')) { ?>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Country Province'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $this->Html->link($address['State']['name'], ['controller' => 'States', 'action' => 'view', $address['State']['id']]); ?>
@@ -64,7 +64,7 @@
 			<?php echo h($address['Address']['formatted_address']); ?>
 			&nbsp;
 		</dd>
-<?php if (Configure::read('Address.debug')) { ?>
+<?php if (Configure::read('Data.Address.debug')) { ?>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Debug'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo pre($address['Address']['geocoder_result']); ?>

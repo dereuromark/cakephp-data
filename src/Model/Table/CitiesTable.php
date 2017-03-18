@@ -44,10 +44,10 @@ class CitiesTable extends Table {
 	 * @param array $config
 	 */
 	public function __construct(array $config = []) {
-		if (Configure::read('City.District') === false) {
+		if (Configure::read('Data.City.District') === false) {
 			unset($this->hasMany['District']);
 		}
-		if (Configure::read('City.County') === false) {
+		if (Configure::read('Data.City.County') === false) {
 			unset($this->belongsTo['County']);
 		}
 

@@ -1,6 +1,7 @@
 <?php
 namespace Data\Model\Table;
 
+use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Network\Exception\InternalErrorException;
 use Geo\Geocoder\Geocoder;
@@ -75,6 +76,17 @@ class StatesTable extends Table {
 			'order' => ''
 		]
 	];
+
+	/**
+	 * @param array $config
+	 */
+	public function __construct(array $config = []) {
+		if (Configure::read('Data.State.County') === false) {
+			unset($this->hasMany['County']);
+		}
+
+		parent::__construct($config);
+	}
 
 	/**
 	 * @param array $config

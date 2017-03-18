@@ -161,7 +161,7 @@ class AddressesTable extends Table {
 		parent::__construct($config);
 
 		return;
-		$config = Configure::read('Address');
+		$config = Configure::read('Data.Address');
 		if ($config) {
 			$vars = ['displayField', 'order', 'actsAs', 'validate', 'belongsTo'];
 			foreach ($vars as $var) {

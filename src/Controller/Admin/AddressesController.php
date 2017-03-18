@@ -53,7 +53,7 @@ class AddressesController extends DataAppController {
 
 		$countries = $this->Addresses->Countries->find('list');
 		$countryProvinces = [];
-		if (Configure::read('Address.State')) {
+		if (Configure::read('Data.Address.State')) {
 			$countryProvinces = $this->Addresses->States->find('list');
 		}
 
@@ -91,7 +91,7 @@ class AddressesController extends DataAppController {
 		}
 		$countries = $this->Addresses->Countries->find('list');
 		$states = [];
-		if (Configure::read('Address.State')) {
+		if (Configure::read('Data.Address.State')) {
 			$states = $this->Addresses->States->find('list');
 		}
 

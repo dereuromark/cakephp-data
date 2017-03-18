@@ -13,7 +13,7 @@ use Cake\Core\Configure;
 <table class="table">
 <tr>
 	<th><?php echo $this->Paginator->sort('country_id');?></th>
-<?php if (Configure::read('Address.State')) { ?>
+<?php if (Configure::read('Data.Address.State')) { ?>
 	<th><?php echo $this->Paginator->sort('country_province_id');?></th>
 <?php } ?>
 	<th><?php echo $this->Paginator->sort('first_name');?></th>
@@ -34,7 +34,7 @@ foreach ($addresses as $address):
 		<td>
 			<?php echo $this->Html->link($address['Country']['name'], ['controller' => 'countries', 'action' => 'view', $address['Country']['id']]); ?>
 		</td>
-<?php if (Configure::read('Address.State')) { ?>
+<?php if (Configure::read('Data.Address.State')) { ?>
 		<td>
 			<?php echo $this->Html->link($address['State']['name'], ['controller' => 'states', 'action' => 'view', $address['State']['id']]); ?>
 		</td>
