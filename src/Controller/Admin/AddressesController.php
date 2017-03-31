@@ -20,7 +20,7 @@ class AddressesController extends DataAppController {
 
 	/**
 	 * @param int|null $id
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function view($id = null) {
 		if (empty($id) || !($address = $this->Addresses->find('first', ['conditions' => ['Addresses.id' => $id]]))) {
@@ -32,7 +32,7 @@ class AddressesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function add() {
 		$address = $this->Addresses->newEntity();
@@ -61,10 +61,7 @@ class AddressesController extends DataAppController {
 	}
 
 	public function edit($id = null) {
-		if (empty($id) || !($address = $this->Addresses->find('first', ['conditions' => ['Addresses.id' => $id]]))) {
-			$this->Flash->error(__('invalid record'));
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
+		$address = $this->Addresses->get($id);
 		if ($this->Common->isPosted()) {
 			$address = $this->Addresses->patchEntity($address, $this->request->data);
 
@@ -77,7 +74,7 @@ class AddressesController extends DataAppController {
 
 		}
 		if (empty($this->request->data)) {
-			$this->request->data = $address;
+			//$this->request->data = $address;
 			$belongsTo = ['' => ' - keine Auswahl - '];
 			foreach ($this->Addresses->belongsTo as $b => $content) {
 				if ($b === 'Country') {
@@ -100,15 +97,12 @@ class AddressesController extends DataAppController {
 
 	/**
 	 * @param int|null $id
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function delete($id = null) {
 		$this->request->allowMethod('post');
 
-		if (empty($id) || !($address = $this->Addresses->find('first', ['conditions' => ['Addresses.id' => $id], 'fields' => ['id', 'formatted_address']]))) {
-			$this->Flash->error(__('invalid record'));
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
+		$address = $this->Addresses->get($id);
 		$var = $address['formatted_address'];
 
 		if ($this->Addresses->delete($address)) {

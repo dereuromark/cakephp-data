@@ -17,7 +17,7 @@ class CitiesController extends DataAppController {
 	public $paginate = ['order' => ['Cities.modified' => 'DESC']];
 
 	/**
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function index() {
 		$cities = $this->paginate();
@@ -26,7 +26,7 @@ class CitiesController extends DataAppController {
 
 	/**
 	 * @param int|null $id
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function view($id = null) {
 		if (empty($id) || !($city = $this->Cities->find('first', ['conditions' => ['City.id' => $id]]))) {
@@ -37,7 +37,7 @@ class CitiesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function add() {
 		if ($this->Common->isPosted()) {
@@ -57,7 +57,7 @@ class CitiesController extends DataAppController {
 
 	/**
 	 * @param int|null $id
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function edit($id = null) {
 		if (empty($id) || !($city = $this->Cities->find('first', ['conditions' => ['City.id' => $id]]))) {
@@ -81,7 +81,7 @@ class CitiesController extends DataAppController {
 
 	/**
 	 * @param int|null $id
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function delete($id = null) {
 		$this->request->allowMethod(['post', 'delete']);

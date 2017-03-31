@@ -43,7 +43,7 @@ class CountriesController extends DataAppController {
 
 	/**
 	 * @param mixed $id
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function updateCoordinates($id = null) {
 		set_time_limit(120);
@@ -183,7 +183,7 @@ class CountriesController extends DataAppController {
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function view($id = null) {
 		$country = $this->Countries->get($id);
@@ -192,7 +192,7 @@ class CountriesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function add() {
 		if ($this->Common->isPosted()) {
@@ -206,20 +206,21 @@ class CountriesController extends DataAppController {
 
 			$this->Flash->error(__('record add not saved'));
 		}
+
+		$this->set(compact('country'));
 	}
 
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function edit($id = null) {
-		if (!$id || !($country = $this->Countries->get($id))) {
-			$this->Flash->error(__('record invalid'));
-			return $this->redirect(['action' => 'index']);
-		}
+		$country = $this->Countries->get($id);
+
 		if ($this->Common->isPosted()) {
-			if ($this->Countries->save($this->request->data)) {
+			$country = $this->Countries->patchEntity($country, $this->request->data);
+			if ($this->Countries->save($country)) {
 				$name = $country['name'];
 				$this->Flash->success(__('record edit {0} saved', h($name)));
 				return $this->redirect(['action' => 'index']);
@@ -227,19 +228,14 @@ class CountriesController extends DataAppController {
 
 			$this->Flash->error(__('record edit not saved'));
 		}
-		if (empty($this->request->data)) {
-			$this->request->data = $country;
-			if (empty($this->request->data)) { # still no record found
-				$this->Flash->error(__('record not exists'));
-				return $this->redirect(['action' => 'index']);
-			}
-		}
+
+		$this->set(compact('country'));
 	}
 
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function delete($id = null) {
 		$country = $this->Countries->get($id);

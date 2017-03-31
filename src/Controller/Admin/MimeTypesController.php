@@ -104,7 +104,8 @@ class MimeTypesController extends DataAppController {
 			if (is_array($mimeType)) {
 				$mimeType = array_shift($mimeType);
 			}
-			if ($mime = $this->MimeTypes->mimeTypeExists($ext)) {
+			$mime = $this->MimeTypes->mimeTypeExists($ext);
+			if ($mime) {
 				$report['in'][] = ['ext' => $ext, 'type' => $mimeType, 'oldType' => $mime['type']];
 				continue;
 			}
@@ -190,7 +191,7 @@ class MimeTypesController extends DataAppController {
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function view($id = null) {
 		if (empty($id)) {
@@ -206,12 +207,14 @@ class MimeTypesController extends DataAppController {
 	}
 
 	public function add() {
+		$mimeType = $this->MimeTypes->get($id);
+
 		if ($this->Common->isPosted()) {
 			$this->request->data['name'] = ucwords($this->request->data['name']); //ucfirst()
 			$this->request->data['mime_type_image_id'] = (int)$this->request->data['mime_type_image_id'];
 
-			$this->MimeTypes->create();
-			if ($this->MimeTypes->save($this->request->data)) {
+			$mimeType = $this->MimeTypes->patchEntity($mimeType, $this->request->data);
+			if ($this->MimeTypes->save($mimeType)) {
 				$id = $this->MimeTypes->id;
 				//$name = $this->request->data['name'];
 				$this->Flash->success(__('record add {0} saved', $id));
@@ -223,19 +226,17 @@ class MimeTypesController extends DataAppController {
 			$this->request->data['active'] = 1;
 		}
 		$mimeTypeImages = $this->MimeTypes->MimeTypeImages->find('list');
-		$this->set(compact('mimeTypeImages'));
+		$this->set(compact('mimeType', 'mimeTypeImages'));
 	}
 
 	public function edit($id = null) {
-		if (empty($id)) {
-			$this->Flash->error(__('record invalid'));
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
+		$mimeType = $this->MimeTypes->get($id);
 		if ($this->Common->isPosted()) {
 			$this->request->data['name'] = ucwords($this->request->data['name']); //ucfirst()
 			$this->request->data['mime_type_image_id'] = (int)$this->request->data['mime_type_image_id'];
+			$mimeType = $this->MimeTypes->patchEntity($mimeType, $this->request->data);
 
-			if ($this->MimeTypes->save($this->request->data)) {
+			if ($this->MimeTypes->save($mimeType)) {
 				//$name = $this->request->data['name'];
 				$this->Flash->success(__('record edit {0} saved', $id));
 				return $this->redirect(['action' => 'index']);
@@ -243,15 +244,9 @@ class MimeTypesController extends DataAppController {
 
 			$this->Flash->error(__('record edit not saved'));
 		}
-		if (empty($this->request->data)) {
-			$this->request->data = $this->MimeTypes->get($id);
-			if (empty($this->request->data)) { # still no record found
-				$this->Flash->error(__('record not exists'));
-				return $this->redirect(['action' => 'index']);
-			}
-		}
+
 		$mimeTypeImages = $this->MimeTypes->MimeTypeImages->find('list');
-		$this->set(compact('mimeTypeImages'));
+		$this->set(compact('mimeType', 'mimeTypeImages'));
 	}
 
 	public function delete($id = null) {

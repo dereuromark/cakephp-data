@@ -84,9 +84,6 @@ class LanguagesController extends DataAppController {
 
 			$this->Flash->error(__('formContainsErrors'));
 		}
-		if (empty($this->request->data)) {
-			$this->request->data = $language;
-		}
 
 		$this->set(compact('language'));
 	}
@@ -110,7 +107,7 @@ class LanguagesController extends DataAppController {
 	/**
 	 * Should only be done once at the very beginning
 	 *
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function importFromCore() {
 		if (!empty($this->request->query['reset'])) {
@@ -195,7 +192,7 @@ class LanguagesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function setPrimaryLanguagesActive() {
 		$languages = $this->Languages->getPrimaryLanguages('list');

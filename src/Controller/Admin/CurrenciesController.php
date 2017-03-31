@@ -68,16 +68,16 @@ class CurrenciesController extends DataAppController {
 	}
 
 	public function add() {
+		$currency = $this->Currencies->newEntity();
+
 		if ($this->Common->isPosted()) {
-			$this->Currencies->create();
-			if ($this->Currencies->save($this->request->data)) {
+			$currency = $this->Currencies->patchEntity($currency, $this->request->data);
+			if ($this->Currencies->save($currency)) {
 				$id = $this->Currencies->id;
 				//$name = $this->request->data['Currency']['name'];
 				$this->Flash->success(__('record add {0} saved', $id));
 				return $this->redirect(['action' => 'index']);
 			}
-
-			$this->request->data = $this->Currencies->data;
 
 			$this->Flash->error(__('record add not saved'));
 		} else {
@@ -85,16 +85,14 @@ class CurrenciesController extends DataAppController {
 		}
 
 		$currencies = $this->Currencies->currencyList();
-		$this->set(compact('currencies'));
+		$this->set(compact('currency', 'currencies'));
 	}
 
 	public function edit($id = null) {
-		if (empty($id)) {
-			$this->Flash->error(__('record invalid'));
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
+		$currency = $this->Currencies->get($id);
 		if ($this->Common->isPosted()) {
-			if ($this->Currencies->save($this->request->data)) {
+			$currency = $this->Currencies->patchEntity($currency, $this->request->data);
+			if ($this->Currencies->save($currency)) {
 				//$name = $this->request->data['Currency']['name'];
 				$this->Flash->success(__('record edit {0} saved', $id));
 				return $this->redirect(['action' => 'index']);
@@ -102,13 +100,8 @@ class CurrenciesController extends DataAppController {
 
 			$this->Flash->error(__('record edit not saved'));
 		}
-		if (empty($this->request->data)) {
-			$this->request->data = $this->Currencies->get($id);
-			if (empty($this->request->data)) { # still no record found
-				$this->Flash->error(__('record not exists'));
-				return $this->redirect(['action' => 'index']);
-			}
-		}
+
+		$this->set(compact('currency'));
 	}
 
 	public function delete($id = null) {
@@ -153,7 +146,7 @@ class CurrenciesController extends DataAppController {
 	 *
 	 * @param string|null $field
 	 * @param int|null $id
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function toggle($field = null, $id = null) {
 		 $fields = ['active'];

@@ -61,9 +61,7 @@ class ContinentsController extends DataAppController {
 
 			$this->Flash->error(__('formContainsErrors'));
 		}
-		if (empty($this->request->data)) {
-			$this->request->data = $continent;
-		}
+
 		$parents = [0 => __('Root')] + $this->Continent->ParentContinent->find('treeList', ['spacer' => '» ']);
 		$this->set(compact('parents'));
 	}

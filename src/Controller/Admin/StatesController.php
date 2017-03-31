@@ -42,7 +42,7 @@ class StatesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function index() {
 		$this->paginate['contain'] = ['Countries'];
@@ -66,7 +66,7 @@ class StatesController extends DataAppController {
 	 *
 	 * @param int|null $id
 	 * @throws \Exception
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function updateSelect($id = null) {
 		//$this->autoRender = false;
@@ -85,7 +85,7 @@ class StatesController extends DataAppController {
 
 	/**
 	 * @param int|null $id
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function updateCoordinates($id = null) {
 		set_time_limit(120);
@@ -102,7 +102,7 @@ class StatesController extends DataAppController {
 
 	/**
 	 * @param int|null $id
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function view($id = null) {
 		if (empty($id)) {
@@ -118,7 +118,7 @@ class StatesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function add() {
 		$state = $this->States->newEntity();
@@ -141,7 +141,7 @@ class StatesController extends DataAppController {
 
 	/**
 	 * @param mixed $id
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function edit($id = null) {
 		$state = $this->States->get($id);
@@ -157,20 +157,14 @@ class StatesController extends DataAppController {
 
 			$this->Flash->error(__('record edit not saved'));
 		}
-		if (empty($this->request->data)) {
-			$this->request->data = $this->States->get($id);
-			if (empty($this->request->data)) { # still no record found
-				$this->Flash->error(__('record not exists'));
-				return $this->redirect(['action' => 'index']);
-			}
-		}
+
 		$countries = $this->States->Countries->find('list');
 		$this->set(compact('state', 'countries'));
 	}
 
 	/**
 	 * @param int|null $id
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function delete($id = null) {
 		$this->request->allowMethod('post');

@@ -140,7 +140,7 @@ class MimeTypeImagesController extends DataAppController {
 					}
 
 					$recordId = null;
-					
+
 					$dbImage = $this->MimeTypeImage->find('first', ['conditions' => ['name' => $name]]);
 					if ($dbImage) {
 						if (empty($dbImage['ext']) || !file_exists(PATH_MIMETYPES . $dbImage['name'] . '.' . $dbImage['ext'])) {
@@ -361,13 +361,6 @@ class MimeTypeImagesController extends DataAppController {
 			}
 
 			$this->Flash->error(__('record edit not saved'));
-		}
-		if (empty($this->request->data)) {
-			$this->request->data = $this->MimeTypeImage->get($id);
-			if (empty($this->request->data)) { # still no record found
-				$this->Flash->error(__('record not exists'));
-				return $this->redirect(['action' => 'index']);
-			}
 		}
 
 		$folder = new Folder(PATH_MIMETYPES . 'import' . DS);

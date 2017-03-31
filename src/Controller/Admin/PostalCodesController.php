@@ -47,7 +47,7 @@ class PostalCodesController extends DataAppController {
 
 	/**
 	 * @param int|null $id
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function view($id = null) {
 		if (empty($id) || !($postalCode = $this->PostalCodes->find('first', ['contain' => ['Countries'], 'conditions' => ['PostalCodes.id' => $id]]))) {
@@ -59,7 +59,7 @@ class PostalCodesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function add() {
 		$postalCode = $this->PostalCodes->newEntity();
@@ -80,7 +80,7 @@ class PostalCodesController extends DataAppController {
 
 	/**
 	 * @param int|null $id
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function edit($id = null) {
 		if (empty($id) || !($postalCode = $this->PostalCodes->find('first', ['conditions' => ['PostalCode.id' => $id]]))) {
@@ -104,7 +104,7 @@ class PostalCodesController extends DataAppController {
 
 	/**
 	 * @param int|null $id
-	 * @return \Cake\Network\Response|null
+	 * @return \Cake\Http\Response|null
 	 */
 	public function delete($id = null) {
 		$this->request->allowMethod('post');
