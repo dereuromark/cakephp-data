@@ -36,4 +36,18 @@ class LocationsTableTest extends TestCase {
 		$this->assertNotEmpty($result);
 	}
 
+	/**
+	 * @return void
+	 */
+	public function testBasicSave() {
+		$data = [
+			'country_id' => 1,
+			'state_id' => 1,
+			'city' => 'Berlin',
+		];
+		$location = $this->Locations->newEntity($data);
+		$result = $this->Locations->save($location);
+		$this->assertNotEmpty($result);
+	}
+
 }

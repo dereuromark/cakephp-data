@@ -12,7 +12,9 @@ class AddressesTableTest extends TestCase {
 	 * @var array
 	 */
 	public $fixtures = [
-		'plugin.data.addresses'
+		'plugin.data.addresses',
+		'plugin.data.countries',
+		'plugin.data.states',
 	];
 
 	/**
@@ -56,6 +58,20 @@ class AddressesTableTest extends TestCase {
 		$this->Addresses->touch($address->id);
 		$address = $this->Addresses->get($address->id);
 		$this->assertTrue($address->last_used > new Time('-2 seconds'));
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testBasicSave() {
+		$data = [
+			'foreign_id' => 1,
+			'model' => 'Foo',
+			'city' => 'Berlin',
+		];
+		$address = $this->Addresses->newEntity($data);
+		$result = $this->Addresses->save($address);
+		$this->assertTrue((bool)$result);
 	}
 
 }
