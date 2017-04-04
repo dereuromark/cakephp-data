@@ -42,7 +42,7 @@ class LanguagesFixture extends TestFixture {
 			'code' => 'de',
 			'iso3' => 'deu',
 			'iso2' => 'de',
-			'locale' => 'de_DE',
+			'locale' => 'deu',
 			'locale_fallback' => 'deu',
 			'status' => '1',
 			'sort' => '0',
@@ -50,6 +50,19 @@ class LanguagesFixture extends TestFixture {
 		],
 		[
 			'id' => '2',
+			'name' => 'Deutsch (Deutschland)',
+			'ori_name' => 'German',
+			'code' => 'de',
+			'iso3' => 'deu',
+			'iso2' => 'de',
+			'locale' => 'de_DE',
+			'locale_fallback' => 'deu',
+			'status' => '0',
+			'sort' => '0',
+			'modified' => '2011-07-17 15:23:08'
+		],
+		[
+			'id' => '3',
 			'name' => 'Englisch',
 			'ori_name' => 'English',
 			'code' => 'en',
