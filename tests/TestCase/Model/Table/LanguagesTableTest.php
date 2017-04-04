@@ -30,6 +30,19 @@ class LanguagesTableTest extends TestCase {
 		$this->assertInstanceOf('\Data\Model\Table\LanguagesTable', $this->Languages);
 	}
 
+	public function testGetList() {
+		$result = $this->Languages->getList();
+		$this->assertContains('Deutsch', $result);
+		$this->assertContains('Englisch', $result);
+		$this->assertNotContains('Deutsch (Deutschland)', $result);
+	}
+
+	public function testCodeList() {
+		$result = $this->Languages->codeList();
+		$this->assertContains('Deutsch', $result);
+		$this->assertContains('Englisch', $result);
+		$this->assertNotContains('Deutsch (Deutschland)', $result);
+	}
 	//TODO
 
 }
