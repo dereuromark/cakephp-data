@@ -29,15 +29,15 @@ class MimeTypesTable extends Table {
 			],
 		],
 		'ext' => [
-			'isUnique' => [
-				'rule' => 'isUnique',
-				'message' => 'Already exists',
-			],
 			'notBlank' => [
 				'rule' => ['notBlank'],
 				'message' => 'valErrMandatoryField',
 				'allowEmpty' => false,
-				//'required' => true
+				'last' => true
+			],
+			'isUnique' => [
+				'rule' => 'validateUnique',
+				'message' => 'Already exists',
 			],
 		],
 		'type' => [
