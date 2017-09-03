@@ -19,6 +19,9 @@ class ContinentsTableTest extends TestCase {
 	 */
 	public $Continents;
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 

@@ -19,6 +19,9 @@ class MimeTypesTableTest extends TestCase {
 	 */
 	public $MimeTypes;
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 

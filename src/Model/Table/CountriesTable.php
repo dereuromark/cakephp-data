@@ -225,10 +225,7 @@ class CountriesTable extends Table {
 		}
 
 		if (!empty($id)) {
-			$res = $this->find('first', ['conditions' => [$this->alias() . '.id' => $id], 'contain' => []]);
-			if (!empty($res['ori_name']) && $data = $Geocoder->geocode($res['ori_name']) || $res['name'] != $res['ori_name'] && $data = $Geocoder->geocode($res['name'])) {
-
-			}
+			//$res = $this->find('first', ['conditions' => [$this->alias() . '.id' => $id], 'contain' => []]);
 		} else {
 			$conditions = [];
 			if (!$override) {
@@ -239,7 +236,7 @@ class CountriesTable extends Table {
 
 			$count = 0;
 			foreach ($results as $res) {
-				if (!empty($res['ori_name']) && $data = $Geocoder->geocode($res['ori_name']) || $res['name'] != $res['ori_name'] && $data = $Geocoder->geocode($res['name'])) {
+				if (!empty($res['ori_name']) && $data = $Geocoder->geocode($res['ori_name']) || $res['name'] !== $res['ori_name'] && $data = $Geocoder->geocode($res['name'])) {
 
 					//$data = $Geocoder->getResult();
 					//echo returns($res);

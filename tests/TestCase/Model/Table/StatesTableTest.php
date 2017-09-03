@@ -19,6 +19,9 @@ class StatesTableTest extends TestCase {
 	 */
 	public $States;
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 

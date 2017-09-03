@@ -19,6 +19,9 @@ class CountiesTableTest extends TestCase {
 	 */
 	public $Counties;
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 

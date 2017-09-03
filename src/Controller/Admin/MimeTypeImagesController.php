@@ -288,10 +288,7 @@ class MimeTypeImagesController extends DataAppController {
 		# save new extension
 
 		if (is_uploaded_file($file['tmp_name']) && move_uploaded_file($file['tmp_name'], PATH_MIMETYPES . $fileName . '.' . $ext)) {
-			# resize?
-			if (false) {
-
-			}
+			//TODO resize?
 
 			return true;
 		}
@@ -1117,14 +1114,10 @@ class MimeTypeImagesController extends DataAppController {
 
 			$this->MimeTypeImage->create();
 			$data = ['name' => $result[$i + 1], 'details' => $result[$i + 2]];
-			if (false) {
-				$this->MimeTypeImage->save($data);
-			}
-
-			pr($data);
+			//TODO
+			//$this->MimeTypeImage->save($data);
+			//pr($data);
 		}
-
-		/* END */
 	}
 
 }

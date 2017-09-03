@@ -19,6 +19,9 @@ class LanguagesTableTest extends TestCase {
 	 */
 	public $Languages;
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 

@@ -175,7 +175,7 @@ class StatesTable extends Table {
 						pr($res);
 						pr($data);
 						pr($saveArray);
-						die(returns($this->validationErrors));
+						exit(returns($this->validationErrors));
 					}
 				}
 				return true;
