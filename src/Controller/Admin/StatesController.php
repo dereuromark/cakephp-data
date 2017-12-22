@@ -17,7 +17,7 @@ class StatesController extends DataAppController {
 	public $paginate = ['order' => ['States.modified' => 'DESC']];
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function initialize() {
 		parent::initialize();
@@ -31,7 +31,7 @@ class StatesController extends DataAppController {
 
 	/**
 	 * @param \Cake\Event\Event $event
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function beforeFilter(Event $event) {
 		parent::beforeFilter($event);
@@ -186,7 +186,7 @@ class StatesController extends DataAppController {
 	 *
 	 * @deprecated
 	 * @param int $cid
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	protected function _processCountry($cid) {
 		$saveCid = true;

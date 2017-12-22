@@ -16,7 +16,7 @@ class LanguagesController extends DataAppController {
 	public $paginate = ['order' => ['Languages.name' => 'ASC']];
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function initialize() {
 		parent::initialize();
@@ -29,7 +29,7 @@ class LanguagesController extends DataAppController {
 	}
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function index() {
 		if (Plugin::loaded('Search')) {
@@ -150,7 +150,7 @@ class LanguagesController extends DataAppController {
 	/**
 	 * http://www.loc.gov/standards/iso639-2/php/code_list.php
 	 *
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function compareToIsoList() {
 		$isoList = $this->Languages->getOfficialIsoList();
@@ -163,7 +163,7 @@ class LanguagesController extends DataAppController {
 	/**
 	 * http://www.loc.gov/standards/iso639-2/php/code_list.php
 	 *
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function compareIsoListToCore() {
 		$isoList = $this->Languages->getOfficialIsoList();

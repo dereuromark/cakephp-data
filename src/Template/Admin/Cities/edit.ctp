@@ -10,7 +10,7 @@
 	<fieldset>
 		<legend><?php echo __('Edit {0}', __('City')); ?></legend>
 	<?php
-		echo $this->Form->input('id');
+		//echo $this->Form->input('id');
 		echo $this->Form->input('country_id');
 		echo $this->Form->input('official_id', ['type' => 'text']);
 
@@ -34,7 +34,7 @@
 <div class="actions">
 	<ul>
 
-		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('City.id')], null, __('Are you sure you want to delete # {0}?', $this->Form->value('City.id'))); ?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->getSourceValue('City.id')], null, __('Are you sure you want to delete # {0}?', $this->Form->getSourceValue('City.id'))); ?></li>
 		<li><?php echo $this->Html->link(__('List {0}', __('Cities')), ['action' => 'index']);?></li>
 	</ul>
 </div>

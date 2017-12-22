@@ -13,7 +13,7 @@ $this->Html->script('jquery/plugins/jquery.dd.js');?>
 	<fieldset>
 		<legend><?php echo __('Edit Mime Type');?></legend>
 	<?php
-		echo $this->Form->input('id');
+		//echo $this->Form->input('id');
 
 		echo $this->Form->input('ext', ['after' => ' Z.B. \'exe\' für *.exe Dateien']);
 		echo $this->Form->input('name', ['label' => 'Programm/Name', 'after' => ' Bezeichnung']);
@@ -30,7 +30,7 @@ $this->Html->script('jquery/plugins/jquery.dd.js');?>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('MimeType.id')], null, __('Are you sure you want to delete # {0}?', $this->Form->value('MimeType.id'))); ?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->getSourceValue('MimeType.id')], null, __('Are you sure you want to delete # {0}?', $this->Form->getSourceValue('MimeType.id'))); ?></li>
 		<li><?php echo $this->Html->link(__('List Mime Types'), ['action' => 'index']);?></li>
 	</ul>
 </div>

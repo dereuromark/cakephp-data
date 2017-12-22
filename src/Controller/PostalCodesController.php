@@ -11,7 +11,7 @@ use Data\Controller\DataAppController;
 class PostalCodesController extends DataAppController {
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function map() {
 		if ($this->Common->isPosted()) {

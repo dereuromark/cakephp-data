@@ -8,7 +8,7 @@
 	<fieldset>
 		<legend><?php echo __('Edit {0}', __('Country'));?></legend>
 	<?php
-		echo $this->Form->input('id');
+		//echo $this->Form->input('id');
 		echo $this->Form->input('name');
 		echo $this->Form->input('ori_name');
 		echo $this->Form->input('iso2');
@@ -30,7 +30,7 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('Country.id')], ['escape' => false], __('Are you sure you want to delete # {0}?', $this->Form->value('Country.id'))); ?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->getSourceValue('Country.id')], ['escape' => false], __('Are you sure you want to delete # {0}?', $this->Form->getSourceValue('Country.id'))); ?></li>
 		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['action' => 'index']);?></li>
 	</ul>
 </div>

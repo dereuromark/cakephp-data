@@ -4,8 +4,8 @@ namespace Data\Model\Table;
 use ArrayObject;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
+use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
-use Cake\ORM\Entity;
 use Exception;
 use Geo\Geocoder\Geocoder;
 use Tools\Model\Table\Table;
@@ -312,7 +312,7 @@ class CountriesTable extends Table {
 	 * @param \ArrayObject $options
 	 * @return void
 	 */
-	public function afterSave(Event $event, Entity $entity, ArrayObject $options) {
+	public function afterSave(Event $event, EntityInterface $entity, ArrayObject $options) {
 		if ($entity->isNew()) {
 			//$this->updateCoordinates($entity);
 		}

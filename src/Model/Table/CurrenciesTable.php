@@ -197,7 +197,7 @@ class CurrenciesTable extends Table {
 	public function baseCurrency($options = []) {
 		$defaults = ['conditions' => [$this->alias() . '.base' => 1]];
 		$options = Hash::merge($defaults, $options);
-		return $this->find('first', $options);
+		return $this->find('all', $options)->first();
 	}
 
 	/**

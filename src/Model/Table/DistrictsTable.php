@@ -99,7 +99,7 @@ class DistrictsTable extends Table {
 		if (!empty($customOptions)) {
 			$options = array_merge($options, $customOptions);
 		}
-		return $this->find('first', $options);
+		return $this->find('all', $options)->first();
 	}
 
 }

@@ -46,8 +46,13 @@ class CountryStateHelperComponent extends Component {
 			$this->Controller->States = TableRegistry::get('Data.States');
 		}
 
+		$selectedCountry = $this->Controller->request->getQuery('country_id');
 		if (!empty($this->Controller->request->data['country_id'])) {
-			$states = $this->Controller->States->getListByCountry($this->Controller->request->data['country_id']);
+			$selectedCountry = $this->Controller->request->data['country_id'];
+		}
+
+		if ($selectedCountry) {
+			$states = $this->Controller->States->getListByCountry($selectedCountry);
 		} elseif ($ignoreStates === true) {
 			# do nothing
 		} else {

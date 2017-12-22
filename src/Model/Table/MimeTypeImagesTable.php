@@ -2,6 +2,7 @@
 namespace Data\Model\Table;
 
 use ArrayObject;
+use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
 use Cake\Filesystem\File;
 use Cake\ORM\Entity;
@@ -82,7 +83,7 @@ class MimeTypeImagesTable extends Table {
 		return true;
 	}
 
-	public function afterDelete(Event $event, Entity $entity, ArrayObject $options) {
+	public function afterDelete(Event $event, EntityInterface $entity, ArrayObject $options) {
 		if (!empty($this->_del)) {
 			# todo: ...
 			$image = $this->_del['name'] . '.' . $this->_del['ext'];

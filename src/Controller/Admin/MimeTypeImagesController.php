@@ -18,7 +18,7 @@ class MimeTypeImagesController extends DataAppController {
 	public $paginate = ['order' => ['MimeTypeImages.modified' => 'DESC']];
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function import() {
 		if ($this->Common->isPosted()) {
@@ -80,7 +80,7 @@ class MimeTypeImagesController extends DataAppController {
 	}
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function allocate() {
 		$folder = new Folder(PATH_MIMETYPES . 'import' . DS);
@@ -178,7 +178,7 @@ class MimeTypeImagesController extends DataAppController {
 	}
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function index() {
 		$mimeTypeImages = $this->paginate();

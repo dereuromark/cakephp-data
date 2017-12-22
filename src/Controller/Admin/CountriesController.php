@@ -18,7 +18,7 @@ class CountriesController extends DataAppController {
 	public $paginate = ['order' => ['Countries.sort' => 'DESC']];
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function initialize() {
 		parent::initialize();
@@ -60,7 +60,7 @@ class CountriesController extends DataAppController {
 	/**
 	 * Check for missing or unused country flag icons
 	 *
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function icons() {
 		$icons = $this->_icons();
@@ -90,7 +90,7 @@ class CountriesController extends DataAppController {
 	}
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function import() {
 		if ($this->Common->isPosted()) {
@@ -127,7 +127,7 @@ class CountriesController extends DataAppController {
 				}
 				# separate list into single records
 
-				$countries = CommonComponent::parseList($list, $separator, false, false);
+				$countries = Tokenizer::parseList($list, $separator, false, false);
 				if (empty($countries)) {
 					$this->Countries->invalidate('import_separator', 'falscher Separator');
 				} elseif (!empty($this->request->data['import_pattern'])) {
@@ -165,7 +165,7 @@ class CountriesController extends DataAppController {
 	}
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function index() {
 		if (Plugin::loaded('Search')) {
@@ -285,7 +285,7 @@ class CountriesController extends DataAppController {
 	 * - http://www.geonames.org/countries/ - http://api.geonames.org/postalCodeCountryInfo?username=demo
 	 * - http://www.pixelenvision.com/1708/zip-postal-code-validation-regex-php-code-for-12-countries/
 	 *
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function validate() {
 		$countries = $this->Countries->find('all');

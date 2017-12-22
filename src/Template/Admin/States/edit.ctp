@@ -9,7 +9,7 @@
 	<fieldset>
 		<legend><?php echo __('Edit {0}', __('State'));?></legend>
 	<?php
-		echo $this->Form->input('id');
+		//echo $this->Form->input('id');
 		echo $this->Form->input('country_id', ['empty' => ' - [ ' . __('pleaseSelect') . ' ]- ', 'required' => 1]);
 		echo $this->Form->input('name', ['required' => 1]);
 		echo $this->Form->input('abbr');

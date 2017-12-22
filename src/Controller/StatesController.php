@@ -17,7 +17,7 @@ class StatesController extends DataAppController {
 	public $paginate = ['order' => ['States.modified' => 'DESC']];
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function initialize() {
 		parent::initialize();
@@ -31,7 +31,7 @@ class StatesController extends DataAppController {
 
 	/**
 	 * @param \Cake\Event\Event $event
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function beforeFilter(Event $event) {
 		parent::beforeFilter($event);
@@ -43,7 +43,7 @@ class StatesController extends DataAppController {
 
 	/**
 	 * @param mixed $cid
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function index($cid = null) {
 		$this->paginate['contain'] = ['Countries'];
@@ -65,7 +65,7 @@ class StatesController extends DataAppController {
 	 * new: optional true/false for default field label
 	 *
 	 * @param int|null $id
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function updateSelect($id = null) {
 		if (!$this->request->is('post') || !$this->request->is('ajax')) {

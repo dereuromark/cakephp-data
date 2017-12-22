@@ -14,7 +14,7 @@ class CurrenciesController extends DataAppController {
 	public $paginate = ['order' => ['Currencies.base' => 'DESC', 'Currencies.modified' => 'DESC']];
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function initialize() {
 		parent::initialize();
@@ -32,7 +32,7 @@ class CurrenciesController extends DataAppController {
 	}
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function index() {
 		$currencies = $this->paginate();
@@ -120,7 +120,7 @@ class CurrenciesController extends DataAppController {
 	 * Set as primary (base)
 	 *
 	 * @param int|null $id
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function base($id = null) {
 		$this->_setAsPrimary($id);

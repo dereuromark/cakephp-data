@@ -9,7 +9,7 @@ use Data\Controller\DataAppController;
 class ContinentsController extends DataAppController {
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function index() {
 		$continents = $this->paginate();

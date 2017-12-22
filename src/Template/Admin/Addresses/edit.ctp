@@ -10,7 +10,7 @@
 	<fieldset>
 		<legend><?php echo __('Edit {0}', __('Address')); ?></legend>
 	<?php
-		echo $this->Form->input('id');
+		//echo $this->Form->input('id');
 		echo $this->Form->input('country_id', ['empty' => ' - [ ' . __('noSelection') . ' ] - ']);
 	if (Configure::read('Data.Address.State')) {
 		echo $this->Form->input('state_id', ['empty' => ' - [ ' . __('noSelection') . ' ] - ']);
@@ -36,7 +36,7 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('Address.id')], null, __('Are you sure you want to delete # {0}?', $this->Form->value('Address.id'))); ?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->getSourceValue('Address.id')], null, __('Are you sure you want to delete # {0}?', $this->Form->getSourceValue('Address.id'))); ?></li>
 		<li><?php echo $this->Html->link(__('List {0}', __('Addresses')), ['action' => 'index']);?></li>
 	</ul>
 </div>

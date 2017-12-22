@@ -22,7 +22,7 @@ class MimeTypesController extends DataAppController {
 	 * Experimental
 	 * needs writing rights on {webroot}/files/tmp
 	 *
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function detect_by_extension() {
 		/*
@@ -44,7 +44,7 @@ class MimeTypesController extends DataAppController {
 	}
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function allocateByType() {
 		# get unused extensions?
@@ -56,7 +56,7 @@ class MimeTypesController extends DataAppController {
 	}
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function allocate() {
 		# get unused extensions
@@ -82,13 +82,13 @@ class MimeTypesController extends DataAppController {
 	}
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function fromFile() {
 	}
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function fromCore() {
 		if ($this->Common->isPosted()) {
@@ -131,7 +131,7 @@ class MimeTypesController extends DataAppController {
 	}
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function index() {
 		$conditions = $this->_searchConditions([]);

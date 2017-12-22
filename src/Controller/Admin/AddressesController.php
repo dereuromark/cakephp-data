@@ -10,7 +10,7 @@ use Data\Controller\DataAppController;
 class AddressesController extends DataAppController {
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function index() {
 		$addresses = $this->paginate();
@@ -52,9 +52,9 @@ class AddressesController extends DataAppController {
 		}
 
 		$countries = $this->Addresses->Countries->find('list');
-		$countryProvinces = [];
+		$states = [];
 		if (Configure::read('Data.Address.State')) {
-			$countryProvinces = $this->Addresses->States->find('list');
+			$states = $this->Addresses->States->find('list');
 		}
 
 		$this->set(compact('countries', 'countryProvinces'));

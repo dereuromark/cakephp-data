@@ -10,7 +10,7 @@
 	<fieldset>
 		<legend><?php echo __('Edit {0}', __('Continent')); ?></legend>
 	<?php
-		echo $this->Form->input('id');
+		//echo $this->Form->input('id');
 		echo $this->Form->input('name');
 		//echo $this->Form->input('ori_name');
 		echo $this->Form->input('parent_id', ['empty' => ' - [ ' . __('pleaseSelect') . ' ] - ']);
@@ -24,7 +24,7 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->value('Continent.id')], null, __('Are you sure you want to delete # {0}?', $this->Form->value('Continent.id'))); ?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->getSourceValue('Continent.id')], null, __('Are you sure you want to delete # {0}?', $this->Form->getSourceValue('Continent.id'))); ?></li>
 		<li><?php echo $this->Html->link(__('List {0}', __('Continents')), ['action' => 'index']);?></li>
 		<li><?php echo $this->Html->link(__('List {0}', __('Continents')), ['controller' => 'continents', 'action' => 'index']); ?> </li>
 		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['controller' => 'countries', 'action' => 'index']); ?> </li>

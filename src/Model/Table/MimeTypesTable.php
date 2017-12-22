@@ -3,6 +3,7 @@ namespace Data\Model\Table;
 
 use ArrayObject;
 use Cake\Core\Configure;
+use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
 use Cake\ORM\Entity;
 use Tools\Mailer\Email;
@@ -84,11 +85,11 @@ class MimeTypesTable extends Table {
 
 	/**
 	 * @param \Cake\Event\Event $event
-	 * @param \Cake\ORM\Entity $entity
+	 * @param \Cake\Datasource\EntityInterface $entity
 	 * @param \ArrayObject $options
 	 * @return void
 	 */
-	public function afterDelete(Event $event, Entity $entity, ArrayObject $options) {
+	public function afterDelete(Event $event, EntityInterface $entity, ArrayObject $options) {
 		$this->cleanUp();
 	}
 

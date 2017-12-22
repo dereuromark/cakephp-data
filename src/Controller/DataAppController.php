@@ -18,7 +18,7 @@ class DataAppController extends AppController {
 
 	/**
 	 * @param \Cake\Event\Event $event
-	 * @return void
+	 * @return \Cake\Http\Response|null
 	 */
 	public function beforeFilter(Event $event) {
 		parent::beforeFilter($event);
