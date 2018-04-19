@@ -6,7 +6,7 @@
 
 A CakePHP 2.x Plugin containing several useful data models that can be used in many projects.
 
-Please note: New functionality has been tested against 2.x (current master and dev) only. Please upgrade if possible.
+NOTE: With 4.x development already being started, **this 2.x branch is now in maintenance mode**. No active development is done anymore on it, mainly only necessary bugfixes.
 
 ## How to include
 Installing the Plugin is pretty much as with every other CakePHP Plugin.
