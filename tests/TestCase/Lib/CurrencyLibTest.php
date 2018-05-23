@@ -34,7 +34,7 @@ class CurrencyLibTest extends TestCase {
 	public function testConvert() {
 		//$this->out('<h2>30 EUR in USD</h2>', true);
 		$is = $this->CurrencyLib->convert(30, 'EUR', 'USD');
-		$this->debug($is);
+		//$this->debug($is);
 		$this->assertTrue($is > 30 && $is < 60);
 
 		$this->assertFalse($this->CurrencyLib->cacheFileUsed());

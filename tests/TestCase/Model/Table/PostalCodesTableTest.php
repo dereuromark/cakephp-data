@@ -3,7 +3,7 @@
 namespace Data\Test\TestCase\Model\Table;
 
 use Cake\ORM\TableRegistry;
-use Geo\Model\Behavior\GeocoderBehavior;
+use App\Model\Behavior\GeocoderBehavior;
 use Tools\TestSuite\TestCase;
 
 class PostalCodesTableTest extends TestCase {
