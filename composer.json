@@ -19,6 +19,8 @@
 		"dereuromark/cakephp-geo": "^1.0"
 	},
 	"require-dev": {
+		"dereuromark/cakephp-geo": "^1.3.1",
+		"cakephp/chronos": "^1.0.1",
 		"friendsofcake/search": "^2.3 || 3.0 || 4.0",
 		"yangqi/htmldom": "dev-master",
 		"fig-r/psr2r-sniffer": "dev-master"

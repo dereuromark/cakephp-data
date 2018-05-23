@@ -3,6 +3,7 @@ namespace App\Model\Behavior;
 
 use Geocoder\Model\Address;
 use Geocoder\Model\Bounds;
+use Geocoder\Model\Coordinates;
 use Geocoder\Model\Country;
 use Geo\Model\Behavior\GeocoderBehavior as ToolsGeocoderBehavior;
 
@@ -18,7 +19,8 @@ class GeocoderBehavior extends ToolsGeocoderBehavior {
 	protected function _execute($address) {
 		$country = new Country('DE', 'DE');
 		$bounds = new Bounds(0, 0, 0, 0);
-		$result = new Address(null, $bounds, 1, 'One', '12345', null, null, null, $country);
+		$coordinates = new Coordinates(0, 0);
+		$result = new Address($coordinates, $bounds, 1, 'One', '12345', null, null, null, $country);
 
 		return $result;
 	}
