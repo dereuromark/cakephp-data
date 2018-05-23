@@ -2,6 +2,7 @@
 namespace Data\Controller\Admin;
 
 use Data\Controller\DataAppController;
+use RuntimeException;
 use Tools\Utility\Mime;
 
 /**
@@ -123,7 +124,7 @@ class MimeTypesController extends DataAppController {
 			if ($this->MimeTypes->save($mimeType)) {
 				$report['success'][] = ['ext' => $ext, 'type' => $mimeType];
 			} else {
-				$report['error'][] = ['ext' => $ext, 'type' => $mimeType, 'errors' => $MimeTypes->errors()];
+				$report['error'][] = ['ext' => $ext, 'type' => $mimeType, 'errors' => $mimeType->getErrors()];
 			}
 		}
 
@@ -206,7 +207,12 @@ class MimeTypesController extends DataAppController {
 		$this->set(compact('mimeType'));
 	}
 
-	public function add() {
+	/**
+	 * @param int|null $id
+	 *
+	 * @return \Cake\Http\Response|null
+	 */
+	public function add($id = null) {
 		$mimeType = $this->MimeTypes->get($id);
 
 		if ($this->Common->isPosted()) {
@@ -282,9 +288,12 @@ class MimeTypesController extends DataAppController {
 		}
 	}
 
+	/**
+	 * @throws \RuntimeException
+	 * @return void
+	 */
 	public function manualNames() {
 		$export = [];
-		$data = [];
 
 		$result = [
 			 'text/plain	Plain text. Default if data is primarily text and no other type detected.',
@@ -324,36 +333,28 @@ class MimeTypesController extends DataAppController {
 			 'application/x-msdownload	Executable (.exe or .dll) file.',
 		];
 		foreach ($result as $r) {
-			$array = explode(TB, $r);
+			$array = explode("\ŧ", $r);
 
 			$type = trim($array[0]);
 			$name = trim($array[1]);
 
 			$export[] = ['type' => $type];
 
-			$data = ['name' => $name, 'type' => $type];
-
-			$record = $this->MimeTypes->find('first', ['conditions' => ['type' => $type]]);
-			pr($record);
-			pr($name);
-
-			if (empty($record)) {
+			$record = $this->MimeTypes->find()->where(['type' => $type])->first();
+			if (!$record) {
 				continue;
 			}
 
-			if (empty($record['name']) || strtolower($record['name']) == strtolower($record['type'])) {
-				//$this->MimeTypes->create();
-				$this->MimeTypes->id = $record['id'];
-				if (true && $res = $this->MimeTypes->save($data)) {
-					echo 'OK:';
-					echo $res;
-					//echo '<br/>';
-				} else {
-					pr($this->MimeTypes->validationErrors);
-					//echo '<br/>';
-				}
+			$record['name'] = $name;
+			$record['type'] = $type;
+
+			$res = $this->MimeTypes->save($record);
+			if (!$res) {
+				throw new RuntimeException(print_r($record->getErrors(), true));
 			}
-			//echo '<br/>';
+
+			echo 'OK:';
+			echo $res;
 		}
 
 		$this->autoRender = false;
@@ -395,20 +396,18 @@ class MimeTypesController extends DataAppController {
 				//echo '<br/>';
 			}
 
-			if (true) {
-				$this->MimeTypes->create();
-				if ($this->MimeTypes->save($d)) {
-					$count++;
-					/*
-					echo $data['name'].' (INSERTED!):';
-					pr ($record);
-					pr ($data);
-					echo '<br/>';
-					*/
+			$mimeType = $this->MimeTypes->newEntity($d);
+			if ($this->MimeTypes->save($mimeType)) {
+				$count++;
+				/*
+				echo $data['name'].' (INSERTED!):';
+				pr ($record);
+				pr ($data);
+				echo '<br/>';
+				*/
 
-				} else {
-					$notSaved++;
-				}
+			} else {
+				$notSaved++;
 			}
 		}
 

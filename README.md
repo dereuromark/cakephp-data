@@ -6,7 +6,9 @@
 [![Total Downloads](https://poser.pugx.org/dereuromark/cakephp-data/d/total.svg)](https://packagist.org/packages/dereuromark/cakephp-data)
 [![Coding Standards](https://img.shields.io/badge/cs-PSR--2--R-yellow.svg)](https://github.com/php-fig-rectified/fig-rectified-standards)
 
-A Cake3.x Plugin containing several useful data models that can be used in many projects.
+A CakePHP plugin containing several useful data models that can be used in many projects.
+
+Note: This branch requires CakePHP 3.5+.
 
 ## Features
 - Continents => Countries => States => Counties => Districts => Cities
@@ -20,7 +22,7 @@ A Cake3.x Plugin containing several useful data models that can be used in many 
 Both schema and data.
 
 ## Demo
-See http://sandbox.dereuromark.de/export
+See https://sandbox.dereuromark.de/export
 
 ## How to include
 Installing the plugin is pretty much as with every other CakePHP Plugin.

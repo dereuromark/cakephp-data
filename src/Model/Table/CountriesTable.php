@@ -232,42 +232,38 @@ class CountriesTable extends Table {
 				$conditions = [$this->alias() . '.iso2' => '']; # right now only iso2
 			}
 
-			$results = $this->find('all', ['conditions' => $conditions, 'contain' => []]);
+			/** @var \Data\Model\Entity\Country[] $countries */
+			$countries = $this->find('all', ['conditions' => $conditions, 'contain' => []]);
 
 			$count = 0;
-			foreach ($results as $res) {
-				if (!empty($res['ori_name']) && $data = $Geocoder->geocode($res['ori_name']) || $res['name'] !== $res['ori_name'] && $data = $Geocoder->geocode($res['name'])) {
+			foreach ($countries as $country) {
+				if (!empty($country['ori_name']) && $data = $Geocoder->geocode($country['ori_name']) || $country['name'] !== $country['ori_name'] && $data = $Geocoder->geocode($country['name'])) {
 
 					//$data = $Geocoder->getResult();
 					//echo returns($res);
 					//echo returns($data); die();
 					# seems to be very problematic: country "Georgien" results in "Georgia, USA"
 
-					$saveArray = [];
 					if (!empty($data['country_code']) && mb_strlen($data['country_code']) === 3 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
-						$saveArray['iso3'] = $data['country_code'];
-						//die(returns($saveArray));
+						$country['iso3'] = $data['country_code'];
 
 					} elseif (!empty($data['country_code']) && mb_strlen($data['country_code']) === 2 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
-						$saveArray['iso2'] = $data['country_code'];
-						//die(returns($saveArray));
+						$country['iso2'] = $data['country_code'];
 					}
 
-					$this->id = $res['id'];
-					if ($this->save($saveArray, true, ['iso2', 'iso3'])) {
+					$dirtyFields = $country->getDirty();
+
+					if ($this->save($country, ['fields' => ['iso2', 'iso3']])) {
 						$count++;
-
-						if (!empty($saveArray['iso2']) && $saveArray['iso2'] != $res['iso2']) {
-				$this->log('Iso2 for country \'' . $data['country'] . '\' changed from \'' . $res['iso2'] . '\' to \'' . $saveArray['iso2'] . '\'', LOG_NOTICE);
-					}
-					if (!empty($saveArray['iso3']) && $saveArray['iso3'] != $res['iso3']) {
-				$this->log('Iso3 for country \'' . $data['country'] . '\' changed from \'' . $res['iso3'] . '\' to \'' . $saveArray['iso3'] . '\'', LOG_NOTICE);
 					}
 
-					} else {
-						//pr($data); pr($Geocoder->debug()); die();
+					if (isset($dirtyFields['iso2'])) {
+						//$this->log('Iso2 for country \'' . $data['country'] . '\' changed from \'' . $country['iso2'] . '\' to \'' . $saveArray['iso2'] . '\'', LOG_NOTICE);
 					}
-					$Geocoder->pause();
+					if (isset($dirtyFields['iso3'])) {
+						//$this->log('Iso3 for country \'' . $data['country'] . '\' changed from \'' . $country['iso3'] . '\' to \'' . $saveArray['iso3'] . '\'', LOG_NOTICE);
+					}
+					//$Geocoder->pause();
 				}
 			}
 

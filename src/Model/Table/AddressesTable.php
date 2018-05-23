@@ -1,7 +1,6 @@
 <?php
 namespace Data\Model\Table;
 
-use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\I18n\Time;
 use Cake\ORM\Entity;
@@ -155,7 +154,7 @@ class AddressesTable extends Table {
 	public function __construct(array $config = []) {
 		parent::__construct($config);
 
-		return;
+		/*
 		$config = Configure::read('Data.Address');
 		if ($config) {
 			$vars = ['displayField', 'order', 'actsAs', 'validate', 'belongsTo'];
@@ -173,6 +172,7 @@ class AddressesTable extends Table {
 				$this->actsAs['Tools.Jsonable'] = ['fields' => ['debug'], 'map' => ['geocoder_result']];
 			}
 		}
+		*/
 	}
 
 	/**

@@ -19,7 +19,7 @@ define('TESTS', ROOT . 'tests');
 define('APP', ROOT . 'tests' . DS . 'test_app' . DS);
 define('APP_DIR', 'test_app');
 define('WEBROOT_DIR', 'webroot');
-define('TMP', sys_get_temp_dir() . DS);
+define('TMP', ROOT . 'tmp' . DS);
 define('CONFIG', APP . 'config' . DS);
 define('WWW_ROOT', APP);
 define('CACHE', TMP);
@@ -58,7 +58,7 @@ $cache = [
 	]
 ];
 
-Cake\Cache\Cache::config($cache);
+Cake\Cache\Cache::setConfig($cache);
 
 Cake\Core\Plugin::load('Data', ['path' => ROOT . DS, 'autoload' => true, 'routes' => true]);
 Cake\Core\Plugin::load('Tools', ['path' => ROOT . DS . 'vendor/dereuromark/cakephp-tools/', 'autoload' => true, 'bootstrap' => true]);
@@ -72,7 +72,7 @@ if (!getenv('db_dsn')) {
 }
 
 if (strpos(getenv('db_class'), 'MySql') !== false) {
-	Cake\Datasource\ConnectionManager::config('test', [
+	Cake\Datasource\ConnectionManager::setConfig('test', [
 		'className' => 'Cake\Database\Connection',
 		'driver' => 'Cake\Database\Driver\Mysql',
 		'database' => 'cake_test',
@@ -85,7 +85,7 @@ if (strpos(getenv('db_class'), 'MySql') !== false) {
 	return;
 }
 
-Cake\Datasource\ConnectionManager::config('test', [
+Cake\Datasource\ConnectionManager::setConfig('test', [
 	'className' => 'Cake\Database\Connection',
 	'driver' => getenv('db_class'),
 	'dsn' => getenv('db_dsn'),

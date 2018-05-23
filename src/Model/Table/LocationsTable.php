@@ -5,6 +5,7 @@ use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\ORM\Entity;
 use Cake\Validation\Validation;
+use Data\Model\Entity\Country;
 use Tools\Model\Table\Table;
 use Tools\Utility\Utility;
 
@@ -41,13 +42,13 @@ class LocationsTable extends Table {
 	];
 
 	/**
+	 * FIXME
+	 *
 	 * @param \Cake\Event\Event $event
 	 * @param \Cake\ORM\Entity $entity
 	 * @return bool|void
 	 */
-	public function beforeSave(Event $event, Entity $entity) {
-		return;
-
+	public function _beforeSave(Event $event, Entity $entity) {
 		$additional = ['locality', 'sublocality'];
 		foreach ($additional as $field) {
 			if (!empty($entity['geocoder_result'][$field])) {
@@ -72,7 +73,7 @@ class LocationsTable extends Table {
 		}
 
 		if (empty($result)) {
-			$this->create();
+			//$this->create();
 			$this->set(['Location' => ['name' => $locationName, 'country_id' => $countryId, 'country_name' => $country]]);
 			$result = $this->save();
 		}
