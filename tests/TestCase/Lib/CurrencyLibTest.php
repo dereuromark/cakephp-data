@@ -1,8 +1,7 @@
 <?php
 namespace Data\Test\TestCase\Lib;
 
-use Cake\Core\Plugin;
-use Data\Lib\CurrencyLib;
+use App\Lib\TestCurrencyLib;
 use Tools\TestSuite\TestCase;
 
 class CurrencyLibTest extends TestCase {
@@ -77,30 +76,6 @@ class CurrencyLibTest extends TestCase {
 	 */
 	public function testReset() {
 		$this->CurrencyLib->reset();
-	}
-
-}
-
-class TestCurrencyLib extends CurrencyLib {
-
-	protected function _getBitcoin() {
-		if (!empty($_SERVER['argv']) && in_array('--debug', $_SERVER['argv'], true)) {
-			debug('Live Data!');
-			return parent::_getBitcoin();
-		}
-		// Fake for now
-		return 55;
-	}
-
-	protected function _loadXml($url) {
-		if (!empty($_SERVER['argv']) && in_array('--debug', $_SERVER['argv'], true)) {
-			debug('Live Data!');
-			return parent::_loadXml($url);
-		}
-
-		$file = basename($url);
-		$url = Plugin::path('Data') . 'tests' . DS . 'test_files' . DS . 'xml' . DS . $file;
-		return parent::_loadXml($url);
 	}
 
 }

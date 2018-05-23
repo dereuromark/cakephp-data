@@ -5,12 +5,12 @@ use Geocoder\Model\Address;
 use Geocoder\Model\Bounds;
 use Geocoder\Model\Coordinates;
 use Geocoder\Model\Country;
-use Geo\Model\Behavior\GeocoderBehavior as ToolsGeocoderBehavior;
+use Geo\Model\Behavior\GeocoderBehavior;
 
 /**
  * A test mock
  */
-class GeocoderBehavior extends ToolsGeocoderBehavior {
+class TestGeocoderBehavior extends GeocoderBehavior {
 
 	/**
 	 * @param string $address

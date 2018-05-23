@@ -2,8 +2,8 @@
 
 namespace Data\Test\TestCase\Model\Table;
 
+use App\Model\Behavior\TestGeocoderBehavior;
 use Cake\ORM\TableRegistry;
-use App\Model\Behavior\GeocoderBehavior;
 use Tools\TestSuite\TestCase;
 
 class PostalCodesTableTest extends TestCase {
@@ -43,7 +43,7 @@ class PostalCodesTableTest extends TestCase {
 	public function testBasicSave() {
 		$config = $this->PostalCodes->behaviors()->Geocoder->getConfig();
 		$this->PostalCodes->removeBehavior('Geocoder');
-		$this->PostalCodes->addBehavior('Geocoder', ['className' => GeocoderBehavior::class] + $config);
+		$this->PostalCodes->addBehavior('Geocoder', ['className' => TestGeocoderBehavior::class] + $config);
 
 		$entity = $this->PostalCodes->newEntity(['code' => '81222']);
 		$this->assertEmpty($entity->getErrors());

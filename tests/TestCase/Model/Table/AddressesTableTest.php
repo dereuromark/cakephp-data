@@ -2,7 +2,7 @@
 
 namespace Data\Test\TestCase\Model\Table;
 
-use App\Model\Behavior\GeocoderBehavior;
+use App\Model\Behavior\TestGeocoderBehavior;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
 use Tools\TestSuite\TestCase;
@@ -66,7 +66,7 @@ class AddressesTableTest extends TestCase {
 	 */
 	public function testBasicSave() {
 		$this->Addresses->removeBehavior('Geocoder');
-		$this->Addresses->addBehavior('Geocoder', ['className' => GeocoderBehavior::class]);
+		$this->Addresses->addBehavior('Geocoder', ['className' => TestGeocoderBehavior::class]);
 
 		$data = [
 			'foreign_id' => 1,
