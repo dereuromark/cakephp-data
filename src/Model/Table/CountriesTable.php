@@ -79,7 +79,7 @@ class CountriesTable extends Table {
 	/**
 	 * @param array $config
 	 */
-	public function __construct(array $config) {
+	public function __construct(array $config = []) {
 		parent::__construct($config);
 
 		if (Configure::read('Data.Country.State') === false) {
