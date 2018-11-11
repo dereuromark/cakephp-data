@@ -11,6 +11,14 @@ use Tools\Model\Table\Table;
 
 /**
  * @mixin \Search\Model\Behavior\SearchBehavior
+ * @method \Data\Model\Entity\Currency get($primaryKey, $options = [])
+ * @method \Data\Model\Entity\Currency newEntity($data = null, array $options = [])
+ * @method \Data\Model\Entity\Currency[] newEntities(array $data, array $options = [])
+ * @method \Data\Model\Entity\Currency|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\Currency|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\Currency patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \Data\Model\Entity\Currency[] patchEntities($entities, array $data, array $options = [])
+ * @method \Data\Model\Entity\Currency findOrCreate($search, callable $callback = null, $options = [])
  */
 class CurrenciesTable extends Table {
 

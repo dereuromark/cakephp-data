@@ -21,6 +21,7 @@ use Tools\Utility\L10n;
  * @method \Data\Model\Entity\Language patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \Data\Model\Entity\Language[] patchEntities($entities, array $data, array $options = [])
  * @method \Data\Model\Entity\Language findOrCreate($search, callable $callback = null, $options = [])
+ * @method \Data\Model\Entity\Language|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  */
 class LanguagesTable extends Table {
 

@@ -19,6 +19,8 @@ use Tools\Model\Table\Table;
  * @method \Data\Model\Entity\Country patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \Data\Model\Entity\Country[] patchEntities($entities, array $data, array $options = [])
  * @method \Data\Model\Entity\Country findOrCreate($search, callable $callback = null, $options = [])
+ * @property \Data\Model\Table\StatesTable|\Cake\ORM\Association\HasMany $States
+ * @method \Data\Model\Entity\Country|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  */
 class CountriesTable extends Table {
 

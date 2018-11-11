@@ -3,6 +3,13 @@ namespace Data\Model\Table;
 
 use Tools\Model\Table\Table;
 
+/**
+ * @property \Cake\ORM\Table|\Cake\ORM\Association\BelongsTo $ParentContinents
+ * @property \Cake\ORM\Table|\Cake\ORM\Association\HasMany $ChildContinents
+ * @property \Cake\ORM\Table|\Cake\ORM\Association\HasMany $Countries
+ *
+ * @mixin \Cake\ORM\Behavior\TreeBehavior
+ */
 class ContinentsTable extends Table {
 
 	/**

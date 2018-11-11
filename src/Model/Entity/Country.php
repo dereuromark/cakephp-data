@@ -14,11 +14,13 @@ use Tools\Model\Entity\Entity;
  * @property string $special
  * @property int $zip_length
  * @property int $sort
- * @property \Cake\I18n\Time $modified
+ * @property \Cake\I18n\FrozenTime|null $modified
  * @property string $address_format
  * @property float $lng
  * @property float $lat
  * @property string $zip_regexp
+ * @property int $status
+ * @property \Data\Model\Entity\State[] $states
  */
 class Country extends Entity {
 }

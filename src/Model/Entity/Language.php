@@ -14,7 +14,7 @@ use Tools\Model\Entity\Entity;
  * @property string $locale_fallback
  * @property int $status
  * @property int $sort
- * @property \Cake\I18n\Time $modified
+ * @property \Cake\I18n\FrozenTime $modified
  */
 class Language extends Entity {
 

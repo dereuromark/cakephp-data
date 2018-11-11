@@ -9,6 +9,15 @@ use Tools\Model\Table\Table;
 
 /**
  * @mixin \Search\Model\Behavior\SearchBehavior
+ * @method \Data\Model\Entity\State get($primaryKey, $options = [])
+ * @method \Data\Model\Entity\State newEntity($data = null, array $options = [])
+ * @method \Data\Model\Entity\State[] newEntities(array $data, array $options = [])
+ * @method \Data\Model\Entity\State|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\State|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\State patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \Data\Model\Entity\State[] patchEntities($entities, array $data, array $options = [])
+ * @method \Data\Model\Entity\State findOrCreate($search, callable $callback = null, $options = [])
+ * @mixin \Tools\Model\Behavior\SluggedBehavior
  */
 class StatesTable extends Table {
 
