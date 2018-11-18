@@ -159,7 +159,7 @@ class MimeTypesController extends DataAppController {
 			$this->request->session()->delete($model . '.search');
 		} else {
 
-		if (!empty($this->request->data) && !empty($this->request->data['Form']['field'])) {
+		if ($this->request->getData() && !empty($this->request->data['Form']['field'])) {
 			$fieldStr = $this->request->data['Form']['field'];
 		} elseif (!empty($this->request->query['field'])) {
 			$fieldStr = $this->request->query['field'];
@@ -167,7 +167,7 @@ class MimeTypesController extends DataAppController {
 			$fieldStr = $sessionSearch['field'];
 		}
 
-		if (!empty($this->request->data) && !empty($this->request->data['Form']['search'])) {
+		if ($this->request->getData() && !empty($this->request->data['Form']['search'])) {
 			$searchStr = $this->request->data['Form']['search'];
 		} elseif (!empty($this->request->query['search'])) {
 			$searchStr = $this->request->query['search'];

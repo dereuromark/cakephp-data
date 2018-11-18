@@ -73,7 +73,7 @@ class AddressesController extends DataAppController {
 			$this->Flash->error(__('formContainsErrors'));
 
 		}
-		if (empty($this->request->data)) {
+		if (!$this->request->getData()) {
 			//$this->request->data = $address;
 			$belongsTo = ['' => ' - keine Auswahl - '];
 			foreach ($this->Addresses->belongsTo as $b => $content) {
