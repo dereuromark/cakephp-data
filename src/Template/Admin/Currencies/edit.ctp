@@ -8,13 +8,13 @@
 	<fieldset>
 		<legend><?php echo __('Edit {0}', __('Currency'));?></legend>
 	<?php
-		//echo $this->Form->input('id');
-		echo $this->Form->input('name');
-		echo $this->Form->input('code');
-		echo $this->Form->input('symbol_left');
-		echo $this->Form->input('symbol_right');
-		echo $this->Form->input('decimal_places');
-		echo $this->Form->input('value');
+		//echo $this->Form->control('id');
+		echo $this->Form->control('name');
+		echo $this->Form->control('code');
+		echo $this->Form->control('symbol_left');
+		echo $this->Form->control('symbol_right');
+		echo $this->Form->control('decimal_places');
+		echo $this->Form->control('value');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>

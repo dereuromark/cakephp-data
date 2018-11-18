@@ -10,10 +10,10 @@
 	<fieldset>
 		<legend><?php echo __('Add {0}', __('Continent')); ?></legend>
 	<?php
-		echo $this->Form->input('name');
-		//echo $this->Form->input('ori_name');
-		echo $this->Form->input('parent_id', ['empty' => ' - [ ' . __('pleaseSelect') . ' ] - ']);
-		//echo $this->Form->input('status');
+		echo $this->Form->control('name');
+		//echo $this->Form->control('ori_name');
+		echo $this->Form->control('parent_id', ['empty' => ' - [ ' . __('pleaseSelect') . ' ] - ']);
+		//echo $this->Form->control('status');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>

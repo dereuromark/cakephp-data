@@ -65,7 +65,7 @@ class PostalCodesController extends DataAppController {
 		$postalCode = $this->PostalCodes->newEntity();
 
 		if ($this->Common->isPosted()) {
-			$postalCode = $this->PostalCodes->patchEntity($postalCode, $this->request->data);
+			$postalCode = $this->PostalCodes->patchEntity($postalCode, $this->request->getData());
 			if ($this->PostalCodes->save($postalCode)) {
 				$var = $postalCode['code'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
@@ -88,7 +88,7 @@ class PostalCodesController extends DataAppController {
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
-			$postalCode = $this->PostalCodes->patchEntity($postalCode, $this->request->data);
+			$postalCode = $this->PostalCodes->patchEntity($postalCode, $this->request->getData());
 
 			if ($this->PostalCodes->save($postalCode)) {
 				$var = $postalCode['code'];

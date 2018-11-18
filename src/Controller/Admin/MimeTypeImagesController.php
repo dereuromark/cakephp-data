@@ -304,7 +304,7 @@ class MimeTypeImagesController extends DataAppController {
 
 			# upload new image, if given...
 			if (!empty($this->request->data['file']['tmp_name'])) {
-				$this->MimeTypeImage->set($this->request->data);
+				$this->MimeTypeImage->set($this->request->getData());
 				$this->MimeTypeImage->validates();
 
 				if (!$this->_uploadImage($this->request->data['file'])) {
@@ -342,7 +342,7 @@ class MimeTypeImagesController extends DataAppController {
 		if ($this->Common->isPosted()) {
 			# upload new image, if given...
 			if (!empty($this->request->data['file']['tmp_name'])) {
-				$this->MimeTypeImage->set($this->request->data);
+				$this->MimeTypeImage->set($this->request->getData());
 				$this->MimeTypeImage->validates();
 
 				if (!$this->_uploadImage($this->request->data['file'])) {

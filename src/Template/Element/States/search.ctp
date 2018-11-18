@@ -3,7 +3,7 @@
  */
 echo $this->Form->create(); ?>
 <?php echo __('Country');?>:&nbsp;&nbsp;
-<?php echo $this->Form->input('country_id', [
+<?php echo $this->Form->control('country_id', [
 	'class' => 'filter',
 	'label' => false,
 	'div' => false,

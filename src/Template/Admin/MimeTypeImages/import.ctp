@@ -18,7 +18,7 @@
 		<?php echo count($fileExtensions)?> neue:
 	<?php
 		if (!empty($fileExtensions)) {
-			echo $this->Form->input('extensions', ['type' => 'select', 'multiple' => 'checkbox', 'options' => $fileExtensions, 'label' => false]);
+			echo $this->Form->control('extensions', ['type' => 'select', 'multiple' => 'checkbox', 'options' => $fileExtensions, 'label' => false]);
 		} else {
 			echo '- - -';
 		}
@@ -33,7 +33,7 @@
 	<fieldset>
 		<legend><?php echo __('Add {0}', __('Extensions'));?></legend>
 	<?php
-		echo $this->Form->input('import', ['type' => 'textarea']);
+		echo $this->Form->control('import', ['type' => 'textarea']);
 	?>
 	Eine mit Komma, Leerzeichen, NewLine, etc. separierte Liste, die nur Endungen (exe, jpg, ...) oder Dateien (1.jpg, 2.gif) enthält, deren Endungen dann importiert werden.
 	</fieldset>

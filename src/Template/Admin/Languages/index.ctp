@@ -15,8 +15,8 @@ use Cake\Core\Plugin;
 <div class="search-box">
 <?php
 echo $this->Form->create($language);
-echo $this->Form->input('search', ['placeholder' => __('wildcardSearch {0} and {1}', '*', '?')]);
-echo $this->Form->input('dir', ['label' => __('Direction'), 'options' => $language::directions(), 'empty' => Configure::read('Select.defaultBefore') . __('noSelection') . Configure::read('Select.defaultAfter')]);
+echo $this->Form->control('search', ['placeholder' => __('wildcardSearch {0} and {1}', '*', '?')]);
+echo $this->Form->control('dir', ['label' => __('Direction'), 'options' => $language::directions(), 'empty' => Configure::read('Select.defaultBefore') . __('noSelection') . Configure::read('Select.defaultAfter')]);
 echo $this->Form->submit(__('Search'), []);
 echo $this->Form->end();
 ?>

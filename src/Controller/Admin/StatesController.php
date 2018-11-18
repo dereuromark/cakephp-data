@@ -124,7 +124,7 @@ class StatesController extends DataAppController {
 		$state = $this->States->newEntity();
 
 		if ($this->Common->isPosted()) {
-			$state = $this->States->patchEntity($state, $this->request->data);
+			$state = $this->States->patchEntity($state, $this->request->getData());
 			if ($this->States->save($state)) {
 				$id = $this->States->id;
 				$name = $this->request->data['name'];
@@ -147,7 +147,7 @@ class StatesController extends DataAppController {
 		$state = $this->States->get($id);
 
 		if ($this->Common->isPosted()) {
-			$state = $this->States->patchEntity($state, $this->request->data);
+			$state = $this->States->patchEntity($state, $this->request->getData());
 
 			if ($this->States->save($state)) {
 				$name = $this->request->data['name'];

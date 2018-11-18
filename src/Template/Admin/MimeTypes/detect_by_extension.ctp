@@ -19,7 +19,7 @@ foreach ($extensions as $extension) {
 	<fieldset>
 		<legend><?php echo __('Test');?></legend>
 	<?php
-		echo $this->Form->input('file', ['type' => 'file']);
+		echo $this->Form->control('file', ['type' => 'file']);
 	?>
 	</fieldset>
 <?php echo $this->Form->end('Submit');?>

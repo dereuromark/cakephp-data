@@ -11,7 +11,7 @@ $this->Html->script($this->GoogleMap->apiUrl(), ['inline' => false])?>
 	<fieldset>
 		<legend><?php echo __('Search {0}', __('Area Code')); ?></legend>
 	<?php
-		echo $this->Form->input('code');
+		echo $this->Form->control('code');
 		echo $this->Form->submit(__('Submit'));
 	?>
 	</fieldset>

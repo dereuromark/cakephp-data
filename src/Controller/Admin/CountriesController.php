@@ -219,7 +219,7 @@ class CountriesController extends DataAppController {
 		$country = $this->Countries->get($id);
 
 		if ($this->Common->isPosted()) {
-			$country = $this->Countries->patchEntity($country, $this->request->data);
+			$country = $this->Countries->patchEntity($country, $this->request->getData());
 			if ($this->Countries->save($country)) {
 				$name = $country['name'];
 				$this->Flash->success(__('record edit {0} saved', h($name)));

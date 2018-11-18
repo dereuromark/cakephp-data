@@ -37,7 +37,7 @@ class AddressesController extends DataAppController {
 	public function add() {
 		$address = $this->Addresses->newEntity();
 		if ($this->Common->isPosted()) {
-			$address = $this->Addresses->patchEntity($address, $this->request->data);
+			$address = $this->Addresses->patchEntity($address, $this->request->getData());
 			if ($this->Addresses->save($address)) {
 				$var = $address['formatted_address'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
@@ -63,7 +63,7 @@ class AddressesController extends DataAppController {
 	public function edit($id = null) {
 		$address = $this->Addresses->get($id);
 		if ($this->Common->isPosted()) {
-			$address = $this->Addresses->patchEntity($address, $this->request->data);
+			$address = $this->Addresses->patchEntity($address, $this->request->getData());
 
 			if ($this->Addresses->save($address)) {
 				$var = $address['formatted_address'];

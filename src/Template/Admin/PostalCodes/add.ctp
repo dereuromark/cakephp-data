@@ -10,11 +10,11 @@
 	<fieldset>
 		<legend><?php echo __('Add {0}', __('Postal Code')); ?></legend>
 	<?php
-		echo $this->Form->input('code');
-		echo $this->Form->input('country_id');
-		echo $this->Form->input('lat');
-		echo $this->Form->input('lng');
-		echo $this->Form->input('official_address');
+		echo $this->Form->control('code');
+		echo $this->Form->control('country_id');
+		echo $this->Form->control('lat');
+		echo $this->Form->control('lng');
+		echo $this->Form->control('official_address');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>

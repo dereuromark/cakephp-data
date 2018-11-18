@@ -8,18 +8,18 @@
 	<fieldset>
 		<legend><?php echo __('Add {0}', __('Country'));?></legend>
 	<?php
-		echo $this->Form->input('name');
-		echo $this->Form->input('ori_name');
-		echo $this->Form->input('iso2');
-		echo $this->Form->input('iso3');
-		echo $this->Form->input('country_code');
-		echo $this->Form->input('special');
-		echo $this->Form->input('address_format', ['type' => 'textarea']);
+		echo $this->Form->control('name');
+		echo $this->Form->control('ori_name');
+		echo $this->Form->control('iso2');
+		echo $this->Form->control('iso3');
+		echo $this->Form->control('country_code');
+		echo $this->Form->control('special');
+		echo $this->Form->control('address_format', ['type' => 'textarea']);
 		echo '<div class="input checkbox">Platzhalter sind :name :street_address :postcode :city :country</div>';
 		echo '<br/>';
 
-		//echo $this->Form->input('sort');
-		echo $this->Form->input('status', ['type' => 'checkbox', 'label' => 'Aktiv']);
+		//echo $this->Form->control('sort');
+		echo $this->Form->control('status', ['type' => 'checkbox', 'label' => 'Aktiv']);
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>

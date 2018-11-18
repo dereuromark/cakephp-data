@@ -219,7 +219,7 @@ class MimeTypesController extends DataAppController {
 			$this->request->data['name'] = ucwords($this->request->data['name']); //ucfirst()
 			$this->request->data['mime_type_image_id'] = (int)$this->request->data['mime_type_image_id'];
 
-			$mimeType = $this->MimeTypes->patchEntity($mimeType, $this->request->data);
+			$mimeType = $this->MimeTypes->patchEntity($mimeType, $this->request->getData());
 			if ($this->MimeTypes->save($mimeType)) {
 				$id = $this->MimeTypes->id;
 				//$name = $this->request->data['name'];
@@ -240,7 +240,7 @@ class MimeTypesController extends DataAppController {
 		if ($this->Common->isPosted()) {
 			$this->request->data['name'] = ucwords($this->request->data['name']); //ucfirst()
 			$this->request->data['mime_type_image_id'] = (int)$this->request->data['mime_type_image_id'];
-			$mimeType = $this->MimeTypes->patchEntity($mimeType, $this->request->data);
+			$mimeType = $this->MimeTypes->patchEntity($mimeType, $this->request->getData());
 
 			if ($this->MimeTypes->save($mimeType)) {
 				//$name = $this->request->data['name'];

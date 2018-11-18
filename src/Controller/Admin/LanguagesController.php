@@ -57,7 +57,7 @@ class LanguagesController extends DataAppController {
 
 		if ($this->Common->isPosted()) {
 			//$this->Languages->create();
-			$language = $this->Languages->patchEntity($language, $this->request->data);
+			$language = $this->Languages->patchEntity($language, $this->request->getData());
 			if ($this->Languages->save($language)) {
 				$var = $this->request->data['name'];
 				$this->Flash->success(__('record add {0} saved', h($var)));

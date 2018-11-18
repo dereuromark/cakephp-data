@@ -10,20 +10,20 @@
 	<fieldset>
 		<legend><?php echo __('Add {0}', __('City')); ?></legend>
 	<?php
-		echo $this->Form->input('country_id');
-		echo $this->Form->input('official_id', ['type' => 'text']);
+		echo $this->Form->control('country_id');
+		echo $this->Form->control('official_id', ['type' => 'text']);
 
 		if (Configure::read('Data.City.County') !== false) {
-			echo $this->Form->input('county_id');
+			echo $this->Form->control('county_id');
 		}
 
-		echo $this->Form->input('name');
+		echo $this->Form->control('name');
 
-		echo $this->Form->input('postal_code');
-		echo $this->Form->input('postal_code_unique');
+		echo $this->Form->control('postal_code');
+		echo $this->Form->control('postal_code_unique');
 
-		echo $this->Form->input('citizens');
-		echo $this->Form->input('description');
+		echo $this->Form->control('citizens');
+		echo $this->Form->control('description');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>

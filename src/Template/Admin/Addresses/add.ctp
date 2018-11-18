@@ -10,22 +10,22 @@
 	<fieldset>
 		<legend><?php echo __('Add {0}', __('Address')); ?></legend>
 	<?php
-		echo $this->Form->input('country_id', ['empty' => [0 => ' - [ ' . __('noSelection') . ' ] - ']]);
+		echo $this->Form->control('country_id', ['empty' => [0 => ' - [ ' . __('noSelection') . ' ] - ']]);
 	if (Configure::read('Data.Address.State')) {
-		echo $this->Form->input('country_province_id', ['empty' => [0 => ' - [ ' . __('noSelection') . ' ] - ']]);
+		echo $this->Form->control('country_province_id', ['empty' => [0 => ' - [ ' . __('noSelection') . ' ] - ']]);
 	}
-		echo $this->Form->input('first_name');
-		echo $this->Form->input('last_name');
-		echo $this->Form->input('street');
-		echo $this->Form->input('postal_code');
-		echo $this->Form->input('city');
+		echo $this->Form->control('first_name');
+		echo $this->Form->control('last_name');
+		echo $this->Form->control('street');
+		echo $this->Form->control('postal_code');
+		echo $this->Form->control('city');
 	?>
 	</fieldset>
 	<fieldset>
 		<legend><?php echo __('Relations'); ?></legend>
 	<?php
-		echo $this->Form->input('model');
-		echo $this->Form->input('foreign_id', ['type' => 'text', 'empty' => [0 => ' - [ ' . __('noSelection') . ' ] - ']]);
+		echo $this->Form->control('model');
+		echo $this->Form->control('foreign_id', ['type' => 'text', 'empty' => [0 => ' - [ ' . __('noSelection') . ' ] - ']]);
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>

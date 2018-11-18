@@ -8,16 +8,16 @@
 	<fieldset>
 		<legend><?php echo __('Add Mime Type Image');?></legend>
 	<?php
-		echo $this->Form->input('name');
+		echo $this->Form->control('name');
 		echo '<br/>';
 
-		echo $this->Form->input('file', ['type' => 'file', 'after' => ' Wird automatisch auf 16px Höhe verkleinert']);
-		echo $this->Form->input('image', ['type' => 'select', 'options' => $availableImages, 'empty' => '- [ n/a ] -']);
-		echo $this->Form->input('ext', ['options' => \Data\Model\Table\MimeTypeImagesTable::extensions(), 'empty' => '- [ n/a ] -']);
+		echo $this->Form->control('file', ['type' => 'file', 'after' => ' Wird automatisch auf 16px Höhe verkleinert']);
+		echo $this->Form->control('image', ['type' => 'select', 'options' => $availableImages, 'empty' => '- [ n/a ] -']);
+		echo $this->Form->control('ext', ['options' => \Data\Model\Table\MimeTypeImagesTable::extensions(), 'empty' => '- [ n/a ] -']);
 
 		echo '<br/>';
-		echo $this->Form->input('active');
-		echo $this->Form->input('details', ['type' => 'textarea']);
+		echo $this->Form->control('active');
+		echo $this->Form->control('details', ['type' => 'textarea']);
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>

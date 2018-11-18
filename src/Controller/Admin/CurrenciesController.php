@@ -71,7 +71,7 @@ class CurrenciesController extends DataAppController {
 		$currency = $this->Currencies->newEntity();
 
 		if ($this->Common->isPosted()) {
-			$currency = $this->Currencies->patchEntity($currency, $this->request->data);
+			$currency = $this->Currencies->patchEntity($currency, $this->request->getData());
 			if ($this->Currencies->save($currency)) {
 				$id = $this->Currencies->id;
 				//$name = $this->request->data['Currency']['name'];
@@ -91,7 +91,7 @@ class CurrenciesController extends DataAppController {
 	public function edit($id = null) {
 		$currency = $this->Currencies->get($id);
 		if ($this->Common->isPosted()) {
-			$currency = $this->Currencies->patchEntity($currency, $this->request->data);
+			$currency = $this->Currencies->patchEntity($currency, $this->request->getData());
 			if ($this->Currencies->save($currency)) {
 				//$name = $this->request->data['Currency']['name'];
 				$this->Flash->success(__('record edit {0} saved', $id));

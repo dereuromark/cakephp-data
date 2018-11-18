@@ -8,7 +8,7 @@
 
 <div class="searchWrapper">
 <?php echo $this->Form->create();?>
-<div class="floatLeft"><?php echo $this->Form->input('Form.search', ['label' => '(Teil)Suche:', 'value' => $searchStr]);?></div>
+<div class="floatLeft"><?php echo $this->Form->control('Form.search', ['label' => '(Teil)Suche:', 'value' => $searchStr]);?></div>
 <div class="floatLeft"><?php echo $this->Form->end(__('Submit'));?></div>
 <?php
 if (!empty($searchStr)) {
