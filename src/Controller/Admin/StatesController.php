@@ -192,13 +192,13 @@ class StatesController extends DataAppController {
 		$saveCid = true;
 		if (empty($cid)) {
 			$saveCid = false;
-			$cid = $this->request->session()->read('State.cid');
+			$cid = $this->request->getSession()->read('State.cid');
 		}
 		if (!empty($cid) && $cid < 0) {
-			$this->request->session()->delete('State.cid');
+			$this->request->getSession()->delete('State.cid');
 			$cid = null;
 		} elseif (!empty($cid) && $saveCid) {
-			$this->request->session()->write('State.cid', $cid);
+			$this->request->getSession()->write('State.cid', $cid);
 		}
 
 		if (!empty($cid)) {
