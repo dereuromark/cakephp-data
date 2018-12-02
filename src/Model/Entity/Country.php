@@ -23,4 +23,7 @@ use Tools\Model\Entity\Entity;
  * @property \Data\Model\Entity\State[] $states
  */
 class Country extends Entity {
+	
+	const STATUS_INACTIVE = 0;
+	const STATUS_ACTIVE = 1;
 }

@@ -6,6 +6,7 @@ use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
+use Data\Model\Entity\Country;
 use Exception;
 use Geo\Geocoder\Geocoder;
 use Tools\Model\Table\Table;
@@ -115,7 +116,7 @@ class CountriesTable extends Table {
 	 * @return \Cake\ORM\Query
 	 */
 	public function findActive(array $options = []) {
-		return $this->find('all', $options)->where([$this->alias() . '.status' => true]);
+		return $this->find('all', $options)->where([$this->alias() . '.status' => Country::STATUS_ACTIVE]);
 	}
 
 	/**
