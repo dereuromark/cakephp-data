@@ -9,6 +9,9 @@ use Data\Model\Entity\Country;
 use Tools\Model\Table\Table;
 use Tools\Utility\Utility;
 
+/**
+ * @mixin \Geo\Model\Behavior\GeocoderBehavior
+ */
 class LocationsTable extends Table {
 
 	/**

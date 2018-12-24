@@ -18,6 +18,7 @@ use Tools\Model\Table\Table;
  * @method \Data\Model\Entity\State[] patchEntities($entities, array $data, array $options = [])
  * @method \Data\Model\Entity\State findOrCreate($search, callable $callback = null, $options = [])
  * @mixin \Tools\Model\Behavior\SluggedBehavior
+ * @property \Data\Model\Table\CountriesTable|\Cake\ORM\Association\BelongsTo $Countries
  */
 class StatesTable extends Table {
 

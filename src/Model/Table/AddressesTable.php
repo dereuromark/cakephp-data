@@ -19,6 +19,11 @@ if (!defined('CLASS_USERS')) {
  * @method \Data\Model\Entity\Address patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \Data\Model\Entity\Address[] patchEntities($entities, array $data, array $options = [])
  * @method \Data\Model\Entity\Address findOrCreate($search, callable $callback = null, $options = [])
+ * @property \Data\Model\Table\CountriesTable|\Cake\ORM\Association\BelongsTo $Countries
+ * @property \Data\Model\Table\StatesTable|\Cake\ORM\Association\BelongsTo $States
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @method \Data\Model\Entity\Address|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @mixin \Geo\Model\Behavior\GeocoderBehavior
  */
 class AddressesTable extends Table {
 

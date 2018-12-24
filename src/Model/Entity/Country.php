@@ -15,10 +15,10 @@ use Tools\Model\Entity\Entity;
  * @property int $zip_length
  * @property int $sort
  * @property \Cake\I18n\FrozenTime|null $modified
- * @property string $address_format
+ * @property string|null $address_format
  * @property float $lng
  * @property float $lat
- * @property string $zip_regexp
+ * @property string|null $zip_regexp
  * @property int $status
  * @property \Data\Model\Entity\State[] $states
  */

@@ -14,6 +14,8 @@ use Tools\Model\Table\Table;
  * @method \Data\Model\Entity\PostalCode patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \Data\Model\Entity\PostalCode[] patchEntities($entities, array $data, array $options = [])
  * @method \Data\Model\Entity\PostalCode findOrCreate($search, callable $callback = null, $options = [])
+ * @method \Data\Model\Entity\PostalCode|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @mixin \Geo\Model\Behavior\GeocoderBehavior
  */
 class PostalCodesTable extends Table {
 
