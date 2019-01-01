@@ -11,8 +11,8 @@ class CountriesTableTest extends TestCase {
 	 * @var array
 	 */
 	public $fixtures = [
-		'plugin.data.countries',
-		'plugin.data.states'
+		'plugin.Data.Countries',
+		'plugin.Data.States'
 	];
 
 	/**

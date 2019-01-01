@@ -11,7 +11,7 @@ class CitiesTableTest extends TestCase {
 	 * @var array
 	 */
 	public $fixtures = [
-		'plugin.data.cities'
+		'plugin.Data.Cities'
 	];
 
 	/**

@@ -13,7 +13,10 @@ class CountryStateHelperComponentTest extends TestCase {
 	/**
 	 * @var array
 	 */
-	public $fixtures = ['plugin.data.countries', 'plugin.data.states'];
+	public $fixtures = [
+		'plugin.Data.Countries',
+		'plugin.Data.States'
+	];
 
 	/**
 	 * @var \App\Controller\AppController

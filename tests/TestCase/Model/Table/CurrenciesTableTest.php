@@ -12,7 +12,7 @@ class CurrenciesTableTest extends TestCase {
 	 * @var array
 	 */
 	public $fixtures = [
-		'plugin.data.currencies'
+		'plugin.Data.Currencies'
 	];
 
 	/**

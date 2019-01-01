@@ -15,7 +15,9 @@ class GeoImportLibTest extends TestCase {
 	/**
 	 * @var array
 	 */
-	public $fixtures = ['plugin.data.countries'];
+	public $fixtures = [
+		'plugin.Data.Countries'
+	];
 
 	/**
 	 * @var \Data\Lib\GeoImportLib|\PHPUnit_Framework_MockObject_MockObject

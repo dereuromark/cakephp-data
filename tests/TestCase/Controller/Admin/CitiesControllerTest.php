@@ -13,7 +13,7 @@ class CitiesControllerTest extends IntegrationTestCase {
 	 * @var array
 	 */
 	public $fixtures = [
-		'plugin.data.Cities'
+		'plugin.Data.Cities'
 	];
 
 	/**

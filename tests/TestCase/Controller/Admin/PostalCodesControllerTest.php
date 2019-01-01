@@ -13,8 +13,8 @@ class PostalCodesControllerTest extends IntegrationTestCase {
 	 * @var array
 	 */
 	public $fixtures = [
-		'plugin.data.PostalCodes',
-		'plugin.data.Countries'
+		'plugin.Data.PostalCodes',
+		'plugin.Data.Countries'
 	];
 
 	/**

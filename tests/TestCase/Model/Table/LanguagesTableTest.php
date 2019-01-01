@@ -11,7 +11,7 @@ class LanguagesTableTest extends TestCase {
 	 * @var array
 	 */
 	public $fixtures = [
-		'plugin.data.languages'
+		'plugin.Data.Languages'
 	];
 
 	/**

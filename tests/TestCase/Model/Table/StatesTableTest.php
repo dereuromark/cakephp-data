@@ -11,7 +11,7 @@ class StatesTableTest extends TestCase {
 	 * @var array
 	 */
 	public $fixtures = [
-		'plugin.data.states'
+		'plugin.Data.States'
 	];
 
 	/**
