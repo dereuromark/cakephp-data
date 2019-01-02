@@ -5,7 +5,6 @@ use ArrayObject;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
 use Cake\I18n\Time;
-use Cake\ORM\Entity;
 use Data\Model\Entity\Address;
 use Tools\Model\Table\Table;
 

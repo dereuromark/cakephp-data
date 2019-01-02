@@ -4,6 +4,7 @@ namespace Data\Controller\Admin;
 use Cake\Core\Plugin;
 use Data\Controller\DataAppController;
 use Data\Model\Entity\Language;
+use RuntimeException;
 
 /**
  * @property \Data\Model\Table\LanguagesTable $Languages
@@ -107,7 +108,7 @@ class LanguagesController extends DataAppController {
 			return $this->redirect(['action' => 'index']);
 		}
 
-		throw new \RuntimeException();
+		throw new RuntimeException();
 	}
 
 	/**
