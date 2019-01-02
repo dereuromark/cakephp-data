@@ -5,6 +5,7 @@ use Data\Controller\DataAppController;
 
 /**
  * @property \Data\Model\Table\CurrenciesTable $Currencies
+ * @method \Data\Model\Entity\Currency[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class CurrenciesController extends DataAppController {
 

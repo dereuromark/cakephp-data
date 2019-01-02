@@ -8,6 +8,8 @@ use Exception;
 
 /**
  * @property \Data\Model\Table\StatesTable $States
+ * @property \Search\Controller\Component\PrgComponent $Prg
+ * @method \Data\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class StatesController extends DataAppController {
 

@@ -1,6 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
+ * @var \Data\Model\Entity\Currency[]|\Cake\Collection\CollectionInterface $currencies
  */
 use Cake\Core\Plugin;
 ?>

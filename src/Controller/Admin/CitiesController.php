@@ -8,6 +8,7 @@ use Data\Controller\DataAppController;
  */
 /**
  * @property \Data\Model\Table\CitiesTable $Cities
+ * @method \Cake\ORM\Entity[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class CitiesController extends DataAppController {
 
@@ -41,7 +42,7 @@ class CitiesController extends DataAppController {
 	 */
 	public function add() {
 		if ($this->Common->isPosted()) {
-			$this->Cities->create();
+			//$this->Cities->create();
 			if ($this->Cities->save($this->request->data)) {
 				$var = $this->request->data['name'];
 				$this->Flash->success(__('record add {0} saved', h($var)));

@@ -1,6 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
+ * @var \Data\Model\Entity\Address[]|\Cake\Collection\CollectionInterface $addresses
  */
 ?>
 <div class="page index">

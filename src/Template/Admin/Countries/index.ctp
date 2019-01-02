@@ -4,6 +4,7 @@
  */
 /**
  * @var \App\View\AppView $this
+ * @var \Data\Model\Entity\Country[]|\Cake\Collection\CollectionInterface $countries
  */
 use Cake\Core\Plugin;
 ?>

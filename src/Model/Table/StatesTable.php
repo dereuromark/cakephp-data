@@ -105,7 +105,7 @@ class StatesTable extends Table {
 	public function initialize(array $config) {
 		parent::initialize($config);
 
-		if (!Plugin::loaded('Search')) {
+		if (!Plugin::isLoaded('Search')) {
 			return;
 		}
 

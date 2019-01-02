@@ -66,7 +66,7 @@ class LocationsTable extends Table {
 	 * @return array location on success, false otherwise
 	 */
 	public function getLocation($locationName, $countryId = null) {
-		$country = !empty($countryId) ? ', ' . Country::addressList($countryId) : __('Germany');
+		$country = !empty($countryId) ? ', ' . $countryId : __('Germany'); ////Country::addressList($countryId)
 		$countryId = !empty($countryId) ? $countryId : 1;
 
 		if (is_numeric($locationName) && strlen($locationName) < 5) { //Country::zipCodeLength($countryId)
@@ -81,7 +81,7 @@ class LocationsTable extends Table {
 			$result = $this->save();
 		}
 
-		if (empty($result['Location']['lat']) && empty($result['Location']['lng']) || !empty($result['Location']['inconclusive'])) {
+		if (empty($result['lat']) && empty($result['lng']) || !empty($result['inconclusive'])) {
 			# delete lastest cached (and now not needed anymore) record
 			$this->delete($this->id, false);
 			return false;

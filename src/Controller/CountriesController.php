@@ -10,6 +10,7 @@ use Data\Controller\DataAppController;
 
 /**
  * @property \Data\Model\Table\CountriesTable $Countries
+ * @method \Data\Model\Entity\Country[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class CountriesController extends DataAppController {
 

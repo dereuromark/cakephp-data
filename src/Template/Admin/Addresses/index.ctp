@@ -1,9 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- */
-/**
- * @property \Cake\View\View $this
+ * @var \Data\Model\Entity\Address[]|\Cake\Collection\CollectionInterface $addresses
  */
 use Cake\Core\Configure;
 ?>

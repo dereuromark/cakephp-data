@@ -1,6 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
+ * @var \Data\Model\Entity\State[]|\Cake\Collection\CollectionInterface $states
  */
 ?>
 <div class="page index">

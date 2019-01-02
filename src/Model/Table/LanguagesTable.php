@@ -93,7 +93,7 @@ class LanguagesTable extends Table {
 	public function initialize(array $config) {
 		parent::initialize($config);
 
-		if (!Plugin::loaded('Search')) {
+		if (!Plugin::isLoaded('Search')) {
 			return;
 		}
 
@@ -165,20 +165,20 @@ class LanguagesTable extends Table {
 	 * Maps ISO 639-3 to I10n::__l10nCatalog (iso2?)
 	 *
 	 * @param string|null $iso3 Language
-	 * @return string|null Lang: iso2
+	 * @return string|array|null Lang: iso2
 	 */
 	public function iso3ToIso2($iso3 = null) {
 		if (!isset($this->L10n)) {
 			$this->L10n = new L10n();
 		}
-		//FIXME
-		$languages = $this->L10n->_l10nMap;
+		$languages = $this->L10n->map();
 		if ($iso3) {
 			if (array_key_exists($iso3, $languages)) {
 				return $languages[$iso3];
 			}
 			return null;
 		}
+
 		return $languages;
 	}
 
@@ -206,11 +206,12 @@ class LanguagesTable extends Table {
 
 		foreach ($res->find('table') as $element) {
 			$languageArray = $element->plaintext;
-			$languageArray = explode(TB . TB, $languageArray);
+			$languageArray = explode("\t" . "\t", $languageArray);
 			array_shift($languageArray);
 			$max = count($languageArray);
 
-			$languageArray[($max - 1)] = array_shift(explode(' ', $languageArray[($max - 1)]));
+			$pieces = explode(' ', $languageArray[($max - 1)]);
+			$languageArray[($max - 1)] = array_shift($pieces);
 			foreach ($languageArray as $key => $val) {
 				$languageArray[$key] = trim(str_replace(['&lt;', '&gt;', '&amp;', '&#039;', '&quot;', '&nbsp;'], ['<', '>', '&', '\'', '"', ' '], $val));
 			}
@@ -224,12 +225,13 @@ class LanguagesTable extends Table {
 
 				$iso2 = $languageArray[$i + 1];
 				if (strpos($iso3, '(') !== false) {
-					$iso3array = explode(NL, $iso3);
+					$iso3array = explode("\n", $iso3);
 					foreach ($iso3array as $key => $val) {
 						if (strpos($val, '(T)') === false) {
 							continue;
 						}
-						$iso3 = trim(array_shift(explode('(', $val)));
+						$pieces = explode('(', $val);
+						$iso3 = trim(array_shift($pieces));
 					}
 				}
 				$languages[$iso3] = ['iso3' => $iso3, 'iso2' => $iso2, 'ori_name' => $languageArray[$i + 2]];

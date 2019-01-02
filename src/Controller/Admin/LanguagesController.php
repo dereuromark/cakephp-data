@@ -7,6 +7,7 @@ use Data\Model\Entity\Language;
 
 /**
  * @property \Data\Model\Table\LanguagesTable $Languages
+ * @method \Data\Model\Entity\Language[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class LanguagesController extends DataAppController {
 
@@ -88,6 +89,11 @@ class LanguagesController extends DataAppController {
 		$this->set(compact('language'));
 	}
 
+	/**
+	 * @param int|null $id
+	 * @throws \RuntimeException
+	 * @return \Cake\Http\Response|null
+	 */
 	public function delete($id = null) {
 		$this->request->allowMethod('post');
 
@@ -100,8 +106,8 @@ class LanguagesController extends DataAppController {
 			$this->Flash->success(__('record del {0} done', h($var)));
 			return $this->redirect(['action' => 'index']);
 		}
-		$this->Flash->error(__('record del {0} not done exception', h($var)));
-		return $this->Common->autoRedirect(['action' => 'index']);
+
+		throw new \RuntimeException();
 	}
 
 	/**

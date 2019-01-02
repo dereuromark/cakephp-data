@@ -70,7 +70,7 @@ class PostalCodesTable extends Table {
 			'className' => 'Data.Countries'
 		]);
 
-		if (!Plugin::loaded('Search')) {
+		if (!Plugin::isLoaded('Search')) {
 			return;
 		}
 

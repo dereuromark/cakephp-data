@@ -3,7 +3,7 @@
  * @var \App\View\AppView $this
  *
  * @var \Data\Model\Entity\Language $language
- * @var \Data\Model\Entity\Language[] $languages
+ * @var \Data\Model\Entity\Language[]|\Cake\Collection\CollectionInterface $languages
  */
 use Cake\Core\Plugin;
 ?>

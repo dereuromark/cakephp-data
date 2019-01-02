@@ -6,6 +6,7 @@ use Data\Controller\DataAppController;
 
 /**
  * @property \Data\Model\Table\AddressesTable $Addresses
+ * @method \Data\Model\Entity\Address[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class AddressesController extends DataAppController {
 

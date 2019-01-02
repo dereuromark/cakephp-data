@@ -1,6 +1,8 @@
 <?php
 namespace Data\Model\Table;
 
+use ArrayObject;
+use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
 use Cake\I18n\Time;
 use Cake\ORM\Entity;
@@ -228,15 +230,15 @@ class AddressesTable extends Table {
 	 * @return bool
 	 */
 	public function fitsToCountry($data) {
-		if (!isset($entity['country_id']) || !isset($entity['country_province_id'])) {
+		if (!isset($data['country_id']) || !isset($data['country_province_id'])) {
 			return true;
 		}
 		$res = $this->Countries->States->find('list', [
-			'conditions' => ['country_id' => $entity['country_id']]
+			'conditions' => ['country_id' => $data['country_id']]
 		])->toArray();
 		if (empty($res) || array_shift($data) == 0) {
-			$entity['country_province_id'] = 0;
-		} elseif (empty($entity['country_province_id']) || !array_key_exists($entity['country_province_id'], $res)) {
+			$data['country_province_id'] = 0;
+		} elseif (empty($data['country_province_id']) || !array_key_exists($data['country_province_id'], $res)) {
 			return false;
 		}
 		return true;
@@ -272,11 +274,11 @@ class AddressesTable extends Table {
 
 	/**
 	 * @param \Cake\Event\Event $event
-	 * @param \Cake\ORM\Entity $entity
-	 *
-	 * @return bool
+	 * @param \Data\Model\Entity\Address $entity
+	 * @param \ArrayObject $options
+	 * @return void
 	 */
-	public function beforeSave(Event $event, Entity $entity) {
+	public function beforeSave(Event $event, EntityInterface $entity, ArrayObject $options) {
 		if (!empty($entity['formatted_address']) && !empty($entity['geocoder_result'])) {
 			# fix city/plz?
 			if (isset($entity['postal_code']) && empty($entity['postal_code'])) {
@@ -298,7 +300,7 @@ class AddressesTable extends Table {
 				$countryProvince = $this->Countries->States->find('first', ['conditions' => ['States.id' => $entity['country_province_id']]]);
 				if (!empty($countryProvince) && strlen($countryProvince['abbr']) === strlen($entity['geocoder_result']['country_province_code']) && $countryProvince['abbr'] != $entity['geocoder_result']['country_province_code']) {
 					$this->invalidate('country_province_id', 'Als Bundesland wurde für diese Adresse \'' . h($entity['geocoder_result']['country_province']) . '\' erwartet - du hast aber \'' . h($countryProvince['name']) . '\' angegeben. Liegt denn deine Adresse tatsächlich in einem anderen Bundesland? Dann gebe bitte die genaue PLZ und Ort an, damit das Bundesland dazu auch korrekt identifiziert werden kann.');
-					return false;
+					return;
 				}
 
 			# enter new id
@@ -318,10 +320,9 @@ class AddressesTable extends Table {
 			}
 		}
 
-		if (isset($entity['geocoder_result']) && !$this->behaviors()->loaded('Jsonable')) {
+		if (isset($entity['geocoder_result']) && !$this->behaviors()->has('Jsonable')) {
 			unset($entity['geocoder_result']);
 		}
-		return true;
 	}
 
 	/**

@@ -4,6 +4,9 @@ namespace Data\Controller;
 use App\Controller\AppController;
 use Cake\Event\Event;
 
+/**
+ * @property \Tools\Controller\Component\CommonComponent $Common
+ */
 class DataAppController extends AppController {
 
 	/**

@@ -9,6 +9,7 @@ use Data\Controller\DataAppController;
  */
 /**
  * @property \Data\Model\Table\PostalCodesTable $PostalCodes
+ * @method \Data\Model\Entity\PostalCode[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class PostalCodesController extends DataAppController {
 

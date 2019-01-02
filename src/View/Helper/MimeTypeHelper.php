@@ -10,6 +10,9 @@ if (!defined('FILE_CACHE')) {
 	define('FILE_CACHE', TMP);
 }
 
+/**
+ * @property \Cake\View\Helper\HtmlHelper $Html
+ */
 class MimeTypeHelper extends Helper {
 
 	/**

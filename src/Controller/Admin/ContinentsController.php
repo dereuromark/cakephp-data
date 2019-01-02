@@ -5,6 +5,7 @@ use Data\Controller\DataAppController;
 
 /**
  * @property \Data\Model\Table\ContinentsTable $Continents
+ * @method \Cake\ORM\Entity[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class ContinentsController extends DataAppController {
 
@@ -45,7 +46,7 @@ class ContinentsController extends DataAppController {
 
 			$this->Flash->error(__('formContainsErrors'));
 		}
-		$parents = [0 => __('Root')] + $this->Continents->ParentContinent->find('treeList', ['spacer' => '» ']);
+		$parents = [0 => __('Root')] + $this->Continents->ParentContinents->find('treeList', ['spacer' => '» ']);
 		$this->set(compact('continent', 'parents'));
 	}
 
@@ -70,7 +71,7 @@ class ContinentsController extends DataAppController {
 			$this->Flash->error(__('formContainsErrors'));
 		}
 
-		$parents = [0 => __('Root')] + $this->Continents->ParentContinent->find('treeList', ['spacer' => '» ']);
+		$parents = [0 => __('Root')] + $this->Continents->ParentContinents->find('treeList', ['spacer' => '» ']);
 		$this->set(compact('continent', 'parents'));
 	}
 

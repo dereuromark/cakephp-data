@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Data\Model\Entity\Country[] $countries
+ * @var \Data\Model\Entity\Country[]|\Cake\Collection\CollectionInterface $countries
  */
 ?>
 <div class="page index">

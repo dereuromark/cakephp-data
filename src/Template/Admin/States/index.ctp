@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var \Data\Model\Entity\State[]|\Cake\Collection\CollectionInterface $states
+ */
+?>
 <?php /**
  * @var \App\View\AppView $this
  * @var \Data\Model\Entity\State[] $states

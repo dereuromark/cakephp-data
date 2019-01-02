@@ -10,6 +10,8 @@ use Cake\View\Helper;
 
 /**
  * DataHelper with basic html snippets
+ *
+ * @property \Cake\View\Helper\HtmlHelper $Html
  */
 class DataHelper extends Helper {
 

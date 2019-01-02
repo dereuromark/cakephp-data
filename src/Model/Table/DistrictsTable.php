@@ -3,6 +3,9 @@ namespace Data\Model\Table;
 
 use Tools\Model\Table\Table;
 
+/**
+ * @property \Data\Model\Table\CitiesTable|\Cake\ORM\Association\BelongsTo $Cities
+ */
 class DistrictsTable extends Table {
 
 	/**

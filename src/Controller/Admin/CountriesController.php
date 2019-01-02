@@ -6,9 +6,11 @@ use Cake\Core\Plugin;
 use Cake\Event\Event;
 use Data\Controller\DataAppController;
 use Data\Model\Entity\Country;
+use Tools\Utility\Utility;
 
 /**
  * @property \Data\Model\Table\CountriesTable $Countries
+ * @method \Data\Model\Entity\Country[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class CountriesController extends DataAppController {
 
@@ -98,7 +100,7 @@ class CountriesController extends DataAppController {
 			if (!empty($this->request->data['Form'])) {
 				$count = 0;
 				foreach ($this->request->data['Form'] as $key => $val) {
-					$this->Countries->create();
+					//$this->Countries->create();
 					$data = ['iso3' => $val['iso3'], 'iso2' => $val['iso2'], 'name' => $val['name']];
 					if (empty($val['confirm'])) {
 						# do nothing
@@ -123,15 +125,15 @@ class CountriesController extends DataAppController {
 
 				} else {
 					$separator = $this->request->data['import_separator'];
-					$separator = Country::separators($separator, true);
+					//$separator = Country::separators($separator, true);
 				}
 				# separate list into single records
 
-				$countries = Tokenizer::parseList($list, $separator, false, false);
+				$countries = Utility::tokenize($list, $separator);
 				if (empty($countries)) {
 					$this->Countries->invalidate('import_separator', 'falscher Separator');
 				} elseif (!empty($this->request->data['import_pattern'])) {
-					$pattern = str_replace(['{SPACE}', '{TAB}'], [Country::separators(SEPARATOR_SPACE, true), Country::separators(SEPARATOR_TAB, true)], $this->request->data['import_pattern']);
+					//$pattern = str_replace(['{SPACE}', '{TAB}'], [Country::separators(SEPARATOR_SPACE, true), Country::separators(SEPARATOR_TAB, true)], $this->request->data['import_pattern']);
 					# select part that matches %name
 					foreach ($countries as $key => $danceStep) {
 						$tmp = sscanf($danceStep, $pattern); # returns array
@@ -196,7 +198,7 @@ class CountriesController extends DataAppController {
 	 */
 	public function add() {
 		if ($this->Common->isPosted()) {
-			$this->Countries->create();
+			//$this->Countries->create();
 			if ($this->Countries->save($this->request->data)) {
 				$id = $this->Countries->id;
 				//$name = $this->request->data['name'];

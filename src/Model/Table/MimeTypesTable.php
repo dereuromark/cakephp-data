@@ -145,17 +145,17 @@ class MimeTypesTable extends Table {
 			return false;
 		}
 		# notify admin
-		$this->Email = new Email();
-		$this->Email->to(Configure::read('Config.adminEmail'), Configure::read('Config.adminEmailname'));
-		$this->Email->replyTo(Configure::read('Config.adminEmail'), Configure::read('Config.adminEmailname'));
+		$email = new Email();
+		$email->to(Configure::read('Config.adminEmail'), Configure::read('Config.adminEmailname'));
+		$email->replyTo(Configure::read('Config.adminEmail'), Configure::read('Config.adminEmailname'));
 
-		$this->Email->subject(Configure::read('Config.page_name') . ' - ' . __('MimeType'));
-		$this->Email->template('simple_email');
+		$email->subject(Configure::read('Config.page_name') . ' - ' . __('MimeType'));
+		$email->template('simple_email');
 
 		$text = 'MimeType hinzugefügt: ' . $ext . '';
-		$this->Email->viewVars(compact('text'));
+		$email->viewVars(compact('text'));
 
-		if (!$this->Email->send()) {
+		if (!$email->send()) {
 			//$this->log('problem with mailing to admin after pushing mimeType');
 		}
 

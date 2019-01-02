@@ -13,7 +13,7 @@ use Tools\Model\Entity\Entity;
  * @property float|null $value
  * @property bool $base
  * @property bool $active
- * @property \Cake\I18n\FrozenTime|null $modified
+ * @property \Cake\I18n\FrozenTime $modified
  */
 class Currency extends Entity {
 }
