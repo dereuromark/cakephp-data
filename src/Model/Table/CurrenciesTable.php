@@ -192,7 +192,7 @@ class CurrenciesTable extends Table {
 	 * @return \Cake\ORM\Query
 	 */
 	public function foreignCurrencies($options = []) {
-		$defaults = ['conditions' => [$this->alias() . '.base' => 0]];
+		$defaults = ['conditions' => [$this->getAlias() . '.base' => 0]];
 		$options = Hash::merge($defaults, $options);
 		return $this->find('all', $options);
 	}
@@ -203,7 +203,7 @@ class CurrenciesTable extends Table {
 	 * @return \Cake\ORM\Query
 	 */
 	public function baseCurrency($options = []) {
-		$defaults = ['conditions' => [$this->alias() . '.base' => 1]];
+		$defaults = ['conditions' => [$this->getAlias() . '.base' => 1]];
 		$options = Hash::merge($defaults, $options);
 		return $this->find('all', $options)->first();
 	}

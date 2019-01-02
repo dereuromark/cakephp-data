@@ -76,9 +76,9 @@ class DistrictsTable extends Table {
 			'conditions' => [
 				//$this->alias.'.lat <>' => 0,
 				//$this->alias.'.lng <>' => 0,
-				$this->Cities->alias() . '.slug' => $citySlug,
+				$this->Cities->getAlias() . '.slug' => $citySlug,
 			],
-			'fields' => [$this->alias() . '.slug', $this->alias() . '.name'],
+			'fields' => [$this->getAlias() . '.slug', $this->getAlias() . '.name'],
 		];
 		return $this->find($type, $options);
 	}
@@ -93,7 +93,7 @@ class DistrictsTable extends Table {
 	public function getIdBySlug($slug, $customOptions = []) {
 		$options = [
 			'conditions' => [
-				$this->alias() . '.slug' => $slug,
+				$this->getAlias() . '.slug' => $slug,
 			]
 		];
 		if (!empty($customOptions)) {

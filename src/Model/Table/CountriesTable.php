@@ -208,7 +208,6 @@ class CountriesTable extends Table {
 					} else {
 						//pr($data); pr($Geocoder->debug()); die();
 					}
-					//$Geocoder->pause();
 				}
 			}
 

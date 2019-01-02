@@ -3,7 +3,7 @@ namespace Data\Model\Table;
 
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
-use Cake\Network\Exception\InternalErrorException;
+use Cake\Http\Exception\InternalErrorException;
 use Geo\Geocoder\Geocoder;
 use Tools\Model\Table\Table;
 
@@ -118,6 +118,8 @@ class StatesTable extends Table {
 	/**
 	 * @param array $conditions
 	 *
+	 * @throws \Cake\Http\Exception\InternalErrorException
+	 *
 	 * @return int
 	 */
 	public function getStateId($conditions) {
@@ -132,7 +134,7 @@ class StatesTable extends Table {
 			return $state->id;
 		}
 
-		throw new InternalErrorException(returns($state->errors()));
+		throw new InternalErrorException(returns($state->getErrors()));
 	}
 
 	/**
@@ -145,8 +147,8 @@ class StatesTable extends Table {
 			return [];
 		}
 		return $this->find('list', [
-			'conditions' => [$this->alias() . '.country_id' => $cid],
-			'order' => [$this->alias() . '.name' => 'ASC']
+			'conditions' => [$this->getAlias() . '.country_id' => $cid],
+			'order' => [$this->getAlias() . '.name' => 'ASC']
 		])->toArray();
 	}
 
@@ -166,7 +168,7 @@ class StatesTable extends Table {
 		}
 
 		if (!empty($id)) {
-			$res = $this->find('first', ['conditions' => [$this->alias() . '.id' => $id], 'contain' => ['Country.name']]);
+			$res = $this->find('first', ['conditions' => [$this->getAlias() . '.id' => $id], 'contain' => ['Country.name']]);
 			if (!empty($res['name']) && !empty($res->countries['name']) && $geocoder->geocode($res['name'] .
 				', ' . $res->countries['name'])) {
 
@@ -178,8 +180,8 @@ class StatesTable extends Table {
 					$saveArray['abbr'] = $data['country_province_code'];
 				}
 
-				$this->id = $id;
-				if (!$this->save($saveArray, true, ['id', 'lat', 'lng', 'abbr', 'country_id'])) {
+				//$this->id = $id;
+				if (!$this->save($saveArray, ['fields' => ['id', 'lat', 'lng', 'abbr', 'country_id']])) {
 					if ($data['country_province_code'] !== 'DC') {
 						echo returns($this->id);
 						pr($res);
@@ -194,7 +196,7 @@ class StatesTable extends Table {
 
 			$conditions = [];
 			if (!$override) {
-				$conditions = [$this->alias() . '.lat' => 0, $this->alias() . '.lng' => 0];
+				$conditions = [$this->getAlias() . '.lat' => 0, $this->getAlias() . '.lng' => 0];
 			}
 
 			$results = $this->find('all', ['conditions' => $conditions, 'contain' => ['Country.name'], 'order' => ['modified' =>
@@ -210,15 +212,15 @@ class StatesTable extends Table {
 					//pr ($geocoder->debug());
 					$saveArray = ['id' => $res['id'], 'country_id' => $res['country_id']];
 					if (isset($data['lat']) && isset($data['lng'])) {
-						$saveArray = array_merge($saveArray, ['lat' => $data['lat'], 'lng' => $data['lng']]);
+						$saveArray = ['lat' => $data['lat'], 'lng' => $data['lng']] + $saveArray;
 					}
 
 					if (!empty($data['country_province_code']) && mb_strlen($data['country_province_code']) <= 3 && preg_match('/^([A-Z])*$/', $data['country_province_code'])) {
 						$saveArray['abbr'] = $data['country_province_code'];
 					}
 
-					$this->id = $res['id'];
-					if ($this->save($saveArray, true, ['lat', 'lng', 'abbr', 'country_id'])) {
+					//$this->id = $res['id'];
+					if ($this->save($saveArray, ['fields' => ['lat', 'lng', 'abbr', 'country_id']])) {
 						$count++;
 
 						if (!empty($saveArray['abbr']) && $saveArray['abbr'] != $res['abbr']) {
@@ -236,7 +238,6 @@ class StatesTable extends Table {
 							//die(returns($this->validationErrors));
 						}
 					}
-					$geocoder->pause();
 				}
 			}
 

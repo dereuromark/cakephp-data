@@ -106,7 +106,7 @@ class MimeTypesTable extends Table {
 	public function mimeTypes($inactiveOnes = false) {
 		$options = ['conditions' => []];
 		if ($inactiveOnes !== true) {
-			$options['conditions'][$this->alias() . '.active'] = 1;
+			$options['conditions'][$this->getAlias() . '.active'] = 1;
 		}
 		return $this->find('all', $options);
 	}
@@ -120,7 +120,7 @@ class MimeTypesTable extends Table {
 		if (empty($ext)) {
 			return null;
 		}
-		return $this->find('all', ['conditions' => [$this->alias() . '.ext' => $ext]])->first();
+		return $this->find('all', ['conditions' => [$this->getAlias() . '.ext' => $ext]])->first();
 	}
 
 	/**

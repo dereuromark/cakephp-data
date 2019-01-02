@@ -78,7 +78,7 @@ class MimeTypeImagesTable extends Table {
 
 	public function beforeDelete($cascade = true) {
 		# retrieve infos
-		$this->_del = $this->find('first', ['conditions' => [$this->alias() . '.id' => $this->id]]);
+		$this->_del = $this->find('first', ['conditions' => [$this->getAlias() . '.id' => $this->id]]);
 
 		return true;
 	}

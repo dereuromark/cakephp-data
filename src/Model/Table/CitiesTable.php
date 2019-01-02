@@ -62,7 +62,7 @@ class CitiesTable extends Table {
 	public function autoCompleteName($name) {
 		$options = [
 			'conditions' => [
-				$this->alias() . '.name LIKE' => $name . '%'
+				$this->getAlias() . '.name LIKE' => $name . '%'
 			],
 			'fields' => ['id', 'postal_code', 'name']
 		];
@@ -77,8 +77,8 @@ class CitiesTable extends Table {
 	 */
 	public function largeCities($country, $limit = 0) {
 		$options = [
-			'conditions' => [$this->alias() . '.country_id' => $country],
-			'order' => [$this->alias() . '.citizens' => 'desc'],
+			'conditions' => [$this->getAlias() . '.country_id' => $country],
+			'order' => [$this->getAlias() . '.citizens' => 'desc'],
 			'limit' => $limit
 		];
 
