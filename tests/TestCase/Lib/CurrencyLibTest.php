@@ -23,13 +23,6 @@ class CurrencyLibTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function testStartReset() {
-		$this->CurrencyLib->reset();
-	}
-
-	/**
-	 * @return void
-	 */
 	public function testConvert() {
 		//$this->out('<h2>30 EUR in USD</h2>', true);
 		$is = $this->CurrencyLib->convert(30, 'EUR', 'USD');
@@ -75,7 +68,8 @@ class CurrencyLibTest extends TestCase {
 	 * @return void
 	 */
 	public function testReset() {
-		$this->CurrencyLib->reset();
+		$result = $this->CurrencyLib->reset();
+		$this->assertTrue($result);
 	}
 
 }

@@ -9,6 +9,7 @@ use Cake\Event\Event;
 use Data\Model\Entity\Country;
 use Exception;
 use Geo\Geocoder\Geocoder;
+use InvalidArgumentException;
 use Tools\Model\Table\Table;
 
 /**
@@ -116,7 +117,7 @@ class CountriesTable extends Table {
 	 * @return \Cake\ORM\Query
 	 */
 	public function findActive(array $options = []) {
-		return $this->find('all', $options)->where([$this->alias() . '.status' => Country::STATUS_ACTIVE]);
+		return $this->find('all', $options)->where([$this->getAlias() . '.status' => Country::STATUS_ACTIVE]);
 	}
 
 	/**
@@ -138,7 +139,8 @@ class CountriesTable extends Table {
 		}
 
 		if (!empty($id)) {
-			$res = $this->find('first', ['conditions' => [$this->alias() . '.id' => $id], 'contain' => []]);
+			/** @var \Data\Model\Entity\Country $res */
+			$res = $this->find('first', ['conditions' => [$this->getAlias() . '.id' => $id], 'contain' => []]);
 			if (!empty($res['ori_name']) && $Geocoder->geocode($res['ori_name']) || $res['name'] != $res['ori_name'] && $Geocoder->geocode($res['name'])) {
 
 				$data = $Geocoder->getResult();
@@ -166,7 +168,7 @@ class CountriesTable extends Table {
 
 			$conditions = [];
 			if (!$override) {
-				$conditions = [$this->alias() . '.lat' => 0, $this->alias() . '.lng' => 0];
+				$conditions = [$this->getAlias() . '.lat' => 0, $this->getAlias() . '.lng' => 0];
 			}
 
 			$results = $this->find('all', ['conditions' => $conditions, 'contain' => []]);
@@ -228,11 +230,11 @@ class CountriesTable extends Table {
 		}
 
 		if (!empty($id)) {
-			//$res = $this->find('first', ['conditions' => [$this->alias() . '.id' => $id], 'contain' => []]);
+			//$res = $this->find('first', ['conditions' => [$this->getAlias() . '.id' => $id], 'contain' => []]);
 		} else {
 			$conditions = [];
 			if (!$override) {
-				$conditions = [$this->alias() . '.iso2' => '']; # right now only iso2
+				$conditions = [$this->getAlias() . '.iso2' => '']; # right now only iso2
 			}
 
 			/** @var \Data\Model\Entity\Country[] $countries */
@@ -240,33 +242,32 @@ class CountriesTable extends Table {
 
 			$count = 0;
 			foreach ($countries as $country) {
-				if (!empty($country['ori_name']) && $data = $Geocoder->geocode($country['ori_name']) || $country['name'] !== $country['ori_name'] && $data = $Geocoder->geocode($country['name'])) {
+				$data = $country->ori_name ? $Geocoder->geocode($country->ori_name) : null;
+				if (!$data && $country->name !== $country->ori_name) {
+					$data = $Geocoder->geocode($country->name);
+				}
+				if (!$data) {
+					continue;
+				}
 
-					//$data = $Geocoder->getResult();
-					//echo returns($res);
-					//echo returns($data); die();
-					# seems to be very problematic: country "Georgien" results in "Georgia, USA"
+				if (!empty($data['country_code']) && mb_strlen($data['country_code']) === 3 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
+					$country['iso3'] = $data['country_code'];
 
-					if (!empty($data['country_code']) && mb_strlen($data['country_code']) === 3 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
-						$country['iso3'] = $data['country_code'];
+				} elseif (!empty($data['country_code']) && mb_strlen($data['country_code']) === 2 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
+					$country['iso2'] = $data['country_code'];
+				}
 
-					} elseif (!empty($data['country_code']) && mb_strlen($data['country_code']) === 2 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
-						$country['iso2'] = $data['country_code'];
-					}
+				$dirtyFields = $country->getDirty();
 
-					$dirtyFields = $country->getDirty();
+				if ($this->save($country, ['fields' => ['iso2', 'iso3']])) {
+					$count++;
+				}
 
-					if ($this->save($country, ['fields' => ['iso2', 'iso3']])) {
-						$count++;
-					}
-
-					if (isset($dirtyFields['iso2'])) {
-						//$this->log('Iso2 for country \'' . $data['country'] . '\' changed from \'' . $country['iso2'] . '\' to \'' . $saveArray['iso2'] . '\'', LOG_NOTICE);
-					}
-					if (isset($dirtyFields['iso3'])) {
-						//$this->log('Iso3 for country \'' . $data['country'] . '\' changed from \'' . $country['iso3'] . '\' to \'' . $saveArray['iso3'] . '\'', LOG_NOTICE);
-					}
-					//$Geocoder->pause();
+				if (isset($dirtyFields['iso2'])) {
+					//$this->log('Iso2 for country \'' . $data['country'] . '\' changed from \'' . $country['iso2'] . '\' to \'' . $saveArray['iso2'] . '\'', LOG_NOTICE);
+				}
+				if (isset($dirtyFields['iso3'])) {
+					//$this->log('Iso3 for country \'' . $data['country'] . '\' changed from \'' . $country['iso3'] . '\' to \'' . $saveArray['iso3'] . '\'', LOG_NOTICE);
 				}
 			}
 
@@ -277,37 +278,8 @@ class CountriesTable extends Table {
 	}
 
 	/**
-	 * Try to guess the country of the user
-	 * - time sensitive (only works in a certain timeframe < 24h)
-	 *
-	 * @param string|null $ip
-	 * @return int country or -1 on error
-	 */
-	public function guessByIp($ip = null) {
-		/*
-		if ($ip === null) {
-			$ip = env('REMOTE_ADDR');
-		}
-		if (empty($ip)) {
-			return -1;
-		}
-		*/
-		$this->GeolocateLib = new GeolocateLib();
-		if ($this->GeolocateLib->locate($ip)) {
-			$country = $this->GeolocateLib->getResult('country_code'); # iso2
-			if (!empty($country)) {
-				$c = $this->fieldByConditions('id', [$this->alias() . '.iso2' => $country]);
-				if (!empty($c)) {
-					return $c;
-				}
-			}
-		}
-		return -1;
-	}
-
-	/**
 	 * @param \Cake\Event\Event $event
-	 * @param \Cake\ORM\Entity $entity
+	 * @param \Data\Model\Entity\Country $entity
 	 * @param \ArrayObject $options
 	 * @return void
 	 */
@@ -317,15 +289,22 @@ class CountriesTable extends Table {
 		}
 	}
 
-	//not in use
-
+	/**
+	 * @param string $isoCode
+	 *
+	 * @throws \InvalidArgumentException
+	 *
+	 * @return int
+	 */
 	public function getIdByIso($isoCode) {
 		$match = ['DE' => 1, 'AT' => 2, 'CH' => 3];
 
-		if (array_key_exists($isoCode = strtoupper($isoCode), $match)) {
+		$isoCode = strtoupper($isoCode);
+		if (array_key_exists($isoCode, $match)) {
 			return $match[$isoCode];
 		}
-		return 0;
+
+		throw new InvalidArgumentException('ISO code not valid: ' . $isoCode);
 	}
 
 	/**
@@ -343,12 +322,14 @@ class CountriesTable extends Table {
 		return $default;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getDefaultCountry() {
-		return $this->getIdByIso(); //TLD
+		return $this->getIdByIso('DE');
 	}
 
 	const STATUS_ACTIVE = 1;
-
 	const STATUS_INACTIVE = 0;
 
 }
