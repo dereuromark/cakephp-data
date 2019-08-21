@@ -1,10 +1,7 @@
 language: php
 
-sudo: false
-
 php:
   - 5.6
-  - 7.0
   - 7.3
 
 env:
@@ -12,6 +9,10 @@ env:
     - DB=mysql db_dsn='mysql://root@127.0.0.1/cakephp_test'
   global:
     - DEFAULT=1
+
+services:
+  - postgresql
+  - mysql
 
 matrix:
   include:
@@ -26,6 +27,9 @@ matrix:
 
   fast_finish: true
 
+before_install:
+  - phpenv config-rm xdebug.ini
+
 before_script:
   - if [[ $PREFER_LOWEST != 1 ]]; then composer install --prefer-source --no-interaction ; fi
   - if [[ $PREFER_LOWEST == 1 ]]; then composer update --prefer-lowest --prefer-stable --prefer-dist --no-interaction ; fi
@@ -39,9 +43,14 @@ script:
 
   - if [[ $PHPCS == 1 ]]; then composer cs-check ; fi
 
-  - if [[ $CODECOVERAGE == 1 ]]; then vendor/bin/phpunit --coverage-clover=clover.xml || true ; fi
-  - if [[ $CODECOVERAGE == 1 ]]; then wget -O codecov.sh https://codecov.io/bash ; fi
-  - if [[ $CODECOVERAGE == 1 ]]; then bash codecov.sh ; fi
+  - if [[ $CODECOVERAGE == 1 ]]; then phpdbg -qrr vendor/bin/phpunit --coverage-clover=clover.xml; fi
+
+after_success:
+  - if [[ $CODECOVERAGE == 1 ]]; then bash <(curl -s https://codecov.io/bash); fi
+
+cache:
+  directories:
+    - $HOME/.composer/cache
 
 notifications:
   email: false
