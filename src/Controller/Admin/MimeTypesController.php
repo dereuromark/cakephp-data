@@ -236,6 +236,11 @@ class MimeTypesController extends DataAppController {
 		$this->set(compact('mimeType', 'mimeTypeImages'));
 	}
 
+	/**
+	 * @param int|null $id
+	 *
+	 * @return \Cake\Http\Response|null
+	 */
 	public function edit($id = null) {
 		$mimeType = $this->MimeTypes->get($id);
 		if ($this->Common->isPosted()) {
@@ -256,11 +261,16 @@ class MimeTypesController extends DataAppController {
 		$this->set(compact('mimeType', 'mimeTypeImages'));
 	}
 
+	/**
+	 * @param int|null $id
+	 *
+	 * @return \Cake\Http\Response
+	 */
 	public function delete($id = null) {
 		$this->request->allowMethod('post');
 
 		$mimeType = $this->MimeTypes->find('first', ['fields' => ['id'], 'conditions' => ['MimeType.id' => $id]]);
-		if (empty($res)) {
+		if (empty($mimeType)) {
 			$this->Flash->error(__('record del not exists'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
@@ -274,6 +284,11 @@ class MimeTypesController extends DataAppController {
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 
+	/**
+	 * @param int|null $id
+	 *
+	 * @return void
+	 */
 	public function toggleActive($id = null) {
 		$id = (int)$id;
 
@@ -361,6 +376,9 @@ class MimeTypesController extends DataAppController {
 		$this->autoRender = false;
 	}
 
+	/**
+	 * @return void
+	 */
 	public function manualInput() {
 		//$this->autoRender = false;
 		$count = 0;

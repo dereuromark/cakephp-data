@@ -21,11 +21,17 @@ class CurrenciesController extends DataAppController {
 		parent::initialize();
 	}
 
+	/**
+	 * @return void
+	 */
 	public function table() {
 		$currencies = $this->Currencies->availableCurrencies();
 		$this->set(compact('currencies'));
 	}
 
+	/**
+	 * @return \Cake\Http\Response
+	 */
 	public function update() {
 		$this->Currencies->updateValues();
 		$this->Flash->success('Currencies Updated');
@@ -55,11 +61,12 @@ class CurrenciesController extends DataAppController {
 		$this->set(compact('baseCurrency', 'currencies'));
 	}
 
+	/**
+	 * @param int|null $id
+	 *
+	 * @return \Cake\Http\Response
+	 */
 	public function view($id = null) {
-		if (empty($id)) {
-			$this->Flash->error(__('record invalid'));
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
 		$currency = $this->Currencies->get($id);
 		if (empty($currency)) {
 			$this->Flash->error(__('record not exists'));
@@ -68,6 +75,9 @@ class CurrenciesController extends DataAppController {
 		$this->set(compact('currency'));
 	}
 
+	/**
+	 * @return \Cake\Http\Response|null
+	 */
 	public function add() {
 		$currency = $this->Currencies->newEntity();
 
@@ -89,6 +99,11 @@ class CurrenciesController extends DataAppController {
 		$this->set(compact('currency', 'currencies'));
 	}
 
+	/**
+	 * @param int|null $id
+	 *
+	 * @return \Cake\Http\Response|null
+	 */
 	public function edit($id = null) {
 		$currency = $this->Currencies->get($id);
 		if ($this->Common->isPosted()) {
@@ -105,6 +120,11 @@ class CurrenciesController extends DataAppController {
 		$this->set(compact('currency'));
 	}
 
+	/**
+	 * @param int|null $id
+	 *
+	 * @return \Cake\Http\Response|null
+	 */
 	public function delete($id = null) {
 		$currency = $this->Currencies->get($id);
 
@@ -127,6 +147,11 @@ class CurrenciesController extends DataAppController {
 		$this->_setAsPrimary($id);
 	}
 
+	/**
+	 * @param int|null $id
+	 *
+	 * @return \Cake\Http\Response
+	 */
 	public function _setAsPrimary($id) {
 		if (!empty($id)) {
 			$value = $this->Currencies->setAsBase($id);

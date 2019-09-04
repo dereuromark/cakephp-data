@@ -46,6 +46,11 @@ class LanguagesController extends DataAppController {
 		$this->set(compact('languages', 'language'));
 	}
 
+	/**
+	 * @param int|null $id
+	 *
+	 * @return \Cake\Http\Response
+	 */
 	public function view($id = null) {
 		if (empty($id) || !($language = $this->Languages->find('first', ['conditions' => ['Languages.id' => $id]]))) {
 			$this->Flash->error(__('invalid record'));
@@ -54,6 +59,9 @@ class LanguagesController extends DataAppController {
 		$this->set(compact('language'));
 	}
 
+	/**
+	 * @return \Cake\Http\Response|null
+	 */
 	public function add() {
 		$language = $this->Languages->newEntity();
 
@@ -72,13 +80,18 @@ class LanguagesController extends DataAppController {
 		$this->set(compact('language'));
 	}
 
+	/**
+	 * @param int|null $id
+	 *
+	 * @return \Cake\Http\Response|null
+	 */
 	public function edit($id = null) {
 		if (empty($id) || !($language = $this->Languages->find('first', ['conditions' => ['Languages.id' => $id]]))) {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
-			if ($this->Languages->save($this->request->data)) {
+			if ($this->Languages->save($this->request->getData())) {
 				$var = $this->request->data['name'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
 				return $this->redirect(['action' => 'index']);

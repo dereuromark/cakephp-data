@@ -217,8 +217,11 @@ class CountriesTable extends Table {
 		return false;
 	}
 
-	//TODO: test
-
+	/**
+	 * @param int|null $id
+	 *
+	 * @return int|false
+	 */
 	public function updateAbbr($id = null) {
 		$Geocoder = new Geocoder();
 

@@ -8,7 +8,7 @@
 
 A CakePHP plugin containing several useful data models that can be used in many projects.
 
-Note: This branch requires CakePHP 3.7+.
+Note: This branch requires CakePHP **3.7+**.
 
 ## Features
 - Continents => Countries => States => Counties => Districts => Cities

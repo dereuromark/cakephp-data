@@ -6,8 +6,6 @@ use Cake\Database\Driver\Mysql;
 use Cake\ORM\TableRegistry;
 use Tools\TestSuite\IntegrationTestCase;
 
-/**
- */
 class PostalControllerTest extends IntegrationTestCase {
 
 	/**

@@ -243,6 +243,11 @@ class AddressesTable extends Table {
 		return true;
 	}
 
+	/**
+	 * @param array $options
+	 *
+	 * @return void
+	 */
 	public function _beforeValidate($options = []) {
 		parent::beforeValidate($options);
 
@@ -267,8 +272,6 @@ class AddressesTable extends Table {
 		if (isset($entity['lng'])) {
 			$entity['lng'] = number_format((float)$entity['lng'], 6);
 		}
-
-		return true;
 	}
 
 	/**

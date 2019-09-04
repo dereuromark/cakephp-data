@@ -28,11 +28,17 @@ class LanguagesTableTest extends TestCase {
 		$this->Languages = TableRegistry::get('Data.Languages');
 	}
 
+	/**
+	 * @return void
+	 */
 	public function testObject() {
 		$this->assertTrue(is_object($this->Languages));
 		$this->assertInstanceOf('\Data\Model\Table\LanguagesTable', $this->Languages);
 	}
 
+	/**
+	 * @return void
+	 */
 	public function testGetList() {
 		$result = $this->Languages->getList();
 		$this->assertContains('Deutsch', $result);
@@ -40,6 +46,9 @@ class LanguagesTableTest extends TestCase {
 		$this->assertNotContains('Deutsch (Deutschland)', $result);
 	}
 
+	/**
+	 * @return void
+	 */
 	public function testCodeList() {
 		$result = $this->Languages->codeList();
 		$this->assertContains('Deutsch', $result);

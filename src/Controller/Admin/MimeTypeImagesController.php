@@ -23,7 +23,6 @@ class MimeTypeImagesController extends DataAppController {
 	 */
 	public function import() {
 		if ($this->Common->isPosted()) {
-
 			if (!empty($this->request->data['extensions'])) {
 				$successfullyInserted = [];
 				if (is_array($this->request->data['extensions'])) {
@@ -296,25 +295,27 @@ class MimeTypeImagesController extends DataAppController {
 		return false;
 	}
 
+	/**
+	 * @return \Cake\Http\Response|null
+	 */
 	public function add() {
 		$folder = new Folder(PATH_MIMETYPES, true, 777);
 		//pr (substr(sprintf('%o', fileperms(PATH_IMAGES)), -4));
 
 		if ($this->Common->isPosted()) {
-			//$this->MimeTypeImages->create();
+			$mimeTypeImage = $this->MimeTypeImages->newEntity($this->request->getData());
 
 			# upload new image, if given...
 			if (!empty($this->request->data['file']['tmp_name'])) {
-				$this->MimeTypeImages->set($this->request->getData());
-				$this->MimeTypeImages->validates();
+				//$this->MimeTypeImages->set($this->request->getData());
 
 				if (!$this->_uploadImage($this->request->data['file'])) {
 					$error = true;
-					$this->MimeTypeImages->invalidate('file', $this->_uploadError);
+					//$this->MimeTypeImages->invalidate('file', $this->_uploadError);
 				}
 			}
 
-			if (empty($error) && $this->MimeTypeImages->save($this->request->data)) {
+			if (empty($error) && $this->MimeTypeImages->save($mimeTypeImage)) {
 				$id = $this->MimeTypeImages->id;
 				//$name = $this->request->data['name'];
 				$this->Flash->success(__('record add {0} saved', $id));
@@ -335,6 +336,11 @@ class MimeTypeImagesController extends DataAppController {
 		$this->set(compact('availableImages'));
 	}
 
+	/**
+	 * @param int|null $id
+	 *
+	 * @return \Cake\Http\Response|null
+	 */
 	public function edit($id = null) {
 		if (empty($id)) {
 			$this->Flash->error(__('record invalid'));
@@ -343,8 +349,8 @@ class MimeTypeImagesController extends DataAppController {
 		if ($this->Common->isPosted()) {
 			# upload new image, if given...
 			if (!empty($this->request->data['file']['tmp_name'])) {
-				$this->MimeTypeImages->set($this->request->getData());
-				$this->MimeTypeImages->validates();
+				//$this->MimeTypeImages->set($this->request->getData());
+				//$this->MimeTypeImages->validates();
 
 				if (!$this->_uploadImage($this->request->data['file'])) {
 					$error = true;
@@ -352,7 +358,7 @@ class MimeTypeImagesController extends DataAppController {
 				}
 			}
 
-			if ($this->MimeTypeImages->save($this->request->data)) {
+			if ($this->MimeTypeImages->save($this->request->getData())) {
 				//$name = $this->request->data['name'];
 				$this->Flash->success(__('record edit {0} saved', $id));
 				return $this->redirect(['action' => 'index']);
@@ -370,6 +376,11 @@ class MimeTypeImagesController extends DataAppController {
 		$this->set(compact('availableImages'));
 	}
 
+	/**
+	 * @param int|null $id
+	 *
+	 * @return \Cake\Http\Response
+	 */
 	public function delete($id = null) {
 		$this->request->allowMethod('post');
 
@@ -394,6 +405,10 @@ class MimeTypeImagesController extends DataAppController {
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 
+	/**
+	 * @param int|null $id
+	 * @return void
+	 */
 	public function toggleActive($id = null) {
 		$id = (int)$id;
 
@@ -409,6 +424,9 @@ class MimeTypeImagesController extends DataAppController {
 		}
 	}
 
+	/**
+	 * @return void
+	 */
 	public function manualInput() {
 		$this->autoRender = false;
 

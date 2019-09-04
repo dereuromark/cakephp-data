@@ -58,9 +58,14 @@ class AddressesController extends DataAppController {
 			$states = $this->Addresses->States->find('list');
 		}
 
-		$this->set(compact('countries', 'countryProvinces'));
+		$this->set(compact('countries', 'states'));
 	}
 
+	/**
+	 * @param int|null $id
+	 *
+	 * @return \Cake\Http\Response|null
+	 */
 	public function edit($id = null) {
 		$address = $this->Addresses->get($id);
 		if ($this->Common->isPosted()) {
@@ -114,6 +119,11 @@ class AddressesController extends DataAppController {
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 
+	/**
+	 * @param int|null $id
+	 *
+	 * @return \Cake\Http\Response
+	 */
 	public function markAsUsed($id = null) {
 		if (empty($id) || !($address = $this->Addresses->find('first', ['conditions' => ['Address.id' => $id], 'fields' => ['id', 'formatted_address']]))) {
 			$this->Flash->error(__('invalid record'));

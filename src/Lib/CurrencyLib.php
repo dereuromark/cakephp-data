@@ -138,6 +138,9 @@ class CurrencyLib {
 		return Cache::delete('currencyList' . ucfirst($name));
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function cacheFileUsed() {
 		return $this->cacheFileUsed;
 	}

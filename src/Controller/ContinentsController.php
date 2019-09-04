@@ -31,7 +31,7 @@ class ContinentsController extends DataAppController {
 	}
 
 	/**
-	 * @return mixed
+	 * @return \Cake\Http\Response|null
 	 */
 	public function add() {
 		if ($this->Common->isPosted()) {
@@ -48,13 +48,20 @@ class ContinentsController extends DataAppController {
 		$this->set(compact('parents'));
 	}
 
+	/**
+	 * @param int|null $id
+	 *
+	 * @return \Cake\Http\Response
+	 */
 	public function edit($id = null) {
 		if (empty($id) || !($continent = $this->Continents->find('first', ['conditions' => ['Continent.id' => $id]]))) {
 			$this->Flash->error(__('invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
-			if ($this->Continents->save($this->request->data)) {
+			$continent = $this->Continents->patchEntity($continent, $this->request->getData());
+
+			if ($this->Continents->save($continent)) {
 				$var = $this->request->data['Continent']['name'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
@@ -67,6 +74,11 @@ class ContinentsController extends DataAppController {
 		$this->set(compact('parents'));
 	}
 
+	/**
+	 * @param int|null $id
+	 *
+	 * @return \Cake\Http\Response|null
+	 */
 	public function delete($id = null) {
 		$this->request->allowMethod('post');
 

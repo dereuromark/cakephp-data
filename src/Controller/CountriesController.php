@@ -52,6 +52,9 @@ class CountriesController extends DataAppController {
 		$this->set(compact('countries'));
 	}
 
+	/**
+	 * @return string[]
+	 */
 	protected function _icons() {
 		$useCache = true;
 		if (!empty($this->request->query['reset'])) {

@@ -32,6 +32,10 @@ class CountriesController extends DataAppController {
 		}
 	}
 
+	/**
+	 * @param \Cake\Event\Event $event
+	 * @return void
+	 */
 	public function beforeFilter(Event $event) {
 		parent::beforeFilter($event);
 
@@ -197,9 +201,11 @@ class CountriesController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function add() {
+		$country = $this->Countries->newEntity();
+
 		if ($this->Common->isPosted()) {
-			//$this->Countries->create();
-			if ($this->Countries->save($this->request->data)) {
+			$country = $this->Countries->patchEntity($country, $this->request->getData());
+			if ($this->Countries->save($country)) {
 				$id = $this->Countries->id;
 				//$name = $this->request->data['name'];
 				$this->Flash->success(__('record add {0} saved', $id));

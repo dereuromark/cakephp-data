@@ -43,7 +43,7 @@ class CitiesController extends DataAppController {
 	public function add() {
 		if ($this->Common->isPosted()) {
 			//$this->Cities->create();
-			if ($this->Cities->save($this->request->data)) {
+			if ($this->Cities->save($this->request->getData())) {
 				$var = $this->request->data['name'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);
@@ -66,7 +66,9 @@ class CitiesController extends DataAppController {
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
-			if ($this->Cities->save($this->request->data)) {
+			$city = $this->Cities->patchEntity($city, $this->request->getData());
+
+			if ($this->Cities->save($city)) {
 				$var = $this->request->data['name'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
 				return $this->Common->postRedirect(['action' => 'index']);

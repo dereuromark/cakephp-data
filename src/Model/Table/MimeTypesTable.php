@@ -68,7 +68,7 @@ class MimeTypesTable extends Table {
 	 * @param \Cake\Event\Event $event
 	 * @param \Cake\ORM\Entity $entity
 	 *
-	 * @return bool
+	 * @return void
 	 */
 	public function beforeSave(Event $event, Entity $entity) {
 		if (isset($entity['ext'])) {
@@ -79,6 +79,11 @@ class MimeTypesTable extends Table {
 		}
 	}
 
+	/**
+	 * @param bool $created
+	 * @param array $options
+	 * @return void
+	 */
 	public function _afterSave($created, $options = []) {
 		$this->cleanUp();
 	}
@@ -93,6 +98,9 @@ class MimeTypesTable extends Table {
 		$this->cleanUp();
 	}
 
+	/**
+	 * @return void
+	 */
 	public function cleanUp() {
 		//$Handle = new File(FILES . 'mime_types.txt');
 		//$Handle->delete();

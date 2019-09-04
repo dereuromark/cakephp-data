@@ -70,12 +70,23 @@ class MimeTypeImagesTable extends Table {
 		return true;
 	}
 
+	/**
+	 * @param bool $created
+	 * @param array $options
+	 *
+	 * @return bool
+	 */
 	public function afterSave($created, $options = []) {
 		# clean up!
 		$this->cleanUp();
 		return true;
 	}
 
+	/**
+	 * @param bool $cascade
+	 *
+	 * @return bool
+	 */
 	public function beforeDelete($cascade = true) {
 		# retrieve infos
 		$this->_del = $this->find('first', ['conditions' => [$this->getAlias() . '.id' => $this->id]]);
@@ -83,6 +94,13 @@ class MimeTypeImagesTable extends Table {
 		return true;
 	}
 
+	/**
+	 * @param \Cake\Event\Event $event
+	 * @param \Cake\Datasource\EntityInterface $entity
+	 * @param \ArrayObject $options
+	 *
+	 * @return void
+	 */
 	public function afterDelete(Event $event, EntityInterface $entity, ArrayObject $options) {
 		if (!empty($this->_del)) {
 			# todo: ...
@@ -107,9 +125,11 @@ class MimeTypeImagesTable extends Table {
 
 		# clean up!
 		$this->cleanUp();
-		return true;
 	}
 
+	/**
+	 * @return void
+	 */
 	public function cleanUp() {
 		$handle = new File(FILES . 'mime_types.txt');
 		$handle->delete();
