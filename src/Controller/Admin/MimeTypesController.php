@@ -26,7 +26,7 @@ class MimeTypesController extends DataAppController {
 	 *
 	 * @return \Cake\Http\Response|null
 	 */
-	public function detect_by_extension() {
+	public function detectByExtension() {
 		/*
 		# Warning (2): finfo_file(): supplied argument is not a valid file_info resource...
 		$file = WWW_ROOT.'files'.DS.'tmp'.DS.'test.7z';
