@@ -11,7 +11,7 @@ class LanguagesControllerTest extends IntegrationTestCase {
 	 * @var array
 	 */
 	public $fixtures = [
-		'plugin.Data.Languages'
+		'plugin.Data.Languages',
 	];
 
 	/**

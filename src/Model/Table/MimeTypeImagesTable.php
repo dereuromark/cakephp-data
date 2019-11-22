@@ -35,7 +35,7 @@ class MimeTypeImagesTable extends Table {
 			],
 		],
 		'ext' => [], # e.g. "jpg" on a file "exe.jpg"
-		'active' => ['numeric']
+		'active' => ['numeric'],
 	];
 
 	/**
@@ -50,7 +50,7 @@ class MimeTypeImagesTable extends Table {
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
-		]
+		],
 	];
 
 	/**

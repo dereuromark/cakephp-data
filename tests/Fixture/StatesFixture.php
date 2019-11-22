@@ -25,7 +25,7 @@ class StatesFixture extends TestFixture {
 		'modified' => ['type' => 'datetime', 'null' => true, 'default' => null, 'collate' => null, 'comment' => ''],
 		//'_indexes' => ['slug' => ['unique' => 0, 'columns' => 'slug']],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
-		'_options' => []
+		'_options' => [],
 	];
 
 	/**
@@ -42,8 +42,8 @@ class StatesFixture extends TestFixture {
 			'lat' => '42.000000',
 			'lng' => '36.000000',
 			'slug' => 'hamburg',
-			'modified' => null
-		]
+			'modified' => null,
+		],
 	];
 
 }

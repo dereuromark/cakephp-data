@@ -26,7 +26,7 @@ class LocationsFixture extends TestFixture {
 		'created' => ['type' => 'datetime', 'null' => false, 'default' => null],
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
-		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM']
+		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM'],
 	];
 
 	/**
@@ -46,7 +46,7 @@ class LocationsFixture extends TestFixture {
 			'lng' => 1,
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
-			'modified' => '2012-12-26 17:20:20'
+			'modified' => '2012-12-26 17:20:20',
 		],
 		[
 			'id' => 2,
@@ -59,7 +59,7 @@ class LocationsFixture extends TestFixture {
 			'lng' => 2,
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
-			'modified' => '2012-12-26 17:20:20'
+			'modified' => '2012-12-26 17:20:20',
 		],
 		[
 			'id' => 3,
@@ -72,7 +72,7 @@ class LocationsFixture extends TestFixture {
 			'lng' => 3,
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
-			'modified' => '2012-12-26 17:20:20'
+			'modified' => '2012-12-26 17:20:20',
 		],
 		[
 			'id' => 4,
@@ -85,7 +85,7 @@ class LocationsFixture extends TestFixture {
 			'lng' => 4,
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
-			'modified' => '2012-12-26 17:20:20'
+			'modified' => '2012-12-26 17:20:20',
 		],
 		[
 			'id' => 5,
@@ -98,7 +98,7 @@ class LocationsFixture extends TestFixture {
 			'lng' => 5,
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
-			'modified' => '2012-12-26 17:20:20'
+			'modified' => '2012-12-26 17:20:20',
 		],
 		[
 			'id' => 6,
@@ -111,7 +111,7 @@ class LocationsFixture extends TestFixture {
 			'lng' => 6,
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
-			'modified' => '2012-12-26 17:20:20'
+			'modified' => '2012-12-26 17:20:20',
 		],
 		[
 			'id' => 7,
@@ -124,7 +124,7 @@ class LocationsFixture extends TestFixture {
 			'lng' => 7,
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
-			'modified' => '2012-12-26 17:20:20'
+			'modified' => '2012-12-26 17:20:20',
 		],
 		[
 			'id' => 8,
@@ -137,7 +137,7 @@ class LocationsFixture extends TestFixture {
 			'lng' => 8,
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
-			'modified' => '2012-12-26 17:20:20'
+			'modified' => '2012-12-26 17:20:20',
 		],
 		[
 			'id' => 9,
@@ -150,7 +150,7 @@ class LocationsFixture extends TestFixture {
 			'lng' => 9,
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
-			'modified' => '2012-12-26 17:20:20'
+			'modified' => '2012-12-26 17:20:20',
 		],
 		[
 			'id' => 10,
@@ -163,7 +163,7 @@ class LocationsFixture extends TestFixture {
 			'lng' => 10,
 			'formatted_address' => 'Lorem ipsum dolor sit amet',
 			'created' => '2012-12-26 17:20:20',
-			'modified' => '2012-12-26 17:20:20'
+			'modified' => '2012-12-26 17:20:20',
 		],
 	];
 

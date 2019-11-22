@@ -27,7 +27,7 @@ class Language extends Entity {
 	public static function directions($value = null) {
 		$options = [
 			static::DIR_LTR => 'LTR',
-			static::DIR_RTL => 'RTL'
+			static::DIR_RTL => 'RTL',
 		];
 		return parent::enum($value, $options);
 	}

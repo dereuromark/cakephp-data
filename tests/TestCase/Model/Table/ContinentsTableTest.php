@@ -11,7 +11,7 @@ class ContinentsTableTest extends TestCase {
 	 * @var array
 	 */
 	public $fixtures = [
-		'plugin.Data.Continents'
+		'plugin.Data.Continents',
 	];
 
 	/**

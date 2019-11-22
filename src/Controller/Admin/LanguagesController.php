@@ -25,7 +25,7 @@ class LanguagesController extends DataAppController {
 
 		if (Plugin::loaded('Search')) {
 			$this->loadComponent('Search.Prg', [
-				'actions' => ['index']
+				'actions' => ['index'],
 			]);
 		}
 	}
@@ -147,7 +147,7 @@ class LanguagesController extends DataAppController {
 				'code' => $code,
 				'locale' => $language['locale'],
 				'locale_fallback' => $language['localeFallback'],
-				'direction' => $language['direction']
+				'direction' => $language['direction'],
 			];
 			$language = $this->Languages->newEntity($data);
 			if ($this->Languages->save($language)) {

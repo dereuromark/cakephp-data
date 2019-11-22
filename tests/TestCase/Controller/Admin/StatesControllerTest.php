@@ -12,7 +12,7 @@ class StatesControllerTest extends IntegrationTestCase {
 	 */
 	public $fixtures = [
 		'plugin.Data.Countries',
-		'plugin.Data.States'
+		'plugin.Data.States',
 	];
 
 	/**

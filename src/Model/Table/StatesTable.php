@@ -49,7 +49,7 @@ class StatesTable extends Table {
 			'notBlank' => [
 				'rule' => ['notBlank'],
 				'message' => 'valErrMandatoryField',
-				'last' => true
+				'last' => true,
 			],
 			'isUnique' => [
 				'rule' => ['validateUnique', ['scope' => ['country_id']]],
@@ -71,7 +71,7 @@ class StatesTable extends Table {
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
-		]
+		],
 	];
 
 	/**
@@ -83,8 +83,8 @@ class StatesTable extends Table {
 			'foreignKey' => 'country_id',
 			'conditions' => '',
 			'fields' => '',
-			'order' => ''
-		]
+			'order' => '',
+		],
 	];
 
 	/**
@@ -148,7 +148,7 @@ class StatesTable extends Table {
 		}
 		return $this->find('list', [
 			'conditions' => [$this->getAlias() . '.country_id' => $cid],
-			'order' => [$this->getAlias() . '.name' => 'ASC']
+			'order' => [$this->getAlias() . '.name' => 'ASC'],
 		])->toArray();
 	}
 

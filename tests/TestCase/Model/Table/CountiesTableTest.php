@@ -12,7 +12,7 @@ class CountiesTableTest extends TestCase {
 	 */
 	public $fixtures = [
 		'plugin.Data.Counties',
-		'plugin.Data.States'
+		'plugin.Data.States',
 	];
 
 	/**
@@ -57,7 +57,7 @@ class CountiesTableTest extends TestCase {
 		$data = [
 			'official_id' => 'foobar',
 			'rank' => 5,
-			'name' => 'Foo Bar'
+			'name' => 'Foo Bar',
 		];
 		$entity = $this->Counties->newEntity($data);
 		$this->assertEmpty($entity->errors());

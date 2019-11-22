@@ -18,7 +18,7 @@ class MimeTypeHelperTest extends TestCase {
 	 */
 	public $fixtures = [
 		'plugin.Data.MimeTypes',
-		'plugin.Data.MimeTypeImages'
+		'plugin.Data.MimeTypeImages',
 	];
 
 	/**

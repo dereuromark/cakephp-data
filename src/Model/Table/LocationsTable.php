@@ -26,7 +26,7 @@ class LocationsTable extends Table {
 			'notBlank' => [
 				'rule' => ['notBlank'],
 				'message' => 'valErrMandatoryField',
-				'last' => true
+				'last' => true,
 			],
 			'unique' => [
 				'rule' => ['validateUnique', ['scope' => ['country_id']]],
@@ -38,9 +38,9 @@ class LocationsTable extends Table {
 			'numeric' => [
 				'rule' => ['numeric'],
 				'message' => 'valErrMandatoryField',
-				'last' => true
+				'last' => true,
 			],
-		]
+		],
 	];
 
 	/**
@@ -101,7 +101,7 @@ class LocationsTable extends Table {
 		$conditions = [
 			'Location.lat<>0',
 			'Location.lng<>0',
-			'1=1 HAVING distance<' . 75
+			'1=1 HAVING distance<' . 75,
 		];
 		$result = $this->find('all', [
 			'conditions' => $conditions,
@@ -113,10 +113,10 @@ class LocationsTable extends Table {
 					'COS( RADIANS(Location.lng) - RADIANS(' . $lng . ')) + ' .
 					'SIN( PI()/2 - RADIANS(90 - Location.lat)) * ' .
 					'SIN( PI()/2 - RADIANS(90 - ' . $lat . '))) ' .
-					'AS distance'
+					'AS distance',
 				]),
 				'order' => 'distance ASC',
-				'limit' => $limit
+				'limit' => $limit,
 		]);
 		return $result;
 	}

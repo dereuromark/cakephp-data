@@ -51,7 +51,7 @@ class AddressesTable extends Table {
 			'numeric' => [
 				'rule' => ['numeric'],
 				'message' => 'valErrMandatoryField',
-				'last' => true
+				'last' => true,
 			],
 			'fitsToCountry' => [
 				'rule' => ['fitsToCountry'],
@@ -63,7 +63,7 @@ class AddressesTable extends Table {
 			'numeric' => [
 				'rule' => ['numeric'],
 				'message' => 'valErrMandatoryField',
-				'last' => true
+				'last' => true,
 			],
 
 		],
@@ -71,7 +71,7 @@ class AddressesTable extends Table {
 			'numeric' => [
 				'rule' => ['numeric'],
 				'message' => 'valErrMandatoryField',
-				'last' => true
+				'last' => true,
 			],
 			'primaryUnique' => [
 				'rule' => ['primaryUnique'],
@@ -86,7 +86,7 @@ class AddressesTable extends Table {
 			'notBlank' => [
 				'rule' => ['notBlank'],
 				'message' => 'valErrMandatoryField',
-				'last' => true
+				'last' => true,
 			],
 			'correspondsWithCountry' => [
 				'rule' => ['correspondsWithCountry'],
@@ -97,7 +97,7 @@ class AddressesTable extends Table {
 		'city' => [
 			'notBlank' => [
 				'rule' => ['notBlank'],
-				'message' => 'valErrMandatoryField'
+				'message' => 'valErrMandatoryField',
 			],
 		],
 		'street' => [
@@ -135,7 +135,7 @@ class AddressesTable extends Table {
 			'foreignKey' => 'country_id',
 			'conditions' => '',
 			'fields' => '',
-			'order' => ''
+			'order' => '',
 		],
 		# redundant:
 		'State' => [
@@ -143,14 +143,14 @@ class AddressesTable extends Table {
 			'foreignKey' => 'state_id',
 			'conditions' => '',
 			'fields' => '',
-			'order' => ''
+			'order' => '',
 		],
 		'User' => [
 			'className' => CLASS_USERS,
 			'foreignKey' => 'foreign_id',
 			'conditions' => ['model' => 'User'],
 			'fields' => ['id', 'username'],
-			'order' => ''
+			'order' => '',
 		],
 	];
 
@@ -209,7 +209,7 @@ class AddressesTable extends Table {
 	public function correspondsWithCountry($data) {
 		if (!empty($entity['postal_code'])) {
 			$res = $this->Countries->find('first', [
-				'conditions' => ['Country.id' => $entity['country_id']]
+				'conditions' => ['Country.id' => $entity['country_id']],
 			]);
 			if (empty($res)) {
 				return true;
@@ -233,7 +233,7 @@ class AddressesTable extends Table {
 			return true;
 		}
 		$res = $this->Countries->States->find('list', [
-			'conditions' => ['country_id' => $data['country_id']]
+			'conditions' => ['country_id' => $data['country_id']],
 		])->toArray();
 		if (empty($res) || array_shift($data) == 0) {
 			$data['country_province_id'] = 0;

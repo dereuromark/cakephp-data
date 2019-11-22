@@ -11,7 +11,7 @@ class CurrenciesControllerTest extends IntegrationTestCase {
 	 * @var array
 	 */
 	public $fixtures = [
-		'plugin.Data.Currencies'
+		'plugin.Data.Currencies',
 	];
 
 	/**

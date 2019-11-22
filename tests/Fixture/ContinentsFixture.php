@@ -19,7 +19,7 @@ class ContinentsFixture extends TestFixture {
 		'status' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 2],
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
-		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM']
+		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM'],
 	];
 
 	/**
@@ -34,7 +34,7 @@ class ContinentsFixture extends TestFixture {
 			'lft' => 1,
 			'rgt' => 1,
 			'status' => 1,
-			'modified' => '2011-07-15 19:47:38'
+			'modified' => '2011-07-15 19:47:38',
 		],
 	];
 

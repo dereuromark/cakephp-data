@@ -35,7 +35,7 @@ class CurrenciesTable extends Table {
 			'notBlank' => [
 				'rule' => ['notBlank'],
 				'message' => 'valErrMandatoryField',
-				'last' => true
+				'last' => true,
 			],
 			'isUnique' => [
 				'rule' => ['isUnique'],
@@ -47,7 +47,7 @@ class CurrenciesTable extends Table {
 			'notBlank' => [
 				'rule' => ['notBlank'],
 				'message' => 'valErrMandatoryField',
-				'last' => true
+				'last' => true,
 			],
 			'isUnique' => [
 				'rule' => ['isUnique'],
@@ -58,7 +58,7 @@ class CurrenciesTable extends Table {
 			'available' => [
 				'rule' => ['available'],
 				'message' => 'this currency is not available',
-				'provider' => 'table'
+				'provider' => 'table',
 			],
 		],
 		'value' => ['numeric'],

@@ -26,7 +26,7 @@ class StatesController extends DataAppController {
 
 		if (Plugin::loaded('Search')) {
 			$this->loadComponent('Search.Prg', [
-				'actions' => ['index']
+				'actions' => ['index'],
 			]);
 		}
 	}

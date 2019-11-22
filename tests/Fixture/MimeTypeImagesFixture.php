@@ -22,7 +22,7 @@ class MimeTypeImagesFixture extends TestFixture {
 		'created' => ['type' => 'datetime', 'null' => false, 'default' => null],
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
-		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM']
+		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM'],
 	];
 
 	/**
@@ -38,8 +38,8 @@ class MimeTypeImagesFixture extends TestFixture {
 			'active' => 1,
 			'details' => 'Lorem ipsum dolor sit amet',
 			'created' => '2014-07-23 14:06:49',
-			'modified' => '2014-07-23 14:06:49'
-		]
+			'modified' => '2014-07-23 14:06:49',
+		],
 	];
 
 }

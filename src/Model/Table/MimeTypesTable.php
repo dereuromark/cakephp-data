@@ -34,7 +34,7 @@ class MimeTypesTable extends Table {
 				'rule' => ['notBlank'],
 				'message' => 'valErrMandatoryField',
 				'allowEmpty' => false,
-				'last' => true
+				'last' => true,
 			],
 			'isUnique' => [
 				'rule' => 'validateUnique',
@@ -60,7 +60,7 @@ class MimeTypesTable extends Table {
 			'foreignKey' => 'mime_type_image_id',
 			'conditions' => '',
 			'fields' => '',
-			'order' => ''
+			'order' => '',
 		],
 	];
 

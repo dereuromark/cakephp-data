@@ -33,7 +33,7 @@ class PostalCodesTable extends Table {
 	 * @var array
 	 */
 	public $actsAs = [
-		'Geo.Geocoder' => ['min_accuracy' => 2, 'address' => ['code', 'country_name'], 'formatted_address' => 'official_address', 'real' => false, 'before' => 'validate', 'allow_inconclusive' => true]
+		'Geo.Geocoder' => ['min_accuracy' => 2, 'address' => ['code', 'country_name'], 'formatted_address' => 'official_address', 'real' => false, 'before' => 'validate', 'allow_inconclusive' => true],
 	];
 
 	/**
@@ -67,7 +67,7 @@ class PostalCodesTable extends Table {
 		parent::initialize($config);
 
 		$this->belongsTo('Countries', [
-			'className' => 'Data.Countries'
+			'className' => 'Data.Countries',
 		]);
 
 		if (!Plugin::isLoaded('Search')) {

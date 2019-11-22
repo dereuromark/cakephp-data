@@ -73,8 +73,8 @@ class ContinentsTable extends Table {
 			'foreignKey' => 'parent_id',
 			'conditions' => '',
 			'fields' => '',
-			'order' => ''
-		]
+			'order' => '',
+		],
 	];
 
 	/**
@@ -96,7 +96,7 @@ class ContinentsTable extends Table {
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
-		]
+		],
 	];
 
 }

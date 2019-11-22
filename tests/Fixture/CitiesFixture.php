@@ -23,7 +23,7 @@ class CitiesFixture extends TestFixture {
 		'created' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
-		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM']
+		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM'],
 	];
 
 	/**
@@ -40,7 +40,7 @@ class CitiesFixture extends TestFixture {
 			'lng' => '11.580186',
 			'active' => 1,
 			'created' => '0000-00-00 00:00:00',
-			'modified' => '0000-00-00 00:00:00'
+			'modified' => '0000-00-00 00:00:00',
 		],
 		[
 			'id' => '3',
@@ -50,7 +50,7 @@ class CitiesFixture extends TestFixture {
 			'lng' => '9.180769',
 			'active' => 1,
 			'created' => '2011-10-07 16:48:05',
-			'modified' => '0000-00-00 00:00:00'
+			'modified' => '0000-00-00 00:00:00',
 		],
 	];
 

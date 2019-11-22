@@ -12,7 +12,7 @@ class DistrictsTable extends Table {
 	 * @var array
 	 */
 	public $actsAs = ['Geo.Geocoder' => [
-		'min_accuracy' => 3, 'address' => ['address'], 'before' => 'save', 'real' => false, 'required' => false
+		'min_accuracy' => 3, 'address' => ['address'], 'before' => 'save', 'real' => false, 'required' => false,
 	], 'Tools.Slugged' => ['mode' => 'ascii', 'case' => 'low']];
 
 	/**
@@ -47,8 +47,8 @@ class DistrictsTable extends Table {
 			'foreignKey' => 'city_id',
 			'conditions' => '',
 			'fields' => '',
-			'order' => ''
-		]
+			'order' => '',
+		],
 	];
 
 	/**
@@ -97,7 +97,7 @@ class DistrictsTable extends Table {
 		$options = [
 			'conditions' => [
 				$this->getAlias() . '.slug' => $slug,
-			]
+			],
 		];
 		if (!empty($customOptions)) {
 			$options = array_merge($options, $customOptions);

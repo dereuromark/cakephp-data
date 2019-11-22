@@ -9,21 +9,21 @@ class CountiesTable extends Table {
 	 * @var array
 	 */
 	public $actsAs = [
-		'Tools.Slugged' => ['case' => 'low', 'mode' => 'ascii', 'unique' => false, 'overwrite' => false]
+		'Tools.Slugged' => ['case' => 'low', 'mode' => 'ascii', 'unique' => false, 'overwrite' => false],
 	];
 
 	/**
 	 * @var array
 	 */
 	public $hasMany = [
-		'City' => ['className' => 'Data.City']
+		'City' => ['className' => 'Data.City'],
 	];
 
 	/**
 	 * @var array
 	 */
 	public $belongsTo = [
-		'State' => ['className' => 'Data.State']
+		'State' => ['className' => 'Data.State'],
 	];
 
 	/**

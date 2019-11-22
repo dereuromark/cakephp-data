@@ -63,7 +63,7 @@ class LanguagesTable extends Table {
 			'notBlank' => [
 				'rule' => ['notBlank'],
 				'message' => 'valErrMandatoryField',
-				'last' => true
+				'last' => true,
 			],
 			'isUnique' => [
 				'rule' => ['isUnique'],
@@ -75,7 +75,7 @@ class LanguagesTable extends Table {
 			'notBlank' => [
 				'rule' => ['notBlank'],
 				'message' => 'valErrMandatoryField',
-				'last' => true
+				'last' => true,
 			],
 		],
 		'status' => [

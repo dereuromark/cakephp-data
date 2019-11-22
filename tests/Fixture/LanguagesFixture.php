@@ -26,7 +26,7 @@ class LanguagesFixture extends TestFixture {
 		'sort' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10, 'collate' => null, 'comment' => ''],
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
-		'_options' => []
+		'_options' => [],
 	];
 
 	/**
@@ -46,7 +46,7 @@ class LanguagesFixture extends TestFixture {
 			'locale_fallback' => 'deu',
 			'status' => '1',
 			'sort' => '0',
-			'modified' => '2011-07-17 15:23:08'
+			'modified' => '2011-07-17 15:23:08',
 		],
 		[
 			'id' => '2',
@@ -59,7 +59,7 @@ class LanguagesFixture extends TestFixture {
 			'locale_fallback' => 'deu',
 			'status' => '0',
 			'sort' => '0',
-			'modified' => '2011-07-17 15:23:08'
+			'modified' => '2011-07-17 15:23:08',
 		],
 		[
 			'id' => '3',
@@ -72,7 +72,7 @@ class LanguagesFixture extends TestFixture {
 			'locale_fallback' => 'eng',
 			'status' => '1',
 			'sort' => '0',
-			'modified' => '2011-07-17 15:23:08'
+			'modified' => '2011-07-17 15:23:08',
 		],
 	];
 

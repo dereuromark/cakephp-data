@@ -32,7 +32,7 @@ class CountriesFixture extends TestFixture {
 		'status' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 2, 'collate' => null, 'comment' => ''],
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
-		'_options' => []
+		'_options' => [],
 	];
 
 	/**
@@ -58,7 +58,7 @@ class CountriesFixture extends TestFixture {
 			'lng' => '10.451526',
 			'address_format' => ':name :street_address D-:postcode :city :country',
 			'status' => '1',
-			'modified' => '2010-06-06 00:19:04'
+			'modified' => '2010-06-06 00:19:04',
 		],
 		[
 			'id' => '2',
@@ -77,7 +77,7 @@ class CountriesFixture extends TestFixture {
 			'lng' => '14.550072',
 			'address_format' => '',
 			'status' => '1',
-			'modified' => '2010-06-06 00:19:04'
+			'modified' => '2010-06-06 00:19:04',
 		],
 		[
 			'id' => '3',
@@ -96,7 +96,7 @@ class CountriesFixture extends TestFixture {
 			'lng' => '8.227512',
 			'address_format' => '',
 			'status' => '1',
-			'modified' => '2010-06-06 00:19:04'
+			'modified' => '2010-06-06 00:19:04',
 		],
 		[
 			'id' => '4',
@@ -115,7 +115,7 @@ class CountriesFixture extends TestFixture {
 			'lng' => '4.469936',
 			'address_format' => '',
 			'status' => '1',
-			'modified' => '2010-06-06 00:19:09'
+			'modified' => '2010-06-06 00:19:09',
 		],
 		[
 			'id' => '5',
@@ -134,7 +134,7 @@ class CountriesFixture extends TestFixture {
 			'lng' => '5.291266',
 			'address_format' => '',
 			'status' => '1',
-			'modified' => '2010-06-06 00:19:40'
+			'modified' => '2010-06-06 00:19:40',
 		],
 		[
 			'id' => '6',
@@ -153,7 +153,7 @@ class CountriesFixture extends TestFixture {
 			'lng' => '9.501785',
 			'address_format' => '',
 			'status' => '1',
-			'modified' => '2010-06-06 00:19:14'
+			'modified' => '2010-06-06 00:19:14',
 		],
 		[
 			'id' => '7',
@@ -172,7 +172,7 @@ class CountriesFixture extends TestFixture {
 			'lng' => '6.129583',
 			'address_format' => '',
 			'status' => '1',
-			'modified' => '2010-06-06 00:19:34'
+			'modified' => '2010-06-06 00:19:34',
 		],
 		[
 			'id' => '8',
@@ -191,7 +191,7 @@ class CountriesFixture extends TestFixture {
 			'lng' => '2.213749',
 			'address_format' => '',
 			'status' => '1',
-			'modified' => '2010-06-06 00:19:17'
+			'modified' => '2010-06-06 00:19:17',
 		],
 		[
 			'id' => '9',
@@ -210,7 +210,7 @@ class CountriesFixture extends TestFixture {
 			'lng' => '-3.435973',
 			'address_format' => '',
 			'status' => '1',
-			'modified' => '2010-06-06 00:19:19'
+			'modified' => '2010-06-06 00:19:19',
 		],
 		[
 			'id' => '12',
@@ -229,7 +229,7 @@ class CountriesFixture extends TestFixture {
 			'lng' => '31.165581',
 			'address_format' => '',
 			'status' => '1',
-			'modified' => '2010-06-06 00:19:57'
+			'modified' => '2010-06-06 00:19:57',
 		],
 	];
 

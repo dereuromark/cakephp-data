@@ -118,7 +118,7 @@ class MimeTypesController extends DataAppController {
 				'ext' => $ext,
 				'type' => $mimeType,
 				'active' => 1,
-				'core' => 1
+				'core' => 1,
 			];
 			$mimeType = $this->MimeTypes->newEntity($data);
 

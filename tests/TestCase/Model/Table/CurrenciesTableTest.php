@@ -12,7 +12,7 @@ class CurrenciesTableTest extends TestCase {
 	 * @var array
 	 */
 	public $fixtures = [
-		'plugin.Data.Currencies'
+		'plugin.Data.Currencies',
 	];
 
 	/**
@@ -52,13 +52,13 @@ class CurrenciesTableTest extends TestCase {
 	 */
 	public function testBasicSave() {
 		$data = [
-			'EUR' => []
+			'EUR' => [],
 		];
 		$this->Currencies->CurrencyLib->method('table')->willReturn($data);
 
 		$data = [
 			'name' => 'Euro',
-			'code' => 'EUR'
+			'code' => 'EUR',
 		];
 		$this->Currencies->deleteAll($data);
 
@@ -74,7 +74,7 @@ class CurrenciesTableTest extends TestCase {
 	 */
 	public function testBeforeMarshal() {
 		$data = [
-			'USD' => []
+			'USD' => [],
 		];
 		$this->Currencies->CurrencyLib->method('table')->willReturn($data);
 
@@ -82,7 +82,7 @@ class CurrenciesTableTest extends TestCase {
 
 		$data = [
 			'name' => 'Dollar',
-			'code' => 'usd'
+			'code' => 'usd',
 		];
 		$currency = $this->Currencies->newEntity($data);
 		$result = $this->Currencies->save($currency);

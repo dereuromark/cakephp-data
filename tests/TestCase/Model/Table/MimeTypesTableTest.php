@@ -11,7 +11,7 @@ class MimeTypesTableTest extends TestCase {
 	 * @var array
 	 */
 	public $fixtures = [
-		'plugin.Data.MimeTypes'
+		'plugin.Data.MimeTypes',
 	];
 
 	/**

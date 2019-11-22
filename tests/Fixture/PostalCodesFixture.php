@@ -23,7 +23,7 @@ class PostalCodesFixture extends TestFixture {
 		'created' => ['type' => 'datetime', 'null' => true, 'default' => null, 'collate' => null],
 		'modified' => ['type' => 'datetime', 'null' => true, 'default' => null, 'collate' => null],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
-		'_options' => []
+		'_options' => [],
 	];
 
 	/**

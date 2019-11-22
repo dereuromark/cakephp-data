@@ -17,7 +17,7 @@ class CitiesTable extends Table {
 	public $validate = [
 		'name' => [
 			'notBlank',
-		]
+		],
 	];
 
 	/**
@@ -29,7 +29,7 @@ class CitiesTable extends Table {
 	 * @var array
 	 */
 	public $hasMany = [
-			'District' => ['className' => 'Data.District']
+			'District' => ['className' => 'Data.District'],
 	];
 
 	/**
@@ -37,7 +37,7 @@ class CitiesTable extends Table {
 	 */
 	public $belongsTo = [
 		'County' => ['className' => 'Data.County'],
-		'Country' => ['className' => 'Data.Country']
+		'Country' => ['className' => 'Data.Country'],
 	];
 
 	/**
@@ -62,9 +62,9 @@ class CitiesTable extends Table {
 	public function autoCompleteName($name) {
 		$options = [
 			'conditions' => [
-				$this->getAlias() . '.name LIKE' => $name . '%'
+				$this->getAlias() . '.name LIKE' => $name . '%',
 			],
-			'fields' => ['id', 'postal_code', 'name']
+			'fields' => ['id', 'postal_code', 'name'],
 		];
 		return $this->find('all', $options);
 	}
@@ -79,7 +79,7 @@ class CitiesTable extends Table {
 		$options = [
 			'conditions' => [$this->getAlias() . '.country_id' => $country],
 			'order' => [$this->getAlias() . '.citizens' => 'desc'],
-			'limit' => $limit
+			'limit' => $limit,
 		];
 
 		return $this->find('all', $options);

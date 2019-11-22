@@ -23,7 +23,7 @@ class DistrictsFixture extends TestFixture {
 		'status' => ['type' => 'boolean', 'null' => false, 'default' => '0', 'comment' => '0 inactive, 1 active'],
 		'created' => ['type' => 'datetime', 'null' => false, 'default' => null],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
-		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM']
+		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM'],
 	];
 
 	/**
@@ -40,7 +40,7 @@ class DistrictsFixture extends TestFixture {
 			'lat' => 1,
 			'lng' => 1,
 			'status' => 1,
-			'created' => '2013-11-06 13:20:46'
+			'created' => '2013-11-06 13:20:46',
 		],
 	];
 

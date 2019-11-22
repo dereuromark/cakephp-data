@@ -27,7 +27,7 @@ class CountiesFixture extends TestFixture {
 		'rank' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 5, 'collate' => null, 'comment' => ''],
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']], 'official_id' => ['type' => 'unique', 'columns' => 'official_id'], 'slug' => ['type' => 'unique', 'columns' => 'slug']],
-		'_options' => []
+		'_options' => [],
 	];
 
 	/**
@@ -47,7 +47,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'flensburg',
 			'single_city' => 1,
 			'rank' => '1',
-			'modified' => '0000-00-00 00:00:00'
+			'modified' => '0000-00-00 00:00:00',
 		],
 		[
 			'id' => '2',
@@ -60,7 +60,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'kiel',
 			'single_city' => 1,
 			'rank' => '3',
-			'modified' => '0000-00-00 00:00:00'
+			'modified' => '0000-00-00 00:00:00',
 		],
 		[
 			'id' => '3',
@@ -73,7 +73,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'luebeck',
 			'single_city' => 1,
 			'rank' => '4',
-			'modified' => '0000-00-00 00:00:00'
+			'modified' => '0000-00-00 00:00:00',
 		],
 		[
 			'id' => '4',
@@ -86,7 +86,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'neumuenster',
 			'single_city' => 1,
 			'rank' => '5',
-			'modified' => '0000-00-00 00:00:00'
+			'modified' => '0000-00-00 00:00:00',
 		],
 		[
 			'id' => '5',
@@ -99,7 +99,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'hamburg',
 			'single_city' => 1,
 			'rank' => '0',
-			'modified' => '0000-00-00 00:00:00'
+			'modified' => '0000-00-00 00:00:00',
 		],
 		[
 			'id' => '6',
@@ -112,7 +112,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'braunschweig',
 			'single_city' => 1,
 			'rank' => '2',
-			'modified' => '0000-00-00 00:00:00'
+			'modified' => '0000-00-00 00:00:00',
 		],
 		[
 			'id' => '7',
@@ -125,7 +125,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'salzgitter',
 			'single_city' => 1,
 			'rank' => '34',
-			'modified' => '0000-00-00 00:00:00'
+			'modified' => '0000-00-00 00:00:00',
 		],
 		[
 			'id' => '8',
@@ -138,7 +138,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'wolfsburg',
 			'single_city' => 1,
 			'rank' => '45',
-			'modified' => '0000-00-00 00:00:00'
+			'modified' => '0000-00-00 00:00:00',
 		],
 		[
 			'id' => '9',
@@ -151,7 +151,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'delmenhorst',
 			'single_city' => 1,
 			'rank' => '6',
-			'modified' => '0000-00-00 00:00:00'
+			'modified' => '0000-00-00 00:00:00',
 		],
 		[
 			'id' => '10',
@@ -164,7 +164,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'emden',
 			'single_city' => 1,
 			'rank' => '8',
-			'modified' => '0000-00-00 00:00:00'
+			'modified' => '0000-00-00 00:00:00',
 		],
 	];
 

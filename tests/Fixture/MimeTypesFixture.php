@@ -27,7 +27,7 @@ class MimeTypesFixture extends TestFixture {
 		'mime_type_image_id' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10, 'unsigned' => true],
 		'alt_type' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 200, 'collate' => 'utf8_unicode_ci', 'comment' => 'alternate (sometimes there is more than one type)', 'charset' => 'utf8'],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
-		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM']
+		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM'],
 	];
 
 	/**
@@ -48,8 +48,8 @@ class MimeTypesFixture extends TestFixture {
 			'modified' => '2014-07-23 14:07:02',
 			'sort' => 1,
 			'mime_type_image_id' => 1,
-			'alt_type' => 'Lorem ipsum dolor sit amet'
-		]
+			'alt_type' => 'Lorem ipsum dolor sit amet',
+		],
 	];
 
 }

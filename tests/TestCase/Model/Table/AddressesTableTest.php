@@ -15,7 +15,7 @@ class AddressesTableTest extends TestCase {
 	public $fixtures = [
 		'plugin.Data.Addresses',
 		'plugin.Data.Countries',
-		'plugin.Data.States'
+		'plugin.Data.States',
 	];
 
 	/**

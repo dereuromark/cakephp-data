@@ -26,7 +26,7 @@ class CurrenciesFixture extends TestFixture {
 		'active' => ['type' => 'boolean', 'null' => false, 'default' => '0', 'collate' => null, 'comment' => ''],
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
-		'_options' => []
+		'_options' => [],
 	];
 
 	/**
@@ -45,7 +45,7 @@ class CurrenciesFixture extends TestFixture {
 			'value' => '1.4146',
 			'base' => 0,
 			'active' => 1,
-			'modified' => '2011-07-16 15:12:33'
+			'modified' => '2011-07-16 15:12:33',
 		],
 		[
 			'id' => '2',
@@ -57,7 +57,7 @@ class CurrenciesFixture extends TestFixture {
 			'value' => '1.0000',
 			'base' => 1,
 			'active' => 1,
-			'modified' => '2009-11-23 12:45:15'
+			'modified' => '2009-11-23 12:45:15',
 		],
 		[
 			'id' => '3',
@@ -69,7 +69,7 @@ class CurrenciesFixture extends TestFixture {
 			'value' => '0.8775',
 			'base' => 0,
 			'active' => 1,
-			'modified' => '2011-07-16 15:12:33'
+			'modified' => '2011-07-16 15:12:33',
 		],
 		[
 			'id' => '4',
@@ -81,7 +81,7 @@ class CurrenciesFixture extends TestFixture {
 			'value' => '1.1577',
 			'base' => 0,
 			'active' => 1,
-			'modified' => '2011-07-16 15:12:33'
+			'modified' => '2011-07-16 15:12:33',
 		],
 		[
 			'id' => '5',
@@ -93,7 +93,7 @@ class CurrenciesFixture extends TestFixture {
 			'value' => '1.3264',
 			'base' => 0,
 			'active' => 0,
-			'modified' => '2011-07-16 15:12:33'
+			'modified' => '2011-07-16 15:12:33',
 		],
 		[
 			'id' => '6',
@@ -105,7 +105,7 @@ class CurrenciesFixture extends TestFixture {
 			'value' => '1.3549',
 			'base' => 0,
 			'active' => 0,
-			'modified' => '2011-07-16 15:12:33'
+			'modified' => '2011-07-16 15:12:33',
 		],
 		[
 			'id' => '7',
@@ -117,7 +117,7 @@ class CurrenciesFixture extends TestFixture {
 			'value' => '111.9700',
 			'base' => 0,
 			'active' => 0,
-			'modified' => '2011-07-16 15:12:33'
+			'modified' => '2011-07-16 15:12:33',
 		],
 		[
 			'id' => '9',
@@ -129,7 +129,7 @@ class CurrenciesFixture extends TestFixture {
 			'value' => '16.5510',
 			'base' => 0,
 			'active' => 0,
-			'modified' => '2011-07-16 15:12:33'
+			'modified' => '2011-07-16 15:12:33',
 		],
 		[
 			'id' => '10',
@@ -141,7 +141,7 @@ class CurrenciesFixture extends TestFixture {
 			'value' => '7.8665',
 			'base' => 0,
 			'active' => 0,
-			'modified' => '2011-07-16 15:12:33'
+			'modified' => '2011-07-16 15:12:33',
 		],
 		[
 			'id' => '11',
@@ -153,7 +153,7 @@ class CurrenciesFixture extends TestFixture {
 			'value' => '9.2121',
 			'base' => 0,
 			'active' => 0,
-			'modified' => '2011-07-16 15:12:33'
+			'modified' => '2011-07-16 15:12:33',
 		],
 	];
 

@@ -12,7 +12,7 @@ class PostalCodesTableTest extends TestCase {
 	 * @var array
 	 */
 	public $fixtures = [
-		'plugin.Data.PostalCodes'
+		'plugin.Data.PostalCodes',
 	];
 
 	/**
