@@ -1,4 +1,5 @@
 <?php
+
 namespace Data\Model\Table;
 
 use Tools\Model\Table\Table;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Data\Test\TestCase\Lib;
 
 use App\Lib\TestCurrencyLib;

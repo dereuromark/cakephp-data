@@ -2,6 +2,7 @@
 /**
  * DistrictsFixture
  */
+
 namespace Data\Test\Fixture;
 
 use Cake\TestSuite\Fixture\TestFixture;

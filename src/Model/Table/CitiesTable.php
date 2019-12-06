@@ -1,4 +1,5 @@
 <?php
+
 namespace Data\Model\Table;
 
 use Cake\Core\Configure;

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Behavior;
 
 use Geocoder\Model\Address;

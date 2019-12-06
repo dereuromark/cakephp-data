@@ -1,4 +1,5 @@
 <?php
+
 namespace Data\Controller\Admin;
 
 use Cake\Core\Plugin;

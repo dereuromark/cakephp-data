@@ -4,6 +4,7 @@
  * - http://www.webservicex.net/WS/WSDetails.aspx?WSID=10 (XML)
  * - http://www.webserviceshare.com/business/financial/currency/service/Noon-Foreign-Exchange-Rates.htm (XML)
  */
+
 namespace Data\Lib;
 
 use Cake\Cache\Cache;
