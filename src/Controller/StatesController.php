@@ -78,7 +78,7 @@ class StatesController extends DataAppController {
 		$states = $this->States->getListByCountry($id);
 
 		$defaultFieldLabel = 'pleaseSelect';
-		if ($this->request->query('optional')) {
+		if ($this->request->getQuery('optional')) {
 			$defaultFieldLabel = 'doesNotMatter';
 		}
 

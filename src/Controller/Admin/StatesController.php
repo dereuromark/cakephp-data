@@ -79,7 +79,7 @@ class StatesController extends DataAppController {
 		$this->viewBuilder()->layout('ajax');
 		$states = $this->States->getListByCountry($id);
 		$defaultFieldLabel = 'pleaseSelect';
-		if ($this->request->query('optional')) {
+		if ($this->request->getQuery('optional')) {
 			$defaultFieldLabel = 'doesNotMatter';
 		}
 
