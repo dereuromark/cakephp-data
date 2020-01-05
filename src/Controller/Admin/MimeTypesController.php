@@ -151,34 +151,32 @@ class MimeTypesController extends DataAppController {
 	 * @return array
 	 */
 	protected function _searchConditions($conditions = []) {
-		$model = $this->MimeTypes->alias;
+		$model = $this->MimeTypes->getAlias();
 
 		$sessionSearch = $this->request->getSession()->read($model . '.search');
 		$fieldStr = '';
 		$searchStr = '';
 
-		if (!empty($this->request->query['clear']) && $this->request->query['clear'] === 'search') {
+		if ($this->request->getQuery('clear') && $this->request->getQuery('clear') === 'search') {
 			$this->request->getSession()->delete($model . '.search');
 		} else {
+			if ($this->request->getData() && $this->request->getData('field')) {
+				$fieldStr = $this->request->getData('field');
+			} elseif ($this->request->getQuery('field')) {
+				$fieldStr = $this->request->getQuery('field');
+			} elseif (!empty($sessionSearch['field'])) {
+				$fieldStr = $sessionSearch['field'];
+			}
 
-		if ($this->request->getData() && !empty($this->request->data['Form']['field'])) {
-			$fieldStr = $this->request->data['Form']['field'];
-		} elseif (!empty($this->request->query['field'])) {
-			$fieldStr = $this->request->query['field'];
-		} elseif (!empty($sessionSearch['field'])) {
-			$fieldStr = $sessionSearch['field'];
+			if ($this->request->getData() && $this->request->getData('search')) {
+				$searchStr = $this->request->getData('search');
+			} elseif ($this->request->getQuery('search')) {
+				$searchStr = $this->request->getQuery('search');
+			} elseif (!empty($sessionSearch['search'])) {
+				$searchStr = $sessionSearch['search'];
+			}
 		}
-
-		if ($this->request->getData() && !empty($this->request->data['Form']['search'])) {
-			$searchStr = $this->request->data['Form']['search'];
-		} elseif (!empty($this->request->query['search'])) {
-			$searchStr = $this->request->query['search'];
-		} elseif (!empty($sessionSearch['search'])) {
-			$searchStr = $sessionSearch['search'];
-		}
-
-		}
-		$this->set(compact('fields', 'searchStr'));
+		$this->set(compact('searchStr'));
 
 		if (!empty($searchStr)) {
 			$this->request->getSession()->write($model . '.search', ['search' => $searchStr, 'field' => $fieldStr]);

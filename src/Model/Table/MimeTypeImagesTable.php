@@ -55,6 +55,11 @@ class MimeTypeImagesTable extends Table {
 	];
 
 	/**
+	 * @var \Cake\Datasource\EntityInterface|null
+	 */
+	protected $_del;
+
+	/**
 	 * @param \Cake\Event\Event $event
 	 * @param \Cake\ORM\Entity $entity
 	 *
@@ -116,11 +121,11 @@ class MimeTypeImagesTable extends Table {
 
 			# remove id from mime_types table
 
-			$types = $this->MimeType->find('all', ['fields' => ['id'], 'conditions' => ['mime_type_image_id' => $this->_del['id']]]);
+			$types = $this->MimeTypes->find('all', ['fields' => ['id'], 'conditions' => ['mime_type_image_id' => $this->_del['id']]]);
 			foreach ($types as $type) {
-				$id = $type[$this->MimeType->alias]['id'];
-				$this->MimeType->saveField($id, 'mime_type_image_id', 0);
-				//pr ($type[$this->MimeType->alias]['id'].' del success');
+				$id = $type[$this->MimeTypes->alias]['id'];
+				$this->MimeTypes->saveField($id, 'mime_type_image_id', 0);
+				//pr ($type[$this->MimeTypes->alias]['id'].' del success');
 			}
 		}
 

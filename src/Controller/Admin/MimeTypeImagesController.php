@@ -112,7 +112,7 @@ class MimeTypeImagesController extends DataAppController {
 
 			} else {
 				# show new files and confirm adding them (as they could have filenames that have to be changed, e.g. "exe_icon.gif" to "exe.gif")
-				//$this->MimeType->allocate(null, $fileName, $ext);
+				//$this->MimeTypes->allocate(null, $fileName, $ext);
 
 			}
 		}

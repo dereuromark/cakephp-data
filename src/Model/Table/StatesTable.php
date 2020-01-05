@@ -5,6 +5,7 @@ namespace Data\Model\Table;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Http\Exception\InternalErrorException;
+use Data\Model\Entity\State;
 use Geo\Geocoder\Geocoder;
 use Tools\Model\Table\Table;
 
@@ -156,10 +157,11 @@ class StatesTable extends Table {
 	/**
 	 * Lat and lng + abbr if available!
 	 *
-	 * @param int|null $id
-	 * @return int|bool
+	 * @param \Data\Model\Entity\State $state
+	 *
+	 * @return \Data\Model\Entity\State|null
 	 */
-	public function updateCoordinates($id = null) {
+	public function updateCoordinates(State $state) {
 		$geocoder = new Geocoder();
 
 		$override = false;

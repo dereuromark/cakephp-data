@@ -71,27 +71,10 @@ if (!getenv('db_dsn')) {
 	putenv('db_dsn=sqlite::memory:');
 }
 
-if (strpos(getenv('db_class'), 'MySql') !== false) {
-	Cake\Datasource\ConnectionManager::setConfig('test', [
-		'className' => 'Cake\Database\Connection',
-		'driver' => 'Cake\Database\Driver\Mysql',
-		'database' => 'cake_test',
-		'username' => 'root',
-		'password' => 'secret',
-		'timezone' => 'UTC',
-		'quoteIdentifiers' => true,
-		'cacheMetadata' => true,
-	]);
-	return;
-}
-
 Cake\Datasource\ConnectionManager::setConfig('test', [
 	'className' => 'Cake\Database\Connection',
-	'driver' => getenv('db_class'),
-	'dsn' => getenv('db_dsn'),
-	'database' => getenv('db_database'),
-	'username' => getenv('db_username'),
-	'password' => getenv('db_password'),
+	'driver' => getenv('db_class') ?: null,
+	'dsn' => getenv('db_dsn') ?: null,
 	'timezone' => 'UTC',
 	'quoteIdentifiers' => true,
 	'cacheMetadata' => true,

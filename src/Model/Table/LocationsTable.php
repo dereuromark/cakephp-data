@@ -63,27 +63,26 @@ class LocationsTable extends Table {
 	/**
 	 * @param string $locationName
 	 * @param int|null $countryId
-	 * @return array location on success, false otherwise
+	 * @return \Cake\Datasource\EntityInterface|false
 	 */
 	public function getLocation($locationName, $countryId = null) {
 		$country = !empty($countryId) ? ', ' . $countryId : __('Germany'); ////Country::addressList($countryId)
 		$countryId = !empty($countryId) ? $countryId : 1;
 
 		if (is_numeric($locationName) && strlen($locationName) < 5) { //Country::zipCodeLength($countryId)
-			$result = $this->find('first', ['conditions' => ['formatted_address LIKE' => $locationName . '%' . $country]]);
+			$location = $this->find('all', ['conditions' => ['formatted_address LIKE' => $locationName . '%' . $country]])->first();
 		} else {
-			$result = $this->find('first', ['conditions' => ['name' => $locationName, 'country_id' => $countryId]]);
+			$location = $this->find('all', ['conditions' => ['name' => $locationName, 'country_id' => $countryId]])->first();
 		}
 
-		if (empty($result)) {
-			//$this->create();
-			$this->set(['Location' => ['name' => $locationName, 'country_id' => $countryId, 'country_name' => $country]]);
-			$result = $this->save();
+		if (empty($location)) {
+			$location = $this->newEntity(['name' => $locationName, 'country_id' => $countryId, 'country_name' => $country]);
+			$result = $this->save($location);
 		}
 
 		if (empty($result['lat']) && empty($result['lng']) || !empty($result['inconclusive'])) {
 			# delete lastest cached (and now not needed anymore) record
-			$this->delete($this->id, false);
+			$this->delete($location);
 			return false;
 		}
 		return $result;

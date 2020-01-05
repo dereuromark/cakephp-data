@@ -90,33 +90,9 @@ class StatesController extends DataAppController {
 	 * @param int|null $id
 	 * @return \Cake\Http\Response|null
 	 */
-	public function updateCoordinates($id = null) {
-		set_time_limit(120);
-		$res = $this->States->updateCoordinates($id);
-		if (!$res) {
-			$this->Flash->error(__('coordinates not updated'));
-		} else {
-			$this->Flash->success(__('coordinates {0} updated', $res));
-		}
-
-		$this->autoRender = false;
-		return $this->redirect(['action' => 'index']);
-	}
-
-	/**
-	 * @param int|null $id
-	 * @return \Cake\Http\Response|null
-	 */
 	public function view($id = null) {
-		if (empty($id)) {
-			$this->Flash->error(__('record invalid'));
-			return $this->redirect(['action' => 'index']);
-		}
 		$state = $this->States->get($id);
-		if (empty($State)) {
-			$this->Flash->error(__('record not exists'));
-			return $this->redirect(['action' => 'index']);
-		}
+
 		$this->set(compact('state'));
 	}
 
@@ -130,7 +106,7 @@ class StatesController extends DataAppController {
 			$state = $this->States->patchEntity($state, $this->request->getData());
 			if ($this->States->save($state)) {
 				$id = $this->States->id;
-				$name = $this->request->data['name'];
+				$name = $this->request->getData('name');
 				$this->Flash->success(__('record add {0} saved', h($name)));
 				return $this->redirect(['action' => 'index']);
 			}
@@ -153,7 +129,7 @@ class StatesController extends DataAppController {
 			$state = $this->States->patchEntity($state, $this->request->getData());
 
 			if ($this->States->save($state)) {
-				$name = $this->request->data['name'];
+				$name = $this->request->getData('name');
 				$this->Flash->success(__('record edit {0} saved', h($name)));
 				return $this->redirect(['action' => 'index']);
 			}
