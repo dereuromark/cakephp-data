@@ -126,7 +126,7 @@ class CurrenciesTable extends Table {
 
 	/**
 	 * @param \Cake\Event\Event $event
-	 * @param \Cake\ORM\Entity $entity
+	 * @param \Data\Model\Entity\Currency $entity
 	 *
 	 * @return bool
 	 */

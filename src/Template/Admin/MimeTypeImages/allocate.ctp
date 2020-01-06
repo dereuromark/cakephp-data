@@ -1,6 +1,8 @@
 <?php
 /**
  * @var \App\View\AppView $this
+ * @var mixed $images
+ * @var mixed $mimeTypeImage
  */
 ?>
 <div class="page form">

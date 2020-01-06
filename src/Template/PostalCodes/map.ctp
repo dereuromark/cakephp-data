@@ -2,6 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var \Data\Model\Entity\PostalCode[]|\Cake\Collection\CollectionInterface $postalCodes
+ * @var array $overviewCode
  */
 ?>
 <?php /**

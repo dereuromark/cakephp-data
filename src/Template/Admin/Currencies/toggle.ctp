@@ -1,6 +1,9 @@
 <?php
 /**
  * @var \App\View\AppView $this
+ * @var array $ajaxToggle
+ * @var mixed $field
+ * @var mixed $model
  */
 ?>
 <?php /**

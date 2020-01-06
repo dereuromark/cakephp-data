@@ -1,6 +1,9 @@
 <?php
 /**
  * @var \App\View\AppView $this
+ * @var array $isoList
+ * @var mixed $languages
+ * @var mixed $locales
  */
 ?>
 <div class="page index">

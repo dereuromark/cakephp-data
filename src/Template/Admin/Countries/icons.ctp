@@ -1,6 +1,10 @@
 <?php
 /**
  * @var \App\View\AppView $this
+ * @var mixed $contriesWithoutIcons
+ * @var mixed $countries
+ * @var mixed $icons
+ * @var mixed $iconsWithoutCountries
  */
 ?>
 <h2>Icons</h2>

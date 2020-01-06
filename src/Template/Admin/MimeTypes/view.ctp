@@ -1,6 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
+ * @var array $mimeType
  */
 ?>
 <div class="page view">

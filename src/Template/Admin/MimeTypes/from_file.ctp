@@ -1,6 +1,9 @@
 <?php
 /**
  * @var \App\View\AppView $this
+ * @var mixed $manualRes
+ * @var mixed $mimeTypes
+ * @var array $report
  */
 ?>
 <h2>Import MimeTypes from File etc</h2>

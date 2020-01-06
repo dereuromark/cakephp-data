@@ -1,6 +1,8 @@
 <?php
 /**
  * @var \App\View\AppView $this
+ * @var array $isoList
+ * @var mixed $languages
  */
 use Cake\Core\Plugin;
 use Cake\Cache\Cache;

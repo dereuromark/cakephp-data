@@ -91,7 +91,7 @@ class MimeTypesTable extends Table {
 
 	/**
 	 * @param \Cake\Event\Event $event
-	 * @param \Cake\Datasource\EntityInterface $entity
+	 * @param \Cake\ORM\Entity $entity
 	 * @param \ArrayObject $options
 	 * @return void
 	 */

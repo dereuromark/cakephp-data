@@ -1,6 +1,8 @@
 <?php
 /**
  * @var \App\View\AppView $this
+ * @var mixed $mimeTypes
+ * @var array $report
  */
 $manualRes = [];
 foreach ($report['in'] as $r) {

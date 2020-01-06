@@ -1,6 +1,9 @@
 <?php
 /**
  * @var \App\View\AppView $this
+ * @var string $allCount
+ * @var mixed $mimeTypes
+ * @var mixed $searchStr
  */
 ?>
 <div class="page index">

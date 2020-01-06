@@ -1,6 +1,9 @@
 <?php
 /**
  * @var \App\View\AppView $this
+ * @var mixed $alreadyIn
+ * @var mixed $fileExtensions
+ * @var mixed $mimeTypeImage
  */
 ?>
 <div class="page form">

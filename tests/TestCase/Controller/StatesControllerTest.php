@@ -5,6 +5,9 @@ namespace Data\Test\TestCase\Controller;
 use Cake\ORM\TableRegistry;
 use Tools\TestSuite\IntegrationTestCase;
 
+/**
+ * @uses \Data\Controller\StatesController
+ */
 class StatesControllerTest extends IntegrationTestCase {
 
 	/**

@@ -77,12 +77,13 @@ class MimeTypeImagesTable extends Table {
 	}
 
 	/**
-	 * @param bool $created
-	 * @param array $options
+	 * @param \Cake\Event\Event $event
+	 * @param \Cake\Datasource\EntityInterface $entity
+	 * @param \ArrayObject $options
 	 *
 	 * @return bool
 	 */
-	public function afterSave($created, $options = []) {
+	public function afterSave(Event $event, EntityInterface $entity, ArrayObject $options) {
 		# clean up!
 		$this->cleanUp();
 		return true;
@@ -102,7 +103,7 @@ class MimeTypeImagesTable extends Table {
 
 	/**
 	 * @param \Cake\Event\Event $event
-	 * @param \Cake\Datasource\EntityInterface $entity
+	 * @param \Cake\ORM\Entity $entity
 	 * @param \ArrayObject $options
 	 *
 	 * @return void
