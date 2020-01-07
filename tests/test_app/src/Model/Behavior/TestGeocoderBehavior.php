@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model\Behavior;
+namespace TestApp\Model\Behavior;
 
 use Geocoder\Model\Address;
 use Geocoder\Model\Bounds;

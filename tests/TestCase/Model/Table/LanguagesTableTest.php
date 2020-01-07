@@ -22,7 +22,7 @@ class LanguagesTableTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->Languages = TableRegistry::get('Data.Languages');
@@ -41,9 +41,9 @@ class LanguagesTableTest extends TestCase {
 	 */
 	public function testGetList() {
 		$result = $this->Languages->getList();
-		$this->assertContains('Deutsch', $result);
-		$this->assertContains('Englisch', $result);
-		$this->assertNotContains('Deutsch (Deutschland)', $result);
+		$this->assertStringContainsString('Deutsch', $result);
+		$this->assertStringContainsString('Englisch', $result);
+		$this->assertStringNotContainsString('Deutsch (Deutschland)', $result);
 	}
 
 	/**
@@ -51,9 +51,9 @@ class LanguagesTableTest extends TestCase {
 	 */
 	public function testCodeList() {
 		$result = $this->Languages->codeList();
-		$this->assertContains('Deutsch', $result);
-		$this->assertContains('Englisch', $result);
-		$this->assertNotContains('Deutsch (Deutschland)', $result);
+		$this->assertStringContainsString('Deutsch', $result);
+		$this->assertStringContainsString('Englisch', $result);
+		$this->assertStringNotContainsString('Deutsch (Deutschland)', $result);
 	}
 
 }

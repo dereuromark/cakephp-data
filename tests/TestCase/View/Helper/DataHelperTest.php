@@ -16,7 +16,7 @@ class DataHelperTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->DataHelper = new DataHelper(new View(null));

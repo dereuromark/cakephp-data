@@ -5,7 +5,7 @@ namespace Data\Controller;
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
-use Cake\Event\Event;
+use Cake\Event\EventInterface;
 use Cake\Filesystem\Folder;
 use Data\Controller\DataAppController;
 
@@ -29,7 +29,7 @@ class CountriesController extends DataAppController {
 	 * @param \Cake\Event\Event $event
 	 * @return \Cake\Http\Response|null
 	 */
-	public function beforeFilter(Event $event) {
+	public function beforeFilter(EventInterface $event) {
 		parent::beforeFilter($event);
 
 		$specific = Configure::read('Country.image_path');

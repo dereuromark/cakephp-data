@@ -31,37 +31,37 @@ class CountryStateHelperComponent extends Component {
 	 * @return void
 	 */
 	public function provideData($ignoreStates = false, $model = null, $defaultValue = 0) {
-		if (!isset($this->Controller->Countries)) {
-			$this->Controller->Countries = TableRegistry::get('Data.Countries');
-		}
-		$countries = $this->Controller->Countries->findActive()->hydrate(false)->find('list')->toArray();
+		$this->getController()->loadModel('Data.Countries');
+		$countries = $this->getController()->Countries->findActive()->enableHydration(false)->find('list')->toArray();
 
 		$states = [];
+		/*
 		if ($model === null) {
-			$model = $this->Controller->modelClass;
+			$model = $this->getController()->modelClass;
+		}
+		*/
+
+		if (!isset($this->getController()->States)) {
+			$this->getController()->States = TableRegistry::get('Data.States');
 		}
 
-		if (!isset($this->Controller->States)) {
-			$this->Controller->States = TableRegistry::get('Data.States');
-		}
-
-		$selectedCountry = $this->Controller->request->getQuery('country_id');
-		if (!empty($this->Controller->request->data['country_id'])) {
-			$selectedCountry = $this->Controller->request->data['country_id'];
+		$selectedCountry = $this->getController()->getRequest()->getQuery('country_id');
+		if ($this->getController()->getRequest()->getData('country_id')) {
+			$selectedCountry = $this->getController()->getRequest()->getData('country_id');
 		}
 
 		if ($selectedCountry) {
-			$states = $this->Controller->States->getListByCountry($selectedCountry);
+			$states = $this->getController()->States->getListByCountry($selectedCountry);
 		} elseif ($ignoreStates === true) {
 			# do nothing
 		} else {
 			# use the id of the first country of the country-list
 			foreach ($countries as $key => $value) {
-				$states = $this->Controller->States->getListByCountry($key);
+				$states = $this->getController()->States->getListByCountry($key);
 				break;
 			}
 		}
-		$this->Controller->set(compact('countries', 'states', 'defaultValue'));
+		$this->getController()->set(compact('countries', 'states', 'defaultValue'));
 	}
 
 }

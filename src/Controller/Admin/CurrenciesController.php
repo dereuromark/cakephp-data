@@ -18,7 +18,7 @@ class CurrenciesController extends DataAppController {
 	/**
 	 * @return \Cake\Http\Response|null
 	 */
-	public function initialize() {
+	public function initialize(): void {
 		parent::initialize();
 	}
 

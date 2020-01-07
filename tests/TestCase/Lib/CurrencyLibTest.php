@@ -2,20 +2,20 @@
 
 namespace Data\Test\TestCase\Lib;
 
-use App\Lib\TestCurrencyLib;
+use TestApp\Lib\TestCurrencyLib;
 use Tools\TestSuite\TestCase;
 
 class CurrencyLibTest extends TestCase {
 
 	/**
-	 * @var \Data\Lib\CurrencyLib|\PHPUnit_Framework_MockObject_MockObject
+	 * @var \Data\Lib\CurrencyLib|\PHPUnit\Framework\MockObject\MockObject
 	 */
 	protected $CurrencyLib;
 
 	/**
 	 * @return void
 	 */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->CurrencyLib = new TestCurrencyLib();

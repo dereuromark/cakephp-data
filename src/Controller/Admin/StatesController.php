@@ -3,7 +3,7 @@
 namespace Data\Controller\Admin;
 
 use Cake\Core\Plugin;
-use Cake\Event\Event;
+use Cake\Event\EventInterface;
 use Data\Controller\DataAppController;
 use Exception;
 
@@ -22,10 +22,10 @@ class StatesController extends DataAppController {
 	/**
 	 * @return \Cake\Http\Response|null
 	 */
-	public function initialize() {
+	public function initialize(): void {
 		parent::initialize();
 
-		if (Plugin::loaded('Search')) {
+		if (Plugin::isLoaded('Search')) {
 			$this->loadComponent('Search.Prg', [
 				'actions' => ['index'],
 			]);
@@ -36,7 +36,7 @@ class StatesController extends DataAppController {
 	 * @param \Cake\Event\Event $event
 	 * @return \Cake\Http\Response|null
 	 */
-	public function beforeFilter(Event $event) {
+	public function beforeFilter(EventInterface $event) {
 		parent::beforeFilter($event);
 
 		if (isset($this->Auth)) {
@@ -50,7 +50,7 @@ class StatesController extends DataAppController {
 	public function index() {
 		$this->paginate['contain'] = ['Countries'];
 
-		if (Plugin::loaded('Search')) {
+		if (Plugin::isLoaded('Search')) {
 			$query = $this->States->find('search', ['search' => $this->request->query]);
 			$states = $this->paginate($query);
 		} else {

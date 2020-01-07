@@ -64,7 +64,7 @@ class PostalCodesTable extends Table {
 	 * @param array $config
 	 * @return void
 	 */
-	public function initialize(array $config) {
+	public function initialize(array $config): void {
 		parent::initialize($config);
 
 		$this->belongsTo('Countries', [
@@ -123,7 +123,7 @@ class PostalCodesTable extends Table {
 		$list = $query
 			->select(['count' => $query->count(), 'country_id'])
 			->group('country_id')
-			->hydrate(false)
+			->enableHydration(false)
 			->all();
 
 		foreach ($list as $x) {

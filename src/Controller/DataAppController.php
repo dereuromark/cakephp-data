@@ -3,7 +3,6 @@
 namespace Data\Controller;
 
 use App\Controller\AppController;
-use Cake\Event\Event;
 
 /**
  * @property \Tools\Controller\Component\CommonComponent $Common
@@ -24,7 +23,7 @@ class DataAppController extends AppController {
 	 * @param \Cake\Event\Event $event
 	 * @return \Cake\Http\Response|null
 	 */
-	public function beforeFilter(Event $event) {
+	public function beforeFilter(EventInterface $event) {
 		parent::beforeFilter($event);
 
 		if (isset($this->Auth)) {

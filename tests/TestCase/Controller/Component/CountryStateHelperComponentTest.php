@@ -31,7 +31,7 @@ class CountryStateHelperComponentTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->Controller = new Controller();
@@ -41,7 +41,7 @@ class CountryStateHelperComponentTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 	}
 
@@ -53,7 +53,7 @@ class CountryStateHelperComponentTest extends TestCase {
 		$this->CountryStateHelperComponent->startup($event);
 		$this->CountryStateHelperComponent->provideData();
 
-		$viewVars = $this->Controller->viewVars;
+		$viewVars = $this->Controller->viewBuilder()->getVars();
 		$this->assertNotEmpty($viewVars['countries']);
 		$this->assertNotEmpty($viewVars['states']);
 	}

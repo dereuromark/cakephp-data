@@ -22,7 +22,7 @@ class CitiesTableTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->Cities = TableRegistry::get('Data.Cities');
@@ -31,7 +31,7 @@ class CitiesTableTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 
 		TableRegistry::clear();

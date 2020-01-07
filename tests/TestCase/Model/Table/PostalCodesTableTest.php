@@ -2,8 +2,8 @@
 
 namespace Data\Test\TestCase\Model\Table;
 
-use App\Model\Behavior\TestGeocoderBehavior;
 use Cake\ORM\TableRegistry;
+use TestApp\Model\Behavior\TestGeocoderBehavior;
 use Tools\TestSuite\TestCase;
 
 class PostalCodesTableTest extends TestCase {
@@ -23,7 +23,7 @@ class PostalCodesTableTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->PostalCodes = TableRegistry::get('Data.PostalCodes');

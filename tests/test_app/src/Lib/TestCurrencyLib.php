@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Lib;
+namespace TestApp\Lib;
 
 use Cake\Core\Plugin;
 use Data\Lib\CurrencyLib;

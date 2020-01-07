@@ -1,16 +1,20 @@
 <?php
+/**
+ * @var \App\View\AppView $this
+ */
+
 use Cake\Core\Configure;
 use Cake\Error\Debugger;
 
 $this->layout = 'error';
 
 if (Configure::read('debug')):
-    $this->layout = 'dev_error';
+	$this->layout = 'dev_error';
 
-    $this->assign('title', $message);
-    $this->assign('templateName', 'error500.ctp');
+	$this->assign('title', $message);
+	$this->assign('templateName', 'error500.ctp');
 
-    $this->start('file');
+	$this->start('file');
 ?>
 <?php if (!empty($error->queryString)) : ?>
     <p class="notice">
@@ -27,13 +31,13 @@ if (Configure::read('debug')):
         <?= sprintf('%s, line %s', str_replace(ROOT, 'ROOT', $error->getFile()), $error->getLine()) ?>
 <?php endif; ?>
 <?php
-    echo $this->element('auto_table_warning');
+	echo $this->element('auto_table_warning');
 
-    if (extension_loaded('xdebug')):
-        xdebug_print_function_stack();
-    endif;
+	if (extension_loaded('xdebug')):
+		xdebug_print_function_stack();
+	endif;
 
-    $this->end();
+	$this->end();
 endif;
 ?>
 <h2><?= __d('cake', 'An Internal Error Has Occurred') ?></h2>

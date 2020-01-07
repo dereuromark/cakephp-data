@@ -23,7 +23,7 @@ class CountriesTableTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->Countries = TableRegistry::get('Data.Countries');
@@ -32,7 +32,7 @@ class CountriesTableTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 
 		TableRegistry::clear();

@@ -1,14 +1,14 @@
 # CakePHP Data Plugin
 [![Build Status](https://api.travis-ci.org/dereuromark/cakephp-data.svg?branch=master)](https://travis-ci.org/dereuromark/cakephp-data)
 [![Coverage Status](https://codecov.io/gh/dereuromark/cakephp-data/branch/master/graph/badge.svg)](https://codecov.io/gh/dereuromark/cakephp-data)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg)](https://php.net/)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg)](https://php.net/)
 [![License](https://poser.pugx.org/dereuromark/cakephp-data/license.svg)](https://packagist.org/packages/dereuromark/cakephp-data)
 [![Total Downloads](https://poser.pugx.org/dereuromark/cakephp-data/d/total.svg)](https://packagist.org/packages/dereuromark/cakephp-data)
 [![Coding Standards](https://img.shields.io/badge/cs-PSR--2--R-yellow.svg)](https://github.com/php-fig-rectified/fig-rectified-standards)
 
 A CakePHP plugin containing several useful data models that can be used in many projects.
 
-Note: This branch requires CakePHP **3.7+**.
+Note: This branch requires **CakePHP 4.0+**.
 
 ## Features
 - Continents => Countries => States => Counties => Districts => Cities
@@ -30,7 +30,9 @@ Installing the plugin is pretty much as with every other CakePHP Plugin.
 composer require dereuromark/cakephp-data
 ```
 
-Make sure you have `Plugin::load('Data')` or `Plugin::loadAll()` in your bootstrap.
+And then load your plugin.
+
+Decide on what part of the plugin you need and also make sure you executed the migrations for the database tables.
 
 That's it. It should be up and running.
 

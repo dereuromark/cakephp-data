@@ -2,9 +2,9 @@
 
 namespace Data\Test\TestCase\Model\Table;
 
-use App\Model\Behavior\TestGeocoderBehavior;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
+use TestApp\Model\Behavior\TestGeocoderBehavior;
 use Tools\TestSuite\TestCase;
 
 class AddressesTableTest extends TestCase {
@@ -26,7 +26,7 @@ class AddressesTableTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->Addresses = TableRegistry::get('Data.Addresses');
@@ -35,7 +35,7 @@ class AddressesTableTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 
 		TableRegistry::clear();

@@ -18,7 +18,7 @@ class PostalCodesController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function index() {
-		if (Plugin::loaded('Search')) {
+		if (Plugin::isLoaded('Search')) {
 			$query = $this->PostalCodes->find('search', ['search' => $this->request->query]);
 			$postalCodes = $this->paginate($query);
 		} else {

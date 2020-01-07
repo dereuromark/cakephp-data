@@ -21,10 +21,10 @@ class LanguagesController extends DataAppController {
 	/**
 	 * @return \Cake\Http\Response|null
 	 */
-	public function initialize() {
+	public function initialize(): void {
 		parent::initialize();
 
-		if (Plugin::loaded('Search')) {
+		if (Plugin::isLoaded('Search')) {
 			$this->loadComponent('Search.Prg', [
 				'actions' => ['index'],
 			]);
@@ -35,7 +35,7 @@ class LanguagesController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function index() {
-		if (Plugin::loaded('Search')) {
+		if (Plugin::isLoaded('Search')) {
 			$query = $this->Languages->find('search', ['search' => $this->request->query]);
 			$languages = $this->paginate($query);
 		} else {

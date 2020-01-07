@@ -4,9 +4,8 @@ namespace Data\Controller\Admin;
 
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
-use Cake\Event\Event;
+use Cake\Event\EventInterface;
 use Data\Controller\DataAppController;
-use Data\Model\Entity\Country;
 use Tools\Utility\Utility;
 
 /**
@@ -23,10 +22,10 @@ class CountriesController extends DataAppController {
 	/**
 	 * @return \Cake\Http\Response|null
 	 */
-	public function initialize() {
+	public function initialize(): void {
 		parent::initialize();
 
-		if (Plugin::loaded('Search')) {
+		if (Plugin::isLoaded('Search')) {
 			$this->loadComponent('Search.Prg', [
 				'actions' => ['index'],
 			]);
@@ -37,7 +36,7 @@ class CountriesController extends DataAppController {
 	 * @param \Cake\Event\Event $event
 	 * @return void
 	 */
-	public function beforeFilter(Event $event) {
+	public function beforeFilter(EventInterface $event) {
 		parent::beforeFilter($event);
 
 		$specific = Configure::read('Country.image_path');
@@ -126,7 +125,7 @@ class CountriesController extends DataAppController {
 
 				if (!empty($this->request->data['import_separator_custom'])) {
 					$separator = $this->request->data['import_separator_custom'];
-					$separator = str_replace(['{SPACE}', '{TAB}'], [Country::separators(SEPARATOR_SPACE, true), Country::separators(SEPARATOR_TAB, true)], $separator);
+					//$separator = str_replace(['{SPACE}', '{TAB}'], [Country::separators(SEPARATOR_SPACE, true), Country::separators(SEPARATOR_TAB, true)], $separator);
 
 				} else {
 					$separator = $this->request->data['import_separator'];
@@ -136,7 +135,8 @@ class CountriesController extends DataAppController {
 
 				$countries = Utility::tokenize($list, $separator);
 				if (empty($countries)) {
-					$this->Countries->invalidate('import_separator', 'falscher Separator');
+					//FIXME
+					//$this->Countries->invalidate('import_separator', 'falscher Separator');
 				} elseif (!empty($this->request->data['import_pattern'])) {
 					//$pattern = str_replace(['{SPACE}', '{TAB}'], [Country::separators(SEPARATOR_SPACE, true), Country::separators(SEPARATOR_TAB, true)], $this->request->data['import_pattern']);
 					# select part that matches %name
@@ -175,7 +175,7 @@ class CountriesController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function index() {
-		if (Plugin::loaded('Search')) {
+		if (Plugin::isLoaded('Search')) {
 			$query = $this->Countries->find('search', ['search' => $this->request->query]);
 			$countries = $this->paginate($query);
 		} else {

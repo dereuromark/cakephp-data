@@ -22,7 +22,7 @@ class DistrictsTableTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->Districts = TableRegistry::get('Data.Districts');

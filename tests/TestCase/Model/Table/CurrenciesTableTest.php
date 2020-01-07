@@ -23,7 +23,7 @@ class CurrenciesTableTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->Currencies = TableRegistry::get('Data.Currencies');
@@ -33,7 +33,7 @@ class CurrenciesTableTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 
 		TableRegistry::clear();

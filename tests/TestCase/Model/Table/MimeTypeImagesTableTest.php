@@ -22,7 +22,7 @@ class MimeTypeImagesTableTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->MimeTypeImages = TableRegistry::get('Data.MimeTypeImages');

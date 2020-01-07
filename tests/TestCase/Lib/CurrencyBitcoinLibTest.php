@@ -9,14 +9,14 @@ use Tools\TestSuite\TestCase;
 class CurrencyBitcoinLibTest extends TestCase {
 
 	/**
-	 * @var \Data\Lib\CurrencyBitcoinLib|\PHPUnit_Framework_MockObject_MockObject
+	 * @var \Data\Lib\CurrencyBitcoinLib|\PHPUnit\Framework\MockObject\MockObject
 	 */
 	protected $CurrencyBitcoin;
 
 	/**
 	 * @return void
 	 */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		if ($this->isDebug()) {

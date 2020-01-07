@@ -31,7 +31,7 @@ require CORE_PATH . 'config/bootstrap.php';
 Cake\Core\Configure::write('App', [
 	'namespace' => 'App',
 	'paths' => [
-		'templates' => [ROOT . DS . 'tests' . DS . 'test_app' . DS . 'src' . DS . 'Template' . DS],
+		'templates' => [ROOT . DS . 'tests' . DS . 'test_app' . DS . 'templates' . DS],
 	],
 ]);
 
@@ -60,8 +60,12 @@ $cache = [
 
 Cake\Cache\Cache::setConfig($cache);
 
-Cake\Core\Plugin::load('Data', ['path' => ROOT . DS, 'autoload' => true, 'routes' => true, 'bootstrap' => true]);
-Cake\Core\Plugin::load('Tools', ['path' => ROOT . DS . 'vendor/dereuromark/cakephp-tools/', 'autoload' => true, 'bootstrap' => true]);
+class_alias(TestApp\Controller\AppController::class, 'App\Controller\AppController');
+class_alias(TestApp\View\AppView::class, 'App\View\AppView');
+class_alias(TestApp\Application::class, 'App\Application');
+
+Cake\Core\Plugin::getCollection()->add(new Data\Plugin()); //)'Data', ['path' => ROOT . DS, 'autoload' => true, 'routes' => true, 'bootstrap' => true]
+Cake\Core\Plugin::getCollection()->add(new Tools\Plugin());
 
 // Ensure default test connection is defined
 if (!getenv('db_class')) {
