@@ -4,6 +4,7 @@ namespace Data\Model\Table;
 
 use Cake\Core\Configure;
 use Cake\Event\Event;
+use Cake\Log\Log;
 use Cake\ORM\Entity;
 use Cake\Validation\Validation;
 use Tools\Model\Table\Table;
@@ -17,7 +18,9 @@ class LocationsTable extends Table {
 	/**
 	 * @var array
 	 */
-	public $actsAs = ['Geo.Geocoder' => ['min_accuracy' => 4, 'address' => ['name', 'country_name'], 'formatted_address' => 'formatted_address', 'real' => false, 'before' => 'validate', 'allow_inconclusive' => true, 'expect' => []]]; //'postal_code', 'locality', 'sublocality', 'street_address'
+	public $actsAs = [
+		'Geo.Geocoder' => ['min_accuracy' => 4, 'address' => ['name', 'country_name'], 'formatted_address' => 'formatted_address', 'real' => false, 'before' => 'validate', 'allow_inconclusive' => true, 'expect' => []], //'postal_code', 'locality', 'sublocality', 'street_address'
+	];
 
 	/**
 	 * @var array
@@ -125,18 +128,17 @@ class LocationsTable extends Table {
 	 * @return \Cake\ORM\Query|false
 	 */
 	public function findLocationByIp() {
-		$ip = $this->findIp();
+		$ip = static::findIp();
 		if (empty($ip)) {
 			return false;
 		}
 		if (Validation::ip($ip)) {
 			//App::import('Vendor', 'geoip', ['file' => 'geoip' . DS . 'geoip.php']);
-			$gi = Net_GeoIP::getInstance(APP . 'vendors' . DS . 'geoip' . DS . 'GeoLiteCity.dat');
-			$record = $gi->lookupLocation($ip);
-			$gi->close();
+			$record = []; //TODO
 		} else {
-			$this->log('Invalid IP \'' . h($ip) . '\'', LOG_WARNING);
+			Log::write( LOG_WARNING, 'Invalid IP `' . $ip . '`');
 		}
+
 		return !empty($record) ? $this->findLocationByCoordinates($record->latitude, $record->longitude, 1) : false;
 	}
 

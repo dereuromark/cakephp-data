@@ -17,7 +17,7 @@ class ContinentsTableTest extends TestCase {
 	/**
 	 * @var \Data\Model\Table\ContinentsTable
 	 */
-	public $Continents;
+	protected $Continents;
 
 	/**
 	 * @return void

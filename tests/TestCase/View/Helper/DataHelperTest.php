@@ -11,7 +11,7 @@ class DataHelperTest extends TestCase {
 	/**
 	 * @var \Data\View\Helper\DataHelper
 	 */
-	public $DataHelper;
+	protected $DataHelper;
 
 	/**
 	 * @return void

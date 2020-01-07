@@ -202,43 +202,56 @@ class AddressesTable extends Table {
 	}
 
 	/**
-	 * Zip Codes
+	 * Postal code validation.
 	 *
-	 * @param string $data
+	 * @param string $postalCode
+	 * @param array $context
+	 *
 	 * @return bool
 	 */
-	public function correspondsWithCountry($data) {
-		if (!empty($entity['postal_code'])) {
-			$res = $this->Countries->find('first', [
-				'conditions' => ['Country.id' => $entity['country_id']],
-			]);
-			if (empty($res)) {
-				return true;
-			}
-			if (!empty($res['Country']['zip_length']) && $res['Country']['zip_length'] != mb_strlen($entity['postal_code'])) {
-				return false;
-			}
+	public function correspondsWithCountry($postalCode, array $context) {
+		$data = $context['data'];
 
+		if (empty($postalCode) || empty($data['country_id'])) {
+			return true;
 		}
+
+		/** @var \Data\Model\Entity\Country $res */
+		$res = $this->Countries->find('all', [
+			'conditions' => ['Countries.id' => $data['country_id']],
+		])->first();
+		if ($res === null) {
+			return true;
+		}
+
+		if ($res->zip_length && $res->zip_length != mb_strlen($data['postal_code'])) {
+			return false;
+		}
+
 		return true;
 	}
 
 	/**
-	 * Validation of country_province_id
+	 * Validation of state_id
 	 *
-	 * @param string $data
+	 * @param int $stateId
+	 * @param array $context
+	 *
 	 * @return bool
 	 */
-	public function fitsToCountry($data) {
-		if (!isset($data['country_id']) || !isset($data['country_province_id'])) {
+	public function fitsToCountry($stateId, $context) {
+		$data = $context['data'];
+
+		if (!isset($data['country_id']) || !$stateId) {
 			return true;
 		}
-		$res = $this->Countries->States->find('list', [
+
+		$res = $this->Countries->States->find('all', [
 			'conditions' => ['country_id' => $data['country_id']],
-		])->toArray();
-		if (empty($res) || array_shift($data) == 0) {
-			$data['country_province_id'] = 0;
-		} elseif (empty($data['country_province_id']) || !array_key_exists($data['country_province_id'], $res)) {
+		])->find('list')->toArray();
+		if (empty($res)) {
+			//$data['state_id'] = null;
+		} elseif (!isset($res[$stateId])) {
 			return false;
 		}
 		return true;
@@ -250,8 +263,6 @@ class AddressesTable extends Table {
 	 * @return void
 	 */
 	public function _beforeValidate($options = []) {
-		parent::beforeValidate($options);
-
 		# add country name for geocoder
 		if (!empty($entity['country_id'])) {
 			$entity['country'] = $this->Countries->fieldByConditions('name', ['id' => $entity['country_id']]);
@@ -296,21 +307,22 @@ class AddressesTable extends Table {
 				$entity['postal_code'] = $entity['geocoder_result']['postal_code'];
 			}
 
-			# ensure province is correct
+			# ensure state is correct
 
-			if (isset($entity['country_province_id']) && !empty($entity['country_province_id']) && !empty($entity['geocoder_result']['country_province_code'])) {
-				//$entity['country_province_id']
-				$countryProvince = $this->Countries->States->find('first', ['conditions' => ['States.id' => $entity['country_province_id']]]);
-				if (!empty($countryProvince) && strlen($countryProvince['abbr']) === strlen($entity['geocoder_result']['country_province_code']) && $countryProvince['abbr'] != $entity['geocoder_result']['country_province_code']) {
-					$this->invalidate('country_province_id', 'Als Bundesland wurde für diese Adresse \'' . h($entity['geocoder_result']['country_province']) . '\' erwartet - du hast aber \'' . h($countryProvince['name']) . '\' angegeben. Liegt denn deine Adresse tatsächlich in einem anderen Bundesland? Dann gebe bitte die genaue PLZ und Ort an, damit das Bundesland dazu auch korrekt identifiziert werden kann.');
+			if (isset($entity['state_id']) && !empty($entity['state_id']) && !empty($entity['geocoder_result']['country_province_code'])) {
+				//$entity['state_id']
+				$state = $this->Countries->States->find('all', ['conditions' => ['States.id' => $entity['state_id']]])->first();
+				if (!empty($state) && strlen($state['abbr']) === strlen($entity['geocoder_result']['country_province_code']) && $state['abbr'] != $entity['geocoder_result']['country_province_code']) {
+					//FIXME
+					//$this->invalidate('state_id', 'Als Bundesland wurde für diese Adresse \'' . h($entity['geocoder_result']['country_province']) . '\' erwartet - du hast aber \'' . h($state['name']) . '\' angegeben. Liegt denn deine Adresse tatsächlich in einem anderen Bundesland? Dann gebe bitte die genaue PLZ und Ort an, damit das Bundesland dazu auch korrekt identifiziert werden kann.');
 					return;
 				}
 
 			# enter new id
-			} elseif (isset($entity['country_province_id']) && !empty($entity['geocoder_result']['country_province_code'])) {
-				$countryProvince = $this->Countries->States->find('first', ['conditions' => ['OR' => ['States.abbr' => $entity['geocoder_result']['country_province_code'], 'States.name' => $entity['geocoder_result']['country_province']]]]);
-				if (!empty($countryProvince)) {
-					$entity['country_province_id'] = $countryProvince['id'];
+			} elseif (isset($entity['state_id']) && !empty($entity['geocoder_result']['country_province_code'])) {
+				$state = $this->Countries->States->find('first', ['conditions' => ['OR' => ['States.abbr' => $entity['geocoder_result']['country_province_code'], 'States.name' => $entity['geocoder_result']['country_province']]]]);
+				if (!empty($state)) {
+					$entity['state_id'] = $state['id'];
 				}
 			}
 

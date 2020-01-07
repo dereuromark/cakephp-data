@@ -18,7 +18,7 @@ class CountriesTableTest extends TestCase {
 	/**
 	 * @var \Data\Model\Table\CountriesTable
 	 */
-	public $Countries;
+	protected $Countries;
 
 	/**
 	 * @return void

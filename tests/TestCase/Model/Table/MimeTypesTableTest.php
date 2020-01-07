@@ -17,7 +17,7 @@ class MimeTypesTableTest extends TestCase {
 	/**
 	 * @var \Data\Model\Table\MimeTypesTable
 	 */
-	public $MimeTypes;
+	protected $MimeTypes;
 
 	/**
 	 * @return void

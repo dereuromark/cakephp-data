@@ -21,12 +21,12 @@ class CountryStateHelperComponentTest extends TestCase {
 	/**
 	 * @var \App\Controller\AppController
 	 */
-	public $Controller;
+	protected $Controller;
 
 	/**
 	 * @var \Data\Controller\Component\CountryStateHelperComponent
 	 */
-	public $CountryStateHelperComponent;
+	protected $CountryStateHelperComponent;
 
 	/**
 	 * @return void

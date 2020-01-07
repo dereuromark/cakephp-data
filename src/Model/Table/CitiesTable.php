@@ -102,12 +102,12 @@ class CitiesTable extends Table {
 	/**
 	 * @param string $postalCode
 	 *
-	 * @return \Cake\Datasource\ResultSetInterface|null
+	 * @return \Cake\Datasource\EntityInterface|null
 	 */
 	public function getCityToPostalCode($postalCode) {
-		$result = $this->getCitiesToPostalCode($postalCode)->first();
+		$result = $this->getCitiesToPostalCode($postalCode);
 
-		return $result;
+		return $result ? $result->first() : null;
 	}
 
 }

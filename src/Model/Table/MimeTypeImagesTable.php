@@ -81,24 +81,21 @@ class MimeTypeImagesTable extends Table {
 	 * @param \Cake\Datasource\EntityInterface $entity
 	 * @param \ArrayObject $options
 	 *
-	 * @return bool
+	 * @return void
 	 */
 	public function afterSave(Event $event, EntityInterface $entity, ArrayObject $options) {
-		# clean up!
 		$this->cleanUp();
-		return true;
 	}
 
 	/**
-	 * @param bool $cascade
+	 * @param \Cake\Event\Event $event
+	 * @param \Cake\Datasource\EntityInterface $entity
+	 * @param \ArrayObject $options
 	 *
-	 * @return bool
+	 * @return void
 	 */
-	public function beforeDelete($cascade = true) {
-		# retrieve infos
-		$this->_del = $this->find('first', ['conditions' => [$this->getAlias() . '.id' => $this->id]]);
-
-		return true;
+	public function beforeDelete(Event $event, EntityInterface $entity, ArrayObject $options) {
+		$this->_del = $entity;
 	}
 
 	/**
@@ -116,15 +113,15 @@ class MimeTypeImagesTable extends Table {
 			# delete image (right now: move to archive)
 			if (file_exists(PATH_MIMETYPES . $image)) {
 				if (!rename(PATH_MIMETYPES . $image, PATH_MIMETYPES . 'archive' . DS . $image)) {
-					return false;
+					return;
 				}
 			}
 
 			# remove id from mime_types table
 
-			$types = $this->MimeTypes->find('all', ['fields' => ['id'], 'conditions' => ['mime_type_image_id' => $this->_del['id']]]);
+			$types = $this->MimeTypes->find('all', ['fields' => ['id'], 'conditions' => ['mime_type_image_id' => $this->_del->id]])->toArray();
 			foreach ($types as $type) {
-				$id = $type[$this->MimeTypes->alias]['id'];
+				$id = $type['id'];
 				$this->MimeTypes->saveField($id, 'mime_type_image_id', 0);
 				//pr ($type[$this->MimeTypes->alias]['id'].' del success');
 			}

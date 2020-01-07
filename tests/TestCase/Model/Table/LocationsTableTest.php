@@ -17,7 +17,7 @@ class LocationsTableTest extends TestCase {
 	/**
 	 * @var \Data\Model\Table\LocationsTable
 	 */
-	public $Locations;
+	protected $Locations;
 
 	/**
 	 * @return void

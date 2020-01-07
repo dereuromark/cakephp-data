@@ -11,7 +11,7 @@ class MimeTypeHelperTest extends TestCase {
 	/**
 	 * @var \Data\View\Helper\MimeTypeHelper
 	 */
-	public $MimeTypeHelper;
+	protected $MimeTypeHelper;
 
 	/**
 	 * @var array

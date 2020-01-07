@@ -2,6 +2,8 @@
 
 namespace Data\Model\Table;
 
+use ArrayObject;
+use Cake\Event\Event;
 use Tools\Model\Table\Table;
 
 /**
@@ -53,16 +55,17 @@ class DistrictsTable extends Table {
 	];
 
 	/**
-	 * @param array $options
-	 * @return bool Success
+	 * @param \Cake\Event\Event $event
+	 * @param \ArrayObject $data
+	 * @param \ArrayObject $options
+	 *
+	 * @return void
 	 */
-	public function _beforeValidate($options = []) {
-		if (!empty($this->data['name']) && !empty($this->data['city_id'])) {
-			$city = $this->Cities->fieldByConditions('name', ['id' => $this->data['city_id']]);
-			$this->data['address'] = $this->data['name'] . ', ' . $city;
+	public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options) {
+		if (!empty($data['name']) && !empty($data['city_id'])) {
+			$city = $this->Cities->fieldByConditions('name', ['id' => $data['city_id']]);
+			$data['address'] = $data['name'] . ', ' . $city;
 		}
-
-		return true;
 	}
 
 	/**

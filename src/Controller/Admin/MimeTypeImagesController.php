@@ -397,11 +397,11 @@ class MimeTypeImagesController extends DataAppController {
 		$fileExt = $res['ext'];
 		$name = $fileName . '.' . $fileExt;
 		if ($this->MimeTypeImages->delete($mimeTypeImage)) {
-			$this->Flash->success(__('record del {0} done', $fileName));
+			$this->Flash->success(__('record del {0} done', $name));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 
-		$this->Flash->error(__('record del {0} not done exception', $fileName));
+		$this->Flash->error(__('record del {0} not done exception', $name));
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 

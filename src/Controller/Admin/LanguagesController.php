@@ -131,9 +131,10 @@ class LanguagesController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function importFromCore() {
-		if (!empty($this->request->query['reset'])) {
+		if ($this->request->getQuery('reset')) {
 			$this->Languages->truncate();
 		}
+
 		//$languages = $this->Languages->iso3ToIso2();
 		$languages = $this->Languages->catalog();
 		$count = 0;

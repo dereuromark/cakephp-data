@@ -21,7 +21,7 @@ class AddressesTableTest extends TestCase {
 	/**
 	 * @var \Data\Model\Table\AddressesTable
 	 */
-	public $Addresses;
+	protected $Addresses;
 
 	/**
 	 * @return void
@@ -72,6 +72,42 @@ class AddressesTableTest extends TestCase {
 			'foreign_id' => 1,
 			'model' => 'Foo',
 			'city' => 'Berlin',
+		];
+		$address = $this->Addresses->newEntity($data);
+		$result = $this->Addresses->save($address);
+		$this->assertTrue((bool)$result);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testSaveWithState() {
+		$this->Addresses->removeBehavior('Geocoder');
+
+		$data = [
+			'foreign_id' => 1,
+			'model' => 'Foo',
+			'city' => 'Berlin',
+			'country_id' => 1,
+			'state_id' => 1,
+		];
+		$address = $this->Addresses->newEntity($data);
+		$result = $this->Addresses->save($address);
+		$this->assertTrue((bool)$result);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testSaveWithPostalCode() {
+		$this->Addresses->removeBehavior('Geocoder');
+
+		$data = [
+			'foreign_id' => 1,
+			'model' => 'Foo',
+			'city' => 'Berlin',
+			'country_id' => 1,
+			'postal_code' => 12345,
 		];
 		$address = $this->Addresses->newEntity($data);
 		$result = $this->Addresses->save($address);

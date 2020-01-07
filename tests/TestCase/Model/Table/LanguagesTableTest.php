@@ -17,7 +17,7 @@ class LanguagesTableTest extends TestCase {
 	/**
 	 * @var \Data\Model\Table\LanguagesTable
 	 */
-	public $Languages;
+	protected $Languages;
 
 	/**
 	 * @return void
@@ -55,6 +55,5 @@ class LanguagesTableTest extends TestCase {
 		$this->assertContains('Englisch', $result);
 		$this->assertNotContains('Deutsch (Deutschland)', $result);
 	}
-	//TODO
 
 }

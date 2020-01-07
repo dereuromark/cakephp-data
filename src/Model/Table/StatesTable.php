@@ -171,12 +171,11 @@ class StatesTable extends Table {
 		}
 
 		if (!empty($id)) {
-			$res = $this->find('first', ['conditions' => [$this->getAlias() . '.id' => $id], 'contain' => ['Country.name']]);
-			if (!empty($res['name']) && !empty($res->countries['name']) && $geocoder->geocode($res['name'] .
-				', ' . $res->countries['name'])) {
+			$res = $this->find('first', ['conditions' => [$this->getAlias() . '.id' => $id], 'contain' => ['Countries']]);
+			if (!empty($res['name']) && !empty($res->country['name']) && $geocoder->geocode($res['name'] .
+				', ' . $res->country['name'])) {
 
 				$data = $geocoder->getResult();
-				//pr($data); die();
 				$saveArray = ['id' => $id, 'lat' => $data['lat'], 'lng' => $data['lng'], 'country_id' => $res['country_id']];
 
 				if (!empty($data['country_province_code']) && mb_strlen($data['country_province_code']) <= 3 && preg_match('/^([A-Z])*$/', $data['country_province_code'])) {
@@ -186,11 +185,7 @@ class StatesTable extends Table {
 				//$this->id = $id;
 				if (!$this->save($saveArray, ['fields' => ['id', 'lat', 'lng', 'abbr', 'country_id']])) {
 					if ($data['country_province_code'] !== 'DC') {
-						echo returns($this->id);
-						pr($res);
-						pr($data);
-						pr($saveArray);
-						exit(returns($this->validationErrors));
+						//fixme
 					}
 				}
 				return true;
@@ -207,8 +202,8 @@ class StatesTable extends Table {
 			$count = 0;
 
 			foreach ($results as $res) {
-				if (!empty($res['name']) && !empty($res->countries['name']) && $geocoder->geocode($res['name'] .
-					', ' . $res->countries['name'])) {
+				if (!empty($res['name']) && !empty($res->country['name']) && $geocoder->geocode($res['name'] .
+					', ' . $res->country['name'])) {
 
 					$data = $geocoder->getResult();
 					//pr($data); die();

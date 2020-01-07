@@ -18,7 +18,7 @@ class PostalCodesTableTest extends TestCase {
 	/**
 	 * @var \Data\Model\Table\PostalCodesTable
 	 */
-	public $PostalCodes;
+	protected $PostalCodes;
 
 	/**
 	 * @return void

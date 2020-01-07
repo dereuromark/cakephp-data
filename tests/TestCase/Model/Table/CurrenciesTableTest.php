@@ -18,7 +18,7 @@ class CurrenciesTableTest extends TestCase {
 	/**
 	 * @var \Data\Model\Table\CurrenciesTable
 	 */
-	public $Currencies;
+	protected $Currencies;
 
 	/**
 	 * @return void

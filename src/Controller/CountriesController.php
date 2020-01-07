@@ -21,6 +21,11 @@ class CountriesController extends DataAppController {
 	public $paginate = ['order' => ['Countries.sort' => 'DESC']];
 
 	/**
+	 * @var string
+	 */
+	protected $imageFolder;
+
+	/**
 	 * @param \Cake\Event\Event $event
 	 * @return \Cake\Http\Response|null
 	 */
@@ -58,7 +63,7 @@ class CountriesController extends DataAppController {
 	 */
 	protected function _icons() {
 		$useCache = true;
-		if (!empty($this->request->query['reset'])) {
+		if ($this->request->getQuery('reset')) {
 			$useCache = false;
 		}
 

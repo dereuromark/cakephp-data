@@ -17,7 +17,7 @@ class DistrictsTableTest extends TestCase {
 	/**
 	 * @var \Data\Model\Table\DistrictsTable
 	 */
-	public $Districts;
+	protected $Districts;
 
 	/**
 	 * @return void

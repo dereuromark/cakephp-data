@@ -17,7 +17,7 @@ class StatesTableTest extends TestCase {
 	/**
 	 * @var \Data\Model\Table\StatesTable
 	 */
-	public $States;
+	protected $States;
 
 	/**
 	 * @return void

@@ -195,7 +195,7 @@ class CountriesTable extends Table {
 						//die(returns($saveArray));
 					}
 
-					$this->id = $res['id'];
+					$saveArray->id = $res['id'];
 					if ($this->save($saveArray, ['fields' => ['lat', 'lng', 'iso2', 'iso3']])) {
 						$count++;
 
