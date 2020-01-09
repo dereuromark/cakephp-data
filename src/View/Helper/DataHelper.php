@@ -48,7 +48,7 @@ class DataHelper extends Helper {
 			$specificPath = str_replace('/', DS, $specificPath);
 			$path .= trim($specificPath, DS) . DS;
 		} else {
-			$wwwPath = '/data/img/country_flags/';
+			$wwwPath = 'Data.country_flags/';
 			$path = Plugin::path('Data') . 'webroot' . DS . 'img' . DS . 'country_flags' . DS;
 		}
 		return [$wwwPath, $path];
