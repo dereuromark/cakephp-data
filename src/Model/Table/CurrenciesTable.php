@@ -85,7 +85,7 @@ class CurrenciesTable extends Table {
 
 		$this->addBehavior('Search.Search');
 		$this->searchManager()
-			->like('search', ['field' => ['name', 'code']])
+			->like('search', ['fields' => ['name', 'code']])
 			->value('active');
 	}
 

@@ -100,8 +100,8 @@ class LanguagesTable extends Table {
 
 		$this->addBehavior('Search.Search');
 		$this->searchManager()
-			->value('dir', ['field' => 'direction'])
-			->like('search', ['field' => ['name', 'ori_name', 'code', 'locale', 'locale_fallback']]);
+			->value('dir', ['fields' => 'direction'])
+			->like('search', ['fields' => ['name', 'ori_name', 'code', 'locale', 'locale_fallback']]);
 	}
 
 	/**

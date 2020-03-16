@@ -110,7 +110,7 @@ class CountriesTable extends Table {
 
 		$this->addBehavior('Search.Search');
 		$this->searchManager()
-			->like('search', ['field' => ['name', 'ori_name', 'iso2', 'iso3', 'country_code'], 'colType' => ['country_code' => 'string']]);
+			->like('search', ['fields' => ['name', 'ori_name', 'iso2', 'iso3', 'country_code'], 'colType' => ['country_code' => 'string']]);
 	}
 
 	/**
