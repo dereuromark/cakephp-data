@@ -23,6 +23,8 @@ class StatesControllerTest extends IntegrationTestCase {
 	 */
 	public function setUp(): void {
 		parent::setUp();
+
+		$this->disableErrorHandlerMiddleware();
 	}
 
 	/**

@@ -15,7 +15,8 @@ echo $this->Form->create(); ?>
 	'div' => false,
 	'type' => 'select',
 	'empty' => ['' => '- [ ' . __('noRestriction') . ' ] -'],
-	'options' => $countries]);?>
+	'options' => $countries]
+); ?>
 
 <?php echo $this->Form->submit(__('Filter'), ['div' => false]); ?>
 <?php echo $this->Form->end(); ?>

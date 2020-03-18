@@ -161,9 +161,10 @@ class CurrencyLib {
 			$currencies['BTC'] = 'Bitcoin';
 		}
 
-		if (array_key_exists($currency, $currencies)) {
+		if (isset($currencies[$currency])) {
 			return $currencies[$currency];
 		}
+
 		return $default;
 	}
 
@@ -264,14 +265,14 @@ class CurrencyLib {
 	 * @return array
 	 */
 	protected function _loadXml($url) {
-		$CurrencyXml = Xml::build($url);
+		$CurrencyXml = Xml::build($url, ['readFile' => true]);
 		return Xml::toArray($CurrencyXml);
 	}
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
-	public $currencies = [
+	protected $currencies = [
 		'AFA' => 'Afghanistan Afghani',
 		'ALL' => 'Albanian Lek',
 		'DZD' => 'Algerian Dinar',

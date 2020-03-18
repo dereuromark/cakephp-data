@@ -142,7 +142,7 @@ class DataHelper extends Helper {
 		$languageFlags = $this->getAvailableLanguageFlags();
 
 		$name = strtolower($iso2) . '.gif';
-		if (!in_array($name, $languageFlags)) {
+		if (!in_array($name, $languageFlags, true)) {
 			return $flag;
 		}
 
@@ -159,7 +159,7 @@ class DataHelper extends Helper {
 		}
 
 		$flags = Cache::read('language_flags');
-		if ($flags !== false) {
+		if ($flags !== null) {
 			$this->languageFlags = $flags;
 
 			return $this->languageFlags;

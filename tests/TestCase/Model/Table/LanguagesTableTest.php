@@ -3,6 +3,7 @@
 namespace Data\Test\TestCase\Model;
 
 use Cake\ORM\TableRegistry;
+use Data\Model\Table\LanguagesTable;
 use Shim\TestSuite\TestCase;
 
 class LanguagesTableTest extends TestCase {
@@ -33,7 +34,7 @@ class LanguagesTableTest extends TestCase {
 	 */
 	public function testObject() {
 		$this->assertTrue(is_object($this->Languages));
-		$this->assertInstanceOf('\Data\Model\Table\LanguagesTable', $this->Languages);
+		$this->assertInstanceOf(LanguagesTable::class, $this->Languages);
 	}
 
 	/**
@@ -41,9 +42,10 @@ class LanguagesTableTest extends TestCase {
 	 */
 	public function testGetList() {
 		$result = $this->Languages->getList();
-		$this->assertStringContainsString('Deutsch', $result);
-		$this->assertStringContainsString('Englisch', $result);
-		$this->assertStringNotContainsString('Deutsch (Deutschland)', $result);
+		$this->assertTrue(in_array('Deutsch', $result, true));
+		$this->assertTrue(in_array('Englisch', $result, true));
+
+		$this->assertFalse(in_array('Deutsch (Deutschland)', $result, true));
 	}
 
 	/**
@@ -51,9 +53,10 @@ class LanguagesTableTest extends TestCase {
 	 */
 	public function testCodeList() {
 		$result = $this->Languages->codeList();
-		$this->assertStringContainsString('Deutsch', $result);
-		$this->assertStringContainsString('Englisch', $result);
-		$this->assertStringNotContainsString('Deutsch (Deutschland)', $result);
+		$this->assertTrue(in_array('Deutsch', $result, true));
+		$this->assertTrue(in_array('Englisch', $result, true));
+
+		$this->assertFalse(in_array('Deutsch (Deutschland)', $result, true));
 	}
 
 }

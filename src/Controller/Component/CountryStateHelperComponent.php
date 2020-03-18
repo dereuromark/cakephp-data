@@ -3,8 +3,7 @@
 namespace Data\Controller\Component;
 
 use Cake\Controller\Component;
-use Cake\Controller\Controller;
-use Cake\ORM\TableRegistry;
+use Cake\Event\EventInterface;
 
 class CountryStateHelperComponent extends Component {
 
@@ -41,7 +40,7 @@ class CountryStateHelperComponent extends Component {
 		*/
 
 		if (!isset($this->getController()->States)) {
-			$this->getController()->States = TableRegistry::get('Data.States');
+			$this->getController()->loadModel('Data.States');
 		}
 
 		$selectedCountry = $this->getController()->getRequest()->getQuery('country_id');
