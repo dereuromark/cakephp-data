@@ -3,6 +3,9 @@
  * @var \App\View\AppView $this
  * @var mixed $countries
  */
+
+use Data\Model\Entity\Country;
+
 ?>
 <div class="page form">
 <h2>Schnell-Import von Ländern</h2>
@@ -10,7 +13,7 @@
 <?php
 	if (!empty($this->request->data['Form'])) { ?>
 	<h3>Speichern</h3>
-	<?php echo $this->Form->create('Country');?>
+	<?php echo $this->Form->create($country);?>
 	<fieldset>
 		<legend><?php echo __('Import Countries');?></legend>
 
@@ -46,7 +49,7 @@
 
 <?php if (true) { ?>
 
-<?php echo $this->Form->create('Country');?>
+<?php echo $this->Form->create($country);?>
 	<fieldset>
 		<legend><?php echo __('Import Countries');?></legend>
 	<?php

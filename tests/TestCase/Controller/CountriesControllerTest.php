@@ -3,7 +3,7 @@
 namespace Data\Test\TestCase\Controller;
 
 use Cake\ORM\TableRegistry;
-use Tools\TestSuite\IntegrationTestCase;
+use Shim\TestSuite\IntegrationTestCase;
 
 /**
  * @uses \Data\Controller\CountriesController

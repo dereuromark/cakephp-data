@@ -33,7 +33,7 @@ class CountriesController extends DataAppController {
 	}
 
 	/**
-	 * @param \Cake\Event\Event $event
+	 * @param \Cake\Event\EventInterface $event
 	 * @return void
 	 */
 	public function beforeFilter(EventInterface $event) {
@@ -176,7 +176,7 @@ class CountriesController extends DataAppController {
 	 */
 	public function index() {
 		if (Plugin::isLoaded('Search')) {
-			$query = $this->Countries->find('search', ['search' => $this->request->query]);
+			$query = $this->Countries->find('search', ['search' => $this->request->getQuery()]);
 			$countries = $this->paginate($query);
 		} else {
 			$countries = $this->paginate();
@@ -184,7 +184,7 @@ class CountriesController extends DataAppController {
 
 		$this->set(compact('countries'));
 
-		$this->helpers = array_merge($this->helpers, ['Geo.GoogleMap']);
+		$this->viewBuilder()->setHelpers(['Geo.GoogleMap']);
 	}
 
 	/**
@@ -202,7 +202,7 @@ class CountriesController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function add() {
-		$country = $this->Countries->newEntity();
+		$country = $this->Countries->newEmptyEntity();
 
 		if ($this->Common->isPosted()) {
 			$country = $this->Countries->patchEntity($country, $this->request->getData());

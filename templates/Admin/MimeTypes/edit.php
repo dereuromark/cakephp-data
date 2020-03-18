@@ -14,7 +14,7 @@ $this->Html->script('jquery/plugins/jquery.dd.js');?>
 
 
 <div class="page form">
-<?php echo $this->Form->create('MimeType');?>
+<?php echo $this->Form->create($mimeType);?>
 	<fieldset>
 		<legend><?php echo __('Edit Mime Type');?></legend>
 	<?php

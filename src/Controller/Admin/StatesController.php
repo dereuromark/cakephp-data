@@ -33,7 +33,7 @@ class StatesController extends DataAppController {
 	}
 
 	/**
-	 * @param \Cake\Event\Event $event
+	 * @param \Cake\Event\EventInterface $event
 	 * @return \Cake\Http\Response|null
 	 */
 	public function beforeFilter(EventInterface $event) {
@@ -51,7 +51,7 @@ class StatesController extends DataAppController {
 		$this->paginate['contain'] = ['Countries'];
 
 		if (Plugin::isLoaded('Search')) {
-			$query = $this->States->find('search', ['search' => $this->request->query]);
+			$query = $this->States->find('search', ['search' => $this->request->getQuery()]);
 			$states = $this->paginate($query);
 		} else {
 			$states = $this->paginate();
@@ -60,7 +60,7 @@ class StatesController extends DataAppController {
 		$countries = $this->States->Countries->find('list');
 
 		$this->set(compact('states', 'countries'));
-		$this->helpers[] = 'Geo.GoogleMap';
+		$this->viewBuilder()->setHelpers(['Geo.GoogleMap']);
 	}
 
 	/**
@@ -100,7 +100,7 @@ class StatesController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function add() {
-		$state = $this->States->newEntity();
+		$state = $this->States->newEmptyEntity();
 
 		if ($this->Common->isPosted()) {
 			$state = $this->States->patchEntity($state, $this->request->getData());

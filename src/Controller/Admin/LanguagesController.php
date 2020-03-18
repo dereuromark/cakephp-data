@@ -36,13 +36,13 @@ class LanguagesController extends DataAppController {
 	 */
 	public function index() {
 		if (Plugin::isLoaded('Search')) {
-			$query = $this->Languages->find('search', ['search' => $this->request->query]);
+			$query = $this->Languages->find('search', ['search' => $this->request->getQuery()]);
 			$languages = $this->paginate($query);
 		} else {
 			$languages = $this->paginate();
 		}
 
-		$language = $this->Languages->newEntity();
+		$language = $this->Languages->newEmptyEntity();
 
 		$this->set(compact('languages', 'language'));
 	}
@@ -64,7 +64,7 @@ class LanguagesController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function add() {
-		$language = $this->Languages->newEntity();
+		$language = $this->Languages->newEmptyEntity();
 
 		if ($this->Common->isPosted()) {
 			//$this->Languages->create();

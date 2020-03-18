@@ -4,9 +4,9 @@ namespace Data\Test\TestCase\Controller;
 
 use Cake\Database\Driver\Mysql;
 use Cake\ORM\TableRegistry;
-use Tools\TestSuite\IntegrationTestCase;
+use Shim\TestSuite\IntegrationTestCase;
 
-class PostalControllerTest extends IntegrationTestCase {
+class PostalCodesControllerTest extends IntegrationTestCase {
 
 	/**
 	 * @var array
@@ -35,7 +35,7 @@ class PostalControllerTest extends IntegrationTestCase {
 	 * @return void
 	 */
 	public function testMap() {
-		$connectionConfig = TableRegistry::get('Data.PostalCodes')->connection()->config();
+		$connectionConfig = TableRegistry::get('Data.PostalCodes')->getConnection()->config();
 		$this->skipIf($connectionConfig['driver'] !== Mysql::class, 'Only for MySQL');
 
 		$this->get(['plugin' => 'Data', 'controller' => 'PostalCodes', 'action' => 'map']);

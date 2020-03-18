@@ -3,7 +3,7 @@
 namespace Data\Test\TestCase\Model\Table;
 
 use Cake\ORM\TableRegistry;
-use Tools\TestSuite\TestCase;
+use Shim\TestSuite\TestCase;
 
 class LocationsTableTest extends TestCase {
 

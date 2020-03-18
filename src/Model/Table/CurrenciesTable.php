@@ -4,8 +4,8 @@ namespace Data\Model\Table;
 
 use ArrayObject;
 use Cake\Core\Plugin;
-use Cake\Event\Event;
-use Cake\ORM\Entity;
+use Cake\Datasource\EntityInterface;
+use Cake\Event\EventInterface;
 use Cake\Utility\Hash;
 use Data\Lib\CurrencyLib;
 use Tools\Model\Table\Table;
@@ -90,12 +90,12 @@ class CurrenciesTable extends Table {
 	}
 
 	/**
-	 * @param \Cake\Event\Event $event
+	 * @param \Cake\Event\EventInterface $event
 	 * @param \ArrayObject $data
 	 * @param \ArrayObject $options
 	 * @return void
 	 */
-	public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options) {
+	public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options) {
 		if (isset($data['value'])) {
 			$data['value'] = (float)$data['value'];
 		}
@@ -125,12 +125,12 @@ class CurrenciesTable extends Table {
 	}
 
 	/**
-	 * @param \Cake\Event\Event $event
+	 * @param \Cake\Event\EventInterface $event
 	 * @param \Data\Model\Entity\Currency $entity
 	 *
 	 * @return bool
 	 */
-	public function beforeSave(Event $event, Entity $entity) {
+	public function beforeSave(EventInterface $event, EntityInterface $entity) {
 		if (isset($entity['name'])) {
 			$entity['name'] = ucwords($entity['name']);
 		}

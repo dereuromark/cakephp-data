@@ -2,8 +2,8 @@
 
 namespace Data\Test\TestCase\Lib;
 
+use Shim\TestSuite\TestCase;
 use TestApp\Lib\TestCurrencyLib;
-use Tools\TestSuite\TestCase;
 
 class CurrencyLibTest extends TestCase {
 

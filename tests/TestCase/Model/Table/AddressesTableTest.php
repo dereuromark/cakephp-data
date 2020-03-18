@@ -4,8 +4,8 @@ namespace Data\Test\TestCase\Model\Table;
 
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
+use Shim\TestSuite\TestCase;
 use TestApp\Model\Behavior\TestGeocoderBehavior;
-use Tools\TestSuite\TestCase;
 
 class AddressesTableTest extends TestCase {
 

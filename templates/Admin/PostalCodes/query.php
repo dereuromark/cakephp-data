@@ -7,7 +7,7 @@
 <div class="page form">
 <h2><?php echo __('Query {0}', __('Geo Data')); ?></h2>
 
-<?php echo $this->Form->create('PostalCode');?>
+<?php echo $this->Form->create($postalCode);?>
 	<fieldset>
 		<legend><?php echo __('Enter Postal Code, City, Address or other Geo Data'); ?></legend>
 	<?php

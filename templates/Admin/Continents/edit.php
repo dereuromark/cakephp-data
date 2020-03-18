@@ -6,7 +6,7 @@
 <h2><?php echo __('Edit {0}', __('Continent')); ?></h2>
 
 <div class="page form">
-<?php echo $this->Form->create('Continent');?>
+<?php echo $this->Form->create($continent);?>
 	<fieldset>
 		<legend><?php echo __('Edit {0}', __('Continent')); ?></legend>
 	<?php

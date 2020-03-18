@@ -4,7 +4,7 @@ namespace Data\Test\TestCase\View\Helper;
 
 use Cake\View\View;
 use Data\View\Helper\DataHelper;
-use Tools\TestSuite\TestCase;
+use Shim\TestSuite\TestCase;
 
 class DataHelperTest extends TestCase {
 

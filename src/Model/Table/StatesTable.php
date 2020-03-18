@@ -159,7 +159,7 @@ class StatesTable extends Table {
 	 *
 	 * @param \Data\Model\Entity\State $state
 	 *
-	 * @return \Data\Model\Entity\State|null
+	 * @return \Data\Model\Entity\State|int|null
 	 */
 	public function updateCoordinates(State $state) {
 		$geocoder = new Geocoder();
@@ -171,24 +171,24 @@ class StatesTable extends Table {
 		}
 
 		if (!empty($id)) {
-			$res = $this->find('first', ['conditions' => [$this->getAlias() . '.id' => $id], 'contain' => ['Countries']]);
+			$res = $this->find('all', ['conditions' => [$this->getAlias() . '.id' => $id], 'contain' => ['Countries']])->first();
 			if (!empty($res['name']) && !empty($res->country['name']) && $geocoder->geocode($res['name'] .
 				', ' . $res->country['name'])) {
 
 				$data = $geocoder->getResult();
-				$saveArray = ['id' => $id, 'lat' => $data['lat'], 'lng' => $data['lng'], 'country_id' => $res['country_id']];
+				$saveArray = ['lat' => $data['lat'], 'lng' => $data['lng'], 'country_id' => $res['country_id']];
 
 				if (!empty($data['country_province_code']) && mb_strlen($data['country_province_code']) <= 3 && preg_match('/^([A-Z])*$/', $data['country_province_code'])) {
 					$saveArray['abbr'] = $data['country_province_code'];
 				}
 
-				//$this->id = $id;
-				if (!$this->save($saveArray, ['fields' => ['id', 'lat', 'lng', 'abbr', 'country_id']])) {
+				$state = $this->patchEntity($res, $saveArray);
+				if (!$this->save($state)) {
 					if ($data['country_province_code'] !== 'DC') {
 						//fixme
 					}
 				}
-				return true;
+				return $state;
 			}
 		} else {
 
@@ -208,7 +208,7 @@ class StatesTable extends Table {
 					$data = $geocoder->getResult();
 					//pr($data); die();
 					//pr ($geocoder->debug());
-					$saveArray = ['id' => $res['id'], 'country_id' => $res['country_id']];
+					$saveArray = ['country_id' => $res['country_id']];
 					if (isset($data['lat']) && isset($data['lng'])) {
 						$saveArray = ['lat' => $data['lat'], 'lng' => $data['lng']] + $saveArray;
 					}
@@ -217,11 +217,11 @@ class StatesTable extends Table {
 						$saveArray['abbr'] = $data['country_province_code'];
 					}
 
-					//$this->id = $res['id'];
-					if ($this->save($saveArray, ['fields' => ['lat', 'lng', 'abbr', 'country_id']])) {
+					$state = $this->patchEntity($res, $saveArray);
+					if ($this->save($state)) {
 						$count++;
 
-						if (!empty($saveArray['abbr']) && $saveArray['abbr'] != $res['abbr']) {
+						if (!empty($saveArray['abbr']) && $saveArray['abbr'] !== $res['abbr']) {
 							//$this->log('Abbr for country province \'' . $data['country_province'] . '\' changed from \'' . $res['abbr'] . '\' to \'' . $saveArray['abbr'] .'\'', LOG_NOTICE);
 						}
 
@@ -242,7 +242,7 @@ class StatesTable extends Table {
 			return $count;
 		}
 
-		return false;
+		return null;
 	}
 
 }

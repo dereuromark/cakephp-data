@@ -80,7 +80,7 @@ class CurrenciesController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function add() {
-		$currency = $this->Currencies->newEntity();
+		$currency = $this->Currencies->newEmptyEntity();
 
 		if ($this->Common->isPosted()) {
 			$currency = $this->Currencies->patchEntity($currency, $this->request->getData());

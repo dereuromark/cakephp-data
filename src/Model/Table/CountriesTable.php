@@ -6,7 +6,7 @@ use ArrayObject;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Datasource\EntityInterface;
-use Cake\Event\Event;
+use Cake\Event\EventInterface;
 use Data\Model\Entity\Country;
 use Exception;
 use Geo\Geocoder\Geocoder;
@@ -281,12 +281,12 @@ class CountriesTable extends Table {
 	}
 
 	/**
-	 * @param \Cake\Event\Event $event
+	 * @param \Cake\Event\EventInterface $event
 	 * @param \Data\Model\Entity\Country $entity
 	 * @param \ArrayObject $options
 	 * @return void
 	 */
-	public function afterSave(Event $event, EntityInterface $entity, ArrayObject $options) {
+	public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
 		if ($entity->isNew()) {
 			//$this->updateCoordinates($entity);
 		}

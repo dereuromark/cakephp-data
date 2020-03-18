@@ -5,8 +5,7 @@ namespace Data\Model\Table;
 use ArrayObject;
 use Cake\Core\Configure;
 use Cake\Datasource\EntityInterface;
-use Cake\Event\Event;
-use Cake\ORM\Entity;
+use Cake\Event\EventInterface;
 use Tools\Mailer\Email;
 use Tools\Model\Table\Table;
 
@@ -66,12 +65,12 @@ class MimeTypesTable extends Table {
 	];
 
 	/**
-	 * @param \Cake\Event\Event $event
+	 * @param \Cake\Event\EventInterface $event
 	 * @param \Cake\ORM\Entity $entity
 	 *
 	 * @return void
 	 */
-	public function beforeSave(Event $event, Entity $entity) {
+	public function beforeSave(EventInterface $event, EntityInterface $entity) {
 		if (isset($entity['ext'])) {
 			$entity['ext'] = mb_strtolower($entity['ext']);
 		}
@@ -90,12 +89,12 @@ class MimeTypesTable extends Table {
 	}
 
 	/**
-	 * @param \Cake\Event\Event $event
+	 * @param \Cake\Event\EventInterface $event
 	 * @param \Cake\ORM\Entity $entity
 	 * @param \ArrayObject $options
 	 * @return void
 	 */
-	public function afterDelete(Event $event, EntityInterface $entity, ArrayObject $options) {
+	public function afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
 		$this->cleanUp();
 	}
 

@@ -2,11 +2,14 @@
 /**
  * @var \App\View\AppView $this
  */
+
+use Cake\Core\Configure;
+
 ?>
 <div class="page form">
 <h2><?php echo __('Edit {0}', __('City')); ?></h2>
 
-<?php echo $this->Form->create('City');?>
+<?php echo $this->Form->create($city);?>
 	<fieldset>
 		<legend><?php echo __('Edit {0}', __('City')); ?></legend>
 	<?php

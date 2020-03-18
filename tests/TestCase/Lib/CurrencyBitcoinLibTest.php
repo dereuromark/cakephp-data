@@ -4,7 +4,7 @@ namespace Data\Test\TestCase\Lib;
 
 use Cake\Core\Plugin;
 use Data\Lib\CurrencyBitcoinLib;
-use Tools\TestSuite\TestCase;
+use Shim\TestSuite\TestCase;
 
 class CurrencyBitcoinLibTest extends TestCase {
 

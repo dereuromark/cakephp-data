@@ -6,7 +6,7 @@ use Cake\Controller\ComponentRegistry;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Data\Controller\Component\CountryStateHelperComponent;
-use Tools\TestSuite\TestCase;
+use Shim\TestSuite\TestCase;
 
 class CountryStateHelperComponentTest extends TestCase {
 

@@ -6,7 +6,7 @@
 <h2><?php echo __('Import {0}', __('Languages')); ?></h2>
 
 <div class="page form">
-<?php echo $this->Form->create('Language');?>
+<?php echo $this->Form->create($language);?>
 	<fieldset>
 		<legend><?php echo __('Add {0}', __('Language')); ?></legend>
 	<?php

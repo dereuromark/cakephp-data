@@ -17,7 +17,8 @@ class AddressesController extends DataAppController {
 	public function index() {
 		$addresses = $this->paginate();
 		$this->set(compact('addresses'));
-		$this->helpers[] = 'Geo.GoogleMap';
+
+		$this->viewBuilder()->setHelpers(['Geo.GoogleMap']);
 	}
 
 	/**
@@ -30,14 +31,14 @@ class AddressesController extends DataAppController {
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->set(compact('address'));
-		$this->helpers[] = 'Geo.GoogleMap';
+		$this->viewBuilder()->setHelpers(['Geo.GoogleMap']);
 	}
 
 	/**
 	 * @return \Cake\Http\Response|null
 	 */
 	public function add() {
-		$address = $this->Addresses->newEntity();
+		$address = $this->Addresses->newEmptyEntity();
 		if ($this->Common->isPosted()) {
 			$address = $this->Addresses->patchEntity($address, $this->request->getData());
 			if ($this->Addresses->save($address)) {

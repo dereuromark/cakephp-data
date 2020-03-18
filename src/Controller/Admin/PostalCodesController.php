@@ -19,7 +19,7 @@ class PostalCodesController extends DataAppController {
 	 */
 	public function index() {
 		if (Plugin::isLoaded('Search')) {
-			$query = $this->PostalCodes->find('search', ['search' => $this->request->query]);
+			$query = $this->PostalCodes->find('search', ['search' => $this->request->getQuery()]);
 			$postalCodes = $this->paginate($query);
 		} else {
 			$postalCodes = $this->paginate();
@@ -42,7 +42,7 @@ class PostalCodesController extends DataAppController {
 		}
 
 		$this->set(compact('ipData'));
-		$this->helpers = array_merge($this->helpers, ['Geo.GoogleMap']);
+		$this->viewBuilder()->setHelpers(['Geo.GoogleMap']);
 		$this->render('geolocate');
 	}
 	*/
@@ -64,7 +64,7 @@ class PostalCodesController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function add() {
-		$postalCode = $this->PostalCodes->newEntity();
+		$postalCode = $this->PostalCodes->newEmptyEntity();
 
 		if ($this->Common->isPosted()) {
 			$postalCode = $this->PostalCodes->patchEntity($postalCode, $this->request->getData());

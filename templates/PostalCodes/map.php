@@ -14,7 +14,7 @@ $this->Html->script($this->GoogleMap->apiUrl(), ['inline' => false])?>
 <h3>Map</h3>
 
 <div>
-<?php echo $this->Form->create('PostalCode');?>
+<?php echo $this->Form->create($postalCode);?>
 	<fieldset>
 		<legend><?php echo __('Search {0}', __('Area Code')); ?></legend>
 	<?php

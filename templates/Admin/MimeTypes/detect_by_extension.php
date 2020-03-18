@@ -15,7 +15,7 @@ foreach ($extensions as $extension) {
 <br/><br/>
 
 <div class="MimeTypes">
-<?php echo $this->Form->create('MimeType', ['type' => 'file', 'action' => 'detectByExtension']);?>
+<?php echo $this->Form->create($mimeType, ['type' => 'file']);?>
 
 	<fieldset>
 		<legend><?php echo __('Test');?></legend>

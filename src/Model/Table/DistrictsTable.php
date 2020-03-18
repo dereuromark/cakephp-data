@@ -3,7 +3,6 @@
 namespace Data\Model\Table;
 
 use ArrayObject;
-use Cake\Event\Event;
 use Tools\Model\Table\Table;
 
 /**
@@ -55,13 +54,13 @@ class DistrictsTable extends Table {
 	];
 
 	/**
-	 * @param \Cake\Event\Event $event
+	 * @param \Cake\Event\EventInterface $event
 	 * @param \ArrayObject $data
 	 * @param \ArrayObject $options
 	 *
 	 * @return void
 	 */
-	public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options) {
+	public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options) {
 		if (!empty($data['name']) && !empty($data['city_id'])) {
 			$city = $this->Cities->fieldByConditions('name', ['id' => $data['city_id']]);
 			$data['address'] = $data['name'] . ', ' . $city;

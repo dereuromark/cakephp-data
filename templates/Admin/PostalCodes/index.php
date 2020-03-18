@@ -8,7 +8,7 @@
 
 <div class="searchBox" style="float: right;">
 <?php
-	echo $this->Form->create('PostalCode');
+	echo $this->Form->create($postalCode);
 	echo $this->Form->control('code', ['placeholder' => 'Platzhalter: * und ?']);
 	echo $this->Form->control('country_id', ['empty' => ' - egal - ']);
 	echo $this->Form->submit(__('Search'), ['div' => false]);

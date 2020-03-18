@@ -5,13 +5,15 @@
  * @var \Data\Model\Entity\Language $language
  * @var \Data\Model\Entity\Language[]|\Cake\Collection\CollectionInterface $languages
  */
+
+use Cake\Core\Configure;
 use Cake\Core\Plugin;
 ?>
 
 <div class="page index">
 <h2><?php echo __('Languages');?></h2>
 
-<?php if (Plugin::loaded('Search')) { ?>
+<?php if (Plugin::isLoaded('Search')) { ?>
 <div class="search-box">
 <?php
 echo $this->Form->create($language);

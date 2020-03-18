@@ -33,8 +33,8 @@ class StatesController extends DataAppController {
 	}
 
 	/**
-	 * @param \Cake\Event\Event $event
-	 * @return \Cake\Http\Response|null
+	 * @param \Cake\Event\EventInterface $event
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function beforeFilter(EventInterface $event) {
 		parent::beforeFilter($event);
@@ -53,7 +53,7 @@ class StatesController extends DataAppController {
 		$this->paginate['order'] = ['States.name' => 'ASC'];
 
 		if (Plugin::isLoaded('Search')) {
-			$query = $this->States->find('search', ['search' => $this->request->query]);
+			$query = $this->States->find('search', ['search' => $this->request->getQuery()]);
 			$states = $this->paginate($query);
 		} else {
 			$states = $this->paginate();

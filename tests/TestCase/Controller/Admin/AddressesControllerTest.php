@@ -3,7 +3,7 @@
 namespace Data\Test\TestCase\Controller\Admin;
 
 use Cake\ORM\TableRegistry;
-use Tools\TestSuite\IntegrationTestCase;
+use Shim\TestSuite\IntegrationTestCase;
 
 /**
  * @uses \Data\Controller\Admin\AddressesController
@@ -37,7 +37,9 @@ class AddressesControllerTest extends IntegrationTestCase {
 	 * @return void
 	 */
 	public function testIndex() {
-		$this->get(['prefix' => 'admin', 'plugin' => 'Data', 'controller' => 'Addresses', 'action' => 'index']);
+		$this->disableErrorHandlerMiddleware();
+
+		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'Addresses', 'action' => 'index']);
 		$this->assertResponseCode(200);
 		$this->assertNoRedirect();
 	}

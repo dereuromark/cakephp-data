@@ -3,7 +3,7 @@
 namespace Data\Test\TestCase\Model\Table;
 
 use Cake\ORM\TableRegistry;
-use Tools\TestSuite\TestCase;
+use Shim\TestSuite\TestCase;
 
 class CountiesTableTest extends TestCase {
 
@@ -60,7 +60,7 @@ class CountiesTableTest extends TestCase {
 			'name' => 'Foo Bar',
 		];
 		$entity = $this->Counties->newEntity($data);
-		$this->assertEmpty($entity->errors());
+		$this->assertEmpty($entity->getErrors());
 
 		$result = $this->Counties->save($entity);
 		//debug($result);ob_flush();

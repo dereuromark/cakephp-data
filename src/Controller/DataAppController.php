@@ -3,6 +3,7 @@
 namespace Data\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\EventInterface;
 
 /**
  * @property \Tools\Controller\Component\CommonComponent $Common
@@ -10,18 +11,19 @@ use App\Controller\AppController;
 class DataAppController extends AppController {
 
 	/**
-	 * @var array
+	 * @return void
 	 */
-	public $components = ['Tools.Common'];
+	public function initialize(): void {
+		parent::initialize();
+
+		$this->loadComponent('Tools.Common');
+
+		$this->viewBuilder()->setHelpers(['Tools.Common', 'Tools.Format', 'Tools.Time', 'Tools.Number', 'Tools.Text', 'Data.Data']);
+	}
 
 	/**
-	 * @var array
-	 */
-	public $helpers = ['Tools.Common', 'Tools.Format', 'Tools.Time', 'Tools.Number', 'Tools.Text', 'Data.Data'];
-
-	/**
-	 * @param \Cake\Event\Event $event
-	 * @return \Cake\Http\Response|null
+	 * @param \Cake\Event\EventInterface $event
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function beforeFilter(EventInterface $event) {
 		parent::beforeFilter($event);

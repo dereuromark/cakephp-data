@@ -4,9 +4,8 @@ namespace Data\Model\Table;
 
 use ArrayObject;
 use Cake\Datasource\EntityInterface;
-use Cake\Event\Event;
+use Cake\Event\EventInterface;
 use Cake\Filesystem\File;
-use Cake\ORM\Entity;
 use Tools\Model\Table\Table;
 
 /**
@@ -60,12 +59,12 @@ class MimeTypeImagesTable extends Table {
 	protected $_del;
 
 	/**
-	 * @param \Cake\Event\Event $event
+	 * @param \Cake\Event\EventInterface $event
 	 * @param \Cake\ORM\Entity $entity
 	 *
 	 * @return bool
 	 */
-	public function beforeSave(Event $event, Entity $entity) {
+	public function beforeSave(EventInterface $event, EntityInterface $entity) {
 		if (isset($entity['name'])) {
 			$entity['name'] = mb_strtolower($entity['name']);
 		}
@@ -77,35 +76,35 @@ class MimeTypeImagesTable extends Table {
 	}
 
 	/**
-	 * @param \Cake\Event\Event $event
+	 * @param \Cake\Event\EventInterface $event
 	 * @param \Cake\Datasource\EntityInterface $entity
 	 * @param \ArrayObject $options
 	 *
 	 * @return void
 	 */
-	public function afterSave(Event $event, EntityInterface $entity, ArrayObject $options) {
+	public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
 		$this->cleanUp();
 	}
 
 	/**
-	 * @param \Cake\Event\Event $event
+	 * @param \Cake\Event\EventInterface $event
 	 * @param \Cake\Datasource\EntityInterface $entity
 	 * @param \ArrayObject $options
 	 *
 	 * @return void
 	 */
-	public function beforeDelete(Event $event, EntityInterface $entity, ArrayObject $options) {
+	public function beforeDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
 		$this->_del = $entity;
 	}
 
 	/**
-	 * @param \Cake\Event\Event $event
+	 * @param \Cake\Event\EventInterface $event
 	 * @param \Cake\ORM\Entity $entity
 	 * @param \ArrayObject $options
 	 *
 	 * @return void
 	 */
-	public function afterDelete(Event $event, EntityInterface $entity, ArrayObject $options) {
+	public function afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
 		if (!empty($this->_del)) {
 			# todo: ...
 			$image = $this->_del['name'] . '.' . $this->_del['ext'];

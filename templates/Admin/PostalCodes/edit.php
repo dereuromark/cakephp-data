@@ -6,7 +6,7 @@
 <div class="page form">
 <h2><?php echo __('Edit {0}', __('Postal Code')); ?></h2>
 
-<?php echo $this->Form->create('PostalCode');?>
+<?php echo $this->Form->create($postalCode);?>
 	<fieldset>
 		<legend><?php echo __('Edit {0}', __('Postal Code')); ?></legend>
 	<?php

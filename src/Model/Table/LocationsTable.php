@@ -3,9 +3,9 @@
 namespace Data\Model\Table;
 
 use Cake\Core\Configure;
-use Cake\Event\Event;
+use Cake\Datasource\EntityInterface;
+use Cake\Event\EventInterface;
 use Cake\Log\Log;
-use Cake\ORM\Entity;
 use Cake\Validation\Validation;
 use Tools\Model\Table\Table;
 use Tools\Utility\Utility;
@@ -50,11 +50,11 @@ class LocationsTable extends Table {
 	/**
 	 * FIXME
 	 *
-	 * @param \Cake\Event\Event $event
+	 * @param \Cake\Event\EventInterface $event
 	 * @param \Cake\ORM\Entity $entity
 	 * @return bool|void
 	 */
-	public function _beforeSave(Event $event, Entity $entity) {
+	public function _beforeSave(EventInterface $event, EntityInterface $entity) {
 		$additional = ['locality', 'sublocality'];
 		foreach ($additional as $field) {
 			if (!empty($entity['geocoder_result'][$field])) {

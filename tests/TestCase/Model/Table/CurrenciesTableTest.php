@@ -4,7 +4,7 @@ namespace Data\Test\TestCase\Model\Table;
 
 use Cake\ORM\TableRegistry;
 use Data\Lib\CurrencyLib;
-use Tools\TestSuite\TestCase;
+use Shim\TestSuite\TestCase;
 
 class CurrenciesTableTest extends TestCase {
 
@@ -63,10 +63,10 @@ class CurrenciesTableTest extends TestCase {
 		$this->Currencies->deleteAll($data);
 
 		$currency = $this->Currencies->newEntity($data);
-		$this->assertEmpty($currency->errors(), print_r($currency->errors(), true));
+		$this->assertEmpty($currency->getErrors(), print_r($currency->getErrors(), true));
 
 		$result = $this->Currencies->save($currency);
-		$this->assertNotEmpty($result, print_r($currency->errors(), true));
+		$this->assertNotEmpty($result, print_r($currency->getErrors(), true));
 	}
 
 	/**
@@ -86,7 +86,7 @@ class CurrenciesTableTest extends TestCase {
 		];
 		$currency = $this->Currencies->newEntity($data);
 		$result = $this->Currencies->save($currency);
-		$this->assertNotEmpty($result, print_r($currency->errors(), true));
+		$this->assertNotEmpty($result, print_r($currency->getErrors(), true));
 
 		$this->assertSame('USD', $result->code);
 

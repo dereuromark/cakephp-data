@@ -4,7 +4,7 @@ namespace Data\Test\TestCase\View\Helper;
 
 use Cake\View\View;
 use Data\View\Helper\MimeTypeHelper;
-use Tools\TestSuite\TestCase;
+use Shim\TestSuite\TestCase;
 
 class MimeTypeHelperTest extends TestCase {
 

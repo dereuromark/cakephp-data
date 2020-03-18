@@ -4,7 +4,7 @@
  */
 ?>
 <div class="page form">
-<?php echo $this->Form->create('Country');?>
+<?php echo $this->Form->create($country);?>
 	<fieldset>
 		<legend><?php echo __('Add {0}', __('Country'));?></legend>
 	<?php

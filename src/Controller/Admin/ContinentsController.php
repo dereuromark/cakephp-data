@@ -35,7 +35,7 @@ class ContinentsController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function add() {
-		$continent = $this->Continents->newEntity();
+		$continent = $this->Continents->newEmptyEntity();
 
 		if ($this->Common->isPosted()) {
 			$continent = $this->Continents->patchEntity($continent, $this->request->getData());

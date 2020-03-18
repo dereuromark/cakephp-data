@@ -4,7 +4,6 @@ namespace Data\Controller\Component;
 
 use Cake\Controller\Component;
 use Cake\Controller\Controller;
-use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 
 class CountryStateHelperComponent extends Component {
@@ -15,10 +14,10 @@ class CountryStateHelperComponent extends Component {
 	public $Controller;
 
 	/**
-	 * @param \Cake\Event\Event $event
+	 * @param \Cake\Event\EventInterface $event
 	 * @return void
 	 */
-	public function startup(Event $event) {
+	public function startup(EventInterface $event) {
 		$this->Controller = $this->_registry->getController();
 	}
 

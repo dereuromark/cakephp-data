@@ -21,7 +21,7 @@ class Application extends BaseApplication {
 	 */
 	public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue {
 		$middlewareQueue
-			->add(RoutingMiddleware::class);
+			->add(new RoutingMiddleware($this));
 
 		return $middlewareQueue;
 	}

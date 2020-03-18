@@ -4,7 +4,7 @@
  */
 ?>
 <div class="page form">
-<?php echo $this->Form->create('Currency');?>
+<?php echo $this->Form->create($currency);?>
 	<fieldset>
 		<legend><?php echo __('Edit {0}', __('Currency'));?></legend>
 	<?php

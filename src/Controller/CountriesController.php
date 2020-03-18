@@ -26,7 +26,7 @@ class CountriesController extends DataAppController {
 	protected $imageFolder;
 
 	/**
-	 * @param \Cake\Event\Event $event
+	 * @param \Cake\Event\EventInterface $event
 	 * @return \Cake\Http\Response|null
 	 */
 	public function beforeFilter(EventInterface $event) {

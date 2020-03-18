@@ -19,7 +19,7 @@ Currently Media View has <b><?php echo count($mimeTypes)?> MimeTypes</b> listed<
 <?php echo count($report['success'])?> wurden neu hingefügt, <?php echo count($report['in'])?> sind schon enthalten (<?php echo count($manualRes)?> davon bedürfen einer manuellen Klärung) sowie <?php echo count($report['error'])?> Fehler.
 
 <div class="page form">
-<?php echo $this->Form->create('MimeType');?>
+<?php echo $this->Form->create($mimeType);?>
 	<fieldset>
 		<legend><?php echo __('Add Mime Type');?></legend>
 	Zur manuellen Klärung:
