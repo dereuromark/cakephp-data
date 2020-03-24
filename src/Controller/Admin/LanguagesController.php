@@ -10,6 +10,7 @@ use RuntimeException;
 /**
  * @property \Data\Model\Table\LanguagesTable $Languages
  * @method \Data\Model\Entity\Language[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @property \Search\Controller\Component\SearchComponent $Search
  */
 class LanguagesController extends DataAppController {
 
@@ -25,7 +26,7 @@ class LanguagesController extends DataAppController {
 		parent::initialize();
 
 		if (Plugin::isLoaded('Search')) {
-			$this->loadComponent('Search.Prg', [
+			$this->loadComponent('Search.Search', [
 				'actions' => ['index'],
 			]);
 		}

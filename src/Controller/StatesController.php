@@ -11,6 +11,7 @@ use Exception;
  * @property \Data\Model\Table\StatesTable $States
  * @property \Search\Controller\Component\PrgComponent $Prg
  * @method \Data\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @property \Search\Controller\Component\SearchComponent $Search
  */
 class StatesController extends DataAppController {
 
@@ -26,7 +27,7 @@ class StatesController extends DataAppController {
 		parent::initialize();
 
 		if (Plugin::isLoaded('Search')) {
-			$this->loadComponent('Search.Prg', [
+			$this->loadComponent('Search.Search', [
 				'actions' => ['index'],
 			]);
 		}

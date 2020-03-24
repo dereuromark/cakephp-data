@@ -11,6 +11,7 @@ use Tools\Utility\Utility;
 /**
  * @property \Data\Model\Table\CountriesTable $Countries
  * @method \Data\Model\Entity\Country[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @property \Search\Controller\Component\SearchComponent $Search
  */
 class CountriesController extends DataAppController {
 
@@ -26,7 +27,7 @@ class CountriesController extends DataAppController {
 		parent::initialize();
 
 		if (Plugin::isLoaded('Search')) {
-			$this->loadComponent('Search.Prg', [
+			$this->loadComponent('Search.Search', [
 				'actions' => ['index'],
 			]);
 		}
