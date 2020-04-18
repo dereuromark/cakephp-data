@@ -18,8 +18,8 @@
 		"dereuromark/cakephp-tools": "^2.0.0"
 	},
 	"require-dev": {
-		"dereuromark/cakephp-geo": "dev-cake4",
-		"friendsofcake/search": "^6.0",
+		"dereuromark/cakephp-geo": "^2.0.0",
+		"friendsofcake/search": "^6.0.0",
 		"yangqi/htmldom": "dev-master",
 		"fig-r/psr2r-sniffer": "dev-master"
 	},
@@ -39,7 +39,6 @@
 		"source": "https://github.com/dereuromark/cakephp-data"
 	},
 	"prefer-stable": true,
-	"minimum-stability": "dev",
 	"scripts": {
 		"test": "php phpunit.phar",
 		"test-setup": "[ ! -f phpunit.phar ] && wget https://phar.phpunit.de/phpunit-8.5.2.phar && mv phpunit-8.5.2.phar phpunit.phar || true",
