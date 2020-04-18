@@ -23,7 +23,7 @@
 		"cakephp/chronos": "^1.0.1",
 		"friendsofcake/search": "^2.3 || 3.0 || 4.0",
 		"yangqi/htmldom": "dev-master",
-		"fig-r/psr2r-sniffer": "dev-master"
+		"fig-r/psr2r-sniffer": "^0.6"
 	},
 	"autoload": {
 		"psr-4": {
