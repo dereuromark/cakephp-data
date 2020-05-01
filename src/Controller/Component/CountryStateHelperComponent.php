@@ -12,7 +12,7 @@ class CountryStateHelperComponent extends Component {
 	/**
 	 * @var \Cake\Controller\Controller
 	 */
-	public $Controller;
+	protected $Controller;
 
 	/**
 	 * @param \Cake\Event\Event $event
@@ -34,7 +34,7 @@ class CountryStateHelperComponent extends Component {
 		if (!isset($this->Controller->Countries)) {
 			$this->Controller->Countries = TableRegistry::get('Data.Countries');
 		}
-		$countries = $this->Controller->Countries->findActive()->hydrate(false)->find('list')->toArray();
+		$countries = $this->Controller->Countries->findActive()->enableHydration(false)->find('list')->toArray();
 
 		$states = [];
 		if ($model === null) {
@@ -46,8 +46,8 @@ class CountryStateHelperComponent extends Component {
 		}
 
 		$selectedCountry = $this->Controller->request->getQuery('country_id');
-		if (!empty($this->Controller->request->data['country_id'])) {
-			$selectedCountry = $this->Controller->request->data['country_id'];
+		if ($this->Controller->request->getData('country_id')) {
+			$selectedCountry = $this->Controller->request->getData('country_id');
 		}
 
 		if ($selectedCountry) {
