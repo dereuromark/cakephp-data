@@ -19,7 +19,7 @@
 	},
 	"require-dev": {
 		"dereuromark/cakephp-geo": "^2.0.0",
-		"willdurand/geocoder": "@stable",
+		"willdurand/geocoder": "^4.2.2",
 		"friendsofcake/search": "^6.0.0",
 		"yangqi/htmldom": "dev-master",
 		"fig-r/psr2r-sniffer": "dev-master"
