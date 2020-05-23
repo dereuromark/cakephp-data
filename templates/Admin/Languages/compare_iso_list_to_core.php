@@ -55,7 +55,7 @@ foreach ($isoList['values'] as $language):
 			?>&nbsp;
 		</td>
 		<td class="actions">
-			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $language['Language']['id']), array('escape'=>false)); ?>
+			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $language['id']), array('escape'=>false)); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -128,7 +128,7 @@ foreach ($locales as $key => $locale):
 			?>
 		</td>
 		<td class="actions">
-			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $language['Language']['id']), array('escape'=>false)); ?>
+			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $language['id']), array('escape'=>false)); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

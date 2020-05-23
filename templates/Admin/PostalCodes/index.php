@@ -34,30 +34,30 @@ $i = 0;
 foreach ($postalCodes as $postalCode): ?>
 	<tr>
 		<td>
-			<?php echo h($postalCode['PostalCode']['code']); ?>
+			<?php echo h($postalCode['code']); ?>
 		</td>
 		<td>
-			<?php echo h($postalCode['PostalCode']['country_id']); ?>
+			<?php echo h($postalCode['country_id']); ?>
 		</td>
 		<td>
-			<?php echo $this->Number->format($postalCode['PostalCode']['lat']); ?>
+			<?php echo $this->Number->format($postalCode['lat']); ?>
 		</td>
 		<td>
-			<?php echo $this->Number->format($postalCode['PostalCode']['lng']); ?>
+			<?php echo $this->Number->format($postalCode['lng']); ?>
 		</td>
 		<td>
-			<?php echo h($postalCode['PostalCode']['official_address']); ?>
+			<?php echo h($postalCode['official_address']); ?>
 		</td>
 		<td>
-			<?php echo $this->Time->niceDate($postalCode['PostalCode']['created']); ?>
+			<?php echo $this->Time->niceDate($postalCode['created']); ?>
 		</td>
 		<td>
-			<?php echo $this->Time->niceDate($postalCode['PostalCode']['modified']); ?>
+			<?php echo $this->Time->niceDate($postalCode['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $postalCode['PostalCode']['id']], ['escape' => false]); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $postalCode['PostalCode']['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $postalCode['PostalCode']['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $postalCode['PostalCode']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $postalCode['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $postalCode['id']], ['escape' => false]); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $postalCode['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $postalCode['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

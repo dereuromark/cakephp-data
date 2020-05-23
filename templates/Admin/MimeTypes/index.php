@@ -3,7 +3,7 @@
  * @var \App\View\AppView $this
  * @var string $allCount
  * @var mixed $mimeTypes
- * @var mixed $searchStr
+ * @var string|null $searchStr
  */
 ?>
 <div class="page index">
@@ -69,37 +69,37 @@ foreach ($mimeTypes as $mimeType):
 			?>
 		</td>
 		<td>
-			*.<b><?php echo h($mimeType['MimeType']['ext']); ?></b>
+			*.<b><?php echo h($mimeType['ext']); ?></b>
 		</td>
 		<td>
-			<?php echo h($mimeType['MimeType']['name']); ?>
+			<?php echo h($mimeType['name']); ?>
 		</td>
 		<td>
-			<?php echo h($mimeType['MimeType']['type']); ?>
+			<?php echo h($mimeType['type']); ?>
 			<?php
-			if (!empty($mimeType['MimeType']['alt_type'])) {
-				echo '[' . h($mimeType['MimeType']['alt_type']) . ']';
+			if (!empty($mimeType['alt_type'])) {
+				echo '[' . h($mimeType['alt_type']) . ']';
 			}
 			?>
 		</td>
 		<td>
-			<span class="ajaxToggling" id="ajaxToggle-<?php echo $mimeType['MimeType']['id']?>">
-			<?php echo $this->Html->link($this->Format->yesNo($mimeType['MimeType']['active'], ['onTitle' => 'Active', 'offTitle' => 'Inactive']), ['action' => 'toggleActive', $mimeType['MimeType']['id']], ['escape' => false]);?>
+			<span class="ajaxToggling" id="ajaxToggle-<?php echo $mimeType['id']?>">
+			<?php echo $this->Html->link($this->Format->yesNo($mimeType['active'], ['onTitle' => 'Active', 'offTitle' => 'Inactive']), ['action' => 'toggleActive', $mimeType['id']], ['escape' => false]);?>
 			</span>
 		</td>
 		<td>
-			<?php echo $this->Format->yesNo($mimeType['MimeType']['core']); ?>
+			<?php echo $this->Format->yesNo($mimeType['core']); ?>
 		</td>
 		<td>
-			<?php echo $this->Time->niceDate($mimeType['MimeType']['created']); ?>
+			<?php echo $this->Time->niceDate($mimeType['created']); ?>
 		</td>
 		<td>
-			<?php echo $this->Time->niceDate($mimeType['MimeType']['modified']); ?>
+			<?php echo $this->Time->niceDate($mimeType['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $mimeType['MimeType']['id']], ['escape' => false]); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $mimeType['MimeType']['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $mimeType['MimeType']['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $mimeType['MimeType']['id'])); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $mimeType['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $mimeType['id']], ['escape' => false]); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $mimeType['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $mimeType['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

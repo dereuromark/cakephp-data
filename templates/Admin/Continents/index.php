@@ -31,7 +31,7 @@ foreach ($continents as $continent):
 			<?php echo h($continent['ori_name']); ?>
 		</td>
 		<td>
-			<?php echo $this->Html->link($continent['ParentContinent']['name'], ['controller' => 'continents', 'action' => 'view', $continent['ParentContinent']['id']]); ?>
+			<?php echo $this->Html->link($continent->parent['name'], ['controller' => 'continents', 'action' => 'view', $content->parent['id']]); ?>
 		</td>
 		<td>
 			<?php echo $this->Time->niceDate($continent['modified']); ?>

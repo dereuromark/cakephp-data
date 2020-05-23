@@ -30,11 +30,11 @@ foreach ($addresses as $address):
 ?>
 	<tr>
 		<td>
-			<?php echo $this->Html->link($address['Country']['name'], ['controller' => 'countries', 'action' => 'view', $address['Country']['id']]); ?>
+			<?php echo $this->Html->link($address->country['name'], ['controller' => 'countries', 'action' => 'view', $address->country['id']]); ?>
 		</td>
 <?php if (Configure::read('Data.Address.State')) { ?>
 		<td>
-			<?php echo $this->Html->link($address['State']['name'], ['controller' => 'states', 'action' => 'view', $address['State']['id']]); ?>
+			<?php echo $this->Html->link($address->state['name'], ['controller' => 'states', 'action' => 'view', $address->state['id']]); ?>
 		</td>
 <?php } ?>
 		<td>

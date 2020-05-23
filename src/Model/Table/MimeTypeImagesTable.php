@@ -146,7 +146,7 @@ class MimeTypeImagesTable extends Table {
 		$images = $this->find('all', ['conditions' => ['active' => 1]]); // ,'contain'=>'MimeType.id'
 		foreach ($images as $image) {
 			//$count = count($image['MimeType']);
-			$list[$image['MimeTypeImage']['id']] = $image['MimeTypeImage']['name'] . '.' . (!empty($image['MimeTypeImage']['ext']) ? $image['MimeTypeImage']['ext'] : '?');
+			$list[$image['id']] = $image['name'] . '.' . (!empty($image['ext']) ? $image['ext'] : '?');
 		}
 		return $list;
 	}

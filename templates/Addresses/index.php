@@ -34,16 +34,16 @@ foreach ($addresses as $address):
 ?>
 	<tr>
 		<td>
-			<?php echo $this->Html->link($address['User']['id'], ['controller' => 'users', 'action' => 'view', $address['User']['id']]); ?>
+			<?php echo $this->Html->link($address->user['id'], ['controller' => 'users', 'action' => 'view', $address->user['id']]); ?>
 		</td>
 		<td>
 			<?php echo h($address['model']); ?>
 		</td>
 		<td>
-			<?php echo $this->Html->link($address['Country']['name'], ['controller' => 'countries', 'action' => 'view', $address['Country']['id']]); ?>
+			<?php echo $this->Html->link($address->country['name'], ['controller' => 'countries', 'action' => 'view', $address->country['id']]); ?>
 		</td>
 		<td>
-			<?php echo $this->Html->link($address['State']['name'], ['controller' => 'states', 'action' => 'view', $address['State']['id']]); ?>
+			<?php echo $this->Html->link($address->state['name'], ['controller' => 'states', 'action' => 'view', $address->state['id']]); ?>
 		</td>
 		<td>
 			<?php echo h($address['first_name']); ?>

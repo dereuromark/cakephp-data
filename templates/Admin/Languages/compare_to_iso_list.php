@@ -67,8 +67,8 @@ foreach ($isoList['values'] as $language):
 			<?php
 				if (!empty($language['iso2'])) {
 					foreach ($languages as $lang) {
-					if (!empty($lang['Language']['code']) && $language['iso2'] == $lang['Language']['code']) {
-						echo '<div>' . h($lang['Language']['name']) . '</div>';
+					if (!empty($lang['code']) && $language['iso2'] == $lang['code']) {
+						echo '<div>' . h($lang['name']) . '</div>';
 					}
 					}
 				}
@@ -76,7 +76,7 @@ foreach ($isoList['values'] as $language):
 			&nbsp;
 		</td>
 		<td class="actions">
-			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $language['Language']['id']), array('escape'=>false)); ?>
+			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $language['id']), array('escape'=>false)); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

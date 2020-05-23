@@ -19,7 +19,7 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Parent Continent'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Html->link($continent['ParentContinent']['name'], ['controller' => 'continents', 'action' => 'view', $continent['ParentContinent']['id']]); ?>
+			<?php echo $this->Html->link($content->parent['name'], ['controller' => 'continents', 'action' => 'view', $content->parent['id']]); ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Status'); ?></dt>
