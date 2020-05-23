@@ -22,7 +22,9 @@
 foreach ($cities as $city) { ?>
 	<tr>
 		<td>
-			<?php echo h($city->country->name); ?>
+			<?php if ($city->country) {
+				echo h($city->country->name);
+			} ?>
 		</td>
 		<td>
 			<?php echo h($city['name']); ?>
@@ -45,7 +47,7 @@ foreach ($cities as $city) { ?>
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $city['id']], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $city['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $city['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $city['id'])); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $city['id']], ['escape' => false, 'confirm' => 'Sure?']); ?>
 		</td>
 	</tr>
 <?php } ?>

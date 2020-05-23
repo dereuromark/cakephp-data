@@ -201,11 +201,12 @@ class CurrenciesTable extends Table {
 	/**
 	 * @param array $options
 	 *
-	 * @return \Cake\ORM\Query
+	 * @return \Data\Model\Entity\Currency|null
 	 */
 	public function baseCurrency($options = []) {
 		$defaults = ['conditions' => [$this->getAlias() . '.base' => 1]];
 		$options = Hash::merge($defaults, $options);
+
 		return $this->find('all', $options)->first();
 	}
 
@@ -218,18 +219,20 @@ class CurrenciesTable extends Table {
 		if (!isset($this->CurrencyLib)) {
 			$this->CurrencyLib = new CurrencyLib();
 		}
-		$base = $this->baseCurrency();
-		$res = $this->CurrencyLib->table($base['code'], 4);
-		if ($res) {
-			return $res;
+
+		$base = $this->baseCurrency() ?: 'EUR';
+		$res = $this->CurrencyLib->table($base->code, 4);
+		if (!$res) {
+			return [];
 		}
-		return [];
+
+		return $res;
 	}
 
 	/**
 	 * For user selection
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	public function currencyList() {
 		$res = $this->availableCurrencies();

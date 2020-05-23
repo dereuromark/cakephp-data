@@ -39,7 +39,7 @@ foreach ($continents as $continent):
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $continent['id']], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $continent['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $continent['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $continent['id'])); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $continent['id']], ['escape' => false, 'confirm' => 'Sure?']); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

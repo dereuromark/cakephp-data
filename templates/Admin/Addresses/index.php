@@ -30,11 +30,15 @@ foreach ($addresses as $address):
 ?>
 	<tr>
 		<td>
-			<?php echo $this->Html->link($address->country->name, ['controller' => 'countries', 'action' => 'view', $address->country->id]); ?>
+			<?php if ($address->country) {
+				echo $this->Html->link($address->country->name, ['controller' => 'countries', 'action' => 'view', $address->country->id]);
+			} ?>
 		</td>
 <?php if (Configure::read('Data.Address.State')) { ?>
 		<td>
-			<?php echo $this->Html->link($address->state['name'], ['controller' => 'states', 'action' => 'view', $address->state['id']]); ?>
+			<?php if ($address->state) {
+				echo $this->Html->link($address->state['name'], ['controller' => 'states', 'action' => 'view', $address->state['id']]);
+			} ?>
 		</td>
 <?php } ?>
 		<td>
@@ -75,7 +79,7 @@ foreach ($addresses as $address):
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $address['id']], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $address['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $address['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $address['id'])); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $address['id']], ['escape' => false, 'confirm' => 'Sure?']); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
