@@ -35,7 +35,7 @@ class DataHelperTest extends TestCase {
 	 */
 	public function testCountryIcon() {
 		$result = $this->DataHelper->countryIcon('de');
-		$expected = '<img src="/data/img/country_flags/de.gif" alt="de" title="DE"/>';
+		$expected = '<img src="/data/country_flags/de.gif" alt="de" title="DE"/>';
 		$this->assertSame($expected, $result);
 	}
 
