@@ -14,7 +14,7 @@
 		</dd>
 		<dt><?php echo __('Country Id'); ?></dt>
 		<dd>
-			<?php echo h($postalCode->country['name']); ?>
+			<?php echo h($postalCode->country->name); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Lat'); ?></dt>

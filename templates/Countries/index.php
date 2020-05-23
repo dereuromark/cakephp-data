@@ -30,7 +30,7 @@ foreach ($countries as $country):
 			<?php echo $this->Data->countryIcon($country['iso2']); ?>
 		</td>
 		<td>
-			<?php echo h($country['name']); ?>
+			<?php echo h($country->name); ?>
 		</td>
 		<td>
 			<?php echo h($country['ori_name']); ?>

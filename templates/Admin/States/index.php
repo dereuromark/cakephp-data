@@ -34,7 +34,7 @@ foreach ($states as $state):
 	<tr>
 
 		<td>
-			<?php echo $this->Data->countryIcon($state->country['iso2']); ?> <?php echo $this->Html->link($state->country['name'], ['controller' => 'Countries', 'action' => 'view', $state->country['id']]); ?>
+			<?php echo $this->Data->countryIcon($state->country['iso2']); ?> <?php echo $this->Html->link($state->country->name, ['controller' => 'Countries', 'action' => 'view', $state->country->id]); ?>
 		</td>
 		<td>
 			<?php echo h($state['name']); ?>

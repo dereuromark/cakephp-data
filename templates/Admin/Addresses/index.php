@@ -30,7 +30,7 @@ foreach ($addresses as $address):
 ?>
 	<tr>
 		<td>
-			<?php echo $this->Html->link($address->country['name'], ['controller' => 'countries', 'action' => 'view', $address->country['id']]); ?>
+			<?php echo $this->Html->link($address->country->name, ['controller' => 'countries', 'action' => 'view', $address->country->id]); ?>
 		</td>
 <?php if (Configure::read('Data.Address.State')) { ?>
 		<td>
@@ -54,15 +54,15 @@ foreach ($addresses as $address):
 		</td>
 		<td>
 			<?php
-				if ((int)$address['lat'] != 0 || (int)$address['lng'] != 0) {
-					echo number_format($address['lat'], 1, ',', '.');
+				if ((int)$address->lat != 0 || (int)$address->lng != 0) {
+					echo number_format($address->lat, 1, ',', '.');
 					echo '/';
-					echo number_format($address['lng'], 1, ',', '.');
+					echo number_format($address->lng, 1, ',', '.');
 
 					$markers = [];
-					$markers[] = ['lat' => $address['lat'], 'lng' => $address['lng'], 'color' => 'green'];
+					$markers[] = ['lat' => $address->lat, 'lng' => $address->lng, 'color' => 'green'];
 					$mapMarkers = $this->GoogleMap->staticMarkers($markers);
-					echo $this->Html->link($this->Format->icon('view', ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $address['lat'] . ',' . $address['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 12]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
+					echo $this->Html->link($this->Format->icon('view', ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $address->lat . ',' . $address->lng, 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 12]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
 				}
 			 ?>
 		</td>

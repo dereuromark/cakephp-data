@@ -29,7 +29,7 @@ foreach ($states as $state):
 	<tr>
 
 		<td>
-			<?php echo $this->Data->countryIcon($state->country['iso2']) . ' ' . h($state->country['name']); ?>
+			<?php echo $this->Data->countryIcon($state->country['iso2']) . ' ' . h($state->country->name); ?>
 		</td>
 		<td>
 			<?php echo h($state['name']); ?>

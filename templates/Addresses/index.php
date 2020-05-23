@@ -40,7 +40,7 @@ foreach ($addresses as $address):
 			<?php echo h($address['model']); ?>
 		</td>
 		<td>
-			<?php echo $this->Html->link($address->country['name'], ['controller' => 'countries', 'action' => 'view', $address->country['id']]); ?>
+			<?php echo $this->Html->link($address->country->name, ['controller' => 'countries', 'action' => 'view', $address->country->id]); ?>
 		</td>
 		<td>
 			<?php echo $this->Html->link($address->state['name'], ['controller' => 'states', 'action' => 'view', $address->state['id']]); ?>
@@ -61,10 +61,10 @@ foreach ($addresses as $address):
 			<?php echo h($address['city']); ?>
 		</td>
 		<td>
-			<?php echo h($address['lat']); ?>
+			<?php echo h($address->lat); ?>
 		</td>
 		<td>
-			<?php echo h($address['lng']); ?>
+			<?php echo h($address->lng); ?>
 		</td>
 		<td>
 			<?php echo $this->Time->niceDate($address['last_used']); ?>

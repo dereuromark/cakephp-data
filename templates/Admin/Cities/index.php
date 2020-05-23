@@ -22,7 +22,7 @@
 foreach ($cities as $city) { ?>
 	<tr>
 		<td>
-			<?php echo h($city->country['name']); ?>
+			<?php echo h($city->country->name); ?>
 		</td>
 		<td>
 			<?php echo h($city['name']); ?>

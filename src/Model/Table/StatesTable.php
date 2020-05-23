@@ -172,8 +172,8 @@ class StatesTable extends Table {
 
 		if (!empty($id)) {
 			$res = $this->find('all', ['conditions' => [$this->getAlias() . '.id' => $id], 'contain' => ['Countries']])->first();
-			if (!empty($res['name']) && !empty($res->country['name']) && $geocoder->geocode($res['name'] .
-				', ' . $res->country['name'])) {
+			if (!empty($res['name']) && !empty($res->country->name) && $geocoder->geocode($res['name'] .
+				', ' . $res->country->name)) {
 
 				$data = $geocoder->getResult();
 				$saveArray = ['lat' => $data['lat'], 'lng' => $data['lng'], 'country_id' => $res['country_id']];
@@ -202,8 +202,8 @@ class StatesTable extends Table {
 			$count = 0;
 
 			foreach ($results as $res) {
-				if (!empty($res['name']) && !empty($res->country['name']) && $geocoder->geocode($res['name'] .
-					', ' . $res->country['name'])) {
+				if (!empty($res['name']) && !empty($res->country->name) && $geocoder->geocode($res['name'] .
+					', ' . $res->country->name)) {
 
 					$data = $geocoder->getResult();
 					//pr($data); die();
