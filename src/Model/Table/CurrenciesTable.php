@@ -220,8 +220,8 @@ class CurrenciesTable extends Table {
 			$this->CurrencyLib = new CurrencyLib();
 		}
 
-		$base = $this->baseCurrency() ?: 'EUR';
-		$res = $this->CurrencyLib->table($base->code, 4);
+		$base = $this->baseCurrency() ? $base->code : 'EUR';
+		$res = $this->CurrencyLib->table($base, 4);
 		if (!$res) {
 			return [];
 		}
