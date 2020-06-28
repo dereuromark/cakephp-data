@@ -156,33 +156,6 @@ class AddressesTable extends Table {
 	];
 
 	/**
-	 * @param array $config
-	 */
-	public function __construct(array $config = []) {
-		parent::__construct($config);
-
-		/*
-		$config = Configure::read('Data.Address');
-		if ($config) {
-			$vars = ['displayField', 'order', 'actsAs', 'validate', 'belongsTo'];
-			foreach ($vars as $var) {
-				if (isset($config[$var])) {
-					$this->{$var} = $config[$var];
-				}
-			}
-			if (isset($config) && $config === false && isset($this->belongsTo)) {
-				unset($this->belongsTo);
-			} else {
-				$config = true;
-			}
-			if (!empty($config['debug'])) {
-				$this->actsAs['Tools.Jsonable'] = ['fields' => ['debug'], 'map' => ['geocoder_result']];
-			}
-		}
-		*/
-	}
-
-	/**
 	 * @param string $data
 	 *
 	 * @return bool

@@ -52,7 +52,7 @@ class LocationsTable extends Table {
 	 *
 	 * @param \Cake\Event\EventInterface $event
 	 * @param \Cake\ORM\Entity $entity
-	 * @return bool|void
+	 * @return void
 	 */
 	public function _beforeSave(EventInterface $event, EntityInterface $entity) {
 		$additional = ['locality', 'sublocality'];
