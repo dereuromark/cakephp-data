@@ -211,6 +211,7 @@ class CountriesController extends DataAppController {
 				$id = $this->Countries->id;
 				//$name = $this->request->data['name'];
 				$this->Flash->success(__('record add {0} saved', $id));
+
 				return $this->redirect(['action' => 'index']);
 			}
 
@@ -233,6 +234,7 @@ class CountriesController extends DataAppController {
 			if ($this->Countries->save($country)) {
 				$name = $country->name;
 				$this->Flash->success(__('record edit {0} saved', h($name)));
+
 				return $this->redirect(['action' => 'index']);
 			}
 
@@ -252,10 +254,12 @@ class CountriesController extends DataAppController {
 
 		if ($this->Countries->delete($country)) {
 			$this->Flash->success(__('record del {0} done', $id));
+
 			return $this->redirect(['action' => 'index']);
 		}
 
 		$this->Flash->error(__('record del {0} not done exception', $id));
+
 		return $this->redirect(['action' => 'index']);
 	}
 

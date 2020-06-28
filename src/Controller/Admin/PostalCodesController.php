@@ -54,6 +54,7 @@ class PostalCodesController extends DataAppController {
 	public function view($id = null) {
 		if (empty($id) || !($postalCode = $this->PostalCodes->find('first', ['contain' => ['Countries'], 'conditions' => ['PostalCodes.id' => $id]]))) {
 			$this->Flash->error(__('invalidRecord'));
+
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 
@@ -71,6 +72,7 @@ class PostalCodesController extends DataAppController {
 			if ($this->PostalCodes->save($postalCode)) {
 				$var = $postalCode['code'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
+
 				return $this->Common->postRedirect(['action' => 'index']);
 			}
 
@@ -87,6 +89,7 @@ class PostalCodesController extends DataAppController {
 	public function edit($id = null) {
 		if (empty($id) || !($postalCode = $this->PostalCodes->find('first', ['conditions' => ['PostalCode.id' => $id]]))) {
 			$this->Flash->error(__('invalidRecord'));
+
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
@@ -95,6 +98,7 @@ class PostalCodesController extends DataAppController {
 			if ($this->PostalCodes->save($postalCode)) {
 				$var = $postalCode['code'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
+
 				return $this->Common->postRedirect(['action' => 'index']);
 			}
 
@@ -116,9 +120,11 @@ class PostalCodesController extends DataAppController {
 
 		if ($this->PostalCodes->delete($postalCode)) {
 			$this->Flash->success(__('record del {0} done', h($var)));
+
 			return $this->redirect(['action' => 'index']);
 		}
 		$this->Flash->error(__('record del {0} not done exception', h($var)));
+
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 

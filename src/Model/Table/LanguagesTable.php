@@ -114,6 +114,7 @@ class LanguagesTable extends Table {
 		$options = [
 			'conditions' => ['status' => Language::STATUS_ACTIVE],
 		];
+
 		return $this->find($type, $options);
 	}
 
@@ -126,6 +127,7 @@ class LanguagesTable extends Table {
 		$options = [
 			'conditions' => ['locale_fallback = locale'],
 		];
+
 		return $this->find($type, $options);
 	}
 
@@ -143,6 +145,7 @@ class LanguagesTable extends Table {
 		foreach ($res as $language) {
 			$ret[$language['id']] = $language['name'];
 		}
+
 		return $ret;
 	}
 
@@ -159,6 +162,7 @@ class LanguagesTable extends Table {
 		foreach ($res as $language) {
 			$ret[$language['code']] = $language['name'];
 		}
+
 		return $ret;
 	}
 
@@ -177,6 +181,7 @@ class LanguagesTable extends Table {
 			if (array_key_exists($iso3, $languages)) {
 				return $languages[$iso3];
 			}
+
 			return null;
 		}
 
@@ -191,6 +196,7 @@ class LanguagesTable extends Table {
 		if (!isset($this->L10n)) {
 			$this->L10n = new L10n();
 		}
+
 		return $this->L10n->catalog($lang);
 	}
 
@@ -239,6 +245,7 @@ class LanguagesTable extends Table {
 			}
 
 			$heading = ['ISO 639-2 Code (alpha3)', 'ISO 639-1 Code (alpha2)', 'English name of Language'];
+
 			break;
 		}
 

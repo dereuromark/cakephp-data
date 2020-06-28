@@ -108,6 +108,7 @@ class PostalCodesTable extends Table {
 			'conditions' => $search,
 			'limit' => 15,
 		];
+
 		return $this->find('all', $options);
 	}
 

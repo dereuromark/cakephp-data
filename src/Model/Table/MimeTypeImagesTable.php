@@ -148,6 +148,7 @@ class MimeTypeImagesTable extends Table {
 			//$count = count($image['MimeType']);
 			$list[$image['id']] = $image['name'] . '.' . (!empty($image['ext']) ? $image['ext'] : '?');
 		}
+
 		return $list;
 	}
 
@@ -176,6 +177,7 @@ class MimeTypeImagesTable extends Table {
 				return true;
 			}
 		}
+
 		return false;
 	}
 
@@ -196,8 +198,10 @@ class MimeTypeImagesTable extends Table {
 			if (array_key_exists($value, $options)) {
 				return $options[$value];
 			}
+
 			return '';
 		}
+
 		return $options;
 	}
 

@@ -2,8 +2,6 @@
 
 namespace Data\Controller;
 
-use Data\Controller\DataAppController;
-
 /**
  * PostalCodes Controller
  *

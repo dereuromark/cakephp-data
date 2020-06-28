@@ -21,6 +21,7 @@ class CurrencyBitcoinLibTest extends TestCase {
 
 		if ($this->isDebug()) {
 			$this->CurrencyBitcoin = new CurrencyBitcoinLib();
+
 			return;
 		}
 

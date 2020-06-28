@@ -32,7 +32,7 @@ class DataHelper extends Helper {
 	public function getCountryIconPaths() {
 		$specific = Configure::read('Country.imagePath');
 		if ($specific) {
-			list ($plugin, $specificPath) = pluginSplit($specific);
+			[$plugin, $specificPath] = pluginSplit($specific);
 			if (substr($specificPath, 0, 1) !== '/') {
 				$specificPath = '/img/' . $specific;
 			}
@@ -51,6 +51,7 @@ class DataHelper extends Helper {
 			$wwwPath = 'Data.country_flags/';
 			$path = Plugin::path('Data') . 'webroot' . DS . 'img' . DS . 'country_flags' . DS;
 		}
+
 		return [$wwwPath, $path];
 	}
 
@@ -63,7 +64,7 @@ class DataHelper extends Helper {
 			return $this->getCountryIconPaths();
 		}
 
-		list ($plugin, $specificPath) = pluginSplit($specific);
+		[$plugin, $specificPath] = pluginSplit($specific);
 		if (substr($specificPath, 0, 1) !== '/') {
 			$specificPath = '/img/' . $specific;
 		}
@@ -98,7 +99,7 @@ class DataHelper extends Helper {
 		$ending = 'gif';
 		$image = 'unknown';
 
-		list($wwwPath, $path) = $this->getCountryIconPaths();
+		[$wwwPath, $path] = $this->getCountryIconPaths();
 
 		if (!empty($options) && is_array($options)) {
 			if (!empty($options['ending'])) {
@@ -147,6 +148,7 @@ class DataHelper extends Helper {
 		}
 
 		$flag .= $this->Html->image('language_flags/' . $name, $options);
+
 		return $flag;
 	}
 
@@ -165,7 +167,7 @@ class DataHelper extends Helper {
 			return $this->languageFlags;
 		}
 
-		list($wwwPath, $path) = $this->getLanguageIconPaths();
+		[$wwwPath, $path] = $this->getLanguageIconPaths();
 		$handle = new Folder($path);
 		$languageFlags = $handle->read(true, true);
 		$languageFlags = $languageFlags[1];

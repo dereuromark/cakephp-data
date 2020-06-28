@@ -33,6 +33,7 @@ class CitiesController extends DataAppController {
 	public function view($id = null) {
 		if (empty($id) || !($city = $this->Cities->find('first', ['conditions' => ['City.id' => $id]]))) {
 			$this->Flash->error(__('invalidRecord'));
+
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->set(compact('city'));
@@ -47,6 +48,7 @@ class CitiesController extends DataAppController {
 			if ($this->Cities->save($this->request->getData())) {
 				$var = $this->request->data['name'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
+
 				return $this->Common->postRedirect(['action' => 'index']);
 			}
 			$this->Flash->error(__('formContainsErrors'));
@@ -64,6 +66,7 @@ class CitiesController extends DataAppController {
 	public function edit($id = null) {
 		if (empty($id) || !($city = $this->Cities->find('first', ['conditions' => ['City.id' => $id]]))) {
 			$this->Flash->error(__('invalidRecord'));
+
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
@@ -72,6 +75,7 @@ class CitiesController extends DataAppController {
 			if ($this->Cities->save($city)) {
 				$var = $this->request->data['name'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
+
 				return $this->Common->postRedirect(['action' => 'index']);
 			}
 			$this->Flash->error(__('formContainsErrors'));
@@ -92,15 +96,18 @@ class CitiesController extends DataAppController {
 
 		if (empty($id) || !($city = $this->Cities->find('first', ['conditions' => ['City.id' => $id], 'fields' => ['id', 'name']]))) {
 			$this->Flash->error(__('invalidRecord'));
+
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$var = $city['name'];
 
 		if ($this->Cities->delete($city)) {
 			$this->Flash->success(__('record del {0} done', h($var)));
+
 			return $this->redirect(['action' => 'index']);
 		}
 		$this->Flash->error(__('record del {0} not done exception', h($var)));
+
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 

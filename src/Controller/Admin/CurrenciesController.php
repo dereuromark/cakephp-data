@@ -36,6 +36,7 @@ class CurrenciesController extends DataAppController {
 	public function update() {
 		$this->Currencies->updateValues();
 		$this->Flash->success('Currencies Updated');
+
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 
@@ -49,6 +50,7 @@ class CurrenciesController extends DataAppController {
 		foreach ($currencies as $currency) {
 			if ($currency['base']) {
 				$baseCurrency = $currency;
+
 				break;
 			}
 		}
@@ -71,6 +73,7 @@ class CurrenciesController extends DataAppController {
 		$currency = $this->Currencies->get($id);
 		if (empty($currency)) {
 			$this->Flash->error(__('record not exists'));
+
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->set(compact('currency'));
@@ -88,6 +91,7 @@ class CurrenciesController extends DataAppController {
 				$id = $this->Currencies->id;
 				//$name = $this->request->data['Currency']['name'];
 				$this->Flash->success(__('record add {0} saved', $id));
+
 				return $this->redirect(['action' => 'index']);
 			}
 
@@ -112,6 +116,7 @@ class CurrenciesController extends DataAppController {
 			if ($this->Currencies->save($currency)) {
 				//$name = $this->request->data['Currency']['name'];
 				$this->Flash->success(__('record edit {0} saved', $id));
+
 				return $this->redirect(['action' => 'index']);
 			}
 
@@ -131,10 +136,12 @@ class CurrenciesController extends DataAppController {
 
 		if ($this->Currencies->delete($currency)) {
 			$this->Flash->success(__('record del {0} done', $id));
+
 			return $this->redirect(['action' => 'index']);
 		}
 
 		$this->Flash->error(__('record del {0} not done exception', $id));
+
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 
@@ -165,6 +172,7 @@ class CurrenciesController extends DataAppController {
 			$this->Flash->error(__('set as primary not done exception', $name));
 
 		}
+
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 
@@ -186,6 +194,7 @@ class CurrenciesController extends DataAppController {
 		# http get request + redirect
 		if (!$this->request->is('ajax')) {
 			$this->Flash->success(__('Saved'));
+
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 

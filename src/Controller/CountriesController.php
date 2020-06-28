@@ -7,7 +7,6 @@ use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Event\EventInterface;
 use Cake\Filesystem\Folder;
-use Data\Controller\DataAppController;
 
 /**
  * @property \Data\Model\Table\CountriesTable $Countries
@@ -69,6 +68,7 @@ class CountriesController extends DataAppController {
 
 		if ($useCache && ($iconNames = Cache::read('country_icon_names')) !== false) {
 			$this->Flash->info('Cache Used');
+
 			return $iconNames;
 		}
 		$handle = new Folder($this->imageFolder);

@@ -86,8 +86,10 @@ class LocationsTable extends Table {
 		if (empty($result['lat']) && empty($result['lng']) || !empty($result['inconclusive'])) {
 			# delete lastest cached (and now not needed anymore) record
 			$this->delete($location);
+
 			return false;
 		}
+
 		return $result;
 	}
 
@@ -121,6 +123,7 @@ class LocationsTable extends Table {
 				'order' => 'distance ASC',
 				'limit' => $limit,
 		]);
+
 		return $result;
 	}
 
@@ -156,16 +159,19 @@ class LocationsTable extends Table {
 			if ($ip) {
 				return $ip;
 			}
+
 			return '127.0.0.1';
 		}
 		$ip = Utility::getClientIp();
 		# usually getClientIp already removes multiple ips in favor of one single ip. but seems to fail sometimes
 		if (strpos($ip, ',') !== false) {
 			return false;
+
 			//$ips = explode(',', $ip);
 			//$ip = trim($ips[0]); # first
 			//$ip = trim($ips[count($ips)-1]); # last
 		}
+
 		return $ip;
 	}
 

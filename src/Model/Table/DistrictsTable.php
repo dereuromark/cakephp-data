@@ -84,6 +84,7 @@ class DistrictsTable extends Table {
 			],
 			'fields' => [$this->getAlias() . '.slug', $this->getAlias() . '.name'],
 		];
+
 		return $this->find($type, $options);
 	}
 
@@ -103,6 +104,7 @@ class DistrictsTable extends Table {
 		if (!empty($customOptions)) {
 			$options = array_merge($options, $customOptions);
 		}
+
 		return $this->find('all', $options)->first();
 	}
 

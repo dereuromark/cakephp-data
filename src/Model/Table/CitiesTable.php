@@ -67,6 +67,7 @@ class CitiesTable extends Table {
 			],
 			'fields' => ['id', 'postal_code', 'name'],
 		];
+
 		return $this->find('all', $options);
 	}
 
@@ -96,6 +97,7 @@ class CitiesTable extends Table {
 		if (!isset($matches[0]) || strlen($matches[0]) !== 5) {
 			return null;
 		}
+
 		return $this->find('all', ['conditions' => ['Cities.postal_code LIKE' => $matches[0]]]);
 	}
 

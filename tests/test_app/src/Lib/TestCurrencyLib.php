@@ -15,6 +15,7 @@ class TestCurrencyLib extends CurrencyLib {
 			//debug('Live Data!');
 			return parent::_getBitcoin();
 		}
+
 		// Fake for now
 		return 55;
 	}
@@ -27,6 +28,7 @@ class TestCurrencyLib extends CurrencyLib {
 	protected function _loadXml($url) {
 		if (!empty($_SERVER['argv']) && in_array('--debug', $_SERVER['argv'], true)) {
 			debug('Live Data!');
+
 			return parent::_loadXml($url);
 		}
 

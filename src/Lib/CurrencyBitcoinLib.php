@@ -39,6 +39,7 @@ class CurrencyBitcoinLib {
 		if (empty($res['currencies'][$options['currency']])) {
 			return false;
 		}
+
 		return $res['currencies'][$options['currency']];
 	}
 
@@ -68,6 +69,7 @@ class CurrencyBitcoinLib {
 		if (empty($array[$options['currency']])) {
 			return false;
 		}
+
 		return $array[$options['currency']];
 	}
 
@@ -91,6 +93,7 @@ class CurrencyBitcoinLib {
 		if (isset($current)) {
 			return $this->calcRate($current);
 		}
+
 		return false;
 	}
 
@@ -125,6 +128,7 @@ class CurrencyBitcoinLib {
 		if (!($res = json_decode($res, true))) {
 			return false;
 		}
+
 		return $res;
 	}
 
@@ -139,6 +143,7 @@ class CurrencyBitcoinLib {
 		if (!($res = json_decode($res, true))) {
 			return false;
 		}
+
 		return $res;
 	}
 
@@ -151,6 +156,7 @@ class CurrencyBitcoinLib {
 		if (!($res = $http->get($url))) {
 			return false;
 		}
+
 		return $res->body;
 	}
 

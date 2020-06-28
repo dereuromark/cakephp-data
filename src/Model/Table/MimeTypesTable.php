@@ -116,6 +116,7 @@ class MimeTypesTable extends Table {
 		if ($inactiveOnes !== true) {
 			$options['conditions'][$this->getAlias() . '.active'] = 1;
 		}
+
 		return $this->find('all', $options);
 	}
 
@@ -128,6 +129,7 @@ class MimeTypesTable extends Table {
 		if (empty($ext)) {
 			return null;
 		}
+
 		return $this->find('all', ['conditions' => [$this->getAlias() . '.ext' => $ext]])->first();
 	}
 
@@ -142,6 +144,7 @@ class MimeTypesTable extends Table {
 		$type = $this->findMimeType($ext);
 		if ($type) {
 			$id = $type['id'];
+
 			return $this->saveField($id, 'sort', $type['sort'] + 1);
 		}
 		# insert this new extension

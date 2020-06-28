@@ -148,6 +148,7 @@ class StatesTable extends Table {
 		if (empty($cid)) {
 			return [];
 		}
+
 		return $this->find('list', [
 			'conditions' => [$this->getAlias() . '.country_id' => $cid],
 			'order' => [$this->getAlias() . '.name' => 'ASC'],
@@ -188,6 +189,7 @@ class StatesTable extends Table {
 						//fixme
 					}
 				}
+
 				return $state;
 			}
 		} else {
@@ -197,7 +199,8 @@ class StatesTable extends Table {
 				$conditions = [$this->getAlias() . '.lat' => 0, $this->getAlias() . '.lng' => 0];
 			}
 
-			$results = $this->find('all', ['conditions' => $conditions, 'contain' => ['Country.name'], 'order' => ['modified' =>
+			$results = $this->find('all', ['conditions' => $conditions, 'contain' => ['Country.name'], 'order' => [
+'modified' =>
 				'ASC']]);
 			$count = 0;
 

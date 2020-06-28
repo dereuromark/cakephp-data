@@ -33,6 +33,7 @@ class CountiesTable extends Table {
 	 */
 	public function initCounty($data) {
 		$entity = $this->newEntity($data);
+
 		return $this->save($entity);
 	}
 

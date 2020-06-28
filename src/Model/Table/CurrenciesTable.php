@@ -149,6 +149,7 @@ class CurrenciesTable extends Table {
 		if (empty($value)) {
 			return false;
 		}
+
 		return $this->isAvailable($value);
 	}
 
@@ -160,6 +161,7 @@ class CurrenciesTable extends Table {
 	 */
 	public function isAvailable($code) {
 		$currencies = $this->availableCurrencies();
+
 		return array_key_exists(mb_strtoupper($code), $currencies);
 	}
 
@@ -195,6 +197,7 @@ class CurrenciesTable extends Table {
 	public function foreignCurrencies($options = []) {
 		$defaults = ['conditions' => [$this->getAlias() . '.base' => 0]];
 		$options = Hash::merge($defaults, $options);
+
 		return $this->find('all', $options);
 	}
 
@@ -246,6 +249,7 @@ class CurrenciesTable extends Table {
 
 			$res[$key] = $val;
 		}
+
 		return $res;
 	}
 

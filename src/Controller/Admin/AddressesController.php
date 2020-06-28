@@ -28,6 +28,7 @@ class AddressesController extends DataAppController {
 	public function view($id = null) {
 		if (empty($id) || !($address = $this->Addresses->find('first', ['conditions' => ['Addresses.id' => $id]]))) {
 			$this->Flash->error(__('invalid record'));
+
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->set(compact('address'));
@@ -44,6 +45,7 @@ class AddressesController extends DataAppController {
 			if ($this->Addresses->save($address)) {
 				$var = $address['formatted_address'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
+
 				return $this->redirect(['action' => 'index']);
 			}
 			$this->Flash->error(__('formContainsErrors'));
@@ -76,6 +78,7 @@ class AddressesController extends DataAppController {
 			if ($this->Addresses->save($address)) {
 				$var = $address['formatted_address'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
+
 				return $this->redirect(['action' => 'index']);
 			}
 			$this->Flash->error(__('formContainsErrors'));
@@ -115,9 +118,11 @@ class AddressesController extends DataAppController {
 
 		if ($this->Addresses->delete($address)) {
 			$this->Flash->success(__('record del {0} done', h($var)));
+
 			return $this->redirect(['action' => 'index']);
 		}
 		$this->Flash->error(__('record del {0} not done exception', h($var)));
+
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 
@@ -129,11 +134,13 @@ class AddressesController extends DataAppController {
 	public function markAsUsed($id = null) {
 		if (empty($id) || !($address = $this->Addresses->find('first', ['conditions' => ['Address.id' => $id], 'fields' => ['id', 'formatted_address']]))) {
 			$this->Flash->error(__('invalid record'));
+
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->Addresses->touch($id);
 		$var = $address['formatted_address'];
 		$this->Flash->success(__('Address \'{0}\' marked as last used', h($var)));
+
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 

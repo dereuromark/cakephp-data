@@ -4,7 +4,6 @@ namespace Data\Controller;
 
 use Cake\Core\Plugin;
 use Cake\Event\EventInterface;
-use Data\Controller\DataAppController;
 use Exception;
 
 /**

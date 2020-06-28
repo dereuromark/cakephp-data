@@ -24,7 +24,7 @@ class MimeTypeHelper extends Helper {
 	/**
 	 * @var array|null
 	 */
-	public $types = null;
+	public $types;
 
 	/**
 	 * Special attr: filename (is then used in title instead of *)
@@ -52,6 +52,7 @@ class MimeTypeHelper extends Helper {
 				if (!empty($t['name'])) {
 					$default['name'] = $t['name'];
 				}
+
 				return $this->formatIcon($default, $attr);
 			}
 		}
@@ -88,6 +89,7 @@ class MimeTypeHelper extends Helper {
 	 */
 	public function types() {
 		$this->getTypes();
+
 		return (array)$this->types;
 	}
 
@@ -101,6 +103,7 @@ class MimeTypeHelper extends Helper {
 		if (!empty($this->types)) {
 			return true;
 		}
+
 		return false;
 	}
 
@@ -142,6 +145,7 @@ class MimeTypeHelper extends Helper {
 				return [];
 			}
 		}
+
 		return $content;
 	}
 

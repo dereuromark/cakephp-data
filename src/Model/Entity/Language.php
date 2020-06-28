@@ -30,15 +30,16 @@ class Language extends Entity {
 			static::DIR_LTR => 'LTR',
 			static::DIR_RTL => 'RTL',
 		];
+
 		return parent::enum($value, $options);
 	}
 
-	const DIR_LTR = 0;
+	public const DIR_LTR = 0;
 
-	const DIR_RTL = 1;
+	public const DIR_RTL = 1;
 
-	const STATUS_ACTIVE = 1;
+	public const STATUS_ACTIVE = 1;
 
-	const STATUS_INACTIVE = 0;
+	public const STATUS_INACTIVE = 0;
 
 }

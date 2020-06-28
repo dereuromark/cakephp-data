@@ -109,6 +109,7 @@ class StatesController extends DataAppController {
 				$id = $this->States->id;
 				$name = $this->request->getData('name');
 				$this->Flash->success(__('record add {0} saved', h($name)));
+
 				return $this->redirect(['action' => 'index']);
 			}
 
@@ -132,6 +133,7 @@ class StatesController extends DataAppController {
 			if ($this->States->save($state)) {
 				$name = $this->request->getData('name');
 				$this->Flash->success(__('record edit {0} saved', h($name)));
+
 				return $this->redirect(['action' => 'index']);
 			}
 
@@ -154,10 +156,12 @@ class StatesController extends DataAppController {
 		$name = $state['name'];
 		if ($this->States->delete($state)) {
 			$this->Flash->success(__('record del {0} done', h($name)));
+
 			return $this->redirect(['action' => 'index']);
 		}
 
 		$this->Flash->error(__('record del {0} not done exception', $name));
+
 		return $this->redirect(['action' => 'index']);
 	}
 

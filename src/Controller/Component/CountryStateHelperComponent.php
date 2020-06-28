@@ -56,6 +56,7 @@ class CountryStateHelperComponent extends Component {
 			# use the id of the first country of the country-list
 			foreach ($countries as $key => $value) {
 				$states = $this->getController()->States->getListByCountry($key);
+
 				break;
 			}
 		}

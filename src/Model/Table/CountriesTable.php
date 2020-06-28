@@ -127,8 +127,8 @@ class CountriesTable extends Table {
 	 * @param int|null $id Id
 	 * - NULL: update all records with missing coordinates only
 	 * - otherwise: specific update
-	 * @return bool Success
 	 * @throws \Exception
+	 * @return bool Success
 	 */
 	public function updateCoordinatesNew($id = null) {
 		$Geocoder = new Geocoder();
@@ -150,10 +150,11 @@ class CountriesTable extends Table {
 
 				if (!empty($data['country_code']) && mb_strlen($data['country_code']) === 3 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
 					$saveArray['iso3'] = $data['country_code'];
-					throw new Exception(returns($saveArray));
 
+					throw new Exception(returns($saveArray));
 				} elseif (!empty($data['country_code']) && mb_strlen($data['country_code']) === 2 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
 					$saveArray['iso2'] = $data['country_code'];
+
 					throw new Exception(returns($saveArray));
 				}
 
@@ -163,6 +164,7 @@ class CountriesTable extends Table {
 					//pr($res); pr($data); pr($saveArray); die(returns($this->validationErrors));
 					throw new Exception();
 				}
+
 				return true;
 			}
 		} else {
@@ -322,6 +324,7 @@ class CountriesTable extends Table {
 		if (array_key_exists($id, $match)) {
 			return $match[$id];
 		}
+
 		return $default;
 	}
 
@@ -332,7 +335,7 @@ class CountriesTable extends Table {
 		return $this->getIdByIso('DE');
 	}
 
-	const STATUS_ACTIVE = 1;
-	const STATUS_INACTIVE = 0;
+	public const STATUS_ACTIVE = 1;
+	public const STATUS_INACTIVE = 0;
 
 }

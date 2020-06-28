@@ -56,6 +56,7 @@ class LanguagesController extends DataAppController {
 	public function view($id = null) {
 		if (empty($id) || !($language = $this->Languages->find('first', ['conditions' => ['Languages.id' => $id]]))) {
 			$this->Flash->error(__('invalid record'));
+
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->set(compact('language'));
@@ -73,6 +74,7 @@ class LanguagesController extends DataAppController {
 			if ($this->Languages->save($language)) {
 				$var = $this->request->data['name'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
+
 				return $this->redirect(['action' => 'index']);
 			}
 
@@ -90,12 +92,14 @@ class LanguagesController extends DataAppController {
 	public function edit($id = null) {
 		if (empty($id) || !($language = $this->Languages->find('first', ['conditions' => ['Languages.id' => $id]]))) {
 			$this->Flash->error(__('invalid record'));
+
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Common->isPosted()) {
 			if ($this->Languages->save($this->request->getData())) {
 				$var = $this->request->data['name'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
+
 				return $this->redirect(['action' => 'index']);
 			}
 
@@ -115,11 +119,13 @@ class LanguagesController extends DataAppController {
 
 		if (empty($id) || !($language = $this->Languages->find('first', ['conditions' => ['Languages.id' => $id], 'fields' => ['id', 'name']]))) {
 			$this->Flash->error(__('invalid record'));
+
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		if ($this->Languages->delete($language)) {
 			$var = $language['name'];
 			$this->Flash->success(__('record del {0} done', h($var)));
+
 			return $this->redirect(['action' => 'index']);
 		}
 
@@ -167,6 +173,7 @@ class LanguagesController extends DataAppController {
 			$errorMessage[] = $error['data'] . ' (' . returns($error['errors']) . ')';
 		}
 		$this->Flash->warning(__('not added') . ' ' . implode(', ', $errorMessage));
+
 		return $this->redirect(['action' => 'index']);
 	}
 
@@ -197,6 +204,7 @@ class LanguagesController extends DataAppController {
 			if (strlen($key) === 2) {
 				$locales[$key] = $value;
 				$locales[$key]['regional'] = [];
+
 				continue;
 			}
 			if (strlen($key) === 1) {
@@ -222,6 +230,7 @@ class LanguagesController extends DataAppController {
 		$count = $this->Languages->updateAll(['status' => Language::STATUS_ACTIVE], ['id' => array_keys($languages)]);
 
 		$this->Flash->success(__('{0} of {1} set active', $count, count($languages)));
+
 		return $this->redirect(['action' => 'index']);
 	}
 

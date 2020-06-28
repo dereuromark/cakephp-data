@@ -110,6 +110,7 @@ class MimeTypesController extends DataAppController {
 			$mime = $this->MimeTypes->mimeTypeExists($ext);
 			if ($mime) {
 				$report['in'][] = ['ext' => $ext, 'type' => $mimeType, 'oldType' => $mime['type']];
+
 				continue;
 			}
 
@@ -186,6 +187,7 @@ class MimeTypesController extends DataAppController {
 			$conditions['or'][$model . '.type LIKE'] = '%' . $searchStr . '%';
 			$conditions['or'][$model . '.alt_type LIKE'] = '%' . $searchStr . '%';
 		}
+
 		return $conditions;
 	 }
 
@@ -197,11 +199,13 @@ class MimeTypesController extends DataAppController {
 	public function view($id = null) {
 		if (empty($id)) {
 			$this->Flash->error(__('record invalid'));
+
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$mimeType = $this->MimeTypes->get($id);
 		if (empty($mimeType)) {
 			$this->Flash->error(__('record not exists'));
+
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->set(compact('mimeType'));
@@ -224,6 +228,7 @@ class MimeTypesController extends DataAppController {
 				$id = $this->MimeTypes->id;
 				//$name = $this->request->data['name'];
 				$this->Flash->success(__('record add {0} saved', $id));
+
 				return $this->redirect(['action' => 'index']);
 			}
 
@@ -250,6 +255,7 @@ class MimeTypesController extends DataAppController {
 			if ($this->MimeTypes->save($mimeType)) {
 				//$name = $this->request->data['name'];
 				$this->Flash->success(__('record edit {0} saved', $id));
+
 				return $this->redirect(['action' => 'index']);
 			}
 
@@ -271,15 +277,18 @@ class MimeTypesController extends DataAppController {
 		$mimeType = $this->MimeTypes->find('first', ['fields' => ['id'], 'conditions' => ['MimeType.id' => $id]]);
 		if (empty($mimeType)) {
 			$this->Flash->error(__('record del not exists'));
+
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 
 		if ($this->MimeTypes->delete($mimeType)) {
 			$this->Flash->success(__('record del {0} done', $id));
+
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 
 		$this->Flash->error(__('record del {0} not done exception', $id));
+
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
 

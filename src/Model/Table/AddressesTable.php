@@ -198,6 +198,7 @@ class AddressesTable extends Table {
 		if ($this->find('first', ['conditions' => $conditions])) {
 			return false;
 		}
+
 		return true;
 	}
 
@@ -254,6 +255,7 @@ class AddressesTable extends Table {
 		} elseif (!isset($res[$stateId])) {
 			return false;
 		}
+
 		return true;
 	}
 
@@ -359,6 +361,7 @@ class AddressesTable extends Table {
 		if ($addressType === null) {
 			$addressType = Address::TYPE_MAIN;
 		}
+
 		return $this->find()->where(['foreign_id' => $id, 'address_type_id' => $addressType]);
 	}
 

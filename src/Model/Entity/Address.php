@@ -39,10 +39,11 @@ class Address extends Entity {
 			static::TYPE_OTHER => __('Other'),
 
 		];
+
 		return parent::enum($value, $options);
 	}
 
-	const TYPE_MAIN = 1;
-	const TYPE_OTHER = 9;
+	public const TYPE_MAIN = 1;
+	public const TYPE_OTHER = 9;
 
 }

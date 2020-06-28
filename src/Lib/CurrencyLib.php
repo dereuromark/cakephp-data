@@ -9,7 +9,6 @@ namespace Data\Lib;
 
 use Cake\Cache\Cache;
 use Cake\Utility\Xml;
-use Data\Lib\CurrencyBitcoinLib;
 
 /**
  * Component to retreive calculate currencies
@@ -25,12 +24,12 @@ use Data\Lib\CurrencyBitcoinLib;
  */
 class CurrencyLib {
 
-	const URL = 'http://www.ecb.int/stats/eurofxref/eurofxref-daily.xml';
+	public const URL = 'http://www.ecb.int/stats/eurofxref/eurofxref-daily.xml';
 
-	const URL_HISTORY = 'http://www.ecb.int/stats/eurofxref/eurofxref-hist.xml';
+	public const URL_HISTORY = 'http://www.ecb.int/stats/eurofxref/eurofxref-hist.xml';
 
 	//TODO: get information about a currency (name, ...)
-	const URL_TABLE = 'http://www.ecb.int/rss/fxref-{currency}.html';
+	public const URL_TABLE = 'http://www.ecb.int/rss/fxref-{currency}.html';
 
 	/**
 	 * @var string
@@ -56,11 +55,11 @@ class CurrencyLib {
 	 * Converts the $amount from $fromCurrency to $toCurrency, formatted to
 	 * $decimals decimal places.
 	 *
-	 * @return string|null [Converted Currency Amount] or boolean FALSE on failure
 	 * @param float $amount
 	 * @param string $fromCurrency
 	 * @param string $toCurrency
 	 * @param int $decimals [optional]default=2
+	 * @return string|null [Converted Currency Amount] or boolean FALSE on failure
 	 */
 	public function convert($amount, $fromCurrency, $toCurrency, $decimals = 2) {
 		//Get the rate table
@@ -70,6 +69,7 @@ class CurrencyLib {
 		if (!array_key_exists($fromCurrency, $rates) || !array_key_exists($toCurrency, $rates)) {
 			return null;
 		}
+
 		return number_format($amount / $rates[$fromCurrency] * $rates[$toCurrency], $decimals);
 	}
 
@@ -99,6 +99,7 @@ class CurrencyLib {
 			}
 			$rateTable[$key] = number_format($rate, $decimals);
 		}
+
 		//Return result array
 		return $rateTable;
 	}
@@ -113,8 +114,10 @@ class CurrencyLib {
 			if (!empty($history[$date])) {
 				return $history[$date];
 			}
+
 			return [];
 		}
+
 		return $history;
 	}
 
@@ -124,6 +127,7 @@ class CurrencyLib {
 	 */
 	public function isAvailable($currency) {
 		$rates = $this->_retrieveCurrencies();
+
 		return array_key_exists($currency, $rates);
 	}
 
@@ -136,6 +140,7 @@ class CurrencyLib {
 			$name = '';
 			Cache::delete('currencyListHistory');
 		}
+
 		return Cache::delete('currencyList' . ucfirst($name));
 	}
 
@@ -193,6 +198,7 @@ class CurrencyLib {
 		}
 
 		$this->_store($historyList, 'history');
+
 		return $historyList;
 	}
 
@@ -226,6 +232,7 @@ class CurrencyLib {
 
 		//Cache
 		$this->_store($currencyList);
+
 		return $currencyList;
 	}
 
@@ -234,6 +241,7 @@ class CurrencyLib {
 	 */
 	protected function _getBitcoin() {
 		$Btc = new CurrencyBitcoinLib();
+
 		return $Btc->rate(['currency' => $this->baseCurrency]);
 	}
 
@@ -255,8 +263,10 @@ class CurrencyLib {
 		$res = Cache::read('currencyList' . ucfirst($name));
 		if ($res !== false) {
 			$this->cacheFileUsed = true;
+
 			return unserialize($res);
 		}
+
 		return false;
 	}
 
@@ -266,6 +276,7 @@ class CurrencyLib {
 	 */
 	protected function _loadXml($url) {
 		$CurrencyXml = Xml::build($url, ['readFile' => true]);
+
 		return Xml::toArray($CurrencyXml);
 	}
 
