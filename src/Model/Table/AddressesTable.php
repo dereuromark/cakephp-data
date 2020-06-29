@@ -233,31 +233,25 @@ class AddressesTable extends Table {
 	}
 
 	/**
-	 * @param array $options
+	 * @param \Cake\Event\EventInterface $event
+	 * @param \ArrayObject $data
+	 * @param \ArrayObject $options
 	 *
 	 * @return void
 	 */
-	public function _beforeValidate($options = []) {
+	public function _beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options) {
 		# add country name for geocoder
-		if (!empty($entity['country_id'])) {
-			$entity['country'] = $this->Countries->fieldByConditions('name', ['id' => $entity['country_id']]);
+		if (!empty($data['country_id'])) {
+			$data['country'] = $this->Countries->fieldByConditions('name', ['id' => $data['country_id']]);
 		}
-		if (!empty($entity['postal_code'])) {
-			unset($this->validate['city']['notBlank']);
-		} elseif (!empty($entity['city'])) {
-			unset($this->validate['postal_code']['notBlank']);
-		}
-
-		if (isset($entity['foreign_id']) && empty($entity['foreign_id'])) {
-			$entity['foreign_id'] = 0;
+		if (!empty($data['postal_code'])) {
+			//unset($this->validate['city']['notBlank']);
+		} elseif (!empty($data['city'])) {
+			//unset($this->validate['postal_code']['notBlank']);
 		}
 
-		# prevents NULL inserts into DB
-		if (isset($entity['lat'])) {
-			$entity['lat'] = number_format((float)$entity['lat'], 6);
-		}
-		if (isset($entity['lng'])) {
-			$entity['lng'] = number_format((float)$entity['lng'], 6);
+		if (isset($data['foreign_id']) && empty($data['foreign_id'])) {
+			$data['foreign_id'] = 0;
 		}
 	}
 

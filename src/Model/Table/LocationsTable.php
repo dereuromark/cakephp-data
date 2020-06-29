@@ -69,8 +69,8 @@ class LocationsTable extends Table {
 	 * @return \Cake\Datasource\EntityInterface|false
 	 */
 	public function getLocation($locationName, $countryId = null) {
-		$country = !empty($countryId) ? ', ' . $countryId : __('Germany'); ////Country::addressList($countryId)
-		$countryId = !empty($countryId) ? $countryId : 1;
+		$country = $countryId !== null ? ', ' . $countryId : __('Germany'); ////Country::addressList($countryId)
+		$countryId = $countryId !== null ? $countryId : 1;
 
 		if (is_numeric($locationName) && strlen($locationName) < 5) { //Country::zipCodeLength($countryId)
 			$location = $this->find('all', ['conditions' => ['formatted_address LIKE' => $locationName . '%' . $country]])->first();
