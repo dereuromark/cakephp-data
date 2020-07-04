@@ -76,7 +76,7 @@ class StatesController extends DataAppController {
 		if (!$this->request->is('post') || !$this->request->is('ajax')) {
 			throw new Exception(__('not a valid request'));
 		}
-		$this->viewBuilder()->layout('ajax');
+		$this->viewBuilder()->setLayout('ajax');
 		$states = $this->States->getListByCountry($id);
 		$defaultFieldLabel = 'pleaseSelect';
 		if ($this->request->getQuery('optional')) {
