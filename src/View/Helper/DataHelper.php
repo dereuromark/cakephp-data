@@ -19,7 +19,7 @@ class DataHelper extends Helper {
 	/**
 	 * @var array
 	 */
-	public $helpers = ['Html'];
+	protected $helpers = ['Html'];
 
 	/**
 	 * @var array|null
