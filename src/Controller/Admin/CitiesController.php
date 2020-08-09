@@ -81,7 +81,7 @@ class CitiesController extends DataAppController {
 			$this->Flash->error(__('formContainsErrors'));
 
 		} else {
-			$this->request->data = $city;
+			//$this->request->data = $city;
 		}
 		$countries = $this->Cities->Countries->find('list');
 		$this->set(compact('countries'));
