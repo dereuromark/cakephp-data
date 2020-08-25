@@ -5,7 +5,7 @@
  */
 ?>
 <div class="page form">
-<?php echo $this->Form->create('MimeTypeImage', ['type' => 'file']);?>
+<?php echo $this->Form->create($mimeTypeImage, ['type' => 'file']);?>
 	<fieldset>
 		<legend><?php echo __('Edit Mime Type Image');?></legend>
 	<?php

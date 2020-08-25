@@ -14,7 +14,7 @@ $this->Html->script('jquery/plugins/jquery.dd.js');?>
 <?php echo $this->Html->script('specific/mime_types_images.js');?>
 
 <div class="page form">
-<?php echo $this->Form->create('MimeType');?>
+<?php echo $this->Form->create($mimeType);?>
 	<fieldset>
 		<legend><?php echo __('Add Mime Type');?></legend>
 	<?php
