@@ -19,7 +19,7 @@ class PostalCodesController extends DataAppController {
 	 */
 	public function index() {
 		if (Plugin::loaded('Search')) {
-			$query = $this->PostalCodes->find('search', ['search' => $this->request->query]);
+			$query = $this->PostalCodes->find('search', ['search' => $this->request->getQuery()]);
 			$postalCodes = $this->paginate($query);
 		} else {
 			$postalCodes = $this->paginate();

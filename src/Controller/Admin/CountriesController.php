@@ -176,7 +176,7 @@ class CountriesController extends DataAppController {
 	 */
 	public function index() {
 		if (Plugin::loaded('Search')) {
-			$query = $this->Countries->find('search', ['search' => $this->request->query]);
+			$query = $this->Countries->find('search', ['search' => $this->request->getQuery()]);
 			$countries = $this->paginate($query);
 		} else {
 			$countries = $this->paginate();

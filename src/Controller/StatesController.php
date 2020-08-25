@@ -53,7 +53,7 @@ class StatesController extends DataAppController {
 		$this->paginate['order'] = ['States.name' => 'ASC'];
 
 		if (Plugin::loaded('Search')) {
-			$query = $this->States->find('search', ['search' => $this->request->query]);
+			$query = $this->States->find('search', ['search' => $this->request->getQuery()]);
 			$states = $this->paginate($query);
 		} else {
 			$states = $this->paginate();
