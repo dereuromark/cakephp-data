@@ -168,7 +168,7 @@ class AddressesTable extends Table {
 		if (!empty($entity['id'])) {
 			$conditions['user_id !='] = $entity['id'];
 		}
-		if ($this->find('first', ['conditions' => $conditions])) {
+		if ($this->find('all', ['conditions' => $conditions])->first()) {
 			return false;
 		}
 
@@ -297,7 +297,7 @@ class AddressesTable extends Table {
 
 			# enter new id
 			if (isset($entity['country_id']) && empty($entity['country_id']) && !empty($entity['geocoder_result']['country_code'])) {
-				$country = $this->Countries->find('first', ['conditions' => ['Country.iso2' => $entity['geocoder_result']['country_code']]]);
+				$country = $this->Countries->find('all', ['conditions' => ['Country.iso2' => $entity['geocoder_result']['country_code']]])->first();
 				if (!empty($country)) {
 					$entity['country_id'] = $country->id;
 				}

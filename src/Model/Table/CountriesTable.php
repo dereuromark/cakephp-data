@@ -140,8 +140,8 @@ class CountriesTable extends Table {
 		}
 
 		if (!empty($id)) {
-			/** @var \Data\Model\Entity\Country $res */
-			$res = $this->find('first', ['conditions' => [$this->getAlias() . '.id' => $id], 'contain' => []]);
+			/** @var \Data\Model\Entity\Country|null $res */
+			$res = $this->find('all', ['conditions' => [$this->getAlias() . '.id' => $id], 'contain' => []])->first();
 			if (!empty($res['ori_name']) && $Geocoder->geocode($res['ori_name']) || $res['name'] != $res['ori_name'] && $Geocoder->geocode($res['name'])) {
 
 				$data = $Geocoder->getResult();

@@ -10,7 +10,7 @@ class MimeTypeImagesTableTest extends TestCase {
 	/**
 	 * @var array
 	 */
-	public $fixtures = [
+	protected $fixtures = [
 		'plugin.Data.MimeTypeImages',
 	];
 

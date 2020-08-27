@@ -10,7 +10,7 @@ class LocationsTableTest extends TestCase {
 	/**
 	 * @var array
 	 */
-	public $fixtures = [
+	protected $fixtures = [
 		'plugin.Data.Locations',
 	];
 

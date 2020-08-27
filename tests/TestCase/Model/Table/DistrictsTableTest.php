@@ -10,7 +10,7 @@ class DistrictsTableTest extends TestCase {
 	/**
 	 * @var array
 	 */
-	public $fixtures = [
+	protected $fixtures = [
 		'plugin.Data.Districts',
 	];
 

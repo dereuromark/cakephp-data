@@ -13,7 +13,7 @@ class CountriesControllerTest extends IntegrationTestCase {
 	/**
 	 * @var array
 	 */
-	public $fixtures = [
+	protected $fixtures = [
 		'plugin.Data.Countries',
 	];
 

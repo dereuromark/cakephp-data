@@ -10,7 +10,7 @@ class CountiesTableTest extends TestCase {
 	/**
 	 * @var array
 	 */
-	public $fixtures = [
+	protected $fixtures = [
 		'plugin.Data.Counties',
 		'plugin.Data.States',
 	];
