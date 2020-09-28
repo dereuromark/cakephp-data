@@ -6,7 +6,7 @@ use ArrayObject;
 use Cake\Core\Configure;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
-use Tools\Mailer\Email;
+use Tools\Mailer\Mailer;
 use Tools\Model\Table\Table;
 
 /**
@@ -156,15 +156,15 @@ class MimeTypesTable extends Table {
 			return false;
 		}
 		# notify admin
-		$email = new Email();
-		$email->to(Configure::read('Config.adminEmail'), Configure::read('Config.adminEmailname'));
-		$email->replyTo(Configure::read('Config.adminEmail'), Configure::read('Config.adminEmailname'));
+		$email = new Mailer();
+		$email->setTo(Configure::read('Config.adminEmail'), Configure::read('Config.adminEmailname'));
+		$email->setReplyTo(Configure::read('Config.adminEmail'), Configure::read('Config.adminEmailname'));
 
-		$email->subject(Configure::read('Config.page_name') . ' - ' . __('MimeType'));
-		$email->template('simple_email');
+		$email->setSubject(Configure::read('Config.page_name') . ' - ' . __('MimeType'));
+		$email->viewBuilder()->setTemplate('simple_email');
 
 		$text = 'MimeType hinzugefügt: ' . $ext . '';
-		$email->viewVars(compact('text'));
+		$email->setViewVars(compact('text'));
 
 		if (!$email->send()) {
 			//$this->log('problem with mailing to admin after pushing mimeType');
