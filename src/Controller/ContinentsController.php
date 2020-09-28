@@ -37,7 +37,7 @@ class ContinentsController extends DataAppController {
 		if ($this->Common->isPosted()) {
 			//$this->Continents->create();
 			if ($this->Continents->save($this->request->getData())) {
-				$var = $this->request->data['Continent']['name'];
+				$var = $this->request->getData('name');
 				$this->Flash->success(__('record add {0} saved', h($var)));
 
 				return $this->Common->postRedirect(['action' => 'index']);
@@ -64,7 +64,7 @@ class ContinentsController extends DataAppController {
 			$continent = $this->Continents->patchEntity($continent, $this->request->getData());
 
 			if ($this->Continents->save($continent)) {
-				$var = $this->request->data['Continent']['name'];
+				$var = $this->request->getData('name');
 				$this->Flash->success(__('record edit {0} saved', h($var)));
 
 				return $this->Common->postRedirect(['action' => 'index']);
