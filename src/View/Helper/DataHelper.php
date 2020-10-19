@@ -27,6 +27,150 @@ class DataHelper extends Helper {
 	protected $languageFlags;
 
 	/**
+	 * Country icons
+	 *
+	 * Custom paths possible:
+	 * 'imagePath' => 'PluginName./img/country_flags/',
+	 *
+	 * @param string|null $code iso2 code (e.g. 'de' or 'gb')
+	 * @param array $options
+	 * @param array $attr
+	 *
+	 * @return string|null
+	 */
+	public function countryIcon(?string $code, array $options = [], array $attr = []): ?string {
+		$iconFontClass = Configure::read('Country.iconFontClass');
+		if ($iconFontClass) {
+			$options['class'] = $iconFontClass;
+
+			return $this->countryFontIcon($code, $options, $attr);
+		}
+
+		$ending = 'gif';
+		$image = 'unknown';
+
+		[$wwwPath, $path] = $this->getCountryIconPaths();
+
+		if (!empty($options) && is_array($options)) {
+			if (!empty($options['ending'])) {
+				$ending = $options['ending'];
+			}
+		}
+
+		$code = mb_strtolower($code);
+		$fileExists = $code && file_exists($path . $code . '.' . $ending);
+		if ($code && !$fileExists) {
+			trigger_error($path . $code . '.' . $ending . ' missing', E_USER_NOTICE);
+		}
+		if ($code && $fileExists) {
+			$image = $code;
+		}
+
+		$defaults = ['alt' => $code, 'title' => strtoupper($code)];
+		$attr += $defaults;
+
+		return $this->Html->image($wwwPath . $image . '.' . $ending, $attr);
+	}
+
+	/**
+	 * @param string|null $code
+	 * @param array $options
+	 * @param array $attr
+	 *
+	 * @return string
+	 */
+	protected function countryFontIcon(?string $code, array $options = [], array $attr = []): string {
+		$class = $options['class'] ?: 'flag-icon';
+		$code = $code ? strtolower($code) : '';
+
+		$template = '<span class="' . $class . ' ' . $class . '-' . $code . '"></span>';
+
+		return $template;
+	}
+
+	/**
+	 * Some language codes do not directly refer to a country code.
+	 * Here you need to use the map config.
+	 *
+	 * @param string $code iso2 code (e.g. 'en' or 'de')
+	 * @param array $options
+	 * @param array $attr
+	 *
+	 * @return string
+	 */
+	public function languageFlag(string $code, array $options = [], array $attr = []): string {
+		$iconFontClass = Configure::read('Language.iconFontClass');
+		if ($iconFontClass) {
+			$options['class'] = $iconFontClass;
+			$icon = $this->mapLanguageToCountry($code);
+
+			return $this->countryFontIcon($icon, $options, $attr);
+		}
+
+		$flag = '';
+
+		$defaults = ['alt' => $code, 'title' => strtoupper($code)];
+		$options += $defaults;
+
+		$languageFlags = $this->getAvailableLanguageFlags();
+
+		$name = strtolower($code) . '.gif';
+		if (!in_array($name, $languageFlags, true)) {
+			return $flag;
+		}
+
+		$defaults = ['alt' => $code, 'title' => strtoupper($code)];
+		$attr += $defaults;
+
+		return $this->Html->image('language_flags/' . $name, $attr);
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function getAvailableLanguageFlags() {
+		if (isset($this->languageFlags)) {
+			return $this->languageFlags;
+		}
+
+		$flags = Cache::read('language_flags');
+		if ($flags !== null) {
+			$this->languageFlags = $flags;
+
+			return $this->languageFlags;
+		}
+
+		[$wwwPath, $path] = $this->getLanguageIconPaths();
+		$handle = new Folder($path);
+		$languageFlags = $handle->read(true, true);
+		$languageFlags = $languageFlags[1];
+		Cache::write('language_flags', $languageFlags);
+
+		$this->languageFlags = $languageFlags;
+
+		return $languageFlags;
+	}
+
+	/**
+	 * @param string $iso2
+	 *
+	 * @return string
+	 */
+	protected function mapLanguageToCountry(string $iso2): string {
+		$code = strtolower($iso2);
+
+		$map = (array)Configure::read('Language.map') + [
+			'en' => 'gb',
+		];
+
+		if (!isset($map[$code])) {
+			return $code;
+		}
+
+		return $map[$code];
+	}
+
+	/**
 	 * @return array with wwwPath and path
 	 */
 	public function getCountryIconPaths() {
@@ -81,101 +225,6 @@ class DataHelper extends Helper {
 		$path .= trim($specificPath, DS) . DS;
 
 		return [$wwwPath, $path];
-	}
-
-	/**
-	 * Country icons
-	 *
-	 * Custom paths possible:
-	 * 'imagePath' => 'PluginName./img/country_flags/',
-	 *
-	 * @param string|null $icon iso2 code (e.g. 'de' or 'gb')
-	 * @param bool $returnFalseOnFailure
-	 * @param array $options
-	 * @param array $attr
-	 * @return string|false
-	 */
-	public function countryIcon($icon, $returnFalseOnFailure = false, $options = [], $attr = []) {
-		$ending = 'gif';
-		$image = 'unknown';
-
-		[$wwwPath, $path] = $this->getCountryIconPaths();
-
-		if (!empty($options) && is_array($options)) {
-			if (!empty($options['ending'])) {
-				$ending = $options['ending'];
-			}
-		}
-
-		$icon = mb_strtolower($icon);
-
-		if (empty($icon)) {
-			if ($returnFalseOnFailure) {
-				return false;
-			}
-		} elseif (!file_exists($path . $icon . '.' . $ending)) {
-			trigger_error($path . $icon . '.' . $ending . ' missing', E_USER_NOTICE);
-
-			if ($returnFalseOnFailure) {
-				return false;
-			}
-		} else {
-			$image = $icon;
-		}
-
-		$defaults = ['alt' => $icon, 'title' => strtoupper($icon)];
-		$attr += $defaults;
-
-		return $this->Html->image($wwwPath . $image . '.' . $ending, $attr);
-	}
-
-	/**
-	 * @param string $iso2
-	 * @param array $options
-	 * @return string
-	 */
-	public function languageFlag($iso2, $options = []) {
-		$flag = '';
-
-		$defaults = ['alt' => $iso2, 'title' => strtoupper($iso2)];
-		$options += $defaults;
-
-		$languageFlags = $this->getAvailableLanguageFlags();
-
-		$name = strtolower($iso2) . '.gif';
-		if (!in_array($name, $languageFlags, true)) {
-			return $flag;
-		}
-
-		$flag .= $this->Html->image('language_flags/' . $name, $options);
-
-		return $flag;
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function getAvailableLanguageFlags() {
-		if (isset($this->languageFlags)) {
-			return $this->languageFlags;
-		}
-
-		$flags = Cache::read('language_flags');
-		if ($flags !== null) {
-			$this->languageFlags = $flags;
-
-			return $this->languageFlags;
-		}
-
-		[$wwwPath, $path] = $this->getLanguageIconPaths();
-		$handle = new Folder($path);
-		$languageFlags = $handle->read(true, true);
-		$languageFlags = $languageFlags[1];
-		Cache::write('language_flags', $languageFlags);
-
-		$this->languageFlags = $languageFlags;
-
-		return $languageFlags;
 	}
 
 }

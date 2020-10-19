@@ -22,37 +22,30 @@ class CitiesTable extends Table {
 	];
 
 	/**
-	 * @var array
-	 */
-	public $actsAs = ['Tools.Slugged' => ['label' => 'name', 'mode' => 'ascii', 'case' => 'low', 'unique' => true, 'overwrite' => false]];
-
-	/**
-	 * @var array
-	 */
-	public $hasMany = [
-			'District' => ['className' => 'Data.District'],
-	];
-
-	/**
-	 * @var array
-	 */
-	public $belongsTo = [
-		'County' => ['className' => 'Data.County'],
-		'Country' => ['className' => 'Data.Country'],
-	];
-
-	/**
 	 * @param array $config
+	 *
+	 * @return void
 	 */
-	public function __construct(array $config = []) {
-		if (Configure::read('Data.City.District') === false) {
-			unset($this->hasMany['District']);
-		}
-		if (Configure::read('Data.City.County') === false) {
-			unset($this->belongsTo['County']);
+	public function initialize(array $config): void {
+		parent::initialize($config);
+
+		$this->addBehavior('Tools.Slugged', ['label' => 'name', 'mode' => 'ascii', 'case' => 'low', 'unique' => true, 'overwrite' => false]);
+
+		if (Configure::read('Data.City.District') !== false) {
+			$this->hasMany('District', [
+				'className' => 'Data.District',
+			]);
 		}
 
-		parent::__construct($config);
+		$this->belongsTo('Countries', [
+			'className' => 'Data.Countries',
+		]);
+
+		if (Configure::read('Data.City.County') !== false) {
+			$this->belongsTo('Counties', [
+				'className' => 'Data.District',
+			]);
+		}
 	}
 
 	/**

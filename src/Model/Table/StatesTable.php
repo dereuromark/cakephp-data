@@ -32,11 +32,6 @@ class StatesTable extends Table {
 	/**
 	 * @var array
 	 */
-	public $actsAs = ['Tools.Slugged' => ['case' => 'low', 'mode' => 'ascii', 'unique' => false, 'overwrite' => false]];
-
-	/**
-	 * @var array
-	 */
 	public $order = ['name' => 'ASC'];
 
 	/**
@@ -69,21 +64,6 @@ class StatesTable extends Table {
 	/**
 	 * @var array
 	 */
-	public $hasMany = [
-		'County' => [
-			'className' => 'Data.County',
-			'foreignKey' => 'state_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-		],
-	];
-
-	/**
-	 * @var array
-	 */
 	public $belongsTo = [
 		'Country' => [
 			'className' => 'Data.Country',
@@ -96,21 +76,18 @@ class StatesTable extends Table {
 
 	/**
 	 * @param array $config
-	 */
-	public function __construct(array $config = []) {
-		if (Configure::read('Data.State.County') === false) {
-			unset($this->hasMany['County']);
-		}
-
-		parent::__construct($config);
-	}
-
-	/**
-	 * @param array $config
 	 * @return void
 	 */
 	public function initialize(array $config): void {
 		parent::initialize($config);
+
+		$this->addBehavior('Tools.Slugged', ['case' => 'low', 'mode' => 'ascii', 'unique' => false, 'overwrite' => false]);
+
+		if (Configure::read('Data.State.County') !== false) {
+			$this->hasMany('Counties', [
+				'className' => 'Data.County',
+			]);
+		}
 
 		if (!Plugin::isLoaded('Search')) {
 			return;
