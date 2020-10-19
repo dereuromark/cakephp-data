@@ -1,6 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
+ * @var mixed $continent
  */
 ?>
 <h2><?php echo __('Edit {0}', __('Continent')); ?></h2>

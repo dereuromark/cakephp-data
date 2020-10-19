@@ -2,6 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var mixed $availableImages
+ * @var \Data\Model\Entity\MimeTypeImage $mimeTypeImage
  */
 ?>
 <div class="page form">

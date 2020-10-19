@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var mixed $mimeTypeImages
+ * @var \Data\Model\Entity\MimeTypeImage[]|\Cake\Collection\CollectionInterface $mimeTypeImages
  */
 ?>
 <div class="page index">

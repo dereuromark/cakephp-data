@@ -3,7 +3,7 @@
  * @var \App\View\AppView $this
  * @var mixed $alreadyIn
  * @var mixed $fileExtensions
- * @var mixed $mimeTypeImage
+ * @var \Data\Model\Entity\MimeTypeImage $mimeTypeImage
  */
 ?>
 <div class="page form">

@@ -10,7 +10,20 @@ use Tools\Mailer\Mailer;
 use Tools\Model\Table\Table;
 
 /**
- * @property \Data\Model\Table\MimeTypeImagesTable|\Cake\ORM\Association\BelongsTo $MimeTypeImages
+ * @property \Data\Model\Table\MimeTypeImagesTable&\Cake\ORM\Association\BelongsTo $MimeTypeImages
+ * @method \Data\Model\Entity\MimeType newEmptyEntity()
+ * @method \Data\Model\Entity\MimeType newEntity(array $data, array $options = [])
+ * @method \Data\Model\Entity\MimeType[] newEntities(array $data, array $options = [])
+ * @method \Data\Model\Entity\MimeType get($primaryKey, $options = [])
+ * @method \Data\Model\Entity\MimeType findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \Data\Model\Entity\MimeType patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \Data\Model\Entity\MimeType[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \Data\Model\Entity\MimeType|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\MimeType saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\MimeType[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\MimeType[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\MimeType[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\MimeType[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
 class MimeTypesTable extends Table {
 
@@ -66,7 +79,7 @@ class MimeTypesTable extends Table {
 
 	/**
 	 * @param \Cake\Event\EventInterface $event
-	 * @param \Cake\ORM\Entity $entity
+	 * @param \Data\Model\Entity\MimeType $entity
 	 *
 	 * @return void
 	 */
@@ -90,7 +103,7 @@ class MimeTypesTable extends Table {
 
 	/**
 	 * @param \Cake\Event\EventInterface $event
-	 * @param \Cake\ORM\Entity $entity
+	 * @param \Data\Model\Entity\MimeType $entity
 	 * @param \ArrayObject $options
 	 * @return void
 	 */

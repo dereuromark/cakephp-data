@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var array $address
+ * @var \Data\Model\Entity\Address $address
  */
 ?>
 <div class="page view">

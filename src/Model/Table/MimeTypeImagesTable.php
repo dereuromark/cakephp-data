@@ -9,7 +9,20 @@ use Cake\Filesystem\File;
 use Tools\Model\Table\Table;
 
 /**
- * @property \Data\Model\Table\MimeTypesTable|\Cake\ORM\Association\HasMany $MimeTypes
+ * @property \Data\Model\Table\MimeTypesTable&\Cake\ORM\Association\HasMany $MimeTypes
+ * @method \Data\Model\Entity\MimeTypeImage newEmptyEntity()
+ * @method \Data\Model\Entity\MimeTypeImage newEntity(array $data, array $options = [])
+ * @method \Data\Model\Entity\MimeTypeImage[] newEntities(array $data, array $options = [])
+ * @method \Data\Model\Entity\MimeTypeImage get($primaryKey, $options = [])
+ * @method \Data\Model\Entity\MimeTypeImage findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \Data\Model\Entity\MimeTypeImage patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \Data\Model\Entity\MimeTypeImage[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \Data\Model\Entity\MimeTypeImage|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\MimeTypeImage saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\MimeTypeImage[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\MimeTypeImage[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\MimeTypeImage[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\MimeTypeImage[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
 class MimeTypeImagesTable extends Table {
 
@@ -60,7 +73,7 @@ class MimeTypeImagesTable extends Table {
 
 	/**
 	 * @param \Cake\Event\EventInterface $event
-	 * @param \Cake\ORM\Entity $entity
+	 * @param \Data\Model\Entity\MimeTypeImage $entity
 	 *
 	 * @return bool
 	 */
@@ -77,7 +90,7 @@ class MimeTypeImagesTable extends Table {
 
 	/**
 	 * @param \Cake\Event\EventInterface $event
-	 * @param \Cake\Datasource\EntityInterface $entity
+	 * @param \Data\Model\Entity\MimeTypeImage $entity
 	 * @param \ArrayObject $options
 	 *
 	 * @return void
@@ -88,7 +101,7 @@ class MimeTypeImagesTable extends Table {
 
 	/**
 	 * @param \Cake\Event\EventInterface $event
-	 * @param \Cake\Datasource\EntityInterface $entity
+	 * @param \Data\Model\Entity\MimeTypeImage $entity
 	 * @param \ArrayObject $options
 	 *
 	 * @return void
@@ -99,7 +112,7 @@ class MimeTypeImagesTable extends Table {
 
 	/**
 	 * @param \Cake\Event\EventInterface $event
-	 * @param \Cake\ORM\Entity $entity
+	 * @param \Data\Model\Entity\MimeTypeImage $entity
 	 * @param \ArrayObject $options
 	 *
 	 * @return void

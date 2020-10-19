@@ -21,7 +21,7 @@ use Cake\ORM\Entity;
  * @property int $sort
  * @property int|null $mime_type_image_id
  *
- * @property \Data\Model\Entity\MimeTypeImage $mime_type_image
+ * @property \Data\Model\Entity\MimeTypeImage|null $mime_type_image
  */
 class MimeType extends Entity {
 

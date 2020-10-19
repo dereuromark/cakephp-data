@@ -2,6 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var mixed $countries
+ * @var \Data\Model\Entity\Country $country
  */
 
 use Data\Model\Entity\Country;

@@ -2,6 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var mixed $results
+ * @var \Data\Model\Entity\PostalCode $postalCode
  */
 ?>
 <div class="page form">

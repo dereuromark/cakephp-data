@@ -2,6 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var mixed $mimeTypeImages
+ * @var \Data\Model\Entity\MimeType $mimeType
  */
 ?>
 <?php /**

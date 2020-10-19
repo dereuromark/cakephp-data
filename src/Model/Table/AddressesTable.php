@@ -15,17 +15,22 @@ if (!defined('CLASS_USERS')) {
 
 /**
  * @method \Data\Model\Entity\Address get($primaryKey, $options = [])
- * @method \Data\Model\Entity\Address newEntity($data = null, array $options = [])
+ * @method \Data\Model\Entity\Address newEntity(array $data, array $options = [])
  * @method \Data\Model\Entity\Address[] newEntities(array $data, array $options = [])
- * @method \Data\Model\Entity\Address|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\Address|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\Address patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Data\Model\Entity\Address[] patchEntities($entities, array $data, array $options = [])
- * @method \Data\Model\Entity\Address findOrCreate($search, callable $callback = null, $options = [])
- * @property \Data\Model\Table\CountriesTable|\Cake\ORM\Association\BelongsTo $Countries
- * @property \Data\Model\Table\StatesTable|\Cake\ORM\Association\BelongsTo $States
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
- * @method \Data\Model\Entity\Address|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\Address[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \Data\Model\Entity\Address findOrCreate($search, ?callable $callback = null, $options = [])
+ * @property \Data\Model\Table\CountriesTable&\Cake\ORM\Association\BelongsTo $Countries
+ * @property \Data\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
+ * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
+ * @method \Data\Model\Entity\Address saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @mixin \Geo\Model\Behavior\GeocoderBehavior
+ * @method \Data\Model\Entity\Address newEmptyEntity()
+ * @method \Data\Model\Entity\Address[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\Address[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\Address[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\Address[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
 class AddressesTable extends Table {
 

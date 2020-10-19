@@ -82,12 +82,12 @@ class MigrationAddresses extends AbstractMigration {
 			->addColumn('created', 'datetime', [
 				'default' => null,
 				'limit' => null,
-				'null' => true,
+				'null' => false,
 			])
 			->addColumn('modified', 'datetime', [
 				'default' => null,
 				'limit' => null,
-				'null' => true,
+				'null' => false,
 			])
 			->create();
 	}

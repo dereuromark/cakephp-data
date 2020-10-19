@@ -12,7 +12,7 @@ use Tools\Utility\Mime;
  * @link http://www.ace.net.nz/tech/TechFileFormat.html
  *
  * @property \Data\Model\Table\MimeTypesTable $MimeTypes
- * @method \Cake\ORM\Entity[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \Data\Model\Entity\MimeType[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class MimeTypesController extends DataAppController {
 

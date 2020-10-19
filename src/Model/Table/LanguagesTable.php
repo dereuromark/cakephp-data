@@ -16,13 +16,18 @@ use Tools\Utility\L10n;
  *
  * @mixin \Search\Model\Behavior\SearchBehavior
  * @method \Data\Model\Entity\Language get($primaryKey, $options = [])
- * @method \Data\Model\Entity\Language newEntity($data = null, array $options = [])
+ * @method \Data\Model\Entity\Language newEntity(array $data, array $options = [])
  * @method \Data\Model\Entity\Language[] newEntities(array $data, array $options = [])
- * @method \Data\Model\Entity\Language|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\Language|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\Language patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Data\Model\Entity\Language[] patchEntities($entities, array $data, array $options = [])
- * @method \Data\Model\Entity\Language findOrCreate($search, callable $callback = null, $options = [])
- * @method \Data\Model\Entity\Language|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\Language[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \Data\Model\Entity\Language findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \Data\Model\Entity\Language saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\Language newEmptyEntity()
+ * @method \Data\Model\Entity\Language[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\Language[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\Language[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\Language[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
 class LanguagesTable extends Table {
 

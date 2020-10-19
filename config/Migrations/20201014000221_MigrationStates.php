@@ -54,7 +54,7 @@ class MigrationStates extends AbstractMigration {
 			->addColumn('modified', 'datetime', [
 				'default' => null,
 				'limit' => null,
-				'null' => true,
+				'null' => false,
 			])
 			->create();
 	}

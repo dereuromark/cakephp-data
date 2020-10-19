@@ -6,16 +6,16 @@ use Tools\Model\Entity\Entity;
 
 /**
  * @property int $id
- * @property int $category_id
- * @property int $address_type_id
- * @property int $location_id
- * @property string $c_o
- * @property string $details
- * @property string $admin_details
- * @property \Cake\I18n\FrozenTime|null $created
- * @property \Cake\I18n\FrozenTime|null $modified
+ * @property int|null $category_id
+ * @property int|null $address_type_id
+ * @property int|null $location_id
+ * @property string|null $c_o
+ * @property string|null $details
+ * @property string|null $admin_details
+ * @property \Cake\I18n\FrozenTime $created
+ * @property \Cake\I18n\FrozenTime $modified
  * @property string $contact_id
- * @property string $address
+ * @property string|null $address
  * @property int|null $state_id
  * @property int|null $country_id
  * @property string $zip_code

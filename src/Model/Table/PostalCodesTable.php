@@ -7,16 +7,21 @@ use Tools\Model\Table\Table;
 
 /**
  * @mixin \Search\Model\Behavior\SearchBehavior
- * @property \Data\Model\Table\CountriesTable|\Cake\ORM\Association\BelongsTo $Countries
+ * @property \Data\Model\Table\CountriesTable&\Cake\ORM\Association\BelongsTo $Countries
  * @method \Data\Model\Entity\PostalCode get($primaryKey, $options = [])
- * @method \Data\Model\Entity\PostalCode newEntity($data = null, array $options = [])
+ * @method \Data\Model\Entity\PostalCode newEntity(array $data, array $options = [])
  * @method \Data\Model\Entity\PostalCode[] newEntities(array $data, array $options = [])
- * @method \Data\Model\Entity\PostalCode|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\PostalCode|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\PostalCode patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Data\Model\Entity\PostalCode[] patchEntities($entities, array $data, array $options = [])
- * @method \Data\Model\Entity\PostalCode findOrCreate($search, callable $callback = null, $options = [])
- * @method \Data\Model\Entity\PostalCode|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\PostalCode[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \Data\Model\Entity\PostalCode findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \Data\Model\Entity\PostalCode saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @mixin \Geo\Model\Behavior\GeocoderBehavior
+ * @method \Data\Model\Entity\PostalCode newEmptyEntity()
+ * @method \Data\Model\Entity\PostalCode[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\PostalCode[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\PostalCode[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\PostalCode[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
 class PostalCodesTable extends Table {
 

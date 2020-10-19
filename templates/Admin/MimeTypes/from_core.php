@@ -3,6 +3,7 @@
  * @var \App\View\AppView $this
  * @var mixed $mimeTypes
  * @var array $report
+ * @var \Data\Model\Entity\MimeType $mimeType
  */
 $manualRes = [];
 foreach ($report['in'] as $r) {

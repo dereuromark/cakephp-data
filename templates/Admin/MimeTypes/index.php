@@ -2,7 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var string $allCount
- * @var mixed $mimeTypes
+ * @var \Data\Model\Entity\MimeType[]|\Cake\Collection\CollectionInterface $mimeTypes
  * @var string|null $searchStr
  */
 ?>

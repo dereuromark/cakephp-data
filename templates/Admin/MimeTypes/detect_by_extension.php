@@ -2,6 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var mixed $extensions
+ * @var \Data\Model\Entity\MimeType $mimeType
  */
 ?>
 <div class="page index">

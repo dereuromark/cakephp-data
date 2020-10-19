@@ -126,7 +126,7 @@ class CurrenciesTable extends Table {
 
 	/**
 	 * @param \Cake\Event\EventInterface $event
-	 * @param \Cake\Datasource\EntityInterface $entity
+	 * @param \Data\Model\Entity\Currency $entity
 	 * @param \ArrayObject $options
 	 *
 	 * @return bool

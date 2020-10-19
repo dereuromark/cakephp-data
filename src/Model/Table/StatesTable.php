@@ -12,15 +12,20 @@ use Tools\Model\Table\Table;
 /**
  * @mixin \Search\Model\Behavior\SearchBehavior
  * @method \Data\Model\Entity\State get($primaryKey, $options = [])
- * @method \Data\Model\Entity\State newEntity($data = null, array $options = [])
+ * @method \Data\Model\Entity\State newEntity(array $data, array $options = [])
  * @method \Data\Model\Entity\State[] newEntities(array $data, array $options = [])
- * @method \Data\Model\Entity\State|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \Data\Model\Entity\State|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\State|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\State saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\State patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Data\Model\Entity\State[] patchEntities($entities, array $data, array $options = [])
- * @method \Data\Model\Entity\State findOrCreate($search, callable $callback = null, $options = [])
+ * @method \Data\Model\Entity\State[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \Data\Model\Entity\State findOrCreate($search, ?callable $callback = null, $options = [])
  * @mixin \Tools\Model\Behavior\SluggedBehavior
- * @property \Data\Model\Table\CountriesTable|\Cake\ORM\Association\BelongsTo $Countries
+ * @property \Data\Model\Table\CountriesTable&\Cake\ORM\Association\BelongsTo $Countries
+ * @method \Data\Model\Entity\State newEmptyEntity()
+ * @method \Data\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
 class StatesTable extends Table {
 

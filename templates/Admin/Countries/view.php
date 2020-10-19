@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var array $country
+ * @var \Data\Model\Entity\Country $country
  */
 ?>
 <div class="page view">

@@ -4,6 +4,7 @@
  * @var mixed $manualRes
  * @var mixed $mimeTypes
  * @var array $report
+ * @var \Data\Model\Entity\MimeType $mimeType
  */
 ?>
 <h2>Import MimeTypes from File etc</h2>

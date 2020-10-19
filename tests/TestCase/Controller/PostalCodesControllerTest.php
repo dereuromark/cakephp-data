@@ -6,6 +6,9 @@ use Cake\Database\Driver\Mysql;
 use Cake\ORM\TableRegistry;
 use Shim\TestSuite\IntegrationTestCase;
 
+/**
+ * @uses \Data\Controller\PostalCodesController
+ */
 class PostalCodesControllerTest extends IntegrationTestCase {
 
 	/**

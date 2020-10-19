@@ -1,6 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
+ * @var \Data\Model\Entity\Language $language
  */
 ?>
 <h2><?php echo __('Import {0}', __('Languages')); ?></h2>

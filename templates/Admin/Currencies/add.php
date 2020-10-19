@@ -2,6 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var mixed $currencies
+ * @var \Data\Model\Entity\Currency $currency
  */
 ?>
 

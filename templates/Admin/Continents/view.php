@@ -2,6 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var array $continent
+ * @var object $content
  */
 ?>
 <div class="page view">

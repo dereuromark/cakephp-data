@@ -2,6 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var mixed $continents
+ * @var object $content
  */
 ?>
 <div class="page index">
