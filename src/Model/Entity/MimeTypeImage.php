@@ -1,22 +1,24 @@
 <?php
+declare(strict_types = 1);
 
 namespace Data\Model\Entity;
 
-use Tools\Model\Entity\Entity;
+use Cake\ORM\Entity;
 
 /**
+ * MimeTypeImage Entity
+ *
  * @property int $id
  * @property string $name
- * @property string $code
- * @property string|null $symbol_left
- * @property string|null $symbol_right
- * @property string|null $decimal_places
- * @property float|null $value
- * @property bool $base
+ * @property string $ext
  * @property bool $active
+ * @property string $details
+ * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
+ *
+ * @property \Data\Model\Entity\MimeType[] $mime_types
  */
-class Currency extends Entity {
+class MimeTypeImage extends Entity {
 
 	/**
 	 * Fields that can be mass assigned using newEntity() or patchEntity().
