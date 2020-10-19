@@ -14,7 +14,7 @@
 		</dd>
 		<dt><?php echo __('Official Id'); ?></dt>
 		<dd>
-			<?php echo h($city['official_id']); ?>
+			<?php echo h($city['official_key']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('County Id'); ?></dt>

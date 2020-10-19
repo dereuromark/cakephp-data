@@ -31,11 +31,8 @@ class CitiesController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function view($id = null) {
-		if (empty($id) || !($city = $this->Cities->find('first', ['conditions' => ['City.id' => $id]]))) {
-			$this->Flash->error(__('invalidRecord'));
+		$city = $this->Cities->get($id);
 
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
 		$this->set(compact('city'));
 	}
 
@@ -43,10 +40,11 @@ class CitiesController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function add() {
+		$city = $this->Cities->newEmptyEntity();
+
 		if ($this->Common->isPosted()) {
-			//$this->Cities->create();
 			if ($this->Cities->save($this->request->getData())) {
-				$var = $this->request->data['name'];
+				$var = $city['name'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
 
 				return $this->Common->postRedirect(['action' => 'index']);
@@ -64,25 +62,20 @@ class CitiesController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function edit($id = null) {
-		if (empty($id) || !($city = $this->Cities->find('first', ['conditions' => ['City.id' => $id]]))) {
-			$this->Flash->error(__('invalidRecord'));
+		$city = $this->Cities->get($id);
 
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
 		if ($this->Common->isPosted()) {
 			$city = $this->Cities->patchEntity($city, $this->request->getData());
 
 			if ($this->Cities->save($city)) {
-				$var = $this->request->data['name'];
+				$var = $city['name'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
 
 				return $this->Common->postRedirect(['action' => 'index']);
 			}
 			$this->Flash->error(__('formContainsErrors'));
-
-		} else {
-			//$this->request->data = $city;
 		}
+
 		$countries = $this->Cities->Countries->find('list');
 		$this->set(compact('countries'));
 	}
@@ -94,11 +87,7 @@ class CitiesController extends DataAppController {
 	public function delete($id = null) {
 		$this->request->allowMethod(['post', 'delete']);
 
-		if (empty($id) || !($city = $this->Cities->find('first', ['conditions' => ['City.id' => $id], 'fields' => ['id', 'name']]))) {
-			$this->Flash->error(__('invalidRecord'));
-
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
+		$city = $this->Cities->get($id);
 		$var = $city['name'];
 
 		if ($this->Cities->delete($city)) {

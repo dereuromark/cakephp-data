@@ -16,7 +16,7 @@ class CurrenciesController extends DataAppController {
 	public $paginate = ['order' => ['Currencies.base' => 'DESC', 'Currencies.modified' => 'DESC']];
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return void
 	 */
 	public function initialize(): void {
 		parent::initialize();
@@ -55,7 +55,7 @@ class CurrenciesController extends DataAppController {
 			}
 		}
 		if (empty($baseCurrency)) {
-			$baseCurrency = $this->Currencies->find('first', ['conditions' => ['base' => true]]);
+			$baseCurrency = $this->Currencies->find('all', ['conditions' => ['base' => true]])->first();
 			if (!$baseCurrency) {
 				$this->Flash->warning(__('noBaseCurrency'));
 			}

@@ -4,6 +4,9 @@ namespace Data\Model\Table;
 
 use Tools\Model\Table\Table;
 
+/**
+ * @deprecated Use only Countries => States => Cities
+ */
 class CountiesTable extends Table {
 
 	/**

@@ -3,10 +3,13 @@
 namespace Data\Model\Table;
 
 use ArrayObject;
+use Cake\Event\EventInterface;
 use Tools\Model\Table\Table;
 
 /**
  * @property \Data\Model\Table\CitiesTable|\Cake\ORM\Association\BelongsTo $Cities
+ *
+ * @deprecated Use only Countries => States => Cities
  */
 class DistrictsTable extends Table {
 

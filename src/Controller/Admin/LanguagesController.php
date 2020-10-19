@@ -20,7 +20,7 @@ class LanguagesController extends DataAppController {
 	public $paginate = ['order' => ['Languages.name' => 'ASC']];
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return void
 	 */
 	public function initialize(): void {
 		parent::initialize();
@@ -33,7 +33,7 @@ class LanguagesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function index() {
 		if (Plugin::isLoaded('Search')) {
@@ -51,28 +51,24 @@ class LanguagesController extends DataAppController {
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Http\Response
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function view($id = null) {
-		if (empty($id) || !($language = $this->Languages->find('first', ['conditions' => ['Languages.id' => $id]]))) {
-			$this->Flash->error(__('invalid record'));
+		$language = $this->Languages->get($id);
 
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
 		$this->set(compact('language'));
 	}
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function add() {
 		$language = $this->Languages->newEmptyEntity();
 
 		if ($this->Common->isPosted()) {
-			//$this->Languages->create();
 			$language = $this->Languages->patchEntity($language, $this->request->getData());
 			if ($this->Languages->save($language)) {
-				$var = $this->request->data['name'];
+				$var = $language['name'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
 
 				return $this->redirect(['action' => 'index']);
@@ -90,14 +86,13 @@ class LanguagesController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function edit($id = null) {
-		if (empty($id) || !($language = $this->Languages->find('first', ['conditions' => ['Languages.id' => $id]]))) {
-			$this->Flash->error(__('invalid record'));
+		$language = $this->Languages->get($id);
 
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
 		if ($this->Common->isPosted()) {
-			if ($this->Languages->save($this->request->getData())) {
-				$var = $this->request->data['name'];
+			$language = $this->Languages->patchEntity($language, $this->request->getData());
+
+			if ($this->Languages->save($language)) {
+				$var = $language->name;
 				$this->Flash->success(__('record edit {0} saved', h($var)));
 
 				return $this->redirect(['action' => 'index']);
@@ -117,11 +112,7 @@ class LanguagesController extends DataAppController {
 	public function delete($id = null) {
 		$this->request->allowMethod('post');
 
-		if (empty($id) || !($language = $this->Languages->find('first', ['conditions' => ['Languages.id' => $id], 'fields' => ['id', 'name']]))) {
-			$this->Flash->error(__('invalid record'));
-
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
+		$language = $this->Languages->get($id);
 		if ($this->Languages->delete($language)) {
 			$var = $language['name'];
 			$this->Flash->success(__('record del {0} done', h($var)));
@@ -170,7 +161,7 @@ class LanguagesController extends DataAppController {
 
 		$errorMessage = [];
 		foreach ($errors as $error) {
-			$errorMessage[] = $error['data'] . ' (' . returns($error['errors']) . ')';
+			$errorMessage[] = $error['data'] . ' (' . json_encode($error['errors']) . ')';
 		}
 		$this->Flash->warning(__('not added') . ' ' . implode(', ', $errorMessage));
 

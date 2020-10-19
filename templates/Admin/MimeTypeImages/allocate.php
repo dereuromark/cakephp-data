@@ -16,7 +16,7 @@
 				echo $this->Form->control('MimeTypeImage.imgs.' . $id, ['type' => 'checkbox', 'label' => false, 'div' => false]);
 
 				echo ' ';
-				$imageName = extractPathInfo($image, 'file');
+				$imageName = pathinfo($image, PATHINFO_FILENAME);
 				$imageName = mb_strtolower($imageName);
 
 				echo $this->Form->control('MimeTypeImage.names.' . $id, ['value' => $imageName, 'after' => '', 'div' => false, 'label' => false]);
@@ -36,7 +36,8 @@
 	?>
 
 	</fieldset>
-<?php echo $this->Form->end(__('Submit'));?>
+<?php echo $this->Form->submit(__('Submit')); ?>
+<?php echo $this->Form->end();?>
 </div>
 <div class="actions">
 	<ul>

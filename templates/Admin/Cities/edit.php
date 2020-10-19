@@ -15,7 +15,7 @@ use Cake\Core\Configure;
 	<?php
 		//echo $this->Form->control('id');
 		echo $this->Form->control('country_id');
-		echo $this->Form->control('official_id', ['type' => 'text']);
+		echo $this->Form->control('official_key', ['type' => 'text']);
 
 		if (Configure::read('Data.City.County') !== false) {
 			echo $this->Form->control('county_id');

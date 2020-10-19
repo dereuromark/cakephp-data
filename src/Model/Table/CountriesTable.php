@@ -83,26 +83,17 @@ class CountriesTable extends Table {
 
 	/**
 	 * @param array $config
-	 */
-	public function __construct(array $config = []) {
-		parent::__construct($config);
-
-		if (Configure::read('Data.Country.State') === false) {
-			return;
-		}
-
-		$this->hasMany('States', [
-			'className' => 'Data.States',
-			'dependent' => true,
-		]);
-	}
-
-	/**
-	 * @param array $config
 	 * @return void
 	 */
 	public function initialize(array $config): void {
 		parent::initialize($config);
+
+		if (Configure::read('Data.Country.State') !== false) {
+			$this->hasMany('States', [
+				'className' => 'Data.States',
+				'dependent' => true,
+			]);
+		}
 
 		if (!Plugin::isLoaded('Search')) {
 			return;
@@ -151,19 +142,16 @@ class CountriesTable extends Table {
 				if (!empty($data['country_code']) && mb_strlen($data['country_code']) === 3 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
 					$saveArray['iso3'] = $data['country_code'];
 
-					throw new Exception(returns($saveArray));
-				} elseif (!empty($data['country_code']) && mb_strlen($data['country_code']) === 2 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
+					throw new Exception(json_encode($saveArray));
+				}
+				if (!empty($data['country_code']) && mb_strlen($data['country_code']) === 2 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
 					$saveArray['iso2'] = $data['country_code'];
 
-					throw new Exception(returns($saveArray));
+					throw new Exception(json_encode($saveArray));
 				}
 
-				//$this->id = $id;
-				if (!$this->saveArray($saveArray, ['fields' => ['lat', 'lng', 'iso2', 'iso3']])) {
-					//echo returns($this->id);
-					//pr($res); pr($data); pr($saveArray); die(returns($this->validationErrors));
-					throw new Exception();
-				}
+				$country = $this->newEntity($saveArray, ['fields' => ['lat', 'lng', 'iso2', 'iso3']]);
+				$this->saveOrFail($country);
 
 				return true;
 			}
@@ -174,7 +162,8 @@ class CountriesTable extends Table {
 				$conditions = [$this->getAlias() . '.lat' => 0, $this->getAlias() . '.lng' => 0];
 			}
 
-			$results = $this->find('all', ['conditions' => $conditions, 'contain' => []]);
+			/** @var \Data\Model\Entity\Country[] $results */
+			$results = $this->find('all', ['conditions' => $conditions, 'contain' => []])->toArray();
 
 			$count = 0;
 			foreach ($results as $res) {
@@ -197,8 +186,8 @@ class CountriesTable extends Table {
 						//die(returns($saveArray));
 					}
 
-					$saveArray->id = $res['id'];
-					if ($this->save($saveArray, ['fields' => ['lat', 'lng', 'iso2', 'iso3']])) {
+					$res = $this->patchEntity($res, $saveArray, ['fields' => ['lat', 'lng', 'iso2', 'iso3']]);
+					if ($this->save($res)) {
 						$count++;
 
 						if (!empty($saveArray['iso2']) && $saveArray['iso2'] != $res['iso2']) {

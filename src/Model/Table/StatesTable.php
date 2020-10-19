@@ -136,7 +136,7 @@ class StatesTable extends Table {
 			return $state->id;
 		}
 
-		throw new InternalErrorException(returns($state->getErrors()));
+		throw new InternalErrorException(json_encode($state->getErrors()));
 	}
 
 	/**
@@ -166,7 +166,7 @@ class StatesTable extends Table {
 		$geocoder = new Geocoder();
 
 		$override = false;
-		if ($id == -1) {
+		if ($state->id == -1) {
 			$id = '';
 			$override = true;
 		}

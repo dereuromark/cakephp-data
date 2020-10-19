@@ -93,7 +93,7 @@ class DataHelper extends Helper {
 	 * @param bool $returnFalseOnFailure
 	 * @param array $options
 	 * @param array $attr
-	 * @return string
+	 * @return string|false
 	 */
 	public function countryIcon($icon, $returnFalseOnFailure = false, $options = [], $attr = []) {
 		$ending = 'gif';

@@ -52,11 +52,7 @@ class PostalCodesController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function view($id = null) {
-		if (empty($id) || !($postalCode = $this->PostalCodes->find('first', ['contain' => ['Countries'], 'conditions' => ['PostalCodes.id' => $id]]))) {
-			$this->Flash->error(__('invalidRecord'));
-
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
+		$postalCode = $this->PostalCodes->get($id, ['contain' => ['Countries']]);
 
 		$this->set(compact('postalCode'));
 	}
@@ -87,11 +83,8 @@ class PostalCodesController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function edit($id = null) {
-		if (empty($id) || !($postalCode = $this->PostalCodes->find('first', ['conditions' => ['PostalCode.id' => $id]]))) {
-			$this->Flash->error(__('invalidRecord'));
+		$postalCode = $this->PostalCodes->get($id, []);
 
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
 		if ($this->Common->isPosted()) {
 			$postalCode = $this->PostalCodes->patchEntity($postalCode, $this->request->getData());
 

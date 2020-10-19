@@ -21,7 +21,12 @@ class CountriesController extends DataAppController {
 	public $paginate = ['order' => ['Countries.sort' => 'DESC']];
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @var string|null
+	 */
+	public $imageFolder;
+
+	/**
+	 * @return void
 	 */
 	public function initialize(): void {
 		parent::initialize();
@@ -35,7 +40,7 @@ class CountriesController extends DataAppController {
 
 	/**
 	 * @param \Cake\Event\EventInterface $event
-	 * @return void
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function beforeFilter(EventInterface $event) {
 		parent::beforeFilter($event);
@@ -67,10 +72,10 @@ class CountriesController extends DataAppController {
 	/**
 	 * Check for missing or unused country flag icons
 	 *
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function icons() {
-		$icons = $this->_icons();
+		$icons = []; //$this->_icons();
 
 		$countries = $this->Countries->find('all', ['fields' => ['id', 'name', 'iso2', 'iso3']]);
 
@@ -89,32 +94,32 @@ class CountriesController extends DataAppController {
 		}
 
 		# icons without countries
-		$iconsWithoutCountries = [];
 		$iconsWithoutCountries = array_diff($icons, $usedIcons);
-		//pr($iconsWithoutCountries);
 
 		$this->set(compact('icons', 'countries', 'contriesWithoutIcons', 'iconsWithoutCountries'));
 	}
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function import() {
 		if ($this->Common->isPosted()) {
+			$countries = [];
 
-			if (!empty($this->request->data['Form'])) {
+			if ($this->request->getData('Form')) {
 				$count = 0;
-				foreach ($this->request->data['Form'] as $key => $val) {
-					//$this->Countries->create();
+				foreach ((array)$this->request->getData('Form') as $key => $val) {
 					$data = ['iso3' => $val['iso3'], 'iso2' => $val['iso2'], 'name' => $val['name']];
+					$country = $this->Countries->newEntity($data);
+
 					if (empty($val['confirm'])) {
 						# do nothing
-					} elseif ($this->Countries->save($data)) {
+					} elseif ($this->Countries->save($country)) {
 						$count++;
-						unset($this->request->data['Form'][$key]);
+						//unset($this->request->data['Form'][$key]);
 					} else {
 						//$this->request->data['Form'][$key]['confirm'] = 0;
-						$this->request->data['Error'][$key] = $this->Countries->validationErrors;
+						//$this->request->data['Error'][$key] = $this->Countries->validationErrors;
 					}
 
 				}
@@ -122,14 +127,14 @@ class CountriesController extends DataAppController {
 
 			} else {
 
-				$list = $this->request->data['import_content'];
+				$list = $this->request->getData('import_content');
 
-				if (!empty($this->request->data['import_separator_custom'])) {
-					$separator = $this->request->data['import_separator_custom'];
+				if ($this->request->getData('import_separator_custom')) {
+					$separator = $this->request->getData('import_separator_custom');
 					//$separator = str_replace(['{SPACE}', '{TAB}'], [Country::separators(SEPARATOR_SPACE, true), Country::separators(SEPARATOR_TAB, true)], $separator);
 
 				} else {
-					$separator = $this->request->data['import_separator'];
+					$separator = $this->request->getData('import_separator');
 					//$separator = Country::separators($separator, true);
 				}
 				# separate list into single records
@@ -138,37 +143,38 @@ class CountriesController extends DataAppController {
 				if (empty($countries)) {
 					//FIXME
 					//$this->Countries->invalidate('import_separator', 'falscher Separator');
-				} elseif (!empty($this->request->data['import_pattern'])) {
+				} elseif ($this->request->getData('import_pattern')) {
+					//FIXME
 					//$pattern = str_replace(['{SPACE}', '{TAB}'], [Country::separators(SEPARATOR_SPACE, true), Country::separators(SEPARATOR_TAB, true)], $this->request->data['import_pattern']);
+					$pattern = '';
 					# select part that matches %name
 					foreach ($countries as $key => $danceStep) {
 						$tmp = sscanf($danceStep, $pattern); # returns array
 						# write back into $countries array
 						if (!empty($tmp[2])) {
-							$this->request->data['Form'][$key] = ['name' => $tmp[2], 'confirm' => 1];
+							//$this->request->data['Form'][$key] = ['name' => $tmp[2], 'confirm' => 1];
 							if (!empty($tmp[1])) {
-								$this->request->data['Form'][$key]['iso2'] = $tmp[1];
+								//$this->request->data['Form'][$key]['iso2'] = $tmp[1];
 							}
 							if (!empty($tmp[0])) {
-								$this->request->data['Form'][$key]['iso3'] = $tmp[0];
+								//$this->request->data['Form'][$key]['iso3'] = $tmp[0];
 							}
 						}
 						$countries[$key] = $tmp;
 					}
 
-					if (empty($this->request->data['Form'])) {
-						$this->Countries->invalidate('import_pattern', 'falsches Muster');
+					if ($this->request->getData('Form')) {
+						//$this->Countries->invalidate('import_pattern', 'falsches Muster');
 					}
 				} else {
 					foreach ($countries as $key => $country) {
-						$this->request->data['Form'][$key] = ['name' => $country, 'confirm' => 1];
+						//$this->request->data['Form'][$key] = ['name' => $country, 'confirm' => 1];
 					}
 				}
 
 			}
 
 			$this->set(compact('countries'));
-
 		}
 	}
 

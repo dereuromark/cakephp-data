@@ -12,6 +12,8 @@ use Tools\Utility\Utility;
 
 /**
  * @mixin \Geo\Model\Behavior\GeocoderBehavior
+ *
+ * @deprecated Moved to Geo plugin.
  */
 class LocationsTable extends Table {
 
@@ -151,7 +153,7 @@ class LocationsTable extends Table {
 	 *
 	 * NEW: if many ips in row (ip1, ip2, ip3), use last (or first???) one!
 	 *
-	 * @return string IP
+	 * @return string|null IP
 	 */
 	public static function findIp() {
 		if ((int)Configure::read('debug') > 1) {
@@ -165,7 +167,7 @@ class LocationsTable extends Table {
 		$ip = Utility::getClientIp();
 		# usually getClientIp already removes multiple ips in favor of one single ip. but seems to fail sometimes
 		if (strpos($ip, ',') !== false) {
-			return false;
+			return null;
 
 			//$ips = explode(',', $ip);
 			//$ip = trim($ips[0]); # first

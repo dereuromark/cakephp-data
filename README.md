@@ -14,12 +14,13 @@ Note: This branch requires **CakePHP 4.0+**.
 - Continents => Countries => States => Counties => Districts => Cities
 - Postal Codes
 - Addresses
-- Locations (geocodable)
 - MimeTypes and MimeTypeImages
-- Languages
-- Currencies
+- Languages (optionally with language flags)
+- Currencies (with converter)
 
 Both schema and data.
+
+Countries also can have country flags (images).
 
 ## Demo
 See https://sandbox.dereuromark.de/export
@@ -32,7 +33,8 @@ composer require dereuromark/cakephp-data
 
 And then load your plugin.
 
-Decide on what part of the plugin you need and also make sure you executed the migrations for the database tables.
+Decide on what part of the plugin you need and make sure you executed the migrations for the database tables.
+It is recommended to just copy the migration files over to project level.
 
 That's it. It should be up and running.
 

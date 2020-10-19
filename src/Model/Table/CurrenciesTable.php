@@ -126,11 +126,12 @@ class CurrenciesTable extends Table {
 
 	/**
 	 * @param \Cake\Event\EventInterface $event
-	 * @param \Data\Model\Entity\Currency $entity
+	 * @param \Cake\Datasource\EntityInterface $entity
+	 * @param \ArrayObject $options
 	 *
 	 * @return bool
 	 */
-	public function beforeSave(EventInterface $event, EntityInterface $entity) {
+	public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
 		if (isset($entity['name'])) {
 			$entity['name'] = ucwords($entity['name']);
 		}
@@ -145,7 +146,7 @@ class CurrenciesTable extends Table {
 	 * @param array $context
 	 * @return bool
 	 */
-	public function available($value, $context) {
+	public function available($value, array $context) {
 		if (empty($value)) {
 			return false;
 		}
@@ -181,7 +182,7 @@ class CurrenciesTable extends Table {
 			$value = $this->CurrencyLib->convert(1, $base['code'], $currency['code'], 4);
 			if ($value !== false) {
 				$id = $currency['id'];
-				$this->saveField($id, 'value', $value);
+				$this->updateAll(['value' => $value], ['id' => $id]);
 			} else {
 				//$this->log('Invalid Currency ' . $currency['code'], 'warning');
 			}

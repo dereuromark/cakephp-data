@@ -204,14 +204,18 @@ class LanguagesTable extends Table {
 	 * @return array Array 2d heading and values
 	 */
 	public function getOfficialIsoList() {
-		$this->HtmlDom = new HtmlDom();
+		$HtmlDom = new HtmlDom();
 		if (!($res = Cache::read('lov_gov_iso_list'))) {
 			$res = file_get_contents('http://www.loc.gov/standards/iso639-2/php/code_list.php');
-			$res = $this->HtmlDom->domFromString($res);
+			$res = $HtmlDom->domFromString($res);
 			Cache::write('lov_gov_iso_list', $res);
 		}
 
-		foreach ($res->find('table') as $element) {
+		/** @var array $elements */
+		$elements = $res->find('table');
+		$heading = $languages = [];
+
+		foreach ($elements as $element) {
 			$languageArray = $element->plaintext;
 			$languageArray = explode("\t" . "\t", $languageArray);
 			array_shift($languageArray);

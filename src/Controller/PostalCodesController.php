@@ -10,7 +10,7 @@ namespace Data\Controller;
 class PostalCodesController extends DataAppController {
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function map() {
 		if ($this->Common->isPosted()) {

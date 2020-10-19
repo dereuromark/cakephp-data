@@ -17,7 +17,7 @@ class CountiesFixture extends TestFixture {
 	 */
 	public $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'collate' => null, 'comment' => ''],
-		'official_id' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 9, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
+		'official_key' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 9, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
 		'country_id' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10, 'collate' => null, 'comment' => ''],
 		'state_id' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 10, 'collate' => null, 'comment' => ''],
 		'name' => ['type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
@@ -27,7 +27,7 @@ class CountiesFixture extends TestFixture {
 		'single_city' => ['type' => 'boolean', 'null' => false, 'default' => '0', 'collate' => null, 'comment' => ''],
 		'rank' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 5, 'collate' => null, 'comment' => ''],
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
-		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']], 'official_id' => ['type' => 'unique', 'columns' => 'official_id'], 'slug' => ['type' => 'unique', 'columns' => 'slug']],
+		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']], 'official_key' => ['type' => 'unique', 'columns' => 'official_key'], 'slug' => ['type' => 'unique', 'columns' => 'slug']],
 		'_options' => [],
 	];
 
@@ -39,7 +39,7 @@ class CountiesFixture extends TestFixture {
 	public $records = [
 		[
 			'id' => '1',
-			'official_id' => '01-0-01',
+			'official_key' => '01-0-01',
 			'country_id' => '1',
 			'state_id' => '1',
 			'name' => 'Flensburg',
@@ -52,7 +52,7 @@ class CountiesFixture extends TestFixture {
 		],
 		[
 			'id' => '2',
-			'official_id' => '01-0-02',
+			'official_key' => '01-0-02',
 			'country_id' => '1',
 			'state_id' => '1',
 			'name' => 'Kiel',
@@ -65,7 +65,7 @@ class CountiesFixture extends TestFixture {
 		],
 		[
 			'id' => '3',
-			'official_id' => '01-0-03',
+			'official_key' => '01-0-03',
 			'country_id' => '1',
 			'state_id' => '1',
 			'name' => 'Lübeck',
@@ -78,7 +78,7 @@ class CountiesFixture extends TestFixture {
 		],
 		[
 			'id' => '4',
-			'official_id' => '01-0-04',
+			'official_key' => '01-0-04',
 			'country_id' => '1',
 			'state_id' => '1',
 			'name' => 'Neumünster',
@@ -91,7 +91,7 @@ class CountiesFixture extends TestFixture {
 		],
 		[
 			'id' => '5',
-			'official_id' => '02-0-00',
+			'official_key' => '02-0-00',
 			'country_id' => '1',
 			'state_id' => '2',
 			'name' => 'Hamburg',
@@ -104,7 +104,7 @@ class CountiesFixture extends TestFixture {
 		],
 		[
 			'id' => '6',
-			'official_id' => '03-1-01',
+			'official_key' => '03-1-01',
 			'country_id' => '1',
 			'state_id' => '3',
 			'name' => 'Braunschweig',
@@ -117,7 +117,7 @@ class CountiesFixture extends TestFixture {
 		],
 		[
 			'id' => '7',
-			'official_id' => '03-1-02',
+			'official_key' => '03-1-02',
 			'country_id' => '1',
 			'state_id' => '3',
 			'name' => 'Salzgitter',
@@ -130,7 +130,7 @@ class CountiesFixture extends TestFixture {
 		],
 		[
 			'id' => '8',
-			'official_id' => '03-1-03',
+			'official_key' => '03-1-03',
 			'country_id' => '1',
 			'state_id' => '3',
 			'name' => 'Wolfsburg',
@@ -143,7 +143,7 @@ class CountiesFixture extends TestFixture {
 		],
 		[
 			'id' => '9',
-			'official_id' => '03-4-01',
+			'official_key' => '03-4-01',
 			'country_id' => '1',
 			'state_id' => '3',
 			'name' => 'Delmenhorst',
@@ -156,7 +156,7 @@ class CountiesFixture extends TestFixture {
 		],
 		[
 			'id' => '10',
-			'official_id' => '03-4-02',
+			'official_key' => '03-4-02',
 			'country_id' => '1',
 			'state_id' => '3',
 			'name' => 'Emden',

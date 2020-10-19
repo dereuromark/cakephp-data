@@ -26,11 +26,8 @@ class AddressesController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function view($id = null) {
-		if (empty($id) || !($address = $this->Addresses->find('first', ['conditions' => ['Addresses.id' => $id]]))) {
-			$this->Flash->error(__('invalid record'));
+		$address = $this->Addresses->get($id);
 
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
 		$this->set(compact('address'));
 		$this->viewBuilder()->setHelpers(['Geo.GoogleMap']);
 	}
@@ -53,7 +50,7 @@ class AddressesController extends DataAppController {
 		} else {
 			# TODO: geolocate via IP? only for frontend
 			$options = ['Countries.iso2' => 'DE'];
-			$this->request->data['country_id'] = $this->Addresses->Countries->fieldByConditions('id', $options);
+			$this->request = $this->request->withData('country_id', $this->Addresses->Countries->fieldByConditions('id', $options));
 		}
 
 		$countries = $this->Addresses->Countries->find('list');
@@ -132,11 +129,8 @@ class AddressesController extends DataAppController {
 	 * @return \Cake\Http\Response
 	 */
 	public function markAsUsed($id = null) {
-		if (empty($id) || !($address = $this->Addresses->find('first', ['conditions' => ['Address.id' => $id], 'fields' => ['id', 'formatted_address']]))) {
-			$this->Flash->error(__('invalid record'));
+		$address = $this->Addresses->get($id);
 
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
 		$this->Addresses->touch($id);
 		$var = $address['formatted_address'];
 		$this->Flash->success(__('Address \'{0}\' marked as last used', h($var)));

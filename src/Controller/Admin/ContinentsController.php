@@ -11,7 +11,7 @@ use Data\Controller\DataAppController;
 class ContinentsController extends DataAppController {
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function index() {
 		$continents = $this->paginate();
@@ -21,14 +21,11 @@ class ContinentsController extends DataAppController {
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function view($id = null) {
-		if (empty($id) || !($continent = $this->Continents->find('first', ['conditions' => ['Continents.id' => $id]]))) {
-			$this->Flash->error(__('invalid record'));
+		$continent = $this->Continents->get($id);
 
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
 		$this->set(compact('continent'));
 	}
 
@@ -41,7 +38,7 @@ class ContinentsController extends DataAppController {
 		if ($this->Common->isPosted()) {
 			$continent = $this->Continents->patchEntity($continent, $this->request->getData());
 			if ($this->Continents->save($continent)) {
-				$var = $this->request->data['name'];
+				$var = $continent['name'];
 				$this->Flash->success(__('record add {0} saved', h($var)));
 
 				return $this->Common->postRedirect(['action' => 'index']);
@@ -59,15 +56,12 @@ class ContinentsController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function edit($id = null) {
-		if (empty($id) || !($continent = $this->Continents->find('first', ['conditions' => ['Continents.id' => $id]]))) {
-			$this->Flash->error(__('invalid record'));
+		$continent = $this->Continents->get($id);
 
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
 		if ($this->Common->isPosted()) {
 			$continent = $this->Continents->patchEntity($continent, $this->request->getData());
 			if ($this->Continents->save($continent)) {
-				$var = $this->request->data['name'];
+				$var = $continent['name'];
 				$this->Flash->success(__('record edit {0} saved', h($var)));
 
 				return $this->Common->postRedirect(['action' => 'index']);
@@ -88,11 +82,7 @@ class ContinentsController extends DataAppController {
 	public function delete($id = null) {
 		$this->request->allowMethod('post');
 
-		if (empty($id) || !($continent = $this->Continents->find('first', ['conditions' => ['Continents.id' => $id], 'fields' => ['id', 'name']]))) {
-			$this->Flash->error(__('invalid record'));
-
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
+		$continent = $this->Continents->get($id);
 		$var = $continent['name'];
 
 		if ($this->Continents->delete($continent)) {

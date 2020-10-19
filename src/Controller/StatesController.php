@@ -20,7 +20,7 @@ class StatesController extends DataAppController {
 	public $paginate = ['order' => ['States.modified' => 'DESC']];
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return void
 	 */
 	public function initialize(): void {
 		parent::initialize();

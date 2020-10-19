@@ -123,7 +123,7 @@ class MimeTypesTable extends Table {
 	/**
 	 * @param string|null $ext
 	 *
-	 * @return \Cake\ORM\Query|null
+	 * @return \Cake\Datasource\EntityInterface|null
 	 */
 	public function findMimeType($ext = null) {
 		if (empty($ext)) {
@@ -143,13 +143,12 @@ class MimeTypesTable extends Table {
 	public function push($ext = null) {
 		$type = $this->findMimeType($ext);
 		if ($type) {
-			$id = $type['id'];
+			$id = $type->id;
 
-			return $this->saveField($id, 'sort', $type['sort'] + 1);
+			return (bool)$this->updateAll(['sort' => $type['sort'] + 1], ['id' => $id]);
 		}
 		# insert this new extension
 		$data = ['ext' => $ext, 'name' => 'auto-added', 'sort' => 1];
-		//$this->create();
 		$mimeType = $this->newEntity($data);
 		if (!$this->save($mimeType)) {
 			//$this->log('problem with pushing new mimeType');
@@ -163,12 +162,10 @@ class MimeTypesTable extends Table {
 		$email->setSubject(Configure::read('Config.page_name') . ' - ' . __('MimeType'));
 		$email->viewBuilder()->setTemplate('simple_email');
 
-		$text = 'MimeType hinzugefügt: ' . $ext . '';
+		$text = 'MimeType added: ' . $ext . '';
 		$email->setViewVars(compact('text'));
 
-		if (!$email->send()) {
-			//$this->log('problem with mailing to admin after pushing mimeType');
-		}
+		$email->send();
 
 		return true;
 	}

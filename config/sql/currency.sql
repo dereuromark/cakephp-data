@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}currencies` (
   `symbol_left` varchar(12) COLLATE utf8_unicode_ci DEFAULT '',
   `symbol_right` varchar(12) COLLATE utf8_unicode_ci DEFAULT '',
   `decimal_places` char(1) COLLATE utf8_unicode_ci DEFAULT '',
-  `value` float(9,4) DEFAULT '0.0000',
+  `value` float(9,4) NOT NULL,
   `base` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'is base currency',
   `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `modified` datetime NOT NULL,

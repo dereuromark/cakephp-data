@@ -289,7 +289,7 @@ class AddressesTable extends Table {
 
 			# enter new id
 			} elseif (isset($entity['state_id']) && !empty($entity['geocoder_result']['country_province_code'])) {
-				$state = $this->Countries->States->find('first', ['conditions' => ['OR' => ['States.abbr' => $entity['geocoder_result']['country_province_code'], 'States.name' => $entity['geocoder_result']['country_province']]]]);
+				$state = $this->Countries->States->find('all', ['conditions' => ['OR' => ['States.abbr' => $entity['geocoder_result']['country_province_code'], 'States.name' => $entity['geocoder_result']['country_province']]]])->first();
 				if (!empty($state)) {
 					$entity['state_id'] = $state['id'];
 				}
