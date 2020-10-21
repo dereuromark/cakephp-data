@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var mixed $currencies
+ * @var array $currencies
  * @var \Data\Model\Entity\Currency $currency
  */
 ?>
@@ -20,7 +20,7 @@
 		echo $this->Form->control('value');
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit'));?>
+<?php echo $this->Form->submit(__('Submit')); $this->Form->end();?>
 </div>
 
 <br/>

@@ -24,7 +24,7 @@
 		echo $this->Form->control('status', ['type' => 'checkbox', 'label' => 'Aktiv']);
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit'));?>
+<?php echo $this->Form->submit(__('Submit')); $this->Form->end();?>
 </div>
 
 <br/><br/>

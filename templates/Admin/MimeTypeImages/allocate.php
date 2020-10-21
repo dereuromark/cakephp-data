@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var mixed $images
+ * @var array $images
  * @var \Data\Model\Entity\MimeTypeImage $mimeTypeImage
  */
 ?>

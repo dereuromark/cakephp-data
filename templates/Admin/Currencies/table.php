@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var mixed $currencies
+ * @var \Data\Model\Entity\Currency[] $currencies
  */
 ?>
 <div class="page index">

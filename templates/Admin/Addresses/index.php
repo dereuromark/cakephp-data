@@ -62,11 +62,20 @@ foreach ($addresses as $address):
 					echo number_format($address->lat, 1, ',', '.');
 					echo '/';
 					echo number_format($address->lng, 1, ',', '.');
+					echo ' ';
 
 					$markers = [];
 					$markers[] = ['lat' => $address->lat, 'lng' => $address->lng, 'color' => 'green'];
-					$mapMarkers = $this->GoogleMap->staticMarkers($markers);
-					echo $this->Html->link($this->Format->icon('view', ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $address->lat . ',' . $address->lng, 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 12]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
+
+					if (Configure::read('GoogleMap.key')) {
+						$mapMarkers = $this->GoogleMap->staticMarkers($markers);
+						echo $this->Html->link($this->Format->icon('view', ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $address->lat . ',' . $address->lng, 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 12]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
+					} else {
+						$options = [
+							'to' => $address->lat . ',' . $address->lng,
+						];
+						echo $this->Html->link($this->Format->icon('view', [], ['title' => __('Show')]), $this->GoogleMap->mapUrl($options), ['class' => 'external', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
+					}
 				}
 			 ?>
 		</td>

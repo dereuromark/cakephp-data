@@ -40,7 +40,7 @@
 	?>
 	Eine mit Komma, Leerzeichen, NewLine, etc. separierte Liste, die nur Endungen (exe, jpg, ...) oder Dateien (1.jpg, 2.gif) enthält, deren Endungen dann importiert werden.
 	</fieldset>
-<?php echo $this->Form->end(__('Submit'));?>
+<?php echo $this->Form->submit(__('Submit')); $this->Form->end();?>
 </div>
 <div class="actions">
 	<ul>

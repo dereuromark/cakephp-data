@@ -32,7 +32,7 @@ $this->Html->script('jquery/plugins/jquery.dd.js');?>
 		echo $this->Form->control('active');
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit'));?>
+<?php echo $this->Form->submit(__('Submit')); $this->Form->end();?>
 </div>
 <div class="actions">
 	<ul>

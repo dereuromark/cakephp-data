@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var mixed $unused
+ * @var \Data\Model\Entity\MimeTypeImage[] $unused
  */
 ?>
 
@@ -13,7 +13,7 @@
 		echo '<ul>';
 		foreach ($unused as $u) {
 			echo '<li>';
-			echo $this->Html->image(IMG_MIMETYPES . $u['MimeTypeImage']['name'] . '.' . $u['MimeTypeImage']['ext']) . ' ' . $u['MimeTypeImage']['name'];
+			echo $this->Html->image(IMG_MIMETYPES . $u['name'] . '.' . $u['ext']) . ' ' . $u['name'];
 			echo '</li>';
 		}
 		echo '</ul>';

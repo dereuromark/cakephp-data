@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var mixed $cities
+ * @var \Data\Model\Entity\City[] $cities
  */
 ?>
 <div class="page index">

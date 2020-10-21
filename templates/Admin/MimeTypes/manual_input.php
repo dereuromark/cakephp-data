@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var mixed $exportArray
+ * @var array $exportArray
  */
 ?>
 <div class="page index">
@@ -13,7 +13,6 @@
 
 <h3>Export</h3>
 <?php
-//pr ($exportArray);
 
 if (!empty($exportArray)) {
 	$out = '$result = array(' . BR;

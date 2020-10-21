@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var mixed $city
+ * @var \Data\Model\Entity\City $city
  */
 
 use Cake\Core\Configure;
@@ -30,7 +30,7 @@ use Cake\Core\Configure;
 		echo $this->Form->control('description');
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit'));?>
+<?php echo $this->Form->submit(__('Submit')); $this->Form->end();?>
 </div>
 
 <div class="actions">

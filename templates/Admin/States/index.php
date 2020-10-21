@@ -49,13 +49,21 @@ foreach ($states as $state):
 			if ((int)$state['lat'] != 0 || (int)$state['lng'] != 0) {
 				$coordinates = $state['lat'] . ',' . $state['lng'];
 			}
-			echo $this->Format->yesNo((int)!empty($coordinates), ['onTitle' => $coordinates, 'offTitke' => 'n/a']);
+			echo $this->Format->yesNo((int)!empty($coordinates), ['onTitle' => $coordinates, 'offTitke' => 'n/a']) . ' ';
 
 			if (!empty($coordinates)) {
 				$markers = [];
 				$markers[] = ['lat' => $state['lat'], 'lng' => $state['lng'], 'color' => 'green'];
-				$mapMarkers = $this->GoogleMap->staticMarkers($markers);
-				echo ' ' . $this->Html->link($this->Format->icon('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $state['lat'] . ',' . $state['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 5]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
+
+				if (Configure::read('GoogleMap.key')) {
+					$mapMarkers = $this->GoogleMap->staticMarkers($markers);
+					echo ' ' . $this->Html->link($this->Format->icon('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $state['lat'] . ',' . $state['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 5]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
+				} else {
+					$options = [
+						'to' => $state->lat . ',' . $state->lng,
+					];
+					echo $this->Html->link($this->Format->icon('view', [], ['title' => __('Show')]), $this->GoogleMap->mapUrl($options), ['class' => 'external', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
+				}
 			}
 
 			?>

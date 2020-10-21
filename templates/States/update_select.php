@@ -1,9 +1,9 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var mixed $defaultFieldLabel
- * @var mixed $defaultValue
- * @var mixed $states
+ * @var string $defaultFieldLabel
+ * @var string $defaultValue
+ * @var string[] $states
  */
 use Cake\Core\Configure;
 

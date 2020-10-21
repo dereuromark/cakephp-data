@@ -41,7 +41,7 @@ use Data\Model\Entity\Country;
 		}
 	?>
 	</fieldset>
-	<?php echo $this->Form->end(__('Submit'));?>
+	<?php echo $this->Form->submit(__('Submit')); $this->Form->end();?>
 <?php } ?>
 
 
@@ -54,11 +54,11 @@ use Data\Model\Entity\Country;
 	<fieldset>
 		<legend><?php echo __('Import Countries');?></legend>
 	<?php
-		echo $this->Form->control('import_separator', ['options' => Country::separators(), 'empty' => [0 => 'Eigenen Separator verwenden']]);
+		//echo $this->Form->control('import_separator', ['options' => Country::separators(), 'empty' => [0 => 'Eigenen Separator verwenden']]);
 		echo $this->Form->control('import_separator_custom', ['label' => 'Eigener Separator']);
 
 		echo $this->Form->control('import_pattern', []);
-		echo $this->Form->control('import_record_separator', ['options' => Country::separators(), 'empty' => [0 => 'Eigenen Separator verwenden']]);
+		//echo $this->Form->control('import_record_separator', ['options' => Country::separators(), 'empty' => [0 => 'Eigenen Separator verwenden']]);
 		echo $this->Form->control('import_record_separator_custom', ['label' => 'Eigener Separator']);
 
 		echo 'Für Pattern verwendbar: &nbsp;&nbsp; <b>{TAB}</b>, <b>{SPACE}</b>, <b>benutzerdefinierte Trennzeichen</b>, <b>%*s</b> (Überspringen), <b>%s</b> (ohne Leerzeichen), <b>%[^.]s</b> (mit Leerzeichen)<br/>
@@ -68,7 +68,7 @@ use Data\Model\Entity\Country;
 		echo $this->Form->control('import_content', ['type' => 'textarea', 'rows' => 30]);
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit'));?>
+<?php echo $this->Form->submit(__('Submit')); $this->Form->end();?>
 
 <?php } else { ?>
 

@@ -6,6 +6,8 @@
  * @var \App\View\AppView $this
  * @var \Data\Model\Entity\Country[]|\Cake\Collection\CollectionInterface $countries
  */
+
+use Cake\Core\Configure;
 use Cake\Core\Plugin;
 ?>
 
@@ -70,13 +72,21 @@ foreach ($countries as $country):
 			if ((int)$country['lat'] != 0 || (int)$country['lng'] != 0) {
 				$coordinates = $country['lat'] . ',' . $country['lng'];
 			}
-			echo $this->Format->yesNo((int)!empty($coordinates), ['onTitle' => $coordinates, 'offTitle' => __('n/a')]);
+			echo $this->Format->yesNo((int)!empty($coordinates), ['onTitle' => $coordinates, 'offTitle' => __('n/a')]) . ' ';
 
 			if (!empty($coordinates)) {
 				$markers = [];
 				$markers[] = ['lat' => $country['lat'], 'lng' => $country['lng'], 'color' => 'green'];
-				$mapMarkers = $this->GoogleMap->staticMarkers($markers);
-				echo ' ' . $this->Html->link($this->Format->icon('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $country['lat'] . ',' . $country['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 3]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false]);
+
+				if (Configure::read('GoogleMap.key')) {
+					$mapMarkers = $this->GoogleMap->staticMarkers($markers);
+					echo ' ' . $this->Html->link($this->Format->icon('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $country['lat'] . ',' . $country['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 3]), ['class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
+				} else {
+					$options = [
+						'to' => $country->lat . ',' . $country->lng,
+					];
+					echo $this->Html->link($this->Format->icon('view', [], ['title' => __('Show')]), $this->GoogleMap->mapUrl($options), ['class' => 'external', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
+				}
 			}
 
 			?>
