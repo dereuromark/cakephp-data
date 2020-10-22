@@ -9,7 +9,6 @@
 	<fieldset>
 		<legend><?php echo __('Edit {0}', __('Country'));?></legend>
 	<?php
-		//echo $this->Form->control('id');
 		echo $this->Form->control('name');
 		echo $this->Form->control('ori_name');
 		echo $this->Form->control('iso2');

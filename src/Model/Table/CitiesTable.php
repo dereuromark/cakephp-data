@@ -5,6 +5,25 @@ namespace Data\Model\Table;
 use Cake\Core\Configure;
 use Tools\Model\Table\Table;
 
+/**
+ * @property \Data\Model\Table\CountriesTable&\Cake\ORM\Association\BelongsTo $Countries
+ *
+ * @method \Data\Model\Entity\City newEmptyEntity()
+ * @method \Data\Model\Entity\City newEntity(array $data, array $options = [])
+ * @method \Data\Model\Entity\City[] newEntities(array $data, array $options = [])
+ * @method \Data\Model\Entity\City get($primaryKey, $options = [])
+ * @method \Data\Model\Entity\City findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \Data\Model\Entity\City patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \Data\Model\Entity\City[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \Data\Model\Entity\City|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\City saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\City[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\City[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\City[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\City[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ *
+ * @mixin \Tools\Model\Behavior\SluggedBehavior
+ */
 class CitiesTable extends Table {
 
 	/**

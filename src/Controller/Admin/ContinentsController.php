@@ -6,7 +6,7 @@ use Data\Controller\DataAppController;
 
 /**
  * @property \Data\Model\Table\ContinentsTable $Continents
- * @method \Cake\ORM\Entity[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \Data\Model\Entity\Continent[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class ContinentsController extends DataAppController {
 
@@ -14,6 +14,10 @@ class ContinentsController extends DataAppController {
 	 * @return \Cake\Http\Response|null|void
 	 */
 	public function index() {
+		$this->paginate = [
+			'contain' => ['ParentContinents'],
+		];
+
 		$continents = $this->paginate();
 		$this->set(compact('continents'));
 	}
@@ -24,7 +28,7 @@ class ContinentsController extends DataAppController {
 	 * @return \Cake\Http\Response|null|void
 	 */
 	public function view($id = null) {
-		$continent = $this->Continents->get($id);
+		$continent = $this->Continents->get($id, ['contain' => ['ParentContinents']]);
 
 		$this->set(compact('continent'));
 	}
@@ -46,7 +50,7 @@ class ContinentsController extends DataAppController {
 
 			$this->Flash->error(__('formContainsErrors'));
 		}
-		$parents = [0 => __('Root')] + $this->Continents->ParentContinents->find('treeList', ['spacer' => '» ']);
+		$parents = ['' => __(' - n/a - ')] + $this->Continents->ParentContinents->find('treeList', ['spacer' => '» '])->toArray();
 		$this->set(compact('continent', 'parents'));
 	}
 
@@ -70,7 +74,7 @@ class ContinentsController extends DataAppController {
 			$this->Flash->error(__('formContainsErrors'));
 		}
 
-		$parents = [0 => __('Root')] + $this->Continents->ParentContinents->find('treeList', ['spacer' => '» ']);
+		$parents = ['' => __(' - n/a - ')] + $this->Continents->ParentContinents->find('treeList', ['spacer' => '» '])->toArray();
 		$this->set(compact('continent', 'parents'));
 	}
 

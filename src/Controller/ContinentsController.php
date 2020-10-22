@@ -4,7 +4,7 @@ namespace Data\Controller;
 
 /**
  * @property \Data\Model\Table\ContinentsTable $Continents
- * @method \Cake\ORM\Entity[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \Data\Model\Entity\Continent[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class ContinentsController extends DataAppController {
 

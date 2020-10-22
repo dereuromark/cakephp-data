@@ -6,6 +6,17 @@ use Tools\Model\Entity\Entity;
 
 /**
  * @property int $id
+ * @property int $country_id
+ * @property string $name
+ * @property string $ori_name
+ * @property float|null $lat
+ * @property float|null $lng
+ * @property string $slug
+ * @property string|null $description
+ * @property int $status
+ * @property \Cake\I18n\FrozenTime $created
+ * @property \Cake\I18n\FrozenTime $modified
+ * @property \Data\Model\Entity\Country $country
  */
 class City extends Entity {
 

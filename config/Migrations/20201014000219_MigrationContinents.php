@@ -15,14 +15,6 @@ class MigrationContinents extends AbstractMigration {
 	 */
 	public function change() {
 		$this->table('continents')
-			->addColumn('id', 'integer', [
-				'autoIncrement' => true,
-				'default' => null,
-				'limit' => null,
-				'null' => false,
-				'signed' => false,
-			])
-			->addPrimaryKey(['id'])
 			->addColumn('name', 'string', [
 				'default' => null,
 				'limit' => 64,
@@ -63,6 +55,19 @@ class MigrationContinents extends AbstractMigration {
 				'null' => false,
 			])
 			->create();
+
+		$sql = <<<SQL
+INSERT INTO `continents` (`id`, `name`, `ori_name`, `parent_id`, `lft`, `rght`, `status`, `modified`) VALUES
+(1, 'Eurasia', '', null, 1, 6, 0, '2011-07-15 19:55:33'),
+(2, 'Europe', '', 1, 2, 3, 1, '2011-07-15 19:55:40'),
+(3, 'Asia', '', 1, 4, 5, 1, '2011-07-15 19:55:47'),
+(4, 'America', '', null, 7, 12, 1, '2011-07-15 19:56:06'),
+(5, 'South America', '', 4, 8, 9, 1, '2011-07-15 19:56:16'),
+(6, 'North America', '', 4, 10, 11, 1, '2011-07-15 19:56:22'),
+(7, 'Antarctica', '', null, 13, 14, 0, '2011-07-15 19:56:39'),
+(8, 'Australia/Oceania', '', null, 15, 16, 1, '2011-07-15 19:56:48');
+SQL;
+		$this->execute($sql);
 	}
 
 }

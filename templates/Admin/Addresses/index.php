@@ -31,13 +31,13 @@ foreach ($addresses as $address):
 	<tr>
 		<td>
 			<?php if ($address->country) {
-				echo $this->Html->link($address->country->name, ['controller' => 'countries', 'action' => 'view', $address->country->id]);
+				echo $this->Html->link($address->country->name, ['controller' => 'Countries', 'action' => 'view', $address->country->id]);
 			} ?>
 		</td>
 <?php if (Configure::read('Data.Address.State')) { ?>
 		<td>
 			<?php if ($address->state) {
-				echo $this->Html->link($address->state['name'], ['controller' => 'states', 'action' => 'view', $address->state['id']]);
+				echo $this->Html->link($address->state['name'], ['controller' => 'States', 'action' => 'view', $address->state['id']]);
 			} ?>
 		</td>
 <?php } ?>

@@ -36,7 +36,7 @@ $this->Html->script('jquery/plugins/jquery.dd.js');?>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->getSourceValue('MimeType.id')], null, __('Are you sure you want to delete # {0}?', $this->Form->getSourceValue('MimeType.id'))); ?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->getSourceValue('MimeType.id')], ['confirm' => __('Are you sure you want to delete # {0}?', $this->Form->getSourceValue('MimeType.id'))]); ?></li>
 		<li><?php echo $this->Html->link(__('List Mime Types'), ['action' => 'index']);?></li>
 	</ul>
 </div>

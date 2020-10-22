@@ -15,14 +15,6 @@ class MigrationLanguages extends AbstractMigration {
 	 */
 	public function change() {
 		$this->table('languages')
-			->addColumn('id', 'integer', [
-				'autoIncrement' => true,
-				'default' => null,
-				'limit' => null,
-				'null' => false,
-				'signed' => false,
-			])
-			->addPrimaryKey(['id'])
 			->addColumn('name', 'string', [
 				'default' => null,
 				'limit' => 60,

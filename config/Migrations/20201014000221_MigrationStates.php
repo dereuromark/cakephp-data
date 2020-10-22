@@ -15,14 +15,6 @@ class MigrationStates extends AbstractMigration {
 	 */
 	public function change() {
 		$this->table('states')
-			->addColumn('id', 'integer', [
-				'autoIncrement' => true,
-				'default' => null,
-				'limit' => null,
-				'null' => false,
-				'signed' => false,
-			])
-			->addPrimaryKey(['id'])
 			->addColumn('country_id', 'integer', [
 				'default' => null,
 				'limit' => null,

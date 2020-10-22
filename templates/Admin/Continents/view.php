@@ -1,12 +1,13 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var array $continent
+ * @var \Data\Model\Entity\Continent $continent
  * @var object $content
  */
 ?>
 <div class="page view">
-<h2><?php echo __('Continent');?></h2>
+<h1><?php echo __('Continent');?></h1>
+
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Name'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
@@ -20,7 +21,7 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Parent Continent'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Html->link($content->parent['name'], ['controller' => 'continents', 'action' => 'view', $content->parent['id']]); ?>
+			<?php echo $this->Html->link($continent->parent_continent['name'], ['controller' => 'Continents', 'action' => 'view', $continent->parent_continent['id']]); ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Status'); ?></dt>
@@ -41,8 +42,6 @@
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit {0}', __('Continent')), ['action' => 'edit', $continent['id']]); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete {0}', __('Continent')), ['action' => 'delete', $continent['id']], null, __('Are you sure you want to delete # {0}?', $continent['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Continents')), ['action' => 'index']); ?> </li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Continents')), ['controller' => 'continents', 'action' => 'index']); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete {0}', __('Continent')), ['action' => 'delete', $continent['id']], ['confirm' => __('Are you sure you want to delete # {0}?', $continent['id'])]); ?> </li>
 	</ul>
 </div>

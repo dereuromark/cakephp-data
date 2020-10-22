@@ -1,8 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var mixed $continents
- * @var object $content
+ * @var \Data\Model\Entity\Continent[]|\Cake\Collection\CollectionInterface $continents
  */
 ?>
 <div class="page index">
@@ -17,12 +16,7 @@
 	<th class="actions"><?php echo __('Actions');?></th>
 </tr>
 <?php
-$i = 0;
 foreach ($continents as $continent):
-	$class = null;
-	if ($i++ % 2 == 0) {
-		$class = ' class="altrow"';
-	}
 ?>
 	<tr>
 		<td>
@@ -32,7 +26,7 @@ foreach ($continents as $continent):
 			<?php echo h($continent['ori_name']); ?>
 		</td>
 		<td>
-			<?php echo $this->Html->link($continent->parent['name'], ['controller' => 'continents', 'action' => 'view', $content->parent['id']]); ?>
+			<?php echo $this->Html->link($continent->parent_continent['name'], ['controller' => 'Continents', 'action' => 'view', $continent->parent_continent['id']]); ?>
 		</td>
 		<td>
 			<?php echo $this->Time->niceDate($continent['modified']); ?>
@@ -56,7 +50,5 @@ foreach ($continents as $continent):
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('Add {0}', __('Continent')), ['action' => 'add']); ?></li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Continents')), ['controller' => 'continents', 'action' => 'index']); ?> </li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['controller' => 'countries', 'action' => 'index']); ?> </li>
 	</ul>
 </div>

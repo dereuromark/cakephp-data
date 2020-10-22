@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Data\Model\Entity\City[] $cities
+ * @var \Data\Model\Entity\City[]|\Cake\Collection\CollectionInterface $cities
  */
 ?>
 <div class="page index">

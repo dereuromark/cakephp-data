@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var mixed $continent
+ * @var \Data\Model\Entity\Continent $continent
  */
 ?>
 <h2><?php echo __('Edit {0}', __('Continent')); ?></h2>
@@ -14,7 +14,7 @@
 		//echo $this->Form->control('id');
 		echo $this->Form->control('name');
 		//echo $this->Form->control('ori_name');
-		echo $this->Form->control('parent_id', ['empty' => ' - [ ' . __('pleaseSelect') . ' ] - ']);
+		echo $this->Form->control('parent_id', []);
 		//echo $this->Form->control('status');
 	?>
 	</fieldset>
@@ -25,9 +25,7 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->getSourceValue('Continent.id')], null, __('Are you sure you want to delete # {0}?', $this->Form->getSourceValue('Continent.id'))); ?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->getSourceValue('Continent.id')], ['confirm' => __('Are you sure you want to delete # {0}?', $this->Form->getSourceValue('Continent.id'))]); ?></li>
 		<li><?php echo $this->Html->link(__('List {0}', __('Continents')), ['action' => 'index']);?></li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Continents')), ['controller' => 'continents', 'action' => 'index']); ?> </li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['controller' => 'countries', 'action' => 'index']); ?> </li>
 	</ul>
 </div>

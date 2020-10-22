@@ -56,7 +56,7 @@
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit {0}', __('Postal Code')), ['action' => 'edit', $postalCode['id']]); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete {0}', __('Postal Code')), ['action' => 'delete', $postalCode['id']], null, __('Are you sure you want to delete # {0}?', $postalCode['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete {0}', __('Postal Code')), ['action' => 'delete', $postalCode['id']], ['confirm' => __('Are you sure you want to delete # {0}?', $postalCode['id'])]); ?> </li>
 		<li><?php echo $this->Html->link(__('List {0}', __('Postal Codes')), ['action' => 'index']); ?> </li>
 	</ul>
 </div>

@@ -9,7 +9,7 @@
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('User'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Html->link($address->user['id'], ['controller' => 'users', 'action' => 'view', $address->user['id']]); ?>
+			<?php echo $this->Html->link($address->user['id'], ['controller' => 'Users', 'action' => 'view', $address->user['id']]); ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Model'); ?></dt>
@@ -19,7 +19,7 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Country'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Html->link($address->country->name, ['controller' => 'countries', 'action' => 'view', $address->country->id]); ?>
+			<?php echo $this->Html->link($address->country->name, ['controller' => 'Countries', 'action' => 'view', $address->country->id]); ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Country Province'); ?></dt>
@@ -80,7 +80,7 @@
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit {0}', __('Address')), ['action' => 'edit', $address['id']]); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete {0}', __('Address')), ['action' => 'delete', $address['id']], null, __('Are you sure you want to delete # {0}?', $address['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete {0}', __('Address')), ['action' => 'delete', $address['id']], ['confirm' => __('Are you sure you want to delete # {0}?', $address['id'])]); ?> </li>
 		<li><?php echo $this->Html->link(__('List {0}', __('Addresses')), ['action' => 'index']); ?> </li>
 	</ul>
 </div>
