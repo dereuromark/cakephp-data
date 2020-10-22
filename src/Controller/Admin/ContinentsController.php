@@ -23,6 +23,17 @@ class ContinentsController extends DataAppController {
 	}
 
 	/**
+	 * @return \Cake\Http\Response|null|void
+	 */
+	public function tree() {
+		$continents = $this->Continents->find('threaded');
+
+		$this->set(compact('continents'));
+
+		$this->viewBuilder()->addHelper('Tools.Tree');
+	}
+
+	/**
 	 * @param int|null $id
 	 *
 	 * @return \Cake\Http\Response|null|void

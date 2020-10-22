@@ -50,5 +50,6 @@ foreach ($continents as $continent):
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('Add {0}', __('Continent')), ['action' => 'add']); ?></li>
+		<li><?php echo $this->Html->link(__('Tree'), ['action' => 'tree']); ?></li>
 	</ul>
 </div>

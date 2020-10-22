@@ -4,7 +4,6 @@ namespace Data\Controller;
 
 /**
  * @property \Data\Model\Table\ContinentsTable $Continents
- * @method \Data\Model\Entity\Continent[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class ContinentsController extends DataAppController {
 
@@ -12,19 +11,11 @@ class ContinentsController extends DataAppController {
 	 * @return \Cake\Http\Response|null|void
 	 */
 	public function index() {
-		$continents = $this->paginate();
+		$continents = $this->Continents->find('threaded');
+
 		$this->set(compact('continents'));
-	}
 
-	/**
-	 * @param int|null $id
-	 *
-	 * @return \Cake\Http\Response|null|void
-	 */
-	public function view($id = null) {
-		$continent = $this->Continents->get($id);
-
-		$this->set(compact('continent'));
+		$this->viewBuilder()->addHelper('Tools.Tree');
 	}
 
 }
