@@ -106,7 +106,7 @@ foreach ($countries as $country):
 
 			<?php echo $this->Html->link($this->Format->icon('map-o', [], ['title' => __('Koordinaten updaten')]), ['action' => 'update_coordinates', $country->id], ['escape' => false]); ?>
 
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $country->id], ['escape' => false], __('Are you sure you want to delete # {0}?', $country->id), false); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $country->id], ['escape' => false, 'confirm'  => __('Are you sure you want to delete # {0}?', $country->id)]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

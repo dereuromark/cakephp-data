@@ -76,7 +76,7 @@ foreach ($states as $state):
 
 			<?php echo $this->Html->link($this->Format->icon('map-o', [], ['title' => __('Update coordinates')]), ['action' => 'updateCoordinates', $state['id']], ['escape' => false]); ?>
 
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $state['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $state['id']), false); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $state['id']], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $state['id'])]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

@@ -85,7 +85,7 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 		<td class="actions">
 			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $mimeTypeImage['id']), array('escape'=>false)); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $mimeTypeImage['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $mimeTypeImage['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $mimeTypeImage['id'])); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $mimeTypeImage['id']], ['escape' => false, 'confirm'  => __('Are you sure you want to delete # {0}?', $mimeTypeImage['id'])]); ?>
 			<?php
 				if (isset($imageWidth) && isset($imageHeight) && $imageWidth != 16 && $imageHeight != 16) {
 					echo $this->Format->icon('expand', ['title' => __('Größe ist nicht 16x16, sondern ' . $imageWidth . 'x' . $imageHeight . '! Anpassen...')]);

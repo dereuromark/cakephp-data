@@ -47,7 +47,7 @@
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit {0}', __('Currency')), ['action' => 'edit', $currency['id']]); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Currency'), ['action' => 'delete', $currency['id']], ['escape' => false], __('Are you sure you want to delete # {0}?', $currency['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete Currency'), ['action' => 'delete', $currency['id']], ['escape' => false, 'confirm'  => __('Are you sure you want to delete # {0}?', $currency['id'])]); ?> </li>
 		<li><?php echo $this->Html->link(__('List {0}', __('Currencies')), ['action' => 'index']); ?> </li>
 		<li><?php echo $this->Html->link(__('Add {0}', __('Currency')), ['action' => 'add']); ?> </li>
 	</ul>
