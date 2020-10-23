@@ -25,6 +25,12 @@ class MigrationCountries extends AbstractMigration {
 				'limit' => 64,
 				'null' => false,
 			])
+			->addColumn('continent_id', 'integer', [
+				'default' => null,
+				'limit' => 10,
+				'null' => true,
+				'signed' => false,
+			])
 			->addColumn('iso2', 'string', [
 				'default' => null,
 				'limit' => 2,

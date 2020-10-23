@@ -8,6 +8,7 @@ use Tools\Model\Entity\Entity;
  * @property int $id
  * @property string $name
  * @property string $ori_name
+ * @property string|null $code
  * @property int|null $parent_id
  * @property int|null $lft
  * @property int|null $rght

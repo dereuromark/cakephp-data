@@ -29,6 +29,7 @@ use Tools\Model\Table\Table;
  * @method \Data\Model\Entity\Country[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
  * @method \Data\Model\Entity\Country[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \Data\Model\Entity\Country[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @property \Data\Model\Table\ContinentsTable&\Cake\ORM\Association\BelongsTo $Continents
  */
 class CountriesTable extends Table {
 
@@ -97,6 +98,11 @@ class CountriesTable extends Table {
 			$this->hasMany('States', [
 				'className' => 'Data.States',
 				'dependent' => true,
+			]);
+		}
+		if (Configure::read('Data.Country.Continent') !== false) {
+			$this->belongsTo('Continents', [
+				'className' => 'Data.Continents',
 			]);
 		}
 

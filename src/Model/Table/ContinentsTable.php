@@ -52,42 +52,11 @@ class ContinentsTable extends Table {
 				'message' => 'valErrMandatoryField',
 			],
 		],
-		'parent_id' => [
-			'numeric' => [
-				'rule' => ['numeric'],
-				'message' => 'valErrMandatoryField',
-			],
-		],
-		'lft' => [
-			'numeric' => [
-				'rule' => ['numeric'],
-				'message' => 'valErrMandatoryField',
-			],
-		],
-		'rgt' => [
-			'numeric' => [
-				'rule' => ['numeric'],
-				'message' => 'valErrMandatoryField',
-			],
-		],
 		'status' => [
 			'numeric' => [
 				'rule' => ['numeric'],
 				'message' => 'valErrMandatoryField',
 			],
-		],
-	];
-
-	/**
-	 * @var array
-	 */
-	public $belongsTo = [
-		'ParentContinent' => [
-			'className' => 'Continent',
-			'foreignKey' => 'parent_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
 		],
 	];
 
