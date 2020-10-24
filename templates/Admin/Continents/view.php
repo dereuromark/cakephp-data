@@ -8,17 +8,20 @@
 <div class="page view">
 <h1><?php echo __('Continent');?></h1>
 
+	<h2><?php echo h($continent['name']); ?></h2>
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Name'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo h($continent['name']); ?>
-			&nbsp;
-		</dd>
+
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Ori Name'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo h($continent['ori_name']); ?>
 			&nbsp;
 		</dd>
+
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Code'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo h($continent->code); ?>
+		</dd>
+
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Parent Continent'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $this->Html->link($continent->parent_continent['name'], ['controller' => 'Continents', 'action' => 'view', $continent->parent_continent['id']]); ?>

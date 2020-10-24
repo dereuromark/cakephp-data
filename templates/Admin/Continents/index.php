@@ -10,7 +10,7 @@
 <table class="table">
 <tr>
 	<th><?php echo $this->Paginator->sort('name');?></th>
-	<th><?php echo $this->Paginator->sort('ori_name');?></th>
+	<th><?php echo $this->Paginator->sort('code');?></th>
 	<th><?php echo $this->Paginator->sort('parent_id');?></th>
 	<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
 	<th class="actions"><?php echo __('Actions');?></th>
@@ -23,7 +23,7 @@ foreach ($continents as $continent):
 			<?php echo h($continent['name']); ?>
 		</td>
 		<td>
-			<?php echo h($continent['ori_name']); ?>
+			<?php echo h($continent['code']); ?>
 		</td>
 		<td>
 			<?php echo $this->Html->link($continent->parent_continent['name'], ['controller' => 'Continents', 'action' => 'view', $continent->parent_continent['id']]); ?>

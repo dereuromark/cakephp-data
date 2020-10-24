@@ -172,8 +172,8 @@ class AddressesTable extends Table {
 			return true;
 		}
 		$conditions = ['foreign_id' => $data['foreign_id'], 'address_type_id' => Address::TYPE_MAIN];
-		if (!empty($entity['id'])) {
-			$conditions['user_id !='] = $entity['id'];
+		if (!empty($data['user_id'])) {
+			$conditions['user_id !='] = $data['user_id'];
 		}
 		if ($this->find('all', ['conditions' => $conditions])->first()) {
 			return false;
