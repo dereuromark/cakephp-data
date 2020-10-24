@@ -35,7 +35,7 @@ class Continent extends Entity {
 	];
 
 	/**
-	 * @param int $value
+	 * @param int|int[]|null $value
 	 * @return string|string[]
 	 */
 	public static function directions($value = null) {

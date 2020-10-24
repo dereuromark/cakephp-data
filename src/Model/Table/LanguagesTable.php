@@ -2,8 +2,11 @@
 
 namespace Data\Model\Table;
 
+use ArrayObject;
 use Cake\Cache\Cache;
+use Cake\Core\Configure;
 use Cake\Core\Plugin;
+use Cake\Event\EventInterface;
 use Data\Model\Entity\Language;
 use Tools\HtmlDom\HtmlDom;
 use Tools\Model\Table\Table;
@@ -107,6 +110,47 @@ class LanguagesTable extends Table {
 		$this->searchManager()
 			->value('dir', ['fields' => 'direction'])
 			->like('search', ['fields' => ['name', 'ori_name', 'code', 'locale', 'locale_fallback']]);
+	}
+
+	/**
+	 * @param \Cake\Event\EventInterface $event
+	 * @param \ArrayObject $data
+	 * @param \ArrayObject $options
+	 * @return void
+	 */
+	public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options) {
+		$dir = Configure::read('Data.Language.dir', 'lower'); // lower or upper casing
+		if ($dir === 'upper') {
+			$method = 'mb_strtoupper';
+		} else {
+			$method = 'mb_strtolower';
+		}
+
+		if (isset($data['code'])) {
+			$data['code'] = $method($data['code']);
+		}
+		if (isset($data['iso2'])) {
+			$data['iso2'] = $method($data['iso2']);
+		}
+		if (isset($data['iso3'])) {
+			$data['iso3'] = $method($data['iso3']);
+		}
+		if (isset($data['locale'])) {
+			if (strpos($data['locale'], '_') !== false) {
+				$pieces = explode('_', $data['locale'], 2);
+				$data['locale'] = mb_strtolower($pieces[0]) . '_' . mb_strtoupper($pieces[1]);
+			} else {
+				$data['locale'] = mb_strtolower($data['locale']);
+			}
+		}
+		if (isset($data['locale_fallback'])) {
+			if (strpos($data['locale_fallback'], '_') !== false) {
+				$pieces = explode('_', $data['locale_fallback'], 2);
+				$data['locale_fallback'] = mb_strtolower($pieces[0]) . '_' . mb_strtoupper($pieces[1]);
+			} else {
+				$data['locale_fallback'] = mb_strtolower($data['locale_fallback']);
+			}
+		}
 	}
 
 	/**

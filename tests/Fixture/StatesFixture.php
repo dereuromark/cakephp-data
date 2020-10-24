@@ -39,11 +39,11 @@ class StatesFixture extends TestFixture {
 			'id' => '1',
 			'country_id' => '1',
 			'name' => 'Hamburg',
-			'abbr' => 'HH',
+			'code' => 'HH',
 			'lat' => '42.000000',
 			'lng' => '36.000000',
 			'slug' => 'hamburg',
-			'modified' => null,
+			'modified' => '2011-07-15 19:47:38',
 		],
 	];
 

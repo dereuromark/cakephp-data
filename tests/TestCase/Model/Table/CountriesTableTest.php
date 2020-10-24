@@ -55,10 +55,10 @@ class CountriesTableTest extends TestCase {
 			'name' => 'Foo Bar',
 			'ori_name' => 'Foo Bar',
 			'iso2' => 'FB',
-			'iso3' => 'FBR',
+			'iso3' => 'fbr',
 		]);
-		$result = $this->Countries->save($country);
-		$this->assertNotEmpty($result);
+		$result = $this->Countries->saveOrFail($country);
+		$this->assertSame('FBR', $result->iso3);
 	}
 
 }

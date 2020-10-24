@@ -2,8 +2,10 @@
 
 namespace Data\Model\Table;
 
+use ArrayObject;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
+use Cake\Event\EventInterface;
 use Cake\Http\Exception\InternalErrorException;
 use Data\Model\Entity\State;
 use Geo\Geocoder\Geocoder;
@@ -97,6 +99,18 @@ class StatesTable extends Table {
 		$this->searchManager()
 			->value('country_id')
 			->like('search', ['fields' => ['name', 'code']]);
+	}
+
+	/**
+	 * @param \Cake\Event\EventInterface $event
+	 * @param \ArrayObject $data
+	 * @param \ArrayObject $options
+	 * @return void
+	 */
+	public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options) {
+		if (isset($data['code'])) {
+			$data['code'] = mb_strtoupper($data['code']);
+		}
 	}
 
 	/**

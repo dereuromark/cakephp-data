@@ -40,8 +40,8 @@ class PostalCodesFixture extends TestFixture {
 			'lat' => 11,
 			'lng' => 12,
 			'official_address' => 'Foo bar',
-			'created' => null,
-			'modified' => null,
+			'created' => '2011-07-15 19:47:38',
+			'modified' => '2011-07-15 19:47:38',
 		],
 	];
 

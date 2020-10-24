@@ -46,4 +46,18 @@ class StatesTableTest extends TestCase {
 		$this->assertSame($state->id, $id);
 	}
 
+	/**
+	 * @return void
+	 */
+	public function testBasicSave() {
+		$data = [
+			'name' => 'Foo',
+			'code' => 'fxy',
+		];
+
+		$result = $this->States->newEntity($data);
+		$this->States->saveOrFail($result);
+		$this->assertSame('FXY', $result->code);
+	}
+
 }
