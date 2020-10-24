@@ -7,8 +7,8 @@ use Tools\Model\Entity\Entity;
 /**
  * @property int $id
  * @property int|null $country_id
- * @property string $abbr
  * @property string $name
+ * @property string $code
  * @property float $lat
  * @property float $lng
  * @property \Cake\I18n\FrozenTime $modified

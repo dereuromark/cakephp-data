@@ -291,7 +291,7 @@ class CountriesController extends DataAppController {
 
 	/**
 	 * Validate
-	 * - abbr
+	 * - code
 	 * - zip length/regexp ?
 	 * - EU ?
 	 * - lat/lng available and correct ?

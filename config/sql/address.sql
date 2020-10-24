@@ -2,9 +2,9 @@
 CREATE TABLE IF NOT EXISTS `{prefix}addresses` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `foreign_id` int(10) unsigned NOT NULL,
-  `model` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `model_key` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `country_id` int(10) unsigned NOT NULL COMMENT '',
-  `state_id` int(10) unsigned NOT NULL COMMENT 'redundant on purpose',
+  `state_id` int(10) unsigned DEFFAULT NULL COMMENT 'redundant on purpose',
   `first_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `last_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `street` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'street address and number',

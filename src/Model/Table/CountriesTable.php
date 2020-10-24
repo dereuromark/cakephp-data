@@ -124,7 +124,7 @@ class CountriesTable extends Table {
 	}
 
 	/**
-	 * Lat and lng + abbr if available!
+	 * Lat and lng + code if available!
 	 *
 	 * @param int|null $id Id
 	 * - NULL: update all records with missing coordinates only
@@ -225,7 +225,7 @@ class CountriesTable extends Table {
 	 *
 	 * @return int|false
 	 */
-	public function updateAbbr($id = null) {
+	public function updateCode($id = null) {
 		$Geocoder = new Geocoder();
 
 		$override = false;

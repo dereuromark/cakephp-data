@@ -26,7 +26,7 @@ use Cake\Core\Configure;
 <tr>
 	<th><?php echo $this->Paginator->sort('country_id');?></th>
 	<th><?php echo $this->Paginator->sort('name');?></th>
-	<th><?php echo $this->Paginator->sort('abbr');?></th>
+	<th><?php echo $this->Paginator->sort('code');?></th>
 	<th><?php echo __('Coordinates');?></th>
 	<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
 	<th class="actions"><?php echo __('Actions');?></th>
@@ -43,7 +43,7 @@ foreach ($states as $state):
 			<?php echo h($state['name']); ?>
 		</td>
 		<td>
-			<?php echo h($state['abbr']); ?>
+			<?php echo h($state['code']); ?>
 		</td>
 
 		<td>

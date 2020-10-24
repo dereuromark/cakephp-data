@@ -42,7 +42,7 @@ class StatesTableTest extends TestCase {
 	public function testGetStateId() {
 		$state = $this->States->find()->first();
 
-		$id = $this->States->getStateId(['abbr' => $state->abbr]);
+		$id = $this->States->getStateId(['code' => $state->code]);
 		$this->assertSame($state->id, $id);
 	}
 

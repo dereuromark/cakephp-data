@@ -10,7 +10,7 @@
 	<?php
 		echo $this->Form->control('country_id', ['empty' => ' - [ ' . __('pleaseSelect') . ' ] - ', 'required' => 1]);
 		echo $this->Form->control('name', ['required' => 1]);
-		echo $this->Form->control('abbr');
+		echo $this->Form->control('code');
 	?>
 	</fieldset>
 <?php echo $this->Form->submit(__('Submit')); $this->Form->end();?>

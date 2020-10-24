@@ -19,7 +19,7 @@
 <tr>
 	<th><?php echo $this->Paginator->sort('country_id');?></th>
 	<th><?php echo $this->Paginator->sort('name');?></th>
-	<th><?php echo $this->Paginator->sort('abbr');?></th>
+	<th><?php echo $this->Paginator->sort('src');?></th>
 	<th><?php echo __('Coordinates');?></th>
 </tr>
 <?php
@@ -35,7 +35,7 @@ foreach ($states as $state):
 			<?php echo h($state['name']); ?>
 		</td>
 		<td>
-			<?php echo h($state['abbr']); ?>
+			<?php echo h($state['src']); ?>
 		</td>
 
 		<td>

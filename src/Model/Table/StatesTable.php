@@ -39,7 +39,7 @@ class StatesTable extends Table {
 	 */
 	public $validate = [
 		'country_id' => ['numeric'],
-		'abbr' => [
+		'code' => [
 			'validateUnique' => [
 				'rule' => ['validateUnique', ['scope' => ['country_id']]],
 				'message' => 'valErrRecordNameExists',
@@ -96,7 +96,7 @@ class StatesTable extends Table {
 		$this->addBehavior('Search.Search');
 		$this->searchManager()
 			->value('country_id')
-			->like('search', ['fields' => ['name', 'abbr']]);
+			->like('search', ['fields' => ['name', 'code']]);
 	}
 
 	/**
@@ -138,7 +138,7 @@ class StatesTable extends Table {
 	}
 
 	/**
-	 * Lat and lng + abbr if available!
+	 * Lat and lng + code if available!
 	 *
 	 * @param \Data\Model\Entity\State $state
 	 *
@@ -162,7 +162,7 @@ class StatesTable extends Table {
 				$saveArray = ['lat' => $data['lat'], 'lng' => $data['lng'], 'country_id' => $res['country_id']];
 
 				if (!empty($data['country_province_code']) && mb_strlen($data['country_province_code']) <= 3 && preg_match('/^([A-Z])*$/', $data['country_province_code'])) {
-					$saveArray['abbr'] = $data['country_province_code'];
+					$saveArray['code'] = $data['country_province_code'];
 				}
 
 				$state = $this->patchEntity($res, $saveArray);
@@ -199,15 +199,15 @@ class StatesTable extends Table {
 					}
 
 					if (!empty($data['country_province_code']) && mb_strlen($data['country_province_code']) <= 3 && preg_match('/^([A-Z])*$/', $data['country_province_code'])) {
-						$saveArray['abbr'] = $data['country_province_code'];
+						$saveArray['code'] = $data['country_province_code'];
 					}
 
 					$state = $this->patchEntity($res, $saveArray);
 					if ($this->save($state)) {
 						$count++;
 
-						if (!empty($saveArray['abbr']) && $saveArray['abbr'] !== $res['abbr']) {
-							//$this->log('Abbr for country province \'' . $data['country_province'] . '\' changed from \'' . $res['abbr'] . '\' to \'' . $saveArray['abbr'] .'\'', LOG_NOTICE);
+						if (!empty($saveArray['code']) && $saveArray['code'] !== $res['code']) {
+							//$this->log('Code for state \'' . $data['country_province'] . '\' changed from \'' . $res['code'] . '\' to \'' . $saveArray['code'] .'\'', LOG_NOTICE);
 						}
 
 					} else {
