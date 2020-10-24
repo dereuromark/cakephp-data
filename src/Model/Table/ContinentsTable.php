@@ -2,6 +2,8 @@
 
 namespace Data\Model\Table;
 
+use ArrayObject;
+use Cake\Event\EventInterface;
 use Tools\Model\Table\Table;
 
 /**
@@ -94,6 +96,18 @@ class ContinentsTable extends Table {
 			'className' => 'Data.Continents',
 			'foreignKey' => 'parent_id',
 		]);
+	}
+
+	/**
+	 * @param \Cake\Event\EventInterface $event
+	 * @param \ArrayObject $data
+	 * @param \ArrayObject $options
+	 * @return void
+	 */
+	public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options) {
+		if (isset($data['code'])) {
+			$data['code'] = mb_strtoupper($data['code']);
+		}
 	}
 
 }

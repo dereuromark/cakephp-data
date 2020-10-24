@@ -34,6 +34,19 @@ class Continent extends Entity {
 		'id' => false,
 	];
 
+	/**
+	 * @param int $value
+	 * @return string|string[]
+	 */
+	public static function directions($value = null) {
+		$options = [
+			static::STATUS_INACTIVE => __('Inactive'),
+			static::STATUS_ACTIVE => __('Active'),
+		];
+
+		return parent::enum($value, $options);
+	}
+
 	public const STATUS_INACTIVE = 0;
 	public const STATUS_ACTIVE = 1;
 
