@@ -63,7 +63,7 @@ class MimeTypeImagesController extends DataAppController {
 					}
 
 					# check if new
-					if ($this->MimeTypeImages->find('first', ['conditions' => ['name' => $extension]])) {
+					if ($this->MimeTypeImages->find('all', ['conditions' => ['name' => $extension]])->first()) {
 						$alreadyIn[] = $extension;
 
 						continue;
@@ -97,7 +97,7 @@ class MimeTypeImagesController extends DataAppController {
 			$ext = mb_strtolower(pathinfo($image, PATHINFO_EXTENSION));
 			# TODO: check on valid ext, Sanitize fileName
 
-			$dbImage = $this->MimeTypeImages->find('first', ['conditions' => ['name' => $fileName]]);
+			$dbImage = $this->MimeTypeImages->find('all', ['conditions' => ['name' => $fileName]])->first();
 			if ($dbImage) {
 				if (empty($dbImage['ext']) || !file_exists(PATH_MIMETYPES . $dbImage['name'] . '.' . $dbImage['ext'])) {
 
@@ -145,7 +145,7 @@ class MimeTypeImagesController extends DataAppController {
 
 					$recordId = null;
 
-					$dbImage = $this->MimeTypeImages->find('first', ['conditions' => ['name' => $name]]);
+					$dbImage = $this->MimeTypeImages->find('all', ['conditions' => ['name' => $name]])->first();
 					if ($dbImage) {
 						if (empty($dbImage['ext']) || !file_exists(PATH_MIMETYPES . $dbImage['name'] . '.' . $dbImage['ext'])) {
 							$recordId = $dbImage['id'];
@@ -406,18 +406,10 @@ class MimeTypeImagesController extends DataAppController {
 	public function delete($id = null) {
 		$this->request->allowMethod('post');
 
-		$mimeTypeImage = $this->MimeTypeImages->find('first', ['fields' => [
-				'id',
-				'name',
-				'ext'], 'conditions' => ['id' => $id]]);
-		if (empty($res)) {
-			$this->Flash->error(__('record del not exists'));
+		$mimeTypeImage = $this->MimeTypeImages->get($id);
 
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
-
-		$fileName = $res['name'];
-		$fileExt = $res['ext'];
+		$fileName = $mimeTypeImage['name'];
+		$fileExt = $mimeTypeImage['ext'];
 		$name = $fileName . '.' . $fileExt;
 		if ($this->MimeTypeImages->delete($mimeTypeImage)) {
 			$this->Flash->success(__('record del {0} done', $name));
@@ -1154,8 +1146,7 @@ class MimeTypeImagesController extends DataAppController {
 		];
 		$count = count($result);
 		for ($i = 0; $i < $count; $i++) {
-			$this->MimeTypeImages->find('first', ['conditions' => ['']]);
-
+			//$this->MimeTypeImages->find('first', ['conditions' => ['']]);
 			//$this->MimeTypeImages->create();
 			$data = ['name' => $result[$i + 1], 'details' => $result[$i + 2]];
 			//TODO

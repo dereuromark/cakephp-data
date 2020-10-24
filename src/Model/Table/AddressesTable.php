@@ -165,11 +165,12 @@ class AddressesTable extends Table {
 	 *
 	 * @return bool
 	 */
-	public function primaryUnique(&$data) {
-		if (empty($entity['foreign_id']) || $entity['address_type_id'] != Address::TYPE_MAIN) {
+	public function primaryUnique($value, array $context) {
+		$data = $context['data'];
+		if (empty($data['foreign_id']) || $data['address_type_id'] != Address::TYPE_MAIN) {
 			return true;
 		}
-		$conditions = ['foreign_id' => $entity['foreign_id'], 'address_type_id' => Address::TYPE_MAIN];
+		$conditions = ['foreign_id' => $data['foreign_id'], 'address_type_id' => Address::TYPE_MAIN];
 		if (!empty($entity['id'])) {
 			$conditions['user_id !='] = $entity['id'];
 		}

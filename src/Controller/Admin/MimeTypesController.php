@@ -70,8 +70,8 @@ class MimeTypesController extends DataAppController {
 		$types = $this->MimeTypes->find('all', ['conditions' => ['MimeTypes.mime_type_image_id' => 0]]);
 		foreach ($types as $type) {
 			$fileExt = $type['ext'];
-			$image = $this->MimeTypes->MimeTypeImages->find('first', ['conditions' => ['MimeTypeImages.name' => $fileExt]]);
-			if (!empty($image)) {
+			$image = $this->MimeTypes->MimeTypeImages->find('all', ['conditions' => ['MimeTypeImages.name' => $fileExt]])->first();
+			if ($image) {
 				$id = $type['id'];
 				//$data = array()
 				if ($this->MimeTypes->saveField($id, 'mime_type_image_id', $image['id'])) {
@@ -274,8 +274,8 @@ class MimeTypesController extends DataAppController {
 	public function delete($id = null) {
 		$this->request->allowMethod('post');
 
-		$mimeType = $this->MimeTypes->find('first', ['fields' => ['id'], 'conditions' => ['MimeType.id' => $id]]);
-		if (empty($mimeType)) {
+		$mimeType = $this->MimeTypes->find('all', ['fields' => ['id'], 'conditions' => ['MimeType.id' => $id]])->first();
+		if (!$mimeType) {
 			$this->Flash->error(__('record del not exists'));
 
 			return $this->Common->autoRedirect(['action' => 'index']);
@@ -412,7 +412,7 @@ class MimeTypesController extends DataAppController {
 
 			$record = [];
 			if (!empty($d['ext'])) {
-				$record = $this->MimeTypes->find('first', ['conditions' => ['ext' => $d['ext']]]);
+				$record = $this->MimeTypes->find('all', ['conditions' => ['ext' => $d['ext']]])->first();
 			}
 
 			if (!empty($record['type']) && $record['type'] != $d['type']) {

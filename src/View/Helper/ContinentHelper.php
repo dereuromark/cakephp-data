@@ -21,7 +21,7 @@ class ContinentHelper extends Helper {
 		}
 
 		if ($continent->status === $continent::STATUS_INACTIVE) {
-			$text = '<span class="disabled">' . $text .'</span>';
+			$text = '<span class="disabled">' . $text . '</span>';
 		}
 
 		return $text;
