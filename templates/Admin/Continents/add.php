@@ -13,6 +13,9 @@
 	<?php
 		echo $this->Form->control('name');
 		//echo $this->Form->control('ori_name');
+
+		echo $this->Form->control('code');
+
 		echo $this->Form->control('parent_id', []);
 		//echo $this->Form->control('status');
 	?>

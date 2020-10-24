@@ -2,12 +2,12 @@
 
 namespace TestApp\Model\Behavior;
 
+use Geo\Model\Behavior\GeocoderBehavior;
 use Geocoder\Model\Address;
 use Geocoder\Model\AdminLevelCollection;
 use Geocoder\Model\Bounds;
 use Geocoder\Model\Coordinates;
 use Geocoder\Model\Country;
-use Geo\Model\Behavior\GeocoderBehavior;
 
 /**
  * A test mock
