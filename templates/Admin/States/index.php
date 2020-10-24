@@ -3,6 +3,9 @@
  * @var \App\View\AppView $this
  * @var \Data\Model\Entity\State[]|\Cake\Collection\CollectionInterface $states
  */
+
+use Cake\Core\Configure;
+
 ?>
 <?php /**
  * @var \App\View\AppView $this
