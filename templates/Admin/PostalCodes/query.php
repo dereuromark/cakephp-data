@@ -17,7 +17,7 @@
 		echo $this->Form->control('min_accuracy', []);
 	?>
 	</fieldset>
-<?php echo $this->Form->submit(__('Submit')); $this->Form->end();?>
+<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
 </div>
 
 <div>

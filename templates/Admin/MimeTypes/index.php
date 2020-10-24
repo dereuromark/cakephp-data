@@ -12,7 +12,7 @@
 <div class="searchWrapper">
 <?php echo $this->Form->create();?>
 <div class="floatLeft"><?php echo $this->Form->control('Form.search', ['label' => '(Teil)Suche:', 'value' => $searchStr]);?></div>
-<div class="floatLeft"><?php echo $this->Form->submit(__('Submit')); $this->Form->end();?></div>
+<div class="floatLeft"><?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?></div>
 <?php
 if (!empty($searchStr)) {
 	echo '<div class="floatRight">' . $this->Html->link('Wieder alle anzeigen', ['action' => 'index', 'clear' => 'search']) . '</div>';

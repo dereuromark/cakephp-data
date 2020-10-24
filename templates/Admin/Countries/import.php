@@ -41,7 +41,7 @@ use Data\Model\Entity\Country;
 		}
 	?>
 	</fieldset>
-	<?php echo $this->Form->submit(__('Submit')); $this->Form->end();?>
+	<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
 <?php } ?>
 
 
@@ -68,7 +68,7 @@ use Data\Model\Entity\Country;
 		echo $this->Form->control('import_content', ['type' => 'textarea', 'rows' => 30]);
 	?>
 	</fieldset>
-<?php echo $this->Form->submit(__('Submit')); $this->Form->end();?>
+<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
 
 <?php } else { ?>
 

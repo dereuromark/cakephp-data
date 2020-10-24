@@ -30,7 +30,7 @@ use Cake\Core\Configure;
 		echo $this->Form->control('description');
 	?>
 	</fieldset>
-<?php echo $this->Form->submit(__('Submit')); $this->Form->end();?>
+<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
 </div>
 
 <div class="actions">

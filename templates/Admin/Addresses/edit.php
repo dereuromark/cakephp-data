@@ -33,7 +33,7 @@ use Cake\Core\Configure;
 		echo $this->Form->control('foreign_id', ['type' => 'text', 'empty' => [0 => ' - [ ' . __('noSelection') . ' ] - ']]);
 	?>
 	</fieldset>
-<?php echo $this->Form->submit(__('Submit')); $this->Form->end();?>
+<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
 </div>
 
 <br/><br/>

@@ -20,7 +20,7 @@
 		echo $this->Form->control('value');
 	?>
 	</fieldset>
-<?php echo $this->Form->submit(__('Submit')); $this->Form->end();?>
+<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
 </div>
 
 <br/>
