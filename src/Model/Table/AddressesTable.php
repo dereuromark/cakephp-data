@@ -47,7 +47,7 @@ class AddressesTable extends Table {
 	/**
 	 * @var array
 	 */
-	public $order = ['type_id' => 'ASC', 'formatted_address' => 'ASC'];
+	protected $order = ['type_id' => 'ASC', 'formatted_address' => 'ASC'];
 
 	/**
 	 * @var array

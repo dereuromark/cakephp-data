@@ -30,7 +30,7 @@ class MimeTypesTable extends Table {
 	/**
 	 * @var array
 	 */
-	public $order = ['modified' => 'DESC'];
+	protected $order = ['modified' => 'DESC'];
 
 	/**
 	 * @var array

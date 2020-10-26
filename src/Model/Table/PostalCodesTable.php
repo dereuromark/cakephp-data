@@ -33,7 +33,7 @@ class PostalCodesTable extends Table {
 	/**
 	 * @var array
 	 */
-	public $order = ['code' => 'ASC'];
+	protected $order = ['code' => 'ASC'];
 
 	/**
 	 * @var array

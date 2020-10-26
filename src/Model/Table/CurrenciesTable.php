@@ -26,7 +26,7 @@ class CurrenciesTable extends Table {
 	/**
 	 * @var array
 	 */
-	public $order = ['base' => 'DESC', 'code' => 'ASC'];
+	protected $order = ['base' => 'DESC', 'code' => 'ASC'];
 
 	/**
 	 * @var array

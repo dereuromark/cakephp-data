@@ -7,6 +7,7 @@ use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
+use Cake\ORM\Query;
 use Data\Model\Entity\Country;
 use Exception;
 use Geo\Geocoder\Geocoder;
@@ -36,7 +37,7 @@ class CountriesTable extends Table {
 	/**
 	 * @var array
 	 */
-	public $order = ['sort' => 'DESC', 'name' => 'ASC'];
+	protected $order = ['sort' => 'DESC', 'name' => 'ASC'];
 
 	/**
 	 * @var array
