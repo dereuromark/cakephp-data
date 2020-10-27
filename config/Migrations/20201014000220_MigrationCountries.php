@@ -90,6 +90,11 @@ class MigrationCountries extends AbstractMigration {
 				'limit' => 190,
 				'null' => true,
 			])
+			->addColumn('timezone', 'string', [
+				'default' => null,
+				'limit' => 50,
+				'null' => true,
+			])
 			->addColumn('status', 'tinyinteger', [
 				'default' => '0',
 				'limit' => null,
