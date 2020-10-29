@@ -83,7 +83,7 @@ class DataHelper extends Helper {
 		$class = $options['class'] ?: 'flag-icon';
 		$code = $code ? strtolower($code) : '';
 
-		$template = '<span class="' . $class . ' ' . $class . '-' . $code . '"></span>';
+		$template = '<span class="' . $class . ' ' . $class . '-' . $code . '" title="' . strtoupper($code) . '"></span>';
 
 		return $template;
 	}
