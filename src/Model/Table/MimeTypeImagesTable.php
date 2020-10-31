@@ -74,18 +74,17 @@ class MimeTypeImagesTable extends Table {
 	/**
 	 * @param \Cake\Event\EventInterface $event
 	 * @param \Data\Model\Entity\MimeTypeImage $entity
+	 * @param \ArrayObject $options
 	 *
-	 * @return bool
+	 * @return void
 	 */
-	public function beforeSave(EventInterface $event, EntityInterface $entity) {
+	public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
 		if (isset($entity['name'])) {
 			$entity['name'] = mb_strtolower($entity['name']);
 		}
 		if (isset($entity['ext'])) {
 			$entity['ext'] = mb_strtolower($entity['ext']);
 		}
-
-		return true;
 	}
 
 	/**

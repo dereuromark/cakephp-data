@@ -26,7 +26,7 @@ class CountriesController extends DataAppController {
 
 	/**
 	 * @param \Cake\Event\EventInterface $event
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function beforeFilter(EventInterface $event) {
 		parent::beforeFilter($event);
@@ -36,16 +36,6 @@ class CountriesController extends DataAppController {
 			$this->imageFolder = WWW_ROOT . 'img' . DS . $specific . DS;
 		} else {
 			$this->imageFolder = Plugin::path('Data') . DS . 'webroot' . DS . 'img' . DS . 'country_flags' . DS;
-		}
-
-		if (isset($this->Auth)) {
-			$this->Auth->allow('index');
-			/*
-			$this->Auth->actionMap = array_merge($this->Auth->actionMap, array(
-				'admin_down' => 'edit',
-				'admin_up' => 'edit'
-			));
-			*/
 		}
 	}
 

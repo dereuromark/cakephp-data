@@ -80,10 +80,11 @@ class MimeTypesTable extends Table {
 	/**
 	 * @param \Cake\Event\EventInterface $event
 	 * @param \Data\Model\Entity\MimeType $entity
+	 * @param \ArrayObject $options
 	 *
 	 * @return void
 	 */
-	public function beforeSave(EventInterface $event, EntityInterface $entity) {
+	public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
 		if (isset($entity['ext'])) {
 			$entity['ext'] = mb_strtolower($entity['ext']);
 		}

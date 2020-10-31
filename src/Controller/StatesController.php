@@ -3,14 +3,12 @@
 namespace Data\Controller;
 
 use Cake\Core\Plugin;
-use Cake\Event\EventInterface;
 use Exception;
 
 /**
  * @property \Data\Model\Table\StatesTable $States
- * @property \Search\Controller\Component\PrgComponent $Prg
- * @method \Data\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  * @property \Search\Controller\Component\SearchComponent $Search
+ * @method \Data\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class StatesController extends DataAppController {
 
@@ -29,18 +27,6 @@ class StatesController extends DataAppController {
 			$this->loadComponent('Search.Search', [
 				'actions' => ['index'],
 			]);
-		}
-	}
-
-	/**
-	 * @param \Cake\Event\EventInterface $event
-	 * @return \Cake\Http\Response|null|void
-	 */
-	public function beforeFilter(EventInterface $event) {
-		parent::beforeFilter($event);
-
-		if (isset($this->Auth)) {
-			$this->Auth->allow(['index', 'update_select']);
 		}
 	}
 

@@ -129,14 +129,12 @@ class CurrenciesTable extends Table {
 	 * @param \Data\Model\Entity\Currency $entity
 	 * @param \ArrayObject $options
 	 *
-	 * @return bool
+	 * @return void
 	 */
-	public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
+	public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void {
 		if (isset($entity['name'])) {
 			$entity['name'] = ucwords($entity['name']);
-		}
-
-		return true;
+		};
 	}
 
 	/**

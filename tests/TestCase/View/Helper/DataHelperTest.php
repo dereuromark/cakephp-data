@@ -47,7 +47,7 @@ class DataHelperTest extends TestCase {
 		Configure::write('Country.iconFontClass', 'foo-bar');
 
 		$result = $this->DataHelper->countryIcon('de');
-		$expected = '<span class="foo-bar foo-bar-de"></span>';
+		$expected = '<span class="foo-bar foo-bar-de" title="DE"></span>';
 		$this->assertSame($expected, $result);
 	}
 
@@ -67,7 +67,7 @@ class DataHelperTest extends TestCase {
 		Configure::write('Language.iconFontClass', 'foo-bar');
 
 		$result = $this->DataHelper->languageFlag('en');
-		$expected = '<span class="foo-bar foo-bar-gb"></span>';
+		$expected = '<span class="foo-bar foo-bar-gb" title="GB"></span>';
 		$this->assertSame($expected, $result);
 	}
 
