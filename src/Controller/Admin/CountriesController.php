@@ -247,7 +247,11 @@ class CountriesController extends DataAppController {
 			$this->Flash->error(__('record edit not saved'));
 		}
 
-		$this->set(compact('country'));
+		$continents = [];
+		if (Configure::read('Data.Country.Continent') !== false) {
+			$continents = $this->Countries->Continents->find('treeList', ['spacer' => '» '])->toArray();
+		}
+		$this->set(compact('country', 'continents'));
 	}
 
 	/**

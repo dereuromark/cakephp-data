@@ -16,7 +16,7 @@
 		echo $this->Form->control('country_code');
 		echo $this->Form->control('special');
 		echo $this->Form->control('address_format', ['type' => 'textarea']);
-		echo '<div class="input checkbox">Platzhalter sind :name :street_address :postcode :city :country</div>';
+		echo '<div class="input checkbox">Placeholders are :name :street_address :postcode :city :country</div>';
 		echo '<br/>';
 
 		//echo $this->Form->control('sort');

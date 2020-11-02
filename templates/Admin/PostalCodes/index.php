@@ -8,10 +8,10 @@
 
 <div class="searchBox" style="float: right;">
 <?php
-	echo $this->Form->create();
-	echo $this->Form->control('code', ['placeholder' => 'Platzhalter: * und ?']);
+	echo $this->Form->create(null, ['valueSources' => 'query']);
+	echo $this->Form->control('code', ['placeholder' => __('Placeholder') . ': * und ?']);
 	echo $this->Form->control('country_id', ['empty' => ' - egal - ']);
-	echo $this->Form->submit(__('Search'), ['div' => false]);
+	echo $this->Form->button(__('Search'));
 	echo $this->Form->end();
 ?>
 </div>

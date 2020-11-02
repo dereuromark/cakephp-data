@@ -3,6 +3,9 @@
  * @var \App\View\AppView $this
  * @var \Data\Model\Entity\Country $country
  */
+
+use Cake\Core\Configure;
+
 ?>
 <div class="page form">
 <?php echo $this->Form->create($country);?>
@@ -14,9 +17,14 @@
 		echo $this->Form->control('iso2');
 		echo $this->Form->control('iso3');
 		echo $this->Form->control('country_code');
+
+		if (Configure::read('Data.City.Continent') !== false) {
+			echo $this->Form->control('continent_id');
+		}
+
 		echo $this->Form->control('special');
 		echo $this->Form->control('address_format', ['type' => 'textarea']);
-		echo '<div class="input checkbox">Platzhalter sind :name :street_address :postcode :city :country</div>';
+		echo '<div class="input checkbox">Placeholders are :name :street_address :postcode :city :country</div>';
 		echo '<br/>';
 
 		//echo $this->Form->control('sort');
