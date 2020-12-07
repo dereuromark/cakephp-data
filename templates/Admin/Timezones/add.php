@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface $timezone
+ * @var \Data\Model\Entity\Timezone $timezone
  */
 ?>
 <div class="row">
@@ -27,8 +27,8 @@
                     echo $this->Form->control('active');
                     echo $this->Form->control('lat');
                     echo $this->Form->control('lng');
-                    echo $this->Form->control('covered');
-                    echo $this->Form->control('notes');
+					echo $this->Form->control('covered', ['type' => 'textarea']);
+					echo $this->Form->control('notes', ['type' => 'textarea']);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

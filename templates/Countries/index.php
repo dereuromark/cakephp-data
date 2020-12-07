@@ -18,12 +18,7 @@
 	<th><?php echo $this->Paginator->sort('zip_length', null, ['direction' => 'desc']);?></th>
 </tr>
 <?php
-$i = 0;
 foreach ($countries as $country):
-	$class = null;
-	if ($i++ % 2 == 0) {
-		$class = ' class="altrow"';
-	}
 ?>
 	<tr>
 		<td>
@@ -60,7 +55,7 @@ foreach ($countries as $country):
 
 <?php if (__('countryCodeExplanation') !== 'countryCodeExplanation') { ?>
 <br/>
-Hinweis:
+<?php echo __('Note') ?>:
 <ul>
 <li><?php echo __('countryCodeExplanation')?></li>
 </ul>

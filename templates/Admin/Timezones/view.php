@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface $timezone
+ * @var \Data\Model\Entity\Timezone $timezone
  */
 ?>
 <div class="row">

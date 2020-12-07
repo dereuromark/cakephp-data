@@ -7,6 +7,9 @@ use Cake\Http\Exception\NotFoundException;
 use Cake\Utility\Xml;
 use Data\Model\Entity\Country;
 
+/**
+ * @see https://github.com/dr5hn/countries-states-cities-database/blob/master/xml/countries.xml
+ */
 class Countries {
 
 	public const URL_XML = 'https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/xml/countries.xml';

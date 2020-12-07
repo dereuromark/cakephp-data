@@ -13,13 +13,18 @@ use Tools\Model\Table\Table;
 /**
  * @mixin \Search\Model\Behavior\SearchBehavior
  * @method \Data\Model\Entity\Currency get($primaryKey, $options = [])
- * @method \Data\Model\Entity\Currency newEntity($data = null, array $options = [])
+ * @method \Data\Model\Entity\Currency newEntity(array $data, array $options = [])
  * @method \Data\Model\Entity\Currency[] newEntities(array $data, array $options = [])
- * @method \Data\Model\Entity\Currency|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \Data\Model\Entity\Currency|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\Currency|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\Currency saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\Currency patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Data\Model\Entity\Currency[] patchEntities($entities, array $data, array $options = [])
- * @method \Data\Model\Entity\Currency findOrCreate($search, callable $callback = null, $options = [])
+ * @method \Data\Model\Entity\Currency[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \Data\Model\Entity\Currency findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \Data\Model\Entity\Currency newEmptyEntity()
+ * @method \Data\Model\Entity\Currency[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\Currency[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\Currency[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \Data\Model\Entity\Currency[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
 class CurrenciesTable extends Table {
 

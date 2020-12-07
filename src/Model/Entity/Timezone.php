@@ -10,7 +10,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $name
- * @property string $country_code
+ * @property string|null $country_code
  * @property string $offset
  * @property string $offset_dst
  * @property string $type

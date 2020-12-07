@@ -6,6 +6,9 @@ use Cake\Http\Client;
 use Cake\Http\Exception\NotFoundException;
 use Data\Model\Entity\Timezone;
 
+/**
+ * @see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+ */
 class Timezones {
 
 	public const URL = 'https://en.wikipedia.org/w/api.php?action=parse&page=%s&prop=wikitext&format=json';

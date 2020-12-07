@@ -10,20 +10,20 @@ use Tools\Model\Entity\Entity;
  * @property string $ori_name
  * @property string $iso2
  * @property string $iso3
- * @property int|null $country_code
+ * @property int $country_code
  * @property bool $eu_member
  * @property string $special
  * @property int $zip_length
  * @property int $sort
  * @property \Cake\I18n\FrozenTime $modified
- * @property string|null $address_format
+ * @property string $address_format
  * @property float|null $lng
  * @property float|null $lat
  * @property string $zip_regexp
  * @property int $status
  * @property \Data\Model\Entity\State[] $states
  * @property int|null $continent_id
- * @property \Data\Model\Entity\Continent|null $continent
+ * @property \Data\Model\Entity\Continent $continent
  */
 class Country extends Entity {
 

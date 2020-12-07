@@ -28,6 +28,7 @@ use Tools\Model\Table\Table;
  * @method \Data\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
  * @method \Data\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \Data\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @property \Cake\ORM\Table&\Cake\ORM\Association\HasMany $Counties
  */
 class StatesTable extends Table {
 

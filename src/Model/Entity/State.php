@@ -6,13 +6,14 @@ use Tools\Model\Entity\Entity;
 
 /**
  * @property int $id
- * @property int|null $country_id
+ * @property int $country_id
  * @property string $name
  * @property string $code
- * @property float $lat
- * @property float $lng
- * @property \Cake\I18n\FrozenTime $modified
- * @property \Data\Model\Entity\Country|null $country
+ * @property float|null $lat
+ * @property float|null $lng
+ * @property \Cake\I18n\FrozenTime|null $modified
+ * @property \Data\Model\Entity\Country $country
+ * @property \Cake\ORM\Entity[] $counties
  */
 class State extends Entity {
 

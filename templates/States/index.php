@@ -7,10 +7,7 @@
 <div class="page index">
 
 <div class="floatRight">
-
-	<div class="floatRight">
-		<?php echo $this->element('Data.States/search'); ?>
-	</div>
+	<?php echo $this->element('Data.States/search'); ?>
 </div>
 
 <h2><?php echo __('States');?></h2>

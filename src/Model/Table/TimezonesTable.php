@@ -63,8 +63,7 @@ class TimezonesTable extends Table {
 		$validator
 			->scalar('country_code')
 			->maxLength('country_code', 2)
-			->requirePresence('country_code', 'create')
-			->notEmptyString('country_code');
+			->allowEmptyString('country_code');
 
 		$validator
 			->scalar('offset')
