@@ -19,7 +19,7 @@ class CitiesController extends DataAppController {
 	public $paginate = ['order' => ['Cities.modified' => 'DESC']];
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function index() {
 		$cities = $this->paginate();
@@ -28,7 +28,7 @@ class CitiesController extends DataAppController {
 
 	/**
 	 * @param int|null $id
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function view($id = null) {
 		$city = $this->Cities->get($id);
@@ -37,7 +37,7 @@ class CitiesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function add() {
 		$city = $this->Cities->newEmptyEntity();
@@ -59,7 +59,7 @@ class CitiesController extends DataAppController {
 
 	/**
 	 * @param int|null $id
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function edit($id = null) {
 		$city = $this->Cities->get($id);

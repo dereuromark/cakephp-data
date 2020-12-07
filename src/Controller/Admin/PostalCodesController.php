@@ -15,7 +15,7 @@ use Data\Controller\DataAppController;
 class PostalCodesController extends DataAppController {
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function index() {
 		if (Plugin::isLoaded('Search')) {
@@ -49,7 +49,7 @@ class PostalCodesController extends DataAppController {
 
 	/**
 	 * @param int|null $id
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function view($id = null) {
 		$postalCode = $this->PostalCodes->get($id, ['contain' => ['Countries']]);
@@ -58,7 +58,7 @@ class PostalCodesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function add() {
 		$postalCode = $this->PostalCodes->newEmptyEntity();
@@ -80,7 +80,7 @@ class PostalCodesController extends DataAppController {
 
 	/**
 	 * @param int|null $id
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function edit($id = null) {
 		$postalCode = $this->PostalCodes->get($id, []);

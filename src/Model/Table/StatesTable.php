@@ -168,11 +168,11 @@ class StatesTable extends Table {
 		}
 
 		if (!empty($id)) {
+			/** @var \Data\Model\Entity\State|null $res */
 			$res = $this->find('all', ['conditions' => [$this->getAlias() . '.id' => $id], 'contain' => ['Countries']])->first();
-			if (!empty($res['name']) && !empty($res->country->name) && $geocoder->geocode($res['name'] .
-				', ' . $res->country->name)) {
-
-				$data = $geocoder->getResult();
+			if ($res && $res->name && $res->country && !empty($res->country->name)) {
+				$data = $geocoder->geocode($res['name'] . ', ' . $res->country->name);
+				$data = $data->first();
 				$saveArray = ['lat' => $data['lat'], 'lng' => $data['lng'], 'country_id' => $res['country_id']];
 
 				if (!empty($data['country_province_code']) && mb_strlen($data['country_province_code']) <= 3 && preg_match('/^([A-Z])*$/', $data['country_province_code'])) {
@@ -195,16 +195,15 @@ class StatesTable extends Table {
 				$conditions = [$this->getAlias() . '.lat' => 0, $this->getAlias() . '.lng' => 0];
 			}
 
-			$results = $this->find('all', ['conditions' => $conditions, 'contain' => ['Country.name'], 'order' => [
+			$results = $this->find('all', ['conditions' => $conditions, 'contain' => ['Countries.name'], 'order' => [
 'modified' =>
 				'ASC']]);
 			$count = 0;
 
 			foreach ($results as $res) {
-				if (!empty($res['name']) && !empty($res->country->name) && $geocoder->geocode($res['name'] .
-					', ' . $res->country->name)) {
-
-					$data = $geocoder->getResult();
+				if ($res->name && $res->country && !empty($res->country->name)) {
+					$result = $geocoder->geocode($res->name . ', ' . $res->country->name);
+					$data = $result->first();
 					//pr($data); die();
 					//pr ($geocoder->debug());
 					$saveArray = ['country_id' => $res['country_id']];

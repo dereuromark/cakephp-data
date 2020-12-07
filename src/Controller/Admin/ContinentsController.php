@@ -51,7 +51,7 @@ class ContinentsController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function add() {
 		$continent = $this->Continents->newEmptyEntity();
@@ -74,7 +74,7 @@ class ContinentsController extends DataAppController {
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function edit($id = null) {
 		$continent = $this->Continents->get($id);

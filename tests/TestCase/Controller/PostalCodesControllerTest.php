@@ -43,7 +43,6 @@ class PostalCodesControllerTest extends IntegrationTestCase {
 
 		$this->get(['plugin' => 'Data', 'controller' => 'PostalCodes', 'action' => 'map']);
 		$this->assertResponseCode(200);
-		$this->assertNoRedirect();
 	}
 
 }

@@ -5,8 +5,9 @@ namespace Data\Controller\Admin;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Event\EventInterface;
+use Cake\Utility\Hash;
 use Data\Controller\DataAppController;
-use Tools\Utility\Utility;
+use Data\Sync\Countries;
 
 /**
  * @property \Data\Model\Table\CountriesTable $Countries
@@ -54,22 +55,6 @@ class CountriesController extends DataAppController {
 	}
 
 	/**
-	 * @param mixed $id
-	 * @return \Cake\Http\Response|null
-	 */
-	public function updateCoordinates($id = null) {
-		set_time_limit(120);
-		$res = $this->Countries->updateCoordinates($id);
-		if (!$res) {
-			$this->Flash->error(__('coordinates not updated'));
-		} else {
-			$this->Flash->success(__('coordinates {0} updated', $res));
-		}
-
-		return $this->redirect(['action' => 'index']);
-	}
-
-	/**
 	 * Check for missing or unused country flag icons
 	 *
 	 * @return \Cake\Http\Response|null|void
@@ -100,86 +85,30 @@ class CountriesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Http\Response|null|void
+	 * @return void
 	 */
-	public function import() {
-		if ($this->Common->isPosted()) {
-			$countries = [];
+	public function sync() {
+		$storedCountries = $this->Countries->find()->all()->toArray();
+		$storedCountries = Hash::combine($storedCountries, '{n}.iso3', '{n}');
 
-			if ($this->request->getData('Form')) {
-				$count = 0;
-				foreach ((array)$this->request->getData('Form') as $key => $val) {
-					$data = ['iso3' => $val['iso3'], 'iso2' => $val['iso2'], 'name' => $val['name']];
-					$country = $this->Countries->newEntity($data);
+		$fields = $this->request->getQuery('fields') ? explode(',', $this->request->getQuery('fields')) : [];
+		$diff = (new Countries())->diff($storedCountries, $fields);
 
-					if (empty($val['confirm'])) {
-						# do nothing
-					} elseif ($this->Countries->save($country)) {
-						$count++;
-						//unset($this->request->data['Form'][$key]);
-					} else {
-						//$this->request->data['Form'][$key]['confirm'] = 0;
-						//$this->request->data['Error'][$key] = $this->Countries->validationErrors;
-					}
-
-				}
-				$this->Flash->success(__('record import {0} saved', $count));
-
-			} else {
-
-				$list = $this->request->getData('import_content');
-
-				if ($this->request->getData('import_separator_custom')) {
-					$separator = $this->request->getData('import_separator_custom');
-					//$separator = str_replace(['{SPACE}', '{TAB}'], [Country::separators(SEPARATOR_SPACE, true), Country::separators(SEPARATOR_TAB, true)], $separator);
-
-				} else {
-					$separator = $this->request->getData('import_separator');
-					//$separator = Country::separators($separator, true);
-				}
-				# separate list into single records
-
-				$countries = Utility::tokenize($list, $separator);
-				if (empty($countries)) {
-					//FIXME
-					//$this->Countries->invalidate('import_separator', 'falscher Separator');
-				} elseif ($this->request->getData('import_pattern')) {
-					//FIXME
-					//$pattern = str_replace(['{SPACE}', '{TAB}'], [Country::separators(SEPARATOR_SPACE, true), Country::separators(SEPARATOR_TAB, true)], $this->request->data['import_pattern']);
-					$pattern = '';
-					# select part that matches %name
-					foreach ($countries as $key => $danceStep) {
-						$tmp = sscanf($danceStep, $pattern); # returns array
-						# write back into $countries array
-						if (!empty($tmp[2])) {
-							//$this->request->data['Form'][$key] = ['name' => $tmp[2], 'confirm' => 1];
-							if (!empty($tmp[1])) {
-								//$this->request->data['Form'][$key]['iso2'] = $tmp[1];
-							}
-							if (!empty($tmp[0])) {
-								//$this->request->data['Form'][$key]['iso3'] = $tmp[0];
-							}
-						}
-						$countries[$key] = $tmp;
-					}
-
-					if ($this->request->getData('Form')) {
-						//$this->Countries->invalidate('import_pattern', 'falsches Muster');
-					}
-				} else {
-					foreach ($countries as $key => $country) {
-						//$this->request->data['Form'][$key] = ['name' => $country, 'confirm' => 1];
-					}
+		if ($this->request->is('post')) {
+			$data = (array)$this->request->getData();
+			foreach ($data as $action => $rows) {
+				foreach ($rows as $key => $row) {
+					dd($row);
 				}
 
 			}
-
-			$this->set(compact('countries'));
 		}
+
+		$this->set(compact('diff', 'storedCountries'));
 	}
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function index() {
 		if (Plugin::isLoaded('Search')) {
@@ -197,7 +126,7 @@ class CountriesController extends DataAppController {
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function view($id = null) {
 		$country = $this->Countries->get($id);
@@ -206,7 +135,7 @@ class CountriesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function add() {
 		$country = $this->Countries->newEmptyEntity();
@@ -214,7 +143,7 @@ class CountriesController extends DataAppController {
 		if ($this->Common->isPosted()) {
 			$country = $this->Countries->patchEntity($country, $this->request->getData());
 			if ($this->Countries->save($country)) {
-				$id = $this->Countries->id;
+				$id = $country->id;
 				//$name = $this->request->data['name'];
 				$this->Flash->success(__('record add {0} saved', $id));
 
@@ -230,7 +159,7 @@ class CountriesController extends DataAppController {
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function edit($id = null) {
 		$country = $this->Countries->get($id);
@@ -309,7 +238,7 @@ class CountriesController extends DataAppController {
 	 * - http://www.geonames.org/countries/ - http://api.geonames.org/postalCodeCountryInfo?username=demo
 	 * - http://www.pixelenvision.com/1708/zip-postal-code-validation-regex-php-code-for-12-countries/
 	 *
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function validate() {
 		$countries = $this->Countries->find('all');

@@ -39,7 +39,6 @@ class CitiesControllerTest extends IntegrationTestCase {
 	public function testIndex() {
 		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'Cities', 'action' => 'index']);
 		$this->assertResponseCode(200);
-		$this->assertNoRedirect();
 	}
 
 }

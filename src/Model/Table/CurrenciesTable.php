@@ -134,7 +134,7 @@ class CurrenciesTable extends Table {
 	public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void {
 		if (isset($entity['name'])) {
 			$entity['name'] = ucwords($entity['name']);
-		};
+		}
 	}
 
 	/**

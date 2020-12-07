@@ -149,15 +149,16 @@ class CurrencyBitcoinLib {
 
 	/**
 	 * @param string $url
-	 * @return string|bool
+	 * @return string|null
 	 */
 	protected function _get($url) {
 		$http = new Client();
-		if (!($res = $http->get($url))) {
-			return false;
+		$res = $http->get($url);
+		if (!$res->isOk()) {
+			return null;
 		}
 
-		return $res->body;
+		return (string)$res->getBody()->getContents();
 	}
 
 }

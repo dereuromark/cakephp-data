@@ -39,7 +39,6 @@ class CountriesControllerTest extends IntegrationTestCase {
 	public function testIndex() {
 		$this->get(['plugin' => 'Data', 'controller' => 'Countries', 'action' => 'index']);
 		$this->assertResponseCode(200);
-		$this->assertNoRedirect();
 	}
 
 }

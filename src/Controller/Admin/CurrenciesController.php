@@ -41,7 +41,7 @@ class CurrenciesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function index() {
 		$currencies = $this->paginate();
@@ -67,7 +67,7 @@ class CurrenciesController extends DataAppController {
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Http\Response
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function view($id = null) {
 		$currency = $this->Currencies->get($id);
@@ -80,7 +80,7 @@ class CurrenciesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function add() {
 		$currency = $this->Currencies->newEmptyEntity();
@@ -88,7 +88,7 @@ class CurrenciesController extends DataAppController {
 		if ($this->Common->isPosted()) {
 			$currency = $this->Currencies->patchEntity($currency, $this->request->getData());
 			if ($this->Currencies->save($currency)) {
-				$id = $this->Currencies->id;
+				$id = $currency->id;
 				//$name = $this->request->data['Currency']['name'];
 				$this->Flash->success(__('record add {0} saved', $id));
 
@@ -97,7 +97,7 @@ class CurrenciesController extends DataAppController {
 
 			$this->Flash->error(__('record add not saved'));
 		} else {
-			$this->request->data['Currency']['decimal_places'] = 2;
+			$this->request = $this->request->withData('decimal_places', 2);
 		}
 
 		$currencies = $this->Currencies->currencyList();
@@ -107,7 +107,7 @@ class CurrenciesController extends DataAppController {
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function edit($id = null) {
 		$currency = $this->Currencies->get($id);
@@ -149,7 +149,7 @@ class CurrenciesController extends DataAppController {
 	 * Set as primary (base)
 	 *
 	 * @param int|null $id
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function base($id = null) {
 		$this->_setAsPrimary($id);
@@ -181,14 +181,13 @@ class CurrenciesController extends DataAppController {
 	 *
 	 * @param string|null $field
 	 * @param int|null $id
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function toggle($field = null, $id = null) {
 		 $fields = ['active'];
 
 		if (!empty($field) && in_array($field, $fields) && !empty($id)) {
 			$value = $this->{$this->modelClass}->toggleField($field, $id);
-
 		}
 
 		# http get request + redirect
@@ -199,7 +198,7 @@ class CurrenciesController extends DataAppController {
 		}
 
 		# ajax
-		$model = $this->{$this->modelClass}->alias;
+		$model = $this->{$this->modelClass}->getAlias();
 		$this->autoRender = false;
 		if (isset($value)) {
 			$this->set('ajaxToggle', $value);

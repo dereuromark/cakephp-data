@@ -39,7 +39,16 @@ class CurrenciesControllerTest extends IntegrationTestCase {
 	public function testIndex() {
 		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'Currencies', 'action' => 'index']);
 		$this->assertResponseCode(200);
-		$this->assertNoRedirect();
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testView() {
+		$this->disableErrorHandlerMiddleware();
+
+		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'Currencies', 'action' => 'view', 1]);
+		$this->assertResponseCode(200);
 	}
 
 }

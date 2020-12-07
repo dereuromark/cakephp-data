@@ -32,7 +32,7 @@ class StatesController extends DataAppController {
 
 	/**
 	 * @param mixed $cid
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function index($cid = null) {
 		$this->paginate['contain'] = ['Countries'];
@@ -54,7 +54,7 @@ class StatesController extends DataAppController {
 	 * new: optional true/false for default field label
 	 *
 	 * @param int|null $id
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function updateSelect($id = null) {
 		if (!$this->request->is('post') || !$this->request->is('ajax')) {

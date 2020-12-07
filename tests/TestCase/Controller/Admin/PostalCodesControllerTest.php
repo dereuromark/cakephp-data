@@ -42,7 +42,16 @@ class PostalCodesControllerTest extends IntegrationTestCase {
 
 		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'PostalCodes', 'action' => 'index']);
 		$this->assertResponseCode(200);
-		$this->assertNoRedirect();
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testAdd() {
+		$this->disableErrorHandlerMiddleware();
+
+		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'PostalCodes', 'action' => 'add']);
+		$this->assertResponseCode(200);
 	}
 
 }

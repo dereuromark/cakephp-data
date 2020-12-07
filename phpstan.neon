@@ -1,8 +1,7 @@
 parameters:
 	level: 1
 	paths:
-		- TestCase/
+		- src/
 	bootstrapFiles:
-		- bootstrap.php
-		- ../phpunit.phar
+		- tests/bootstrap.php
 	ignoreErrors:

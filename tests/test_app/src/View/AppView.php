@@ -12,4 +12,12 @@ use Cake\View\View;
  * @property \Data\View\Helper\ContinentHelper $Continent
  */
 class AppView extends View {
+
+	/**
+	 * @return void
+	 */
+	public function initialize(): void {
+		$this->loadHelper('Tools.Format');
+	}
+
 }

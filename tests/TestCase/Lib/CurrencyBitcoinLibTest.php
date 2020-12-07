@@ -14,6 +14,11 @@ class CurrencyBitcoinLibTest extends TestCase {
 	protected $CurrencyBitcoin;
 
 	/**
+	 * @var string
+	 */
+	protected $path;
+
+	/**
 	 * @return void
 	 */
 	public function setUp(): void {
@@ -65,12 +70,12 @@ class CurrencyBitcoinLibTest extends TestCase {
 	public function testRate() {
 		$this->skipIf(true, 'TODO!');
 
-		$this->debug($this->_header('rate - bitmarket - ' . $this->CurrencyBitcoin->settings['currency']), true);
+		//$this->debug($this->_header('rate - bitmarket - ' . $this->CurrencyBitcoin->settings['currency']), true);
 		$is = $this->CurrencyBitcoin->rate();
 		$this->debug($is);
 		$this->assertTrue(is_numeric($is) && $is > 0 && $is < 100);
 
-		$this->debug($this->_header('rate - bitcoincharts - ' . $this->CurrencyBitcoin->settings['currency']), true);
+		//$this->debug($this->_header('rate - bitcoincharts - ' . $this->CurrencyBitcoin->settings['currency']), true);
 		$is = $this->CurrencyBitcoin->rate(['api' => 'bitcoincharts']);
 		$this->debug($is);
 		$this->assertTrue(is_numeric($is) && $is > 0 && $is < 100);

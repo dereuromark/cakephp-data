@@ -3,7 +3,6 @@
 namespace Data\Controller\Admin;
 
 use Cake\Core\Plugin;
-use Cake\Event\EventInterface;
 use Data\Controller\DataAppController;
 use Exception;
 
@@ -33,7 +32,7 @@ class StatesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function index() {
 		$this->paginate['contain'] = ['Countries'];
@@ -57,7 +56,7 @@ class StatesController extends DataAppController {
 	 *
 	 * @param int|null $id
 	 * @throws \Exception
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function updateSelect($id = null) {
 		//$this->autoRender = false;
@@ -75,17 +74,7 @@ class StatesController extends DataAppController {
 	}
 
 	/**
-	 * @param int|null $id
-	 * @return \Cake\Http\Response|null
-	 */
-	public function view($id = null) {
-		$state = $this->States->get($id);
-
-		$this->set(compact('state'));
-	}
-
-	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function add() {
 		$state = $this->States->newEmptyEntity();
@@ -93,7 +82,7 @@ class StatesController extends DataAppController {
 		if ($this->Common->isPosted()) {
 			$state = $this->States->patchEntity($state, $this->request->getData());
 			if ($this->States->save($state)) {
-				$id = $this->States->id;
+				$id = $state->id;
 				$name = $this->request->getData('name');
 				$this->Flash->success(__('record add {0} saved', h($name)));
 
@@ -109,7 +98,7 @@ class StatesController extends DataAppController {
 
 	/**
 	 * @param mixed $id
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function edit($id = null) {
 		$state = $this->States->get($id);
@@ -157,7 +146,7 @@ class StatesController extends DataAppController {
 	 *
 	 * @deprecated
 	 * @param int|null $cid
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	protected function _processCountry($cid) {
 		$saveCid = true;

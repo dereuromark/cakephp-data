@@ -12,7 +12,7 @@ use Data\Controller\DataAppController;
 class AddressesController extends DataAppController {
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function index() {
 		$addresses = $this->paginate();
@@ -23,7 +23,7 @@ class AddressesController extends DataAppController {
 
 	/**
 	 * @param int|null $id
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function view($id = null) {
 		$address = $this->Addresses->get($id);
@@ -33,7 +33,7 @@ class AddressesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function add() {
 		$address = $this->Addresses->newEmptyEntity();
@@ -65,7 +65,7 @@ class AddressesController extends DataAppController {
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function edit($id = null) {
 		$address = $this->Addresses->get($id);

@@ -40,7 +40,16 @@ class StatesControllerTest extends IntegrationTestCase {
 	public function testIndex() {
 		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'States', 'action' => 'index']);
 		$this->assertResponseCode(200);
-		$this->assertNoRedirect();
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testEdit() {
+		$this->disableErrorHandlerMiddleware();
+
+		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'States', 'action' => 'edit', 1]);
+		$this->assertResponseCode(200);
 	}
 
 }

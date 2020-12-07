@@ -3,6 +3,8 @@ declare(strict_types = 1);
 
 use Migrations\AbstractMigration;
 
+// phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
+// phpcs:disable PSR2R.Classes.ClassFileName.NoMatch
 class MigrationCountries extends AbstractMigration {
 
 	/**
@@ -92,7 +94,7 @@ class MigrationCountries extends AbstractMigration {
 			])
 			->addColumn('timezone', 'string', [
 				'default' => null,
-				'limit' => 50,
+				'limit' => 255,
 				'null' => true,
 			])
 			->addColumn('status', 'tinyinteger', [

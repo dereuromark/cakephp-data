@@ -41,7 +41,16 @@ class LanguagesControllerTest extends IntegrationTestCase {
 
 		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'Languages', 'action' => 'index']);
 		$this->assertResponseCode(200);
-		$this->assertNoRedirect();
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testView() {
+		$this->disableErrorHandlerMiddleware();
+
+		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'Languages', 'action' => 'view', 1]);
+		$this->assertResponseCode(200);
 	}
 
 }

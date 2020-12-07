@@ -7,9 +7,7 @@ use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
-use Cake\ORM\Query;
 use Data\Model\Entity\Country;
-use Exception;
 use Geo\Geocoder\Geocoder;
 use InvalidArgumentException;
 use Tools\Model\Table\Table;
@@ -140,103 +138,6 @@ class CountriesTable extends Table {
 	}
 
 	/**
-	 * Lat and lng + code if available!
-	 *
-	 * @param int|null $id Id
-	 * - NULL: update all records with missing coordinates only
-	 * - otherwise: specific update
-	 * @throws \Exception
-	 * @return bool Success
-	 */
-	public function updateCoordinatesNew($id = null) {
-		$Geocoder = new Geocoder();
-
-		$override = false;
-		if ($id == -1) {
-			$id = '';
-			$override = true;
-		}
-
-		if (!empty($id)) {
-			/** @var \Data\Model\Entity\Country|null $res */
-			$res = $this->find('all', ['conditions' => [$this->getAlias() . '.id' => $id], 'contain' => []])->first();
-			if (!empty($res['ori_name']) && $Geocoder->geocode($res['ori_name']) || $res['name'] != $res['ori_name'] && $Geocoder->geocode($res['name'])) {
-
-				$data = $Geocoder->getResult();
-				//pr($data); die();
-				$saveArray = ['lat' => $data['lat'], 'lng' => $data['lng']];
-
-				if (!empty($data['country_code']) && mb_strlen($data['country_code']) === 3 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
-					$saveArray['iso3'] = $data['country_code'];
-
-					throw new Exception(json_encode($saveArray));
-				}
-				if (!empty($data['country_code']) && mb_strlen($data['country_code']) === 2 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
-					$saveArray['iso2'] = $data['country_code'];
-
-					throw new Exception(json_encode($saveArray));
-				}
-
-				$country = $this->newEntity($saveArray, ['fields' => ['lat', 'lng', 'iso2', 'iso3']]);
-				$this->saveOrFail($country);
-
-				return true;
-			}
-		} else {
-
-			$conditions = [];
-			if (!$override) {
-				$conditions = [$this->getAlias() . '.lat' => 0, $this->getAlias() . '.lng' => 0];
-			}
-
-			/** @var \Data\Model\Entity\Country[] $results */
-			$results = $this->find('all', ['conditions' => $conditions, 'contain' => []])->toArray();
-
-			$count = 0;
-			foreach ($results as $res) {
-				if (!empty($res['ori_name']) && $Geocoder->geocode($res['ori_name']) || $res['name'] != $res['ori_name'] && $Geocoder->geocode($res['name'])) {
-
-					$data = $Geocoder->getResult();
-					# seems to be very problematic: country "Georgien" results in "Georgia, USA"
-
-					$saveArray = [];
-					if (isset($data['lat']) && isset($data['lng'])) {
-						$saveArray = ['lat' => $data['lat'], 'lng' => $data['lng']];
-					}
-
-					if (!empty($data['country_code']) && mb_strlen($data['country_code']) === 3 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
-						$saveArray['iso3'] = $data['country_code'];
-						//die(returns($saveArray));
-
-					} elseif (!empty($data['country_code']) && mb_strlen($data['country_code']) === 2 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
-						$saveArray['iso2'] = $data['country_code'];
-						//die(returns($saveArray));
-					}
-
-					$res = $this->patchEntity($res, $saveArray, ['fields' => ['lat', 'lng', 'iso2', 'iso3']]);
-					if ($this->save($res)) {
-						$count++;
-
-						if (!empty($saveArray['iso2']) && $saveArray['iso2'] != $res['iso2']) {
-							//$this->log('Iso2 for country \'' . $data['country'] . '\' changed from \'' . $res['iso2'] . '\' to \'' . $saveArray['iso2'] . '\'', LOG_NOTICE);
-						}
-						if (!empty($saveArray['iso3']) && $saveArray['iso3'] != $res['iso3']) {
-							//$this->log('Iso3 for country \'' . $data['country'] . '\' changed from \'' . $res['iso3'] . '\' to \'' . $saveArray['iso3'] . '\'', LOG_NOTICE);
-						}
-
-					} else {
-						//pr($data); pr($Geocoder->debug()); die();
-					}
-				}
-			}
-
-			return $count;
-		}
-
-		return false;
-	}
-
-	/**
 	 * @param int|null $id
 	 *
 	 * @return int|false
@@ -348,7 +249,7 @@ class CountriesTable extends Table {
 	 * @return int
 	 */
 	public function getDefaultCountry() {
-		return $this->getIdByIso('DE');
+		return $this->getIdByIso(Configure::read('Data.defaultCountryCode', 'DE'));
 	}
 
 	public const STATUS_ACTIVE = 1;

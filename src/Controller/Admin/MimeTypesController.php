@@ -51,7 +51,7 @@ class MimeTypesController extends DataAppController {
 	 */
 	public function allocateByType() {
 		# get unused extensions?
-		$unusedIds = $this->MimeTypes->MimeTypeImages->unusedRecords($this->MimeTypes->table);
+		$unusedIds = $this->MimeTypes->MimeTypeImages->unusedRecords($this->MimeTypes->getTable());
 
 		$unused = $this->MimeTypes->MimeTypeImages->find('all', ['conditions' => ['MimeTypeImages.id' => $unusedIds]]);
 
@@ -214,18 +214,19 @@ class MimeTypesController extends DataAppController {
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function add($id = null) {
 		$mimeType = $this->MimeTypes->get($id);
 
 		if ($this->Common->isPosted()) {
-			$this->request->data['name'] = ucwords($this->request->data['name']); //ucfirst()
-			$this->request->data['mime_type_image_id'] = (int)$this->request->data['mime_type_image_id'];
+			//FIXME: move to beforeMarshal
+			//$this->request->data['name'] = ucwords($this->request->data['name']); //ucfirst()
+			//$this->request->data['mime_type_image_id'] = (int)$this->request->data['mime_type_image_id'];
 
 			$mimeType = $this->MimeTypes->patchEntity($mimeType, $this->request->getData());
 			if ($this->MimeTypes->save($mimeType)) {
-				$id = $this->MimeTypes->id;
+				$id = $mimeType->id;
 				//$name = $this->request->data['name'];
 				$this->Flash->success(__('record add {0} saved', $id));
 
@@ -234,7 +235,7 @@ class MimeTypesController extends DataAppController {
 
 			$this->Flash->error(__('record add not saved'));
 		} else {
-			$this->request->data['active'] = 1;
+			$this->request = $this->request->withData('active', true);
 		}
 		$mimeTypeImages = $this->MimeTypes->MimeTypeImages->find('list');
 		$this->set(compact('mimeType', 'mimeTypeImages'));
@@ -248,8 +249,8 @@ class MimeTypesController extends DataAppController {
 	public function edit($id = null) {
 		$mimeType = $this->MimeTypes->get($id);
 		if ($this->Common->isPosted()) {
-			$this->request->data['name'] = ucwords($this->request->data['name']); //ucfirst()
-			$this->request->data['mime_type_image_id'] = (int)$this->request->data['mime_type_image_id'];
+			//$this->request->data['name'] = ucwords($this->request->data['name']); //ucfirst()
+			//$this->request->data['mime_type_image_id'] = (int)$this->request->data['mime_type_image_id'];
 			$mimeType = $this->MimeTypes->patchEntity($mimeType, $this->request->getData());
 
 			if ($this->MimeTypes->save($mimeType)) {

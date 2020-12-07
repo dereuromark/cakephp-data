@@ -83,7 +83,7 @@ class LanguagesController extends DataAppController {
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function edit($id = null) {
 		$language = $this->Languages->get($id);
@@ -153,7 +153,7 @@ class LanguagesController extends DataAppController {
 			if ($this->Languages->save($language)) {
 				$count++;
 			} else {
-				$errors[] = ['data' => $language, 'errors' => $this->Languages->validationErrors];
+				$errors[] = ['data' => $language, 'errors' => $language->getErrors()];
 			}
 		}
 
@@ -171,7 +171,7 @@ class LanguagesController extends DataAppController {
 	/**
 	 * http://www.loc.gov/standards/iso639-2/php/code_list.php
 	 *
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function compareToIsoList() {
 		$isoList = $this->Languages->getOfficialIsoList();
@@ -184,7 +184,7 @@ class LanguagesController extends DataAppController {
 	/**
 	 * http://www.loc.gov/standards/iso639-2/php/code_list.php
 	 *
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function compareIsoListToCore() {
 		$isoList = $this->Languages->getOfficialIsoList();
@@ -217,7 +217,7 @@ class LanguagesController extends DataAppController {
 	 * @return \Cake\Http\Response|null
 	 */
 	public function setPrimaryLanguagesActive() {
-		$languages = $this->Languages->getPrimaryLanguages('list');
+		$languages = $this->Languages->getPrimaryLanguages('list')->toArray();
 		$count = $this->Languages->updateAll(['status' => Language::STATUS_ACTIVE], ['id' => array_keys($languages)]);
 
 		$this->Flash->success(__('{0} of {1} set active', $count, count($languages)));

@@ -5,7 +5,7 @@ use Migrations\AbstractMigration;
 
 // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 // phpcs:disable PSR2R.Classes.ClassFileName.NoMatch
-class MigrationAddresses extends AbstractMigration {
+class MigrationTimezones extends AbstractMigration {
 
 	/**
 	 * Change Method.
@@ -16,57 +16,37 @@ class MigrationAddresses extends AbstractMigration {
 	 * @return void
 	 */
 	public function change() {
-		$this->table('addresses')
-			->addColumn('id', 'integer', [
-				'autoIncrement' => true,
+		$this->table('timezones')
+			->addColumn('name', 'string', [
+				'comment' => null,
 				'default' => null,
-				'limit' => null,
+				'limit' => 100,
 				'null' => false,
 			])
-			->addPrimaryKey(['id'])
-			->addColumn('country_id', 'integer', [
-				'default' => null,
-				'limit' => null,
-				'null' => false,
-			])
-			->addColumn('state_id', 'integer', [
-				'default' => null,
-				'limit' => null,
-				'null' => true,
-			])
-			->addColumn('postal_code', 'string', [
+			->addColumn('offset', 'string', [
 				'default' => null,
 				'limit' => 10,
 				'null' => false,
 			])
-			->addColumn('city', 'string', [
-				'default' => null,
-				'limit' => 80,
-				'null' => false,
-			])
-			->addColumn('street', 'string', [
-				'default' => null,
-				'limit' => 80,
-				'null' => false,
-			])
-			->addColumn('foreign_id', 'string', [
+			->addColumn('offset_dst', 'string', [
 				'default' => null,
 				'limit' => 10,
-				'null' => true,
-			])
-			->addColumn('model_key', 'string', [
-				'default' => '',
-				'limit' => 60,
-				'null' => true,
-			])
-			->addColumn('postal_code', 'string', [
-				'default' => null,
-				'limit' => 7,
 				'null' => false,
 			])
-			->addColumn('formatted_address', 'string', [
+			->addColumn('type', 'string', [
 				'default' => null,
-				'limit' => 190,
+				'limit' => 100,
+				'null' => false,
+			])
+			->addColumn('country_code', 'string', [
+				'comment' => 'ISO_3166-2',
+				'default' => null,
+				'limit' => 2,
+				'null' => true,
+			])
+			->addColumn('active', 'boolean', [
+				'default' => false,
+				'limit' => null,
 				'null' => false,
 			])
 			->addColumn('lat', 'float', [
@@ -80,6 +60,21 @@ class MigrationAddresses extends AbstractMigration {
 				'null' => true,
 				'precision' => 10,
 				'scale' => 6,
+			])
+			->addColumn('covered', 'string', [
+				'default' => null,
+				'limit' => 190,
+				'null' => true,
+			])
+			->addColumn('notes', 'string', [
+				'default' => null,
+				'limit' => 190,
+				'null' => true,
+			])
+			->addColumn('linked_id', 'integer', [
+				'default' => null,
+				'limit' => null,
+				'null' => true,
 			])
 			->addColumn('created', 'datetime', [
 				'default' => null,

@@ -41,7 +41,6 @@ class AddressesControllerTest extends IntegrationTestCase {
 
 		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'Addresses', 'action' => 'index']);
 		$this->assertResponseCode(200);
-		$this->assertNoRedirect();
 	}
 
 }

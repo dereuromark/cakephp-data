@@ -42,7 +42,6 @@ class StatesControllerTest extends IntegrationTestCase {
 	public function testIndex() {
 		$this->get(['plugin' => 'Data', 'controller' => 'States', 'action' => 'index']);
 		$this->assertResponseCode(200);
-		$this->assertNoRedirect();
 	}
 
 	/**
