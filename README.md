@@ -1,5 +1,5 @@
 # CakePHP Data Plugin
-[![Build Status](https://api.travis-ci.com/dereuromark/cakephp-data.svg?branch=master)](https://travis-ci.com/dereuromark/cakephp-data)
+[![CI](https://github.com/dereuromark/cakephp-data/workflows/CI/badge.svg?branch=master)](https://github.com/dereuromark/cakephp-data/actions?query=workflow%3ACI+branch%3Amaster)
 [![Coverage Status](https://codecov.io/gh/dereuromark/cakephp-data/branch/master/graph/badge.svg)](https://codecov.io/gh/dereuromark/cakephp-data)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg)](https://php.net/)
 [![License](https://poser.pugx.org/dereuromark/cakephp-data/license.svg)](https://packagist.org/packages/dereuromark/cakephp-data)
