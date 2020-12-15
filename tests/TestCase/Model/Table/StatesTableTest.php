@@ -53,6 +53,7 @@ class StatesTableTest extends TestCase {
 		$data = [
 			'name' => 'Foo',
 			'code' => 'fxy',
+			'country_id' => 1,
 		];
 
 		$result = $this->States->newEntity($data);

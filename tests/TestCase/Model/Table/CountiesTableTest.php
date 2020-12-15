@@ -58,6 +58,8 @@ class CountiesTableTest extends TestCase {
 			'official_key' => 'foobar',
 			'rank' => 5,
 			'name' => 'Foo Bar',
+			'country_id' => 1,
+			'state_id' => 1,
 		];
 		$entity = $this->Counties->newEntity($data);
 		$this->assertEmpty($entity->getErrors());
