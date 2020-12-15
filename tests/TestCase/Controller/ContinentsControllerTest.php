@@ -29,7 +29,7 @@ class ContinentsControllerTest extends IntegrationTestCase {
 	/**
 	 * @return void
 	 */
-	public function testMap() {
+	public function testIndex() {
 		$this->get(['plugin' => 'Data', 'controller' => 'Continents', 'action' => 'index']);
 		$this->assertResponseCode(200);
 	}
