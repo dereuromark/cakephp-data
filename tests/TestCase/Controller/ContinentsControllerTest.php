@@ -30,6 +30,8 @@ class ContinentsControllerTest extends IntegrationTestCase {
 	 * @return void
 	 */
 	public function testIndex() {
+		$this->disableErrorHandlerMiddleware();
+
 		$this->get(['plugin' => 'Data', 'controller' => 'Continents', 'action' => 'index']);
 		$this->assertResponseCode(200);
 	}
