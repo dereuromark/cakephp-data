@@ -27,7 +27,7 @@
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->getSourceValue('MimeTypeImage.id')], ['confirm' => __('Are you sure you want to delete # {0}?', $this->Form->getSourceValue('MimeTypeImage.id'))]); ?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->getSourceValue('MimeTypeImages.id')], ['confirm' => __('Are you sure you want to delete # {0}?', $this->Form->getSourceValue('MimeTypeImage.id'))]); ?></li>
 		<li><?php echo $this->Html->link(__('List Mime Type Images'), ['action' => 'index']);?></li>
 	</ul>
 </div>

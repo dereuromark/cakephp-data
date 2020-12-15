@@ -64,7 +64,7 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 
 		</td>
 		<td>
-			<?php $count = count($mimeTypeImage['MimeType']);
+			<?php $count = count($mimeTypeImage->mime_types);
 				if ($count > 0) {
 					echo $count . ' &nbsp; ';
 					echo $this->Format->icon('details', [], ['class' => 'hand', 'id' => 'details_' . $mimeTypeImage['id']]);
@@ -90,7 +90,7 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 				if (isset($imageWidth) && isset($imageHeight) && $imageWidth != 16 && $imageHeight != 16) {
 					echo $this->Format->icon('expand', ['title' => __('Größe ist nicht 16x16, sondern ' . $imageWidth . 'x' . $imageHeight . '! Anpassen...')]);
 				} elseif (empty($mimeTypeImage['ext']) || !empty($mimeTypeImage['warning'])) {
-					echo $this->Html->link($this->Format->cIcon('google.gif', 'Bei Google suchen'), 'http://images.google.de/images?q=' . $mimeTypeImage['name'] . '+imagesize%3A16x16&btnG=Bilder-Suche', ['escape' => false]);
+					echo $this->Html->link($this->Format->icon('google', ['title' => __('Search with Google')]), 'http://images.google.de/images?q=' . $mimeTypeImage['name'] . '+imagesize%3A16x16&btnG=Bilder-Suche', ['escape' => false]);
 				}
 			?>
 		</td>

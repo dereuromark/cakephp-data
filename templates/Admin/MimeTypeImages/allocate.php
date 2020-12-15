@@ -13,14 +13,14 @@
 		if (!empty($images)) {
 			//echo $this->Form->control('images', array('type'=>'select','multiple'=>'checkbox','options'=>$images,'label'=>false));
 			foreach ($images as $id => $image) {
-				echo $this->Form->control('MimeTypeImage.imgs.' . $id, ['type' => 'checkbox', 'label' => false, 'div' => false]);
+				echo $this->Form->control('MimeTypeImages.imgs.' . $id, ['type' => 'checkbox', 'label' => false, 'div' => false]);
 
 				echo ' ';
 				$imageName = pathinfo($image, PATHINFO_FILENAME);
 				$imageName = mb_strtolower($imageName);
 
-				echo $this->Form->control('MimeTypeImage.names.' . $id, ['value' => $imageName, 'after' => '', 'div' => false, 'label' => false]);
-				echo $this->Form->control('MimeTypeImage.filenames.' . $id, ['value' => $image, 'type' => 'hidden']);
+				echo $this->Form->control('MimeTypeImages.names.' . $id, ['value' => $imageName, 'after' => '', 'div' => false, 'label' => false]);
+				echo $this->Form->control('MimeTypeImages.filenames.' . $id, ['value' => $image, 'type' => 'hidden']);
 				echo ' ';
 				echo $this->Html->image(IMG_MIMETYPES . 'import/' . $image, ['title' => $image]);
 				echo ' ' . $image;

@@ -25,7 +25,7 @@ class MimeTypesController extends DataAppController {
 	 * Experimental
 	 * needs writing rights on {webroot}/files/tmp
 	 *
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function detectByExtension() {
 		/*
@@ -47,7 +47,7 @@ class MimeTypesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function allocateByType() {
 		# get unused extensions?
@@ -59,7 +59,7 @@ class MimeTypesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function allocate() {
 		# get unused extensions
@@ -85,13 +85,13 @@ class MimeTypesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function fromFile() {
 	}
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function fromCore() {
 		if ($this->Common->isPosted()) {
@@ -135,7 +135,7 @@ class MimeTypesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function index() {
 		$conditions = $this->_searchConditions([]);
@@ -194,7 +194,7 @@ class MimeTypesController extends DataAppController {
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function view($id = null) {
 		if (empty($id)) {
@@ -212,12 +212,10 @@ class MimeTypesController extends DataAppController {
 	}
 
 	/**
-	 * @param int|null $id
-	 *
 	 * @return \Cake\Http\Response|null|void
 	 */
-	public function add($id = null) {
-		$mimeType = $this->MimeTypes->get($id);
+	public function add() {
+		$mimeType = $this->MimeTypes->newEmptyEntity();
 
 		if ($this->Common->isPosted()) {
 			//FIXME: move to beforeMarshal
@@ -244,7 +242,7 @@ class MimeTypesController extends DataAppController {
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Http\Response|null
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function edit($id = null) {
 		$mimeType = $this->MimeTypes->get($id);
@@ -275,7 +273,7 @@ class MimeTypesController extends DataAppController {
 	public function delete($id = null) {
 		$this->request->allowMethod('post');
 
-		$mimeType = $this->MimeTypes->find('all', ['fields' => ['id'], 'conditions' => ['MimeType.id' => $id]])->first();
+		$mimeType = $this->MimeTypes->find('all', ['fields' => ['id'], 'conditions' => ['MimeTypes.id' => $id]])->first();
 		if (!$mimeType) {
 			$this->Flash->error(__('record del not exists'));
 

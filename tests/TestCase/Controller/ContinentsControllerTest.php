@@ -6,15 +6,15 @@ use Cake\ORM\TableRegistry;
 use Shim\TestSuite\IntegrationTestCase;
 
 /**
- * @uses \Data\Controller\CountriesController
+ * @uses \Data\Controller\ContinentsController
  */
-class CountriesControllerTest extends IntegrationTestCase {
+class ContinentsControllerTest extends IntegrationTestCase {
 
 	/**
 	 * @var array
 	 */
 	protected $fixtures = [
-		'plugin.Data.Countries',
+		'plugin.Data.Continents',
 	];
 
 	/**
@@ -29,8 +29,8 @@ class CountriesControllerTest extends IntegrationTestCase {
 	/**
 	 * @return void
 	 */
-	public function testIndex() {
-		$this->get(['plugin' => 'Data', 'controller' => 'Countries', 'action' => 'index']);
+	public function testMap() {
+		$this->get(['plugin' => 'Data', 'controller' => 'Continents', 'action' => 'index']);
 		$this->assertResponseCode(200);
 	}
 
