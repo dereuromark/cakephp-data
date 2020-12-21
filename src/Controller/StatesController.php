@@ -40,9 +40,9 @@ class StatesController extends DataAppController {
 
 		if (Plugin::isLoaded('Search')) {
 			$query = $this->States->find('search', ['search' => $this->request->getQuery()]);
-			$states = $this->paginate($query);
+			$states = $this->paginate($query)->toArray();
 		} else {
-			$states = $this->paginate();
+			$states = $this->paginate()->toArray();
 		}
 
 		$countries = $this->States->Countries->findActive()->find('list');

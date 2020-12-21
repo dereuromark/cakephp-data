@@ -57,7 +57,8 @@ class CountriesController extends DataAppController {
 	 * @return \Cake\Http\Response|null|void
 	 */
 	public function index() {
-		$countries = $this->paginate();
+		$countries = $this->paginate()->toArray();
+
 		$this->set(compact('countries'));
 	}
 

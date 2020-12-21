@@ -22,7 +22,7 @@ class CitiesController extends DataAppController {
 	 * @return \Cake\Http\Response|null|void
 	 */
 	public function index() {
-		$cities = $this->paginate();
+		$cities = $this->paginate()->toArray();
 		$this->set(compact('cities'));
 	}
 

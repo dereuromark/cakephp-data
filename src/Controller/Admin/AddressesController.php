@@ -15,7 +15,7 @@ class AddressesController extends DataAppController {
 	 * @return \Cake\Http\Response|null|void
 	 */
 	public function index() {
-		$addresses = $this->paginate();
+		$addresses = $this->paginate()->toArray();
 		$this->set(compact('addresses'));
 
 		$this->viewBuilder()->setHelpers(['Geo.GoogleMap']);

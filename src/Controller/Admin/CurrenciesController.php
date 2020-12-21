@@ -44,7 +44,7 @@ class CurrenciesController extends DataAppController {
 	 * @return \Cake\Http\Response|null|void
 	 */
 	public function index() {
-		$currencies = $this->paginate();
+		$currencies = $this->paginate()->toArray();
 
 		$baseCurrency = [];
 		foreach ($currencies as $currency) {

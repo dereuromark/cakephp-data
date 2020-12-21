@@ -113,9 +113,9 @@ class CountriesController extends DataAppController {
 	public function index() {
 		if (Plugin::isLoaded('Search')) {
 			$query = $this->Countries->find('search', ['search' => $this->request->getQuery()]);
-			$countries = $this->paginate($query);
+			$countries = $this->paginate($query)->toArray();
 		} else {
-			$countries = $this->paginate();
+			$countries = $this->paginate()->toArray();
 		}
 
 		$this->set(compact('countries'));

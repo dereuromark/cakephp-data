@@ -38,9 +38,9 @@ class LanguagesController extends DataAppController {
 	public function index() {
 		if (Plugin::isLoaded('Search')) {
 			$query = $this->Languages->find('search', ['search' => $this->request->getQuery()]);
-			$languages = $this->paginate($query);
+			$languages = $this->paginate($query)->toArray();
 		} else {
-			$languages = $this->paginate();
+			$languages = $this->paginate()->toArray();
 		}
 
 		$language = $this->Languages->newEmptyEntity();

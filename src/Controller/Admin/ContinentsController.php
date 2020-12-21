@@ -18,7 +18,7 @@ class ContinentsController extends DataAppController {
 			'contain' => ['ParentContinents'],
 		];
 
-		$continents = $this->paginate();
+		$continents = $this->paginate()->toArray();
 		$this->set(compact('continents'));
 	}
 
