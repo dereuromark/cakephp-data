@@ -6,39 +6,43 @@
 ?>
 <div class="page view">
 <h2><?php echo __('Country');?></h2>
-	<dl><?php $i = 0; $class = ' class="altrow"';?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Name'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+	<dl>
+		<dt><?php echo __('Name'); ?></dt>
+		<dd>
 			<?php echo h($country->name); ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Ori Name'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+		<dt><?php echo __('Ori Name'); ?></dt>
+		<dd>
 			<?php echo h($country['ori_name']); ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Iso2'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+		<dt><?php echo __('Iso2'); ?></dt>
+		<dd>
 			<?php echo h($country['iso2']); ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Iso3'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+		<dt><?php echo __('Iso3'); ?></dt>
+		<dd>
 			<?php echo h($country['iso3']); ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Country Code'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo h($country['country_code']); ?>
-			&nbsp;
+		<dt><?php echo __('Phone Code'); ?></dt>
+		<dd>
+			<?php echo ($country['phone_code'] ? '+' . h($country['phone_code']) : ''); ?>
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Special'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+		<dt><?php echo __('Phone Code'); ?></dt>
+		<dd>
+			<?php echo ($country['phone_code'] ? '+' . h($country['phone_code']) : ''); ?>
+		</dd>
+
+		<dt><?php echo __('Special'); ?></dt>
+		<dd>
 			<?php echo h($country['special']); ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Address Format'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+		<dt><?php echo __('Address Format'); ?></dt>
+		<dd>
 			<?php echo nl2br(h($country['address_format'])); ?>
 			&nbsp;
 		</dd>

@@ -6,29 +6,29 @@
 ?>
 <div class="page view">
 <h2><?php echo __('Mime Type Image');?></h2>
-	<dl><?php $i = 0; $class = ' class="altrow"';?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Name'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+	<dl>
+		<dt><?php echo __('Name'); ?></dt>
+		<dd>
 			<?php echo h($mimeTypeImage['name']); ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Ext'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+		<dt><?php echo __('Ext'); ?></dt>
+		<dd>
 			<?php echo h($mimeTypeImage['ext']); ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Active'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+		<dt><?php echo __('Active'); ?></dt>
+		<dd>
 			<?php echo h($mimeTypeImage['active']); ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Created'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+		<dt><?php echo __('Created'); ?></dt>
+		<dd>
 			<?php echo $this->Time->niceDate($mimeTypeImage['created']); ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Modified'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+		<dt><?php echo __('Modified'); ?></dt>
+		<dd>
 			<?php echo $this->Time->niceDate($mimeTypeImage['modified']); ?>
 			&nbsp;
 		</dd>

@@ -109,14 +109,61 @@ class Countries {
 		if ($country['iso2'] !== $storedCountry->iso2) {
 			$diff['iso2'] = $country['iso2'];
 		}
-		if ($country['phone_code'] !== $storedCountry->country_code) {
-			$diff['country_code'] = $country['phone_code'];
+
+		$phoneCode = $this->normalizePhoneCode($country['phone_code']);
+		if ($phoneCode !== $storedCountry->phone_code) {
+			$diff['phone_code'] = $phoneCode;
 		}
-		if ($country['iso2'] !== $storedCountry->iso2) {
-			$diff['iso2'] = $country['iso2'];
+		$timezones = $this->normalizeTimeZones($country['timezones']);
+		if ($timezones !== $storedCountry->timezone) {
+			$diff['timezone'] = $timezones;
 		}
 
 		return $diff;
+	}
+
+	/**
+	 * @param string $phoneCode
+	 *
+	 * @return string|null
+	 */
+	protected function normalizePhoneCode(string $phoneCode): ?string {
+		if (!$phoneCode) {
+			return null;
+		}
+
+		if (substr($phoneCode, 0, 1) === '+') {
+			$phoneCode = substr($phoneCode, 1);
+		}
+		if (substr($phoneCode, 0, 2) === '00') {
+			$phoneCode = substr($phoneCode, 2);
+		}
+
+		if (strpos($phoneCode, ' and ') !== false) {
+			$phoneCodePieces = explode(' and ', $phoneCode);
+			$phoneCode = implode(',', $phoneCodePieces);
+		}
+
+		return $phoneCode;
+	}
+
+	/**
+	 * @param array $timezones
+	 *
+	 * @return string|null
+	 */
+	protected function normalizeTimeZones(array $timezones): ?string {
+		$array = [];
+		foreach ($timezones as $timezone) {
+			$array[] = $timezone['gmtOffset'];
+		}
+		$array = array_unique($array);
+
+		if (!$array) {
+			return null;
+		}
+
+		return implode(',', $array);
 	}
 
 }

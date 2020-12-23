@@ -23,7 +23,14 @@
 				if (!empty($row['fields'])) {
 					echo json_encode($row['fields']);
 				}
-				echo $this->Form->control('Form.' . $action . '.' . $key . '.execute', ['type' => 'checkbox', 'label' => $row['label']]);
+
+				$label = $row['label'];
+				if (!empty($row['entity'])) {
+					$label .= ' (' . $row['entity']->iso3 . ')';
+				} elseif (!empty($row['data']['iso3'])) {
+					$label .= ' (' . $row['data']['iso3'] . ')';
+				}
+				echo $this->Form->control('Form.' . $action . '.' . $key . '.execute', ['default' => true, 'type' => 'checkbox', 'label' => $label]);
 			}
 
 			echo '</fieldset>';

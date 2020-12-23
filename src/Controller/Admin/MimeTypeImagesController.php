@@ -303,7 +303,6 @@ class MimeTypeImagesController extends DataAppController {
 
 		if (is_uploaded_file($file['tmp_name']) && move_uploaded_file($file['tmp_name'], PATH_MIMETYPES . $fileName . '.' . $ext)) {
 			//TODO resize?
-
 			return true;
 		}
 

@@ -3,6 +3,9 @@
  * @var \App\View\AppView $this
  * @var \Data\Model\Entity\Timezone[]|\Cake\Collection\CollectionInterface $timezones
  */
+
+use Cake\Core\Plugin;
+
 ?>
 <nav class="actions large-3 medium-4 columns col-sm-4 col-xs-12" id="actions-sidebar">
     <ul class="side-nav nav nav-pills flex-column">
@@ -14,7 +17,18 @@
 </nav>
 <div class="timezones index content large-9 medium-8 columns col-sm-8 col-12">
 
-    <h2><?= __('Timezones') ?></h2>
+	<h2><?= __('Timezones') ?></h2>
+
+	<?php if (Plugin::isLoaded('Search')) { ?>
+		<div class="search-box">
+			<?php
+			echo $this->Form->create(null, ['valueSources' => 'query']);
+			echo $this->Form->control('search', ['placeholder' => __('wildcardSearch {0} and {1}', '*', '?')]);
+			echo $this->Form->button(__('Search'), []);
+			echo $this->Form->end();
+			?>
+		</div>
+	<?php } ?>
 
     <div class="">
         <table class="table table-sm table-striped">
@@ -38,7 +52,14 @@
             <tbody>
                 <?php foreach ($timezones as $timezone): ?>
                 <tr>
-                    <td><?= h($timezone->name) ?></td>
+                    <td>
+						<?= h($timezone->name) ?>
+						<div><small>
+								<?php if ($timezone->canonical_timezone) {
+									echo ' => ' . $this->Html->link($timezone->canonical_timezone->name, ['action' => 'view', $timezone->linked_id]);
+								} ?>
+							</small></div>
+					</td>
                     <td><?= h($timezone->country_code) ?></td>
                     <td><?= h($timezone->offset) ?></td>
                     <td><?= h($timezone->offset_dst) ?></td>

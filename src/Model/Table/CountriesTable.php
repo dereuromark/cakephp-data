@@ -81,7 +81,7 @@ class CountriesTable extends Table {
 				'provider' => 'table',
 			],
 		],
-		'country_code' => ['numeric'],
+		//'phone_code' => ['numeric'],
 		//'special' => array('notBlank'),
 		//'sort' => array('numeric')
 	];
@@ -111,7 +111,7 @@ class CountriesTable extends Table {
 
 		$this->addBehavior('Search.Search');
 		$this->searchManager()
-			->like('search', ['fields' => ['name', 'ori_name', 'iso2', 'iso3', 'country_code'], 'colType' => ['country_code' => 'string']]);
+			->like('search', ['fields' => ['name', 'ori_name', 'iso2', 'iso3']]);
 	}
 
 	/**
@@ -147,11 +147,11 @@ class CountriesTable extends Table {
 
 		$override = false;
 		if ($id == -1) {
-			$id = '';
+			$id = 0;
 			$override = true;
 		}
 
-		if (!empty($id)) {
+		if ($id) {
 			//$res = $this->find('first', ['conditions' => [$this->getAlias() . '.id' => $id], 'contain' => []]);
 		} else {
 			$conditions = [];

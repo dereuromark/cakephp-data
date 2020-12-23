@@ -85,7 +85,7 @@ class CountriesController extends DataAppController {
 	}
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function sync() {
 		$storedCountries = $this->Countries->find()->all()->toArray();
@@ -95,13 +95,44 @@ class CountriesController extends DataAppController {
 		$diff = (new Countries())->diff($storedCountries, $fields);
 
 		if ($this->request->is('post')) {
-			$data = (array)$this->request->getData();
+			$data = (array)$this->request->getData('Form');
+			$count = 0;
 			foreach ($data as $action => $rows) {
 				foreach ($rows as $key => $row) {
-					dd($row);
-				}
+					if (empty($row['execute']) || empty($diff[$action][$key])) {
+						continue;
+					}
 
+					$element = $diff[$action][$key];
+
+					switch ($action) {
+						case 'add':
+							$entity = $this->Countries->newEntity($element['data']);
+							$this->Countries->saveOrFail($entity);
+
+							break;
+						case 'edit':
+							/** @var \Data\Model\Entity\Country $entity */
+							$entity = $element['entity'];
+							$entity = $this->Countries->patchEntity($entity, $element['fields']);
+							$this->Countries->saveOrFail($entity);
+
+							break;
+						case 'delete':
+							/** @var \Data\Model\Entity\Country $entity */
+							$entity = $element['entity'];
+							$this->Countries->deleteOrFail($entity);
+
+							break;
+					}
+
+					$count++;
+				}
 			}
+
+			$this->Flash->success($count . ' countries updated.');
+
+			return $this->redirect(['action' => 'sync']);
 		}
 
 		$this->set(compact('diff', 'storedCountries'));

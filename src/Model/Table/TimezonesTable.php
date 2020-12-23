@@ -3,8 +3,12 @@ declare(strict_types = 1);
 
 namespace Data\Model\Table;
 
+use Cake\Core\Plugin;
 use Cake\ORM\Table;
+use Cake\Utility\Hash;
 use Cake\Validation\Validator;
+use Data\Model\Entity\Timezone;
+use RuntimeException;
 
 /**
  * Timezones Model
@@ -23,7 +27,9 @@ use Cake\Validation\Validator;
  * @method \Data\Model\Entity\Timezone[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \Data\Model\Entity\Timezone[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  *
+ * @mixin \Search\Model\Behavior\SearchBehavior
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
+ * @property \Data\Model\Table\TimezonesTable&\Cake\ORM\Association\BelongsTo $CanonicalTimezones
  */
 class TimezonesTable extends Table {
 
@@ -41,6 +47,24 @@ class TimezonesTable extends Table {
 		$this->setPrimaryKey('id');
 
 		$this->addBehavior('Timestamp');
+
+		$this->belongsTo('CanonicalTimezones', [
+			'className' => 'Data.Timezones',
+			'foreignKey' => 'linked_id',
+		]);
+
+		if (!Plugin::isLoaded('Search')) {
+			return;
+		}
+
+		$this->addBehavior('Search.Search');
+		$this->searchManager()
+			->value('linked_id')
+			->value('type')
+			->value('active')
+			->value('offset')
+			->value('offset_dst')
+			->like('search', ['fields' => ['name', 'country_code']]);
 	}
 
 	/**
@@ -106,6 +130,37 @@ class TimezonesTable extends Table {
 			->allowEmptyString('notes');
 
 		return $validator;
+	}
+
+	/**
+	 * @param \Data\Model\Entity\Timezone $timezone
+	 * @param \Data\Model\Entity\Timezone[] $allTimezones
+	 *
+	 * @return \Data\Model\Entity\Timezone|null
+	 */
+	public function findCanonical(Timezone $timezone, array $allTimezones = []) {
+		if (!$allTimezones) {
+			$allTimezones = $this->find()->all()->toArray();
+			$allTimezones = Hash::combine($allTimezones, '{n}.name', '{n}');
+		}
+
+		if (strpos($timezone->notes, 'Link to [[') === false) {
+			return null;
+		}
+
+		preg_match('/Link to \[\[(.+?)\]\]/', $timezone->notes, $matches);
+		if (!$matches) {
+			return null;
+		}
+
+		$exploded = explode('|', $matches[1]);
+		$timezoneName = array_pop($exploded);
+
+		if (!isset($allTimezones[$timezoneName])) {
+			throw new RuntimeException('`' . $timezoneName . '` cannot be found in given timezones.');
+		}
+
+		return $allTimezones[$timezoneName];
 	}
 
 }

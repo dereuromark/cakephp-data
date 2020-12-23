@@ -23,7 +23,7 @@
 				if (!empty($row['fields'])) {
 					echo json_encode($row['fields']);
 				}
-				echo $this->Form->control('Form.' . $action . '.' . $key . '.execute', ['type' => 'checkbox', 'label' => $row['label']]);
+				echo $this->Form->control('Form.' . $action . '.' . $key . '.execute', ['default' => true, 'type' => 'checkbox', 'label' => $row['label']]);
 			}
 
 			echo '</fieldset>';

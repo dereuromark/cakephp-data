@@ -16,7 +16,8 @@ use Cake\Core\Configure;
 		echo $this->Form->control('ori_name');
 		echo $this->Form->control('iso2');
 		echo $this->Form->control('iso3');
-		echo $this->Form->control('country_code');
+		echo $this->Form->control('phone_code');
+		echo $this->Form->control('timezone');
 
 		if (Configure::read('Data.City.Continent') !== false) {
 			echo $this->Form->control('continent_id');

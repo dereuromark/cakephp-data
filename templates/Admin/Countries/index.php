@@ -37,7 +37,6 @@ echo $this->Form->end();
 	<th><?php echo $this->Paginator->sort('ori_name');?></th>
 	<th><?php echo $this->Paginator->sort('iso2');?></th>
 	<th><?php echo $this->Paginator->sort('iso3');?></th>
-	<th><?php echo $this->Paginator->sort('country_code');?></th>
 	<th><?php echo __('Coordinates');?></th>
 	<th><?php echo $this->Paginator->sort('sort');?></th>
 	<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
@@ -61,9 +60,6 @@ foreach ($countries as $country):
 		</td>
 		<td>
 			<?php echo $country['iso3']; ?>
-		</td>
-		<td>
-			<?php echo '+' . $country['country_code']; ?>
 		</td>
 
 		<td>

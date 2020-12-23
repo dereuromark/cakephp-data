@@ -43,7 +43,7 @@ class MigrationCountries extends AbstractMigration {
 				'limit' => 3,
 				'null' => false,
 			])
-			->addColumn('country_code', 'integer', [
+			->addColumn('phone_code', 'integer', [
 				'default' => null,
 				'limit' => null,
 				'null' => true,
@@ -121,6 +121,9 @@ class MigrationCountries extends AbstractMigration {
 				['unique' => true]
 			)
 			->create();
+
+		// ALTER TABLE `countries` ADD `timezone` VARCHAR(255) NULL AFTER `phone_code`;
+		// ALTER TABLE `countries` CHANGE `phone_code` `phone_code` VARCHAR(20) NULL DEFAULT NULL;
 	}
 
 }

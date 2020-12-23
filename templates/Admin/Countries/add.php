@@ -13,7 +13,6 @@
 		echo $this->Form->control('ori_name');
 		echo $this->Form->control('iso2');
 		echo $this->Form->control('iso3');
-		echo $this->Form->control('country_code');
 		echo $this->Form->control('special');
 		echo $this->Form->control('address_format', ['type' => 'textarea']);
 		echo '<div class="input checkbox">Placeholders are :name :street_address :postcode :city :country</div>';

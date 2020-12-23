@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace Data\Controller\Admin;
 
 use App\Controller\AppController;
+use Cake\Core\Plugin;
 use Cake\Utility\Hash;
 use Data\Sync\Timezones;
 
@@ -14,16 +15,43 @@ use Data\Sync\Timezones;
 class TimezonesController extends AppController {
 
 	/**
+	 * @var array
+	 */
+	public $paginate = ['order' => ['Timezones.name' => 'ASC']];
+
+	/**
+	 * @return void
+	 */
+	public function initialize(): void {
+		parent::initialize();
+
+		if (Plugin::isLoaded('Search')) {
+			$this->loadComponent('Search.Search', [
+				'actions' => ['index'],
+			]);
+		}
+	}
+
+	/**
 	 * @return \Cake\Http\Response|null|void Renders view
 	 */
 	public function index() {
-		$timezones = $this->paginate($this->Timezones);
+		$this->paginate['contain'] = [
+			'CanonicalTimezones',
+		];
+
+		if (Plugin::isLoaded('Search')) {
+			$query = $this->Timezones->find('search', ['search' => $this->request->getQuery()]);
+			$timezones = $this->paginate($query)->toArray();
+		} else {
+			$timezones = $this->paginate()->toArray();
+		}
 
 		$this->set(compact('timezones'));
 	}
 
 	/**
-	 * @return void
+	 * @return \Cake\Http\Response|null|void
 	 */
 	public function sync() {
 		$storedTimezones = $this->Timezones->find()->all()->toArray();
@@ -33,16 +61,60 @@ class TimezonesController extends AppController {
 		$diff = (new Timezones())->diff($storedTimezones, $fields);
 
 		if ($this->request->is('post')) {
-			$data = (array)$this->request->getData();
+			$data = (array)$this->request->getData('Form');
+			$count = 0;
 			foreach ($data as $action => $rows) {
 				foreach ($rows as $key => $row) {
 					dd($row);
 				}
-
 			}
+
+			$this->Flash->success($count . ' timezones updated.');
+
+			return $this->redirect(['action' => 'link']);
 		}
 
 		$this->set(compact('diff', 'storedTimezones'));
+	}
+
+	/**
+	 * @return \Cake\Http\Response|null|void
+	 */
+	public function link() {
+		/** @var \Data\Model\Entity\Timezone[] $storedTimezones */
+		$storedTimezones = $this->Timezones->find()->all()->toArray();
+		$storedTimezones = Hash::combine($storedTimezones, '{n}.name', '{n}');
+
+		$todo = [];
+		foreach ($storedTimezones as $storedTimezone) {
+			$canonicalTimezone = $this->Timezones->findCanonical($storedTimezone, $storedTimezones);
+			if (!$canonicalTimezone || $canonicalTimezone->id === $storedTimezone->linked_id) {
+				continue;
+			}
+
+			$storedTimezone->canonical_timezone = $canonicalTimezone;
+
+			$todo[$storedTimezone->id] = $storedTimezone;
+		}
+
+		if ($this->request->is('post')) {
+			$data = (array)$this->request->getData('Form.link');
+			$count = 0;
+			foreach ($data as $id => $row) {
+				if (empty($row['execute']) || empty($todo[$id])) {
+					continue;
+				}
+
+				$timezone = $todo[$id];
+				$this->Timezones->saveOrFail($timezone);
+				$count++;
+			}
+			$this->Flash->success($count . ' timezones updated.');
+
+			return $this->redirect(['action' => 'link']);
+		}
+
+		$this->set(compact('todo', 'storedTimezones'));
 	}
 
 	/**

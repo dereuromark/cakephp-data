@@ -10,7 +10,6 @@ use Tools\Model\Entity\Entity;
  * @property string $ori_name
  * @property string $iso2
  * @property string $iso3
- * @property int $country_code
  * @property bool $eu_member
  * @property string $special
  * @property int $zip_length
@@ -24,6 +23,8 @@ use Tools\Model\Entity\Entity;
  * @property \Data\Model\Entity\State[] $states
  * @property int|null $continent_id
  * @property \Data\Model\Entity\Continent $continent
+ * @property string|null $phone_code
+ * @property string|null $timezone
  */
 class Country extends Entity {
 
