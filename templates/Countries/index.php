@@ -21,22 +21,22 @@ foreach ($countries as $country):
 ?>
 	<tr>
 		<td>
-			<?php echo $this->Data->countryIcon($country['iso2']); ?>
+			<?php echo $this->Data->countryIcon($country->iso2); ?>
 		</td>
 		<td>
 			<?php echo h($country->name); ?>
 		</td>
 		<td>
-			<?php echo h($country['ori_name']); ?>
+			<?php echo h($country->ori_name); ?>
 		</td>
 		<td>
-			<?php echo $country['iso2']; ?>
+			<?php echo h($country->iso2); ?>
 		</td>
 		<td>
-			<?php echo $country['iso3']; ?>
+			<?php echo h($country->iso3); ?>
 		</td>
 		<td>
-			<?php echo '+' . $country['phone_code']; ?>
+			<?php echo ($country['phone_code'] ? '+' . h($country['phone_code']) : ''); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
