@@ -123,7 +123,7 @@ class MigrationCountries extends AbstractMigration {
 			->create();
 
 		// ALTER TABLE `countries` ADD `timezone` VARCHAR(255) NULL AFTER `phone_code`;
-		// ALTER TABLE `countries` CHANGE `phone_code` `phone_code` VARCHAR(20) NULL DEFAULT NULL;
+		// ALTER TABLE `countries` CHANGE `country_code` `phone_code` VARCHAR(20) NULL DEFAULT NULL;
 	}
 
 }
