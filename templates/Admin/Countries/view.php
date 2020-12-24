@@ -31,9 +31,9 @@
 		<dd>
 			<?php echo ($country['phone_code'] ? '+' . h($country['phone_code']) : ''); ?>
 		</dd>
-		<dt><?php echo __('Phone Code'); ?></dt>
+		<dt><?php echo __('Timezone'); ?></dt>
 		<dd>
-			<?php echo ($country['phone_code'] ? '+' . h($country['phone_code']) : ''); ?>
+			<?php echo h($country['timezone']); ?>
 		</dd>
 
 		<dt><?php echo __('Special'); ?></dt>
