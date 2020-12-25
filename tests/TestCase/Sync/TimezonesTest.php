@@ -72,4 +72,32 @@ class TimezonesTest extends TestCase {
 		$this->assertTrue(count($result['add']) >= 488);
 	}
 
+	/**
+	 * @return void
+	 */
+	public function testIntToString(): void {
+		$result = Timezones::intToString(3600);
+		$this->assertSame('+01:00', $result);
+
+		$result = Timezones::intToString(-3600);
+		$this->assertSame('-01:00', $result);
+
+		$result = Timezones::intToString(19800);
+		$this->assertSame('+05:30', $result);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testStringToInt(): void {
+		$result = Timezones::stringToInt('01:00');
+		$this->assertSame(3600, $result);
+
+		$result = Timezones::stringToInt('+01:00');
+		$this->assertSame(3600, $result);
+
+		$result = Timezones::stringToInt('-01:00');
+		$this->assertSame(-3600, $result);
+	}
+
 }

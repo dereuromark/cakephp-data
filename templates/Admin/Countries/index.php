@@ -50,7 +50,7 @@ foreach ($countries as $country):
 			<?php echo $this->Data->countryIcon($country['iso2']); ?>
 		</td>
 		<td>
-			<?php echo $this->Html->link($country->name, ['controller' => 'states', 'action' => 'index', $country->id]); ?>
+			<?php echo $this->Html->link($country->name, ['controller' => 'States', 'action' => 'index', $country->id]); ?>
 		</td>
 		<td>
 			<?php echo h($country['ori_name']); ?>
@@ -97,7 +97,7 @@ foreach ($countries as $country):
 		<td class="actions">
 			<?php echo $this->Html->link($this->Format->icon('up'), ['action' => 'up', $country->id], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Format->icon('down'), ['action' => 'down', $country->id], ['escape' => false]); ?>
-			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $country->id), array('escape'=>false)); ?>
+			<?php echo $this->Html->link($this->Format->icon('view'), ['action'=>'view', $country->id], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $country->id], ['escape' => false]); ?>
 
 			<?php echo $this->Html->link($this->Format->icon('map-o', [], ['title' => __('Koordinaten updaten')]), ['action' => 'update_coordinates', $country->id], ['escape' => false]); ?>

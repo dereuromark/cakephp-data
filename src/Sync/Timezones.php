@@ -5,6 +5,7 @@ namespace Data\Sync;
 use Cake\Http\Client;
 use Cake\Http\Exception\NotFoundException;
 use Data\Model\Entity\Timezone;
+use InvalidArgumentException;
 
 /**
  * @see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
@@ -216,6 +217,47 @@ class Timezones {
 		}
 
 		return $data;
+	}
+
+	/**
+	 * -3600 => -01:00
+	 * +3600 => +01:00
+	 *
+	 * @param int $offset
+	 *
+	 * @return string
+	 */
+	public static function intToString(int $offset): string {
+		$rest = $offset % 3600;
+		$hours = (int)floor($offset / 3600);
+		$sign = $offset < 0 ? '-' : '+';
+		$hours = abs($hours);
+
+		$hourString = str_pad((string)$hours, 2, '0', STR_PAD_LEFT);
+		$minuteString = str_pad((string)(int)floor($rest / 60), 2, '0', STR_PAD_LEFT);
+
+		return $sign . $hourString . ':' . $minuteString;
+	}
+
+	/**
+	 *  -01:00 => -3600
+	 *  +01:00 => +3600
+	 *
+	 * @param string $offset
+	 *
+	 * @return int
+	 */
+	public static function stringToInt(string $offset): int {
+		preg_match('/^([+-]?)(\d+):(\d+)$/', $offset, $matches);
+		if (!$matches) {
+			throw new InvalidArgumentException('Invalid offset');
+		}
+
+		$sign = $matches[1] ?: '+';
+		$hours = (int)$matches[2];
+		$minutes = (int)$matches[3];
+
+		return ($hours * HOUR + $minutes * MINUTE) * ($sign === '-' ? -1 : 1);
 	}
 
 }

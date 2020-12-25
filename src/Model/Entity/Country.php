@@ -2,6 +2,7 @@
 
 namespace Data\Model\Entity;
 
+use Data\Sync\Timezones;
 use Tools\Model\Entity\Entity;
 
 /**
@@ -25,6 +26,9 @@ use Tools\Model\Entity\Entity;
  * @property \Data\Model\Entity\Continent $continent
  * @property string|null $phone_code
  * @property string|null $timezone
+ * @property-read array $timezones
+ * @property-read string|null $timezoneString
+ * @property-read array $timezoneStrings
  */
 class Country extends Entity {
 
@@ -44,5 +48,52 @@ class Country extends Entity {
 
 	public const STATUS_INACTIVE = 0;
 	public const STATUS_ACTIVE = 1;
+
+	/**
+	 * @return int[]
+	 */
+	protected function _getTimezones(): array {
+		if ($this->timezone === null) {
+			return [];
+		}
+
+		$timezoneStrings = explode(',', $this->timezone);
+		$timezones = [];
+		foreach ($timezoneStrings as $value) {
+			$timezones[$value] = (int)$value;
+		}
+
+		return $timezones;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	protected function _getTimezoneStrings(): array {
+		if ($this->timezone === null) {
+			return [];
+		}
+
+		$timezoneStrings = explode(',', $this->timezone);
+		$timezones = [];
+		foreach ($timezoneStrings as $value) {
+			$timezones[$value] = Timezones::intToString((int)$value);
+		}
+
+		return $timezones;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	protected function _getTimezoneString(): ?string {
+		if ($this->timezone === null) {
+			return null;
+		}
+
+		$timezones = $this->_getTimezoneStrings();
+
+		return implode(',', $timezones);
+	}
 
 }

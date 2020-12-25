@@ -33,7 +33,7 @@
 		</dd>
 		<dt><?php echo __('Timezone'); ?></dt>
 		<dd>
-			<?php echo h($country['timezone']); ?>
+			<?php echo $country->timezoneStrings ? 'UTC ' . implode(', ', $country->timezoneStrings) : ''; ?>
 		</dd>
 
 		<dt><?php echo __('Special'); ?></dt>
