@@ -43,11 +43,10 @@ class MigrationCountries extends AbstractMigration {
 				'limit' => 3,
 				'null' => false,
 			])
-			->addColumn('phone_code', 'integer', [
+			->addColumn('phone_code', 'string', [
 				'default' => null,
-				'limit' => null,
+				'limit' => 20,
 				'null' => true,
-				'signed' => false,
 			])
 			->addColumn('eu_member', 'boolean', [
 				'comment' => 'Member of the EU',
