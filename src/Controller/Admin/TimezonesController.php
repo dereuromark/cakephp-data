@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace Data\Controller\Admin;
 
 use App\Controller\AppController;
+use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Utility\Hash;
 use Data\Sync\Timezones;
@@ -39,6 +40,9 @@ class TimezonesController extends AppController {
 		$this->paginate['contain'] = [
 			'CanonicalTimezones',
 		];
+		if (Configure::read('Data.Timezone.Country') !== false) {
+			$this->paginate['contain'][] = 'Countries';
+		}
 
 		if (Plugin::isLoaded('Search')) {
 			$query = $this->Timezones->find('search', ['search' => $this->request->getQuery()]);
@@ -65,13 +69,40 @@ class TimezonesController extends AppController {
 			$count = 0;
 			foreach ($data as $action => $rows) {
 				foreach ($rows as $key => $row) {
-					dd($row);
+					if (empty($row['execute']) || empty($diff[$action][$key])) {
+						continue;
+					}
+
+					$element = $diff[$action][$key];
+
+					switch ($action) {
+						case 'add':
+							$entity = $this->Timezones->newEntity($element['data']);
+							$this->Timezones->saveOrFail($entity);
+
+							break;
+						case 'edit':
+							/** @var \Data\Model\Entity\Timezone $entity */
+							$entity = $element['entity'];
+							$entity = $this->Timezones->patchEntity($entity, $element['fields']);
+							$this->Timezones->saveOrFail($entity);
+
+							break;
+						case 'delete':
+							/** @var \Data\Model\Entity\Timezone $entity */
+							$entity = $element['entity'];
+							$this->Timezones->deleteOrFail($entity);
+
+							break;
+					}
+
+					$count++;
 				}
 			}
 
 			$this->Flash->success($count . ' timezones updated.');
 
-			return $this->redirect(['action' => 'link']);
+			return $this->redirect(['action' => 'sync']);
 		}
 
 		$this->set(compact('diff', 'storedTimezones'));
@@ -124,8 +155,12 @@ class TimezonesController extends AppController {
 	 * @return \Cake\Http\Response|null|void Renders view
 	 */
 	public function view($id = null) {
+		$contain = ['CanonicalTimezones'];
+		if (Configure::read('Data.Timezone.Country') !== false) {
+			$contain[] = 'Countries';
+		}
 		$timezone = $this->Timezones->get($id, [
-			'contain' => [],
+			'contain' => $contain,
 		]);
 
 		$this->set(compact('timezone'));

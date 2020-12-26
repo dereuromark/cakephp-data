@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var mixed $contriesWithoutIcons
+ * @var mixed $countriesWithoutIcons
  * @var mixed $countries
  * @var mixed $icons
  * @var mixed $iconsWithoutCountries
@@ -11,12 +11,12 @@
 <?php echo count($countries); ?> Länder - <?php echo count($icons); ?> Icons
 
 
-<h3>contriesWithoutIcons: <b><?php echo count($contriesWithoutIcons);?></b></h3>
+<h3>contriesWithoutIcons: <b><?php echo count($countriesWithoutIcons);?></b></h3>
 <ul>
 <?php
-	foreach ($contriesWithoutIcons as $country) {
+	foreach ($countriesWithoutIcons as $country) {
 		echo '<li>';
-		echo $this->Data->countryIcon(null) . ' ' . h($country->name) . ' (' . $country['iso2'] . ', ' . $country['iso3'] . ') ' . $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $country->id], ['escape' => false], 'Sicher?');
+		echo $this->Data->countryIcon(null) . ' ' . h($country->name) . ' (' . $country['iso2'] . ', ' . $country['iso3'] . ') ' . $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $country->id], ['escape' => false, 'confirm' => __('Sure?')]);
 		echo '</li>';
 	}
 ?>

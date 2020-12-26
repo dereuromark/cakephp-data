@@ -23,14 +23,16 @@ class MigrationTimezones extends AbstractMigration {
 				'limit' => 100,
 				'null' => false,
 			])
-			->addColumn('offset', 'string', [
+			->addColumn('offset', 'integer', [
 				'default' => null,
 				'limit' => 10,
+				'signed' => true,
 				'null' => false,
 			])
-			->addColumn('offset_dst', 'string', [
+			->addColumn('offset_dst', 'integer', [
 				'default' => null,
 				'limit' => 10,
+				'signed' => true,
 				'null' => false,
 			])
 			->addColumn('type', 'string', [
@@ -87,6 +89,9 @@ class MigrationTimezones extends AbstractMigration {
 				'null' => false,
 			])
 			->create();
+
+		// ALTER TABLE `timezones` CHANGE `offset` `offset` INT(10) NULL;
+		// ALTER TABLE `timezones` CHANGE `offset_dst` `offset_dst` INT(10) NULL;
 	}
 
 }

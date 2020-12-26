@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace Data\Model\Table;
 
+use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\ORM\Table;
 use Cake\Utility\Hash;
@@ -52,6 +53,13 @@ class TimezonesTable extends Table {
 			'className' => 'Data.Timezones',
 			'foreignKey' => 'linked_id',
 		]);
+		if (Configure::read('Data.Timezone.Country') !== false) {
+			$this->belongsTo('Countries', [
+				'className' => 'Data.Countries',
+				'foreignKey' => false,
+				'conditions' => ['Timezones.country_code = Countries.iso2'],
+			]);
+		}
 
 		if (!Plugin::isLoaded('Search')) {
 			return;
@@ -90,14 +98,12 @@ class TimezonesTable extends Table {
 			->allowEmptyString('country_code');
 
 		$validator
-			->scalar('offset')
-			->maxLength('offset', 10)
+			->numeric('offset')
 			->requirePresence('offset', 'create')
 			->notEmptyString('offset');
 
 		$validator
-			->scalar('offset_dst')
-			->maxLength('offset_dst', 10)
+			->numeric('offset_dst')
 			->requirePresence('offset_dst', 'create')
 			->notEmptyString('offset_dst');
 

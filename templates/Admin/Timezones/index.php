@@ -13,6 +13,9 @@ use Cake\Core\Plugin;
         <li class="nav-item">
             <?= $this->Html->link(__('New {0}', __('Timezone')), ['action' => 'add'], ['class' => 'nav-link']) ?>
         </li>
+		<li class="nav-item">
+			<?php echo $this->Html->link(__('Sync'), ['action' => 'sync'], ['class' => 'nav-link']); ?>
+		</li>
     </ul>
 </nav>
 <div class="timezones index content large-9 medium-8 columns col-sm-8 col-12">
@@ -60,9 +63,11 @@ use Cake\Core\Plugin;
 								} ?>
 							</small></div>
 					</td>
-                    <td><?= h($timezone->country_code) ?></td>
-                    <td><?= h($timezone->offset) ?></td>
-                    <td><?= h($timezone->offset_dst) ?></td>
+                    <td><?php
+						echo $timezone->country ? $this->Html->link($timezone->country_code, ['controller' => 'Countries', 'action' => 'view', $timezone->country->id]) : h($timezone->country_code)
+						?></td>
+                    <td><?= h($timezone->offset_string) ?></td>
+                    <td><?= h($timezone->offset_dst_string) ?></td>
                     <td><?= h($timezone->type) ?></td>
                     <td><?= $this->Format->yesNo($timezone->active) ?></td>
                     <td><?= h($timezone->lat) ?></td>

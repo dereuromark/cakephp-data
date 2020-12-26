@@ -15,6 +15,7 @@ class CountriesControllerTest extends IntegrationTestCase {
 	 */
 	protected $fixtures = [
 		'plugin.Data.Countries',
+		'plugin.Data.Timezones',
 	];
 
 	/**

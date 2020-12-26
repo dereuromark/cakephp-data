@@ -92,7 +92,7 @@ class MigrationCountries extends AbstractMigration {
 				'limit' => 190,
 				'null' => true,
 			])
-			->addColumn('timezone', 'string', [
+			->addColumn('timezone_offset', 'string', [
 				'default' => null,
 				'limit' => 255,
 				'null' => true,
@@ -122,7 +122,7 @@ class MigrationCountries extends AbstractMigration {
 			)
 			->create();
 
-		// ALTER TABLE `countries` ADD `timezone` VARCHAR(255) NULL AFTER `phone_code`;
+		// ALTER TABLE `countries` ADD `timezone_offset` VARCHAR(255) NULL AFTER `phone_code`;
 		// ALTER TABLE `countries` CHANGE `country_code` `phone_code` VARCHAR(20) NULL DEFAULT NULL;
 	}
 

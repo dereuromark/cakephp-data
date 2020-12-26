@@ -20,19 +20,28 @@
             <table class="table table-striped">
                 <tr>
                     <th><?= __('Name') ?></th>
-                    <td><?= h($timezone->name) ?></td>
+                    <td>
+						<?= h($timezone->name) ?>
+						<div><small>
+								<?php if ($timezone->canonical_timezone) {
+									echo ' => ' . $this->Html->link($timezone->canonical_timezone->name, ['action' => 'view', $timezone->linked_id]);
+								} ?>
+							</small></div>
+					</td>
                 </tr>
                 <tr>
                     <th><?= __('Country Code') ?></th>
-                    <td><?= h($timezone->country_code) ?></td>
+                    <td><?php
+						echo $timezone->country ? $this->Html->link($timezone->country_code, ['controller' => 'Countries', 'action' => 'view', $timezone->country->id]) : h($timezone->country_code)
+					?></td>
                 </tr>
                 <tr>
                     <th><?= __('Offset') ?></th>
-                    <td><?= h($timezone->offset) ?></td>
+                    <td><?= h($timezone->offset_string) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Offset Dst') ?></th>
-                    <td><?= h($timezone->offset_dst) ?></td>
+                    <td><?= h($timezone->offset_dst_string) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Type') ?></th>

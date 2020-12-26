@@ -25,10 +25,12 @@ use Tools\Model\Entity\Entity;
  * @property int|null $continent_id
  * @property \Data\Model\Entity\Continent $continent
  * @property string|null $phone_code
- * @property string|null $timezone
- * @property-read array $timezones
- * @property-read string|null $timezoneString
- * @property-read array $timezoneStrings
+ * @property string|null $timezone_offset
+ * @property-read array $timezones_offsets
+ * @property-read string|null $timezone_offset_string
+ * @property-read string[] $timezone_offset_strings
+ * @property int[] $timezone_offsets
+ * @property \Data\Model\Entity\Timezone[] $timezones
  */
 class Country extends Entity {
 
@@ -46,18 +48,29 @@ class Country extends Entity {
 		'id' => false,
 	];
 
+	/**
+	 * List of computed or virtual fields that **should** be included in JSON or array
+	 * representations of this Entity. If a field is present in both _hidden and _virtual
+	 * the field will **not** be in the array/JSON versions of the entity.
+	 *
+	 * @var string[]
+	 */
+	protected $_virtual = [
+		'timezone_offset_string',
+	];
+
 	public const STATUS_INACTIVE = 0;
 	public const STATUS_ACTIVE = 1;
 
 	/**
 	 * @return int[]
 	 */
-	protected function _getTimezones(): array {
-		if ($this->timezone === null) {
+	protected function _getTimezoneOffsets(): array {
+		if ($this->timezone_offset === null) {
 			return [];
 		}
 
-		$timezoneStrings = explode(',', $this->timezone);
+		$timezoneStrings = explode(',', $this->timezone_offset);
 		$timezones = [];
 		foreach ($timezoneStrings as $value) {
 			$timezones[$value] = (int)$value;
@@ -69,12 +82,12 @@ class Country extends Entity {
 	/**
 	 * @return string[]
 	 */
-	protected function _getTimezoneStrings(): array {
-		if ($this->timezone === null) {
+	protected function _getTimezoneOffsetStrings(): array {
+		if ($this->timezone_offset === null) {
 			return [];
 		}
 
-		$timezoneStrings = explode(',', $this->timezone);
+		$timezoneStrings = explode(',', $this->timezone_offset);
 		$timezones = [];
 		foreach ($timezoneStrings as $value) {
 			$timezones[$value] = Timezones::intToString((int)$value);
@@ -86,12 +99,12 @@ class Country extends Entity {
 	/**
 	 * @return string|null
 	 */
-	protected function _getTimezoneString(): ?string {
-		if ($this->timezone === null) {
+	protected function _getTimezoneOffsetString(): ?string {
+		if ($this->timezone_offset === null) {
 			return null;
 		}
 
-		$timezones = $this->_getTimezoneStrings();
+		$timezones = $this->_getTimezoneOffsetStrings();
 
 		return implode(',', $timezones);
 	}

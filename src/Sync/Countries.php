@@ -115,7 +115,7 @@ class Countries {
 			$diff['phone_code'] = $phoneCode;
 		}
 		$timezones = $this->normalizeTimeZones($country['timezones']);
-		if ($timezones !== $storedCountry->timezone) {
+		if ($timezones !== $storedCountry->timezone_offset) {
 			$diff['timezone'] = $timezones;
 		}
 

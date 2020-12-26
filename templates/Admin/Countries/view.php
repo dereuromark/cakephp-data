@@ -33,7 +33,20 @@
 		</dd>
 		<dt><?php echo __('Timezone'); ?></dt>
 		<dd>
-			<?php echo $country->timezoneStrings ? 'UTC ' . implode(', ', $country->timezoneStrings) : ''; ?>
+			<p>
+			<?php echo $country->timezone_offset_strings? 'UTC ' . implode(', ', $country->timezone_offset_strings) : ''; ?>
+			</p>
+			<?php if ($country->timezones) { ?>
+			<b>Related timezones:</b>
+				<ul>
+					<?php foreach ($country->timezones as $timezone) { ?>
+					<li>
+						<?php echo $this->Html->link($timezone->name, ['controller' => 'Timezones', 'action' => 'view', $timezone->id]);?>
+						(<?php echo h($timezone->offset_string); ?>)
+					</li>
+					<?php } ?>
+				</ul>
+			<?php } ?>
 		</dd>
 
 		<dt><?php echo __('Special'); ?></dt>

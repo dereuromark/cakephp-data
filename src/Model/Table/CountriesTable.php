@@ -29,6 +29,7 @@ use Tools\Model\Table\Table;
  * @method \Data\Model\Entity\Country[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \Data\Model\Entity\Country[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  * @property \Data\Model\Table\ContinentsTable&\Cake\ORM\Association\BelongsTo $Continents
+ * @property \Data\Model\Table\TimezonesTable&\Cake\ORM\Association\HasMany $Timezones
  */
 class CountriesTable extends Table {
 
@@ -102,6 +103,14 @@ class CountriesTable extends Table {
 		if (Configure::read('Data.Country.Continent') !== false) {
 			$this->belongsTo('Continents', [
 				'className' => 'Data.Continents',
+			]);
+		}
+		if (Configure::read('Data.Country.Timezone') !== false) {
+			$this->hasMany('Timezones', [
+				'className' => 'Data.Timezones',
+				'foreignKey' => 'country_code',
+				'bindingKey' => 'iso2',
+				'conditions' => ['Timezones.type' => 'Canonical', 'Timezones.active' => true],
 			]);
 		}
 

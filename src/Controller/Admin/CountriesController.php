@@ -62,16 +62,16 @@ class CountriesController extends DataAppController {
 	public function icons() {
 		$icons = []; //$this->_icons();
 
-		$countries = $this->Countries->find('all', ['fields' => ['id', 'name', 'iso2', 'iso3']]);
+		$countries = $this->Countries->find('all', ['fields' => ['id', 'name', 'iso2', 'iso3']])->toArray();
 
 		$usedIcons = [];
 
 		# countries without icons
-		$contriesWithoutIcons = [];
+		$countriesWithoutIcons = [];
 		foreach ($countries as $country) {
 			$icon = strtoupper($country['iso2']);
 			if (!in_array($icon, $icons)) {
-				$contriesWithoutIcons[] = $country;
+				$countriesWithoutIcons[] = $country;
 			} else {
 				$key = array_keys($icons, $icon);
 				$usedIcons[] = $icons[$key[0]];
@@ -81,7 +81,7 @@ class CountriesController extends DataAppController {
 		# icons without countries
 		$iconsWithoutCountries = array_diff($icons, $usedIcons);
 
-		$this->set(compact('icons', 'countries', 'contriesWithoutIcons', 'iconsWithoutCountries'));
+		$this->set(compact('icons', 'countries', 'countriesWithoutIcons', 'iconsWithoutCountries'));
 	}
 
 	/**
@@ -160,7 +160,11 @@ class CountriesController extends DataAppController {
 	 * @return \Cake\Http\Response|null|void
 	 */
 	public function view($id = null) {
-		$country = $this->Countries->get($id);
+		$contain = [];
+		if (Configure::read('Data.Country.Timezone') !== false) {
+			$contain[] = 'Timezones';
+		}
+		$country = $this->Countries->get($id, ['contain' => $contain]);
 
 		$this->set(compact('country'));
 	}

@@ -18,6 +18,7 @@ class TimezonesControllerTest extends TestCase {
 	 */
 	protected $fixtures = [
 		'plugin.Data.Timezones',
+		'plugin.Data.Countries',
 	];
 
 	/**
@@ -37,6 +38,16 @@ class TimezonesControllerTest extends TestCase {
 		$this->disableErrorHandlerMiddleware();
 
 		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'Timezones', 'action' => 'sync']);
+		$this->assertResponseCode(200);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testLink(): void {
+		$this->disableErrorHandlerMiddleware();
+
+		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'Timezones', 'action' => 'link']);
 		$this->assertResponseCode(200);
 	}
 

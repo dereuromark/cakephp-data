@@ -115,7 +115,7 @@ foreach ($countries as $country):
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('Add {0}', __('Country')), ['action' => 'add']); ?></li>
-		<li><?php echo $this->Html->link(__('Update Coordinates'), ['action' => 'update_coordinates']); ?></li>
+		<li><?php echo $this->Html->link(__('Sync'), ['action' => 'sync']); ?></li>
 		<li><?php echo $this->Html->link(__('Icons'), ['action' => 'icons']); ?></li>
 	</ul>
 </div>

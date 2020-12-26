@@ -6,6 +6,7 @@ use Cake\Http\Client;
 use Cake\Http\Exception\NotFoundException;
 use Data\Model\Entity\Timezone;
 use InvalidArgumentException;
+use RuntimeException;
 
 /**
  * @see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
@@ -36,7 +37,7 @@ class Timezones {
 
 		$timezones = [];
 		foreach ($rows as $row) {
-			preg_match('#\|(.+)]]$#', $row['name'], $nameMatches);
+			preg_match('#\|(.+?)]]$#', $row['name'], $nameMatches);
 			if ($nameMatches) {
 				$name = $nameMatches[1];
 			} else {
@@ -44,19 +45,19 @@ class Timezones {
 			}
 
 			$offset = null;
-			preg_match('#\|(.+)]]$#', $row['offset'], $offsetMatches);
+			preg_match('#\|(.\d+:\d+)]]$#', str_replace('−', '-', $row['offset']), $offsetMatches);
 			if ($offsetMatches) {
 				$offset = $offsetMatches[1];
 			}
 			$offsetDst = null;
-			preg_match('#\|(.+)]]$#', $row['offset_dst'], $offsetDstMatches);
+			preg_match('#\|(.\d+:\d+)]]$#', str_replace('−', '-', $row['offset_dst']), $offsetDstMatches);
 			if ($offsetDstMatches) {
 				$offsetDst = $offsetDstMatches[1];
 			}
 
 			$countryCode = null;
 			if ($row['country_code']) {
-				preg_match('#\|(.+)]]$#', $row['country_code'], $countryCodeMatches);
+				preg_match('#\|(.+?)]]$#', $row['country_code'], $countryCodeMatches);
 				$countryCode = $countryCodeMatches ? $countryCodeMatches[1] : null;
 			}
 
@@ -71,6 +72,16 @@ class Timezones {
 
 				$lat = (float)((int)substr($lat, 0, 3) . '.' . substr($lat, 3));
 				$lng = (float)((int)substr($lng, 0, 4) . '.' . substr($lng, 4));
+			}
+
+			if ($offset) {
+				$offset = static::stringToInt($offset);
+			}
+			if ($offsetDst) {
+				$offsetDst = static::stringToInt($offsetDst);
+			}
+			if (!is_numeric($offset) || !is_numeric($offsetDst)) {
+				throw new RuntimeException('Not numeric value encountered in offset or offset_dst for ' . $name . '!');
 			}
 
 			$timezones[$name] = [

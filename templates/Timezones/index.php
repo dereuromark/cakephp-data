@@ -27,8 +27,8 @@
                 <tr>
                     <td><?= h($timezone->name) ?></td>
                     <td><?= h($timezone->country_code) ?></td>
-                    <td><?= h($timezone->offset) ?></td>
-                    <td><?= h($timezone->offset_dst) ?></td>
+                    <td><?= h($timezone->offset_string) ?></td>
+                    <td><?= h($timezone->offset_dst_string) ?></td>
                     <td><?= h($timezone->type) ?></td>
                     <td><?= $this->Format->yesNo($timezone->active) ?></td>
 					<td><?php
