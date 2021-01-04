@@ -1,44 +1,34 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var mixed $countriesWithoutIcons
- * @var mixed $countries
- * @var mixed $icons
- * @var mixed $iconsWithoutCountries
+ * @var \Data\Model\Entity\Country[] $countriesWithoutIcons
+ * @var \Data\Model\Entity\Country[] $countries
+ * @var array $icons
  */
 ?>
 <h2>Icons</h2>
 <?php echo count($countries); ?> Länder - <?php echo count($icons); ?> Icons
 
-
-<h3>contriesWithoutIcons: <b><?php echo count($countriesWithoutIcons);?></b></h3>
+<?php if ($countriesWithoutIcons) { ?>
+<h3>Countries Without Icons: <b><?php echo count($countriesWithoutIcons);?></b></h3>
 <ul>
 <?php
 	foreach ($countriesWithoutIcons as $country) {
 		echo '<li>';
-		echo $this->Data->countryIcon(null) . ' ' . h($country->name) . ' (' . $country['iso2'] . ', ' . $country['iso3'] . ') ' . $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $country->id], ['escape' => false, 'confirm' => __('Sure?')]);
+		echo $this->Data->countryIcon(null) . ' ' . h($country->name) . ' (' . $country['iso2'] . ', ' . $country['iso3'] . ')';
 		echo '</li>';
 	}
 ?>
 </ul>
+<?php } ?>
 
-
-<h3>iconsWithoutCountries: <b><?php echo count($iconsWithoutCountries);?></b></h3>
+<h3>Countries and Icons</h3>
 <ul>
-<?php
-	foreach ($iconsWithoutCountries as $icon) {
+	<?php
+	foreach ($countries as $country) {
 		echo '<li>';
-		echo $this->Data->countryIcon($icon) . ' (' . $icon . ')';
+		echo $this->Data->countryIcon($country->iso2) . ' ' . h($country->name) . ' (' . $country['iso2'] . ', ' . $country['iso3'] . ') ' . $this->Html->link($this->Format->icon('view'), ['action' => 'view', $country->id], ['escapeTitle' => false]);
 		echo '</li>';
 	}
-?>
+	?>
 </ul>
-
-
-<br/><br/>
-
-<div class="actions">
-	<ul>
-		<li><?php echo $this->Html->link(__('Reset Cache'), ['action' => 'icons', 'reset' => 1]); ?></li>
-	</ul>
-</div>

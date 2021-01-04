@@ -5,9 +5,12 @@ namespace Data\Controller\Admin;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Event\EventInterface;
+use Cake\Filesystem\Folder;
 use Cake\Utility\Hash;
+use Cake\View\View;
 use Data\Controller\DataAppController;
 use Data\Sync\Countries;
+use Data\View\Helper\DataHelper;
 
 /**
  * @property \Data\Model\Table\CountriesTable $Countries
@@ -60,28 +63,40 @@ class CountriesController extends DataAppController {
 	 * @return \Cake\Http\Response|null|void
 	 */
 	public function icons() {
-		$icons = []; //$this->_icons();
+		$icons = $this->_icons();
 
 		$countries = $this->Countries->find('all', ['fields' => ['id', 'name', 'iso2', 'iso3']])->toArray();
-
-		$usedIcons = [];
-
-		# countries without icons
 		$countriesWithoutIcons = [];
-		foreach ($countries as $country) {
-			$icon = strtoupper($country['iso2']);
-			if (!in_array($icon, $icons)) {
-				$countriesWithoutIcons[] = $country;
-			} else {
-				$key = array_keys($icons, $icon);
-				$usedIcons[] = $icons[$key[0]];
+
+		$iconFontClass = (bool)Configure::read('Country.iconFontClass');
+		if (!$iconFontClass) {
+			foreach ($countries as $country) {
+				$icon = strtolower($country['iso2']);
+				if (!isset($icons[$icon])) {
+					$countriesWithoutIcons[] = $country;
+				}
 			}
 		}
 
-		# icons without countries
-		$iconsWithoutCountries = array_diff($icons, $usedIcons);
+		$this->set(compact('icons', 'countries', 'countriesWithoutIcons', 'iconFontClass'));
+	}
 
-		$this->set(compact('icons', 'countries', 'countriesWithoutIcons', 'iconsWithoutCountries'));
+	/**
+	 * @return string[]
+	 */
+	protected function _icons(): array {
+		[$wwwPath, $path] = (new DataHelper(new View()))->getCountryIconPaths();
+
+		$content = (new Folder($path))->read();
+		$files = $content[1];
+
+		$icons = [];
+		foreach ($files as $file) {
+			$name = pathinfo($file, PATHINFO_FILENAME);
+			$icons[$name] = $file;
+		}
+
+		return $icons;
 	}
 
 	/**
