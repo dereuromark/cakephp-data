@@ -22,10 +22,7 @@
 <?php
 $i = 0;
 foreach ($mimeTypeImages as $mimeTypeImage):
-	$class = null;
-	if ($i++ % 2 == 0) {
-		$class = ' class="altrow"';
-	}
+
 
 	$image = '---';
 	$imageSize = $imageWidth = $imageHeight = null;

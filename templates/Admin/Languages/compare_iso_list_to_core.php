@@ -24,10 +24,7 @@ Core contains <?php echo count($locales);?> locales (with <?php echo count($lang
 <?php
 $i = 0;
 foreach ($isoList['values'] as $language):
-	$class = null;
-	if ($i++ % 2 == 0) {
-		$class = ' class="altrow"';
-	}
+
 
 	if (empty($language['iso2']) || array_key_exists($language['iso2'], $locales)) {
 		continue;
@@ -85,10 +82,7 @@ foreach ($isoList['values'] as $key => $value) {
 
 $i = 0;
 foreach ($locales as $key => $locale):
-	$class = null;
-	if ($i++ % 2 == 0) {
-		$class = ' class="altrow"';
-	}
+
 
 	if (($exists = array_key_exists($key, $isoLocales)) && $locale['locale'] === $isoLocales[$key]) {
 		continue;

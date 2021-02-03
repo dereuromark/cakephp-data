@@ -47,10 +47,7 @@ if (!empty($searchStr) && !empty($allCount)) {
 <?php
 $i = 0;
 foreach ($mimeTypes as $mimeType):
-	$class = null;
-	if ($i++ % 2 == 0) {
-		$class = ' class="altrow"';
-	}
+
 ?>
 	<tr>
 		<td>

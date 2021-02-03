@@ -27,10 +27,7 @@ Local DB contains <?php echo count($languages); ?> locales.
 <?php
 $i = 0;
 foreach ($isoList['values'] as $language):
-	$class = null;
-	if ($i++ % 2 == 0) {
-		$class = ' class="altrow"';
-	}
+
 ?>
 	<tr>
 		<td>

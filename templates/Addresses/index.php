@@ -27,10 +27,7 @@
 <?php
 $i = 0;
 foreach ($addresses as $address):
-	$class = null;
-	if ($i++ % 2 == 0) {
-		$class = ' class="altrow"';
-	}
+
 ?>
 	<tr>
 		<td>
