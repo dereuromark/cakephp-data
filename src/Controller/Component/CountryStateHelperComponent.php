@@ -24,28 +24,27 @@ class CountryStateHelperComponent extends Component {
 	 * Call in methods where needed
 	 *
 	 * @param bool $ignoreStates
-	 * @param string|null $model
+	 * @param string|null $prefix Data prefix if applicable (e.g. user_info.country_id)
 	 * @param int $defaultValue
 	 * @return void
 	 */
-	public function provideData($ignoreStates = false, $model = null, $defaultValue = 0) {
+	public function provideData($ignoreStates = false, $prefix = null, $defaultValue = 0) {
 		$this->Controller->loadModel('Data.Countries');
 		$countries = $this->Controller->Countries->findActive()->enableHydration(false)->find('list')->toArray();
 
 		$states = [];
-		/*
-		if ($model === null) {
-			$model = $this->Controller->modelClass;
+		$field = 'country_id';
+		if ($prefix !== null) {
+			$field = $prefix . '.' . $field;
 		}
-		*/
 
 		if (!isset($this->Controller->States)) {
 			$this->Controller->loadModel('Data.States');
 		}
 
 		$selectedCountry = $this->Controller->getRequest()->getQuery('country_id');
-		if ($this->Controller->getRequest()->getData('country_id')) {
-			$selectedCountry = $this->Controller->getRequest()->getData('country_id');
+		if ($this->Controller->getRequest()->getData($field)) {
+			$selectedCountry = $this->Controller->getRequest()->getData($field);
 		}
 
 		if ($selectedCountry) {
