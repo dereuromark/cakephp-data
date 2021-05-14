@@ -42,7 +42,7 @@ class CountryStateHelperComponent extends Component {
 			$this->Controller->loadModel('Data.States');
 		}
 
-		$selectedCountry = $this->Controller->getRequest()->getQuery('country_id');
+		$selectedCountry = $this->Controller->getRequest()->getQuery($field);
 		if ($this->Controller->getRequest()->getData($field)) {
 			$selectedCountry = $this->Controller->getRequest()->getData($field);
 		}
