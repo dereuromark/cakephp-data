@@ -17,7 +17,7 @@ use Cake\Core\Configure;
 		//echo $this->Form->control('id');
 		echo $this->Form->control('country_id', ['empty' => ' - [ ' . __('noSelection') . ' ] - ']);
 	if (Configure::read('Data.Address.State')) {
-		echo $this->Form->control('state_id', ['empty' => ' - [ ' . __('noSelection') . ' ] - ']);
+		echo $this->Form->control('state_id', ['id' => 'country-states', 'empty' => ' - [ ' . __('noSelection') . ' ] - ']);
 	}
 		echo $this->Form->control('first_name');
 		echo $this->Form->control('last_name');
