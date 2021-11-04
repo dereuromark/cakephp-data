@@ -41,13 +41,6 @@ class CountryStateHelperComponentTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function tearDown(): void {
-		parent::tearDown();
-	}
-
-	/**
-	 * @return void
-	 */
 	public function testProvideData() {
 		$event = new Event('Controller.startup', $this->Controller);
 		$this->CountryStateHelperComponent->startup($event);
