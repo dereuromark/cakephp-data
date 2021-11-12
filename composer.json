@@ -18,6 +18,7 @@
 		"dereuromark/cakephp-tools": "^2.0.0"
 	},
 	"require-dev": {
+		"phpunit/phpunit": "^9.5",
 		"cakephp/migrations": "^3.0.0",
 		"dereuromark/cakephp-geo": "^2.0.0",
 		"willdurand/geocoder": "^4.2.2",
