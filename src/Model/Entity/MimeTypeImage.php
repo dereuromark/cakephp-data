@@ -16,7 +16,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
- * @property \Data\Model\Entity\MimeType[] $mime_types
+ * @property array<\Data\Model\Entity\MimeType> $mime_types
  */
 class MimeTypeImage extends Entity {
 

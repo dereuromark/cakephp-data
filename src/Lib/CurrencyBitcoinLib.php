@@ -77,7 +77,7 @@ class CurrencyBitcoinLib {
 	 * @param array $options
 	 * - currency
 	 * - api
-	 * @return bool|float
+	 * @return float|bool
 	 */
 	public function rate($options = []) {
 		$options += $this->settings;
@@ -122,10 +122,12 @@ class CurrencyBitcoinLib {
 	 * @return string|bool
 	 */
 	protected function _getBitmarket($url) {
-		if (!($res = $this->_get($url))) {
+		$res = $this->_get($url);
+		if (!$res) {
 			return false;
 		}
-		if (!($res = json_decode($res, true))) {
+		$res = json_decode($res, true);
+		if (!$res) {
 			return false;
 		}
 
@@ -137,10 +139,12 @@ class CurrencyBitcoinLib {
 	 * @return string|bool
 	 */
 	protected function _getBitcoincharts($url) {
-		if (!($res = $this->_get($url))) {
+		$res = $this->_get($url);
+		if (!$res) {
 			return false;
 		}
-		if (!($res = json_decode($res, true))) {
+		$res = json_decode($res, true);
+		if (!$res) {
 			return false;
 		}
 

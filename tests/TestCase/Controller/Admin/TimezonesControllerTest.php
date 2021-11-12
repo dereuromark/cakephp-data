@@ -14,7 +14,7 @@ class TimezonesControllerTest extends TestCase {
 	use IntegrationTestTrait;
 
 	/**
-	 * @var string[]
+	 * @var array<string>
 	 */
 	protected $fixtures = [
 		'plugin.Data.Timezones',

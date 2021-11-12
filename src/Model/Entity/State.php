@@ -13,7 +13,7 @@ use Tools\Model\Entity\Entity;
  * @property float|null $lng
  * @property \Cake\I18n\FrozenTime|null $modified
  * @property \Data\Model\Entity\Country $country
- * @property \Cake\ORM\Entity[] $counties
+ * @property array<\Cake\ORM\Entity> $counties
  */
 class State extends Entity {
 

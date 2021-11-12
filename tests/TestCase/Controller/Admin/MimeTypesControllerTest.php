@@ -14,7 +14,7 @@ class MimeTypesControllerTest extends TestCase {
 	use IntegrationTestTrait;
 
 	/**
-	 * @var string[]
+	 * @var array<string>
 	 */
 	protected $fixtures = [
 		'plugin.Data.MimeTypes',

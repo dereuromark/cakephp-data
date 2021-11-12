@@ -16,11 +16,11 @@ use RuntimeException;
  *
  * @method \Data\Model\Entity\Timezone newEmptyEntity()
  * @method \Data\Model\Entity\Timezone newEntity(array $data, array $options = [])
- * @method \Data\Model\Entity\Timezone[] newEntities(array $data, array $options = [])
+ * @method array<\Data\Model\Entity\Timezone> newEntities(array $data, array $options = [])
  * @method \Data\Model\Entity\Timezone get($primaryKey, $options = [])
  * @method \Data\Model\Entity\Timezone findOrCreate($search, ?callable $callback = null, $options = [])
  * @method \Data\Model\Entity\Timezone patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Data\Model\Entity\Timezone[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method array<\Data\Model\Entity\Timezone> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Data\Model\Entity\Timezone|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\Timezone saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\Timezone[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
@@ -140,7 +140,7 @@ class TimezonesTable extends Table {
 
 	/**
 	 * @param \Data\Model\Entity\Timezone $timezone
-	 * @param \Data\Model\Entity\Timezone[] $allTimezones
+	 * @param array<\Data\Model\Entity\Timezone> $allTimezones
 	 *
 	 * @return \Data\Model\Entity\Timezone|null
 	 */

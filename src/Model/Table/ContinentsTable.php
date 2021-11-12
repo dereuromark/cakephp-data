@@ -14,11 +14,11 @@ use Tools\Model\Table\Table;
  * @mixin \Cake\ORM\Behavior\TreeBehavior
  * @method \Data\Model\Entity\Continent newEmptyEntity()
  * @method \Data\Model\Entity\Continent newEntity(array $data, array $options = [])
- * @method \Data\Model\Entity\Continent[] newEntities(array $data, array $options = [])
+ * @method array<\Data\Model\Entity\Continent> newEntities(array $data, array $options = [])
  * @method \Data\Model\Entity\Continent get($primaryKey, $options = [])
  * @method \Data\Model\Entity\Continent findOrCreate($search, ?callable $callback = null, $options = [])
  * @method \Data\Model\Entity\Continent patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Data\Model\Entity\Continent[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method array<\Data\Model\Entity\Continent> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Data\Model\Entity\Continent|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\Continent saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\Continent[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])

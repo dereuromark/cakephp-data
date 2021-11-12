@@ -16,10 +16,10 @@ if (!defined('CLASS_USERS')) {
 /**
  * @method \Data\Model\Entity\Address get($primaryKey, $options = [])
  * @method \Data\Model\Entity\Address newEntity(array $data, array $options = [])
- * @method \Data\Model\Entity\Address[] newEntities(array $data, array $options = [])
+ * @method array<\Data\Model\Entity\Address> newEntities(array $data, array $options = [])
  * @method \Data\Model\Entity\Address|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\Address patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Data\Model\Entity\Address[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method array<\Data\Model\Entity\Address> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Data\Model\Entity\Address findOrCreate($search, ?callable $callback = null, $options = [])
  * @property \Data\Model\Table\CountriesTable&\Cake\ORM\Association\BelongsTo $Countries
  * @property \Data\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
@@ -294,7 +294,7 @@ class AddressesTable extends Table {
 					return;
 				}
 
-			# enter new id
+				# enter new id
 			} elseif (isset($entity['state_id']) && !empty($entity['geocoder_result']['country_province_code'])) {
 				$state = $this->Countries->States->find('all', ['conditions' => ['OR' => ['States.code' => $entity['geocoder_result']['country_province_code'], 'States.name' => $entity['geocoder_result']['country_province']]]])->first();
 				if (!empty($state)) {

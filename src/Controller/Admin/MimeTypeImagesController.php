@@ -162,8 +162,11 @@ class MimeTypeImagesController extends DataAppController {
 						continue;
 					}
 
-					if (rename(PATH_MIMETYPES . 'import' . DS . $filename, PATH_MIMETYPES . $name . '.' . $ext) && $this->MimeTypeImages->allocate($recordId, $name,
-						$ext)) {
+					if (rename(PATH_MIMETYPES . 'import' . DS . $filename, PATH_MIMETYPES . $name . '.' . $ext) && $this->MimeTypeImages->allocate(
+                        $recordId,
+                        $name,
+                        $ext,
+                    )) {
 						$renameSuccess[] = $name . '.' . $ext;
 						unset($this->request->data['imgs'][$key]);
 						unset($this->request->data['names'][$key]);
@@ -216,6 +219,7 @@ class MimeTypeImagesController extends DataAppController {
 		}
 
 		# any files left = should not be there any more (not working with pagination)
+		/*
 		if (!empty($images)) {
 			foreach ($images as $image) {
 				rename(PATH_MIMETYPES . $image['name'] . '.' . $image['ext'], PATH_MIMETYPES . 'archive' . DS . $image['name'] .
@@ -224,6 +228,7 @@ class MimeTypeImagesController extends DataAppController {
 			$this->Flash->info(count($images) . ' Icon-Dateien vorhanden, obwohl kein Datensatz dazu (verschoben nach Archiv): ' . implode(', ',
 				$images));
 		}
+		*/
 
 		$this->set(compact('mimeTypeImages'));
 	}

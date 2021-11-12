@@ -71,11 +71,7 @@ class CurrenciesController extends DataAppController {
 	 */
 	public function view($id = null) {
 		$currency = $this->Currencies->get($id);
-		if (empty($currency)) {
-			$this->Flash->error(__('record not exists'));
 
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
 		$this->set(compact('currency'));
 	}
 

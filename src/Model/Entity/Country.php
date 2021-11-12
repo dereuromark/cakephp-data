@@ -21,16 +21,16 @@ use Tools\Model\Entity\Entity;
  * @property float|null $lat
  * @property string $zip_regexp
  * @property int $status
- * @property \Data\Model\Entity\State[] $states
+ * @property array<\Data\Model\Entity\State> $states
  * @property int|null $continent_id
  * @property \Data\Model\Entity\Continent $continent
  * @property string|null $phone_code
  * @property string|null $timezone_offset
  * @property-read array $timezones_offsets
  * @property-read string|null $timezone_offset_string
- * @property-read string[] $timezone_offset_strings
- * @property int[] $timezone_offsets
- * @property \Data\Model\Entity\Timezone[] $timezones
+ * @property-read array<string> $timezone_offset_strings
+ * @property array<int> $timezone_offsets
+ * @property array<\Data\Model\Entity\Timezone> $timezones
  */
 class Country extends Entity {
 
@@ -53,17 +53,25 @@ class Country extends Entity {
 	 * representations of this Entity. If a field is present in both _hidden and _virtual
 	 * the field will **not** be in the array/JSON versions of the entity.
 	 *
-	 * @var string[]
+	 * @var array<string>
 	 */
 	protected $_virtual = [
 		'timezone_offset_string',
 	];
 
+    /**
+     * @var int
+     */
 	public const STATUS_INACTIVE = 0;
+
+    /**
+     * @return array<int>
+     * @var int
+     */
 	public const STATUS_ACTIVE = 1;
 
 	/**
-	 * @return int[]
+	 * @return array<int>
 	 */
 	protected function _getTimezoneOffsets(): array {
 		if ($this->timezone_offset === null) {
@@ -80,7 +88,7 @@ class Country extends Entity {
 	}
 
 	/**
-	 * @return string[]
+	 * @return array<string>
 	 */
 	protected function _getTimezoneOffsetStrings(): array {
 		if ($this->timezone_offset === null) {

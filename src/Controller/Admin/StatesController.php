@@ -141,30 +141,4 @@ class StatesController extends DataAppController {
 		return $this->redirect(['action' => 'index']);
 	}
 
-	/**
-	 * For both index views
-	 *
-	 * @deprecated
-	 * @param int|null $cid
-	 * @return \Cake\Http\Response|null|void
-	 */
-	protected function _processCountry($cid) {
-		$saveCid = true;
-		if (empty($cid)) {
-			$saveCid = false;
-			$cid = $this->request->getSession()->read('State.cid');
-		}
-		if (!empty($cid) && $cid < 0) {
-			$this->request->getSession()->delete('State.cid');
-			$cid = null;
-		} elseif (!empty($cid) && $saveCid) {
-			$this->request->getSession()->write('State.cid', $cid);
-		}
-
-		if (!empty($cid)) {
-			$this->paginate = ['conditions' => ['country_id' => $cid]] + $this->paginate;
-			//$this->request->data['Filter']['id'] = $cid;
-		}
-	}
-
 }

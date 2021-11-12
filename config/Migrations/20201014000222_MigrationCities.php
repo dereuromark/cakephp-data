@@ -90,22 +90,22 @@ class MigrationCities extends AbstractMigration {
 				[
 					'slug',
 				],
-				['unique' => true]
+				['unique' => true],
 			)
 			->addIndex(
 				[
 					'official_key',
-				]
+				],
 			)
 			->addIndex(
 				[
 					'name',
-				]
+				],
 			)
 			->addIndex(
 				[
 					'postal_code',
-				]
+				],
 			)
 			->create();
 	}

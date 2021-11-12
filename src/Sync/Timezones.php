@@ -13,7 +13,14 @@ use RuntimeException;
  */
 class Timezones {
 
+    /**
+     * @var string
+     */
 	public const URL = 'https://en.wikipedia.org/w/api.php?action=parse&page=%s&prop=wikitext&format=json';
+
+    /**
+     * @var string
+     */
 	public const PAGE = 'List_of_tz_database_time_zones';
 
 	/**
@@ -101,8 +108,8 @@ class Timezones {
 	}
 
 	/**
-	 * @param \Data\Model\Entity\Timezone[] $storedTimezones
-	 * @param string[] $fields
+	 * @param array<\Data\Model\Entity\Timezone> $storedTimezones
+	 * @param array<string> $fields
 	 *
 	 * @return array
 	 */

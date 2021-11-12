@@ -112,7 +112,7 @@ class TimezonesController extends AppController {
 	 * @return \Cake\Http\Response|null|void
 	 */
 	public function link() {
-		/** @var \Data\Model\Entity\Timezone[] $storedTimezones */
+		/** @var array<\Data\Model\Entity\Timezone> $storedTimezones */
 		$storedTimezones = $this->Timezones->find()->all()->toArray();
 		$storedTimezones = Hash::combine($storedTimezones, '{n}.name', '{n}');
 

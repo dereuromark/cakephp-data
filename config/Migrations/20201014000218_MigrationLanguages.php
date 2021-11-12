@@ -73,13 +73,13 @@ class MigrationLanguages extends AbstractMigration {
 				[
 					'iso2',
 				],
-				['unique' => true]
+				['unique' => true],
 			)
 			->addIndex(
 				[
 					'iso3',
 				],
-				['unique' => true]
+				['unique' => true],
 			)
 			->create();
 	}

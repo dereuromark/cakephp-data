@@ -16,7 +16,7 @@ class TimezonesTableTest extends TestCase {
 	protected $Timezones;
 
 	/**
-	 * @var string[]
+	 * @var array<string>
 	 */
 	protected $fixtures = [
 		'plugin.Data.Timezones',

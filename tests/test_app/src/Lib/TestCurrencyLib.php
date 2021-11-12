@@ -8,7 +8,7 @@ use Data\Lib\CurrencyLib;
 class TestCurrencyLib extends CurrencyLib {
 
 	/**
-	 * @return bool|float|int
+	 * @return float|int|bool
 	 */
 	protected function _getBitcoin() {
 		if (!empty($_SERVER['argv']) && in_array('--debug', $_SERVER['argv'], true)) {

@@ -12,11 +12,11 @@ use Tools\Model\Table\Table;
  * @property \Data\Model\Table\MimeTypesTable&\Cake\ORM\Association\HasMany $MimeTypes
  * @method \Data\Model\Entity\MimeTypeImage newEmptyEntity()
  * @method \Data\Model\Entity\MimeTypeImage newEntity(array $data, array $options = [])
- * @method \Data\Model\Entity\MimeTypeImage[] newEntities(array $data, array $options = [])
+ * @method array<\Data\Model\Entity\MimeTypeImage> newEntities(array $data, array $options = [])
  * @method \Data\Model\Entity\MimeTypeImage get($primaryKey, $options = [])
  * @method \Data\Model\Entity\MimeTypeImage findOrCreate($search, ?callable $callback = null, $options = [])
  * @method \Data\Model\Entity\MimeTypeImage patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Data\Model\Entity\MimeTypeImage[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method array<\Data\Model\Entity\MimeTypeImage> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Data\Model\Entity\MimeTypeImage|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\MimeTypeImage saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\MimeTypeImage[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
@@ -130,7 +130,7 @@ class MimeTypeImagesTable extends Table {
 
 			# remove id from mime_types table
 
-			/** @var \Cake\Datasource\EntityInterface[] $types */
+			/** @var array<\Cake\Datasource\EntityInterface> $types */
 			$types = $this->MimeTypes->find('all', ['fields' => ['id'], 'conditions' => ['mime_type_image_id' => $this->_del->id]])->toArray();
 			foreach ($types as $type) {
 				$id = $type['id'];
@@ -198,7 +198,7 @@ class MimeTypeImagesTable extends Table {
 	 * ALLOWED EXTENSIONS
 	 *
 	 * @param string|null $value
-	 * @return array|mixed|string
+	 * @return mixed|array|string
 	 */
 	public static function extensions($value = null) {
 		$options = [

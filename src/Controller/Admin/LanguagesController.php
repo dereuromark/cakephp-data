@@ -138,9 +138,7 @@ class LanguagesController extends DataAppController {
 		$count = 0;
 		$errors = [];
 		foreach ($languages as $language) {
-			if (!($code = $this->Languages->iso3ToIso2($language['localeFallback']))) {
-				$code = '';
-			}
+			$code = $this->Languages->iso3ToIso2($language['localeFallback']) ?: '';
 			$data = [
 				'name' => $language,
 				'ori_name' => $language,
@@ -225,10 +223,10 @@ class LanguagesController extends DataAppController {
 		return $this->redirect(['action' => 'index']);
 	}
 
-/* probs:
+	/* probs:
 
-Array
-(
+	Array
+	(
 	[0] => Array
 		(
 			[data] => Array
@@ -301,8 +299,8 @@ Array
 
 		)
 
-)
+	)
 
-*/
+	*/
 
 }

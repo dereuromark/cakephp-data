@@ -32,7 +32,7 @@ class CountiesTable extends Table {
 
 	/**
 	 * @param mixed $data
-	 * @return bool|\Cake\Datasource\EntityInterface
+	 * @return \Cake\Datasource\EntityInterface|bool
 	 */
 	public function initCounty($data) {
 		$entity = $this->newEntity($data);

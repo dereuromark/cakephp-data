@@ -10,11 +10,11 @@ use Tools\Model\Table\Table;
  *
  * @method \Data\Model\Entity\City newEmptyEntity()
  * @method \Data\Model\Entity\City newEntity(array $data, array $options = [])
- * @method \Data\Model\Entity\City[] newEntities(array $data, array $options = [])
+ * @method array<\Data\Model\Entity\City> newEntities(array $data, array $options = [])
  * @method \Data\Model\Entity\City get($primaryKey, $options = [])
  * @method \Data\Model\Entity\City findOrCreate($search, ?callable $callback = null, $options = [])
  * @method \Data\Model\Entity\City patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Data\Model\Entity\City[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method array<\Data\Model\Entity\City> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Data\Model\Entity\City|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\City saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\City[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])

@@ -3,7 +3,6 @@
 namespace Data\Controller\Admin;
 
 use Data\Controller\DataAppController;
-use RuntimeException;
 use Tools\Utility\Mime;
 
 /**
@@ -146,7 +145,7 @@ class MimeTypesController extends DataAppController {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated To be replaced soon
 	 *
 	 * @param array $conditions
 	 * @return array
@@ -189,7 +188,7 @@ class MimeTypesController extends DataAppController {
 		}
 
 		return $conditions;
-	 }
+	}
 
 	/**
 	 * @param int|null $id
@@ -203,11 +202,7 @@ class MimeTypesController extends DataAppController {
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$mimeType = $this->MimeTypes->get($id);
-		if (empty($mimeType)) {
-			$this->Flash->error(__('record not exists'));
 
-			return $this->Common->autoRedirect(['action' => 'index']);
-		}
 		$this->set(compact('mimeType'));
 	}
 
@@ -308,149 +303,6 @@ class MimeTypesController extends DataAppController {
 		if (!empty($value)) {
 			$this->set('ajaxToggle', $value);
 			$this->render('toggle_active', 'ajax');
-		}
-	}
-
-	/**
-	 * @throws \RuntimeException
-	 * @return void
-	 */
-	public function manualNames() {
-		$export = [];
-
-		$result = [
-			 'text/plain	Plain text. Default if data is primarily text and no other type detected.',
-			 'text/html	HTML',
-			 'text/xml	XML data',
-			 'text/richtext	Rich Text Format (RTF).',
-			 'text/scriptlet	Windows script component.',
-			 'audio/x-aiff	Audio Interchange File, Macintosh.',
-			 'audio/basic	Audio file, UNIX.',
-			 'audio/mid	Internet Explorer 7 and later. MIDI sequence.',
-			 'audio/wav	Pulse Code Modulation (PCM) Wave audio, Windows.',
-			 'image/gif	Graphics Interchange Format (GIF).',
-			 'image/jpeg	JPEG image.',
-			 'image/pjpeg	Default type for JPEG images.',
-			 'image/png	Internet Explorer 7 and later. Portable Network Graphics (PNG).',
-			 'image/x-png	Internet Explorer 7 and later. Default type for PNG images.',
-			 'image/tiff	Tagged Image File Format (TIFF) image.',
-			 'image/bmp	Bitmap (BMP) image.',
-			 'image/x-xbitmap	Removed from Internet Explorer 8.',
-			 'image/x-jg	AOL Johnson-Grace compressed file.',
-			 'image/x-emf	Enhanced Metafile (EMF).',
-			 'image/x-wmf	Windows Metafile Format (WMF).',
-			 'video/avi	Audio-Video Interleaved (AVI) file.',
-			 'video/mpeg	MPEG stream file.',
-			 'application/octet-stream	Binary file. Default if data is primarily binary.',
-			 'application/postscript	PostScript (.ai, .eps, or .ps) file.',
-			 'application/base64	Base64-encoded bytes.',
-			 'application/macbinhex40	BinHex for Macintosh.',
-			 'application/pdf	Portable Document Format (PDF).',
-			 'application/xml	XML data. Must be server-supplied. See also "text/xml" type.',
-			 'application/atom+xml	Internet Explorer 7 and later. Atom Syndication Format feed.',
-			 'application/rss+xml	Internet Explorer 7 and later. Really Simple Syndication (RSS) feed.',
-			 'application/x-compressed	UNIX tar file, Gzipped.',
-			 'application/x-zip-compressed	Compressed archive file.',
-			 'application/x-gzip-compressed	Gzip compressed archive file.',
-			 'application/java	Java applet.',
-			 'application/x-msdownload	Executable (.exe or .dll) file.',
-		];
-		foreach ($result as $r) {
-			$array = explode("\ŧ", $r);
-
-			$type = trim($array[0]);
-			$name = trim($array[1]);
-
-			$export[] = ['type' => $type];
-
-			$record = $this->MimeTypes->find()->where(['type' => $type])->first();
-			if (!$record) {
-				continue;
-			}
-
-			$record['name'] = $name;
-			$record['type'] = $type;
-
-			$res = $this->MimeTypes->save($record);
-			if (!$res) {
-				throw new RuntimeException(print_r($record->getErrors(), true));
-			}
-
-			echo 'OK:';
-			echo $res;
-		}
-
-		$this->autoRender = false;
-	}
-
-	/**
-	 * @return void
-	 */
-	public function manualInput() {
-		//$this->autoRender = false;
-		$count = 0;
-		$notSaved = 0;
-
-		$result = [];
-
-		$export = [];
-		$data = [];
-
-		foreach ($result as $r) {
-			$array = explode("\t", $r);
-
-				$type = trim($array[1]);
-				$ext = trim($array[0]);
-				$export[] = ['type' => $type, 'ext' => $ext];
-
-						$data[] = ['name' => $type, 'type' => $type, 'ext' => $ext, 'active' => 0];
-
-		}
-		echo count($data);
-		foreach ($data as $d) {
-
-			$record = [];
-			if (!empty($d['ext'])) {
-				$record = $this->MimeTypes->find('all', ['conditions' => ['ext' => $d['ext']]])->first();
-			}
-
-			if (!empty($record['type']) && $record['type'] != $d['type']) {
-				//echo '<br/>';
-				echo '<b>' . $d['ext'] . ' (DIFF TYPES!):</b>';
-				//pr($record);
-				//pr($d);
-				//echo '<br/>';
-			}
-
-			$mimeType = $this->MimeTypes->newEntity($d);
-			if ($this->MimeTypes->save($mimeType)) {
-				$count++;
-				/*
-				echo $data['name'].' (INSERTED!):';
-				pr ($record);
-				pr ($data);
-				echo '<br/>';
-				*/
-
-			} else {
-				$notSaved++;
-			}
-		}
-
-		if ($count > 0) {
-			echo $count . ' neue eingefügt!'; //BR;
-		}
-		if ($notSaved > 0) {
-			echo $notSaved . ' nicht eingefügt!'; //BR;
-		}
-
-		if (!empty($export)) {
-			$this->set('exportArray', $export);
-			/*
-				$file = new File(TMP.'mime_types_'.time().'.txt');
-			$file->open('w', true);
-			$file->write(serialize($export), 'w', true);
-			*/
 		}
 	}
 

@@ -63,7 +63,7 @@ class CountriesController extends DataAppController {
 	}
 
 	/**
-	 * @return string[]
+	 * @return array<string>
 	 */
 	protected function _icons() {
 		$useCache = true;
@@ -71,10 +71,13 @@ class CountriesController extends DataAppController {
 			$useCache = false;
 		}
 
-		if ($useCache && ($iconNames = Cache::read('country_icon_names')) !== false) {
-			$this->Flash->info('Cache Used');
+		if ($useCache) {
+			$iconNames = Cache::read('country_icon_names');
+			if ($iconNames !== false) {
+				$this->Flash->info('Cache Used');
 
-			return $iconNames;
+				return $iconNames;
+			}
 		}
 
 		$handle = new Folder($this->imageFolder);

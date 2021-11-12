@@ -16,10 +16,10 @@ use Tools\Model\Table\Table;
  * @mixin \Search\Model\Behavior\SearchBehavior
  * @method \Data\Model\Entity\Country get($primaryKey, $options = [])
  * @method \Data\Model\Entity\Country newEntity(array $data, array $options = [])
- * @method \Data\Model\Entity\Country[] newEntities(array $data, array $options = [])
+ * @method array<\Data\Model\Entity\Country> newEntities(array $data, array $options = [])
  * @method \Data\Model\Entity\Country|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\Country patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Data\Model\Entity\Country[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method array<\Data\Model\Entity\Country> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Data\Model\Entity\Country findOrCreate($search, ?callable $callback = null, $options = [])
  * @property \Data\Model\Table\StatesTable&\Cake\ORM\Association\HasMany $States
  * @method \Data\Model\Entity\Country saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
@@ -168,7 +168,7 @@ class CountriesTable extends Table {
 				$conditions = [$this->getAlias() . '.iso2' => '']; # right now only iso2
 			}
 
-			/** @var \Data\Model\Entity\Country[] $countries */
+			/** @var array<\Data\Model\Entity\Country> $countries */
 			$countries = $this->find('all', ['conditions' => $conditions, 'contain' => []]);
 
 			$count = 0;
@@ -261,7 +261,14 @@ class CountriesTable extends Table {
 		return $this->getIdByIso(Configure::read('Data.defaultCountryCode', 'DE'));
 	}
 
+    /**
+     * @var int
+     */
 	public const STATUS_ACTIVE = 1;
+
+    /**
+     * @var int
+     */
 	public const STATUS_INACTIVE = 0;
 
 }

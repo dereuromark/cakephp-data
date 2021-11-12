@@ -24,11 +24,20 @@ use Cake\Utility\Xml;
  */
 class CurrencyLib {
 
+    /**
+     * @var string
+     */
 	public const URL = 'http://www.ecb.int/stats/eurofxref/eurofxref-daily.xml';
 
+    /**
+     * @var string
+     */
 	public const URL_HISTORY = 'http://www.ecb.int/stats/eurofxref/eurofxref-hist.xml';
 
 	//TODO: get information about a currency (name, ...)
+    /**
+     * @var string
+     */
 	public const URL_TABLE = 'http://www.ecb.int/rss/fxref-{currency}.html';
 
 	/**
@@ -154,7 +163,7 @@ class CurrencyLib {
 	/**
 	 * @param string $currency Code (3digit - e.g. EUR)
 	 * @param mixed $default (defaults to bool false)
-	 * @return bool|mixed
+	 * @return mixed|bool
 	 */
 	public function getName($currency, $default = false) {
 		if (empty($currency)) {
@@ -226,8 +235,11 @@ class CurrencyLib {
 			$currencyList[$currency['@currency']] = $currency['@rate'];
 		}
 
-		if ($this->includeBitcoin && ($res = $this->_getBitcoin())) {
-			$currencyList['BTC'] = $res;
+		if ($this->includeBitcoin) {
+			$res = $this->_getBitcoin();
+			if ($res) {
+				$currencyList['BTC'] = $res;
+			}
 		}
 
 		//Cache
@@ -237,7 +249,7 @@ class CurrencyLib {
 	}
 
 	/**
-	 * @return bool|float
+	 * @return float|bool
 	 */
 	protected function _getBitcoin() {
 		$Btc = new CurrencyBitcoinLib();
@@ -257,7 +269,7 @@ class CurrencyLib {
 
 	/**
 	 * @param string $name Name: "" (none), "history", "full" (both)
-	 * @return bool|mixed
+	 * @return mixed|bool
 	 */
 	protected function _retrieve($name = '') {
 		$res = Cache::read('currencyList' . ucfirst($name));
@@ -281,7 +293,7 @@ class CurrencyLib {
 	}
 
 	/**
-	 * @var string[]
+	 * @var array<string>
 	 */
 	protected $currencies = [
 		'AFA' => 'Afghanistan Afghani',

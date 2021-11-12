@@ -20,10 +20,10 @@ use Tools\Utility\L10n;
  * @mixin \Search\Model\Behavior\SearchBehavior
  * @method \Data\Model\Entity\Language get($primaryKey, $options = [])
  * @method \Data\Model\Entity\Language newEntity(array $data, array $options = [])
- * @method \Data\Model\Entity\Language[] newEntities(array $data, array $options = [])
+ * @method array<\Data\Model\Entity\Language> newEntities(array $data, array $options = [])
  * @method \Data\Model\Entity\Language|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\Language patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Data\Model\Entity\Language[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method array<\Data\Model\Entity\Language> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Data\Model\Entity\Language findOrCreate($search, ?callable $callback = null, $options = [])
  * @method \Data\Model\Entity\Language saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\Language newEmptyEntity()
@@ -219,7 +219,7 @@ class LanguagesTable extends Table {
 	 * Maps ISO 639-3 to I10n::__l10nCatalog (iso2?)
 	 *
 	 * @param string|null $iso3 Language
-	 * @return string|array|null Lang: iso2
+	 * @return array|string|null Lang: iso2
 	 */
 	public function iso3ToIso2($iso3 = null) {
 		if (!isset($this->L10n)) {
@@ -254,7 +254,8 @@ class LanguagesTable extends Table {
 	 */
 	public function getOfficialIsoList() {
 		$HtmlDom = new HtmlDom();
-		if (!($res = Cache::read('lov_gov_iso_list'))) {
+		$res = Cache::read('lov_gov_iso_list');
+		if (!$res) {
 			$res = file_get_contents('http://www.loc.gov/standards/iso639-2/php/code_list.php');
 			$res = $HtmlDom->domFromString($res);
 			Cache::write('lov_gov_iso_list', $res);

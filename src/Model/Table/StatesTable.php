@@ -15,11 +15,11 @@ use Tools\Model\Table\Table;
  * @mixin \Search\Model\Behavior\SearchBehavior
  * @method \Data\Model\Entity\State get($primaryKey, $options = [])
  * @method \Data\Model\Entity\State newEntity(array $data, array $options = [])
- * @method \Data\Model\Entity\State[] newEntities(array $data, array $options = [])
+ * @method array<\Data\Model\Entity\State> newEntities(array $data, array $options = [])
  * @method \Data\Model\Entity\State|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\State saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\State patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Data\Model\Entity\State[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method array<\Data\Model\Entity\State> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Data\Model\Entity\State findOrCreate($search, ?callable $callback = null, $options = [])
  * @mixin \Tools\Model\Behavior\SluggedBehavior
  * @property \Data\Model\Table\CountriesTable&\Cake\ORM\Association\BelongsTo $Countries
@@ -197,7 +197,7 @@ class StatesTable extends Table {
 			}
 
 			$results = $this->find('all', ['conditions' => $conditions, 'contain' => ['Countries.name'], 'order' => [
-'modified' =>
+			'modified' =>
 				'ASC']]);
 			$count = 0;
 

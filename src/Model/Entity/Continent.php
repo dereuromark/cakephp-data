@@ -15,8 +15,8 @@ use Tools\Model\Entity\Entity;
  * @property int $status
  * @property \Cake\I18n\FrozenTime $modified
  * @property \Data\Model\Entity\Continent|null $parent_continent
- * @property \Cake\ORM\Entity[] $child_continents
- * @property \Cake\ORM\Entity[] $countries
+ * @property array<\Cake\ORM\Entity> $child_continents
+ * @property array<\Cake\ORM\Entity> $countries
  */
 class Continent extends Entity {
 
@@ -35,8 +35,8 @@ class Continent extends Entity {
 	];
 
 	/**
-	 * @param int|int[]|null $value
-	 * @return string|string[]
+	 * @param array<int>|int|null $value
+	 * @return array<string>|string
 	 */
 	public static function directions($value = null) {
 		$options = [
@@ -47,7 +47,14 @@ class Continent extends Entity {
 		return parent::enum($value, $options);
 	}
 
+    /**
+     * @var int
+     */
 	public const STATUS_INACTIVE = 0;
+
+    /**
+     * @var int
+     */
 	public const STATUS_ACTIVE = 1;
 
 }

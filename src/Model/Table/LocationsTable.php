@@ -72,7 +72,7 @@ class LocationsTable extends Table {
 	 */
 	public function getLocation($locationName, $countryId = null) {
 		$country = $countryId !== null ? ', ' . $countryId : __('Germany'); ////Country::addressList($countryId)
-		$countryId = $countryId !== null ? $countryId : 1;
+		$countryId = $countryId ?? 1;
 
 		if (is_numeric($locationName) && strlen($locationName) < 5) { //Country::zipCodeLength($countryId)
 			$location = $this->find('all', ['conditions' => ['formatted_address LIKE' => $locationName . '%' . $country]])->first();
@@ -121,7 +121,8 @@ class LocationsTable extends Table {
 					'SIN( PI()/2 - RADIANS(90 - Location.lat)) * ' .
 					'SIN( PI()/2 - RADIANS(90 - ' . $lat . '))) ' .
 					'AS distance',
-				]),
+				],
+            ),
 				'order' => 'distance ASC',
 				'limit' => $limit,
 		]);
@@ -141,7 +142,7 @@ class LocationsTable extends Table {
 			//App::import('Vendor', 'geoip', ['file' => 'geoip' . DS . 'geoip.php']);
 			$record = []; //TODO
 		} else {
-			Log::write( LOG_WARNING, 'Invalid IP `' . $ip . '`');
+			Log::write(LOG_WARNING, 'Invalid IP `' . $ip . '`');
 		}
 
 		return !empty($record) ? $this->findLocationByCoordinates($record->latitude, $record->longitude, 1) : false;

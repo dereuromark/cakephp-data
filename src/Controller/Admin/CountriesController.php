@@ -82,7 +82,7 @@ class CountriesController extends DataAppController {
 	}
 
 	/**
-	 * @return string[]
+	 * @return array<string>
 	 */
 	protected function _icons(): array {
 		[$wwwPath, $path] = (new DataHelper(new View()))->getCountryIconPaths();
