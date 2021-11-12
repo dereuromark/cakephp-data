@@ -71,14 +71,16 @@ class Timezones {
 			$lat = $lng = null;
 			if ($row['lat_lng']) {
 				preg_match('#^([+−]\d+)([+−]\d+)$#u', $row['lat_lng'], $latLngMatches);
-				$lat = $latLngMatches[1];
-				$lng = $latLngMatches[2];
+				if ($latLngMatches) {
+					$lat = $latLngMatches[1];
+					$lng = $latLngMatches[2];
 
-				$lat = str_replace(['+', '−'], ['+', '-'], $lat);
-				$lng = str_replace(['+', '−'], ['+', '-'], $lng);
+					$lat = str_replace(['+', '−'], ['+', '-'], $lat);
+					$lng = str_replace(['+', '−'], ['+', '-'], $lng);
 
-				$lat = (float)((int)substr($lat, 0, 3) . '.' . substr($lat, 3));
-				$lng = (float)((int)substr($lng, 0, 4) . '.' . substr($lng, 4));
+					$lat = (float)((int)substr($lat, 0, 3) . '.' . substr($lat, 3));
+					$lng = (float)((int)substr($lng, 0, 4) . '.' . substr($lng, 4));
+				}
 			}
 
 			if ($offset) {
@@ -87,8 +89,8 @@ class Timezones {
 			if ($offsetDst) {
 				$offsetDst = static::stringToInt($offsetDst);
 			}
-			if (!is_numeric($offset) || !is_numeric($offsetDst)) {
-				throw new RuntimeException('Not numeric value encountered in offset or offset_dst for ' . $name . '!');
+			if (($offset && !is_numeric($offset)) || ($offsetDst && !is_numeric($offsetDst))) {
+				throw new RuntimeException('Not numeric value encountered in offset or offset_dst for ' . $name . ': `' . $offset . '`/`' . $offsetDst . '`');
 			}
 
 			$timezones[$name] = [
