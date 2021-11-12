@@ -11,15 +11,15 @@ if (!defined('WINDOWS')) {
 	}
 }
 // Path constants to a few helpful things.
-define('ROOT', dirname(__DIR__) . DS);
-define('CAKE_CORE_INCLUDE_PATH', ROOT . 'vendor' . DS . 'cakephp' . DS . 'cakephp');
-define('CORE_PATH', ROOT . 'vendor' . DS . 'cakephp' . DS . 'cakephp' . DS);
+define('ROOT', dirname(__DIR__));
+define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . 'vendor' . DS . 'cakephp' . DS . 'cakephp');
+define('CORE_PATH', ROOT . DS . 'vendor' . DS . 'cakephp' . DS . 'cakephp' . DS);
 define('CAKE', CORE_PATH . 'src' . DS);
-define('TESTS', ROOT . 'tests' . DS);
+define('TESTS', ROOT . DS . 'tests' . DS);
 define('APP', TESTS . 'test_app' . DS);
 define('APP_DIR', 'test_app');
 define('WEBROOT_DIR', 'webroot');
-define('TMP', ROOT . 'tmp' . DS);
+define('TMP', ROOT . DS . 'tmp' . DS);
 define('CONFIG', TESTS . 'config' . DS);
 define('WWW_ROOT', APP);
 define('CACHE', TMP);
