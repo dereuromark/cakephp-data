@@ -59,15 +59,15 @@ class Country extends Entity {
 		'timezone_offset_string',
 	];
 
-    /**
-     * @var int
-     */
+	/**
+	 * @var int
+	 */
 	public const STATUS_INACTIVE = 0;
 
-    /**
-     * @return array<int>
-     * @var int
-     */
+	/**
+	 * @return array<int>
+	 * @var int
+	 */
 	public const STATUS_ACTIVE = 1;
 
 	/**

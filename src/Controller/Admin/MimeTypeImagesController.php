@@ -163,10 +163,10 @@ class MimeTypeImagesController extends DataAppController {
 					}
 
 					if (rename(PATH_MIMETYPES . 'import' . DS . $filename, PATH_MIMETYPES . $name . '.' . $ext) && $this->MimeTypeImages->allocate(
-                        $recordId,
-                        $name,
-                        $ext,
-                    )) {
+						$recordId,
+						$name,
+						$ext,
+					)) {
 						$renameSuccess[] = $name . '.' . $ext;
 						unset($this->request->data['imgs'][$key]);
 						unset($this->request->data['names'][$key]);

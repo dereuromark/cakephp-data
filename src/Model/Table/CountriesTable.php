@@ -261,14 +261,14 @@ class CountriesTable extends Table {
 		return $this->getIdByIso(Configure::read('Data.defaultCountryCode', 'DE'));
 	}
 
-    /**
-     * @var int
-     */
+	/**
+	 * @var int
+	 */
 	public const STATUS_ACTIVE = 1;
 
-    /**
-     * @var int
-     */
+	/**
+	 * @var int
+	 */
 	public const STATUS_INACTIVE = 0;
 
 }

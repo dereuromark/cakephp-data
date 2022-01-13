@@ -47,14 +47,14 @@ class Continent extends Entity {
 		return parent::enum($value, $options);
 	}
 
-    /**
-     * @var int
-     */
+	/**
+	 * @var int
+	 */
 	public const STATUS_INACTIVE = 0;
 
-    /**
-     * @var int
-     */
+	/**
+	 * @var int
+	 */
 	public const STATUS_ACTIVE = 1;
 
 }

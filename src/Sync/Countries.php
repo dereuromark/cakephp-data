@@ -12,9 +12,9 @@ use Data\Model\Entity\Country;
  */
 class Countries {
 
-    /**
-     * @var string
-     */
+	/**
+	 * @var string
+	 */
 	public const URL_XML = 'https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/xml/countries.xml';
 
 	/**

@@ -122,7 +122,7 @@ class LocationsTable extends Table {
 					'SIN( PI()/2 - RADIANS(90 - ' . $lat . '))) ' .
 					'AS distance',
 				],
-            ),
+			),
 				'order' => 'distance ASC',
 				'limit' => $limit,
 		]);

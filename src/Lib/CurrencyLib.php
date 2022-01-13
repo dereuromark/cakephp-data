@@ -24,20 +24,20 @@ use Cake\Utility\Xml;
  */
 class CurrencyLib {
 
-    /**
-     * @var string
-     */
+	/**
+	 * @var string
+	 */
 	public const URL = 'http://www.ecb.int/stats/eurofxref/eurofxref-daily.xml';
 
-    /**
-     * @var string
-     */
+	/**
+	 * @var string
+	 */
 	public const URL_HISTORY = 'http://www.ecb.int/stats/eurofxref/eurofxref-hist.xml';
 
 	//TODO: get information about a currency (name, ...)
-    /**
-     * @var string
-     */
+	/**
+	 * @var string
+	 */
 	public const URL_TABLE = 'http://www.ecb.int/rss/fxref-{currency}.html';
 
 	/**

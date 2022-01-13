@@ -13,14 +13,14 @@ use RuntimeException;
  */
 class Timezones {
 
-    /**
-     * @var string
-     */
+	/**
+	 * @var string
+	 */
 	public const URL = 'https://en.wikipedia.org/w/api.php?action=parse&page=%s&prop=wikitext&format=json';
 
-    /**
-     * @var string
-     */
+	/**
+	 * @var string
+	 */
 	public const PAGE = 'List_of_tz_database_time_zones';
 
 	/**

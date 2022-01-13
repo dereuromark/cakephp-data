@@ -57,14 +57,14 @@ class Address extends Entity {
 		return parent::enum($value, $options);
 	}
 
-    /**
-     * @var int
-     */
+	/**
+	 * @var int
+	 */
 	public const TYPE_MAIN = 1;
 
-    /**
-     * @var int
-     */
+	/**
+	 * @var int
+	 */
 	public const TYPE_OTHER = 9;
 
 }
