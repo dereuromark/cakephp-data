@@ -95,7 +95,7 @@ class MimeTypesTable extends Table {
 
 	/**
 	 * @param bool $created
-	 * @param array $options
+	 * @param array<string, mixed> $options
 	 * @return void
 	 */
 	public function _afterSave($created, $options = []) {

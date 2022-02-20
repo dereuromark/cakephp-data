@@ -33,7 +33,7 @@ class DataHelper extends Helper {
 	 * 'imagePath' => 'PluginName./img/country_flags/',
 	 *
 	 * @param string|null $code iso2 code (e.g. 'de' or 'gb')
-	 * @param array $options
+	 * @param array<string, mixed> $options
 	 * @param array $attr
 	 *
 	 * @return string|null
@@ -74,7 +74,7 @@ class DataHelper extends Helper {
 
 	/**
 	 * @param string|null $code
-	 * @param array $options
+	 * @param array<string, mixed> $options
 	 * @param array $attr
 	 *
 	 * @return string
@@ -93,7 +93,7 @@ class DataHelper extends Helper {
 	 * Here you need to use the map config.
 	 *
 	 * @param string $code iso2 code (e.g. 'en' or 'de')
-	 * @param array $options
+	 * @param array<string, mixed> $options
 	 * @param array $attr
 	 *
 	 * @return string

@@ -195,7 +195,7 @@ class CurrenciesTable extends Table {
 	/**
 	 * All except base one
 	 *
-	 * @param array $options
+	 * @param array<string, mixed> $options
 	 * @return \Cake\ORM\Query
 	 */
 	public function foreignCurrencies($options = []) {
@@ -206,7 +206,7 @@ class CurrenciesTable extends Table {
 	}
 
 	/**
-	 * @param array $options
+	 * @param array<string, mixed> $options
 	 *
 	 * @return \Data\Model\Entity\Currency|null
 	 */

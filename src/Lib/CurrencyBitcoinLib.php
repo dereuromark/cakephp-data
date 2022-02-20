@@ -22,7 +22,7 @@ class CurrencyBitcoinLib {
 
 	/**
 	 * @see https://bitmarket.eu/api
-	 * @param array $options
+	 * @param array<string, mixed> $options
 	 * @return bool
 	 */
 	public function bitmarket($options = []) {
@@ -47,7 +47,7 @@ class CurrencyBitcoinLib {
 	 * Working
 	 *
 	 * @see http://bitcoincharts.com/about/markets-api/
-	 * @param array $options
+	 * @param array<string, mixed> $options
 	 * @return array|bool
 	 */
 	public function bitcoincharts($options = []) {
@@ -74,7 +74,7 @@ class CurrencyBitcoinLib {
 	}
 
 	/**
-	 * @param array $options
+	 * @param array<string, mixed> $options
 	 * - currency
 	 * - api
 	 * @return float|bool

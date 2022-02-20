@@ -139,7 +139,7 @@ class CountriesTable extends Table {
 	}
 
 	/**
-	 * @param array $options
+	 * @param array<string, mixed> $options
 	 * @return \Cake\ORM\Query
 	 */
 	public function findActive(array $options = []) {

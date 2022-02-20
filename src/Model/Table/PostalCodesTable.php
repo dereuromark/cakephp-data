@@ -89,7 +89,7 @@ class PostalCodesTable extends Table {
 	/**
 	 * @param string $code
 	 * @param int|null $countryId
-	 * @param array $options
+	 * @param array<string, mixed> $options
 	 *
 	 * @return \Cake\ORM\Query
 	 */
