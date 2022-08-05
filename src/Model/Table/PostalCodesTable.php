@@ -18,10 +18,10 @@ use Tools\Model\Table\Table;
  * @method \Data\Model\Entity\PostalCode saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @mixin \Geo\Model\Behavior\GeocoderBehavior
  * @method \Data\Model\Entity\PostalCode newEmptyEntity()
- * @method \Data\Model\Entity\PostalCode[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\PostalCode[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \Data\Model\Entity\PostalCode[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\PostalCode[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\PostalCode>|false saveMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\PostalCode> saveManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\PostalCode>|false deleteMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\PostalCode> deleteManyOrFail(iterable $entities, $options = [])
  */
 class PostalCodesTable extends Table {
 

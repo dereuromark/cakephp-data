@@ -21,10 +21,10 @@ use Tools\Model\Table\Table;
  * @method array<\Data\Model\Entity\Currency> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Data\Model\Entity\Currency findOrCreate($search, ?callable $callback = null, $options = [])
  * @method \Data\Model\Entity\Currency newEmptyEntity()
- * @method \Data\Model\Entity\Currency[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\Currency[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \Data\Model\Entity\Currency[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\Currency[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Currency>|false saveMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Currency> saveManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Currency>|false deleteMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Currency> deleteManyOrFail(iterable $entities, $options = [])
  */
 class CurrenciesTable extends Table {
 

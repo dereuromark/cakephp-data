@@ -8,7 +8,7 @@ use Exception;
 /**
  * @property \Data\Model\Table\StatesTable $States
  * @property \Search\Controller\Component\SearchComponent $Search
- * @method \Data\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State> paginate($object = null, array $settings = [])
  */
 class StatesController extends DataAppController {
 

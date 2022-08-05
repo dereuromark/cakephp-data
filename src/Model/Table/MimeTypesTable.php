@@ -20,10 +20,10 @@ use Tools\Model\Table\Table;
  * @method array<\Data\Model\Entity\MimeType> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Data\Model\Entity\MimeType|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\MimeType saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \Data\Model\Entity\MimeType[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\MimeType[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \Data\Model\Entity\MimeType[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\MimeType[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\MimeType>|false saveMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\MimeType> saveManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\MimeType>|false deleteMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\MimeType> deleteManyOrFail(iterable $entities, $options = [])
  */
 class MimeTypesTable extends Table {
 

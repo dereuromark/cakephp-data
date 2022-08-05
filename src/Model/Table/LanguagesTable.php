@@ -27,10 +27,10 @@ use Tools\Utility\L10n;
  * @method \Data\Model\Entity\Language findOrCreate($search, ?callable $callback = null, $options = [])
  * @method \Data\Model\Entity\Language saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\Language newEmptyEntity()
- * @method \Data\Model\Entity\Language[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\Language[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \Data\Model\Entity\Language[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\Language[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Language>|false saveMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Language> saveManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Language>|false deleteMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Language> deleteManyOrFail(iterable $entities, $options = [])
  */
 class LanguagesTable extends Table {
 

@@ -21,10 +21,10 @@ use Tools\Model\Table\Table;
  * @method array<\Data\Model\Entity\Continent> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Data\Model\Entity\Continent|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\Continent saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \Data\Model\Entity\Continent[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\Continent[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \Data\Model\Entity\Continent[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\Continent[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Continent>|false saveMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Continent> saveManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Continent>|false deleteMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Continent> deleteManyOrFail(iterable $entities, $options = [])
  */
 class ContinentsTable extends Table {
 

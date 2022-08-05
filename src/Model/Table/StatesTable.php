@@ -24,10 +24,10 @@ use Tools\Model\Table\Table;
  * @mixin \Tools\Model\Behavior\SluggedBehavior
  * @property \Data\Model\Table\CountriesTable&\Cake\ORM\Association\BelongsTo $Countries
  * @method \Data\Model\Entity\State newEmptyEntity()
- * @method \Data\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \Data\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State>|false saveMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State> saveManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State>|false deleteMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State> deleteManyOrFail(iterable $entities, $options = [])
  * @property \Cake\ORM\Table&\Cake\ORM\Association\HasMany $Counties
  */
 class StatesTable extends Table {

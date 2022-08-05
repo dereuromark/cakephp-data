@@ -17,10 +17,10 @@ use Tools\Model\Table\Table;
  * @method array<\Data\Model\Entity\City> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Data\Model\Entity\City|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\City saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \Data\Model\Entity\City[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\City[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \Data\Model\Entity\City[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\City[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\City>|false saveMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\City> saveManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\City>|false deleteMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\City> deleteManyOrFail(iterable $entities, $options = [])
  *
  * @mixin \Tools\Model\Behavior\SluggedBehavior
  */

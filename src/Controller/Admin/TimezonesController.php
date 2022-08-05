@@ -11,7 +11,7 @@ use Data\Sync\Timezones;
 
 /**
  * @property \Data\Model\Table\TimezonesTable $Timezones
- * @method \Data\Model\Entity\Timezone[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Timezone> paginate($object = null, array $settings = [])
  */
 class TimezonesController extends AppController {
 

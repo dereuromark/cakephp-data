@@ -27,10 +27,10 @@ if (!defined('CLASS_USERS')) {
  * @method \Data\Model\Entity\Address saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @mixin \Geo\Model\Behavior\GeocoderBehavior
  * @method \Data\Model\Entity\Address newEmptyEntity()
- * @method \Data\Model\Entity\Address[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\Address[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \Data\Model\Entity\Address[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\Address[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Address>|false saveMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Address> saveManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Address>|false deleteMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Address> deleteManyOrFail(iterable $entities, $options = [])
  */
 class AddressesTable extends Table {
 

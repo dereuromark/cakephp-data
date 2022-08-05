@@ -23,10 +23,10 @@ use RuntimeException;
  * @method array<\Data\Model\Entity\Timezone> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Data\Model\Entity\Timezone|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\Timezone saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \Data\Model\Entity\Timezone[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\Timezone[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \Data\Model\Entity\Timezone[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\Timezone[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Timezone>|false saveMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Timezone> saveManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Timezone>|false deleteMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Timezone> deleteManyOrFail(iterable $entities, $options = [])
  *
  * @mixin \Search\Model\Behavior\SearchBehavior
  * @mixin \Cake\ORM\Behavior\TimestampBehavior

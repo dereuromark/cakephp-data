@@ -19,10 +19,10 @@ use Tools\Model\Table\Table;
  * @method array<\Data\Model\Entity\MimeTypeImage> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Data\Model\Entity\MimeTypeImage|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\MimeTypeImage saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \Data\Model\Entity\MimeTypeImage[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\MimeTypeImage[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \Data\Model\Entity\MimeTypeImage[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\MimeTypeImage[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\MimeTypeImage>|false saveMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\MimeTypeImage> saveManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\MimeTypeImage>|false deleteMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\MimeTypeImage> deleteManyOrFail(iterable $entities, $options = [])
  */
 class MimeTypeImagesTable extends Table {
 

@@ -9,7 +9,7 @@ use RuntimeException;
 
 /**
  * @property \Data\Model\Table\LanguagesTable $Languages
- * @method \Data\Model\Entity\Language[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Language> paginate($object = null, array $settings = [])
  * @property \Search\Controller\Component\SearchComponent $Search
  */
 class LanguagesController extends DataAppController {

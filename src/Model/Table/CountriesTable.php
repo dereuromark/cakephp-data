@@ -24,10 +24,10 @@ use Tools\Model\Table\Table;
  * @property \Data\Model\Table\StatesTable&\Cake\ORM\Association\HasMany $States
  * @method \Data\Model\Entity\Country saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \Data\Model\Entity\Country newEmptyEntity()
- * @method \Data\Model\Entity\Country[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\Country[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \Data\Model\Entity\Country[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \Data\Model\Entity\Country[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country>|false saveMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country> saveManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country>|false deleteMany(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country> deleteManyOrFail(iterable $entities, $options = [])
  * @property \Data\Model\Table\ContinentsTable&\Cake\ORM\Association\BelongsTo $Continents
  * @property \Data\Model\Table\TimezonesTable&\Cake\ORM\Association\HasMany $Timezones
  */

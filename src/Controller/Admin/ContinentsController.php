@@ -6,7 +6,7 @@ use Data\Controller\DataAppController;
 
 /**
  * @property \Data\Model\Table\ContinentsTable $Continents
- * @method \Data\Model\Entity\Continent[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Continent> paginate($object = null, array $settings = [])
  */
 class ContinentsController extends DataAppController {
 

@@ -10,7 +10,7 @@ use Cake\Filesystem\Folder;
 
 /**
  * @property \Data\Model\Table\CountriesTable $Countries
- * @method \Data\Model\Entity\Country[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country> paginate($object = null, array $settings = [])
  * @property \Search\Controller\Component\SearchComponent $Search
  */
 class CountriesController extends DataAppController {

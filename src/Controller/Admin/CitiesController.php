@@ -9,7 +9,7 @@ use Data\Controller\DataAppController;
  */
 /**
  * @property \Data\Model\Table\CitiesTable $Cities
- * @method \Data\Model\Entity\City[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\City> paginate($object = null, array $settings = [])
  */
 class CitiesController extends DataAppController {
 

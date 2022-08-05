@@ -7,7 +7,7 @@ use Data\Controller\DataAppController;
 
 /**
  * @property \Data\Model\Table\AddressesTable $Addresses
- * @method \Data\Model\Entity\Address[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Address> paginate($object = null, array $settings = [])
  */
 class AddressesController extends DataAppController {
 
@@ -82,7 +82,6 @@ class AddressesController extends DataAppController {
 
 		}
 		if (!$this->request->getData()) {
-			//$this->request->data = $address;
 			$belongsTo = ['' => ' - keine Auswahl - '];
 			foreach ($this->Addresses->belongsTo as $b => $content) {
 				if ($b === 'Country') {
@@ -90,9 +89,7 @@ class AddressesController extends DataAppController {
 				}
 				$belongsTo[$b] = $b;
 			}
-			if (!empty($belongsTo)) {
-				$this->set('models', $belongsTo);
-			}
+			$this->set('models', $belongsTo);
 		}
 		$countries = $this->Addresses->Countries->find('list');
 		$states = [];

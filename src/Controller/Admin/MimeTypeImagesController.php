@@ -9,7 +9,7 @@ use Tools\Utility\Utility;
 
 /**
  * @property \Data\Model\Table\MimeTypeImagesTable $MimeTypeImages
- * @method \Data\Model\Entity\MimeTypeImage[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\MimeTypeImage> paginate($object = null, array $settings = [])
  */
 class MimeTypeImagesController extends DataAppController {
 
