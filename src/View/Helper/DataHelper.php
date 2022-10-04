@@ -57,7 +57,9 @@ class DataHelper extends Helper {
 			}
 		}
 
-		$code = mb_strtolower($code);
+		if ($code) {
+			$code = mb_strtolower($code);
+		}
 		$fileExists = $code && file_exists($path . $code . '.' . $ending);
 		if ($code && !$fileExists) {
 			trigger_error($path . $code . '.' . $ending . ' missing', E_USER_NOTICE);
