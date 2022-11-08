@@ -17,7 +17,9 @@ class CountryStateHelperComponent extends Component {
 	 * @return void
 	 */
 	public function startup(EventInterface $event) {
-		$this->Controller = $this->getController();
+		/** @var \App\Controller\AppController $controller */
+		$controller = $this->getController();
+		$this->Controller = $controller;
 	}
 
 	/**

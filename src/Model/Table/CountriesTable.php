@@ -8,7 +8,6 @@ use Cake\Core\Plugin;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
 use Data\Model\Entity\Country;
-use Geo\Geocoder\Geocoder;
 use InvalidArgumentException;
 use Tools\Model\Table\Table;
 
@@ -34,7 +33,7 @@ use Tools\Model\Table\Table;
 class CountriesTable extends Table {
 
 	/**
-	 * @var array
+	 * @var array<int|string, mixed>|string|null
 	 */
 	protected $order = ['sort' => 'DESC', 'name' => 'ASC'];
 
@@ -144,68 +143,6 @@ class CountriesTable extends Table {
 	 */
 	public function findActive(array $options = []) {
 		return $this->find('all', $options)->where([$this->getAlias() . '.status' => Country::STATUS_ACTIVE]);
-	}
-
-	/**
-	 * @param int|null $id
-	 *
-	 * @return int|false
-	 */
-	public function updateCode($id = null) {
-		$Geocoder = new Geocoder();
-
-		$override = false;
-		if ($id == -1) {
-			$id = 0;
-			$override = true;
-		}
-
-		if ($id) {
-			//$res = $this->find('first', ['conditions' => [$this->getAlias() . '.id' => $id], 'contain' => []]);
-		} else {
-			$conditions = [];
-			if (!$override) {
-				$conditions = [$this->getAlias() . '.iso2' => '']; # right now only iso2
-			}
-
-			/** @var array<\Data\Model\Entity\Country> $countries */
-			$countries = $this->find('all', ['conditions' => $conditions, 'contain' => []]);
-
-			$count = 0;
-			foreach ($countries as $country) {
-				$data = $country->ori_name ? $Geocoder->geocode($country->ori_name) : null;
-				if (!$data && $country->name !== $country->ori_name) {
-					$data = $Geocoder->geocode($country->name);
-				}
-				if (!$data) {
-					continue;
-				}
-
-				if (!empty($data['country_code']) && mb_strlen($data['country_code']) === 3 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
-					$country['iso3'] = $data['country_code'];
-
-				} elseif (!empty($data['country_code']) && mb_strlen($data['country_code']) === 2 && preg_match('/^([A-Z])*$/', $data['country_code'])) {
-					$country['iso2'] = $data['country_code'];
-				}
-
-				$dirtyFields = $country->getDirty();
-
-				if ($this->save($country, ['fields' => ['iso2', 'iso3']])) {
-					$count++;
-				}
-
-				if (isset($dirtyFields['iso2'])) {
-					//$this->log('Iso2 for country \'' . $data['country'] . '\' changed from \'' . $country['iso2'] . '\' to \'' . $saveArray['iso2'] . '\'', LOG_NOTICE);
-				}
-				if (isset($dirtyFields['iso3'])) {
-					//$this->log('Iso3 for country \'' . $data['country'] . '\' changed from \'' . $country['iso3'] . '\' to \'' . $saveArray['iso3'] . '\'', LOG_NOTICE);
-				}
-			}
-
-			return $count;
-		}
-
-		return false;
 	}
 
 	/**

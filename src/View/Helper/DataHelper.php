@@ -68,7 +68,7 @@ class DataHelper extends Helper {
 			$image = $code;
 		}
 
-		$defaults = ['alt' => $code, 'title' => strtoupper($code)];
+		$defaults = ['alt' => $code, 'title' => $code ? strtoupper($code) : null];
 		$attr += $defaults;
 
 		return $this->Html->image($wwwPath . $image . '.' . $ending, $attr);

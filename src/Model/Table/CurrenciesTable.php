@@ -29,7 +29,7 @@ use Tools\Model\Table\Table;
 class CurrenciesTable extends Table {
 
 	/**
-	 * @var array
+	 * @var array<int|string, mixed>|string|null
 	 */
 	protected $order = ['base' => 'DESC', 'code' => 'ASC'];
 
@@ -73,7 +73,7 @@ class CurrenciesTable extends Table {
 	];
 
 	/**
-	 * @var \Data\Lib\CurrencyLib
+	 * @var \Data\Lib\CurrencyLib|null
 	 */
 	public $CurrencyLib;
 
@@ -183,7 +183,7 @@ class CurrenciesTable extends Table {
 		$currencies = $this->foreignCurrencies()->all();
 		foreach ($currencies as $currency) {
 			$value = $this->CurrencyLib->convert(1, $base['code'], $currency['code'], 4);
-			if ($value !== false) {
+			if ($value !== null) {
 				$id = $currency['id'];
 				$this->updateAll(['value' => $value], ['id' => $id]);
 			} else {
@@ -214,6 +214,7 @@ class CurrenciesTable extends Table {
 		$defaults = ['conditions' => [$this->getAlias() . '.base' => 1]];
 		$options = Hash::merge($defaults, $options);
 
+		/** @var \Data\Model\Entity\Currency */
 		return $this->find('all', $options)->first();
 	}
 

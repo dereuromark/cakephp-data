@@ -125,15 +125,14 @@ class MimeTypeImagesController extends DataAppController {
 		}
 
 		$renameSuccess = [];
-		if (!empty($this->request->data['imgs']) && !empty($this->request->data['names'])) {
-			if (is_array($this->request->data['imgs']) && is_array($this->request->data['names']) && is_array($this->
-				request->data['filenames'])) {
-				foreach ($this->request->data['names'] as $key => $image) {
-					if (empty($this->request->data['imgs'][$key]) || empty($this->request->data['filenames'][$key])) {
+		if ($this->request->getData('imgs') && $this->request->getData('names')) {
+			if (is_array($this->request->getData('imgs')) && is_array($this->request->getData('names')) && is_array($this->request->getData('filenames'))) {
+				foreach ($this->request->getData('names') as $key => $image) {
+					if (empty($this->request->getData('imgs')[$key]) || empty($this->request->getData('filenames')[$key])) {
 						continue;
 					}
 
-					$filename = $this->request->data['filenames'][$key];
+					$filename = $this->request->getData('filenames')[$key];
 					$ext = pathinfo($filename, PATHINFO_EXTENSION);
 					$ext = mb_strtolower($ext);
 					$name = mb_strtolower($image);
@@ -258,7 +257,7 @@ class MimeTypeImagesController extends DataAppController {
 	 * Upload new Icon/Image (auto resize to height:16px and convert if desired)
 	 * used by add() and edit()
 	 *
-	 * @param string|null $file
+	 * @param array<string, mixed>|null $file
 	 * @return bool
 	 */
 	protected function _uploadImage($file = null) {
@@ -336,7 +335,7 @@ class MimeTypeImagesController extends DataAppController {
 			}
 
 			if (empty($error) && $this->MimeTypeImages->save($mimeTypeImage)) {
-				$id = $this->MimeTypeImages->id;
+				$id = $mimeTypeImage->id;
 				//$name = $this->request->data['name'];
 				$this->Flash->success(__('record add {0} saved', $id));
 
@@ -432,7 +431,7 @@ class MimeTypeImagesController extends DataAppController {
 		$id = (int)$id;
 
 		if ($id > 0 && $this->request->isAll(['post', 'ajax'])) {
-			$value = $this->MimeTypeImages->toggleActive($id);
+			$value = null; // $this->MimeTypeImages->toggleActive($id);
 
 		}
 
@@ -449,7 +448,7 @@ class MimeTypeImagesController extends DataAppController {
 	public function manualInput() {
 		$this->autoRender = false;
 
-		/* BEGINNING */
+		/** @var array<string> $result */
 		$result = [
 			'3dm - x-world/x-3dmf',
 			'3dmf - x-world/x-3dmf',

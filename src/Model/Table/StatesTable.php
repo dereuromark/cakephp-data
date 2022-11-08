@@ -33,7 +33,7 @@ use Tools\Model\Table\Table;
 class StatesTable extends Table {
 
 	/**
-	 * @var array
+	 * @var array<int|string, mixed>|string|null
 	 */
 	protected $order = ['name' => 'ASC'];
 
@@ -171,7 +171,7 @@ class StatesTable extends Table {
 		if (!empty($id)) {
 			/** @var \Data\Model\Entity\State|null $res */
 			$res = $this->find('all', ['conditions' => [$this->getAlias() . '.id' => $id], 'contain' => ['Countries']])->first();
-			if ($res && $res->name && $res->country && !empty($res->country->name)) {
+			if ($res && $res->name && $res->country && $res->country->name) {
 				$data = $geocoder->geocode($res['name'] . ', ' . $res->country->name);
 				$data = $data->first();
 				$saveArray = ['lat' => $data['lat'], 'lng' => $data['lng'], 'country_id' => $res['country_id']];

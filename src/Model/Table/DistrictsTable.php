@@ -21,7 +21,7 @@ class DistrictsTable extends Table {
 	], 'Tools.Slugged' => ['mode' => 'ascii', 'case' => 'low']];
 
 	/**
-	 * @var array
+	 * @var array<int|string, mixed>|string|null
 	 */
 	protected $order = ['name' => 'ASC'];
 

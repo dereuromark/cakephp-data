@@ -157,8 +157,9 @@ class CurrenciesController extends DataAppController {
 	 * @return \Cake\Http\Response
 	 */
 	public function _setAsPrimary($id) {
-		if (!empty($id)) {
-			$value = $this->Currencies->setAsBase($id);
+		if ($id) {
+			//$value = $this->Currencies->setAsBase($id);
+			$value = null;
 		}
 
 		$name = '';

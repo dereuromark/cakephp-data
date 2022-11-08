@@ -23,7 +23,7 @@ class CurrencyBitcoinLib {
 	/**
 	 * @see https://bitmarket.eu/api
 	 * @param array<string, mixed> $options
-	 * @return bool
+	 * @return array<string, mixed>|false
 	 */
 	public function bitmarket($options = []) {
 		$options += $this->settings;
@@ -119,7 +119,7 @@ class CurrencyBitcoinLib {
 
 	/**
 	 * @param string $url
-	 * @return string|bool
+	 * @return array<string, mixed>|false
 	 */
 	protected function _getBitmarket($url) {
 		$res = $this->_get($url);
@@ -136,7 +136,7 @@ class CurrencyBitcoinLib {
 
 	/**
 	 * @param string $url
-	 * @return string|bool
+	 * @return array<string, mixed>|bool
 	 */
 	protected function _getBitcoincharts($url) {
 		$res = $this->_get($url);

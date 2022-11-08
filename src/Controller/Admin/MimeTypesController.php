@@ -72,13 +72,12 @@ class MimeTypesController extends DataAppController {
 			$image = $this->MimeTypes->MimeTypeImages->find('all', ['conditions' => ['MimeTypeImages.name' => $fileExt]])->first();
 			if ($image) {
 				$id = $type['id'];
-				//$data = array()
-				if ($this->MimeTypes->saveField($id, 'mime_type_image_id', $image['id'])) {
+				if ($this->MimeTypes->updateAll(['mime_type_image_id' => $image['id']], ['id' => $id])) {
 					$addedIcon[] = $fileExt . ' ' . CHAR_ARROWS . ' ' . $image['name'] . '.' . (!empty($image['ext']) ? $image['ext'] : '?');
 				}
 			}
 		}
-		if (!empty($addedIcon)) {
+		if ($addedIcon) {
 			$this->Flash->success(count($addedIcon) . ' File Extension Images added: ' . implode(', ', $addedIcon));
 		}
 	}
@@ -106,7 +105,7 @@ class MimeTypesController extends DataAppController {
 			if (is_array($mimeType)) {
 				$mimeType = array_shift($mimeType);
 			}
-			$mime = $this->MimeTypes->mimeTypeExists($ext);
+			$mime = null; // $this->MimeTypes->mimeTypeExists($ext);
 			if ($mime) {
 				$report['in'][] = ['ext' => $ext, 'type' => $mimeType, 'oldType' => $mime['type']];
 
@@ -295,7 +294,7 @@ class MimeTypesController extends DataAppController {
 		$id = (int)$id;
 
 		if ($id > 0 && $this->request->isAll(['post', 'ajax'])) {
-			$value = $this->MimeTypes->toggleActive($id);
+			$value = null; // $this->MimeTypes->toggleActive($id);
 
 		}
 

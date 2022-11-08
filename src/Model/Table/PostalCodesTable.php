@@ -31,7 +31,7 @@ class PostalCodesTable extends Table {
 	public $displayField = 'code';
 
 	/**
-	 * @var array
+	 * @var array<int|string, mixed>|string|null
 	 */
 	protected $order = ['code' => 'ASC'];
 

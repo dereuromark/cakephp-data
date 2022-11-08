@@ -28,7 +28,7 @@ use Tools\Model\Table\Table;
 class MimeTypesTable extends Table {
 
 	/**
-	 * @var array
+	 * @var array<int|string, mixed>|string|null
 	 */
 	protected $order = ['modified' => 'DESC'];
 

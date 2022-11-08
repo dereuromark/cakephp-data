@@ -45,7 +45,7 @@ class AddressesTable extends Table {
 	public $actsAs = ['Geo.Geocoder' => ['real' => false, 'override' => true, 'allow_inconclusive' => true]]; //'before'=>'validate'
 
 	/**
-	 * @var array
+	 * @var array<int|string, mixed>|string|null
 	 */
 	protected $order = ['type_id' => 'ASC', 'formatted_address' => 'ASC'];
 

@@ -35,12 +35,12 @@ use Tools\Utility\L10n;
 class LanguagesTable extends Table {
 
 	/**
-	 * @var array
+	 * @var array<int|string, mixed>|string|null
 	 */
 	protected $order = ['name' => 'ASC'];
 
 	/**
-	 * @var \Tools\Utility\L10n
+	 * @var \Tools\Utility\L10n|null
 	 */
 	public $L10n;
 
