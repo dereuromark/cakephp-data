@@ -6,7 +6,6 @@ use Cake\Http\Client;
 use Cake\Http\Exception\NotFoundException;
 use Data\Model\Entity\Timezone;
 use InvalidArgumentException;
-use RuntimeException;
 
 /**
  * @see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
@@ -100,9 +99,6 @@ class Timezones {
 			}
 			if ($offsetDst) {
 				$offsetDst = static::stringToInt($offsetDst);
-			}
-			if (($offset) || $offsetDst) {
-				throw new RuntimeException('Not numeric value encountered in offset or offset_dst for ' . $name . ': `' . $offset . '`/`' . $offsetDst . '`');
 			}
 
 			$notes = trim($row['notes']);
