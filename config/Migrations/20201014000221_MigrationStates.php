@@ -25,7 +25,7 @@ class MigrationStates extends AbstractMigration {
 			])
 			->addColumn('code', 'string', [
 				'default' => null,
-				'limit' => 3,
+				'limit' => 6,
 				'null' => false,
 			])
 			->addColumn('name', 'string', [
