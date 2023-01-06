@@ -21,9 +21,9 @@ class DistrictsTable extends Table {
 	], 'Tools.Slugged' => ['mode' => 'ascii', 'case' => 'low']];
 
 	/**
-	 * @var array<int|string, mixed>|string|null
+	 * @var array<int|string, mixed>
 	 */
-	protected $order = ['name' => 'ASC'];
+	protected array $order = ['name' => 'ASC'];
 
 	/**
 	 * @var array
@@ -75,7 +75,7 @@ class DistrictsTable extends Table {
 	 *
 	 * @param string $citySlug
 	 * @param string $type
-	 * @return \Cake\ORM\Query
+	 * @return \Cake\ORM\Query\SelectQuery
 	 */
 	public function getDistrictsByCity($citySlug, $type = 'all') {
 		$options = [

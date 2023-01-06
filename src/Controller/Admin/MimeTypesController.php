@@ -3,7 +3,7 @@
 namespace Data\Controller\Admin;
 
 use Data\Controller\DataAppController;
-use Tools\Utility\Mime;
+use Data\Utility\Mime;
 
 /**
  * @link http://en.wikipedia.org/wiki/List_of_file_formats_(alphabetical)
@@ -16,9 +16,9 @@ use Tools\Utility\Mime;
 class MimeTypesController extends DataAppController {
 
 	/**
-	 * @var array
+	 * @var array<string, mixed>
 	 */
-	public $paginate = ['order' => ['MimeTypes.modified' => 'DESC']];
+	protected array $paginate = ['order' => ['MimeTypes.modified' => 'DESC']];
 
 	/**
 	 * Experimental

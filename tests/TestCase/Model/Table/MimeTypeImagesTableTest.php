@@ -10,7 +10,7 @@ class MimeTypeImagesTableTest extends TestCase {
 	/**
 	 * @var array
 	 */
-	protected $fixtures = [
+	protected array $fixtures = [
 		'plugin.Data.MimeTypeImages',
 	];
 
@@ -25,7 +25,7 @@ class MimeTypeImagesTableTest extends TestCase {
 	public function setUp(): void {
 		parent::setUp();
 
-		$this->MimeTypeImages = TableRegistry::get('Data.MimeTypeImages');
+		$this->MimeTypeImages = TableRegistry::getTableLocator()->get('Data.MimeTypeImages');
 	}
 
 	/**

@@ -1,6 +1,6 @@
 <?php
 
-namespace Data\Lib;
+namespace Data\Currency;
 
 use Cake\Http\Client;
 

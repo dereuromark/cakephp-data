@@ -34,9 +34,9 @@ class ContinentsTable extends Table {
 	public $actsAs = ['Tree'];
 
 	/**
-	 * @var array<int|string, mixed>|string|null
+	 * @var array<int|string, mixed>
 	 */
-	protected $order = ['name' => 'ASC'];
+	protected array $order = ['name' => 'ASC'];
 
 	/**
 	 * @var array

@@ -14,7 +14,7 @@ class LocationsFixture extends TestFixture {
 	 *
 	 * @var array
 	 */
-	public $fields = [
+	public array $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10],
 		'state_id' => ['type' => 'integer', 'null' => true, 'default' => null, 'length' => 10],
 		'country_id' => ['type' => 'integer', 'null' => true, 'default' => null, 'length' => 10, 'comment' => 'redundance purposely'],
@@ -35,7 +35,7 @@ class LocationsFixture extends TestFixture {
 	 *
 	 * @var array
 	 */
-	public $records = [
+	public array $records = [
 		[
 			'id' => 1,
 			'state_id' => 1,

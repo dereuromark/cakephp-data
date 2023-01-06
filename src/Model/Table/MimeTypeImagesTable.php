@@ -5,7 +5,7 @@ namespace Data\Model\Table;
 use ArrayObject;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
-use Cake\Filesystem\File;
+use Shim\Filesystem\File;
 use Tools\Model\Table\Table;
 
 /**
@@ -27,9 +27,9 @@ use Tools\Model\Table\Table;
 class MimeTypeImagesTable extends Table {
 
 	/**
-	 * @var array<int|string, mixed>|string|null
+	 * @var array<int|string, mixed>
 	 */
-	protected $order = ['modified' => 'DESC'];
+	protected array $order = ['modified' => 'DESC'];
 
 	/**
 	 * @var array
@@ -130,12 +130,11 @@ class MimeTypeImagesTable extends Table {
 
 			# remove id from mime_types table
 
-			/** @var array<\Cake\Datasource\EntityInterface> $types */
+			/** @var array<\Data\Model\Entity\MimeType> $types */
 			$types = $this->MimeTypes->find('all', ['fields' => ['id'], 'conditions' => ['mime_type_image_id' => $this->_del->id]])->toArray();
 			foreach ($types as $type) {
-				$id = $type['id'];
+				$id = $type->id;
 				$this->MimeTypes->updateAll(['mime_type_image_id' => null], ['id' => $id]);
-				//pr ($type[$this->MimeTypes->alias]['id'].' del success');
 			}
 		}
 

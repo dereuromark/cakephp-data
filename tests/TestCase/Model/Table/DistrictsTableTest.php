@@ -10,7 +10,7 @@ class DistrictsTableTest extends TestCase {
 	/**
 	 * @var array
 	 */
-	protected $fixtures = [
+	protected array $fixtures = [
 		'plugin.Data.Districts',
 	];
 
@@ -25,7 +25,7 @@ class DistrictsTableTest extends TestCase {
 	public function setUp(): void {
 		parent::setUp();
 
-		$this->Districts = TableRegistry::get('Data.Districts');
+		$this->Districts = TableRegistry::getTableLocator()->get('Data.Districts');
 	}
 
 	/**

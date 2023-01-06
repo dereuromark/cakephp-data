@@ -15,9 +15,9 @@ use RuntimeException;
 class LanguagesController extends DataAppController {
 
 	/**
-	 * @var array
+	 * @var array<string, mixed>
 	 */
-	public $paginate = ['order' => ['Languages.name' => 'ASC']];
+	protected array $paginate = ['order' => ['Languages.name' => 'ASC']];
 
 	/**
 	 * @return void

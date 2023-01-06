@@ -11,7 +11,7 @@ class LanguagesTableTest extends TestCase {
 	/**
 	 * @var array
 	 */
-	protected $fixtures = [
+	protected array $fixtures = [
 		'plugin.Data.Languages',
 	];
 
@@ -26,7 +26,7 @@ class LanguagesTableTest extends TestCase {
 	public function setUp(): void {
 		parent::setUp();
 
-		$this->Languages = TableRegistry::get('Data.Languages');
+		$this->Languages = TableRegistry::getTableLocator()->get('Data.Languages');
 	}
 
 	/**

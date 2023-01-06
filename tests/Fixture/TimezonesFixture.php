@@ -16,7 +16,7 @@ class TimezonesFixture extends TestFixture {
 	 * @var array
 	 */
 	// phpcs:disable
-	public $fields = [
+	public array $fields = [
 		'id' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
 		'name' => ['type' => 'string', 'length' => 100, 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null],
 		'country_code' => ['type' => 'string', 'length' => 2, 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => 'ISO_3166-2', 'precision' => null],

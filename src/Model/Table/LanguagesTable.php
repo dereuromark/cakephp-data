@@ -7,10 +7,10 @@ use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Event\EventInterface;
+use Data\HtmlDom\HtmlDom;
 use Data\Model\Entity\Language;
-use Tools\HtmlDom\HtmlDom;
+use Data\Utility\L10n;
 use Tools\Model\Table\Table;
-use Tools\Utility\L10n;
 
 /**
  * Languages and their locales
@@ -35,12 +35,12 @@ use Tools\Utility\L10n;
 class LanguagesTable extends Table {
 
 	/**
-	 * @var array<int|string, mixed>|string|null
+	 * @var array<int|string, mixed>
 	 */
-	protected $order = ['name' => 'ASC'];
+	protected array $order = ['name' => 'ASC'];
 
 	/**
-	 * @var \Tools\Utility\L10n|null
+	 * @var \Data\Utility\L10n|null
 	 */
 	public $L10n;
 
@@ -157,7 +157,7 @@ class LanguagesTable extends Table {
 	 * For language switch etc
 	 *
 	 * @param string $type
-	 * @return \Cake\ORM\Query
+	 * @return \Cake\ORM\Query\SelectQuery
 	 */
 	public function getActive($type = 'all') {
 		$options = [
@@ -170,7 +170,7 @@ class LanguagesTable extends Table {
 	/**
 	 * @param string $type
 	 * @param array $customOptions
-	 * @return \Cake\ORM\Query
+	 * @return \Cake\ORM\Query\SelectQuery
 	 */
 	public function getPrimaryLanguages($type = 'all', $customOptions = []) {
 		$options = [

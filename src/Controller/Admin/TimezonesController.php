@@ -16,9 +16,9 @@ use Data\Sync\Timezones;
 class TimezonesController extends AppController {
 
 	/**
-	 * @var array
+	 * @var array<string, mixed>
 	 */
-	public $paginate = ['order' => ['Timezones.name' => 'ASC']];
+	protected array $paginate = ['order' => ['Timezones.name' => 'ASC']];
 
 	/**
 	 * @return void

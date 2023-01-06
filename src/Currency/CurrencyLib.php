@@ -5,7 +5,7 @@
  * - http://www.webserviceshare.com/business/financial/currency/service/Noon-Foreign-Exchange-Rates.htm (XML)
  */
 
-namespace Data\Lib;
+namespace Data\Currency;
 
 use Cake\Cache\Cache;
 use Cake\Utility\Xml;
@@ -295,7 +295,7 @@ class CurrencyLib {
 	/**
 	 * @var array<string>
 	 */
-	protected $currencies = [
+	protected array $currencies = [
 		'AFA' => 'Afghanistan Afghani',
 		'ALL' => 'Albanian Lek',
 		'DZD' => 'Algerian Dinar',

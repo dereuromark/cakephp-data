@@ -99,7 +99,7 @@ class LocationsTable extends Table {
 	 * @param float $lat
 	 * @param float $lng
 	 * @param int $limit
-	 * @return \Cake\ORM\Query|null
+	 * @return \Cake\ORM\Query\SelectQuery|null
 	 */
 	public function findLocationByCoordinates($lat, $lng, $limit = 1) {
 		if (!is_numeric($lat) || !is_numeric($lng) || !is_numeric($limit)) {
@@ -131,7 +131,7 @@ class LocationsTable extends Table {
 	}
 
 	/**
-	 * @return \Cake\ORM\Query|false
+	 * @return \Cake\ORM\Query\SelectQuery|false
 	 */
 	public function findLocationByIp() {
 		$ip = static::findIp();

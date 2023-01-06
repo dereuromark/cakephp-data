@@ -10,7 +10,7 @@ class CountiesTableTest extends TestCase {
 	/**
 	 * @var array
 	 */
-	protected $fixtures = [
+	protected array $fixtures = [
 		'plugin.Data.Counties',
 		'plugin.Data.States',
 	];
@@ -26,7 +26,7 @@ class CountiesTableTest extends TestCase {
 	public function setUp(): void {
 		parent::setUp();
 
-		$this->Counties = TableRegistry::get('Data.Counties');
+		$this->Counties = TableRegistry::getTableLocator()->get('Data.Counties');
 	}
 
 	/**

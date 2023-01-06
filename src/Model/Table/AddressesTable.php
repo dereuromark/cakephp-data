@@ -5,7 +5,7 @@ namespace Data\Model\Table;
 use ArrayObject;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
-use Cake\I18n\Time;
+use Cake\I18n\DateTime;
 use Data\Model\Entity\Address;
 use Tools\Model\Table\Table;
 
@@ -45,9 +45,9 @@ class AddressesTable extends Table {
 	public $actsAs = ['Geo.Geocoder' => ['real' => false, 'override' => true, 'allow_inconclusive' => true]]; //'before'=>'validate'
 
 	/**
-	 * @var array<int|string, mixed>|string|null
+	 * @var array<int|string, mixed>
 	 */
-	protected $order = ['type_id' => 'ASC', 'formatted_address' => 'ASC'];
+	protected array $order = ['type_id' => 'ASC', 'formatted_address' => 'ASC'];
 
 	/**
 	 * @var array
@@ -323,13 +323,13 @@ class AddressesTable extends Table {
 	 * @return void
 	 */
 	public function touch($addressId) {
-		$this->updateAll(['last_used' => new Time()], ['id' => $addressId]);
+		$this->updateAll(['last_used' => new DateTime()], ['id' => $addressId]);
 	}
 
 	/**
 	 * @param int|null $addressType Address Type (defaults to MAIN)
 	 * @param int|null $id Id (foreign id)
-	 * @return \Cake\ORM\Query
+	 * @return \Cake\ORM\Query\SelectQuery
 	 */
 	public function getByType($addressType = null, $id = null) {
 		if ($addressType === null) {

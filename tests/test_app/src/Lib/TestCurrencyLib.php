@@ -3,7 +3,7 @@
 namespace TestApp\Lib;
 
 use Cake\Core\Plugin;
-use Data\Lib\CurrencyLib;
+use Data\Currency\CurrencyLib;
 
 class TestCurrencyLib extends CurrencyLib {
 

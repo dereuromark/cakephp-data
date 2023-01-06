@@ -3,17 +3,20 @@
 namespace Data\Test\TestCase\Controller;
 
 use Cake\ORM\TableRegistry;
-use Shim\TestSuite\IntegrationTestCase;
+use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 
 /**
  * @uses \Data\Controller\ContinentsController
  */
-class ContinentsControllerTest extends IntegrationTestCase {
+class ContinentsControllerTest extends TestCase {
+
+	use IntegrationTestTrait;
 
 	/**
 	 * @var array
 	 */
-	protected $fixtures = [
+	protected array $fixtures = [
 		'plugin.Data.Continents',
 	];
 
@@ -23,7 +26,7 @@ class ContinentsControllerTest extends IntegrationTestCase {
 	public function tearDown(): void {
 		parent::tearDown();
 
-		TableRegistry::clear();
+		TableRegistry::getTableLocator()->clear();
 	}
 
 	/**

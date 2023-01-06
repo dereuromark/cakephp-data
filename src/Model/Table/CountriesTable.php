@@ -33,9 +33,9 @@ use Tools\Model\Table\Table;
 class CountriesTable extends Table {
 
 	/**
-	 * @var array<int|string, mixed>|string|null
+	 * @var array<int|string, mixed>
 	 */
-	protected $order = ['sort' => 'DESC', 'name' => 'ASC'];
+	protected array $order = ['sort' => 'DESC', 'name' => 'ASC'];
 
 	/**
 	 * @var array
@@ -139,7 +139,7 @@ class CountriesTable extends Table {
 
 	/**
 	 * @param array<string, mixed> $options
-	 * @return \Cake\ORM\Query
+	 * @return \Cake\ORM\Query\SelectQuery
 	 */
 	public function findActive(array $options = []) {
 		return $this->find('all', $options)->where([$this->getAlias() . '.status' => Country::STATUS_ACTIVE]);

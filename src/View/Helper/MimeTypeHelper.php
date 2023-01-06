@@ -2,10 +2,10 @@
 
 namespace Data\View\Helper;
 
-use Cake\Filesystem\File;
 use Cake\ORM\TableRegistry;
 use Cake\View\Helper;
 use Exception;
+use Shim\Filesystem\File;
 
 if (!defined('FILE_CACHE')) {
 	define('FILE_CACHE', TMP);
@@ -19,7 +19,7 @@ class MimeTypeHelper extends Helper {
 	/**
 	 * @var array
 	 */
-	protected $helpers = ['Html'];
+	protected array $helpers = ['Html'];
 
 	/**
 	 * @var array|null
@@ -117,7 +117,7 @@ class MimeTypeHelper extends Helper {
 		$handle = new File(FILE_CACHE . 'mime_types.txt', true, 0770);
 		if (!$handle->exists()) {
 			# create and fill: ext||type||name||img (array serialized? separated by ||?)
-			$MimeTypes = TableRegistry::get('Data.MimeTypes');
+			$MimeTypes = TableRegistry::getTableLocator()->get('Data.MimeTypes');
 			$mimeTypes = $MimeTypes->find('all', ['fields' => ['name', 'ext', 'type', 'MimeTypeImages.name', 'MimeTypeImages.ext'], 'conditions' => ['MimeTypes.active' => 1], 'contain' => ['MimeTypeImages']]);
 
 			$content = [];

@@ -3,7 +3,7 @@
 namespace Data\Test\TestCase\Model\Table;
 
 use Cake\ORM\TableRegistry;
-use Data\Lib\CurrencyLib;
+use Data\Currency\CurrencyLib;
 use Shim\TestSuite\TestCase;
 
 class CurrenciesTableTest extends TestCase {
@@ -11,7 +11,7 @@ class CurrenciesTableTest extends TestCase {
 	/**
 	 * @var array
 	 */
-	protected $fixtures = [
+	protected array $fixtures = [
 		'plugin.Data.Currencies',
 	];
 
@@ -26,7 +26,7 @@ class CurrenciesTableTest extends TestCase {
 	public function setUp(): void {
 		parent::setUp();
 
-		$this->Currencies = TableRegistry::get('Data.Currencies');
+		$this->Currencies = TableRegistry::getTableLocator()->get('Data.Currencies');
 		$this->Currencies->CurrencyLib = $this->getMockBuilder(CurrencyLib::class)->getMock();
 	}
 

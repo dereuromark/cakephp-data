@@ -12,7 +12,7 @@ class AddressesTableTest extends TestCase {
 	/**
 	 * @var array
 	 */
-	protected $fixtures = [
+	protected array $fixtures = [
 		'plugin.Data.Addresses',
 		'plugin.Data.Countries',
 		'plugin.Data.States',
@@ -29,7 +29,7 @@ class AddressesTableTest extends TestCase {
 	public function setUp(): void {
 		parent::setUp();
 
-		$this->Addresses = TableRegistry::get('Data.Addresses');
+		$this->Addresses = TableRegistry::getTableLocator()->get('Data.Addresses');
 	}
 
 	/**

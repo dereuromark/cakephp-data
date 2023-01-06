@@ -56,16 +56,16 @@ foreach ($currencies as $currency):
 			if ($currency['base'] && !empty($baseCurrency)) {
 				echo $this->Format->yesNo($currency['base'], ['onTitle' => __('Base value')]);
 			} else {
-				echo $this->Html->link($this->Format->icon('check-square-o', ['title' => __('Zum Basis-Wert machen')]), ['action' => 'base', $currency['id']], ['escape' => false], 'Sicher?');
+				echo $this->Html->link($this->Icon->render('check-square-o', ['title' => __('Zum Basis-Wert machen')]), ['action' => 'base', $currency['id']], ['escape' => false], 'Sicher?');
 			} ?>
 		</td>
 		<td>
 			<?php echo $this->Time->niceDate($currency['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $currency['id']], ['escape' => false]); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $currency['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $currency['id']], ['escape' => false, 'confirm'  => __('Are you sure you want to delete # {0}?', $currency['id'])]); ?>
+			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $currency['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $currency['id']], ['escape' => false]); ?>
+			<?php echo $this->Form->postLink($this->Icon->render('delete'), ['action' => 'delete', $currency['id']], ['escape' => false, 'confirm'  => __('Are you sure you want to delete # {0}?', $currency['id'])]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

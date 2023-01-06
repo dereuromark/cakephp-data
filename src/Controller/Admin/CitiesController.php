@@ -14,9 +14,9 @@ use Data\Controller\DataAppController;
 class CitiesController extends DataAppController {
 
 	/**
-	 * @var array
+	 * @var array<string, mixed>
 	 */
-	public $paginate = ['order' => ['Cities.modified' => 'DESC']];
+	protected array $paginate = ['order' => ['Cities.modified' => 'DESC']];
 
 	/**
 	 * @return \Cake\Http\Response|null|void

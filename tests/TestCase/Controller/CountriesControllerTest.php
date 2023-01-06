@@ -3,17 +3,20 @@
 namespace Data\Test\TestCase\Controller;
 
 use Cake\ORM\TableRegistry;
-use Shim\TestSuite\IntegrationTestCase;
+use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 
 /**
  * @uses \Data\Controller\CountriesController
  */
-class CountriesControllerTest extends IntegrationTestCase {
+class CountriesControllerTest extends TestCase {
+
+	use IntegrationTestTrait;
 
 	/**
 	 * @var array
 	 */
-	protected $fixtures = [
+	protected array $fixtures = [
 		'plugin.Data.Countries',
 	];
 

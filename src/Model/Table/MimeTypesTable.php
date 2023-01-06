@@ -28,9 +28,9 @@ use Tools\Model\Table\Table;
 class MimeTypesTable extends Table {
 
 	/**
-	 * @var array<int|string, mixed>|string|null
+	 * @var array<int|string, mixed>
 	 */
-	protected $order = ['modified' => 'DESC'];
+	protected array $order = ['modified' => 'DESC'];
 
 	/**
 	 * @var array
@@ -123,7 +123,7 @@ class MimeTypesTable extends Table {
 	/**
 	 * @param bool $inactiveOnes
 	 *
-	 * @return \Cake\ORM\Query
+	 * @return \Cake\ORM\Query\SelectQuery
 	 */
 	public function mimeTypes($inactiveOnes = false) {
 		$options = ['conditions' => []];
@@ -137,7 +137,7 @@ class MimeTypesTable extends Table {
 	/**
 	 * @param string|null $ext
 	 *
-	 * @return \Cake\Datasource\EntityInterface|null
+	 * @return \Data\Model\Entity\MimeType|null
 	 */
 	public function findMimeType($ext = null) {
 		if (empty($ext)) {

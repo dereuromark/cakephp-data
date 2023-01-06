@@ -27,9 +27,9 @@ use Tools\Model\Table\Table;
 class CitiesTable extends Table {
 
 	/**
-	 * @var array<int|string, mixed>|string|null
+	 * @var array<int|string, mixed>
 	 */
-	protected $order = ['name' => 'ASC'];
+	protected array $order = ['name' => 'ASC'];
 
 	/**
 	 * @var array
@@ -70,7 +70,7 @@ class CitiesTable extends Table {
 	/**
 	 * @param string $name
 	 *
-	 * @return \Cake\ORM\Query
+	 * @return \Cake\ORM\Query\SelectQuery
 	 */
 	public function autoCompleteName($name) {
 		$options = [
@@ -87,7 +87,7 @@ class CitiesTable extends Table {
 	 * @param int $country
 	 * @param int $limit
 	 *
-	 * @return \Cake\ORM\Query
+	 * @return \Cake\ORM\Query\SelectQuery
 	 */
 	public function largeCities($country, $limit = 0) {
 		$options = [
@@ -102,7 +102,7 @@ class CitiesTable extends Table {
 	/**
 	 * @param string $postalCode
 	 *
-	 * @return \Cake\ORM\Query|null
+	 * @return \Cake\ORM\Query\SelectQuery|null
 	 */
 	public function getCitiesToPostalCode($postalCode) {
 		preg_match("/\d+/", $postalCode, $matches);

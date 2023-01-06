@@ -1,15 +1,15 @@
 <?php
 
-namespace Data\Test\TestCase\Lib;
+namespace Data\Test\TestCase\Currency;
 
 use Cake\Core\Plugin;
-use Data\Lib\CurrencyBitcoinLib;
+use Data\Currency\CurrencyBitcoinLib;
 use Shim\TestSuite\TestCase;
 
 class CurrencyBitcoinLibTest extends TestCase {
 
 	/**
-	 * @var \Data\Lib\CurrencyBitcoinLib|\PHPUnit\Framework\MockObject\MockObject
+	 * @var \Data\Currency\CurrencyBitcoinLib|\PHPUnit\Framework\MockObject\MockObject
 	 */
 	protected $CurrencyBitcoin;
 

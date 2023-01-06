@@ -31,8 +31,9 @@ class CountryStateHelperComponent extends Component {
 	 * @return void
 	 */
 	public function provideData($ignoreStates = false, $prefix = null, $defaultValue = 0) {
-		$this->Controller->loadModel('Data.Countries');
-		$countries = $this->Controller->Countries->findActive()->enableHydration(false)->find('list')->toArray();
+		/** @var \Data\Model\Table\CountriesTable $countriesTable */
+		$countriesTable = $this->Controller->fetchTable('Data.Countries');
+		$countries = $countriesTable->findActive()->enableHydration(false)->find('list')->toArray();
 
 		$states = [];
 		$field = 'country_id';
@@ -40,9 +41,8 @@ class CountryStateHelperComponent extends Component {
 			$field = $prefix . '.' . $field;
 		}
 
-		if (!isset($this->Controller->States)) {
-			$this->Controller->loadModel('Data.States');
-		}
+		/** @var \Data\Model\Table\StatesTable $statesTable */
+		$statesTable = $this->Controller->fetchTable('Data.States');
 
 		$selectedCountry = $this->Controller->getRequest()->getQuery($field);
 		if ($this->Controller->getRequest()->getData($field)) {
@@ -50,13 +50,13 @@ class CountryStateHelperComponent extends Component {
 		}
 
 		if ($selectedCountry) {
-			$states = $this->Controller->States->getListByCountry($selectedCountry);
+			$states = $statesTable->getListByCountry($selectedCountry);
 		} elseif ($ignoreStates === true) {
 			# do nothing
 		} else {
 			# use the id of the first country of the country-list
 			foreach ($countries as $key => $value) {
-				$states = $this->Controller->States->getListByCountry($key);
+				$states = $statesTable->getListByCountry($key);
 
 				break;
 			}

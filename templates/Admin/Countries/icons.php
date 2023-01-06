@@ -27,7 +27,7 @@
 	<?php
 	foreach ($countries as $country) {
 		echo '<li>';
-		echo $this->Data->countryIcon($country->iso2) . ' ' . h($country->name) . ' (' . $country['iso2'] . ', ' . $country['iso3'] . ') ' . $this->Html->link($this->Format->icon('view'), ['action' => 'view', $country->id], ['escapeTitle' => false]);
+		echo $this->Data->countryIcon($country->iso2) . ' ' . h($country->name) . ' (' . $country['iso2'] . ', ' . $country['iso3'] . ') ' . $this->Html->link($this->Icon->render('view'), ['action' => 'view', $country->id], ['escapeTitle' => false]);
 		echo '</li>';
 	}
 	?>

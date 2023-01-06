@@ -5,12 +5,12 @@ namespace Data\Controller\Admin;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Event\EventInterface;
-use Cake\Filesystem\Folder;
 use Cake\Utility\Hash;
 use Cake\View\View;
 use Data\Controller\DataAppController;
 use Data\Sync\Countries;
 use Data\View\Helper\DataHelper;
+use Shim\Filesystem\Folder;
 
 /**
  * @property \Data\Model\Table\CountriesTable $Countries
@@ -20,9 +20,9 @@ use Data\View\Helper\DataHelper;
 class CountriesController extends DataAppController {
 
 	/**
-	 * @var array
+	 * @var array<string, mixed>
 	 */
-	public $paginate = ['order' => ['Countries.sort' => 'DESC']];
+	protected array $paginate = ['order' => ['Countries.sort' => 'DESC']];
 
 	/**
 	 * @var string|null

@@ -45,9 +45,9 @@ foreach ($cities as $city) { ?>
 			<?php echo $this->Time->niceDate($city['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $city['id']], ['escape' => false]); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $city['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $city['id']], ['escape' => false, 'confirm' => 'Sure?']); ?>
+			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $city['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $city['id']], ['escape' => false]); ?>
+			<?php echo $this->Form->postLink($this->Icon->render('delete'), ['action' => 'delete', $city['id']], ['escape' => false, 'confirm' => 'Sure?']); ?>
 		</td>
 	</tr>
 <?php } ?>

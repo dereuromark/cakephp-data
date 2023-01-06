@@ -11,9 +11,9 @@ use Data\Controller\DataAppController;
 class CurrenciesController extends DataAppController {
 
 	/**
-	 * @var array
+	 * @var array<string, mixed>
 	 */
-	public $paginate = ['order' => ['Currencies.base' => 'DESC', 'Currencies.modified' => 'DESC']];
+	protected array $paginate = ['order' => ['Currencies.base' => 'DESC', 'Currencies.modified' => 'DESC']];
 
 	/**
 	 * @return void
@@ -184,7 +184,7 @@ class CurrenciesController extends DataAppController {
 		 $fields = ['active'];
 
 		if (!empty($field) && in_array($field, $fields) && !empty($id)) {
-			$value = $this->{$this->modelClass}->toggleField($field, $id);
+			$value = $this->{$this->defaultTable}->toggleField($field, $id);
 		}
 
 		# http get request + redirect
@@ -195,7 +195,7 @@ class CurrenciesController extends DataAppController {
 		}
 
 		# ajax
-		$model = $this->{$this->modelClass}->getAlias();
+		$model = $this->{$this->defaultTable}->getAlias();
 		$this->autoRender = false;
 		if (isset($value)) {
 			$this->set('ajaxToggle', $value);

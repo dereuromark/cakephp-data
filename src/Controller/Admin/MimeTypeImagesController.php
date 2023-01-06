@@ -2,9 +2,9 @@
 
 namespace Data\Controller\Admin;
 
-use Cake\Filesystem\Folder;
 use Data\Controller\DataAppController;
 use Data\Model\Table\MimeTypeImagesTable;
+use Shim\Filesystem\Folder;
 use Tools\Utility\Utility;
 
 /**
@@ -14,9 +14,9 @@ use Tools\Utility\Utility;
 class MimeTypeImagesController extends DataAppController {
 
 	/**
-	 * @var array
+	 * @var array<string, mixed>
 	 */
-	public $paginate = ['order' => ['MimeTypeImages.modified' => 'DESC']];
+	protected array $paginate = ['order' => ['MimeTypeImages.modified' => 'DESC']];
 
 	/**
 	 * @return \Cake\Http\Response|null|void
@@ -251,7 +251,7 @@ class MimeTypeImagesController extends DataAppController {
 	/**
 	 * @var array
 	 */
-	protected $_allowedTypes = [];
+	protected array $_allowedTypes = [];
 
 	/**
 	 * Upload new Icon/Image (auto resize to height:16px and convert if desired)

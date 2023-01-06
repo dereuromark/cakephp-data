@@ -18,18 +18,18 @@
 		}
 	],
 	"require": {
-		"php": ">=7.4",
-		"cakephp/cakephp": "^4.2.0",
-		"dereuromark/cakephp-tools": "^2.0.0"
+		"php": ">=8.1",
+		"cakephp/cakephp": "5.x-dev",
+		"dereuromark/cakephp-tools": "dev-cake5"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "^9.5",
-		"cakephp/migrations": "^3.0.0",
-		"dereuromark/cakephp-geo": "^2.0.0",
+		"phpunit/phpunit": "^9.5.16",
+		"cakephp/migrations": "4.x-dev",
+		"dereuromark/cakephp-geo": "dev-cake5",
 		"willdurand/geocoder": "^4.2.2",
-		"friendsofcake/search": "^6.0.0",
+		"friendsofcake/search": "dev-cake-5",
 		"yangqi/htmldom": "dev-master",
-		"fig-r/psr2r-sniffer": "dev-master"
+		"fig-r/psr2r-sniffer": "dev-next"
 	},
 	"autoload": {
 		"psr-4": {
@@ -60,5 +60,6 @@
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
-	}
+	},
+	"minimum-stability": "dev"
 }

@@ -7,7 +7,7 @@ use Cake\Core\Plugin;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
 use Cake\Utility\Hash;
-use Data\Lib\CurrencyLib;
+use Data\Currency\CurrencyLib;
 use Tools\Model\Table\Table;
 
 /**
@@ -29,9 +29,9 @@ use Tools\Model\Table\Table;
 class CurrenciesTable extends Table {
 
 	/**
-	 * @var array<int|string, mixed>|string|null
+	 * @var array<int|string, mixed>
 	 */
-	protected $order = ['base' => 'DESC', 'code' => 'ASC'];
+	protected array $order = ['base' => 'DESC', 'code' => 'ASC'];
 
 	/**
 	 * @var array
@@ -73,7 +73,7 @@ class CurrenciesTable extends Table {
 	];
 
 	/**
-	 * @var \Data\Lib\CurrencyLib|null
+	 * @var \Data\Currency\CurrencyLib|null
 	 */
 	public $CurrencyLib;
 
@@ -196,7 +196,7 @@ class CurrenciesTable extends Table {
 	 * All except base one
 	 *
 	 * @param array<string, mixed> $options
-	 * @return \Cake\ORM\Query
+	 * @return \Cake\ORM\Query\SelectQuery
 	 */
 	public function foreignCurrencies($options = []) {
 		$defaults = ['conditions' => [$this->getAlias() . '.base' => 0]];

@@ -11,7 +11,7 @@ class PostalCodesTableTest extends TestCase {
 	/**
 	 * @var array
 	 */
-	protected $fixtures = [
+	protected array $fixtures = [
 		'plugin.Data.PostalCodes',
 	];
 
@@ -26,7 +26,7 @@ class PostalCodesTableTest extends TestCase {
 	public function setUp(): void {
 		parent::setUp();
 
-		$this->PostalCodes = TableRegistry::get('Data.PostalCodes');
+		$this->PostalCodes = TableRegistry::getTableLocator()->get('Data.PostalCodes');
 	}
 
 	/**

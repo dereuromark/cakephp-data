@@ -14,7 +14,7 @@ class PostalCodesFixture extends TestFixture {
 	 *
 	 * @var array
 	 */
-	public $fields = [
+	public array $fields = [
 		'id' => ['type' => 'uuid', 'null' => false, 'default' => null, 'length' => 36],
 		'code' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 5],
 		'country_id' => ['type' => 'integer', 'null' => false, 'default' => '0', 'length' => 2, 'collate' => null],
@@ -32,7 +32,7 @@ class PostalCodesFixture extends TestFixture {
 	 *
 	 * @var array
 	 */
-	public $records = [
+	public array $records = [
 		[
 			'id' => 'e23',
 			'code' => '81234',

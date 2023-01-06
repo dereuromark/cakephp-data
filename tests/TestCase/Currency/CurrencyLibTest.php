@@ -1,6 +1,6 @@
 <?php
 
-namespace Data\Test\TestCase\Lib;
+namespace Data\Test\TestCase\Currency;
 
 use Shim\TestSuite\TestCase;
 use TestApp\Lib\TestCurrencyLib;
@@ -8,7 +8,7 @@ use TestApp\Lib\TestCurrencyLib;
 class CurrencyLibTest extends TestCase {
 
 	/**
-	 * @var \Data\Lib\CurrencyLib|\PHPUnit\Framework\MockObject\MockObject
+	 * @var \Data\Currency\CurrencyLib|\PHPUnit\Framework\MockObject\MockObject
 	 */
 	protected $CurrencyLib;
 

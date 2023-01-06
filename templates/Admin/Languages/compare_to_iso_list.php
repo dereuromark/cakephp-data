@@ -6,7 +6,7 @@
  */
 use Cake\Core\Plugin;
 use Cake\Cache\Cache;
-use Cake\Filesystem\Folder;
+use Shim\Filesystem\Folder;
 ?>
 
 <div class="page index">
@@ -73,7 +73,7 @@ foreach ($isoList['values'] as $language):
 			&nbsp;
 		</td>
 		<td class="actions">
-			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $language['id']), array('escape'=>false)); ?>
+			<?php //echo $this->Html->link($this->Icon->render('view'), array('action'=>'view', $language['id']), array('escape'=>false)); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

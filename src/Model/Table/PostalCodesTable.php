@@ -31,9 +31,9 @@ class PostalCodesTable extends Table {
 	public $displayField = 'code';
 
 	/**
-	 * @var array<int|string, mixed>|string|null
+	 * @var array<int|string, mixed>
 	 */
-	protected $order = ['code' => 'ASC'];
+	protected array $order = ['code' => 'ASC'];
 
 	/**
 	 * @var array
@@ -91,7 +91,7 @@ class PostalCodesTable extends Table {
 	 * @param int|null $countryId
 	 * @param array<string, mixed> $options
 	 *
-	 * @return \Cake\ORM\Query
+	 * @return \Cake\ORM\Query\SelectQuery
 	 */
 	public function searchLocation($code, $countryId = null, $options = []) {
 		if (!empty($options['exact'])) {

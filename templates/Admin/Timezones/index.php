@@ -77,9 +77,9 @@ use Cake\Core\Plugin;
                     <td><?= $this->Time->nice($timezone->created) ?></td>
                     <td><?= $this->Time->nice($timezone->modified) ?></td>
                     <td class="actions">
-                        <?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $timezone->id], ['escapeTitle' => false]); ?>
-                        <?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $timezone->id], ['escapeTitle' => false]); ?>
-                        <?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $timezone->id], ['escapeTitle' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $timezone->id)]); ?>
+                        <?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $timezone->id], ['escapeTitle' => false]); ?>
+                        <?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $timezone->id], ['escapeTitle' => false]); ?>
+                        <?php echo $this->Form->postLink($this->Icon->render('delete'), ['action' => 'delete', $timezone->id], ['escapeTitle' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $timezone->id)]); ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

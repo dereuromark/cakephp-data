@@ -54,7 +54,7 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 
 			<?php
 				if (!empty($mimeTypeImage['warning'])) {
-				echo ' ' . $this->Format->icon('warning', ['title' => 'Icon konnte nicht gefunden werden!']);
+				echo ' ' . $this->Icon->render('warning', ['title' => 'Icon konnte nicht gefunden werden!']);
 				}
 
 			?>
@@ -64,7 +64,7 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 			<?php $count = count($mimeTypeImage->mime_types);
 				if ($count > 0) {
 					echo $count . ' &nbsp; ';
-					echo $this->Format->icon('details', [], ['class' => 'hand', 'id' => 'details_' . $mimeTypeImage['id']]);
+					echo $this->Icon->render('details', [], ['class' => 'hand', 'id' => 'details_' . $mimeTypeImage['id']]);
 				} else {
 					echo '---';
 				}
@@ -80,14 +80,14 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 			<?php echo $this->Time->niceDate($mimeTypeImage['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php //echo $this->Html->link($this->Format->icon('view'), array('action'=>'view', $mimeTypeImage['id']), array('escape'=>false)); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $mimeTypeImage['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $mimeTypeImage['id']], ['escape' => false, 'confirm'  => __('Are you sure you want to delete # {0}?', $mimeTypeImage['id'])]); ?>
+			<?php //echo $this->Html->link($this->Icon->render('view'), array('action'=>'view', $mimeTypeImage['id']), array('escape'=>false)); ?>
+			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $mimeTypeImage['id']], ['escape' => false]); ?>
+			<?php echo $this->Form->postLink($this->Icon->render('delete'), ['action' => 'delete', $mimeTypeImage['id']], ['escape' => false, 'confirm'  => __('Are you sure you want to delete # {0}?', $mimeTypeImage['id'])]); ?>
 			<?php
 				if (isset($imageWidth) && isset($imageHeight) && $imageWidth != 16 && $imageHeight != 16) {
-					echo $this->Format->icon('expand', ['title' => __('Größe ist nicht 16x16, sondern ' . $imageWidth . 'x' . $imageHeight . '! Anpassen...')]);
+					echo $this->Icon->render('expand', ['title' => __('Größe ist nicht 16x16, sondern ' . $imageWidth . 'x' . $imageHeight . '! Anpassen...')]);
 				} elseif (empty($mimeTypeImage['ext']) || !empty($mimeTypeImage['warning'])) {
-					echo $this->Html->link($this->Format->icon('google', ['title' => __('Search with Google')]), 'http://images.google.de/images?q=' . $mimeTypeImage['name'] . '+imagesize%3A16x16&btnG=Bilder-Suche', ['escape' => false]);
+					echo $this->Html->link($this->Icon->render('google', ['title' => __('Search with Google')]), 'http://images.google.de/images?q=' . $mimeTypeImage['name'] . '+imagesize%3A16x16&btnG=Bilder-Suche', ['escape' => false]);
 				}
 			?>
 		</td>

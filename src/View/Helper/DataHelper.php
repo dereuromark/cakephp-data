@@ -5,9 +5,9 @@ namespace Data\View\Helper;
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
-use Cake\Filesystem\Folder;
 use Cake\Utility\Inflector;
 use Cake\View\Helper;
+use Shim\Filesystem\Folder;
 
 /**
  * DataHelper with basic html snippets
@@ -19,7 +19,7 @@ class DataHelper extends Helper {
 	/**
 	 * @var array
 	 */
-	protected $helpers = ['Html'];
+	protected array $helpers = ['Html'];
 
 	/**
 	 * @var array|null

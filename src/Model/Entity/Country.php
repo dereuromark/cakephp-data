@@ -43,7 +43,7 @@ class Country extends Entity {
 	 *
 	 * @var array<string, bool>
 	 */
-	protected $_accessible = [
+	protected array $_accessible = [
 		'*' => true,
 		'id' => false,
 	];
@@ -55,7 +55,7 @@ class Country extends Entity {
 	 *
 	 * @var array<string>
 	 */
-	protected $_virtual = [
+	protected array $_virtual = [
 		'timezone_offset_string',
 	];
 

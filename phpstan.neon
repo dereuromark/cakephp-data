@@ -2,6 +2,8 @@ parameters:
 	level: 3
 	paths:
 		- src/
+	excludePaths:
+		- %rootDir%/../../../src/Utility/Mime
 	bootstrapFiles:
 		- tests/bootstrap.php
 	treatPhpDocTypesAsCertain: false

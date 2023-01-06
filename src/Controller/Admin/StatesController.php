@@ -14,9 +14,9 @@ use Exception;
 class StatesController extends DataAppController {
 
 	/**
-	 * @var array
+	 * @var array<string, mixed>
 	 */
-	public $paginate = ['order' => ['States.modified' => 'DESC']];
+	protected array $paginate = ['order' => ['States.modified' => 'DESC']];
 
 	/**
 	 * @return void

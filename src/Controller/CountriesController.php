@@ -6,7 +6,7 @@ use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Event\EventInterface;
-use Cake\Filesystem\Folder;
+use Shim\Filesystem\Folder;
 
 /**
  * @property \Data\Model\Table\CountriesTable $Countries
@@ -16,9 +16,9 @@ use Cake\Filesystem\Folder;
 class CountriesController extends DataAppController {
 
 	/**
-	 * @var array
+	 * @var array<string, mixed>
 	 */
-	public $paginate = ['order' => ['Countries.sort' => 'DESC']];
+	protected array $paginate = ['order' => ['Countries.sort' => 'DESC']];
 
 	/**
 	 * @var string

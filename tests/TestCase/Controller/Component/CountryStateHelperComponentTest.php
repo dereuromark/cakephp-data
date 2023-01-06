@@ -5,6 +5,7 @@ namespace Data\Test\TestCase\Controller\Component;
 use Cake\Controller\ComponentRegistry;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\Http\ServerRequest;
 use Data\Controller\Component\CountryStateHelperComponent;
 use Shim\TestSuite\TestCase;
 
@@ -13,7 +14,7 @@ class CountryStateHelperComponentTest extends TestCase {
 	/**
 	 * @var array
 	 */
-	protected $fixtures = [
+	protected array $fixtures = [
 		'plugin.Data.Countries',
 		'plugin.Data.States',
 	];
@@ -34,7 +35,7 @@ class CountryStateHelperComponentTest extends TestCase {
 	public function setUp(): void {
 		parent::setUp();
 
-		$this->Controller = new Controller();
+		$this->Controller = new Controller(new ServerRequest());
 		$this->CountryStateHelperComponent = new CountryStateHelperComponent(new ComponentRegistry($this->Controller));
 	}
 

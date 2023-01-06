@@ -71,9 +71,9 @@ foreach ($languages as $language):
 			<?php echo $this->Time->niceDate($language['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $language['id']], ['escape' => false]); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $language['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $language['id']], ['escape' => false, 'confirm'  => __('Are you sure you want to delete # {0}?', $language['id'])]); ?>
+			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $language['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $language['id']], ['escape' => false]); ?>
+			<?php echo $this->Form->postLink($this->Icon->render('delete'), ['action' => 'delete', $language['id']], ['escape' => false, 'confirm'  => __('Are you sure you want to delete # {0}?', $language['id'])]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

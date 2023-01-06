@@ -4,17 +4,16 @@ namespace Data\Test\TestCase\Controller;
 
 use Cake\Database\Driver\Mysql;
 use Cake\ORM\TableRegistry;
-use Shim\TestSuite\IntegrationTestCase;
 
 /**
  * @uses \Data\Controller\PostalCodesController
  */
-class PostalCodesControllerTest extends IntegrationTestCase {
+class PostalCodesControllerTest extends TestCase {
 
 	/**
 	 * @var array
 	 */
-	protected $fixtures = [
+	protected array $fixtures = [
 		'plugin.Data.PostalCodes',
 	];
 
@@ -31,7 +30,7 @@ class PostalCodesControllerTest extends IntegrationTestCase {
 	 * @return void
 	 */
 	public function testMap() {
-		$connectionConfig = TableRegistry::get('Data.PostalCodes')->getConnection()->config();
+		$connectionConfig = TableRegistry::getTableLocator()->get('Data.PostalCodes')->getConnection()->config();
 		$this->skipIf($connectionConfig['driver'] !== Mysql::class, 'Only for MySQL');
 
 		$this->get(['plugin' => 'Data', 'controller' => 'PostalCodes', 'action' => 'map']);

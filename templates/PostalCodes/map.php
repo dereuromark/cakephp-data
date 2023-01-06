@@ -57,7 +57,7 @@ foreach ($postalCodes as $postalCode) {
 	$lng = $postalCode['lng'];
 
 	$content = 'Area Code <b>' . $title . '</b>' . '<br>' . $postalCode['count'] . ' codes for this area';
-	$content .= ' ' . $this->Html->link($this->Format->icon('map'), $this->GoogleMap->mapUrl(['to' => $lat . ',' . $lng]), ['escape' => false]);
+	$content .= ' ' . $this->Html->link($this->Icon->render('map'), $this->GoogleMap->mapUrl(['to' => $lat . ',' . $lng]), ['escape' => false]);
 
 	# more correct average location
 	if (isset($postalCode['lat_sum'])) {

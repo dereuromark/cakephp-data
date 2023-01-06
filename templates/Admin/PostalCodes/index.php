@@ -55,9 +55,9 @@ foreach ($postalCodes as $postalCode): ?>
 			<?php echo $this->Time->niceDate($postalCode['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('view'), ['action' => 'view', $postalCode['id']], ['escape' => false]); ?>
-			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $postalCode['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $postalCode['id']], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $postalCode['id'])]); ?>
+			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $postalCode['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $postalCode['id']], ['escape' => false]); ?>
+			<?php echo $this->Form->postLink($this->Icon->render('delete'), ['action' => 'delete', $postalCode['id']], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $postalCode['id'])]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
