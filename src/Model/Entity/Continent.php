@@ -13,7 +13,7 @@ use Tools\Model\Entity\Entity;
  * @property int|null $lft
  * @property int|null $rght
  * @property int $status
- * @property \Cake\I18n\FrozenTime $modified
+ * @property \Cake\I18n\DateTime $modified
  * @property \Data\Model\Entity\Continent|null $parent_continent
  * @property array<\Cake\ORM\Entity> $child_continents
  * @property array<\Cake\ORM\Entity> $countries

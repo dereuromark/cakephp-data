@@ -15,7 +15,7 @@ use Tools\Model\Entity\Entity;
  * @property string $special
  * @property int $zip_length
  * @property int $sort
- * @property \Cake\I18n\FrozenTime $modified
+ * @property \Cake\I18n\DateTime $modified
  * @property string $address_format
  * @property float|null $lng
  * @property float|null $lat

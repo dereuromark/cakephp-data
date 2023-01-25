@@ -11,8 +11,8 @@ use Tools\Model\Entity\Entity;
  * @property float $lat
  * @property float $lng
  * @property string $official_address
- * @property \Cake\I18n\FrozenTime $created
- * @property \Cake\I18n\FrozenTime $modified
+ * @property \Cake\I18n\DateTime $created
+ * @property \Cake\I18n\DateTime $modified
  * @property \Data\Model\Entity\Country $country
  */
 class PostalCode extends Entity {

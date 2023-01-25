@@ -14,8 +14,8 @@ use Tools\Model\Entity\Entity;
  * @property string $slug
  * @property string|null $description
  * @property int $status
- * @property \Cake\I18n\FrozenTime $created
- * @property \Cake\I18n\FrozenTime $modified
+ * @property \Cake\I18n\DateTime $created
+ * @property \Cake\I18n\DateTime $modified
  * @property \Data\Model\Entity\Country $country
  */
 class City extends Entity {

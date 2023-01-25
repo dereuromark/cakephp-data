@@ -16,8 +16,8 @@ use Cake\ORM\Entity;
  * @property string $details
  * @property bool $core
  * @property bool $active
- * @property \Cake\I18n\FrozenTime $created
- * @property \Cake\I18n\FrozenTime $modified
+ * @property \Cake\I18n\DateTime $created
+ * @property \Cake\I18n\DateTime $modified
  * @property int $sort
  * @property int|null $mime_type_image_id
  *

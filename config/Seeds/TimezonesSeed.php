@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-use Cake\I18n\FrozenTime;
+use Cake\I18n\DateTime;
 use Data\Sync\Timezones;
 use Migrations\AbstractSeed;
 
@@ -21,7 +21,7 @@ class TimezonesSeed extends AbstractSeed {
 	public function run() {
 		$data = (new Timezones())->all();
 		foreach ($data as $key => $row) {
-			$data[$key]['created'] = $data[$key]['modified'] = substr((new FrozenTime())->toIso8601String(), 0, 19);
+			$data[$key]['created'] = $data[$key]['modified'] = substr((new DateTime())->toIso8601String(), 0, 19);
 			$data[$key]['active'] = $row['type'] === 'Canonical';
 			unset($data[$key]['abbr']);
 			unset($data[$key]['alias']);

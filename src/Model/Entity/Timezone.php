@@ -20,8 +20,8 @@ use Data\Sync\Timezones;
  * @property float|null $lng
  * @property string|null $covered
  * @property string|null $notes
- * @property \Cake\I18n\FrozenTime $created
- * @property \Cake\I18n\FrozenTime $modified
+ * @property \Cake\I18n\DateTime $created
+ * @property \Cake\I18n\DateTime $modified
  * @property \Data\Model\Entity\Timezone|null $canonical_timezone
  * @property int|null $linked_id
  * @property-read string|null $offset_string

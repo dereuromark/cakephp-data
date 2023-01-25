@@ -12,8 +12,8 @@ use Tools\Model\Entity\Entity;
  * @property string|null $c_o
  * @property string|null $details
  * @property string|null $admin_details
- * @property \Cake\I18n\FrozenTime $created
- * @property \Cake\I18n\FrozenTime $modified
+ * @property \Cake\I18n\DateTime $created
+ * @property \Cake\I18n\DateTime $modified
  * @property string $contact_id
  * @property string|null $address
  * @property int|null $state_id

@@ -13,8 +13,8 @@ use Cake\ORM\Entity;
  * @property string $ext
  * @property bool $active
  * @property string $details
- * @property \Cake\I18n\FrozenTime $created
- * @property \Cake\I18n\FrozenTime $modified
+ * @property \Cake\I18n\DateTime $created
+ * @property \Cake\I18n\DateTime $modified
  *
  * @property array<\Data\Model\Entity\MimeType> $mime_types
  */
