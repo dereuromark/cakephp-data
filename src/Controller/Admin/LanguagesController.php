@@ -40,7 +40,7 @@ class LanguagesController extends DataAppController {
 			$query = $this->Languages->find('search', ['search' => $this->request->getQuery()]);
 			$languages = $this->paginate($query)->toArray();
 		} else {
-			$languages = $this->paginate()->toArray();
+			$languages = $this->paginate();
 		}
 
 		$language = $this->Languages->newEmptyEntity();

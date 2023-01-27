@@ -161,7 +161,7 @@ class CountriesController extends DataAppController {
 			$query = $this->Countries->find('search', ['search' => $this->request->getQuery()]);
 			$countries = $this->paginate($query)->toArray();
 		} else {
-			$countries = $this->paginate()->toArray();
+			$countries = $this->paginate();
 		}
 
 		$this->set(compact('countries'));

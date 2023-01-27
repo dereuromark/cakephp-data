@@ -139,7 +139,7 @@ class MimeTypesController extends DataAppController {
 		$conditions = $this->_searchConditions([]);
 		$this->paginate['conditions'] = $conditions;
 
-		$mimeTypes = $this->paginate()->toArray();
+		$mimeTypes = $this->paginate();
 		$this->set(compact('mimeTypes'));
 	}
 

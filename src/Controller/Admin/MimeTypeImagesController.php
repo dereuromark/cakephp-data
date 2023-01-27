@@ -190,7 +190,7 @@ class MimeTypeImagesController extends DataAppController {
 	 */
 	public function index() {
 		$this->paginate['contain'] = ['MimeTypes'];
-		$mimeTypeImages = $this->paginate()->toArray();
+		$mimeTypeImages = $this->paginate();
 
 		/*
 		$folder = new Folder(PATH_MIMETYPES);

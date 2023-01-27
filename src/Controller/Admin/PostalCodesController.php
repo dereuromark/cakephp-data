@@ -22,7 +22,7 @@ class PostalCodesController extends DataAppController {
 			$query = $this->PostalCodes->find('search', ['search' => $this->request->getQuery()]);
 			$postalCodes = $this->paginate($query)->toArray();
 		} else {
-			$postalCodes = $this->paginate()->toArray();
+			$postalCodes = $this->paginate();
 		}
 
 		$countries = $this->PostalCodes->Countries->find('list');
