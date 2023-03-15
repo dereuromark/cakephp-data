@@ -12,6 +12,7 @@
 		//echo $this->Form->control('id');
 		echo $this->Form->control('country_id', ['empty' => ' - [ ' . __('pleaseSelect') . ' ]- ', 'required' => 1]);
 		echo $this->Form->control('name', ['required' => 1]);
+		echo $this->Form->control('ori_name');
 		echo $this->Form->control('code');
 
 	?>
