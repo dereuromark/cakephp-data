@@ -16,6 +16,7 @@
 <tr>
 	<th><?php echo $this->Paginator->sort('country_id');?></th>
 	<th><?php echo $this->Paginator->sort('name');?></th>
+	<th><?php echo $this->Paginator->sort('ori_name');?></th>
 	<th><?php echo $this->Paginator->sort('code');?></th>
 	<th><?php echo __('Coordinates');?></th>
 </tr>
@@ -26,20 +27,23 @@ foreach ($states as $state):
 	<tr>
 
 		<td>
-			<?php echo $this->Data->countryIcon($state->country['iso2']) . ' ' . h($state->country->name); ?>
+			<?php echo $this->Data->countryIcon($state->country->iso2) . ' ' . h($state->country->name); ?>
 		</td>
 		<td>
-			<?php echo h($state['name']); ?>
+			<?php echo h($state->name); ?>
 		</td>
 		<td>
-			<?php echo h($state['code']); ?>
+			<?php echo h((string)$state->ori_name); ?>
+		</td>
+		<td>
+			<?php echo h($state->code); ?>
 		</td>
 
 		<td>
 			<?php
 			$coordinates = '';
-			if ((int)$state['lat'] != 0 || (int)$state['lat'] != 0) {
-				$coordinates = $state['lat'] . ',' . $state['lat'];
+			if ((int)$state->lat != 0 || (int)$state->lat != 0) {
+				$coordinates = $state->lat . ',' . $state->lat;
 			}
 			echo $this->Format->yesNo((int)!empty($coordinates), ['onTitle' => $coordinates, 'offTitle' => 'n/a']);
 			?>

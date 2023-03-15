@@ -26,6 +26,7 @@ use Cake\Core\Configure;
 <tr>
 	<th><?php echo $this->Paginator->sort('country_id');?></th>
 	<th><?php echo $this->Paginator->sort('name');?></th>
+	<th><?php echo $this->Paginator->sort('ori_name');?></th>
 	<th><?php echo $this->Paginator->sort('code');?></th>
 	<th><?php echo __('Coordinates');?></th>
 	<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
@@ -37,30 +38,33 @@ foreach ($states as $state):
 	<tr>
 
 		<td>
-			<?php echo $this->Data->countryIcon($state->country['iso2']); ?> <?php echo $this->Html->link($state->country->name, ['controller' => 'Countries', 'action' => 'view', $state->country->id]); ?>
+			<?php echo $this->Data->countryIcon($state->country->iso2); ?> <?php echo $this->Html->link($state->country->name, ['controller' => 'Countries', 'action' => 'view', $state->country->id]); ?>
 		</td>
 		<td>
-			<?php echo h($state['name']); ?>
+			<?php echo h($state->name); ?>
 		</td>
 		<td>
-			<?php echo h($state['code']); ?>
+		<?php echo h((string)$state->ori_name); ?>
+		</td>
+		<td>
+			<?php echo h($state->code); ?>
 		</td>
 
 		<td>
 			<?php
 			$coordinates = '';
-			if ((int)$state['lat'] != 0 || (int)$state['lng'] != 0) {
-				$coordinates = $state['lat'] . ',' . $state['lng'];
+			if ((int)$state->lat != 0 || (int)$state->lng != 0) {
+				$coordinates = $state->lat . ',' . $state->lng;
 			}
-			echo $this->Format->yesNo((int)!empty($coordinates), ['onTitle' => $coordinates, 'offTitke' => 'n/a']) . ' ';
+			echo $this->Format->yesNo((int)!empty($coordinates), ['onTitle' => $coordinates, 'offTitle' => 'n/a']) . ' ';
 
 			if (!empty($coordinates)) {
 				$markers = [];
-				$markers[] = ['lat' => $state['lat'], 'lng' => $state['lng'], 'color' => 'green'];
+				$markers[] = ['lat' => $state->lat, 'lng' => $state->lng, 'color' => 'green'];
 
 				if (Configure::read('GoogleMap.key')) {
 					$mapMarkers = $this->GoogleMap->staticMarkers($markers);
-					echo ' ' . $this->Html->link($this->Format->icon('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $state['lat'] . ',' . $state['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 5]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
+					echo ' ' . $this->Html->link($this->Format->icon('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $state->lat . ',' . $state->lng, 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 5]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
 				} else {
 					$options = [
 						'to' => $state->lat . ',' . $state->lng,
@@ -72,14 +76,14 @@ foreach ($states as $state):
 			?>
 		</td>
 		<td>
-			<?php echo $this->Time->niceDate($state['modified']); ?>
+			<?php echo $this->Time->niceDate($state->modified); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $state['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Format->icon('edit'), ['action' => 'edit', $state->id], ['escape' => false]); ?>
 
-			<?php echo $this->Html->link($this->Format->icon('map-o', [], ['title' => __('Update coordinates')]), ['action' => 'updateCoordinates', $state['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Format->icon('map-o', [], ['title' => __('Update coordinates')]), ['action' => 'updateCoordinates', $state->id], ['escape' => false]); ?>
 
-			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $state['id']], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $state['id'])]); ?>
+			<?php echo $this->Form->postLink($this->Format->icon('delete'), ['action' => 'delete', $state->id], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $state->id)]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
