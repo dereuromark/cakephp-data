@@ -58,6 +58,12 @@ class MigrationLanguages extends AbstractMigration {
 				'null' => false,
 				'signed' => false,
 			])
+			->addColumn('direction', 'tinyinteger', [
+				'default' => '0',
+				'limit' => null,
+				'null' => false,
+				'signed' => false,
+			])
 			->addColumn('sort', 'integer', [
 				'default' => '0',
 				'limit' => null,

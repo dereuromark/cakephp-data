@@ -16,12 +16,15 @@ use Cake\Core\Plugin;
 <?php if (Plugin::isLoaded('Search')) { ?>
 <div class="search-box">
 <?php
-echo $this->Form->create(null, ['valueSources' => 'query']);
+echo $this->Form->create();
 echo $this->Form->control('search', ['placeholder' => __('wildcardSearch {0} and {1}', '*', '?')]);
 echo $this->Form->control('dir', ['label' => __('Direction'), 'options' => $language::directions(), 'empty' => Configure::read('Select.defaultBefore') . __('noSelection') . Configure::read('Select.defaultAfter')]);
 echo $this->Form->button(__('Search'), []);
 echo $this->Form->end();
 ?>
+<?php if ($this->Search->isSearch()) {
+	echo $this->Search->resetLink(null, ['class' => 'btn btn-secondary']);
+} ?>
 </div>
 <?php } ?>
 
@@ -62,7 +65,7 @@ foreach ($languages as $language):
 			<?php echo h($language['locale_fallback']); ?>
 		</td>
 		<td>
-			<?php echo h($language['direction']); ?>
+			<?php echo $language::directions($language->direction); ?>
 		</td>
 		<td>
 			<?php echo $this->Format->yesNo($language['status'], ['onTitle' => __('Active'), 'offTitle' => __('Inactive')]); ?>

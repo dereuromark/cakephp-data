@@ -25,11 +25,14 @@ use Cake\Core\Plugin;
 	<?php if (Plugin::isLoaded('Search')) { ?>
 		<div class="search-box">
 			<?php
-			echo $this->Form->create(null, ['valueSources' => 'query']);
+			echo $this->Form->create();
 			echo $this->Form->control('search', ['placeholder' => __('wildcardSearch {0} and {1}', '*', '?')]);
 			echo $this->Form->button(__('Search'), []);
 			echo $this->Form->end();
 			?>
+			<?php if ($this->Search->isSearch()) {
+				echo $this->Search->resetLink(null, ['class' => 'btn btn-secondary']);
+			} ?>
 		</div>
 	<?php } ?>
 

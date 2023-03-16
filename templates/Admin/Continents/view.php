@@ -24,7 +24,7 @@
 
 		<dt><?php echo __('Parent Continent'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($continent->parent_continent['name'], ['controller' => 'Continents', 'action' => 'view', $continent->parent_continent['id']]); ?>
+			<?php echo $continent->parent_continent ? $this->Html->link($continent->parent_continent->name, ['controller' => 'Continents', 'action' => 'view', $continent->parent_continent['id']]) : ''; ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Status'); ?></dt>

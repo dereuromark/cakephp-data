@@ -5,6 +5,7 @@
  */
 
 use Cake\Core\Configure;
+use Cake\Core\Plugin;
 
 ?>
 <?php /**
@@ -16,9 +17,11 @@ use Cake\Core\Configure;
 
 <div class="page index">
 
-<div class="floatRight">
+<?php if (Plugin::isLoaded('Search')) { ?>
+<div class="search-box" style="float: right">
 	<?php echo $this->element('Data.States/search'); ?>
 </div>
+<?php } ?>
 
 <h2><?php echo __('States');?></h2>
 

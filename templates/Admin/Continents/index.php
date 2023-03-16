@@ -26,7 +26,7 @@ foreach ($continents as $continent):
 			<?php echo h($continent['code']); ?>
 		</td>
 		<td>
-			<?php echo $this->Html->link($continent->parent_continent['name'], ['controller' => 'Continents', 'action' => 'view', $continent->parent_continent['id']]); ?>
+			<?php echo $continent->parent_continent ? $this->Html->link($continent->parent_continent->name, ['controller' => 'Continents', 'action' => 'view', $continent->parent_continent['id']]) : ''; ?>
 		</td>
 		<td>
 			<?php echo $this->Time->niceDate($continent['modified']); ?>
