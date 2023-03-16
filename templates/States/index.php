@@ -3,12 +3,17 @@
  * @var \App\View\AppView $this
  * @var \Data\Model\Entity\State[]|\Cake\Collection\CollectionInterface $states
  */
+
+use Cake\Core\Plugin;
+
 ?>
 <div class="page index">
 
-<div class="floatRight">
-	<?php echo $this->element('Data.States/search'); ?>
-</div>
+	<?php if (Plugin::isLoaded('Search')) { ?>
+		<div class="search-box" style="float: right">
+			<?php echo $this->element('Data.States/search'); ?>
+		</div>
+	<?php } ?>
 
 <h2><?php echo __('States');?></h2>
 

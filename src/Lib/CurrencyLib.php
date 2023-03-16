@@ -276,7 +276,7 @@ class CurrencyLib {
 		if ($res !== false) {
 			$this->cacheFileUsed = true;
 
-			return unserialize($res);
+			return unserialize((string)$res);
 		}
 
 		return false;
