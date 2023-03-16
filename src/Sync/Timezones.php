@@ -27,6 +27,7 @@ class Timezones {
 	 */
 	public function all(): array {
 		$client = new Client();
+		$client->setConfig(['timeout' => 3]);
 		$response = $client->get(sprintf(static::URL, static::PAGE));
 		if (!$response->isOk()) {
 			throw new NotFoundException('Cannot load timezones HTML from Wikipedia');
