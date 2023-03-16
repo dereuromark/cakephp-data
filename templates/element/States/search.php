@@ -7,7 +7,7 @@
 <?php /**
  * @var \App\View\AppView $this
  */
-echo $this->Form->create(); ?>
+echo $this->Form->create(null, ['valueSources' => 'query']); ?>
 <?php echo __('Country');?>:&nbsp;&nbsp;
 <?php echo $this->Form->control('country_id', [
 	'class' => 'filter',
