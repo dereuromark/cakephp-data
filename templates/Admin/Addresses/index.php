@@ -69,7 +69,7 @@ foreach ($addresses as $address):
 
 					if (Configure::read('GoogleMap.key')) {
 						$mapMarkers = $this->GoogleMap->staticMarkers($markers);
-						echo $this->Html->link($this->Format->icon('view', ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $address->lat . ',' . $address->lng, 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 12]), ['id' => 'googleMap', 'class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
+						echo $this->Html->link($this->Format->icon('view', ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $address->lat . ',' . $address->lng, 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 12]), ['id' => 'googleMap', 'class' => 'internal zoom-image highslideImage', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
 					} else {
 						$options = [
 							'to' => $address->lat . ',' . $address->lng,
