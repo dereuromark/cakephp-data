@@ -4,7 +4,6 @@ namespace Data\Controller\Admin;
 
 use Cake\Core\Plugin;
 use Data\Controller\DataAppController;
-use Exception;
 
 /**
  * @property \Data\Model\Table\StatesTable $States

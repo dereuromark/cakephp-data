@@ -3,7 +3,6 @@
 namespace Data\Controller;
 
 use Cake\Core\Plugin;
-use Exception;
 
 /**
  * @property \Data\Model\Table\StatesTable $States
