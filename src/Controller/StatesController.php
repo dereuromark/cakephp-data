@@ -57,8 +57,6 @@ class StatesController extends DataAppController {
 	 * @return \Cake\Http\Response|null|void
 	 */
 	public function updateSelect($id = null) {
-		$this->request->allowMethod('ajax');
-
 		$this->viewBuilder()->setLayout('ajax');
 		$states = $this->States->getListByCountry($id);
 
