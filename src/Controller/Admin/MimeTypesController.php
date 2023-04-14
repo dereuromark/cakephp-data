@@ -106,11 +106,13 @@ class MimeTypesController extends DataAppController {
 				$mimeType = array_shift($mimeType);
 			}
 			$mime = null; // $this->MimeTypes->mimeTypeExists($ext);
+			/*
 			if ($mime) {
 				$report['in'][] = ['ext' => $ext, 'type' => $mimeType, 'oldType' => $mime['type']];
 
 				continue;
 			}
+			*/
 
 			//$this->MimeTypes->create();
 			$data = [
