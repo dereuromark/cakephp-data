@@ -4,9 +4,11 @@ use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Datasource\ConnectionManager;
+use Data\Plugin as DataPlugin;
 use TestApp\Application;
 use TestApp\Controller\AppController;
 use TestApp\View\AppView;
+use Tools\Plugin as ToolsPlugin;
 
 if (!defined('DS')) {
 	define('DS', DIRECTORY_SEPARATOR);
@@ -75,8 +77,8 @@ class_alias(AppController::class, 'App\Controller\AppController');
 class_alias(AppView::class, 'App\View\AppView');
 class_alias(Application::class, 'App\Application');
 
-Plugin::getCollection()->add(new Data\Plugin());
-Plugin::getCollection()->add(new Tools\Plugin());
+Plugin::getCollection()->add(new DataPlugin());
+Plugin::getCollection()->add(new ToolsPlugin());
 
 // Ensure default test connection is defined
 if (!getenv('db_class')) {
