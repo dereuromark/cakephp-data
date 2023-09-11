@@ -22,6 +22,9 @@ echo $this->Form->control('dir', ['label' => __('Direction'), 'options' => $lang
 echo $this->Form->button(__('Search'), []);
 echo $this->Form->end();
 ?>
+<?php if ($this->Search->isSearch()) {
+	echo $this->Search->resetLink(null, ['class' => 'btn btn-secondary']);
+} ?>
 </div>
 <?php } ?>
 
@@ -62,7 +65,7 @@ foreach ($languages as $language):
 			<?php echo h($language['locale_fallback']); ?>
 		</td>
 		<td>
-			<?php echo h($language['direction']); ?>
+			<?php echo $language::directions($language->direction); ?>
 		</td>
 		<td>
 			<?php echo $this->Format->yesNo($language['status'], ['onTitle' => __('Active'), 'offTitle' => __('Inactive')]); ?>

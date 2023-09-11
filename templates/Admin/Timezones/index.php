@@ -30,6 +30,9 @@ use Cake\Core\Plugin;
 			echo $this->Form->button(__('Search'), []);
 			echo $this->Form->end();
 			?>
+			<?php if ($this->Search->isSearch()) {
+				echo $this->Search->resetLink(null, ['class' => 'btn btn-secondary']);
+			} ?>
 		</div>
 	<?php } ?>
 

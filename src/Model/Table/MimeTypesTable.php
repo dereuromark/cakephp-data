@@ -155,6 +155,7 @@ class MimeTypesTable extends Table {
 	 * @return bool
 	 */
 	public function push($ext = null) {
+		/** @var \Data\Model\Entity\MimeType|null $type */
 		$type = $this->findMimeType($ext);
 		if ($type) {
 			$id = $type->id;

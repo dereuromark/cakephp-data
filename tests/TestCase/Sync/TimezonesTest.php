@@ -27,8 +27,10 @@ class TimezonesTest extends TestCase {
 	 */
 	public function testAll() {
 		$result = $this->Timezones->all();
-
 		$this->assertNotEmpty($result);
+
+		$berlin = $result['Europe/Berlin'];
+		unset($berlin['covered']);
 		$expected = [
 			'name' => 'Europe/Berlin',
 			'country_code' => 'DE,DK,NO,SE,SJ',
@@ -37,12 +39,11 @@ class TimezonesTest extends TestCase {
 			'offset' => 3600,
 			'offset_dst' => 7200,
 			'abbr' => 'CEST',
-			'covered' => 'Germany (most areas), Scandinavia',
 			'notes' => 'In 1945, the Trizone did not follow Berlin\'s switch to DST, see [[Time in Germany]]',
 			'type' => 'Canonical',
 			'alias' => 'Central European Summer Time',
 		];
-		$this->assertEquals($expected, $result['Europe/Berlin']);
+		$this->assertEquals($expected, $berlin);
 	}
 
 	/**

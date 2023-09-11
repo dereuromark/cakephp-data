@@ -26,6 +26,9 @@ echo $this->Form->create(null, ['valueSources' => 'query']);
 echo $this->Form->control('search', ['placeholder' => __('wildcardSearch {0} and {1}', '*', '?')]);
 echo $this->Form->button(__('Search'), []);
 echo $this->Form->end();
+if ($this->Search->isSearch()) {
+	echo $this->Search->resetLink(null, ['class' => 'btn btn-secondary']);
+}
 ?>
 </div>
 <?php } ?>
@@ -76,7 +79,7 @@ foreach ($countries as $country):
 
 				if (Configure::read('GoogleMap.key')) {
 					$mapMarkers = $this->GoogleMap->staticMarkers($markers);
-					echo ' ' . $this->Html->link($this->Icon->render('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $country['lat'] . ',' . $country['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 3]), ['class' => 'internal highslideImage', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
+					echo ' ' . $this->Html->link($this->Format->icon('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $country['lat'] . ',' . $country['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 3]), ['class' => 'internal zoom-image highslideImage', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
 				} else {
 					$options = [
 						'to' => $country->lat . ',' . $country->lng,

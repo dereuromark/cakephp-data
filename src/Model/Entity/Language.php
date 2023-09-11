@@ -15,6 +15,7 @@ use Tools\Model\Entity\Entity;
  * @property string $locale_fallback
  * @property int $status
  * @property int $sort
+ * @property int $direction
  * @property \Cake\I18n\DateTime $modified
  */
 class Language extends Entity {

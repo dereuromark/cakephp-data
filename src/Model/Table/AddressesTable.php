@@ -197,7 +197,7 @@ class AddressesTable extends Table {
 			return true;
 		}
 
-		/** @var \Data\Model\Entity\Country $res */
+		/** @var \Data\Model\Entity\Country|null $res */
 		$res = $this->Countries->find('all', [
 			'conditions' => ['Countries.id' => $data['country_id']],
 		])->first();

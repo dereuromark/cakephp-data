@@ -29,6 +29,8 @@ use Tools\Model\Entity\Entity;
  * @property-read array $timezones_offsets
  * @property-read string|null $timezone_offset_string
  * @property-read array<string> $timezone_offset_strings
+ * @property-read string $slug2
+ * @property-read string $slug3
  * @property array<int> $timezone_offsets
  * @property array<\Data\Model\Entity\Timezone> $timezones
  */
@@ -57,6 +59,8 @@ class Country extends Entity {
 	 */
 	protected array $_virtual = [
 		'timezone_offset_string',
+		'slug2',
+		'slug3',
 	];
 
 	/**
@@ -115,6 +119,28 @@ class Country extends Entity {
 		$timezones = $this->_getTimezoneOffsetStrings();
 
 		return implode(',', $timezones);
+	}
+
+	/**
+	 * @return string|null
+	 */
+	protected function _getSlug2(): ?string {
+		if ($this->iso2 === null) {
+			return null;
+		}
+
+		return mb_strtolower($this->iso2);
+	}
+
+	/**
+	 * @return string|null
+	 */
+	protected function _getSlug3(): ?string {
+		if ($this->iso3 === null) {
+			return null;
+		}
+
+		return mb_strtolower($this->iso3);
 	}
 
 }

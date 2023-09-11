@@ -28,9 +28,10 @@ class CountryStateHelperComponent extends Component {
 	 * @param bool $ignoreStates
 	 * @param string|null $prefix Data prefix if applicable (e.g. user_info.country_id)
 	 * @param int $defaultValue
+	 * @param int|null $selectedCountry
 	 * @return void
 	 */
-	public function provideData($ignoreStates = false, $prefix = null, $defaultValue = 0) {
+	public function provideData($ignoreStates = false, $prefix = null, $defaultValue = 0, $selectedCountry = null) {
 		/** @var \Data\Model\Table\CountriesTable $countriesTable */
 		$countriesTable = $this->Controller->fetchTable('Data.Countries');
 		$countries = $countriesTable->findActive()->enableHydration(false)->find('list')->toArray();
@@ -44,9 +45,10 @@ class CountryStateHelperComponent extends Component {
 		/** @var \Data\Model\Table\StatesTable $statesTable */
 		$statesTable = $this->Controller->fetchTable('Data.States');
 
-		$selectedCountry = $this->Controller->getRequest()->getQuery($field);
 		if ($this->Controller->getRequest()->getData($field)) {
 			$selectedCountry = $this->Controller->getRequest()->getData($field);
+		} elseif ($this->Controller->getRequest()->getQuery($field)) {
+			$selectedCountry = $this->Controller->getRequest()->getQuery($field);
 		}
 
 		if ($selectedCountry) {

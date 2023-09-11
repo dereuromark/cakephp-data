@@ -22,6 +22,7 @@ class Countries {
 	 */
 	public function all(): array {
 		$client = new Client();
+		$client->setConfig(['timeout' => 3]);
 		$response = $client->get(static::URL_XML);
 		if (!$response->isOk()) {
 			throw new NotFoundException('Cannot load countries.csv from GitHub');

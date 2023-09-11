@@ -118,8 +118,11 @@ class MimeTypeImagesTable extends Table {
 	 */
 	public function afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
 		if (!empty($this->_del)) {
+			/** @var \Data\Model\Entity\MimeTypeImage $mimeTypeImage */
+			$mimeTypeImage = $this->_del;
+
 			# todo: ...
-			$image = $this->_del['name'] . '.' . $this->_del['ext'];
+			$image = $mimeTypeImage->name . '.' . $mimeTypeImage->ext;
 
 			# delete image (right now: move to archive)
 			if (file_exists(PATH_MIMETYPES . $image)) {
@@ -130,8 +133,8 @@ class MimeTypeImagesTable extends Table {
 
 			# remove id from mime_types table
 
-			/** @var array<\Data\Model\Entity\MimeType> $types */
-			$types = $this->MimeTypes->find('all', ['fields' => ['id'], 'conditions' => ['mime_type_image_id' => $this->_del->id]])->toArray();
+			/** @var array<\Cake\Datasource\EntityInterface> $types */
+			$types = $this->MimeTypes->find('all', ['fields' => ['id'], 'conditions' => ['mime_type_image_id' => $mimeTypeImage->id]])->toArray();
 			foreach ($types as $type) {
 				$id = $type->id;
 				$this->MimeTypes->updateAll(['mime_type_image_id' => null], ['id' => $id]);

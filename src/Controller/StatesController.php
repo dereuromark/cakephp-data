@@ -3,7 +3,6 @@
 namespace Data\Controller;
 
 use Cake\Core\Plugin;
-use Exception;
 
 /**
  * @property \Data\Model\Table\StatesTable $States
@@ -57,9 +56,6 @@ class StatesController extends DataAppController {
 	 * @return \Cake\Http\Response|null|void
 	 */
 	public function updateSelect($id = null) {
-		if (!$this->request->is('post') || !$this->request->is('ajax')) {
-			throw new Exception(__('not a valid request'));
-		}
 		$this->viewBuilder()->setLayout('ajax');
 		$states = $this->States->getListByCountry($id);
 

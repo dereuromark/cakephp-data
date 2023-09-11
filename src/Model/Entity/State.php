@@ -8,6 +8,7 @@ use Tools\Model\Entity\Entity;
  * @property int $id
  * @property int $country_id
  * @property string $name
+ * @property string|null $ori_name
  * @property string $code
  * @property float|null $lat
  * @property float|null $lng
