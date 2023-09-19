@@ -39,7 +39,7 @@ class TimezonesTest extends TestCase {
 			'offset' => 3600,
 			'offset_dst' => 7200,
 			'abbr' => 'CEST',
-			'notes' => 'In 1945, the Trizone did not follow Berlin\'s switch to DST, see [[Time in Germany]]',
+			'notes' => 'In 1945, the [[Bizone|Trizone]] did not follow Berlin\'s switch to DST, see [[Time in Germany]]',
 			'type' => 'Canonical',
 			'alias' => 'Central European Summer Time',
 		];
