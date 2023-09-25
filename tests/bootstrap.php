@@ -8,7 +8,8 @@ use Data\Plugin as DataPlugin;
 use TestApp\Application;
 use TestApp\Controller\AppController;
 use TestApp\View\AppView;
-use Tools\Plugin as ToolsPlugin;
+use Tools\ToolsPlugin;
+use Tools\View\Icon\BootstrapIcon;
 
 if (!defined('DS')) {
 	define('DS', DIRECTORY_SEPARATOR);
@@ -37,6 +38,7 @@ define('LOGS', TMP);
 
 require ROOT . '/vendor/autoload.php';
 require CORE_PATH . 'config/bootstrap.php';
+require CAKE . 'functions.php';
 
 require ROOT . '/config/bootstrap.php';
 
@@ -95,6 +97,12 @@ ConnectionManager::setConfig('test', [
 	'timezone' => 'UTC',
 	'quoteIdentifiers' => true,
 	'cacheMetadata' => true,
+]);
+
+Configure::write('Icon', [
+	'sets' => [
+		'bs' => BootstrapIcon::class,
+	],
 ]);
 
 if (env('FIXTURE_SCHEMA_METADATA')) {

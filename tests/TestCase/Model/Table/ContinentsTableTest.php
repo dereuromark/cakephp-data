@@ -34,7 +34,7 @@ class ContinentsTableTest extends TestCase {
 	public function tearDown(): void {
 		parent::tearDown();
 
-		TableRegistry::clear();
+		//TableRegistry::clear();
 	}
 
 	/**

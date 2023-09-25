@@ -2,7 +2,6 @@
 
 namespace Data\Test\TestCase\Controller;
 
-use Cake\ORM\TableRegistry;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
@@ -26,7 +25,7 @@ class ContinentsControllerTest extends TestCase {
 	public function tearDown(): void {
 		parent::tearDown();
 
-		TableRegistry::getTableLocator()->clear();
+		//TableRegistry::getTableLocator()->clear();
 	}
 
 	/**

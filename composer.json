@@ -19,7 +19,7 @@
 	],
 	"require": {
 		"php": ">=8.1",
-		"cakephp/cakephp": "^5.0.0",
+		"cakephp/cakephp": "5.x-dev as 5.0.0",
 		"dereuromark/cakephp-tools": "dev-cake5"
 	},
 	"require-dev": {

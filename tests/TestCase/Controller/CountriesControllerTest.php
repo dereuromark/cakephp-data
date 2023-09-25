@@ -2,7 +2,6 @@
 
 namespace Data\Test\TestCase\Controller;
 
-use Cake\ORM\TableRegistry;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
@@ -26,13 +25,15 @@ class CountriesControllerTest extends TestCase {
 	public function tearDown(): void {
 		parent::tearDown();
 
-		TableRegistry::clear();
+		//TableRegistry::clear();
 	}
 
 	/**
 	 * @return void
 	 */
 	public function testIndex() {
+		$this->disableErrorHandlerMiddleware();
+
 		$this->get(['plugin' => 'Data', 'controller' => 'Countries', 'action' => 'index']);
 		$this->assertResponseCode(200);
 	}

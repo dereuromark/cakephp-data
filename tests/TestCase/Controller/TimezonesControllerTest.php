@@ -24,6 +24,8 @@ class TimezonesControllerTest extends TestCase {
 	 * @return void
 	 */
 	public function testIndex(): void {
+		$this->disableErrorHandlerMiddleware();
+
 		$this->get(['plugin' => 'Data', 'controller' => 'Timezones', 'action' => 'index']);
 		$this->assertResponseCode(200);
 	}

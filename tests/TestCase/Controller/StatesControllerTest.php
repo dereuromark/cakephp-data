@@ -2,12 +2,15 @@
 
 namespace Data\Test\TestCase\Controller;
 
-use Cake\ORM\TableRegistry;
+use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 
 /**
  * @uses \Data\Controller\StatesController
  */
 class StatesControllerTest extends TestCase {
+
+	use IntegrationTestTrait;
 
 	/**
 	 * @var array
@@ -32,7 +35,7 @@ class StatesControllerTest extends TestCase {
 	public function tearDown(): void {
 		parent::tearDown();
 
-		TableRegistry::clear();
+		//TableRegistry::clear();
 	}
 
 	/**

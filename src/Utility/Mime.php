@@ -751,9 +751,9 @@ class Mime extends Response {
 	 * e.g `mapType('application/pdf'); // returns 'pdf'`
 	 *
 	 * @param array|string $ctype Either a string content type to map, or an array of types.
-	 * @return mixed Aliases for the types provided.
+	 * @return array|string|null Aliases for the types provided.
 	 */
-	public function mapType($ctype) {
+	public function mapType(array|string $ctype): array|string|null {
 		return parent::mapType($ctype);
 	}
 

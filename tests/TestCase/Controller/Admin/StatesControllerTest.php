@@ -2,12 +2,15 @@
 
 namespace Data\Test\TestCase\Controller\Admin;
 
-use Cake\ORM\TableRegistry;
+use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 
 /**
  * @uses \Data\Controller\Admin\StatesController
  */
 class StatesControllerTest extends TestCase {
+
+	use IntegrationTestTrait;
 
 	/**
 	 * @var array
@@ -23,13 +26,15 @@ class StatesControllerTest extends TestCase {
 	public function tearDown(): void {
 		parent::tearDown();
 
-		TableRegistry::clear();
+		//TableRegistry::clear();
 	}
 
 	/**
 	 * @return void
 	 */
 	public function testIndex() {
+		$this->disableErrorHandlerMiddleware();
+
 		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'States', 'action' => 'index']);
 		$this->assertResponseCode(200);
 	}

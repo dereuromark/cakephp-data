@@ -4,11 +4,15 @@ namespace Data\Test\TestCase\Controller;
 
 use Cake\Database\Driver\Mysql;
 use Cake\ORM\TableRegistry;
+use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 
 /**
  * @uses \Data\Controller\PostalCodesController
  */
 class PostalCodesControllerTest extends TestCase {
+
+	use IntegrationTestTrait;
 
 	/**
 	 * @var array
@@ -23,7 +27,7 @@ class PostalCodesControllerTest extends TestCase {
 	public function tearDown(): void {
 		parent::tearDown();
 
-		TableRegistry::clear();
+		//TableRegistry::clear();
 	}
 
 	/**

@@ -133,7 +133,7 @@ class MimeTypeImagesTable extends Table {
 
 			# remove id from mime_types table
 
-			/** @var array<\Cake\Datasource\EntityInterface> $types */
+			/** @var array<\Data\Model\Entity\MimeTypeImage> $types */
 			$types = $this->MimeTypes->find('all', ['fields' => ['id'], 'conditions' => ['mime_type_image_id' => $mimeTypeImage->id]])->toArray();
 			foreach ($types as $type) {
 				$id = $type->id;
