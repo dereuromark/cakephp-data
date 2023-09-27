@@ -202,7 +202,8 @@ class MimeTypeImagesController extends DataAppController {
 			if (!empty($m['ext'])) {
 				# should have an icon
 				if (!file_exists(PATH_MIMETYPES . $m['name'] . '.' . $m['ext'])) {
-					$mimeTypeImages[$key]['warning'] = 1; # missing icon
+					//FIXME
+					//$mimeTypeImages[$key]['warning'] = 1; # missing icon
 				}
 
 				# remove from our found list (not working with pagination)

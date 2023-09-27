@@ -30,7 +30,7 @@ class CurrencyBitcoinLibTest extends TestCase {
 			return;
 		}
 
-		$this->CurrencyBitcoin = $this->getMockBuilder('Data\Lib\CurrencyBitcoinLib')->setMethods(['_get'])->getMock();
+		$this->CurrencyBitcoin = $this->getMockBuilder('Data\Currency\CurrencyBitcoinLib')->onlyMethods(['_get'])->getMock();
 		$this->path = Plugin::path('Data') . 'tests' . DS . 'test_files' . DS . 'json' . DS;
 	}
 
