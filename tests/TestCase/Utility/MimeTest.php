@@ -28,7 +28,7 @@ class MimeTest extends TestCase {
 	 */
 	public function testObject() {
 		$this->assertTrue(is_object($this->Mime));
-		$this->assertInstanceOf('Tools\Utility\Mime', $this->Mime);
+		$this->assertInstanceOf('Data\Utility\Mime', $this->Mime);
 	}
 
 	/**

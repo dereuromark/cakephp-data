@@ -61,7 +61,7 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 
 		</td>
 		<td>
-			<?php $count = count($mimeTypeImage->mime_types);
+			<?php $count = $mimeTypeImage->mime_types ? count($mimeTypeImage->mime_types) : 0;
 				if ($count > 0) {
 					echo $count . ' &nbsp; ';
 					echo $this->Icon->render('details', [], ['class' => 'hand', 'id' => 'details_' . $mimeTypeImage['id']]);

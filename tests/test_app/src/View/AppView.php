@@ -17,7 +17,11 @@ class AppView extends View {
 	 * @return void
 	 */
 	public function initialize(): void {
-		$this->loadHelper('Tools.Format');
+		$this->addHelper('Tools.Format');
+		$this->addHelper('Tools.Icon');
+		$this->addHelper('Tools.Time');
+		$this->addHelper('Tools.Number');
+		$this->addHelper('Tools.Text');
 	}
 
 }
