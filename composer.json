@@ -25,7 +25,7 @@
 	"require-dev": {
 		"phpunit/phpunit": "^10.2",
 		"cakephp/migrations": "^4.0.1",
-		"dereuromark/cakephp-geo": "dev-cake5",
+		"dereuromark/cakephp-geo": "^3.0.0",
 		"willdurand/geocoder": "^4.2.2",
 		"friendsofcake/search": "^7.0.0",
 		"yangqi/htmldom": "dev-master",
