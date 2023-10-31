@@ -26,21 +26,14 @@ class Timezones {
 	 * @return array
 	 */
 	public function all(): array {
-		$client = new Client();
-		$client->setConfig(['timeout' => 3]);
-		$response = $client->get(sprintf(static::URL, static::PAGE));
-		if (!$response->isOk()) {
-			throw new NotFoundException('Cannot load timezones HTML from Wikipedia');
-		}
+		$content = $this->fetchContent();
 
-		$content = $response->getBody()->getContents();
 		$data = json_decode($content, true);
 		$data = $data['parse']['wikitext']['*'];
 
 		if (!is_dir(TMP)) {
 			mkdir(TMP, 0770, true);
 		}
-		file_put_contents(TMP . 'timezones.txt', $data);
 		$rows = explode(PHP_EOL, $data);
 
 		$rows = $this->parse($rows);
@@ -327,6 +320,10 @@ class Timezones {
 		$index = 0;
 		$rowIndex = 0;
 		for ($i = $start; $i < $count; $i++) {
+			if (!isset($rows[$i])) {
+				continue;
+			}
+
 			if (strpos($rows[$i], '|- style') === 0 || strpos($rows[$i], '|- id=') === 0) {
 				$index++;
 				$rowIndex = 0;
@@ -339,6 +336,27 @@ class Timezones {
 		}
 
 		return $data;
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function fetchContent(): string {
+		if (file_exists(TMP . 'wiki-timezones.txt')) {
+			return (string)file_get_contents(TMP . 'wiki-timezones.txt');
+		}
+
+		$client = new Client();
+		$client->setConfig(['timeout' => 3]);
+		$response = $client->get(sprintf(static::URL, static::PAGE));
+		if (!$response->isOk()) {
+			throw new NotFoundException('Cannot load timezones HTML from Wikipedia');
+		}
+
+		$content = $response->getBody()->getContents();
+		file_put_contents(TMP . 'wiki-timezones.txt', $content);
+
+		return $content;
 	}
 
 }
