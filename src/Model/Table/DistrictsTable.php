@@ -7,7 +7,7 @@ use Cake\Event\EventInterface;
 use Tools\Model\Table\Table;
 
 /**
- * @property \Data\Model\Table\CitiesTable|\Cake\ORM\Association\BelongsTo $Cities
+ * @property \Data\Model\Table\CitiesTable $Cities
  *
  * @deprecated Use only Countries => States => Cities
  */

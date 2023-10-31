@@ -58,7 +58,7 @@ class MimeTypeImagesController extends DataAppController {
 					}
 					$extension = mb_strtolower($extension);
 
-					if (empty($extension) || in_array($extension, $fileExtensions) || in_array($extension, $alreadyIn)) {
+					if (!$extension || in_array($extension, $fileExtensions) || in_array($extension, $alreadyIn)) {
 						continue;
 					}
 
@@ -167,9 +167,9 @@ class MimeTypeImagesController extends DataAppController {
 						$ext,
 					)) {
 						$renameSuccess[] = $name . '.' . $ext;
-						unset($this->request->data['imgs'][$key]);
-						unset($this->request->data['names'][$key]);
-						unset($this->request->data['filenames'][$key]);
+						//unset($this->request->data['imgs'][$key]);
+						//unset($this->request->data['names'][$key]);
+						//unset($this->request->data['filenames'][$key]);
 						unset($images[$key]);
 					} else {
 						$this->log('ERROR in mimetype allocation on import');
@@ -268,12 +268,13 @@ class MimeTypeImagesController extends DataAppController {
 			'bmp',
 			'jpeg',
 			'gif',
-			'png'];
+			'png',
+		];
 
 		$image = $file['name'];
 		$ext = mb_strtolower(pathinfo($image, PATHINFO_EXTENSION));
 
-		if (empty($ext) || !in_array($ext, $this->_allowedTypes, true)) {
+		if (!$ext || !in_array($ext, $this->_allowedTypes, true)) {
 			$this->_uploadError = 'Invalid File Type';
 
 			return false;
@@ -285,6 +286,7 @@ class MimeTypeImagesController extends DataAppController {
 			return false;
 		}
 
+		/** @var string|null $fileName */
 		$fileName = $this->request->getData('name');
 
 		if (!array_key_exists($ext, MimeTypeImagesTable::extensions()) || ($this->request->getData('ext') && $this->request->getData('ext') !=
@@ -305,8 +307,8 @@ class MimeTypeImagesController extends DataAppController {
 		//$this->request->data['ext'] = $ext;
 
 		# save new extension
-
-		if (is_uploaded_file($file['tmp_name']) && move_uploaded_file($file['tmp_name'], PATH_MIMETYPES . $fileName . '.' . $ext)) {
+		$to = PATH_MIMETYPES . $fileName . '.' . $ext;
+		if (is_uploaded_file($file['tmp_name']) && move_uploaded_file($file['tmp_name'], $to)) {
 			//TODO resize?
 			return true;
 		}

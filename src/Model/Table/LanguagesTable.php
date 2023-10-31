@@ -219,12 +219,13 @@ class LanguagesTable extends Table {
 	 * Maps ISO 639-3 to I10n::__l10nCatalog (iso2?)
 	 *
 	 * @param string|null $iso3 Language
-	 * @return array|string|null Lang: iso2
+	 * @return array<string, mixed>|string|null Lang: iso2
 	 */
 	public function iso3ToIso2($iso3 = null) {
 		if (!isset($this->L10n)) {
 			$this->L10n = new L10n();
 		}
+		/** @var array<string, mixed> $languages */
 		$languages = $this->L10n->map();
 		if ($iso3) {
 			if (array_key_exists($iso3, $languages)) {
@@ -241,12 +242,12 @@ class LanguagesTable extends Table {
 	 * @param string|null $lang lang: iso2 or iso3
 	 * @return array|null String if lang passed (or false on failure) - or complete array if null is passed
 	 */
-	public function catalog($lang = null) {
+	public function catalog(?string $lang = null) {
 		if (!isset($this->L10n)) {
 			$this->L10n = new L10n();
 		}
 
-		return $this->L10n->catalog($lang);
+		return $this->L10n->catalog($lang) ?: null;
 	}
 
 	/**
@@ -256,7 +257,7 @@ class LanguagesTable extends Table {
 		$HtmlDom = new HtmlDom();
 		$res = Cache::read('lov_gov_iso_list');
 		if (!$res) {
-			$res = file_get_contents('http://www.loc.gov/standards/iso639-2/php/code_list.php');
+			$res = (string)file_get_contents('http://www.loc.gov/standards/iso639-2/php/code_list.php');
 			$res = $HtmlDom->domFromString($res);
 			Cache::write('lov_gov_iso_list', $res);
 		}

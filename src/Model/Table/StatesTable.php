@@ -121,7 +121,7 @@ class StatesTable extends Table {
 	 *
 	 * @return int
 	 */
-	public function getStateId($conditions) {
+	public function getStateId(array $conditions) {
 		$id = $this->fieldByConditions('id', $conditions);
 		if ($id) {
 			return $id;
@@ -133,7 +133,7 @@ class StatesTable extends Table {
 			return $state->id;
 		}
 
-		throw new InternalErrorException(json_encode($state->getErrors()));
+		throw new InternalErrorException(json_encode($state->getErrors()) ?: 'Unknown error');
 	}
 
 	/**
@@ -174,16 +174,19 @@ class StatesTable extends Table {
 			if ($res && $res->name && $res->country && $res->country->name) {
 				$data = $geocoder->geocode($res['name'] . ', ' . $res->country->name);
 				$data = $data->first();
-				$saveArray = ['lat' => $data['lat'], 'lng' => $data['lng'], 'country_id' => $res['country_id']];
+				$coordinates = $data->getCoordinates();
+				if ($coordinates) {
+					$saveArray = ['lat' => $coordinates->getLatitude(), 'lng' => $coordinates->getLongitude(), 'country_id' => $res['country_id']];
 
-				if (!empty($data['country_province_code']) && mb_strlen($data['country_province_code']) <= 3 && preg_match('/^([A-Z])*$/', $data['country_province_code'])) {
-					$saveArray['code'] = $data['country_province_code'];
-				}
+					if (!empty($data['country_province_code']) && mb_strlen($data['country_province_code']) <= 3 && preg_match('/^([A-Z])*$/', $data['country_province_code'])) {
+						$saveArray['code'] = $data['country_province_code'];
+					}
 
-				$state = $this->patchEntity($res, $saveArray);
-				if (!$this->save($state)) {
-					if ($data['country_province_code'] !== 'DC') {
-						//fixme
+					$state = $this->patchEntity($res, $saveArray);
+					if (!$this->save($state)) {
+						if ($data->getCountry()?->getCode() !== 'DC') {
+							//fixme
+						}
 					}
 				}
 
@@ -196,6 +199,7 @@ class StatesTable extends Table {
 				$conditions = [$this->getAlias() . '.lat' => 0, $this->getAlias() . '.lng' => 0];
 			}
 
+			/** @var \Data\Model\Entity\State[] $results */
 			$results = $this->find('all', ['conditions' => $conditions, 'contain' => ['Countries.name'], 'order' => [
 			'modified' =>
 				'ASC']]);
@@ -205,29 +209,34 @@ class StatesTable extends Table {
 				if ($res->name && $res->country && !empty($res->country->name)) {
 					$result = $geocoder->geocode($res->name . ', ' . $res->country->name);
 					$data = $result->first();
-					//pr($data); die();
-					//pr ($geocoder->debug());
-					$saveArray = ['country_id' => $res['country_id']];
-					if (isset($data['lat']) && isset($data['lng'])) {
-						$saveArray = ['lat' => $data['lat'], 'lng' => $data['lng']] + $saveArray;
+					$coordinates = $data->getCoordinates();
+
+					$saveArray = ['country_id' => $res->country_id];
+					if ($coordinates) {
+						$saveArray = ['lat' => $coordinates->getLatitude(), 'lng' => $coordinates->getLongitude()] + $saveArray;
 					}
 
+					//FIXME
+					/*
 					if (!empty($data['country_province_code']) && mb_strlen($data['country_province_code']) <= 3 && preg_match('/^([A-Z])*$/', $data['country_province_code'])) {
 						$saveArray['code'] = $data['country_province_code'];
 					}
+					*/
 
 					$state = $this->patchEntity($res, $saveArray);
 					if ($this->save($state)) {
 						$count++;
 
-						if (!empty($saveArray['code']) && $saveArray['code'] !== $res['code']) {
+						/*
+						if (!empty($saveArray['code']) && $saveArray['code'] !== $res->code) {
 							//$this->log('Code for state \'' . $data['country_province'] . '\' changed from \'' . $res['code'] . '\' to \'' . $saveArray['code'] .'\'', LOG_NOTICE);
 						}
+						*/
 
 					} else {
 						//pr($data); pr($geocoder->debug()); die();
 
-						if ($data['country_province_code'] !== 'DC') {
+						if ($data->getCountry()?->getCode() !== 'DC') { // ['country_province_code']
 							//echo returns($this->id);
 							//pr($res);
 							//pr($data);

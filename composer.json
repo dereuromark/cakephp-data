@@ -47,7 +47,7 @@
 		"source": "https://github.com/dereuromark/cakephp-data"
 	},
 	"prefer-stable": true,
-	"minimum-stability": "dev",
+	"minimum-stability": "RC",
 	"scripts": {
 		"test": "phpunit",
 		"test-coverage": "phpunit --log-junit tmp/coverage/unitreport.xml --coverage-html tmp/coverage --coverage-clover tmp/coverage/coverage.xml",
@@ -61,6 +61,5 @@
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
-	},
-	"minimum-stability": "stable"
+	}
 }

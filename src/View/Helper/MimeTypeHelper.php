@@ -17,7 +17,7 @@ if (!defined('FILE_CACHE')) {
 class MimeTypeHelper extends Helper {
 
 	/**
-	 * @var array
+	 * @var array<mixed>
 	 */
 	protected array $helpers = ['Html'];
 

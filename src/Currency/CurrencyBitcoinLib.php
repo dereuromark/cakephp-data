@@ -136,7 +136,7 @@ class CurrencyBitcoinLib {
 
 	/**
 	 * @param string $url
-	 * @return array<string, mixed>|bool
+	 * @return array<string, mixed>|false
 	 */
 	protected function _getBitcoincharts($url) {
 		$res = $this->_get($url);

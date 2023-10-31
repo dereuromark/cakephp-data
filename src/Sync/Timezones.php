@@ -118,6 +118,7 @@ class Timezones {
 				$alias = $aliasMatches[1] ?? null;
 			}
 
+			/** @var string $name */
 			$timezones[$name] = [
 				'name' => $name,
 				'country_code' => $countryCode,

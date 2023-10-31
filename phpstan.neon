@@ -1,5 +1,5 @@
 parameters:
-	level: 5
+	level: 7
 	paths:
 		- src/
 	excludePaths:
@@ -7,4 +7,5 @@ parameters:
 	bootstrapFiles:
 		- tests/bootstrap.php
 	treatPhpDocTypesAsCertain: false
-	ignoreErrors:
+	checkGenericClassInNonGenericObjectType: false
+	checkMissingIterableValueType: false
