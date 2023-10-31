@@ -36,7 +36,7 @@ class DataHelperTest extends TestCase {
 	 */
 	public function testCountryIcon() {
 		$result = $this->DataHelper->countryIcon('de');
-		$expected = '<img src="/data/country_flags/de.gif" alt="de" title="DE"/>';
+		$expected = '<img src="/data/country_flags/de.gif" alt="de" title="DE">';
 		$this->assertSame($expected, $result);
 	}
 
@@ -56,7 +56,7 @@ class DataHelperTest extends TestCase {
 	 */
 	public function testLanguageFlag() {
 		$result = $this->DataHelper->languageFlag('de');
-		$expected = '<img src="/language_flags/de.gif" alt="de" title="DE"/>';
+		$expected = '<img src="/language_flags/de.gif" alt="de" title="DE">';
 		$this->assertSame($expected, $result);
 	}
 
