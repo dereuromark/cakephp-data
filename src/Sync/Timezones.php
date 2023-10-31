@@ -338,8 +338,10 @@ class Timezones {
 		return $data;
 	}
 
-	protected function fetchContent(): string
-	{
+	/**
+	 * @return string
+	 */
+	protected function fetchContent(): string {
 		if (file_exists(TMP . 'wiki-timezones.txt')) {
 			return (string)file_get_contents(TMP . 'wiki-timezones.txt');
 		}
