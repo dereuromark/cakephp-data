@@ -4,6 +4,7 @@ namespace Data\Controller\Admin;
 
 use Data\Controller\DataAppController;
 use Data\Model\Table\MimeTypeImagesTable;
+use Shim\Datasource\Paging\NumericPaginator;
 use Shim\Filesystem\Folder;
 use Tools\Utility\Utility;
 
@@ -16,7 +17,10 @@ class MimeTypeImagesController extends DataAppController {
 	/**
 	 * @var array<string, mixed>
 	 */
-	protected array $paginate = ['order' => ['MimeTypeImages.modified' => 'DESC']];
+	protected array $paginate = [
+		'order' => ['MimeTypeImages.modified' => 'DESC'],
+		'className' => NumericPaginator::class,
+	];
 
 	/**
 	 * @return \Cake\Http\Response|null|void

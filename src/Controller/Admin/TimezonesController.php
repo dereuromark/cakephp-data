@@ -8,6 +8,7 @@ use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Utility\Hash;
 use Data\Sync\Timezones;
+use Shim\Datasource\Paging\NumericPaginator;
 
 /**
  * @property \Data\Model\Table\TimezonesTable $Timezones
@@ -18,7 +19,10 @@ class TimezonesController extends AppController {
 	/**
 	 * @var array<string, mixed>
 	 */
-	protected array $paginate = ['order' => ['Timezones.name' => 'ASC']];
+	protected array $paginate = [
+		'order' => ['Timezones.name' => 'ASC'],
+		'className' => NumericPaginator::class,
+	];
 
 	/**
 	 * @return void

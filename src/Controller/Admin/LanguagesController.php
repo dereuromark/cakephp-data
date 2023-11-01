@@ -6,6 +6,7 @@ use Cake\Core\Plugin;
 use Data\Controller\DataAppController;
 use Data\Model\Entity\Language;
 use RuntimeException;
+use Shim\Datasource\Paging\NumericPaginator;
 
 /**
  * @property \Data\Model\Table\LanguagesTable $Languages
@@ -17,7 +18,10 @@ class LanguagesController extends DataAppController {
 	/**
 	 * @var array<string, mixed>
 	 */
-	protected array $paginate = ['order' => ['Languages.name' => 'ASC']];
+	protected array $paginate = [
+		'order' => ['Languages.name' => 'ASC'],
+		'className' => NumericPaginator::class,
+	];
 
 	/**
 	 * @return void

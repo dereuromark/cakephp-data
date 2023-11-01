@@ -3,6 +3,7 @@
 namespace Data\Controller\Admin;
 
 use Data\Controller\DataAppController;
+use Shim\Datasource\Paging\NumericPaginator;
 
 /**
  * @property \Data\Model\Table\CurrenciesTable $Currencies
@@ -13,7 +14,10 @@ class CurrenciesController extends DataAppController {
 	/**
 	 * @var array<string, mixed>
 	 */
-	protected array $paginate = ['order' => ['Currencies.base' => 'DESC', 'Currencies.modified' => 'DESC']];
+	protected array $paginate = [
+		'order' => ['Currencies.base' => 'DESC', 'Currencies.modified' => 'DESC'],
+		'className' => NumericPaginator::class,
+	];
 
 	/**
 	 * @return void

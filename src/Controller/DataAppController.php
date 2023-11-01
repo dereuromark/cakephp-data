@@ -3,11 +3,16 @@
 namespace Data\Controller;
 
 use App\Controller\AppController;
+use Shim\Datasource\Paging\NumericPaginator;
 
 /**
  * @property \Tools\Controller\Component\CommonComponent $Common
  */
 class DataAppController extends AppController {
+
+	protected array $paginate = [
+		'className' => NumericPaginator::class,
+	];
 
 	/**
 	 * @return void

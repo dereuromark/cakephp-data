@@ -3,6 +3,7 @@
 namespace Data\Controller\Admin;
 
 use Data\Controller\DataAppController;
+use Shim\Datasource\Paging\NumericPaginator;
 
 /**
  * Cities Controller
@@ -16,7 +17,10 @@ class CitiesController extends DataAppController {
 	/**
 	 * @var array<string, mixed>
 	 */
-	protected array $paginate = ['order' => ['Cities.modified' => 'DESC']];
+	protected array $paginate = [
+		'order' => ['Cities.modified' => 'DESC'],
+		'className' => NumericPaginator::class,
+	];
 
 	/**
 	 * @return \Cake\Http\Response|null|void

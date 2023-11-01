@@ -4,6 +4,7 @@ namespace Data\Controller\Admin;
 
 use Data\Controller\DataAppController;
 use Data\Utility\Mime;
+use Shim\Datasource\Paging\NumericPaginator;
 
 /**
  * @link http://en.wikipedia.org/wiki/List_of_file_formats_(alphabetical)
@@ -18,7 +19,10 @@ class MimeTypesController extends DataAppController {
 	/**
 	 * @var array<string, mixed>
 	 */
-	protected array $paginate = ['order' => ['MimeTypes.modified' => 'DESC']];
+	protected array $paginate = [
+		'order' => ['MimeTypes.modified' => 'DESC'],
+		'className' => NumericPaginator::class,
+	];
 
 	/**
 	 * Experimental

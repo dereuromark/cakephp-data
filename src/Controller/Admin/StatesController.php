@@ -4,6 +4,7 @@ namespace Data\Controller\Admin;
 
 use Cake\Core\Plugin;
 use Data\Controller\DataAppController;
+use Shim\Datasource\Paging\NumericPaginator;
 
 /**
  * @property \Data\Model\Table\StatesTable $States
@@ -15,7 +16,10 @@ class StatesController extends DataAppController {
 	/**
 	 * @var array<string, mixed>
 	 */
-	protected array $paginate = ['order' => ['States.modified' => 'DESC']];
+	protected array $paginate = [
+		'order' => ['States.modified' => 'DESC'],
+		'className' => NumericPaginator::class,
+	];
 
 	/**
 	 * @return void
@@ -38,12 +42,11 @@ class StatesController extends DataAppController {
 
 		if (Plugin::isLoaded('Search')) {
 			$query = $this->States->find('search', ['search' => $this->request->getQuery()]);
-			$states = $this->paginate($query)->toArray();
+			$states = $this->paginate($query);
 		} else {
 			$states = $this->paginate();
 		}
-
-		$countries = $this->States->Countries->find('list');
+		$countries = $this->States->Countries->find('list')->toArray();
 
 		$this->set(compact('states', 'countries'));
 		$this->viewBuilder()->setHelpers(['Geo.GoogleMap']);

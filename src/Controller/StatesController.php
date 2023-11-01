@@ -3,6 +3,7 @@
 namespace Data\Controller;
 
 use Cake\Core\Plugin;
+use Shim\Datasource\Paging\NumericPaginator;
 
 /**
  * @property \Data\Model\Table\StatesTable $States
@@ -14,7 +15,10 @@ class StatesController extends DataAppController {
 	/**
 	 * @var array<string, mixed>
 	 */
-	protected array $paginate = ['order' => ['States.modified' => 'DESC']];
+	protected array $paginate = [
+		'order' => ['States.modified' => 'DESC'],
+		'className' => NumericPaginator::class,
+	];
 
 	/**
 	 * @return void

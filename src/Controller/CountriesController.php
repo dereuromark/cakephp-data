@@ -6,6 +6,7 @@ use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Event\EventInterface;
+use Shim\Datasource\Paging\NumericPaginator;
 use Shim\Filesystem\Folder;
 
 /**
@@ -18,7 +19,10 @@ class CountriesController extends DataAppController {
 	/**
 	 * @var array<string, mixed>
 	 */
-	protected array $paginate = ['order' => ['Countries.sort' => 'DESC']];
+	protected array $paginate = [
+		'order' => ['Countries.sort' => 'DESC'],
+		'className' => NumericPaginator::class,
+	];
 
 	/**
 	 * @var string
