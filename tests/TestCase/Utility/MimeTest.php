@@ -113,8 +113,10 @@ class MimeTest extends TestCase {
 		$res = $this->Mime->detectMimeType('https://raw.githubusercontent.com/dereuromark/cakephp-ide-helper/master/docs/img/code_completion_invalid.png');
 		$this->assertEquals('', $res);
 
-		$res = $this->Mime->detectMimeType(Plugin::path('Tools') . 'tests' . DS . 'test_files' . DS . 'img' . DS . 'hotel.jpg');
-		$this->assertEquals('image/jpeg', $res);
+		$file = Plugin::path('Data') . 'tests' . DS . 'test_files' . DS . 'json' . DS . 'bitcoincharts.json';
+		$this->assertFileExists($file);
+		$res = $this->Mime->detectMimeType($file);
+		$this->assertEquals('application/json', $res);
 	}
 
 	/**
