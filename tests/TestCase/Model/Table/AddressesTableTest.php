@@ -58,7 +58,7 @@ class AddressesTableTest extends TestCase {
 
 		$this->Addresses->touch($address->id);
 		$address = $this->Addresses->get($address->id);
-		$this->assertTrue($address->last_used > new Time('-2 seconds'));
+		$this->assertTrue($address->last_used > Time::parseTime('-2 seconds'));
 	}
 
 	/**
