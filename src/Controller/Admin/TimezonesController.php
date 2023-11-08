@@ -49,8 +49,8 @@ class TimezonesController extends AppController {
 		}
 
 		if (Plugin::isLoaded('Search')) {
-			$query = $this->Timezones->find('search', ['search' => $this->request->getQuery()]);
-			$timezones = $this->paginate($query)->toArray();
+			$query = $this->Timezones->find('search', search: $this->request->getQuery());
+			$timezones = $this->paginate($query);
 		} else {
 			$timezones = $this->paginate();
 		}
