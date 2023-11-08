@@ -2,6 +2,7 @@
 /plugins/
 phpunit.phar
 .phpunit.result.cache
+/.phpunit.cache/
 composer.lock
 /tmp/
 /logs/
