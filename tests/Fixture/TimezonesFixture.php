@@ -49,7 +49,6 @@ class TimezonesFixture extends TestFixture {
 	public function init(): void {
 		$this->records = [
 			[
-				'id' => 1,
 				'name' => 'Lorem ipsum dolor sit amet',
 				'country_code' => 'Lo',
 				'offset' => 3600,
