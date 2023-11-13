@@ -79,7 +79,7 @@ class MigrationCountries extends AbstractMigration {
 				'precision' => 10,
 				'scale' => 6,
 			])
-			->addColumn('lng', 'float', [
+			->addColumn('lng', 'decimal', [
 				'comment' => 'longitude',
 				'default' => null,
 				'null' => true,

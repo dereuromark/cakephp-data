@@ -39,7 +39,7 @@ class MigrationStates extends AbstractMigration {
 				'precision' => 10,
 				'scale' => 6,
 			])
-			->addColumn('lng', 'float', [
+			->addColumn('lng', 'decimal', [
 				'default' => null,
 				'null' => true,
 				'precision' => 10,
