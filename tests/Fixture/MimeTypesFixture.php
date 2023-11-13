@@ -38,7 +38,6 @@ class MimeTypesFixture extends TestFixture {
 	 */
 	public array $records = [
 		[
-			'id' => 1,
 			'name' => 'Lorem ipsum dolor sit amet',
 			'ext' => 'Lorem ipsum dolor ',
 			'type' => 'Lorem ipsum dolor sit amet',

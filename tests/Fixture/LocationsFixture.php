@@ -37,7 +37,6 @@ class LocationsFixture extends TestFixture {
 	 */
 	public array $records = [
 		[
-			'id' => 1,
 			'state_id' => 1,
 			'country_id' => 1,
 			'postal_code' => 'Lorem ip',

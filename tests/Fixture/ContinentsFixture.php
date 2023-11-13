@@ -28,7 +28,6 @@ class ContinentsFixture extends TestFixture {
 	 */
 	public array $records = [
 		[
-			'id' => 1,
 			'name' => 'Lorem ipsum dolor sit amet',
 			'ori_name' => 'Lorem ipsum dolor sit amet',
 			'code' => 'XY',

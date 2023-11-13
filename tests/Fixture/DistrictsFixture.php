@@ -34,7 +34,6 @@ class DistrictsFixture extends TestFixture {
 	 */
 	public array $records = [
 		[
-			'id' => 1,
 			'name' => 'Lorem ipsum dolor sit amet',
 			'slug' => 'Lorem ipsum dolor sit amet',
 			'city_id' => 1,
