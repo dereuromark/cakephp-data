@@ -34,6 +34,8 @@ class PostalCodesControllerTest extends TestCase {
 	 * @return void
 	 */
 	public function testMap() {
+		$this->disableErrorHandlerMiddleware();
+
 		$connectionConfig = TableRegistry::getTableLocator()->get('Data.PostalCodes')->getConnection()->config();
 		$this->skipIf($connectionConfig['driver'] !== Mysql::class, 'Only for MySQL');
 

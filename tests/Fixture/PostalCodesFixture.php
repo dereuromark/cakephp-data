@@ -3,7 +3,6 @@
 namespace Data\Test\Fixture;
 
 use Cake\TestSuite\Fixture\TestFixture;
-use Tools\Utility\Text;
 
 /**
  * PostalCodesFixture
