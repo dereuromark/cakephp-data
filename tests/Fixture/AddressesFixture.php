@@ -44,7 +44,7 @@ class AddressesFixture extends TestFixture {
 	public array $records = [
 		[
 			'id' => '46',
-			'foreign_id' => '6',
+			'foreign_id' => '481fc6d0-b920-43e0-a40d-111111111111',
 			'model' => 'Partner',
 			'country_id' => null,
 			'first_name' => 'Hans',
@@ -62,7 +62,7 @@ class AddressesFixture extends TestFixture {
 		],
 		[
 			'id' => '47',
-			'foreign_id' => '4',
+			'foreign_id' => '481fc6d0-b920-43e0-a40d-111111111111',
 			'model' => 'Restaurant',
 			'country_id' => '1',
 			'first_name' => '',
@@ -80,7 +80,7 @@ class AddressesFixture extends TestFixture {
 		],
 		[
 			'id' => '48',
-			'foreign_id' => '7',
+			'foreign_id' => '481fc6d0-b920-43e0-a40d-111111111111',
 			'model' => 'Partner',
 			'country_id' => null,
 			'first_name' => 'Tim',
@@ -98,7 +98,7 @@ class AddressesFixture extends TestFixture {
 		],
 		[
 			'id' => '49',
-			'foreign_id' => '5',
+			'foreign_id' => '481fc6d0-b920-43e0-a40d-111111111111',
 			'model' => 'Restaurant',
 			'country_id' => '1',
 			'first_name' => '',

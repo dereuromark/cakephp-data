@@ -51,12 +51,12 @@ class ContinentsTableTest extends TestCase {
 	public function testBasicSave() {
 		$data = [
 			'name' => 'Foo',
-			'code' => 'fxy',
+			'code' => 'YZ',
 		];
 
 		$result = $this->Continents->newEntity($data);
 		$this->Continents->saveOrFail($result);
-		$this->assertSame('FXY', $result->code);
+		$this->assertSame('XY', $result->code);
 	}
 
 }

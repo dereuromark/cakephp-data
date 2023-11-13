@@ -55,6 +55,8 @@ class TimezonesControllerTest extends TestCase {
 	 * @return void
 	 */
 	public function testView(): void {
+		$this->disableErrorHandlerMiddleware();
+
 		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'Timezones', 'action' => 'view', 1]);
 		$this->assertResponseCode(200);
 	}
@@ -63,6 +65,8 @@ class TimezonesControllerTest extends TestCase {
 	 * @return void
 	 */
 	public function testAdd(): void {
+		$this->disableErrorHandlerMiddleware();
+
 		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'Timezones', 'action' => 'add']);
 		$this->assertResponseCode(200);
 	}
@@ -71,6 +75,8 @@ class TimezonesControllerTest extends TestCase {
 	 * @return void
 	 */
 	public function testEdit(): void {
+		$this->disableErrorHandlerMiddleware();
+
 		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'Timezones', 'action' => 'edit', 1]);
 		$this->assertResponseCode(200);
 	}
@@ -79,6 +85,8 @@ class TimezonesControllerTest extends TestCase {
 	 * @return void
 	 */
 	public function testDelete(): void {
+		$this->disableErrorHandlerMiddleware();
+
 		$this->post(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'Timezones', 'action' => 'delete', 1]);
 		$this->assertResponseCode(302);
 	}

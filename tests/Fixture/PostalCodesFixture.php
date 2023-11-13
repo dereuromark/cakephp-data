@@ -3,6 +3,7 @@
 namespace Data\Test\Fixture;
 
 use Cake\TestSuite\Fixture\TestFixture;
+use Tools\Utility\Text;
 
 /**
  * PostalCodesFixture
@@ -34,7 +35,7 @@ class PostalCodesFixture extends TestFixture {
 	 */
 	public array $records = [
 		[
-			'id' => 'e23',
+			'id' => '481fc6d0-b920-43e0-a40d-111111111111',
 			'code' => '81234',
 			'country_id' => 1,
 			'lat' => 11,
