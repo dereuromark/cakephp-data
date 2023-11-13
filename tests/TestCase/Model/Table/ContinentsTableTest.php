@@ -51,7 +51,7 @@ class ContinentsTableTest extends TestCase {
 	public function testBasicSave() {
 		$data = [
 			'name' => 'Foo',
-			'code' => 'YZ',
+			'code' => 'XY',
 		];
 
 		$result = $this->Continents->newEntity($data);
