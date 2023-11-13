@@ -18,16 +18,16 @@ class LocationsFixture extends TestFixture {
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10],
 		'state_id' => ['type' => 'integer', 'null' => true, 'default' => null, 'length' => 10],
 		'country_id' => ['type' => 'integer', 'null' => true, 'default' => null, 'length' => 10, 'comment' => 'redundance purposely'],
-		'postal_code' => ['type' => 'string', 'null' => true, 'default' => null, 'length' => 10, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'],
-		'city' => ['type' => 'string', 'null' => true, 'default' => null, 'length' => 80, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'],
-		'street' => ['type' => 'string', 'null' => true, 'default' => null, 'length' => 80, 'collate' => 'utf8_unicode_ci', 'comment' => 'street address and street number', 'charset' => 'utf8'],
+		'postal_code' => ['type' => 'string', 'null' => true, 'default' => null, 'length' => 10, 'charset' => 'utf8'],
+		'city' => ['type' => 'string', 'null' => true, 'default' => null, 'length' => 80, 'charset' => 'utf8'],
+		'street' => ['type' => 'string', 'null' => true, 'default' => null, 'length' => 80, 'comment' => 'street address and street number', 'charset' => 'utf8'],
 		'lat' => ['type' => 'float', 'null' => true, 'default' => null, 'length' => '10,6', 'comment' => 'maps.google.de latitude'],
 		'lng' => ['type' => 'float', 'null' => true, 'default' => null, 'length' => '10,6', 'comment' => 'maps.google.de longitude'],
-		'formatted_address' => ['type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'],
+		'formatted_address' => ['type' => 'string', 'null' => true, 'default' => null, 'charset' => 'utf8'],
 		'created' => ['type' => 'datetime', 'null' => false, 'default' => null],
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
-		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM'],
+		'_options' => ['charset' => 'utf8', 'engine' => 'MyISAM'],
 	];
 
 	/**

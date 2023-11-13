@@ -16,15 +16,15 @@ class CitiesFixture extends TestFixture {
 	 */
 	public array $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'collate' => null, 'comment' => ''],
-		'name' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 30, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
-		'slug' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 40, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
+		'name' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 30, 'comment' => '', 'charset' => 'utf8'],
+		'slug' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 40, 'comment' => '', 'charset' => 'utf8'],
 		'lat' => ['type' => 'float', 'null' => false, 'default' => null, 'length' => '10,6', 'collate' => null, 'comment' => ''],
 		'lng' => ['type' => 'float', 'null' => false, 'default' => null, 'length' => '10,6', 'collate' => null, 'comment' => ''],
 		'active' => ['type' => 'boolean', 'null' => false, 'default' => '0', 'collate' => null, 'comment' => ''],
 		'created' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
-		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM'],
+		'_options' => ['charset' => 'utf8', 'engine' => 'MyISAM'],
 	];
 
 	/**

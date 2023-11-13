@@ -16,14 +16,14 @@ class MimeTypeImagesFixture extends TestFixture {
 	 */
 	public array $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'unsigned' => true],
-		'name' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 100, 'collate' => 'utf8_unicode_ci', 'comment' => 'extension (e.g. jpg)', 'charset' => 'utf8'],
-		'ext' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 20, 'collate' => 'utf8_unicode_ci', 'comment' => 'extension (lowercase!) of real image (exe.gif -> gif)', 'charset' => 'utf8'],
+		'name' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 100, 'comment' => 'extension (e.g. jpg)', 'charset' => 'utf8'],
+		'ext' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 20, 'comment' => 'extension (lowercase!) of real image (exe.gif -> gif)', 'charset' => 'utf8'],
 		'active' => ['type' => 'boolean', 'null' => false, 'default' => '0'],
-		'details' => ['type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'],
+		'details' => ['type' => 'string', 'null' => false, 'default' => null, 'charset' => 'utf8'],
 		'created' => ['type' => 'datetime', 'null' => false, 'default' => null],
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
-		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM'],
+		'_options' => ['charset' => 'utf8', 'engine' => 'MyISAM'],
 	];
 
 	/**

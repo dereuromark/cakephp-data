@@ -16,15 +16,15 @@ class DistrictsFixture extends TestFixture {
 	 */
 	public array $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10],
-		'name' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 30, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'],
-		'slug' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 40, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'],
+		'name' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 30, 'charset' => 'utf8'],
+		'slug' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 40, 'charset' => 'utf8'],
 		'city_id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10],
 		'lat' => ['type' => 'float', 'null' => true, 'default' => null, 'length' => '10,6'],
 		'lng' => ['type' => 'float', 'null' => true, 'default' => null, 'length' => '10,6'],
 		'status' => ['type' => 'boolean', 'null' => false, 'default' => '0', 'comment' => '0 inactive, 1 active'],
 		'created' => ['type' => 'datetime', 'null' => false, 'default' => null],
 		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
-		'_options' => ['charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'MyISAM'],
+		'_options' => ['charset' => 'utf8', 'engine' => 'MyISAM'],
 	];
 
 	/**

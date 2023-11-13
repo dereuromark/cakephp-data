@@ -17,11 +17,11 @@ class CurrenciesFixture extends TestFixture {
 	 */
 	public array $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'collate' => null, 'comment' => ''],
-		'name' => ['type' => 'string', 'null' => false, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
-		'code' => ['type' => 'string', 'null' => false, 'length' => 3, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
-		'symbol_left' => ['type' => 'string', 'null' => true, 'length' => 12, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
-		'symbol_right' => ['type' => 'string', 'null' => true, 'length' => 12, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
-		'decimal_places' => ['type' => 'string', 'null' => true, 'length' => 1, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
+		'name' => ['type' => 'string', 'null' => false, 'comment' => '', 'charset' => 'utf8'],
+		'code' => ['type' => 'string', 'null' => false, 'length' => 3, 'comment' => '', 'charset' => 'utf8'],
+		'symbol_left' => ['type' => 'string', 'null' => true, 'length' => 12, 'comment' => '', 'charset' => 'utf8'],
+		'symbol_right' => ['type' => 'string', 'null' => true, 'length' => 12, 'comment' => '', 'charset' => 'utf8'],
+		'decimal_places' => ['type' => 'string', 'null' => true, 'length' => 1, 'comment' => '', 'charset' => 'utf8'],
 		'value' => ['type' => 'float', 'null' => true, 'default' => '0.0000', 'length' => '9,4', 'collate' => null, 'comment' => ''],
 		'base' => ['type' => 'boolean', 'null' => false, 'default' => '0', 'collate' => null, 'comment' => 'is base currency'],
 		'active' => ['type' => 'boolean', 'null' => false, 'default' => '0', 'collate' => null, 'comment' => ''],

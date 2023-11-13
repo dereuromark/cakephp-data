@@ -17,13 +17,13 @@ class CountiesFixture extends TestFixture {
 	 */
 	public array $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'collate' => null, 'comment' => ''],
-		'official_key' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 9, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
+		'official_key' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 9, 'comment' => '', 'charset' => 'utf8'],
 		'country_id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'collate' => null, 'comment' => ''],
 		'state_id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'collate' => null, 'comment' => ''],
-		'name' => ['type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
+		'name' => ['type' => 'string', 'null' => false, 'default' => null, 'comment' => '', 'charset' => 'utf8'],
 		'lat' => ['type' => 'float', 'null' => true, 'default' => null, 'length' => '10,6', 'collate' => null, 'comment' => ''],
 		'lng' => ['type' => 'float', 'null' => true, 'default' => null, 'length' => '10,6', 'collate' => null, 'comment' => ''],
-		'slug' => ['type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'charset' => 'utf8'],
+		'slug' => ['type' => 'string', 'null' => false, 'default' => null, 'comment' => '', 'charset' => 'utf8'],
 		'single_city' => ['type' => 'boolean', 'null' => false, 'default' => '0', 'collate' => null, 'comment' => ''],
 		'rank' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 5, 'collate' => null, 'comment' => ''],
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
