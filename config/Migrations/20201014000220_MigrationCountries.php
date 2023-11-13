@@ -72,7 +72,7 @@ class MigrationCountries extends AbstractMigration {
 				'null' => false,
 				'signed' => false,
 			])
-			->addColumn('lat', 'float', [
+			->addColumn('lat', 'decimal', [
 				'comment' => 'latitude',
 				'default' => null,
 				'null' => true,

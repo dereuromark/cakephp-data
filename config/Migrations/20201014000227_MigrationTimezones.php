@@ -51,7 +51,7 @@ class MigrationTimezones extends AbstractMigration {
 				'limit' => null,
 				'null' => false,
 			])
-			->addColumn('lat', 'float', [
+			->addColumn('lat', 'decimal', [
 				'default' => null,
 				'null' => true,
 				'precision' => 10,

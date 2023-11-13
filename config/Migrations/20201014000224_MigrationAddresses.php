@@ -69,7 +69,7 @@ class MigrationAddresses extends AbstractMigration {
 				'limit' => 190,
 				'null' => false,
 			])
-			->addColumn('lat', 'float', [
+			->addColumn('lat', 'decimal', [
 				'default' => null,
 				'null' => true,
 				'precision' => 10,

@@ -33,7 +33,7 @@ class MigrationStates extends AbstractMigration {
 				'limit' => 60,
 				'null' => false,
 			])
-			->addColumn('lat', 'float', [
+			->addColumn('lat', 'decimal', [
 				'default' => null,
 				'null' => true,
 				'precision' => 10,
