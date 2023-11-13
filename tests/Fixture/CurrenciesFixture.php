@@ -37,7 +37,6 @@ class CurrenciesFixture extends TestFixture {
 	 */
 	public array $records = [
 		[
-			'id' => '1',
 			'name' => 'US Dollar',
 			'code' => 'USD',
 			'symbol_left' => '$',
@@ -49,7 +48,6 @@ class CurrenciesFixture extends TestFixture {
 			'modified' => '2011-07-16 15:12:33',
 		],
 		[
-			'id' => '2',
 			'name' => 'Euro',
 			'code' => 'EUR',
 			'symbol_left' => '€',
@@ -61,7 +59,6 @@ class CurrenciesFixture extends TestFixture {
 			'modified' => '2009-11-23 12:45:15',
 		],
 		[
-			'id' => '3',
 			'name' => 'British Pounds',
 			'code' => 'GBP',
 			'symbol_left' => '£',
@@ -73,7 +70,6 @@ class CurrenciesFixture extends TestFixture {
 			'modified' => '2011-07-16 15:12:33',
 		],
 		[
-			'id' => '4',
 			'name' => 'Schweizer Franken',
 			'code' => 'CHF',
 			'symbol_left' => '',
@@ -85,7 +81,6 @@ class CurrenciesFixture extends TestFixture {
 			'modified' => '2011-07-16 15:12:33',
 		],
 		[
-			'id' => '5',
 			'name' => 'Australien Dollar',
 			'code' => 'AUD',
 			'symbol_left' => '',
@@ -97,7 +92,6 @@ class CurrenciesFixture extends TestFixture {
 			'modified' => '2011-07-16 15:12:33',
 		],
 		[
-			'id' => '6',
 			'name' => 'Canadian Dollar',
 			'code' => 'CAD',
 			'symbol_left' => '',
@@ -109,7 +103,6 @@ class CurrenciesFixture extends TestFixture {
 			'modified' => '2011-07-16 15:12:33',
 		],
 		[
-			'id' => '7',
 			'name' => 'Japanese Yen',
 			'code' => 'JPY',
 			'symbol_left' => '',
@@ -121,7 +114,6 @@ class CurrenciesFixture extends TestFixture {
 			'modified' => '2011-07-16 15:12:33',
 		],
 		[
-			'id' => '9',
 			'name' => 'Mexican Peso',
 			'code' => 'MXN',
 			'symbol_left' => '',
@@ -133,7 +125,6 @@ class CurrenciesFixture extends TestFixture {
 			'modified' => '2011-07-16 15:12:33',
 		],
 		[
-			'id' => '10',
 			'name' => 'Norwegian Krone',
 			'code' => 'NOK',
 			'symbol_left' => '',
@@ -145,7 +136,6 @@ class CurrenciesFixture extends TestFixture {
 			'modified' => '2011-07-16 15:12:33',
 		],
 		[
-			'id' => '11',
 			'name' => 'Swedish Krona',
 			'code' => 'SEK',
 			'symbol_left' => '',

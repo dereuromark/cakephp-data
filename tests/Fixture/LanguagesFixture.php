@@ -38,7 +38,6 @@ class LanguagesFixture extends TestFixture {
 	 */
 	public array $records = [
 		[
-			'id' => '1',
 			'name' => 'Deutsch',
 			'ori_name' => 'German',
 			'code' => 'de',
@@ -51,7 +50,6 @@ class LanguagesFixture extends TestFixture {
 			'modified' => '2011-07-17 15:23:08',
 		],
 		[
-			'id' => '2',
 			'name' => 'Deutsch (Deutschland)',
 			'ori_name' => 'German',
 			'code' => 'de',
@@ -64,7 +62,6 @@ class LanguagesFixture extends TestFixture {
 			'modified' => '2011-07-17 15:23:08',
 		],
 		[
-			'id' => '3',
 			'name' => 'Englisch',
 			'ori_name' => 'English',
 			'code' => 'en',

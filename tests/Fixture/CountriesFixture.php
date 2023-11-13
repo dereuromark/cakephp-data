@@ -44,7 +44,6 @@ class CountriesFixture extends TestFixture {
 	 */
 	public array $records = [
 		[
-			'id' => '1',
 			'name' => 'Deutschland',
 			'ori_name' => 'Deutschland',
 			'iso2' => 'DE',
@@ -63,7 +62,6 @@ class CountriesFixture extends TestFixture {
 			'modified' => '2010-06-06 00:19:04',
 		],
 		[
-			'id' => '2',
 			'name' => 'Österreich',
 			'ori_name' => 'Österreich',
 			'iso2' => 'AT',
@@ -82,7 +80,6 @@ class CountriesFixture extends TestFixture {
 			'modified' => '2010-06-06 00:19:04',
 		],
 		[
-			'id' => '3',
 			'name' => 'Schweiz',
 			'ori_name' => 'Schweiz',
 			'iso2' => 'CH',
@@ -101,7 +98,6 @@ class CountriesFixture extends TestFixture {
 			'modified' => '2010-06-06 00:19:04',
 		],
 		[
-			'id' => '4',
 			'name' => 'Belgien',
 			'ori_name' => 'Belgium',
 			'iso2' => 'BE',
@@ -120,7 +116,6 @@ class CountriesFixture extends TestFixture {
 			'modified' => '2010-06-06 00:19:09',
 		],
 		[
-			'id' => '5',
 			'name' => 'Niederlande',
 			'ori_name' => 'Netherlands',
 			'iso2' => 'NL',
@@ -139,7 +134,6 @@ class CountriesFixture extends TestFixture {
 			'modified' => '2010-06-06 00:19:40',
 		],
 		[
-			'id' => '6',
 			'name' => 'Dänemark',
 			'ori_name' => 'Denmark',
 			'iso2' => 'DK',
@@ -158,7 +152,6 @@ class CountriesFixture extends TestFixture {
 			'modified' => '2010-06-06 00:19:14',
 		],
 		[
-			'id' => '7',
 			'name' => 'Luxemburg',
 			'ori_name' => 'Luxembourg',
 			'iso2' => 'LU',
@@ -177,7 +170,6 @@ class CountriesFixture extends TestFixture {
 			'modified' => '2010-06-06 00:19:34',
 		],
 		[
-			'id' => '8',
 			'name' => 'Frankreich',
 			'ori_name' => 'France',
 			'iso2' => 'FR',
@@ -196,7 +188,6 @@ class CountriesFixture extends TestFixture {
 			'modified' => '2010-06-06 00:19:17',
 		],
 		[
-			'id' => '9',
 			'name' => 'Großbritannien',
 			'ori_name' => 'United Kingdom (Great Britian)',
 			'iso2' => 'GB',
@@ -215,7 +206,6 @@ class CountriesFixture extends TestFixture {
 			'modified' => '2010-06-06 00:19:19',
 		],
 		[
-			'id' => '12',
 			'name' => 'Ukraine',
 			'ori_name' => 'Ukraine',
 			'iso2' => 'UA',

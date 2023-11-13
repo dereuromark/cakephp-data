@@ -34,7 +34,6 @@ class CitiesFixture extends TestFixture {
 	 */
 	public array $records = [
 		[
-			'id' => '1',
 			'name' => 'München',
 			'slug' => 'muenchen',
 			'lat' => '48.139126',
@@ -44,7 +43,6 @@ class CitiesFixture extends TestFixture {
 			'modified' => '2011-04-21 16:50:05',
 		],
 		[
-			'id' => '3',
 			'name' => 'Stuttgart',
 			'slug' => 'Stuttgart',
 			'lat' => '48.777107',

@@ -69,7 +69,7 @@ class AddressesTableTest extends TestCase {
 		$this->Addresses->addBehavior('Geocoder', ['className' => TestGeocoderBehavior::class]);
 
 		$data = [
-			'foreign_id' => 1,
+			'foreign_id' => 'eb25610d-7bfa-4e34-812c-ad72b100fb26',
 			'model' => 'Foo',
 			'city' => 'Berlin',
 		];
@@ -85,7 +85,7 @@ class AddressesTableTest extends TestCase {
 		$this->Addresses->removeBehavior('Geocoder');
 
 		$data = [
-			'foreign_id' => 1,
+			'foreign_id' => 'eb25610d-7bfa-4e34-812c-ad72b100fb26',
 			'model' => 'Foo',
 			'city' => 'Berlin',
 			'country_id' => 1,
@@ -103,7 +103,7 @@ class AddressesTableTest extends TestCase {
 		$this->Addresses->removeBehavior('Geocoder');
 
 		$data = [
-			'foreign_id' => 1,
+			'foreign_id' => 'eb25610d-7bfa-4e34-812c-ad72b100fb26',
 			'model' => 'Foo',
 			'city' => 'Berlin',
 			'country_id' => 1,

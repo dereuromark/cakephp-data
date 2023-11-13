@@ -49,7 +49,6 @@ class LocationsFixture extends TestFixture {
 			'modified' => '2012-12-26 17:20:20',
 		],
 		[
-			'id' => 2,
 			'state_id' => 2,
 			'country_id' => 2,
 			'postal_code' => 'Lorem ip',
@@ -62,7 +61,6 @@ class LocationsFixture extends TestFixture {
 			'modified' => '2012-12-26 17:20:20',
 		],
 		[
-			'id' => 3,
 			'state_id' => 3,
 			'country_id' => 3,
 			'postal_code' => 'Lorem ip',
@@ -75,7 +73,6 @@ class LocationsFixture extends TestFixture {
 			'modified' => '2012-12-26 17:20:20',
 		],
 		[
-			'id' => 4,
 			'state_id' => 4,
 			'country_id' => 4,
 			'postal_code' => 'Lorem ip',
@@ -88,7 +85,6 @@ class LocationsFixture extends TestFixture {
 			'modified' => '2012-12-26 17:20:20',
 		],
 		[
-			'id' => 5,
 			'state_id' => 5,
 			'country_id' => 5,
 			'postal_code' => 'Lorem ip',
@@ -101,7 +97,6 @@ class LocationsFixture extends TestFixture {
 			'modified' => '2012-12-26 17:20:20',
 		],
 		[
-			'id' => 6,
 			'state_id' => 6,
 			'country_id' => 6,
 			'postal_code' => 'Lorem ip',
@@ -114,7 +109,6 @@ class LocationsFixture extends TestFixture {
 			'modified' => '2012-12-26 17:20:20',
 		],
 		[
-			'id' => 7,
 			'state_id' => 7,
 			'country_id' => 7,
 			'postal_code' => 'Lorem ip',
@@ -127,7 +121,6 @@ class LocationsFixture extends TestFixture {
 			'modified' => '2012-12-26 17:20:20',
 		],
 		[
-			'id' => 8,
 			'state_id' => 8,
 			'country_id' => 8,
 			'postal_code' => 'Lorem ip',
@@ -140,7 +133,6 @@ class LocationsFixture extends TestFixture {
 			'modified' => '2012-12-26 17:20:20',
 		],
 		[
-			'id' => 9,
 			'state_id' => 9,
 			'country_id' => 9,
 			'postal_code' => 'Lorem ip',
@@ -153,7 +145,6 @@ class LocationsFixture extends TestFixture {
 			'modified' => '2012-12-26 17:20:20',
 		],
 		[
-			'id' => 10,
 			'state_id' => 10,
 			'country_id' => 10,
 			'postal_code' => 'Lorem ip',

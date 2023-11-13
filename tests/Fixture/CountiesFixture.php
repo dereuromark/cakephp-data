@@ -38,7 +38,6 @@ class CountiesFixture extends TestFixture {
 	 */
 	public array $records = [
 		[
-			'id' => '1',
 			'official_key' => '01-0-01',
 			'country_id' => '1',
 			'state_id' => '1',
@@ -51,7 +50,6 @@ class CountiesFixture extends TestFixture {
 			'modified' => '2011-04-21 16:50:05',
 		],
 		[
-			'id' => '2',
 			'official_key' => '01-0-02',
 			'country_id' => '1',
 			'state_id' => '1',
@@ -64,7 +62,6 @@ class CountiesFixture extends TestFixture {
 			'modified' => '2011-04-21 16:50:05',
 		],
 		[
-			'id' => '3',
 			'official_key' => '01-0-03',
 			'country_id' => '1',
 			'state_id' => '1',
@@ -77,7 +74,6 @@ class CountiesFixture extends TestFixture {
 			'modified' => '2011-04-21 16:50:05',
 		],
 		[
-			'id' => '4',
 			'official_key' => '01-0-04',
 			'country_id' => '1',
 			'state_id' => '1',
@@ -90,7 +86,6 @@ class CountiesFixture extends TestFixture {
 			'modified' => '2011-04-21 16:50:05',
 		],
 		[
-			'id' => '5',
 			'official_key' => '02-0-00',
 			'country_id' => '1',
 			'state_id' => '2',
@@ -103,7 +98,6 @@ class CountiesFixture extends TestFixture {
 			'modified' => '2011-04-21 16:50:05',
 		],
 		[
-			'id' => '6',
 			'official_key' => '03-1-01',
 			'country_id' => '1',
 			'state_id' => '3',
@@ -116,7 +110,6 @@ class CountiesFixture extends TestFixture {
 			'modified' => '2011-04-21 16:50:05',
 		],
 		[
-			'id' => '7',
 			'official_key' => '03-1-02',
 			'country_id' => '1',
 			'state_id' => '3',
@@ -129,7 +122,6 @@ class CountiesFixture extends TestFixture {
 			'modified' => '2011-04-21 16:50:05',
 		],
 		[
-			'id' => '8',
 			'official_key' => '03-1-03',
 			'country_id' => '1',
 			'state_id' => '3',
@@ -142,7 +134,6 @@ class CountiesFixture extends TestFixture {
 			'modified' => '2011-04-21 16:50:05',
 		],
 		[
-			'id' => '9',
 			'official_key' => '03-4-01',
 			'country_id' => '1',
 			'state_id' => '3',
@@ -155,7 +146,6 @@ class CountiesFixture extends TestFixture {
 			'modified' => '2011-04-21 16:50:05',
 		],
 		[
-			'id' => '10',
 			'official_key' => '03-4-02',
 			'country_id' => '1',
 			'state_id' => '3',
