@@ -87,15 +87,18 @@ if (!getenv('DB_URL')) {
 	putenv('DB_URL=sqlite:///:memory:');
 }
 
-ConnectionManager::setConfig('test', [
+$config = [
 	'url' => getenv('DB_URL') ?: null,
 	'timezone' => 'UTC',
 	'quoteIdentifiers' => true,
 	'cacheMetadata' => true,
 	'flags' => [
-		PDO::MYSQL_ATTR_INIT_COMMAND => "SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''))",
 	],
-]);
+];
+if (str_contains(getenv('DB_URL'), 'mysql')) {
+	$config['flags'][PDO::MYSQL_ATTR_INIT_COMMAND] = "SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''))";
+}
+ConnectionManager::setConfig('test', $config);
 
 Configure::write('Icon', [
 	'sets' => [
