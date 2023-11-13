@@ -48,7 +48,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'flensburg',
 			'single_city' => 1,
 			'rank' => '1',
-			'modified' => '0000-00-00 00:00:00',
+			'modified' => '2011-04-21 16:50:05',
 		],
 		[
 			'id' => '2',
@@ -61,7 +61,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'kiel',
 			'single_city' => 1,
 			'rank' => '3',
-			'modified' => '0000-00-00 00:00:00',
+			'modified' => '2011-04-21 16:50:05',
 		],
 		[
 			'id' => '3',
@@ -74,7 +74,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'luebeck',
 			'single_city' => 1,
 			'rank' => '4',
-			'modified' => '0000-00-00 00:00:00',
+			'modified' => '2011-04-21 16:50:05',
 		],
 		[
 			'id' => '4',
@@ -87,7 +87,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'neumuenster',
 			'single_city' => 1,
 			'rank' => '5',
-			'modified' => '0000-00-00 00:00:00',
+			'modified' => '2011-04-21 16:50:05',
 		],
 		[
 			'id' => '5',
@@ -100,7 +100,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'hamburg',
 			'single_city' => 1,
 			'rank' => '0',
-			'modified' => '0000-00-00 00:00:00',
+			'modified' => '2011-04-21 16:50:05',
 		],
 		[
 			'id' => '6',
@@ -113,7 +113,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'braunschweig',
 			'single_city' => 1,
 			'rank' => '2',
-			'modified' => '0000-00-00 00:00:00',
+			'modified' => '2011-04-21 16:50:05',
 		],
 		[
 			'id' => '7',
@@ -126,7 +126,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'salzgitter',
 			'single_city' => 1,
 			'rank' => '34',
-			'modified' => '0000-00-00 00:00:00',
+			'modified' => '2011-04-21 16:50:05',
 		],
 		[
 			'id' => '8',
@@ -139,7 +139,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'wolfsburg',
 			'single_city' => 1,
 			'rank' => '45',
-			'modified' => '0000-00-00 00:00:00',
+			'modified' => '2011-04-21 16:50:05',
 		],
 		[
 			'id' => '9',
@@ -152,7 +152,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'delmenhorst',
 			'single_city' => 1,
 			'rank' => '6',
-			'modified' => '0000-00-00 00:00:00',
+			'modified' => '2011-04-21 16:50:05',
 		],
 		[
 			'id' => '10',
@@ -165,7 +165,7 @@ class CountiesFixture extends TestFixture {
 			'slug' => 'emden',
 			'single_city' => 1,
 			'rank' => '8',
-			'modified' => '0000-00-00 00:00:00',
+			'modified' => '2011-04-21 16:50:05',
 		],
 	];
 

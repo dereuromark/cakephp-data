@@ -40,8 +40,8 @@ class CitiesFixture extends TestFixture {
 			'lat' => '48.139126',
 			'lng' => '11.580186',
 			'active' => 1,
-			'created' => '0000-00-00 00:00:00',
-			'modified' => '0000-00-00 00:00:00',
+			'created' => '2011-04-21 16:50:05',
+			'modified' => '2011-04-21 16:50:05',
 		],
 		[
 			'id' => '3',
@@ -51,7 +51,7 @@ class CitiesFixture extends TestFixture {
 			'lng' => '9.180769',
 			'active' => 1,
 			'created' => '2011-10-07 16:48:05',
-			'modified' => '0000-00-00 00:00:00',
+			'modified' => '2011-04-21 16:50:05',
 		],
 	];
 
