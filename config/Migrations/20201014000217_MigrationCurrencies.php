@@ -42,10 +42,10 @@ class MigrationCurrencies extends AbstractMigration {
 				'limit' => 1,
 				'null' => true,
 			])
-			->addColumn('value', 'float', [
+			->addColumn('value', 'decimal', [
 				'default' => null,
 				'null' => true,
-				'precision' => 9,
+				'precision' => 10,
 				'scale' => 4,
 			])
 			->addColumn('base', 'boolean', [

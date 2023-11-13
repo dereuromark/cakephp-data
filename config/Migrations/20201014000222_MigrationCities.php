@@ -54,17 +54,13 @@ class MigrationCities extends AbstractMigration {
 				'limit' => 7,
 				'null' => false,
 			])
-			->addColumn('lat', 'decimal', [
+			->addColumn('lat', 'float', [
 				'default' => null,
 				'null' => true,
-				'precision' => 10,
-				'scale' => 6,
 			])
-			->addColumn('lng', 'decimal', [
+			->addColumn('lng', 'float', [
 				'default' => null,
 				'null' => true,
-				'precision' => 10,
-				'scale' => 6,
 			])
 			->addColumn('slug', 'string', [
 				'default' => '',

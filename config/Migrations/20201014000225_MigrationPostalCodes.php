@@ -39,17 +39,13 @@ class MigrationPostalCodes extends AbstractMigration {
 				'limit' => 190,
 				'null' => true,
 			])
-			->addColumn('lat', 'decimal', [
+			->addColumn('lat', 'float', [
 				'default' => null,
 				'null' => true,
-				'precision' => 10,
-				'scale' => 6,
 			])
-			->addColumn('lng', 'decimal', [
+			->addColumn('lng', 'float', [
 				'default' => null,
 				'null' => true,
-				'precision' => 10,
-				'scale' => 6,
 			])
 			->addColumn('created', 'datetime', [
 				'default' => null,
