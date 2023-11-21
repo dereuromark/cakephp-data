@@ -79,7 +79,7 @@ foreach ($countries as $country):
 
 				if (Configure::read('GoogleMap.key')) {
 					$mapMarkers = $this->GoogleMap->staticMarkers($markers);
-					echo ' ' . $this->Html->link($this->Format->icon('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $country['lat'] . ',' . $country['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 3]), ['class' => 'internal zoom-image highslideImage', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
+					echo ' ' . $this->Html->link($this->Icon->render('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $country['lat'] . ',' . $country['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 3]), ['class' => 'internal zoom-image highslideImage', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
 				} else {
 					$options = [
 						'to' => $country->lat . ',' . $country->lng,
