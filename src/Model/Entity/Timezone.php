@@ -57,8 +57,8 @@ class Timezone extends Entity {
 	];
 
 	/**
-	 * @return string|null
 	 * @see \Data\Model\Entity\Timezone::$offset_string
+	 * @return string|null
 	 */
 	protected function _getOffsetString(): ?string {
 		if ($this->offset === null) {
@@ -69,8 +69,8 @@ class Timezone extends Entity {
 	}
 
 	/**
-	 * @return string|null
 	 * @see \Data\Model\Entity\Timezone::$offset_dst_string
+	 * @return string|null
 	 */
 	protected function _getOffsetDstString(): ?string {
 		if ($this->offset_dst === null) {

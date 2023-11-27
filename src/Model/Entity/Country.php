@@ -76,8 +76,8 @@ class Country extends Entity {
 	public const STATUS_ACTIVE = 1;
 
 	/**
-	 * @return array<int>
 	 * @see \Data\Model\Entity\Country::$timezone_offsets
+	 * @return array<int>
 	 */
 	protected function _getTimezoneOffsets(): array {
 		if ($this->timezone_offset === null) {
@@ -94,8 +94,8 @@ class Country extends Entity {
 	}
 
 	/**
-	 * @return array<string>
 	 * @see \Data\Model\Entity\Country::$timezone_offset_strings
+	 * @return array<string>
 	 */
 	protected function _getTimezoneOffsetStrings(): array {
 		if ($this->timezone_offset === null) {
@@ -112,8 +112,8 @@ class Country extends Entity {
 	}
 
 	/**
-	 * @return string|null
 	 * @see \Data\Model\Entity\Country::$timezone_offset_string
+	 * @return string|null
 	 */
 	protected function _getTimezoneOffsetString(): ?string {
 		if ($this->timezone_offset === null) {
@@ -126,8 +126,8 @@ class Country extends Entity {
 	}
 
 	/**
-	 * @return string|null
 	 * @see \Data\Model\Entity\Country::$slug2
+	 * @return string|null
 	 */
 	protected function _getSlug2(): ?string {
 		if ($this->iso2 === null) {
@@ -138,8 +138,8 @@ class Country extends Entity {
 	}
 
 	/**
-	 * @return string|null
 	 * @see \Data\Model\Entity\Country::$slug3
+	 * @return string|null
 	 */
 	protected function _getSlug3(): ?string {
 		if ($this->iso3 === null) {
