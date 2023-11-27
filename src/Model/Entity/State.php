@@ -12,7 +12,7 @@ use Tools\Model\Entity\Entity;
  * @property string $code
  * @property float|null $lat
  * @property float|null $lng
- * @property \Cake\I18n\DateTime|null $modified
+ * @property \Cake\I18n\DateTime $modified
  * @property \Data\Model\Entity\Country $country
  * @property array<\Cake\ORM\Entity> $counties
  */

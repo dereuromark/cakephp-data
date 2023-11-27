@@ -13,20 +13,20 @@ use Tools\Model\Table\Table;
 
 /**
  * @mixin \Search\Model\Behavior\SearchBehavior
- * @method \Data\Model\Entity\Country get($primaryKey, $options = [])
+ * @method \Data\Model\Entity\Country get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
  * @method \Data\Model\Entity\Country newEntity(array $data, array $options = [])
  * @method array<\Data\Model\Entity\Country> newEntities(array $data, array $options = [])
- * @method \Data\Model\Entity\Country|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\Country|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
  * @method \Data\Model\Entity\Country patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method array<\Data\Model\Entity\Country> patchEntities(iterable $entities, array $data, array $options = [])
- * @method \Data\Model\Entity\Country findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \Data\Model\Entity\Country findOrCreate($search, ?callable $callback = null, array $options = [])
  * @property \Data\Model\Table\StatesTable&\Cake\ORM\Association\HasMany $States
- * @method \Data\Model\Entity\Country saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\Country saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
  * @method \Data\Model\Entity\Country newEmptyEntity()
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country>|false saveMany(iterable $entities, $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country> saveManyOrFail(iterable $entities, $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country>|false deleteMany(iterable $entities, $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country> deleteManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country>|false saveMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country> saveManyOrFail(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country>|false deleteMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country> deleteManyOrFail(iterable $entities, array $options = [])
  * @property \Data\Model\Table\ContinentsTable&\Cake\ORM\Association\BelongsTo $Continents
  * @property \Data\Model\Table\TimezonesTable&\Cake\ORM\Association\HasMany $Timezones
  */

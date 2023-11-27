@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Data\Model\Entity\Timezone[]|\Cake\Collection\CollectionInterface $timezones
+ * @var iterable<\Data\Model\Entity\Timezone> $timezones
  */
 
 use Cake\Core\Plugin;

@@ -1,6 +1,7 @@
 <?php
 /**
- * @var \Data\Model\Entity\Country[] $countries
+ * @var iterable<\Data\Model\Entity\Country> $countries
+ * @var \App\View\AppView $this
  */
 /**
  * @var \App\View\AppView $this

@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Data\Model\Entity\Address[]|\Cake\Collection\CollectionInterface $addresses
+ * @var iterable<\Data\Model\Entity\Address> $addresses
  */
 use Cake\Core\Configure;
 ?>

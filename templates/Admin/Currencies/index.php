@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Data\Model\Entity\Currency[]|\Cake\Collection\CollectionInterface $currencies
+ * @var iterable<\Data\Model\Entity\Currency> $currencies
  * @var array $baseCurrency
  */
 use Cake\Core\Plugin;

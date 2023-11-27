@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Data\Model\Entity\Currency[]|\Cake\Collection\CollectionInterface $currencies
+ * @var iterable<\Data\Model\Entity\Currency> $currencies
  */
 ?>
 <div class="currencies index content large-9 medium-8 columns col-12">

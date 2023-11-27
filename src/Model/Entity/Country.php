@@ -15,24 +15,25 @@ use Tools\Model\Entity\Entity;
  * @property string $special
  * @property int $zip_length
  * @property int $sort
- * @property \Cake\I18n\DateTime $modified
- * @property string $address_format
+ * @property \Cake\I18n\DateTime|null $modified
+ * @property string|null $address_format
  * @property float|null $lng
  * @property float|null $lat
- * @property string $zip_regexp
+ * @property string|null $zip_regexp
  * @property int $status
  * @property array<\Data\Model\Entity\State> $states
  * @property int|null $continent_id
- * @property \Data\Model\Entity\Continent $continent
+ * @property \Data\Model\Entity\Continent|null $continent
  * @property string|null $phone_code
  * @property string|null $timezone_offset
  * @property-read array $timezones_offsets
  * @property-read string|null $timezone_offset_string
  * @property-read array<string> $timezone_offset_strings
- * @property-read string $slug2
- * @property-read string $slug3
+ * @property-read string|null $slug2
+ * @property-read string|null $slug3
  * @property array<int> $timezone_offsets
  * @property array<\Data\Model\Entity\Timezone> $timezones
+ * @property string|null $timezone
  */
 class Country extends Entity {
 
@@ -76,6 +77,7 @@ class Country extends Entity {
 
 	/**
 	 * @return array<int>
+	 * @see \Data\Model\Entity\Country::$timezone_offsets
 	 */
 	protected function _getTimezoneOffsets(): array {
 		if ($this->timezone_offset === null) {
@@ -93,6 +95,7 @@ class Country extends Entity {
 
 	/**
 	 * @return array<string>
+	 * @see \Data\Model\Entity\Country::$timezone_offset_strings
 	 */
 	protected function _getTimezoneOffsetStrings(): array {
 		if ($this->timezone_offset === null) {
@@ -110,6 +113,7 @@ class Country extends Entity {
 
 	/**
 	 * @return string|null
+	 * @see \Data\Model\Entity\Country::$timezone_offset_string
 	 */
 	protected function _getTimezoneOffsetString(): ?string {
 		if ($this->timezone_offset === null) {
@@ -123,6 +127,7 @@ class Country extends Entity {
 
 	/**
 	 * @return string|null
+	 * @see \Data\Model\Entity\Country::$slug2
 	 */
 	protected function _getSlug2(): ?string {
 		if ($this->iso2 === null) {
@@ -134,6 +139,7 @@ class Country extends Entity {
 
 	/**
 	 * @return string|null
+	 * @see \Data\Model\Entity\Country::$slug3
 	 */
 	protected function _getSlug3(): ?string {
 		if ($this->iso3 === null) {

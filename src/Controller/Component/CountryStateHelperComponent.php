@@ -5,6 +5,9 @@ namespace Data\Controller\Component;
 use Cake\Controller\Component;
 use Cake\Event\EventInterface;
 
+/**
+ * @method \App\Controller\AppController getController()
+ */
 class CountryStateHelperComponent extends Component {
 
 	/**

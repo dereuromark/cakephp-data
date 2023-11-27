@@ -2,7 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var \Data\Model\Entity\Country[] $countriesWithoutIcons
- * @var \Data\Model\Entity\Country[] $countries
+ * @var iterable<\Data\Model\Entity\Country> $countries
  * @var array $icons
  */
 ?>

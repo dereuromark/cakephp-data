@@ -8,7 +8,7 @@ use Tools\Model\Entity\Entity;
  * @property int $id
  * @property int $country_id
  * @property string $name
- * @property string $ori_name
+ * @property string|null $ori_name
  * @property float|null $lat
  * @property float|null $lng
  * @property string $slug
@@ -17,6 +17,8 @@ use Tools\Model\Entity\Entity;
  * @property \Cake\I18n\DateTime $created
  * @property \Cake\I18n\DateTime $modified
  * @property \Data\Model\Entity\Country $country
+ * @property int|null $state_id
+ * @property string|null $timezone
  */
 class City extends Entity {
 

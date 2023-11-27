@@ -7,7 +7,7 @@ use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
 /**
- * @uses \Data\Controller\Admin\MimeTypesController
+ * @uses \Data\Controller\Admin\MimeTypeImagesController
  */
 class MimeTypeImagesControllerTest extends TestCase {
 

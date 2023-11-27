@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Data\Model\Entity\Continent[]|\Cake\Collection\CollectionInterface $continents
+ * @var iterable<\Data\Model\Entity\Continent> $continents
  */
 ?>
 <div class="page index">

@@ -26,6 +26,7 @@ use Data\Sync\Timezones;
  * @property int|null $linked_id
  * @property-read string|null $offset_string
  * @property-read string|null $offset_dst_string
+ * @property \Data\Model\Entity\Country $country
  */
 class Timezone extends Entity {
 
@@ -57,6 +58,7 @@ class Timezone extends Entity {
 
 	/**
 	 * @return string|null
+	 * @see \Data\Model\Entity\Timezone::$offset_string
 	 */
 	protected function _getOffsetString(): ?string {
 		if ($this->offset === null) {
@@ -68,6 +70,7 @@ class Timezone extends Entity {
 
 	/**
 	 * @return string|null
+	 * @see \Data\Model\Entity\Timezone::$offset_dst_string
 	 */
 	protected function _getOffsetDstString(): ?string {
 		if ($this->offset_dst === null) {

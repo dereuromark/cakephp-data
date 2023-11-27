@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Data\Model\Entity\PostalCode[]|\Cake\Collection\CollectionInterface $postalCodes
+ * @var iterable<\Data\Model\Entity\PostalCode> $postalCodes
  * @var array $overviewCode
  */
 ?>
