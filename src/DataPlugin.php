@@ -5,7 +5,7 @@ namespace Data;
 use Cake\Core\BasePlugin;
 use Cake\Routing\RouteBuilder;
 
-class Plugin extends BasePlugin {
+class DataPlugin extends BasePlugin {
 
 	/**
 	 * @var bool
