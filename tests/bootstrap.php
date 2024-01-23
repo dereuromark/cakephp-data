@@ -4,7 +4,7 @@ use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Datasource\ConnectionManager;
-use Data\DataPlugin as DataPlugin;
+use Data\DataPlugin;
 use TestApp\Application;
 use TestApp\Controller\AppController;
 use TestApp\View\AppView;
