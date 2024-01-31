@@ -49,7 +49,7 @@ class Timezone extends Entity {
 	 * representations of this Entity. If a field is present in both _hidden and _virtual
 	 * the field will **not** be in the array/JSON versions of the entity.
 	 *
-	 * @var array<string>
+	 * @var list<string>
 	 */
 	protected array $_virtual = [
 		'offset_string',
