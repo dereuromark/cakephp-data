@@ -29,7 +29,7 @@
 	"require-dev": {
 		"cakephp/migrations": "^4.0.1",
 		"dereuromark/cakephp-geo": "^3.0.0",
-		"fig-r/psr2r-sniffer": "dev-next",
+		"fig-r/psr2r-sniffer": "dev-master",
 		"friendsofcake/search": "^7.0.0",
 		"phpunit/phpunit": "^10.2",
 		"willdurand/geocoder": "^4.2.2",
