@@ -29,7 +29,7 @@
 		"willdurand/geocoder": "^4.2.2",
 		"friendsofcake/search": "^6.0.0",
 		"yangqi/htmldom": "dev-master",
-		"fig-r/psr2r-sniffer": "dev-master"
+		"fig-r/psr2r-sniffer": "^1.5.1"
 	},
 	"autoload": {
 		"psr-4": {
