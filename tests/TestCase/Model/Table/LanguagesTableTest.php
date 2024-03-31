@@ -1,6 +1,6 @@
 <?php
 
-namespace Data\Test\TestCase\Model;
+namespace Data\Test\TestCase\Model\Table;
 
 use Cake\ORM\TableRegistry;
 use Data\Model\Table\LanguagesTable;
