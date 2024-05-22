@@ -14,7 +14,7 @@ class MimeTypeHelperTest extends TestCase {
 	protected $MimeTypeHelper;
 
 	/**
-	 * @var array
+	 * @var array<string>
 	 */
 	protected array $fixtures = [
 		'plugin.Data.MimeTypes',

@@ -9,7 +9,7 @@ use Shim\TestSuite\TestCase;
 class LanguagesTableTest extends TestCase {
 
 	/**
-	 * @var array
+	 * @var array<string>
 	 */
 	protected array $fixtures = [
 		'plugin.Data.Languages',

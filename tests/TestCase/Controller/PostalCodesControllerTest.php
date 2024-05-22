@@ -15,7 +15,7 @@ class PostalCodesControllerTest extends TestCase {
 	use IntegrationTestTrait;
 
 	/**
-	 * @var array
+	 * @var array<string>
 	 */
 	protected array $fixtures = [
 		'plugin.Data.PostalCodes',

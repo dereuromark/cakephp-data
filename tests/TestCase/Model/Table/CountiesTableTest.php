@@ -8,7 +8,7 @@ use Shim\TestSuite\TestCase;
 class CountiesTableTest extends TestCase {
 
 	/**
-	 * @var array
+	 * @var array<string>
 	 */
 	protected array $fixtures = [
 		'plugin.Data.Counties',

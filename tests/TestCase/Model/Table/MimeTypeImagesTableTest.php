@@ -8,7 +8,7 @@ use Shim\TestSuite\TestCase;
 class MimeTypeImagesTableTest extends TestCase {
 
 	/**
-	 * @var array
+	 * @var array<string>
 	 */
 	protected array $fixtures = [
 		'plugin.Data.MimeTypeImages',

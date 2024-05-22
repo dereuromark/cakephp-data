@@ -12,7 +12,7 @@ use Shim\TestSuite\TestCase;
 class CountryStateHelperComponentTest extends TestCase {
 
 	/**
-	 * @var array
+	 * @var array<string>
 	 */
 	protected array $fixtures = [
 		'plugin.Data.Countries',
