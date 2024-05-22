@@ -178,7 +178,8 @@ class StatesTable extends Table {
 				if ($coordinates) {
 					$saveArray = ['lat' => $coordinates->getLatitude(), 'lng' => $coordinates->getLongitude(), 'country_id' => $res['country_id']];
 
-					/** //FIXME
+					/*
+					 * //FIXME
 					if (!empty($data['country_province_code']) && mb_strlen($data['country_province_code']) <= 3 && preg_match('/^([A-Z])*$/', $data['country_province_code'])) {
 						$saveArray['code'] = $data['country_province_code'];
 					}
