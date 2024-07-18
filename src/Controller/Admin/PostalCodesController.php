@@ -52,7 +52,7 @@ class PostalCodesController extends DataAppController {
 	 * @return \Cake\Http\Response|null|void
 	 */
 	public function view($id = null) {
-		$postalCode = $this->PostalCodes->get($id, ['contain' => ['Countries']]);
+		$postalCode = $this->PostalCodes->get($id, contain: ['Countries']);
 
 		$this->set(compact('postalCode'));
 	}

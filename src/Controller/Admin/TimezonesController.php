@@ -164,9 +164,7 @@ class TimezonesController extends AppController {
 		if (Configure::read('Data.Timezone.Country') !== false) {
 			$contain[] = 'Countries';
 		}
-		$timezone = $this->Timezones->get($id, [
-			'contain' => $contain,
-		]);
+		$timezone = $this->Timezones->get($id, contain: $contain);
 
 		$this->set(compact('timezone'));
 	}
@@ -193,9 +191,7 @@ class TimezonesController extends AppController {
 	 * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
 	 */
 	public function edit($id = null) {
-		$timezone = $this->Timezones->get($id, [
-			'contain' => [],
-		]);
+		$timezone = $this->Timezones->get($id);
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$timezone = $this->Timezones->patchEntity($timezone, $this->request->getData());
 			if ($this->Timezones->save($timezone)) {

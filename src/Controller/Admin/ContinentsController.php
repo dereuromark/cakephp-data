@@ -14,11 +14,10 @@ class ContinentsController extends DataAppController {
 	 * @return \Cake\Http\Response|null|void
 	 */
 	public function index() {
-		$this->paginate = [
-			'contain' => ['ParentContinents'],
-		];
+		$query = $this->Continents->find()
+			->contain(['ParentContinents']);
 
-		$continents = $this->paginate();
+		$continents = $this->paginate($query);
 		$this->set(compact('continents'));
 	}
 
@@ -45,7 +44,7 @@ class ContinentsController extends DataAppController {
 	 * @return \Cake\Http\Response|null|void
 	 */
 	public function view($id = null) {
-		$continent = $this->Continents->get($id, ['contain' => ['ParentContinents']]);
+		$continent = $this->Continents->get($id, contain: ['ParentContinents']);
 
 		$this->set(compact('continent'));
 	}

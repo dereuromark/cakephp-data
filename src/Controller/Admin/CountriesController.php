@@ -183,7 +183,7 @@ class CountriesController extends DataAppController {
 		if (Configure::read('Data.Country.Timezone') !== false) {
 			$contain[] = 'Timezones';
 		}
-		$country = $this->Countries->get($id, ['contain' => $contain]);
+		$country = $this->Countries->get($id, contain: $contain);
 
 		$this->set(compact('country'));
 	}
