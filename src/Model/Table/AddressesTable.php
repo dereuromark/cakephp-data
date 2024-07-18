@@ -14,7 +14,7 @@ if (!defined('CLASS_USERS')) {
 }
 
 /**
- * @method \Data\Model\Entity\Address get($primaryKey, $options = [])
+ * @method \Data\Model\Entity\Address get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
  * @method \Data\Model\Entity\Address newEntity(array $data, array $options = [])
  * @method array<\Data\Model\Entity\Address> newEntities(array $data, array $options = [])
  * @method \Data\Model\Entity\Address|false save(\Cake\Datasource\EntityInterface $entity, $options = [])

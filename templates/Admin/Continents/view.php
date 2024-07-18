@@ -2,7 +2,6 @@
 /**
  * @var \App\View\AppView $this
  * @var \Data\Model\Entity\Continent $continent
- * @var object $content
  */
 ?>
 <div class="page view">

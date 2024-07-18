@@ -13,7 +13,7 @@ use Tools\Model\Table\Table;
  * @method \Data\Model\Entity\MimeTypeImage newEmptyEntity()
  * @method \Data\Model\Entity\MimeTypeImage newEntity(array $data, array $options = [])
  * @method array<\Data\Model\Entity\MimeTypeImage> newEntities(array $data, array $options = [])
- * @method \Data\Model\Entity\MimeTypeImage get($primaryKey, $options = [])
+ * @method \Data\Model\Entity\MimeTypeImage get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
  * @method \Data\Model\Entity\MimeTypeImage findOrCreate($search, ?callable $callback = null, $options = [])
  * @method \Data\Model\Entity\MimeTypeImage patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method array<\Data\Model\Entity\MimeTypeImage> patchEntities(iterable $entities, array $data, array $options = [])

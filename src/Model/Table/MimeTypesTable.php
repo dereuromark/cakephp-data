@@ -14,7 +14,7 @@ use Tools\Model\Table\Table;
  * @method \Data\Model\Entity\MimeType newEmptyEntity()
  * @method \Data\Model\Entity\MimeType newEntity(array $data, array $options = [])
  * @method array<\Data\Model\Entity\MimeType> newEntities(array $data, array $options = [])
- * @method \Data\Model\Entity\MimeType get($primaryKey, $options = [])
+ * @method \Data\Model\Entity\MimeType get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
  * @method \Data\Model\Entity\MimeType findOrCreate($search, ?callable $callback = null, $options = [])
  * @method \Data\Model\Entity\MimeType patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method array<\Data\Model\Entity\MimeType> patchEntities(iterable $entities, array $data, array $options = [])

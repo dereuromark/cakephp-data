@@ -12,19 +12,19 @@ use Tools\Model\Table\Table;
 
 /**
  * @mixin \Search\Model\Behavior\SearchBehavior
- * @method \Data\Model\Entity\Currency get($primaryKey, $options = [])
+ * @method \Data\Model\Entity\Currency get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
  * @method \Data\Model\Entity\Currency newEntity(array $data, array $options = [])
  * @method array<\Data\Model\Entity\Currency> newEntities(array $data, array $options = [])
- * @method \Data\Model\Entity\Currency|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \Data\Model\Entity\Currency saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Data\Model\Entity\Currency|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
+ * @method \Data\Model\Entity\Currency saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
  * @method \Data\Model\Entity\Currency patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method array<\Data\Model\Entity\Currency> patchEntities(iterable $entities, array $data, array $options = [])
- * @method \Data\Model\Entity\Currency findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \Data\Model\Entity\Currency findOrCreate($search, ?callable $callback = null, array $options = [])
  * @method \Data\Model\Entity\Currency newEmptyEntity()
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Currency>|false saveMany(iterable $entities, $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Currency> saveManyOrFail(iterable $entities, $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Currency>|false deleteMany(iterable $entities, $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Currency> deleteManyOrFail(iterable $entities, $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Currency>|false saveMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Currency> saveManyOrFail(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Currency>|false deleteMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Currency> deleteManyOrFail(iterable $entities, array $options = [])
  */
 class CurrenciesTable extends Table {
 
