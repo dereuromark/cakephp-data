@@ -289,7 +289,7 @@ class Timezones {
 	 */
 	public static function stringToInt(string $offset): int {
 		preg_match('/^([+-]?)(\d+):(\d+)$/', $offset, $matches);
-		if (!$matches) {
+		if (!$matches || !isset($matches[1]) || empty($matches[2]) || empty($matches[3])) {
 			throw new InvalidArgumentException('Invalid offset');
 		}
 
