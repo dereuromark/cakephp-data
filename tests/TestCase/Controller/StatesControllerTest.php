@@ -26,16 +26,9 @@ class StatesControllerTest extends TestCase {
 	public function setUp(): void {
 		parent::setUp();
 
+		$this->loadPlugins(['Data', 'Tools']);
+
 		$this->disableErrorHandlerMiddleware();
-	}
-
-	/**
-	 * @return void
-	 */
-	public function tearDown(): void {
-		parent::tearDown();
-
-		//TableRegistry::clear();
 	}
 
 	/**

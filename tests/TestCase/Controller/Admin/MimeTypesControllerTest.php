@@ -24,6 +24,15 @@ class MimeTypesControllerTest extends TestCase {
 	/**
 	 * @return void
 	 */
+	public function setUp(): void {
+		parent::setUp();
+
+		$this->loadPlugins(['Data', 'Tools']);
+	}
+
+	/**
+	 * @return void
+	 */
 	public function testIndex(): void {
 		$this->disableErrorHandlerMiddleware();
 

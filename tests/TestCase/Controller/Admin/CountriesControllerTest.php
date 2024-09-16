@@ -23,10 +23,10 @@ class CountriesControllerTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function tearDown(): void {
-		parent::tearDown();
+	public function setUp(): void {
+		parent::setUp();
 
-		//TableRegistry::clear();
+		$this->loadPlugins(['Data', 'Tools']);
 	}
 
 	/**

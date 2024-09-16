@@ -25,6 +25,15 @@ class TimezonesControllerTest extends TestCase {
 	/**
 	 * @return void
 	 */
+	public function setUp(): void {
+		parent::setUp();
+
+		$this->loadPlugins(['Data', 'Tools']);
+	}
+
+	/**
+	 * @return void
+	 */
 	public function testIndex(): void {
 		$connectionConfig = $this->getTableLocator()->get('Data.Timezones')->getConnection()->config();
 		$this->skipIf($connectionConfig['driver'] === Postgres::class, 'Does not work for postgres right now');
