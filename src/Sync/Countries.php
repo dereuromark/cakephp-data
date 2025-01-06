@@ -114,11 +114,11 @@ class Countries {
 			$diff['iso2'] = $country['iso2'];
 		}
 
-		$phoneCode = $this->normalizePhoneCode($country['phone_code']);
+		$phoneCode = $this->normalizePhoneCode($country['phone_code'] ?? '');
 		if ($phoneCode !== $storedCountry->phone_code) {
 			$diff['phone_code'] = $phoneCode;
 		}
-		$timezones = $this->normalizeTimeZones($country['timezones']);
+		$timezones = $this->normalizeTimeZones($country['timezones'] ?? '');
 		if ($timezones !== $storedCountry->timezone_offset) {
 			$diff['timezone'] = $timezones;
 		}
