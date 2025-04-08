@@ -3,8 +3,8 @@
 namespace Data\Controller\Admin;
 
 use Data\Controller\DataAppController;
-use Data\Utility\Mime;
 use Shim\Datasource\Paging\NumericPaginator;
+use Tools\Utility\Mime;
 
 /**
  * @link http://en.wikipedia.org/wiki/List_of_file_formats_(alphabetical)
