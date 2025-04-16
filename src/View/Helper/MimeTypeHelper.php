@@ -30,10 +30,10 @@ class MimeTypeHelper extends Helper {
 	 * Special attr: filename (is then used in title instead of *)
 	 *
 	 * @param string|null $ext
-	 * @param array $attr
+	 * @param array<string, mixed> $attr
 	 * @return string
 	 */
-	public function icon($ext = null, $attr = []) {
+	public function icon($ext = null, array $attr = []) {
 		if (empty($ext)) {
 			return '';
 		}
@@ -62,10 +62,10 @@ class MimeTypeHelper extends Helper {
 
 	/**
 	 * @param array|null $icon
-	 * @param array $attr
+	 * @param array<string, mixed> $attr
 	 * @return string
 	 */
-	public function formatIcon($icon = null, $attr = []) {
+	public function formatIcon($icon = null, array $attr = []) {
 		$filename = '*';
 		if (!empty($attr['filename'])) {
 			$filename = $attr['filename'];

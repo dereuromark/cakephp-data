@@ -34,7 +34,7 @@ class DataHelper extends Helper {
 	 *
 	 * @param string|null $code iso2 code (e.g. 'de' or 'gb')
 	 * @param array<string, mixed> $options
-	 * @param array $attr
+	 * @param array<string, mixed> $attr
 	 *
 	 * @return string|null
 	 */
@@ -77,7 +77,7 @@ class DataHelper extends Helper {
 	/**
 	 * @param string|null $code
 	 * @param array<string, mixed> $options
-	 * @param array $attr
+	 * @param array<string, mixed> $attr
 	 *
 	 * @return string
 	 */
@@ -98,7 +98,7 @@ class DataHelper extends Helper {
 	 *
 	 * @param string $code iso2 code (e.g. 'en' or 'de')
 	 * @param array<string, mixed> $options
-	 * @param array $attr
+	 * @param array<string, mixed> $attr
 	 *
 	 * @return string
 	 */
