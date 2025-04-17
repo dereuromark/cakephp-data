@@ -42,7 +42,7 @@ class CurrencyBitcoinLibTest extends TestCase {
 			$this->CurrencyBitcoin->expects($this->once())
 				->method('_get')
 				->with('https://bitmarket.eu/api/ticker')
-				->will($this->returnValue(file_get_contents($this->path . 'bitmarket.json')));
+				->willReturn(file_get_contents($this->path . 'bitmarket.json'));
 		}
 		$is = $this->CurrencyBitcoin->bitmarket();
 		//debug($is);
@@ -57,7 +57,7 @@ class CurrencyBitcoinLibTest extends TestCase {
 			$this->CurrencyBitcoin->expects($this->once())
 				->method('_get')
 				->with('http://api.bitcoincharts.com/v1/markets.json')
-				->will($this->returnValue(file_get_contents($this->path . 'bitcoincharts.json')));
+				->willReturn(file_get_contents($this->path . 'bitcoincharts.json'));
 		}
 		$is = $this->CurrencyBitcoin->bitcoincharts();
 		//debug($is);
