@@ -51,7 +51,7 @@ class DataHelper extends Helper {
 
 		[$wwwPath, $path] = $this->getCountryIconPaths();
 
-		if (!empty($options) && is_array($options)) {
+		if ($options) {
 			if (!empty($options['ending'])) {
 				$ending = $options['ending'];
 			}

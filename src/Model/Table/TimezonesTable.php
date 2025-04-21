@@ -30,8 +30,8 @@ use RuntimeException;
  *
  * @mixin \Search\Model\Behavior\SearchBehavior
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
- * @property \Data\Model\Table\TimezonesTable&\Cake\ORM\Association\BelongsTo $CanonicalTimezones
- * @property \Data\Model\Table\CountriesTable&\Cake\ORM\Association\BelongsTo $Countries
+ * @property \Data\Model\Table\TimezonesTable|\Cake\ORM\Association\BelongsTo $CanonicalTimezones
+ * @property \Data\Model\Table\CountriesTable|\Cake\ORM\Association\BelongsTo $Countries
  */
 class TimezonesTable extends Table {
 

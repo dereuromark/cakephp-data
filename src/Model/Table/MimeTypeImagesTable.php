@@ -9,7 +9,7 @@ use Shim\Filesystem\File;
 use Tools\Model\Table\Table;
 
 /**
- * @property \Data\Model\Table\MimeTypesTable&\Cake\ORM\Association\HasMany $MimeTypes
+ * @property \Data\Model\Table\MimeTypesTable|\Cake\ORM\Association\HasMany $MimeTypes
  * @method \Data\Model\Entity\MimeTypeImage newEmptyEntity()
  * @method \Data\Model\Entity\MimeTypeImage newEntity(array $data, array $options = [])
  * @method array<\Data\Model\Entity\MimeTypeImage> newEntities(array $data, array $options = [])

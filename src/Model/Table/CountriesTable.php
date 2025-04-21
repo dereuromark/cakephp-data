@@ -20,15 +20,15 @@ use Tools\Model\Table\Table;
  * @method \Data\Model\Entity\Country patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method array<\Data\Model\Entity\Country> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Data\Model\Entity\Country findOrCreate($search, ?callable $callback = null, array $options = [])
- * @property \Data\Model\Table\StatesTable&\Cake\ORM\Association\HasMany $States
  * @method \Data\Model\Entity\Country saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
  * @method \Data\Model\Entity\Country newEmptyEntity()
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country>|false saveMany(iterable $entities, array $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country> saveManyOrFail(iterable $entities, array $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country>|false deleteMany(iterable $entities, array $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country> deleteManyOrFail(iterable $entities, array $options = [])
- * @property \Data\Model\Table\ContinentsTable&\Cake\ORM\Association\BelongsTo $Continents
- * @property \Data\Model\Table\TimezonesTable&\Cake\ORM\Association\HasMany $Timezones
+ * @property \Data\Model\Table\ContinentsTable|\Cake\ORM\Association\BelongsTo $Continents
+ * @property \Data\Model\Table\StatesTable|\Cake\ORM\Association\HasMany $States
+ * @property \Data\Model\Table\TimezonesTable|\Cake\ORM\Association\HasMany $Timezones
  */
 class CountriesTable extends Table {
 

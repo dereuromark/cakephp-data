@@ -6,7 +6,7 @@ use Cake\Core\Configure;
 use Tools\Model\Table\Table;
 
 /**
- * @property \Data\Model\Table\CountriesTable&\Cake\ORM\Association\BelongsTo $Countries
+ * @property \Data\Model\Table\CountriesTable|\Cake\ORM\Association\BelongsTo $Countries
  *
  * @method \Data\Model\Entity\City newEmptyEntity()
  * @method \Data\Model\Entity\City newEntity(array $data, array $options = [])

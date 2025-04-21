@@ -7,9 +7,9 @@ use Cake\Event\EventInterface;
 use Tools\Model\Table\Table;
 
 /**
- * @property \Data\Model\Table\ContinentsTable&\Cake\ORM\Association\BelongsTo $ParentContinents
- * @property \Cake\ORM\Table&\Cake\ORM\Association\HasMany $ChildContinents
- * @property \Cake\ORM\Table&\Cake\ORM\Association\HasMany $Countries
+ * @property \Data\Model\Table\ContinentsTable|\Cake\ORM\Association\BelongsTo $ParentContinents
+ * @property \Cake\ORM\Table|\Cake\ORM\Association\HasMany $ChildContinents
+ * @property \Cake\ORM\Table|\Cake\ORM\Association\HasMany $Countries
  *
  * @mixin \Cake\ORM\Behavior\TreeBehavior
  * @method \Data\Model\Entity\Continent newEmptyEntity()

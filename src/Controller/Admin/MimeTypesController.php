@@ -54,9 +54,10 @@ class MimeTypesController extends DataAppController {
 	 */
 	public function allocateByType() {
 		# get unused extensions?
-		$unusedIds = $this->MimeTypes->MimeTypeImages->unusedRecords($this->MimeTypes->getTable());
+		//$unusedIds = $this->MimeTypes->MimeTypeImages->unusedRecords($this->MimeTypes->getTable());
 
-		$unused = $this->MimeTypes->MimeTypeImages->find('all', ['conditions' => ['MimeTypeImages.id' => $unusedIds]]);
+		//$unused = $this->MimeTypes->MimeTypeImages->find('all', ['conditions' => ['MimeTypeImages.id' => $unusedIds]]);
+		$unused = [];
 
 		$this->set(compact('unused'));
 	}

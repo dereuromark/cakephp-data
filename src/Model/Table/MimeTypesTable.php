@@ -10,7 +10,7 @@ use Tools\Mailer\Mailer;
 use Tools\Model\Table\Table;
 
 /**
- * @property \Data\Model\Table\MimeTypeImagesTable&\Cake\ORM\Association\BelongsTo $MimeTypeImages
+ * @property \Data\Model\Table\MimeTypeImagesTable|\Cake\ORM\Association\BelongsTo $MimeTypeImages
  * @method \Data\Model\Entity\MimeType newEmptyEntity()
  * @method \Data\Model\Entity\MimeType newEntity(array $data, array $options = [])
  * @method array<\Data\Model\Entity\MimeType> newEntities(array $data, array $options = [])

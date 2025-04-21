@@ -22,13 +22,13 @@ use Tools\Model\Table\Table;
  * @method array<\Data\Model\Entity\State> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Data\Model\Entity\State findOrCreate($search, ?callable $callback = null, array $options = [])
  * @mixin \Tools\Model\Behavior\SluggedBehavior
- * @property \Data\Model\Table\CountriesTable&\Cake\ORM\Association\BelongsTo $Countries
  * @method \Data\Model\Entity\State newEmptyEntity()
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State>|false saveMany(iterable $entities, array $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State> saveManyOrFail(iterable $entities, array $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State>|false deleteMany(iterable $entities, array $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State> deleteManyOrFail(iterable $entities, array $options = [])
- * @property \Cake\ORM\Table&\Cake\ORM\Association\HasMany $Counties
+ * @property \Cake\ORM\Association\BelongsTo<\Data\Model\Table\CountriesTable> $Countries
+ * @property \Data\Model\Table\CountiesTable|\Cake\ORM\Association\HasMany $Counties
  */
 class StatesTable extends Table {
 
@@ -205,7 +205,7 @@ class StatesTable extends Table {
 			/** @var \Data\Model\Entity\State[] $results */
 			$results = $this->find('all', ['conditions' => $conditions, 'contain' => ['Countries.name'], 'order' => [
 			'modified' =>
-				'ASC']]);
+				'ASC']])->toArray();
 			$count = 0;
 
 			foreach ($results as $res) {

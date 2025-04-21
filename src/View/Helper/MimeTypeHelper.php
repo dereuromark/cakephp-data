@@ -72,7 +72,7 @@ class MimeTypeHelper extends Helper {
 			unset($attr['filename']);
 		}
 		$imageAttr = ['class' => 'help', 'title' => $icon['name'] . ' (' . $filename . '.' . $icon['ext'] . ')', 'alt' => $icon['ext'], 'height' => '16'];
-		if (!empty($attr) && is_array($attr)) {
+		if ($attr) {
 			$imageAttr = array_merge($imageAttr, $attr);
 		}
 		if (!empty($icon['img'])) {
