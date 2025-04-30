@@ -31,7 +31,7 @@ class PostalCodesController extends DataAppController {
 				'lng_sum' => $query->newExpr('SUM(lng)'),
 			])
 			->select($this->PostalCodes)
-			->group('sub');
+			->groupBy('sub');
 		$postalCodes = $query->all()->toArray();
 
 		if (!empty($term)) {
@@ -47,7 +47,7 @@ class PostalCodesController extends DataAppController {
 					'lng_sum' => $query->newExpr('SUM(lng)'),
 				])
 				->select($this->PostalCodes)
-				->group('sub');
+				->groupBy('sub');
 			$postalCodes = $query->all()->toArray();
 		}
 

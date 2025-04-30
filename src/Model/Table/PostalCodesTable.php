@@ -128,7 +128,7 @@ class PostalCodesTable extends Table {
 		$query = $this->find();
 		$list = $query
 			->select(['count' => $query->count(), 'country_id'])
-			->group('country_id')
+			->groupBy('country_id')
 			->enableHydration(false)
 			->all();
 

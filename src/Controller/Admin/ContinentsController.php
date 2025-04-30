@@ -29,7 +29,7 @@ class ContinentsController extends DataAppController {
 
 		$countries = $this->Continents->Countries->find()
 			->select(['count' => 'COUNT(*)', 'continent_id'])
-			->group('continent_id')
+			->groupBy('continent_id')
 			->find('list', ['keyField' => 'continent_id', 'valueField' => 'count'])
 			->toArray();
 
