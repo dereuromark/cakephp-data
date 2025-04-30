@@ -175,7 +175,7 @@ class AddressesTable extends Table {
 		if (!empty($data['user_id'])) {
 			$conditions['user_id !='] = $data['user_id'];
 		}
-		if ($this->find('all', ['conditions' => $conditions])->first()) {
+		if ($this->find('all', ...['conditions' => $conditions])->first()) {
 			return false;
 		}
 
@@ -198,7 +198,7 @@ class AddressesTable extends Table {
 		}
 
 		/** @var \Data\Model\Entity\Country|null $res */
-		$res = $this->Countries->find('all', [
+		$res = $this->Countries->find('all', ...[
 			'conditions' => ['Countries.id' => $data['country_id']],
 		])->first();
 		if ($res === null) {
@@ -227,7 +227,7 @@ class AddressesTable extends Table {
 			return true;
 		}
 
-		$res = $this->Countries->States->find('all', [
+		$res = $this->Countries->States->find('all', ...[
 			'conditions' => ['country_id' => $data['country_id']],
 		])->find('list')->toArray();
 		if (empty($res)) {
@@ -287,7 +287,7 @@ class AddressesTable extends Table {
 
 			if (isset($entity['state_id']) && !empty($entity['state_id']) && !empty($entity['geocoder_result']['country_province_code'])) {
 				//$entity['state_id']
-				$state = $this->Countries->States->find('all', ['conditions' => ['States.id' => $entity['state_id']]])->first();
+				$state = $this->Countries->States->find('all', ...['conditions' => ['States.id' => $entity['state_id']]])->first();
 				if (!empty($state) && strlen($state['code']) === strlen($entity['geocoder_result']['country_province_code']) && $state['code'] != $entity['geocoder_result']['country_province_code']) {
 					//FIXME
 					//$this->invalidate('state_id', 'Als Bundesland wurde für diese Adresse \'' . h($entity['geocoder_result']['country_province']) . '\' erwartet - du hast aber \'' . h($state['name']) . '\' angegeben. Liegt denn deine Adresse tatsächlich in einem anderen Bundesland? Dann gebe bitte die genaue PLZ und Ort an, damit das Bundesland dazu auch korrekt identifiziert werden kann.');
@@ -296,7 +296,7 @@ class AddressesTable extends Table {
 
 				# enter new id
 			} elseif (isset($entity['state_id']) && !empty($entity['geocoder_result']['country_province_code'])) {
-				$state = $this->Countries->States->find('all', ['conditions' => ['OR' => ['States.code' => $entity['geocoder_result']['country_province_code'], 'States.name' => $entity['geocoder_result']['country_province']]]])->first();
+				$state = $this->Countries->States->find('all', ...['conditions' => ['OR' => ['States.code' => $entity['geocoder_result']['country_province_code'], 'States.name' => $entity['geocoder_result']['country_province']]]])->first();
 				if (!empty($state)) {
 					$entity['state_id'] = $state['id'];
 				}
@@ -304,7 +304,7 @@ class AddressesTable extends Table {
 
 			# enter new id
 			if (isset($entity['country_id']) && empty($entity['country_id']) && !empty($entity['geocoder_result']['country_code'])) {
-				$country = $this->Countries->find('all', ['conditions' => ['Countries.iso2' => $entity['geocoder_result']['country_code']]])->first();
+				$country = $this->Countries->find('all', ...['conditions' => ['Countries.iso2' => $entity['geocoder_result']['country_code']]])->first();
 				if (!empty($country)) {
 					$entity['country_id'] = $country->id;
 				}

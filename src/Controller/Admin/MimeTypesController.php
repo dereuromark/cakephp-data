@@ -56,7 +56,7 @@ class MimeTypesController extends DataAppController {
 		# get unused extensions?
 		//$unusedIds = $this->MimeTypes->MimeTypeImages->unusedRecords($this->MimeTypes->getTable());
 
-		//$unused = $this->MimeTypes->MimeTypeImages->find('all', ['conditions' => ['MimeTypeImages.id' => $unusedIds]]);
+		//$unused = $this->MimeTypes->MimeTypeImages->find('all', ...['conditions' => ['MimeTypeImages.id' => $unusedIds]]);
 		$unused = [];
 
 		$this->set(compact('unused'));
@@ -71,10 +71,10 @@ class MimeTypesController extends DataAppController {
 
 		//$images = $this->MimeTypes->MimeTypeImages->find('all', array('conditions'=>array('active'=>1)));
 		$addedIcon = [];
-		$types = $this->MimeTypes->find('all', ['conditions' => ['MimeTypes.mime_type_image_id' => 0]]);
+		$types = $this->MimeTypes->find('all', ...['conditions' => ['MimeTypes.mime_type_image_id' => 0]]);
 		foreach ($types as $type) {
 			$fileExt = $type['ext'];
-			$image = $this->MimeTypes->MimeTypeImages->find('all', ['conditions' => ['MimeTypeImages.name' => $fileExt]])->first();
+			$image = $this->MimeTypes->MimeTypeImages->find('all', ...['conditions' => ['MimeTypeImages.name' => $fileExt]])->first();
 			if ($image) {
 				$id = $type['id'];
 				if ($this->MimeTypes->updateAll(['mime_type_image_id' => $image['id']], ['id' => $id])) {
@@ -274,7 +274,7 @@ class MimeTypesController extends DataAppController {
 	public function delete($id = null) {
 		$this->request->allowMethod('post');
 
-		$mimeType = $this->MimeTypes->find('all', ['fields' => ['id'], 'conditions' => ['MimeTypes.id' => $id]])->first();
+		$mimeType = $this->MimeTypes->find('all', ...['fields' => ['id'], 'conditions' => ['MimeTypes.id' => $id]])->first();
 		if (!$mimeType) {
 			$this->Flash->error(__('record del not exists'));
 

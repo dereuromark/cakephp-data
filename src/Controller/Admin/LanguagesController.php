@@ -178,7 +178,7 @@ class LanguagesController extends DataAppController {
 	public function compareToIsoList() {
 		$isoList = $this->Languages->getOfficialIsoList();
 
-		$languages = $this->Languages->find('all', []);
+		$languages = $this->Languages->find('all', ...[]);
 
 		$this->set(compact('isoList', 'languages'));
 	}

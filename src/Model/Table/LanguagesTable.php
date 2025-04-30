@@ -189,7 +189,7 @@ class LanguagesTable extends Table {
 	 */
 	public function getList($conditions = []) {
 		$conditions += ['status' => 1];
-		$res = $this->find('all', ['conditions' => $conditions, 'fields' => ['id', 'name']]);
+		$res = $this->find('all', ...['conditions' => $conditions, 'fields' => ['id', 'name']]);
 		$ret = [];
 		foreach ($res as $language) {
 			$ret[$language['id']] = $language['name'];
@@ -206,7 +206,7 @@ class LanguagesTable extends Table {
 	 */
 	public function codeList($conditions = []) {
 		$conditions += ['status' => 1];
-		$res = $this->find('all', ['conditions' => $conditions, 'fields' => ['code', 'name']]);
+		$res = $this->find('all', ...['conditions' => $conditions, 'fields' => ['code', 'name']]);
 		$ret = [];
 		foreach ($res as $language) {
 			$ret[$language['code']] = $language['name'];

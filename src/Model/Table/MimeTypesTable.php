@@ -131,7 +131,7 @@ class MimeTypesTable extends Table {
 			$options['conditions'][$this->getAlias() . '.active'] = 1;
 		}
 
-		return $this->find('all', $options);
+		return $this->find('all', ...$options);
 	}
 
 	/**
@@ -144,7 +144,7 @@ class MimeTypesTable extends Table {
 			return null;
 		}
 
-		return $this->find('all', ['conditions' => [$this->getAlias() . '.ext' => $ext]])->first();
+		return $this->find('all', ...['conditions' => [$this->getAlias() . '.ext' => $ext]])->first();
 	}
 
 	/**

@@ -69,7 +69,7 @@ class CountriesController extends DataAppController {
 	public function icons() {
 		$icons = $this->_icons();
 
-		$countries = $this->Countries->find('all', ['fields' => ['id', 'name', 'iso2', 'iso3']])->toArray();
+		$countries = $this->Countries->find('all', ...['fields' => ['id', 'name', 'iso2', 'iso3']])->toArray();
 		$countriesWithoutIcons = [];
 
 		$iconFontClass = (bool)Configure::read('Country.iconFontClass');
@@ -232,7 +232,7 @@ class CountriesController extends DataAppController {
 
 		$continents = [];
 		if (Configure::read('Data.Country.Continent') !== false) {
-			$continents = $this->Countries->Continents->find('treeList', ['spacer' => '» '])->toArray();
+			$continents = $this->Countries->Continents->find('treeList', ...['spacer' => '» '])->toArray();
 		}
 		$this->set(compact('country', 'continents'));
 	}

@@ -80,7 +80,7 @@ class CitiesTable extends Table {
 			'fields' => ['id', 'postal_code', 'name'],
 		];
 
-		return $this->find('all', $options);
+		return $this->find('all', ...$options);
 	}
 
 	/**
@@ -96,7 +96,7 @@ class CitiesTable extends Table {
 			'limit' => $limit,
 		];
 
-		return $this->find('all', $options);
+		return $this->find('all', ...$options);
 	}
 
 	/**
@@ -110,7 +110,7 @@ class CitiesTable extends Table {
 			return null;
 		}
 
-		return $this->find('all', ['conditions' => ['Cities.postal_code LIKE' => $matches[0]]]);
+		return $this->find('all', ...['conditions' => ['Cities.postal_code LIKE' => $matches[0]]]);
 	}
 
 	/**

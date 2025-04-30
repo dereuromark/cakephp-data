@@ -75,9 +75,9 @@ class LocationsTable extends Table {
 		$countryId = $countryId ?? 1;
 
 		if (is_numeric($locationName) && strlen($locationName) < 5) { //Country::zipCodeLength($countryId)
-			$location = $this->find('all', ['conditions' => ['formatted_address LIKE' => $locationName . '%' . $country]])->first();
+			$location = $this->find('all', ...['conditions' => ['formatted_address LIKE' => $locationName . '%' . $country]])->first();
 		} else {
-			$location = $this->find('all', ['conditions' => ['name' => $locationName, 'country_id' => $countryId]])->first();
+			$location = $this->find('all', ...['conditions' => ['name' => $locationName, 'country_id' => $countryId]])->first();
 		}
 
 		if (empty($location)) {
@@ -110,7 +110,7 @@ class LocationsTable extends Table {
 			'Location.lng<>0',
 			'1=1 HAVING distance<' . 75,
 		];
-		$result = $this->find('all', [
+		$result = $this->find('all', ...[
 			'conditions' => $conditions,
 			'fields' => array_merge(
 				['Location.id', 'Location.name', 'Location.formatted_address'],

@@ -118,7 +118,7 @@ class MimeTypeHelper extends Helper {
 		if (!$handle->exists()) {
 			# create and fill: ext||type||name||img (array serialized? separated by ||?)
 			$MimeTypes = TableRegistry::getTableLocator()->get('Data.MimeTypes');
-			$mimeTypes = $MimeTypes->find('all', ['fields' => ['name', 'ext', 'type', 'MimeTypeImages.name', 'MimeTypeImages.ext'], 'conditions' => ['MimeTypes.active' => 1], 'contain' => ['MimeTypeImages']]);
+			$mimeTypes = $MimeTypes->find('all', ...['fields' => ['name', 'ext', 'type', 'MimeTypeImages.name', 'MimeTypeImages.ext'], 'conditions' => ['MimeTypes.active' => 1], 'contain' => ['MimeTypeImages']]);
 
 			$content = [];
 			foreach ($mimeTypes as $m) {

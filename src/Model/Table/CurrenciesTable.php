@@ -202,7 +202,7 @@ class CurrenciesTable extends Table {
 		$defaults = ['conditions' => [$this->getAlias() . '.base' => 0]];
 		$options = Hash::merge($defaults, $options);
 
-		return $this->find('all', $options);
+		return $this->find('all', ...$options);
 	}
 
 	/**
@@ -215,7 +215,7 @@ class CurrenciesTable extends Table {
 		$options = Hash::merge($defaults, $options);
 
 		/** @var \Data\Model\Entity\Currency */
-		return $this->find('all', $options)->first();
+		return $this->find('all', ...$options)->first();
 	}
 
 	/**

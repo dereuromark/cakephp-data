@@ -67,7 +67,7 @@ class MimeTypeImagesController extends DataAppController {
 					}
 
 					# check if new
-					if ($this->MimeTypeImages->find('all', ['conditions' => ['name' => $extension]])->first()) {
+					if ($this->MimeTypeImages->find('all', ...['conditions' => ['name' => $extension]])->first()) {
 						$alreadyIn[] = $extension;
 
 						continue;
@@ -101,7 +101,7 @@ class MimeTypeImagesController extends DataAppController {
 			$ext = mb_strtolower(pathinfo($image, PATHINFO_EXTENSION));
 			# TODO: check on valid ext, Sanitize fileName
 
-			$dbImage = $this->MimeTypeImages->find('all', ['conditions' => ['name' => $fileName]])->first();
+			$dbImage = $this->MimeTypeImages->find('all', ...['conditions' => ['name' => $fileName]])->first();
 			if ($dbImage) {
 				if (empty($dbImage['ext']) || !file_exists(PATH_MIMETYPES . $dbImage['name'] . '.' . $dbImage['ext'])) {
 
@@ -148,7 +148,7 @@ class MimeTypeImagesController extends DataAppController {
 
 					$recordId = null;
 
-					$dbImage = $this->MimeTypeImages->find('all', ['conditions' => ['name' => $name]])->first();
+					$dbImage = $this->MimeTypeImages->find('all', ...['conditions' => ['name' => $name]])->first();
 					if ($dbImage) {
 						if (empty($dbImage['ext']) || !file_exists(PATH_MIMETYPES . $dbImage['name'] . '.' . $dbImage['ext'])) {
 							$recordId = $dbImage['id'];

@@ -30,7 +30,7 @@ class ContinentsController extends DataAppController {
 		$countries = $this->Continents->Countries->find()
 			->select(['count' => 'COUNT(*)', 'continent_id'])
 			->groupBy('continent_id')
-			->find('list', ['keyField' => 'continent_id', 'valueField' => 'count'])
+			->find('list', ...['keyField' => 'continent_id', 'valueField' => 'count'])
 			->toArray();
 
 		$this->set(compact('continents', 'countries'));
@@ -66,7 +66,7 @@ class ContinentsController extends DataAppController {
 
 			$this->Flash->error(__('formContainsErrors'));
 		}
-		$parents = ['' => __(' - n/a - ')] + $this->Continents->ParentContinents->find('treeList', ['spacer' => '» '])->toArray();
+		$parents = ['' => __(' - n/a - ')] + $this->Continents->ParentContinents->find('treeList', ...['spacer' => '» '])->toArray();
 		$this->set(compact('continent', 'parents'));
 	}
 
@@ -90,7 +90,7 @@ class ContinentsController extends DataAppController {
 			$this->Flash->error(__('formContainsErrors'));
 		}
 
-		$parents = ['' => __(' - n/a - ')] + $this->Continents->ParentContinents->find('treeList', ['spacer' => '» '])->toArray();
+		$parents = ['' => __(' - n/a - ')] + $this->Continents->ParentContinents->find('treeList', ...['spacer' => '» '])->toArray();
 		$this->set(compact('continent', 'parents'));
 	}
 

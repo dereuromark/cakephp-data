@@ -59,7 +59,7 @@ class CurrenciesController extends DataAppController {
 			}
 		}
 		if (!$baseCurrency) {
-			$baseCurrency = $this->Currencies->find('all', ['conditions' => ['base' => true]])->first();
+			$baseCurrency = $this->Currencies->find('all', ...['conditions' => ['base' => true]])->first();
 			if (!$baseCurrency) {
 				$this->Flash->warning(__('noBaseCurrency'));
 			}

@@ -114,7 +114,7 @@ class PostalCodesTable extends Table {
 			'limit' => 15,
 		];
 
-		return $this->find('all', $options);
+		return $this->find('all', ...$options);
 	}
 
 	/**
