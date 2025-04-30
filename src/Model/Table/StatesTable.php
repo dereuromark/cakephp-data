@@ -146,7 +146,7 @@ class StatesTable extends Table {
 			return [];
 		}
 
-		return $this->find('list', [
+		return $this->find('list', ...[
 			'conditions' => [$this->getAlias() . '.country_id' => $cid],
 			'order' => [$this->getAlias() . '.name' => 'ASC'],
 		])->toArray();
@@ -170,7 +170,7 @@ class StatesTable extends Table {
 
 		if (!empty($id)) {
 			/** @var \Data\Model\Entity\State|null $res */
-			$res = $this->find('all', ['conditions' => [$this->getAlias() . '.id' => $id], 'contain' => ['Countries']])->first();
+			$res = $this->find('all', ...['conditions' => [$this->getAlias() . '.id' => $id], 'contain' => ['Countries']])->first();
 			if ($res && $res->name && $res->country && $res->country->name) {
 				$data = $geocoder->geocode($res['name'] . ', ' . $res->country->name);
 				$data = $data->first();
@@ -203,7 +203,7 @@ class StatesTable extends Table {
 			}
 
 			/** @var \Data\Model\Entity\State[] $results */
-			$results = $this->find('all', ['conditions' => $conditions, 'contain' => ['Countries.name'], 'order' => [
+			$results = $this->find('all', ...['conditions' => $conditions, 'contain' => ['Countries.name'], 'order' => [
 			'modified' =>
 				'ASC']])->toArray();
 			$count = 0;
