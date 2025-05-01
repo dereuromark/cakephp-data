@@ -9,7 +9,7 @@
 
 A CakePHP plugin containing several useful data models that can be used in many projects.
 
-Note: This branch requires **CakePHP 5.0+**. See [version map](https://github.com/dereuromark/cakephp-data/wiki#cakephp-version-map) for details.
+Note: This branch requires **CakePHP 5.1+**. See [version map](https://github.com/dereuromark/cakephp-data/wiki#cakephp-version-map) for details.
 
 ## Features
 - Continents => Countries => States => Counties => Districts => Cities
