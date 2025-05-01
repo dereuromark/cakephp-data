@@ -118,7 +118,7 @@ class LanguagesTable extends Table {
 	 * @param \ArrayObject $options
 	 * @return void
 	 */
-	public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options) {
+	public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options): void {
 		$dir = Configure::read('Data.Language.dir', 'lower'); // lower or upper casing
 		if ($dir === 'upper') {
 			$method = 'mb_strtoupper';

@@ -63,7 +63,7 @@ class DistrictsTable extends Table {
 	 *
 	 * @return void
 	 */
-	public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options) {
+	public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options): void {
 		if (!empty($data['name']) && !empty($data['city_id'])) {
 			$city = $this->Cities->fieldByConditions('name', ['id' => $data['city_id']]);
 			$data['address'] = $data['name'] . ', ' . $city;

@@ -108,7 +108,7 @@ class StatesTable extends Table {
 	 * @param \ArrayObject $options
 	 * @return void
 	 */
-	public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options) {
+	public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options): void {
 		if (isset($data['code'])) {
 			$data['code'] = mb_strtoupper($data['code']);
 		}

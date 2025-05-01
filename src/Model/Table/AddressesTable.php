@@ -268,7 +268,7 @@ class AddressesTable extends Table {
 	 * @param \ArrayObject $options
 	 * @return void
 	 */
-	public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
+	public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void {
 		if (!empty($entity['formatted_address']) && !empty($entity['geocoder_result'])) {
 			# fix city/plz?
 			if (isset($entity['postal_code']) && empty($entity['postal_code'])) {

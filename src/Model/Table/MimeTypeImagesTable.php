@@ -78,7 +78,7 @@ class MimeTypeImagesTable extends Table {
 	 *
 	 * @return void
 	 */
-	public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
+	public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void {
 		if (isset($entity['name'])) {
 			$entity['name'] = mb_strtolower($entity['name']);
 		}
