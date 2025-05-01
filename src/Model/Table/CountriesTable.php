@@ -151,7 +151,7 @@ class CountriesTable extends Table {
 	 * @param \ArrayObject $options
 	 * @return void
 	 */
-	public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
+	public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void {
 		if ($entity->isNew()) {
 			//$this->updateCoordinates($entity);
 		}

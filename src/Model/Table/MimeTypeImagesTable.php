@@ -94,7 +94,7 @@ class MimeTypeImagesTable extends Table {
 	 *
 	 * @return void
 	 */
-	public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
+	public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void {
 		$this->cleanUp();
 	}
 
@@ -105,7 +105,7 @@ class MimeTypeImagesTable extends Table {
 	 *
 	 * @return void
 	 */
-	public function beforeDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
+	public function beforeDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options): void {
 		$this->_del = $entity;
 	}
 
@@ -116,7 +116,7 @@ class MimeTypeImagesTable extends Table {
 	 *
 	 * @return void
 	 */
-	public function afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
+	public function afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options): void {
 		if (!empty($this->_del)) {
 			/** @var \Data\Model\Entity\MimeTypeImage $mimeTypeImage */
 			$mimeTypeImage = $this->_del;

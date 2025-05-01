@@ -98,7 +98,7 @@ class MimeTypesTable extends Table {
 	 * @param array<string, mixed> $options
 	 * @return void
 	 */
-	public function _afterSave($created, $options = []) {
+	public function _afterSave($created, $options = []): void {
 		$this->cleanUp();
 	}
 
@@ -108,7 +108,7 @@ class MimeTypesTable extends Table {
 	 * @param \ArrayObject $options
 	 * @return void
 	 */
-	public function afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
+	public function afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options): void {
 		$this->cleanUp();
 	}
 
