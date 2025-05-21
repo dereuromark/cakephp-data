@@ -2,6 +2,7 @@
 
 namespace Data\Currency;
 
+use Cake\Core\InstanceConfigTrait;
 use Cake\Http\Client;
 
 /**
@@ -12,99 +13,61 @@ use Cake\Http\Client;
  */
 class CurrencyBitcoinLib {
 
+	use InstanceConfigTrait;
+
 	/**
-	 * @var array
+	 * @var array<string, mixed>
 	 */
-	public $settings = [
+	protected $_defaultConfig = [
 		'currency' => 'EUR', # set to NULL or empty for all
-		'api' => 'bitmarket', # bitmarket or bitcoincharts
+		'api' => 'coingecko',
 	];
 
 	/**
-	 * @see https://bitmarket.eu/api
-	 * @param array<string, mixed> $options
-	 * @return array<string, mixed>|false
+	 * @param array<string, mixed> $config
 	 */
-	public function bitmarket($options = []) {
-		$options += $this->settings;
-		$url = 'https://bitmarket.eu/api/ticker';
-		$res = $this->_getBitmarket($url);
-
-		if (!$res) {
-			return false;
-		}
-		if (empty($options['currency'])) {
-			return $res['currencies'];
-		}
-		if (empty($res['currencies'][$options['currency']])) {
-			return false;
-		}
-
-		return $res['currencies'][$options['currency']];
+	public function __construct(array $config = []) {
+		$this->setConfig($config);
 	}
 
 	/**
-	 * Working
-	 *
-	 * @see http://bitcoincharts.com/about/markets-api/
-	 * @param array<string, mixed> $options
-	 * @return array|bool
+	 * @return int|null
 	 */
-	public function bitcoincharts($options = []) {
-		$options += $this->settings;
-		$url = 'http://api.bitcoincharts.com/v1/markets.json';
-		$res = $this->_getBitcoincharts($url);
-		if (!$res) {
-			return false;
-		}
-		$array = [];
-		foreach ($res as $val) {
-			$array[$val['currency']] = $val;
-			unset($array[$val['currency']]['currency']);
-		}
+	public function coingecko(): ?int {
+		$currency = strtolower($this->getConfig('currency'));
+		$url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=' . $currency;
 
-		if (empty($options['currency'])) {
-			return $array;
-		}
-		if (empty($array[$options['currency']])) {
-			return false;
-		}
+		/*
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$response = curl_exec($ch);
+		curl_close($ch);
+		*/
+		$response = $this->_get($url);
 
-		return $array[$options['currency']];
-	}
+		$data = json_decode($response, true);
 
-	/**
-	 * @param array<string, mixed> $options
-	 * - currency
-	 * - api
-	 * @return float|bool
-	 */
-	public function rate($options = []) {
-		$options += $this->settings;
-		$res = $this->{$options['api']}($options);
-
-		if ($res && isset($res['sell'])) {
-			// bitmarket
-			$current = $res['sell'];
-		} elseif ($res && isset($res['ask'])) {
-			// bitcoincharts
-			$current = $res['ask'];
-		}
-		if (isset($current)) {
-			return $this->calcRate($current);
-		}
-
-		return false;
+		return $data['bitcoin'][$currency] ?? null;
 	}
 
 	/**
 	 * Calc BTC relative to 1 baseCurrency
 	 *
-	 * @param float $current
-	 * @return float relativeValue
+	 * @param string|float|int $current Value of 1 BTC
+	 * @return float
 	 */
-	public function calcRate($current) {
+	public function ratio(string|float|int $current) {
 		return 1.0 / (float)$current;
+	}
+
+	/**
+	 * @param string|float|int $value
+	 * @param string|float|int $current
+	 * @return float
+	 */
+	public function convert(string|float|int $value, string|float|int $current): float {
+		return (float)$value * $this->ratio($current);
 	}
 
 	/**
@@ -119,43 +82,9 @@ class CurrencyBitcoinLib {
 
 	/**
 	 * @param string $url
-	 * @return array<string, mixed>|false
-	 */
-	protected function _getBitmarket($url) {
-		$res = $this->_get($url);
-		if (!$res) {
-			return false;
-		}
-		$res = json_decode($res, true);
-		if (!$res) {
-			return false;
-		}
-
-		return $res;
-	}
-
-	/**
-	 * @param string $url
-	 * @return array<string, mixed>|false
-	 */
-	protected function _getBitcoincharts($url) {
-		$res = $this->_get($url);
-		if (!$res) {
-			return false;
-		}
-		$res = json_decode($res, true);
-		if (!$res) {
-			return false;
-		}
-
-		return $res;
-	}
-
-	/**
-	 * @param string $url
 	 * @return string|null
 	 */
-	protected function _get($url) {
+	protected function _get(string $url): ?string {
 		$http = new Client();
 		$res = $http->get($url);
 		if (!$res->isOk()) {

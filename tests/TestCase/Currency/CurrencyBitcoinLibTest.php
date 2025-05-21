@@ -37,48 +37,27 @@ class CurrencyBitcoinLibTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function testBitmarket() {
+	public function testCoingecko() {
 		if (!$this->isDebug()) {
 			$this->CurrencyBitcoin->expects($this->once())
 				->method('_get')
-				->with('https://bitmarket.eu/api/ticker')
-				->willReturn(file_get_contents($this->path . 'bitmarket.json'));
+				->with('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=eur')
+				->willReturn(file_get_contents($this->path . 'coingecko.json'));
 		}
-		$is = $this->CurrencyBitcoin->bitmarket();
-		//debug($is);
-		$this->assertTrue(!empty($is['last']));
+		$result = $this->CurrencyBitcoin->coingecko();
+		$this->assertTrue($result !== null && $result > 999);
 	}
 
 	/**
 	 * @return void
 	 */
-	public function testBitcoincharts() {
-		if (!$this->isDebug()) {
-			$this->CurrencyBitcoin->expects($this->once())
-				->method('_get')
-				->with('http://api.bitcoincharts.com/v1/markets.json')
-				->willReturn(file_get_contents($this->path . 'bitcoincharts.json'));
-		}
-		$is = $this->CurrencyBitcoin->bitcoincharts();
-		//debug($is);
-		$this->assertTrue(!empty($is['close']));
-	}
+	public function testRatio() {
+		$is = $this->CurrencyBitcoin->ratio(95871);
+		$this->assertTrue(is_numeric($is) && $is > 0 && $is < 1);
 
-	/**
-	 * @return void
-	 */
-	public function testRate() {
-		$this->skipIf(true, 'TODO!');
-
-		//$this->debug($this->_header('rate - bitmarket - ' . $this->CurrencyBitcoin->settings['currency']), true);
-		$is = $this->CurrencyBitcoin->rate();
-		$this->debug($is);
-		$this->assertTrue(is_numeric($is) && $is > 0 && $is < 100);
-
-		//$this->debug($this->_header('rate - bitcoincharts - ' . $this->CurrencyBitcoin->settings['currency']), true);
-		$is = $this->CurrencyBitcoin->rate(['api' => 'bitcoincharts']);
-		$this->debug($is);
-		$this->assertTrue(is_numeric($is) && $is > 0 && $is < 100);
+		$is = $this->CurrencyBitcoin->convert(42.32, 95871); // EUR
+		// 0.00044142...
+		$this->assertTrue(is_numeric($is) && $is > 0 && $is < 1);
 	}
 
 }

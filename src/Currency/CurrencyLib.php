@@ -249,12 +249,13 @@ class CurrencyLib {
 	}
 
 	/**
-	 * @return float|bool
+	 * @return float
 	 */
 	protected function _getBitcoin() {
-		$Btc = new CurrencyBitcoinLib();
+		$Btc = new CurrencyBitcoinLib(['currency' => $this->baseCurrency]);
+		$current = $Btc->coingecko();
 
-		return $Btc->rate(['currency' => $this->baseCurrency]);
+		return $Btc->ratio($current);
 	}
 
 	/**

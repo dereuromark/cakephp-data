@@ -8,7 +8,7 @@ use Data\Currency\CurrencyLib;
 class TestCurrencyLib extends CurrencyLib {
 
 	/**
-	 * @return float|int|bool
+	 * @return float
 	 */
 	protected function _getBitcoin() {
 		if (!empty($_SERVER['argv']) && in_array('--debug', $_SERVER['argv'], true)) {
@@ -17,7 +17,7 @@ class TestCurrencyLib extends CurrencyLib {
 		}
 
 		// Fake for now
-		return 55;
+		return 9.99;
 	}
 
 	/**
