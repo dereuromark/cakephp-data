@@ -3,10 +3,10 @@ declare(strict_types = 1);
 
 use Cake\I18n\DateTime;
 use Data\Sync\Timezones;
-use Migrations\AbstractSeed;
+use Migrations\BaseSeed;
 
 // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
-class TimezonesSeed extends AbstractSeed {
+class TimezonesSeed extends BaseSeed {
 
 	/**
 	 * Run Method.

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types = 1);
 
-use Migrations\AbstractMigration;
+use Migrations\BaseMigration;
 
 // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 // phpcs:disable PSR2R.Classes.ClassFileName.NoMatch
-class MigrationCities extends AbstractMigration {
+class MigrationCities extends BaseMigration {
 
 	/**
 	 * Change Method.
