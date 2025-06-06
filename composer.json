@@ -35,6 +35,9 @@
 		"willdurand/geocoder": "^4.2.2 || ^5.0.0",
 		"yangqi/htmldom": "dev-master"
 	},
+	"conflict": {
+		"cakephp/migrations": "<4.5"
+	},
 	"minimum-stability": "stable",
 	"prefer-stable": true,
 	"autoload": {
