@@ -14,13 +14,6 @@ use Tools\Model\Table\Table;
 class DistrictsTable extends Table {
 
 	/**
-	 * @var array
-	 */
-	public $actsAs = ['Geo.Geocoder' => [
-		'min_accuracy' => 3, 'address' => ['address'], 'before' => 'save', 'real' => false, 'required' => false,
-	], 'Tools.Slugged' => ['mode' => 'ascii', 'case' => 'low']];
-
-	/**
 	 * @var array<int|string, mixed>
 	 */
 	protected array $order = ['name' => 'ASC'];
@@ -28,7 +21,7 @@ class DistrictsTable extends Table {
 	/**
 	 * @var array
 	 */
-	public $validate = [
+	public array $validate = [
 		'name' => [
 			'notBlank' => [
 				'rule' => ['notBlank'],
@@ -44,17 +37,26 @@ class DistrictsTable extends Table {
 	];
 
 	/**
-	 * @var array
+	 * @param array $config
+	 * @return void
 	 */
-	public $belongsTo = [
-		'City' => [
-			'className' => 'Data.City',
+	public function initialize(array $config): void {
+		parent::initialize($config);
+
+		$this->addBehavior('Geo.Geocoder', [
+			'min_accuracy' => 3,
+			'address' => ['address'],
+			'before' => 'save',
+			'real' => false,
+			'required' => false,
+		]);
+		$this->addBehavior('Tools.Slugged', ['mode' => 'ascii', 'case' => 'low']);
+
+		$this->belongsTo('Cities', [
+			'className' => 'Data.Cities',
 			'foreignKey' => 'city_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-		],
-	];
+		]);
+	}
 
 	/**
 	 * @param \Cake\Event\EventInterface $event

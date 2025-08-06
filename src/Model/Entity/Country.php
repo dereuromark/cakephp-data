@@ -56,7 +56,7 @@ class Country extends Entity {
 	 * representations of this Entity. If a field is present in both _hidden and _virtual
 	 * the field will **not** be in the array/JSON versions of the entity.
 	 *
-	 * @var list<string>
+	 * @var array<string>
 	 */
 	protected array $_virtual = [
 		'timezone_offset_string',

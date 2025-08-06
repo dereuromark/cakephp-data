@@ -34,7 +34,7 @@ class MimeTypeImagesTable extends Table {
 	/**
 	 * @var array
 	 */
-	public $validate = [
+	public array $validate = [
 		'name' => [ # e.g. "exe"
 			'isUnique' => [
 				'rule' => ['isUnique'],
@@ -52,24 +52,23 @@ class MimeTypeImagesTable extends Table {
 	];
 
 	/**
-	 * @var array
-	 */
-	public $hasMany = [
-		'MimeType' => [
-			'className' => 'Data.MimeType',
-			'foreignKey' => 'mime_type_image_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-		],
-	];
-
-	/**
 	 * @var \Cake\Datasource\EntityInterface|null
 	 */
 	protected $_del;
+
+	/**
+	 * @param array $config
+	 * @return void
+	 */
+	public function initialize(array $config): void {
+		parent::initialize($config);
+
+		$this->hasMany('MimeTypes', [
+			'className' => 'Data.MimeTypes',
+			'foreignKey' => 'mime_type_image_id',
+			'dependent' => false,
+		]);
+	}
 
 	/**
 	 * @param \Cake\Event\EventInterface $event

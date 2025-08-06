@@ -36,7 +36,7 @@ class CurrenciesTable extends Table {
 	/**
 	 * @var array
 	 */
-	public $validate = [
+	public array $validate = [
 		'name' => [
 			'notBlank' => [
 				'rule' => ['notBlank'],

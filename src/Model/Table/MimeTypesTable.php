@@ -33,9 +33,22 @@ class MimeTypesTable extends Table {
 	protected array $order = ['modified' => 'DESC'];
 
 	/**
+	 * @param array $config
+	 * @return void
+	 */
+	public function initialize(array $config): void {
+		parent::initialize($config);
+
+		$this->belongsTo('MimeTypeImages', [
+			'className' => 'Data.MimeTypeImages',
+			'foreignKey' => 'mime_type_image_id',
+		]);
+	}
+
+	/**
 	 * @var array
 	 */
-	public $validate = [
+	public array $validate = [
 		'name' => [
 			'notBlank' => [
 				'rule' => ['notBlank'],
@@ -62,19 +75,6 @@ class MimeTypesTable extends Table {
 		],
 		'active' => ['numeric'],
 		'mime_type_image_id' => ['numeric'],
-	];
-
-	/**
-	 * @var array
-	 */
-	public $belongsTo = [
-		'MimeTypeImage' => [
-			'className' => 'Data.MimeTypeImage',
-			'foreignKey' => 'mime_type_image_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-		],
 	];
 
 	/**

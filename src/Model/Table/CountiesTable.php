@@ -10,25 +10,22 @@ use Tools\Model\Table\Table;
 class CountiesTable extends Table {
 
 	/**
-	 * @var array
+	 * @param array $config
+	 * @return void
 	 */
-	public $actsAs = [
-		'Tools.Slugged' => ['case' => 'low', 'mode' => 'ascii', 'unique' => false, 'overwrite' => false],
-	];
+	public function initialize(array $config): void {
+		parent::initialize($config);
 
-	/**
-	 * @var array
-	 */
-	public $hasMany = [
-		'City' => ['className' => 'Data.City'],
-	];
+		$this->addBehavior('Tools.Slugged', ['case' => 'low', 'mode' => 'ascii', 'unique' => false, 'overwrite' => false]);
 
-	/**
-	 * @var array
-	 */
-	public $belongsTo = [
-		'State' => ['className' => 'Data.State'],
-	];
+		$this->hasMany('Cities', [
+			'className' => 'Data.Cities',
+		]);
+
+		$this->belongsTo('States', [
+			'className' => 'Data.States',
+		]);
+	}
 
 	/**
 	 * @param mixed $data

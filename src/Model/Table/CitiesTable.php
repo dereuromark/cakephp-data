@@ -34,7 +34,7 @@ class CitiesTable extends Table {
 	/**
 	 * @var array
 	 */
-	public $validate = [
+	public array $validate = [
 		'name' => [
 			'notBlank',
 		],

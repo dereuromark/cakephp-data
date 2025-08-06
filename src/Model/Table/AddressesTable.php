@@ -40,11 +40,6 @@ class AddressesTable extends Table {
 	public $displayField = 'formatted_address';
 
 	/**
-	 * @var array
-	 */
-	public $actsAs = ['Geo.Geocoder' => ['real' => false, 'override' => true, 'allow_inconclusive' => true]]; //'before'=>'validate'
-
-	/**
 	 * @var array<int|string, mixed>
 	 */
 	protected array $order = ['type_id' => 'ASC', 'formatted_address' => 'ASC'];
@@ -52,7 +47,7 @@ class AddressesTable extends Table {
 	/**
 	 * @var array
 	 */
-	public $validate = [
+	public array $validate = [
 		'state_id' => [
 			'numeric' => [
 				'rule' => ['numeric'],
@@ -133,32 +128,29 @@ class AddressesTable extends Table {
 	];
 
 	/**
-	 * @var array
+	 * @param array $config
+	 * @return void
 	 */
-	public $belongsTo = [
-		'Country' => [
-			'className' => 'Data.Country',
+	public function initialize(array $config): void {
+		parent::initialize($config);
+
+		$this->addBehavior('Geo.Geocoder', ['real' => false, 'override' => true, 'allow_inconclusive' => true]);
+
+		$this->belongsTo('Countries', [
+			'className' => 'Data.Countries',
 			'foreignKey' => 'country_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-		],
+		]);
 		# redundant:
-		'State' => [
-			'className' => 'Data.State',
+		$this->belongsTo('States', [
+			'className' => 'Data.States',
 			'foreignKey' => 'state_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-		],
-		'User' => [
+		]);
+		$this->belongsTo('Users', [
 			'className' => CLASS_USERS,
 			'foreignKey' => 'foreign_id',
 			'conditions' => ['model' => 'User'],
-			'fields' => ['id', 'username'],
-			'order' => '',
-		],
-	];
+		]);
+	}
 
 	/**
 	 * @param string $value

@@ -40,7 +40,7 @@ class StatesTable extends Table {
 	/**
 	 * @var array
 	 */
-	public $validate = [
+	public array $validate = [
 		'country_id' => ['numeric'],
 		'code' => [
 			'validateUnique' => [
@@ -65,19 +65,6 @@ class StatesTable extends Table {
 	];
 
 	/**
-	 * @var array
-	 */
-	public $belongsTo = [
-		'Country' => [
-			'className' => 'Data.Country',
-			'foreignKey' => 'country_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-		],
-	];
-
-	/**
 	 * @param array $config
 	 * @return void
 	 */
@@ -86,9 +73,14 @@ class StatesTable extends Table {
 
 		$this->addBehavior('Tools.Slugged', ['case' => 'low', 'mode' => 'ascii', 'unique' => false, 'overwrite' => false]);
 
+		$this->belongsTo('Countries', [
+			'className' => 'Data.Countries',
+			'foreignKey' => 'country_id',
+		]);
+
 		if (Configure::read('Data.State.County') !== false) {
 			$this->hasMany('Counties', [
-				'className' => 'Data.County',
+				'className' => 'Data.Counties',
 			]);
 		}
 

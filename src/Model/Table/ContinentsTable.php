@@ -29,11 +29,6 @@ use Tools\Model\Table\Table;
 class ContinentsTable extends Table {
 
 	/**
-	 * @var array
-	 */
-	public $actsAs = ['Tree'];
-
-	/**
 	 * @var array<int|string, mixed>
 	 */
 	protected array $order = ['name' => 'ASC'];
@@ -41,7 +36,7 @@ class ContinentsTable extends Table {
 	/**
 	 * @var array
 	 */
-	public $validate = [
+	public array $validate = [
 		'name' => [
 			'notBlank' => [
 				'rule' => ['notBlank'],
@@ -63,28 +58,6 @@ class ContinentsTable extends Table {
 	];
 
 	/**
-	 * @var array
-	 */
-	public $hasMany = [
-		'ChildContinent' => [
-			'className' => 'Continent',
-			'foreignKey' => 'parent_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-		],
-		'Country' => [
-			'className' => 'Country',
-			'foreignKey' => 'continent_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-		],
-	];
-
-	/**
 	 * @param array $config
 	 *
 	 * @return void
@@ -92,9 +65,23 @@ class ContinentsTable extends Table {
 	public function initialize(array $config): void {
 		parent::initialize($config);
 
+		$this->addBehavior('Tree');
+
 		$this->belongsTo('ParentContinents', [
 			'className' => 'Data.Continents',
 			'foreignKey' => 'parent_id',
+		]);
+
+		$this->hasMany('ChildContinents', [
+			'className' => 'Data.Continents',
+			'foreignKey' => 'parent_id',
+			'dependent' => false,
+		]);
+
+		$this->hasMany('Countries', [
+			'className' => 'Data.Countries',
+			'foreignKey' => 'continent_id',
+			'dependent' => false,
 		]);
 	}
 

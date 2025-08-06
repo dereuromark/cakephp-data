@@ -20,14 +20,14 @@ class LocationsTable extends Table {
 	/**
 	 * @var array
 	 */
-	public $actsAs = [
+	public array $actsAs = [
 		'Geo.Geocoder' => ['min_accuracy' => 4, 'address' => ['name', 'country_name'], 'formatted_address' => 'formatted_address', 'real' => false, 'before' => 'validate', 'allow_inconclusive' => true, 'expect' => []], //'postal_code', 'locality', 'sublocality', 'street_address'
 	];
 
 	/**
 	 * @var array
 	 */
-	public $validate = [
+	public array $validate = [
 		'name' => [
 			'notBlank' => [
 				'rule' => ['notBlank'],

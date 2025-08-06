@@ -38,14 +38,14 @@ class PostalCodesTable extends Table {
 	/**
 	 * @var array
 	 */
-	public $actsAs = [
+	public array $actsAs = [
 		'Geo.Geocoder' => ['min_accuracy' => 2, 'address' => ['code', 'country_name'], 'formatted_address' => 'official_address', 'real' => false, 'before' => 'validate', 'allow_inconclusive' => true],
 	];
 
 	/**
 	 * @var array
 	 */
-	public $validate = [
+	public array $validate = [
 		'code' => ['notBlank'],
 		/*
 		'official_address' => array(
