@@ -51,7 +51,6 @@ class Address extends Entity {
 		$options = [
 			static::TYPE_MAIN => __('Main Residence'),
 			static::TYPE_OTHER => __('Other'),
-
 		];
 
 		return parent::enum($value, $options);

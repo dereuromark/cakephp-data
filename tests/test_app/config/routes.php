@@ -1,3 +1,3 @@
 <?php
 
-require dirname(dirname(dirname(__DIR__))) . '/config/routes.php';
+require dirname(__DIR__, 3) . '/config/routes.php';

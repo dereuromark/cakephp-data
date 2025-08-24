@@ -195,9 +195,12 @@ class StatesTable extends Table {
 			}
 
 			/** @var \Data\Model\Entity\State[] $results */
-			$results = $this->find('all', ...['conditions' => $conditions, 'contain' => ['Countries.name'], 'order' => [
-			'modified' =>
-				'ASC']])->toArray();
+			$results = $this->find('all', ...['conditions' => $conditions,
+				'contain' => ['Countries.name'], 'order' => [
+					'modified' =>
+				'ASC',
+				],
+			])->toArray();
 			$count = 0;
 
 			foreach ($results as $res) {

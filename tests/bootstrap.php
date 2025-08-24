@@ -92,8 +92,7 @@ $config = [
 	'timezone' => 'UTC',
 	'quoteIdentifiers' => true,
 	'cacheMetadata' => true,
-	'flags' => [
-	],
+	'flags' => [],
 ];
 if (str_contains(getenv('DB_URL'), 'mysql')) {
 	$config['flags'][PDO::MYSQL_ATTR_INIT_COMMAND] = "SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''))";

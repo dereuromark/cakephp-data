@@ -66,7 +66,6 @@ class AddressesTable extends Table {
 				'message' => 'valErrMandatoryField',
 				'last' => true,
 			],
-
 		],
 		'address_type_id' => [
 			'numeric' => [
@@ -81,8 +80,7 @@ class AddressesTable extends Table {
 				'provider' => 'table',
 			],
 		],
-		'foreign_id' => [
-		],
+		'foreign_id' => [],
 		'postal_code' => [
 			'notBlank' => [
 				'rule' => ['notBlank'],
@@ -101,8 +99,7 @@ class AddressesTable extends Table {
 				'message' => 'valErrMandatoryField',
 			],
 		],
-		'street' => [
-		],
+		'street' => [],
 		'formatted_address' => [
 			'validateUnique' => [
 				'rule' => ['validateUnique', ['scope' => ['foreign_id', 'model']]],

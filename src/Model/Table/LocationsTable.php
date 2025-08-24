@@ -115,16 +115,16 @@ class LocationsTable extends Table {
 			'fields' => array_merge(
 				['Location.id', 'Location.name', 'Location.formatted_address'],
 				[
-					'6371.04 * ACOS( COS( PI()/2 - RADIANS(90 - Location.lat)) * ' .
-					'COS( PI()/2 - RADIANS(90 - ' . $lat . ')) * ' .
-					'COS( RADIANS(Location.lng) - RADIANS(' . $lng . ')) + ' .
-					'SIN( PI()/2 - RADIANS(90 - Location.lat)) * ' .
-					'SIN( PI()/2 - RADIANS(90 - ' . $lat . '))) ' .
-					'AS distance',
+					'6371.04 * ACOS( COS( PI()/2 - RADIANS(90 - Location.lat)) * '
+					. 'COS( PI()/2 - RADIANS(90 - ' . $lat . ')) * '
+					. 'COS( RADIANS(Location.lng) - RADIANS(' . $lng . ')) + '
+					. 'SIN( PI()/2 - RADIANS(90 - Location.lat)) * '
+					. 'SIN( PI()/2 - RADIANS(90 - ' . $lat . '))) '
+					. 'AS distance',
 				],
 			),
-				'order' => 'distance ASC',
-				'limit' => $limit,
+			'order' => 'distance ASC',
+			'limit' => $limit,
 		]);
 
 		return $result;
