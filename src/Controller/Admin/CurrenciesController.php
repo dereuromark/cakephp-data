@@ -185,7 +185,7 @@ class CurrenciesController extends DataAppController {
 	 * @return \Cake\Http\Response|null|void
 	 */
 	public function toggle($field = null, $id = null) {
-		 $fields = ['active'];
+		$fields = ['active'];
 
 		if (!empty($field) && in_array($field, $fields) && !empty($id)) {
 			$value = $this->{$this->defaultTable}->toggleField($field, $id);
