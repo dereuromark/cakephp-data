@@ -25,10 +25,10 @@ class PostalCodesController extends DataAppController {
 		$query = $this->PostalCodes->find();
 		$query->where(['code LIKE' => $term . '%', 'country_id' => 1])
 			->select([
-				'sub' => $query->newExpr('SUBSTRING(code FROM 1 FOR ' . $length . ')'),
+				'sub' => $query->expr('SUBSTRING(code FROM 1 FOR ' . $length . ')'),
 				'count' => $query->count(),
-				'lat_sum' => $query->newExpr('SUM(lat)'),
-				'lng_sum' => $query->newExpr('SUM(lng)'),
+				'lat_sum' => $query->expr('SUM(lat)'),
+				'lng_sum' => $query->expr('SUM(lng)'),
 			])
 			->select($this->PostalCodes)
 			->groupBy('sub');
@@ -41,10 +41,10 @@ class PostalCodesController extends DataAppController {
 			$query = $this->PostalCodes->find();
 			$query->where(['code LIKE' => $term . '%', 'country_id' => 1])
 				->select([
-					'sub' => $query->newExpr('SUBSTRING(code FROM 1 FOR ' . ($length + 1) . ')'),
+					'sub' => $query->expr('SUBSTRING(code FROM 1 FOR ' . ($length + 1) . ')'),
 					'count' => $query->count(),
-					'lat_sum' => $query->newExpr('SUM(lat)'),
-					'lng_sum' => $query->newExpr('SUM(lng)'),
+					'lat_sum' => $query->expr('SUM(lat)'),
+					'lng_sum' => $query->expr('SUM(lng)'),
 				])
 				->select($this->PostalCodes)
 				->groupBy('sub');
