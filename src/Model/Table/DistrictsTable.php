@@ -100,7 +100,7 @@ class DistrictsTable extends Table {
 	 * @param array $customOptions
 	 * @return array
 	 */
-	public function getIdBySlug($slug, $customOptions = []) {
+	public function getIdBySlug($slug, array $customOptions = []) {
 		$options = [
 			'conditions' => [
 				$this->getAlias() . '.slug' => $slug,

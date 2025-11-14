@@ -93,7 +93,7 @@ class PostalCodesTable extends Table {
 	 *
 	 * @return \Cake\ORM\Query\SelectQuery
 	 */
-	public function searchLocation($code, $countryId = null, $options = []) {
+	public function searchLocation($code, $countryId = null, array $options = []) {
 		if (!empty($options['exact'])) {
 			if (!empty($options['term'])) {
 				$term = sprintf($options['term'], $code);

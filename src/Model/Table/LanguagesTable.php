@@ -172,7 +172,7 @@ class LanguagesTable extends Table {
 	 * @param array $customOptions
 	 * @return \Cake\ORM\Query\SelectQuery
 	 */
-	public function getPrimaryLanguages($type = 'all', $customOptions = []) {
+	public function getPrimaryLanguages($type = 'all', array $customOptions = []) {
 		$options = [
 			'conditions' => ['locale_fallback = locale'],
 		];
