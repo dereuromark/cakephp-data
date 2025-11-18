@@ -84,10 +84,6 @@ class TimezonesTable extends Table {
 	 */
 	public function validationDefault(Validator $validator): Validator {
 		$validator
-			->integer('id')
-			->allowEmptyString('id', null, 'create');
-
-		$validator
 			->scalar('name')
 			->maxLength('name', 100)
 			->requirePresence('name', 'create')
