@@ -4,9 +4,12 @@ use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Datasource\ConnectionManager;
+use Cake\TestSuite\Fixture\SchemaLoader;
 use Data\DataPlugin;
 use TestApp\Application;
 use TestApp\Controller\AppController;
+use TestApp\Model\Entity\User;
+use TestApp\Model\Table\UsersTable;
 use TestApp\View\AppView;
 use Tools\ToolsPlugin;
 use Tools\View\Icon\BootstrapIcon;
@@ -106,9 +109,9 @@ Configure::write('Icon', [
 ]);
 
 if (env('FIXTURE_SCHEMA_METADATA')) {
-	$loader = new Cake\TestSuite\Fixture\SchemaLoader();
+	$loader = new SchemaLoader();
 	$loader->loadInternalFile(env('FIXTURE_SCHEMA_METADATA'));
 }
 
-class_alias(\TestApp\Model\Entity\User::class, 'App\Model\Entity\User');
-class_alias(\TestApp\Model\Table\UsersTable::class, 'App\Model\Table\UsersTable');
+class_alias(User::class, 'App\Model\Entity\User');
+class_alias(UsersTable::class, 'App\Model\Table\UsersTable');
