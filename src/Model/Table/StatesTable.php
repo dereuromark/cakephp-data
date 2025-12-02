@@ -89,7 +89,9 @@ class StatesTable extends Table {
 		}
 
 		$this->addBehavior('Search.Search');
-		$this->searchManager()
+		/** @var \Search\Model\Behavior\SearchBehavior $searchBehavior */
+		$searchBehavior = $this->getBehavior('Search');
+		$searchBehavior->searchManager()
 			->value('country_id')
 			->like('search', ['fields' => ['name', 'code']]);
 	}
