@@ -118,7 +118,9 @@ class CountriesTable extends Table {
 		}
 
 		$this->addBehavior('Search.Search');
-		$this->searchManager()
+		/** @var \Search\Model\Behavior\SearchBehavior $searchBehavior */
+		$searchBehavior = $this->getBehavior('Search');
+		$searchBehavior->searchManager()
 			->like('search', ['fields' => ['name', 'ori_name', 'iso2', 'iso3']]);
 	}
 
