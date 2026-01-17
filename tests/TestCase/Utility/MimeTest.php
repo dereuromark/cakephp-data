@@ -119,12 +119,12 @@ class MimeTest extends TestCase {
 		//pr($is);
 		$this->assertEquals($is, 'us-ascii');
 
-		file_put_contents(TMP . 'sometest.zip', utf8_encode('xäääyz'));
+		file_put_contents(TMP . 'sometest.zip', mb_convert_encoding('xäääyz', 'UTF-8', 'ISO-8859-1'));
 		$is = $this->Mime->getEncoding(TMP . 'sometest.zip');
 		//pr($is);
 		$this->assertEquals($is, 'utf-8');
 
-		file_put_contents(TMP . 'sometest.zip', utf8_encode('xyz'));
+		file_put_contents(TMP . 'sometest.zip', 'xyz');
 		$is = $this->Mime->getEncoding(TMP . 'sometest.zip');
 		//pr($is);
 		$this->assertEquals($is, 'us-ascii');

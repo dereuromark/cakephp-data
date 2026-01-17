@@ -22,7 +22,7 @@ class CurrenciesFixture extends TestFixture {
 		'symbol_left' => ['type' => 'string', 'null' => true, 'length' => 12, 'comment' => '', 'charset' => 'utf8'],
 		'symbol_right' => ['type' => 'string', 'null' => true, 'length' => 12, 'comment' => '', 'charset' => 'utf8'],
 		'decimal_places' => ['type' => 'string', 'null' => true, 'length' => 1, 'comment' => '', 'charset' => 'utf8'],
-		'value' => ['type' => 'float', 'null' => true, 'default' => '0.0000', 'length' => '9,4', 'collate' => null, 'comment' => ''],
+		'value' => ['type' => 'float', 'null' => true, 'default' => '0.0000', 'length' => 9, 'precision' => 4, 'collate' => null, 'comment' => ''],
 		'base' => ['type' => 'boolean', 'null' => false, 'default' => '0', 'collate' => null, 'comment' => 'is base currency'],
 		'active' => ['type' => 'boolean', 'null' => false, 'default' => '0', 'collate' => null, 'comment' => ''],
 		'modified' => ['type' => 'datetime', 'null' => false, 'default' => null, 'collate' => null, 'comment' => ''],
