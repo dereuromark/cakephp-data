@@ -27,6 +27,9 @@ class TimezonesTest extends TestCase {
 	 */
 	public function testAll() {
 		$result = $this->Timezones->all();
+		if (!$result) {
+			$this->markTestSkipped('Wikipedia timezone data not available (network issue).');
+		}
 		$this->assertNotEmpty($result);
 
 		$berlin = $result['Europe/Berlin'];
@@ -50,6 +53,12 @@ class TimezonesTest extends TestCase {
 	 * @return void
 	 */
 	public function testDiff() {
+		// Check if data is available first
+		$all = $this->Timezones->all();
+		if (!$all) {
+			$this->markTestSkipped('Wikipedia timezone data not available (network issue).');
+		}
+
 		$existing = [];
 		$existing['Europe/Paris'] = new Timezone([
 			'name' => 'Europe/FooBar',
