@@ -31,9 +31,11 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 		$image = $this->Html->image(IMG_MIMETYPES . $mimeTypeImage['name'] . '.' . $mimeTypeImage['ext'], ['
 		title' => $mimeTypeImage['name'] . '.' . $mimeTypeImage['ext'], 'alt' => $mimeTypeImage['name'] . '.' . $mimeTypeImage['ext']]);
 
-		$imageSize = getimagesize(PATH_MIMETYPES . $mimeTypeImage['name'] . '.' . $mimeTypeImage['ext']);
-		$imageWidth = $imageSize[0];
-		$imageHeight = $imageSize[1];
+		$imageSize = @getimagesize(PATH_MIMETYPES . $mimeTypeImage['name'] . '.' . $mimeTypeImage['ext']);
+		if ($imageSize) {
+			$imageWidth = $imageSize[0];
+			$imageHeight = $imageSize[1];
+		}
 	}
 
 ?>

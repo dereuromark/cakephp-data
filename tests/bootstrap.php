@@ -98,7 +98,8 @@ $config = [
 	'flags' => [],
 ];
 if (str_contains(getenv('DB_URL'), 'mysql')) {
-	$config['flags'][PDO::MYSQL_ATTR_INIT_COMMAND] = "SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''))";
+	// Use integer value 1002 directly (PDO::MYSQL_ATTR_INIT_COMMAND) to avoid deprecation on PHP 8.5+
+	$config['flags'][1002] = "SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''))";
 }
 ConnectionManager::setConfig('test', $config);
 
