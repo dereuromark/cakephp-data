@@ -315,6 +315,10 @@ class Timezones {
 			}
 		}
 
+		if ($start === null) {
+			return [];
+		}
+
 		$count = count($rows);
 
 		$data = [];
