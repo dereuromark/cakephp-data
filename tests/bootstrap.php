@@ -98,9 +98,8 @@ $config = [
 	'flags' => [],
 ];
 if (str_contains(getenv('DB_URL'), 'mysql')) {
-	// PDO::MYSQL_ATTR_INIT_COMMAND is deprecated in PHP 8.5, use Pdo\Mysql::ATTR_INIT_COMMAND instead
-	$attrInitCommand = PHP_VERSION_ID >= 80500 ? Pdo\Mysql::ATTR_INIT_COMMAND : PDO::MYSQL_ATTR_INIT_COMMAND;
-	$config['flags'][$attrInitCommand] = "SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''))";
+	// Use integer value 1002 directly (PDO::MYSQL_ATTR_INIT_COMMAND) to avoid deprecation on PHP 8.5+
+	$config['flags'][1002] = "SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''))";
 }
 ConnectionManager::setConfig('test', $config);
 
