@@ -149,11 +149,12 @@ class TimezonesTable extends Table {
 			$allTimezones = Hash::combine($allTimezones, '{n}.name', '{n}');
 		}
 
-		if (strpos($timezone->notes, 'Link to [[') === false) {
+		$notes = $timezone->notes ?? '';
+		if (strpos($notes, 'Link to [[') === false) {
 			return null;
 		}
 
-		preg_match('/Link to \[\[(.+?)\]\]/', $timezone->notes, $matches);
+		preg_match('/Link to \[\[(.+?)\]\]/', $notes, $matches);
 		if (!$matches) {
 			return null;
 		}

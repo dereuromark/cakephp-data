@@ -138,7 +138,7 @@ class LanguagesController extends DataAppController {
 		}
 
 		//$languages = $this->Languages->iso3ToIso2();
-		$languages = $this->Languages->catalog();
+		$languages = $this->Languages->catalog() ?? [];
 		$count = 0;
 		$errors = [];
 		foreach ($languages as $language) {
@@ -191,7 +191,7 @@ class LanguagesController extends DataAppController {
 	public function compareIsoListToCore() {
 		$isoList = $this->Languages->getOfficialIsoList();
 
-		$languages = $this->Languages->catalog();
+		$languages = $this->Languages->catalog() ?? [];
 		$locales = [];
 		foreach ($languages as $key => $value) {
 			if (strlen($key) === 2) {

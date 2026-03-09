@@ -42,8 +42,9 @@ class MimeTypeHelper extends Helper {
 		}
 
 		$default = ['ext' => $ext, 'name' => 'Datei'];
+		$types = $this->types ?? [];
 
-		foreach ($this->types as $t) {
+		foreach ($types as $t) {
 			if ($t['ext'] == $ext) {
 				if (!empty($t['img'])) {
 					return $this->formatIcon($t, $attr);
@@ -61,17 +62,19 @@ class MimeTypeHelper extends Helper {
 	}
 
 	/**
-	 * @param array|null $icon
+	 * @param array<string, mixed> $icon
 	 * @param array<string, mixed> $attr
 	 * @return string
 	 */
-	public function formatIcon($icon = null, array $attr = []) {
+	public function formatIcon(array $icon, array $attr = []) {
 		$filename = '*';
 		if (!empty($attr['filename'])) {
 			$filename = $attr['filename'];
 			unset($attr['filename']);
 		}
-		$imageAttr = ['class' => 'help', 'title' => $icon['name'] . ' (' . $filename . '.' . $icon['ext'] . ')', 'alt' => $icon['ext'], 'height' => '16'];
+		$name = $icon['name'] ?? '';
+		$ext = $icon['ext'] ?? '';
+		$imageAttr = ['class' => 'help', 'title' => $name . ' (' . $filename . '.' . $ext . ')', 'alt' => $ext, 'height' => '16'];
 		if ($attr) {
 			$imageAttr = array_merge($imageAttr, $attr);
 		}

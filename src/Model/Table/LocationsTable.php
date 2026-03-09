@@ -131,7 +131,7 @@ class LocationsTable extends Table {
 	}
 
 	/**
-	 * @return \Cake\ORM\Query\SelectQuery|false
+	 * @return \Cake\ORM\Query\SelectQuery|false|null
 	 */
 	public function findLocationByIp() {
 		$ip = static::findIp();
