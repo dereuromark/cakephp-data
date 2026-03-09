@@ -45,7 +45,7 @@ class Address extends Entity {
 
 	/**
 	 * @param int|null $value
-	 * @return array|string
+	 * @return array<int|string, mixed>|string|null
 	 */
 	public static function addressTypes($value = null) {
 		$options = [

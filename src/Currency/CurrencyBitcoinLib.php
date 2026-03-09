@@ -45,6 +45,9 @@ class CurrencyBitcoinLib {
 		curl_close($ch);
 		*/
 		$response = $this->_get($url);
+		if ($response === null) {
+			return null;
+		}
 
 		$data = json_decode($response, true);
 

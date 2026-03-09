@@ -182,6 +182,9 @@ class CurrenciesTable extends Table {
 		$this->CurrencyLib->reset();
 
 		$base = $this->baseCurrency();
+		if (!$base) {
+			return;
+		}
 		$currencies = $this->foreignCurrencies()->all();
 		foreach ($currencies as $currency) {
 			$value = $this->CurrencyLib->convert(1, $base['code'], $currency['code'], 4);
@@ -246,6 +249,9 @@ class CurrenciesTable extends Table {
 	 */
 	public function currencyList() {
 		$res = $this->availableCurrencies();
+		if (!isset($this->CurrencyLib)) {
+			$this->CurrencyLib = new CurrencyLib();
+		}
 		foreach ($res as $key => $val) {
 			$val = $key;
 

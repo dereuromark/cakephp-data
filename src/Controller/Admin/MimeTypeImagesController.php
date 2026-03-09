@@ -249,9 +249,9 @@ class MimeTypeImagesController extends DataAppController {
 	}
 
 	/**
-	 * @var string|null
+	 * @var string
 	 */
-	protected $_uploadError;
+	protected string $_uploadError = '';
 
 	/**
 	 * @var array
@@ -274,6 +274,12 @@ class MimeTypeImagesController extends DataAppController {
 			'gif',
 			'png',
 		];
+
+		if (!$file || !isset($file['name'], $file['tmp_name'])) {
+			$this->_uploadError = 'No file uploaded';
+
+			return false;
+		}
 
 		$image = $file['name'];
 		$ext = mb_strtolower(pathinfo($image, PATHINFO_EXTENSION));
@@ -406,7 +412,7 @@ class MimeTypeImagesController extends DataAppController {
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Http\Response
+	 * @return \Cake\Http\Response|null
 	 */
 	public function delete($id = null) {
 		$this->request->allowMethod('post');

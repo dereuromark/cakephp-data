@@ -61,7 +61,7 @@ class StatesController extends DataAppController {
 	 */
 	public function updateSelect($id = null) {
 		$this->viewBuilder()->setLayout('ajax');
-		$states = $this->States->getListByCountry($id);
+		$states = $this->States->getListByCountry((int)$id);
 
 		$defaultFieldLabel = 'pleaseSelect';
 		if ($this->request->getQuery('optional')) {
