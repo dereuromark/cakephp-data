@@ -8,7 +8,11 @@
 		"plugin",
 		"data",
 		"geo",
-		"admin-panel"
+		"admin-panel",
+		"countries",
+		"cities",
+		"currencies",
+		"reference-data"
 	],
 	"authors": [
 		{
