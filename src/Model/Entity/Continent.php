@@ -36,7 +36,7 @@ class Continent extends Entity {
 
 	/**
 	 * @param array<int>|int|null $value
-	 * @return array<string>|string
+	 * @return array<int|string, mixed>|string|null
 	 */
 	public static function directions($value = null) {
 		$options = [

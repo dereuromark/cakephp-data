@@ -83,7 +83,8 @@ class AddressesController extends DataAppController {
 		}
 		if (!$this->request->getData()) {
 			$belongsTo = ['' => ' - keine Auswahl - '];
-			foreach ($this->Addresses->belongsTo as $b => $content) {
+			$associations = $this->Addresses->belongsTo ?? [];
+			foreach ($associations as $b => $content) {
 				if ($b === 'Country') {
 					continue;
 				}
@@ -123,12 +124,14 @@ class AddressesController extends DataAppController {
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Http\Response
+	 * @return \Cake\Http\Response|null
 	 */
 	public function markAsUsed($id = null) {
 		$address = $this->Addresses->get($id);
 
-		$this->Addresses->touch($id);
+		/** @var int $addressId */
+		$addressId = $address->id;
+		$this->Addresses->touch($addressId);
 		$var = $address['formatted_address'];
 		$this->Flash->success(__('Address \'{0}\' marked as last used', h($var)));
 

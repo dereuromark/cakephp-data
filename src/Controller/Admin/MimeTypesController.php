@@ -269,7 +269,7 @@ class MimeTypesController extends DataAppController {
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Http\Response
+	 * @return \Cake\Http\Response|null
 	 */
 	public function delete($id = null) {
 		$this->request->allowMethod('post');

@@ -254,6 +254,9 @@ class CurrencyLib {
 	protected function _getBitcoin() {
 		$Btc = new CurrencyBitcoinLib(['currency' => $this->baseCurrency]);
 		$current = $Btc->coingecko();
+		if ($current === null) {
+			return 0.0;
+		}
 
 		return $Btc->ratio($current);
 	}

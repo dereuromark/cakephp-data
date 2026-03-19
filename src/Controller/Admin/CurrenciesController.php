@@ -35,7 +35,7 @@ class CurrenciesController extends DataAppController {
 	}
 
 	/**
-	 * @return \Cake\Http\Response
+	 * @return \Cake\Http\Response|null
 	 */
 	public function update() {
 		$this->Currencies->updateValues();
@@ -158,7 +158,7 @@ class CurrenciesController extends DataAppController {
 	/**
 	 * @param int|null $id
 	 *
-	 * @return \Cake\Http\Response
+	 * @return \Cake\Http\Response|null
 	 */
 	public function _setAsPrimary($id) {
 		if ($id) {
