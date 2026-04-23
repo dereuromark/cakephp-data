@@ -67,7 +67,15 @@
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit {0}', __('Country')), ['action' => 'edit', $country->id]); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Country'), ['action' => 'delete', $country->id], ['escape' => false, 'confirm'  => __('Are you sure you want to delete # {0}?', $country->id)]); ?> </li>
+		<li><?php echo $this->Form->postButton(__('Delete Country'), ['action' => 'delete', $country->id], [
+			'escape' => false,
+			'class' => 'btn btn-link p-0 align-baseline',
+			'form' => [
+				'class' => 'd-inline',
+				'data-confirm-message' => __('Are you sure you want to delete # {0}?', $country->id),
+			],
+		]); ?> </li>
 		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['action' => 'index']); ?> </li>
 	</ul>
 </div>
+<?= $this->element('Data.csp_confirm') ?>

@@ -57,7 +57,14 @@ foreach ($postalCodes as $postalCode): ?>
 		<td class="actions">
 			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $postalCode['id']], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $postalCode['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Icon->render('delete'), ['action' => 'delete', $postalCode['id']], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $postalCode['id'])]); ?>
+			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $postalCode['id']], [
+				'escape' => false,
+				'class' => 'btn btn-link p-0 align-baseline',
+				'form' => [
+					'class' => 'd-inline',
+					'data-confirm-message' => __('Are you sure you want to delete # {0}?', $postalCode['id']),
+				],
+			]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -76,3 +83,4 @@ foreach ($postalCodes as $postalCode): ?>
 		<li><?php echo $this->Html->link(__('Geolocate'), ['action' => 'geolocate']); ?></li>
 	</ul>
 </div>
+<?= $this->element('Data.csp_confirm') ?>

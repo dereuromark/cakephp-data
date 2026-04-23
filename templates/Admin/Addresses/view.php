@@ -81,7 +81,14 @@
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit {0}', __('Address')), ['action' => 'edit', $address['id']]); ?> </li>
 		<li><?php echo $this->Html->link(__('Mark as {0}', __('Used')), ['action' => 'mark_as_used', $address['id']]); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete {0}', __('Address')), ['action' => 'delete', $address['id']], ['confirm' => __('Are you sure you want to delete # {0}?', $address['id'])]); ?> </li>
+		<li><?php echo $this->Form->postButton(__('Delete {0}', __('Address')), ['action' => 'delete', $address['id']], [
+			'class' => 'btn btn-link p-0 align-baseline',
+			'form' => [
+				'class' => 'd-inline',
+				'data-confirm-message' => __('Are you sure you want to delete # {0}?', $address['id']),
+			],
+		]); ?> </li>
 		<li><?php echo $this->Html->link(__('List {0}', __('Addresses')), ['action' => 'index']); ?> </li>
 	</ul>
 </div>
+<?= $this->element('Data.csp_confirm') ?>

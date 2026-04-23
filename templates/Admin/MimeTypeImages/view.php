@@ -37,8 +37,16 @@
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit Mime Type Image'), ['action' => 'edit', $mimeTypeImage['id']]); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Mime Type Image'), ['action' => 'delete', $mimeTypeImage['id']], ['escape' => false, 'confirm'  => __('Are you sure you want to delete # {0}?', $mimeTypeImage['id'])]); ?> </li>
+		<li><?php echo $this->Form->postButton(__('Delete Mime Type Image'), ['action' => 'delete', $mimeTypeImage['id']], [
+			'escape' => false,
+			'class' => 'btn btn-link p-0 align-baseline',
+			'form' => [
+				'class' => 'd-inline',
+				'data-confirm-message' => __('Are you sure you want to delete # {0}?', $mimeTypeImage['id']),
+			],
+		]); ?> </li>
 		<li><?php echo $this->Html->link(__('List Mime Type Images'), ['action' => 'index']); ?> </li>
 		<li><?php echo $this->Html->link(__('Add Mime Type Image'), ['action' => 'add']); ?> </li>
 	</ul>
 </div>
+<?= $this->element('Data.csp_confirm') ?>

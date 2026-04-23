@@ -65,7 +65,14 @@ foreach ($currencies as $currency):
 		<td class="actions">
 			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $currency['id']], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $currency['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Icon->render('delete'), ['action' => 'delete', $currency['id']], ['escape' => false, 'confirm'  => __('Are you sure you want to delete # {0}?', $currency['id'])]); ?>
+			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $currency['id']], [
+				'escape' => false,
+				'class' => 'btn btn-link p-0 align-baseline',
+				'form' => [
+					'class' => 'd-inline',
+					'data-confirm-message' => __('Are you sure you want to delete # {0}?', $currency['id']),
+				],
+			]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -80,3 +87,4 @@ foreach ($currencies as $currency):
 		<li><?php echo $this->Html->link(__('Update {0}', __('Currency Values')), ['action' => 'update']); ?></li>
 	</ul>
 </div>
+<?= $this->element('Data.csp_confirm') ?>

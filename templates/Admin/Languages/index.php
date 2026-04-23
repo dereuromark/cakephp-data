@@ -76,7 +76,14 @@ foreach ($languages as $language):
 		<td class="actions">
 			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $language['id']], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $language['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Icon->render('delete'), ['action' => 'delete', $language['id']], ['escape' => false, 'confirm'  => __('Are you sure you want to delete # {0}?', $language['id'])]); ?>
+			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $language['id']], [
+				'escape' => false,
+				'class' => 'btn btn-link p-0 align-baseline',
+				'form' => [
+					'class' => 'd-inline',
+					'data-confirm-message' => __('Are you sure you want to delete # {0}?', $language['id']),
+				],
+			]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -101,3 +108,4 @@ The language flags are actually country flags. Due to incompatabities between co
 		<li><?php echo $this->Html->link(__('Set primary languages active'), ['action' => 'set_primary_languages_active'], [], __('Sure?')); ?></li>
 	</ul>
 </div>
+<?= $this->element('Data.csp_confirm') ?>

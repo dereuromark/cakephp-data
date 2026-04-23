@@ -34,7 +34,14 @@ foreach ($continents as $continent):
 		<td class="actions">
 			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $continent['id']], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $continent['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Icon->render('delete'), ['action' => 'delete', $continent['id']], ['escape' => false, 'confirm' => 'Sure?']); ?>
+			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $continent['id']], [
+				'escape' => false,
+				'class' => 'btn btn-link p-0 align-baseline',
+				'form' => [
+					'class' => 'd-inline',
+					'data-confirm-message' => 'Sure?',
+				],
+			]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -53,3 +60,4 @@ foreach ($continents as $continent):
 		<li><?php echo $this->Html->link(__('Tree'), ['action' => 'tree']); ?></li>
 	</ul>
 </div>
+<?= $this->element('Data.csp_confirm') ?>

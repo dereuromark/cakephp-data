@@ -96,7 +96,14 @@ foreach ($mimeTypes as $mimeType):
 		<td class="actions">
 			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $mimeType['id']], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $mimeType['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Icon->render('delete'), ['action' => 'delete', $mimeType['id']], ['escape' => false, 'confirm'  => __('Are you sure you want to delete # {0}?', $mimeType['id'])]); ?>
+			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $mimeType['id']], [
+				'escape' => false,
+				'class' => 'btn btn-link p-0 align-baseline',
+				'form' => [
+					'class' => 'd-inline',
+					'data-confirm-message' => __('Are you sure you want to delete # {0}?', $mimeType['id']),
+				],
+			]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -128,3 +135,4 @@ message = für Nachrichten<br/>
 model = für Dateien, die mehrdimensionale Strukturen repräsentieren<br/>
 <br/>
 Subtypen für server-eigene Dateiformate, d.h. Dateitypen, die auf dem Server ausgeführt werden können, werden meist mit x- eingeleitet.
+<?= $this->element('Data.csp_confirm') ?>
