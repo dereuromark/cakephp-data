@@ -47,7 +47,14 @@ foreach ($cities as $city) { ?>
 		<td class="actions">
 			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $city['id']], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $city['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Icon->render('delete'), ['action' => 'delete', $city['id']], ['escape' => false, 'confirm' => 'Sure?']); ?>
+			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $city['id']], [
+				'escape' => false,
+				'class' => 'btn btn-link p-0 align-baseline',
+				'form' => [
+					'class' => 'd-inline',
+					'data-confirm-message' => 'Sure?',
+				],
+			]); ?>
 		</td>
 	</tr>
 <?php } ?>
@@ -64,3 +71,4 @@ foreach ($cities as $city) { ?>
 		<li><?php echo $this->Html->link(__('New {0}', __('City')), ['action' => 'add']); ?></li>
 	</ul>
 </div>
+<?= $this->element('Data.csp_confirm') ?>

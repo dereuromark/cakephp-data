@@ -84,7 +84,14 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 		<td class="actions">
 			<?php //echo $this->Html->link($this->Icon->render('view'), array('action'=>'view', $mimeTypeImage['id']), array('escape'=>false)); ?>
 			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $mimeTypeImage['id']], ['escape' => false]); ?>
-			<?php echo $this->Form->postLink($this->Icon->render('delete'), ['action' => 'delete', $mimeTypeImage['id']], ['escape' => false, 'confirm'  => __('Are you sure you want to delete # {0}?', $mimeTypeImage['id'])]); ?>
+			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $mimeTypeImage['id']], [
+				'escape' => false,
+				'class' => 'btn btn-link p-0 align-baseline',
+				'form' => [
+					'class' => 'd-inline',
+					'data-confirm-message' => __('Are you sure you want to delete # {0}?', $mimeTypeImage['id']),
+				],
+			]); ?>
 			<?php
 				if (isset($imageWidth) && isset($imageHeight) && $imageWidth != 16 && $imageHeight != 16) {
 					echo $this->Icon->render('expand', ['title' => __('Größe ist nicht 16x16, sondern ' . $imageWidth . 'x' . $imageHeight . '! Anpassen...')]);
@@ -106,3 +113,4 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 		<li><?php echo $this->Html->link(__('Search Icon on google.de'), 'http://images.google.de/images?q=icon+imagesize%3A16x16&btnG=Bilder-Suche'); ?></li>
 	</ul>
 </div>
+<?= $this->element('Data.csp_confirm') ?>

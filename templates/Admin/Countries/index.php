@@ -106,7 +106,14 @@ foreach ($countries as $country):
 
 			<?php echo $this->Html->link($this->Icon->render('map-o', [], ['title' => __('Koordinaten updaten')]), ['action' => 'update_coordinates', $country->id], ['escape' => false]); ?>
 
-			<?php echo $this->Form->postLink($this->Icon->render('delete'), ['action' => 'delete', $country->id], ['escape' => false, 'confirm'  => __('Are you sure you want to delete # {0}?', $country->id)]); ?>
+			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $country->id], [
+				'escape' => false,
+				'class' => 'btn btn-link p-0 align-baseline',
+				'form' => [
+					'class' => 'd-inline',
+					'data-confirm-message' => __('Are you sure you want to delete # {0}?', $country->id),
+				],
+			]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -129,6 +136,7 @@ Hinweis:
 <ul>
 <li><?__('countryCodeExplanation')?></li>
 </ul>
+<?= $this->element('Data.csp_confirm') ?>
 
 <br/>
 <span class="keyList">Legende:</span>

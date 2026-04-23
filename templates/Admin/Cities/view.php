@@ -66,7 +66,14 @@
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit {0}', __('City')), ['action' => 'edit', $city['id']]); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete {0}', __('City')), ['action' => 'delete', $city['id']], ['confirm' => __('Are you sure you want to delete # {0}?', $city['id'])]); ?> </li>
+		<li><?php echo $this->Form->postButton(__('Delete {0}', __('City')), ['action' => 'delete', $city['id']], [
+			'class' => 'btn btn-link p-0 align-baseline',
+			'form' => [
+				'class' => 'd-inline',
+				'data-confirm-message' => __('Are you sure you want to delete # {0}?', $city['id']),
+			],
+		]); ?> </li>
 		<li><?php echo $this->Html->link(__('List {0}', __('Cities')), ['action' => 'index']); ?> </li>
 	</ul>
 </div>
+<?= $this->element('Data.csp_confirm') ?>

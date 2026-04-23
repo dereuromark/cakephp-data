@@ -82,7 +82,14 @@ use Cake\Core\Plugin;
                     <td class="actions">
                         <?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $timezone->id], ['escapeTitle' => false]); ?>
                         <?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $timezone->id], ['escapeTitle' => false]); ?>
-                        <?php echo $this->Form->postLink($this->Icon->render('delete'), ['action' => 'delete', $timezone->id], ['escapeTitle' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $timezone->id)]); ?>
+                        <?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $timezone->id], [
+                            'escapeTitle' => false,
+                            'class' => 'btn btn-link p-0 align-baseline',
+                            'form' => [
+                                'class' => 'd-inline',
+                                'data-confirm-message' => __('Are you sure you want to delete # {0}?', $timezone->id),
+                            ],
+                        ]); ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
@@ -92,3 +99,4 @@ use Cake\Core\Plugin;
 
     <?php echo $this->element('Tools.pagination'); ?>
 </div>
+<?= $this->element('Data.csp_confirm') ?>

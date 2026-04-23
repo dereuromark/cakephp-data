@@ -9,7 +9,13 @@
         <ul class="side-nav nav nav-pills flex-column">
             <li class="nav-item heading"><?= __('Actions') ?></li>
             <li class="nav-item"><?= $this->Html->link(__('Edit {0}', __('Timezone')), ['action' => 'edit', $timezone->id], ['class' => 'side-nav-item']) ?></li>
-            <li class="nav-item"><?= $this->Form->postLink(__('Delete {0}', __('Timezone')), ['action' => 'delete', $timezone->id], ['confirm' => __('Are you sure you want to delete # {0}?', $timezone->id), 'class' => 'side-nav-item']) ?></li>
+            <li class="nav-item"><?= $this->Form->postButton(__('Delete {0}', __('Timezone')), ['action' => 'delete', $timezone->id], [
+                'class' => 'side-nav-item btn btn-link text-start w-100',
+                'form' => [
+                    'class' => 'd-inline',
+                    'data-confirm-message' => __('Are you sure you want to delete # {0}?', $timezone->id),
+                ],
+            ]) ?></li>
             <li class="nav-item"><?= $this->Html->link(__('List {0}', __('Timezones')), ['action' => 'index'], ['class' => 'side-nav-item']) ?></li>
         </ul>
     </aside>
@@ -79,3 +85,4 @@
         </div>
     </div>
 </div>
+<?= $this->element('Data.csp_confirm') ?>

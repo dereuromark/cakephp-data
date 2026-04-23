@@ -3,12 +3,13 @@
  * @var \App\View\AppView $this
  * @var \Data\Model\Entity\MimeType $mimeType
  */
+$cspNonce = (string)$this->getRequest()->getAttribute('cspNonce', '');
 ?>
 <?php /**
  * @var \App\View\AppView $this
  */
 $this->Html->script('jquery/plugins/jquery.dd.js');?>
-<script type="text/javascript">
+<script type="text/javascript"<?= $cspNonce !== '' ? ' nonce="' . h($cspNonce) . '"' : '' ?>>
 	var imagePath = baseurl + 'img/<?php echo IMG_MIMETYPES?>';
 </script>
 <?php echo $this->Html->script('specific/mime_types_images.js');?>
@@ -36,7 +37,14 @@ $this->Html->script('jquery/plugins/jquery.dd.js');?>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $this->Form->getSourceValue('MimeType.id')], ['confirm' => __('Are you sure you want to delete # {0}?', $this->Form->getSourceValue('MimeType.id'))]); ?></li>
+		<li><?php echo $this->Form->postButton(__('Delete'), ['action' => 'delete', $this->Form->getSourceValue('MimeType.id')], [
+			'class' => 'btn btn-link p-0 align-baseline',
+			'form' => [
+				'class' => 'd-inline',
+				'data-confirm-message' => __('Are you sure you want to delete # {0}?', $this->Form->getSourceValue('MimeType.id')),
+			],
+		]); ?></li>
 		<li><?php echo $this->Html->link(__('List Mime Types'), ['action' => 'index']);?></li>
 	</ul>
 </div>
+<?= $this->element('Data.csp_confirm') ?>

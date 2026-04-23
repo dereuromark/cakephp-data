@@ -86,7 +86,14 @@ foreach ($states as $state):
 
 			<?php echo $this->Html->link($this->Icon->render('map-o', [], ['title' => __('Update coordinates')]), ['action' => 'updateCoordinates', $state['id']], ['escape' => false]); ?>
 
-			<?php echo $this->Form->postLink($this->Icon->render('delete'), ['action' => 'delete', $state['id']], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $state['id'])]); ?>
+			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $state['id']], [
+				'escape' => false,
+				'class' => 'btn btn-link p-0 align-baseline',
+				'form' => [
+					'class' => 'd-inline',
+					'data-confirm-message' => __('Are you sure you want to delete # {0}?', $state['id']),
+				],
+			]); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -104,3 +111,4 @@ foreach ($states as $state):
 		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['controller' => 'Countries', 'action' => 'index']); ?> </li>
 	</ul>
 </div>
+<?= $this->element('Data.csp_confirm') ?>

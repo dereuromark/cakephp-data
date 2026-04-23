@@ -8,10 +8,16 @@
     <aside class="column large-3 medium-4 columns col-sm-4 col-12">
         <ul class="side-nav nav nav-pills flex-column">
             <li class="nav-item heading"><?= __('Actions') ?></li>
-            <li class="nav-item"><?= $this->Form->postLink(
+            <li class="nav-item"><?= $this->Form->postButton(
                 __('Delete'),
                 ['action' => 'delete', $timezone->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $timezone->id), 'class' => 'side-nav-item']
+                [
+                    'class' => 'side-nav-item btn btn-link text-start w-100',
+                    'form' => [
+                        'class' => 'd-inline',
+                        'data-confirm-message' => __('Are you sure you want to delete # {0}?', $timezone->id),
+                    ],
+                ]
                 ) ?></li>
             <li class="nav-item"><?= $this->Html->link(__('List Timezones'), ['action' => 'index'], ['class' => 'side-nav-item']) ?></li>
         </ul>
@@ -41,3 +47,4 @@
         </div>
     </div>
 </div>
+<?= $this->element('Data.csp_confirm') ?>

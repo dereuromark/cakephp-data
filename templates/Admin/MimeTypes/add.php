@@ -4,12 +4,13 @@
  * @var array $mimeTypeImages
  * @var \Data\Model\Entity\MimeType $mimeType
  */
+$cspNonce = (string)$this->getRequest()->getAttribute('cspNonce', '');
 ?>
 <?php /**
  * @var \App\View\AppView $this
  */
 $this->Html->script('jquery/plugins/jquery.dd.js');?>
-<script type="text/javascript">
+<script type="text/javascript"<?= $cspNonce !== '' ? ' nonce="' . h($cspNonce) . '"' : '' ?>>
 	var imagePath = baseurl + 'img/<?php echo IMG_MIMETYPES?>';
 </script>
 <?php echo $this->Html->script('specific/mime_types_images.js');?>
