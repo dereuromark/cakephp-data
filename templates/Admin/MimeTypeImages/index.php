@@ -85,7 +85,7 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 			<?php //echo $this->Html->link($this->Icon->render('view'), array('action'=>'view', $mimeTypeImage['id']), array('escape'=>false)); ?>
 			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $mimeTypeImage['id']], ['escape' => false]); ?>
 			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $mimeTypeImage['id']], [
-				'escape' => false,
+				'escapeTitle' => false,
 				'class' => 'btn btn-link p-0 align-baseline',
 				'form' => [
 					'class' => 'd-inline',

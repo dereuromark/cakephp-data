@@ -38,7 +38,7 @@
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit Mime Type Image'), ['action' => 'edit', $mimeTypeImage['id']]); ?> </li>
 		<li><?php echo $this->Form->postButton(__('Delete Mime Type Image'), ['action' => 'delete', $mimeTypeImage['id']], [
-			'escape' => false,
+			'escapeTitle' => false,
 			'class' => 'btn btn-link p-0 align-baseline',
 			'form' => [
 				'class' => 'd-inline',

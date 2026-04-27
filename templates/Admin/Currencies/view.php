@@ -48,7 +48,7 @@
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit {0}', __('Currency')), ['action' => 'edit', $currency['id']]); ?> </li>
 		<li><?php echo $this->Form->postButton(__('Delete Currency'), ['action' => 'delete', $currency['id']], [
-			'escape' => false,
+			'escapeTitle' => false,
 			'class' => 'btn btn-link p-0 align-baseline',
 			'form' => [
 				'class' => 'd-inline',

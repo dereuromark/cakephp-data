@@ -58,7 +58,7 @@ foreach ($postalCodes as $postalCode): ?>
 			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $postalCode['id']], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $postalCode['id']], ['escape' => false]); ?>
 			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $postalCode['id']], [
-				'escape' => false,
+				'escapeTitle' => false,
 				'class' => 'btn btn-link p-0 align-baseline',
 				'form' => [
 					'class' => 'd-inline',

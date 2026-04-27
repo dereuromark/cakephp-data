@@ -107,7 +107,7 @@ foreach ($countries as $country):
 			<?php echo $this->Html->link($this->Icon->render('map-o', [], ['title' => __('Koordinaten updaten')]), ['action' => 'update_coordinates', $country->id], ['escape' => false]); ?>
 
 			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $country->id], [
-				'escape' => false,
+				'escapeTitle' => false,
 				'class' => 'btn btn-link p-0 align-baseline',
 				'form' => [
 					'class' => 'd-inline',

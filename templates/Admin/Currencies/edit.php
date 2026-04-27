@@ -23,7 +23,7 @@
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Form->postButton(__('Delete'), ['action' => 'delete', $currency->id], [
-			'escape' => false,
+			'escapeTitle' => false,
 			'class' => 'btn btn-link p-0 align-baseline',
 			'form' => [
 				'class' => 'd-inline',

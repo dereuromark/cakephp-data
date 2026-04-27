@@ -97,7 +97,7 @@ foreach ($mimeTypes as $mimeType):
 			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $mimeType['id']], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $mimeType['id']], ['escape' => false]); ?>
 			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $mimeType['id']], [
-				'escape' => false,
+				'escapeTitle' => false,
 				'class' => 'btn btn-link p-0 align-baseline',
 				'form' => [
 					'class' => 'd-inline',

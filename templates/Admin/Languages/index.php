@@ -77,7 +77,7 @@ foreach ($languages as $language):
 			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $language['id']], ['escape' => false]); ?>
 			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $language['id']], ['escape' => false]); ?>
 			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $language['id']], [
-				'escape' => false,
+				'escapeTitle' => false,
 				'class' => 'btn btn-link p-0 align-baseline',
 				'form' => [
 					'class' => 'd-inline',
