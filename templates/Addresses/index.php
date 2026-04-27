@@ -70,8 +70,8 @@ foreach ($addresses as $address):
 			<?php echo h($address['formatted_address']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $address['id']], ['escape' => false]); ?>
-			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $address['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $address['id']], ['escapeTitle' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $address['id']], ['escapeTitle' => false]); ?>
 			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $address['id']], [
 				'escapeTitle' => false,
 				'class' => 'btn btn-link p-0 align-baseline',

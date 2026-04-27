@@ -51,7 +51,7 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 		</td>
 		<td>
 			<span class="ajaxToggling" id="ajaxToggle-<?php echo $mimeTypeImage['id']?>">
-			<?php echo $this->Html->link($this->Format->yesNo($mimeTypeImage['active'], ['onTitle' => 'Active', 'offTitle' => 'Inactive']), ['action' => 'toggleActive', $mimeTypeImage['id']], ['escape' => false]);?>
+			<?php echo $this->Html->link($this->Format->yesNo($mimeTypeImage['active'], ['onTitle' => 'Active', 'offTitle' => 'Inactive']), ['action' => 'toggleActive', $mimeTypeImage['id']], ['escapeTitle' => false]);?>
 			</span>
 
 			<?php
@@ -83,7 +83,7 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 		</td>
 		<td class="actions">
 			<?php //echo $this->Html->link($this->Icon->render('view'), array('action'=>'view', $mimeTypeImage['id']), array('escape'=>false)); ?>
-			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $mimeTypeImage['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $mimeTypeImage['id']], ['escapeTitle' => false]); ?>
 			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $mimeTypeImage['id']], [
 				'escapeTitle' => false,
 				'class' => 'btn btn-link p-0 align-baseline',
@@ -96,7 +96,7 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 				if (isset($imageWidth) && isset($imageHeight) && $imageWidth != 16 && $imageHeight != 16) {
 					echo $this->Icon->render('expand', ['title' => __('Größe ist nicht 16x16, sondern ' . $imageWidth . 'x' . $imageHeight . '! Anpassen...')]);
 				} elseif (empty($mimeTypeImage['ext']) || !empty($mimeTypeImage['warning'])) {
-					echo $this->Html->link($this->Icon->render('google', ['title' => __('Search with Google')]), 'http://images.google.de/images?q=' . $mimeTypeImage['name'] . '+imagesize%3A16x16&btnG=Bilder-Suche', ['escape' => false]);
+					echo $this->Html->link($this->Icon->render('google', ['title' => __('Search with Google')]), 'http://images.google.de/images?q=' . $mimeTypeImage['name'] . '+imagesize%3A16x16&btnG=Bilder-Suche', ['escapeTitle' => false]);
 				}
 			?>
 		</td>

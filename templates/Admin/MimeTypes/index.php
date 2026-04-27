@@ -81,7 +81,7 @@ foreach ($mimeTypes as $mimeType):
 		</td>
 		<td>
 			<span class="ajaxToggling" id="ajaxToggle-<?php echo $mimeType['id']?>">
-			<?php echo $this->Html->link($this->Format->yesNo($mimeType['active'], ['onTitle' => 'Active', 'offTitle' => 'Inactive']), ['action' => 'toggleActive', $mimeType['id']], ['escape' => false]);?>
+			<?php echo $this->Html->link($this->Format->yesNo($mimeType['active'], ['onTitle' => 'Active', 'offTitle' => 'Inactive']), ['action' => 'toggleActive', $mimeType['id']], ['escapeTitle' => false]);?>
 			</span>
 		</td>
 		<td>
@@ -94,8 +94,8 @@ foreach ($mimeTypes as $mimeType):
 			<?php echo $this->Time->niceDate($mimeType['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $mimeType['id']], ['escape' => false]); ?>
-			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $mimeType['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $mimeType['id']], ['escapeTitle' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $mimeType['id']], ['escapeTitle' => false]); ?>
 			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $mimeType['id']], [
 				'escapeTitle' => false,
 				'class' => 'btn btn-link p-0 align-baseline',

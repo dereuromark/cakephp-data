@@ -80,12 +80,12 @@ foreach ($countries as $country):
 
 				if (Configure::read('GoogleMap.key')) {
 					$mapMarkers = $this->GoogleMap->staticMarkers($markers);
-					echo ' ' . $this->Html->link($this->Icon->render('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $country['lat'] . ',' . $country['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 3]), ['class' => 'internal zoom-image highslideImage', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
+					echo ' ' . $this->Html->link($this->Icon->render('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $country['lat'] . ',' . $country['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 3]), ['class' => 'internal zoom-image highslideImage', 'title' => __('click for full map'), 'escapeTitle' => false, 'target' => '_blank']);
 				} else {
 					$options = [
 						'to' => $country->lat . ',' . $country->lng,
 					];
-					echo $this->Html->link($this->Icon->render('view', [], ['title' => __('Show')]), $this->GoogleMap->mapUrl($options), ['class' => 'external', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
+					echo $this->Html->link($this->Icon->render('view', [], ['title' => __('Show')]), $this->GoogleMap->mapUrl($options), ['class' => 'external', 'title' => __('click for full map'), 'escapeTitle' => false, 'target' => '_blank']);
 				}
 			}
 
@@ -99,12 +99,12 @@ foreach ($countries as $country):
 			<?php echo $this->Time->niceDate($country['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Icon->render('up'), ['action' => 'up', $country->id], ['escape' => false]); ?>
-			<?php echo $this->Html->link($this->Icon->render('down'), ['action' => 'down', $country->id], ['escape' => false]); ?>
-			<?php echo $this->Html->link($this->Icon->render('view'), ['action'=>'view', $country->id], ['escape' => false]); ?>
-			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $country->id], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('up'), ['action' => 'up', $country->id], ['escapeTitle' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('down'), ['action' => 'down', $country->id], ['escapeTitle' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('view'), ['action'=>'view', $country->id], ['escapeTitle' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $country->id], ['escapeTitle' => false]); ?>
 
-			<?php echo $this->Html->link($this->Icon->render('map-o', [], ['title' => __('Koordinaten updaten')]), ['action' => 'update_coordinates', $country->id], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('map-o', [], ['title' => __('Koordinaten updaten')]), ['action' => 'update_coordinates', $country->id], ['escapeTitle' => false]); ?>
 
 			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $country->id], [
 				'escapeTitle' => false,
