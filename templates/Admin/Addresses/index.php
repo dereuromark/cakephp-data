@@ -69,12 +69,12 @@ foreach ($addresses as $address):
 
 					if (Configure::read('GoogleMap.key')) {
 						$mapMarkers = $this->GoogleMap->staticMarkers($markers);
-						echo $this->Html->link($this->Icon->render('view', ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $address->lat . ',' . $address->lng, 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 12]), ['id' => 'googleMap', 'class' => 'internal zoom-image highslideImage', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
+						echo $this->Html->link($this->Icon->render('view', ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $address->lat . ',' . $address->lng, 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 12]), ['id' => 'googleMap', 'class' => 'internal zoom-image highslideImage', 'title' => __('click for full map'), 'escapeTitle' => false, 'target' => '_blank']);
 					} else {
 						$options = [
 							'to' => $address->lat . ',' . $address->lng,
 						];
-						echo $this->Html->link($this->Icon->render('view', [], ['title' => __('Show')]), $this->GoogleMap->mapUrl($options), ['class' => 'external', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
+						echo $this->Html->link($this->Icon->render('view', [], ['title' => __('Show')]), $this->GoogleMap->mapUrl($options), ['class' => 'external', 'title' => __('click for full map'), 'escapeTitle' => false, 'target' => '_blank']);
 					}
 				}
 			 ?>
@@ -86,8 +86,8 @@ foreach ($addresses as $address):
 			<?php echo h($address['formatted_address']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $address['id']], ['escape' => false]); ?>
-			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $address['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $address['id']], ['escapeTitle' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $address['id']], ['escapeTitle' => false]); ?>
 			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $address['id']], [
 				'escapeTitle' => false,
 				'class' => 'btn btn-link p-0 align-baseline',

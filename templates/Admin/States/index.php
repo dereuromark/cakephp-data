@@ -67,12 +67,12 @@ foreach ($states as $state):
 
 				if (Configure::read('GoogleMap.key')) {
 					$mapMarkers = $this->GoogleMap->staticMarkers($markers);
-					echo ' ' . $this->Html->link($this->Icon->render('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $state->lat . ',' . $state->lng, 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 5]), ['id' => 'googleMap', 'class' => 'internal zoom-image highslideImage', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
+					echo ' ' . $this->Html->link($this->Icon->render('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $state->lat . ',' . $state->lng, 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 5]), ['id' => 'googleMap', 'class' => 'internal zoom-image highslideImage', 'title' => __('click for full map'), 'escapeTitle' => false, 'target' => '_blank']);
 				} else {
 					$options = [
 						'to' => $state->lat . ',' . $state->lng,
 					];
-					echo $this->Html->link($this->Icon->render('view', [], ['title' => __('Show')]), $this->GoogleMap->mapUrl($options), ['class' => 'external', 'title' => __('click for full map'), 'escape' => false, 'target' => '_blank']);
+					echo $this->Html->link($this->Icon->render('view', [], ['title' => __('Show')]), $this->GoogleMap->mapUrl($options), ['class' => 'external', 'title' => __('click for full map'), 'escapeTitle' => false, 'target' => '_blank']);
 				}
 			}
 
@@ -82,9 +82,9 @@ foreach ($states as $state):
 			<?php echo $this->Time->niceDate($state->modified); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $state['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $state['id']], ['escapeTitle' => false]); ?>
 
-			<?php echo $this->Html->link($this->Icon->render('map-o', [], ['title' => __('Update coordinates')]), ['action' => 'updateCoordinates', $state['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('map-o', [], ['title' => __('Update coordinates')]), ['action' => 'updateCoordinates', $state['id']], ['escapeTitle' => false]); ?>
 
 			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $state['id']], [
 				'escapeTitle' => false,

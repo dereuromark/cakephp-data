@@ -32,8 +32,8 @@ foreach ($continents as $continent):
 			<?php echo $this->Time->niceDate($continent['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $continent['id']], ['escape' => false]); ?>
-			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $continent['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $continent['id']], ['escapeTitle' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $continent['id']], ['escapeTitle' => false]); ?>
 			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $continent['id']], [
 				'escapeTitle' => false,
 				'class' => 'btn btn-link p-0 align-baseline',
