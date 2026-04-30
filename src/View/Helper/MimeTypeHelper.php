@@ -143,7 +143,7 @@ class MimeTypeHelper extends Helper {
 			if ($content === false) {
 				return [];
 			}
-			$content = unserialize($content);
+			$content = unserialize($content, ['allowed_classes' => false]);
 			if ($content === false || !is_array($content)) {
 				return [];
 			}

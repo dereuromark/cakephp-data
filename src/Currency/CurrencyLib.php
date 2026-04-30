@@ -280,7 +280,7 @@ class CurrencyLib {
 		if ($res !== false) {
 			$this->cacheFileUsed = true;
 
-			return unserialize((string)$res);
+			return unserialize((string)$res, ['allowed_classes' => false]);
 		}
 
 		return false;
