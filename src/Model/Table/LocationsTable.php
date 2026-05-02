@@ -7,6 +7,7 @@ use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
 use Cake\Log\Log;
 use Cake\Validation\Validation;
+use Cake\Validation\Validator;
 use Tools\Model\Table\Table;
 use Tools\Utility\Utility;
 
@@ -25,29 +26,27 @@ class LocationsTable extends Table {
 	];
 
 	/**
-	 * @var array
+	 * Default validation rules.
+	 *
+	 * @param \Cake\Validation\Validator $validator Validator instance.
+	 * @return \Cake\Validation\Validator
 	 */
-	public array $validate = [
-		'name' => [
-			'notBlank' => [
-				'rule' => ['notBlank'],
-				'message' => 'valErrMandatoryField',
-				'last' => true,
-			],
-			'unique' => [
+	public function validationDefault(Validator $validator): Validator {
+		$validator
+			->scalar('name')
+			->notEmptyString('name', __('valErrMandatoryField'))
+			->add('name', 'unique', [
 				'rule' => ['validateUnique', ['scope' => ['country_id']]],
-				'message' => 'valErrRecordNameExists',
+				'message' => __('valErrRecordNameExists'),
 				'provider' => 'table',
-			],
-		],
-		'country_id' => [
-			'numeric' => [
-				'rule' => ['numeric'],
-				'message' => 'valErrMandatoryField',
-				'last' => true,
-			],
-		],
-	];
+			]);
+
+		$validator
+			->integer('country_id')
+			->notEmptyString('country_id', __('valErrMandatoryField'));
+
+		return $validator;
+	}
 
 	/**
 	 * FIXME

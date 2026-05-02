@@ -4,6 +4,7 @@ namespace Data\Model\Table;
 
 use ArrayObject;
 use Cake\Event\EventInterface;
+use Cake\Validation\Validator;
 use Tools\Model\Table\Table;
 
 /**
@@ -19,22 +20,22 @@ class DistrictsTable extends Table {
 	protected array $order = ['name' => 'ASC'];
 
 	/**
-	 * @var array
+	 * Default validation rules.
+	 *
+	 * @param \Cake\Validation\Validator $validator Validator instance.
+	 * @return \Cake\Validation\Validator
 	 */
-	public array $validate = [
-		'name' => [
-			'notBlank' => [
-				'rule' => ['notBlank'],
-				'message' => 'valErrMandatoryField',
-			],
-		],
-		'city_id' => [
-			'numeric' => [
-				'rule' => ['numeric'],
-				'message' => 'valErrMandatoryField',
-			],
-		],
-	];
+	public function validationDefault(Validator $validator): Validator {
+		$validator
+			->scalar('name')
+			->notEmptyString('name', __('valErrMandatoryField'));
+
+		$validator
+			->integer('city_id')
+			->notEmptyString('city_id', __('valErrMandatoryField'));
+
+		return $validator;
+	}
 
 	/**
 	 * @param array $config

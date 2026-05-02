@@ -6,6 +6,7 @@ use ArrayObject;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
 use Cake\I18n\DateTime;
+use Cake\Validation\Validator;
 use Data\Model\Entity\Address;
 use Tools\Model\Table\Table;
 
@@ -45,84 +46,71 @@ class AddressesTable extends Table {
 	protected array $order = ['type_id' => 'ASC', 'formatted_address' => 'ASC'];
 
 	/**
-	 * @var array
+	 * Default validation rules.
+	 *
+	 * @param \Cake\Validation\Validator $validator Validator instance.
+	 * @return \Cake\Validation\Validator
 	 */
-	public array $validate = [
-		'state_id' => [
-			'numeric' => [
-				'rule' => ['numeric'],
-				'message' => 'valErrMandatoryField',
-				'last' => true,
-			],
-			'fitsToCountry' => [
-				'rule' => ['fitsToCountry'],
-				'message' => 'The province seems not be fit to the chosen country',
+	public function validationDefault(Validator $validator): Validator {
+		$validator
+			->integer('state_id')
+			->allowEmptyString('state_id')
+			->add('state_id', 'fitsToCountry', [
+				'rule' => 'fitsToCountry',
+				'message' => __('The province seems not be fit to the chosen country'),
 				'provider' => 'table',
-			],
-		],
-		'country_id' => [
-			'numeric' => [
-				'rule' => ['numeric'],
-				'message' => 'valErrMandatoryField',
-				'last' => true,
-			],
-		],
-		'address_type_id' => [
-			'numeric' => [
-				'rule' => ['numeric'],
-				'message' => 'valErrMandatoryField',
-				'last' => true,
-			],
-			'primaryUnique' => [
-				'rule' => ['primaryUnique'],
-				'message' => 'Es darf nur eine Adresse "Haupt-Wohnsitz" sein, bitte einen anderen Typ wählen',
+			]);
+
+		$validator
+			->integer('country_id')
+			->allowEmptyString('country_id');
+
+		$validator
+			->integer('address_type_id')
+			->allowEmptyString('address_type_id')
+			->add('address_type_id', 'primaryUnique', [
+				'rule' => 'primaryUnique',
+				'message' => __('Only one address can be marked as "Main Residence", please choose another type'),
 				'last' => true,
 				'provider' => 'table',
-			],
-		],
-		'foreign_id' => [],
-		'postal_code' => [
-			'notBlank' => [
-				'rule' => ['notBlank'],
-				'message' => 'valErrMandatoryField',
-				'last' => true,
-			],
-			'correspondsWithCountry' => [
-				'rule' => ['correspondsWithCountry'],
-				'message' => 'The zip code seems not to have the correct length',
+			]);
+
+		$validator
+			->scalar('postal_code')
+			->allowEmptyString('postal_code')
+			->add('postal_code', 'correspondsWithCountry', [
+				'rule' => 'correspondsWithCountry',
+				'message' => __('The zip code seems not to have the correct length'),
 				'provider' => 'table',
-			],
-		],
-		'city' => [
-			'notBlank' => [
-				'rule' => ['notBlank'],
-				'message' => 'valErrMandatoryField',
-			],
-		],
-		'street' => [],
-		'formatted_address' => [
-			'validateUnique' => [
+			]);
+
+		$validator
+			->scalar('city')
+			->allowEmptyString('city');
+
+		$validator
+			->scalar('street')
+			->allowEmptyString('street');
+
+		$validator
+			->scalar('formatted_address')
+			->allowEmptyString('formatted_address')
+			->add('formatted_address', 'validateUnique', [
 				'rule' => ['validateUnique', ['scope' => ['foreign_id', 'model']]],
-				'allowEmpty' => true,
-				'message' => 'valErrRecordNameExists',
+				'message' => __('valErrRecordNameExists'),
 				'provider' => 'table',
-			],
-		],
-		'lat' => [
-			'decimal' => [
-				'rule' => ['decimal', 6],
-				'allowEmpty' => true,
-				'message' => 'not a valid geografic number for latitude',
-			],
-		],
-		'lng' => [
-			'decimal' => [
-				'rule' => ['decimal', 6],
-				'allowEmpty' => true,
-				'message' => 'not a valid geografic number for longitude',
-			],
-		],
-	];
+			]);
+
+		$validator
+			->decimal('lat', 6, __('not a valid geografic number for latitude'))
+			->allowEmptyString('lat');
+
+		$validator
+			->decimal('lng', 6, __('not a valid geografic number for longitude'))
+			->allowEmptyString('lng');
+
+		return $validator;
+	}
 
 	/**
 	 * @param array $config

@@ -27,18 +27,18 @@ class CurrencyLib {
 	/**
 	 * @var string
 	 */
-	public const URL = 'http://www.ecb.int/stats/eurofxref/eurofxref-daily.xml';
+	public const URL = 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml';
 
 	/**
 	 * @var string
 	 */
-	public const URL_HISTORY = 'http://www.ecb.int/stats/eurofxref/eurofxref-hist.xml';
+	public const URL_HISTORY = 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.xml';
 
 	//TODO: get information about a currency (name, ...)
 	/**
 	 * @var string
 	 */
-	public const URL_TABLE = 'http://www.ecb.int/rss/fxref-{currency}.html';
+	public const URL_TABLE = 'https://www.ecb.europa.eu/rss/fxref-{currency}.html';
 
 	/**
 	 * @var string
