@@ -7,9 +7,11 @@ use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Event\EventInterface;
+use Cake\Http\Client;
 use Data\HtmlDom\HtmlDom;
 use Data\Model\Entity\Language;
 use Data\Utility\L10n;
+use RuntimeException;
 use Tools\Model\Table\Table;
 
 /**
@@ -253,14 +255,20 @@ class LanguagesTable extends Table {
 	}
 
 	/**
+	 * @throws \RuntimeException If the ISO 639-2 list cannot be fetched.
+	 *
 	 * @return array Array 2d heading and values
 	 */
 	public function getOfficialIsoList() {
 		$HtmlDom = new HtmlDom();
 		$res = Cache::read('lov_gov_iso_list');
 		if (!$res) {
-			$res = (string)file_get_contents('http://www.loc.gov/standards/iso639-2/php/code_list.php');
-			$res = $HtmlDom->domFromString($res);
+			$client = new Client(['timeout' => 5]);
+			$response = $client->get('https://www.loc.gov/standards/iso639-2/php/code_list.php');
+			if (!$response->isOk()) {
+				throw new RuntimeException('Cannot load ISO 639-2 list from loc.gov');
+			}
+			$res = $HtmlDom->domFromString($response->getStringBody());
 			Cache::write('lov_gov_iso_list', $res);
 		}
 
