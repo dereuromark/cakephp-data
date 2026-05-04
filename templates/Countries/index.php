@@ -5,7 +5,7 @@
  */
 ?>
 <div class="page index">
-<h2><?php echo __('Countries');?></h2>
+<h2><?php echo __d('data', 'Countries');?></h2>
 
 <table class="table">
 <tr>
@@ -45,16 +45,16 @@ foreach ($countries as $country):
 <?php echo $this->element('Tools.pagination'); ?>
 </div>
 
-<?php if (__('countryCodeExplanation') !== 'countryCodeExplanation') { ?>
+<?php if (__d('data', 'countryCodeExplanation') !== 'countryCodeExplanation') { ?>
 <br/>
-<?php echo __('Note') ?>:
+<?php echo __d('data', 'Note') ?>:
 <ul>
-<li><?php echo __('countryCodeExplanation')?></li>
+<li><?php echo __d('data', 'countryCodeExplanation')?></li>
 </ul>
 <?php } ?>
 
 <br/>
-<span class="keyList"><?php echo __('Legend');?></span>
+<span class="keyList"><?php echo __d('data', 'Legend');?></span>
 <ul class="keyList">
 <li><?php echo $this->Data->countryIcon(null); ?> = Default Icon</li>
 </ul>

@@ -73,12 +73,12 @@ class LanguagesController extends DataAppController {
 			$language = $this->Languages->patchEntity($language, $this->request->getData());
 			if ($this->Languages->save($language)) {
 				$var = $language['name'];
-				$this->Flash->success(__('record add {0} saved', h($var)));
+				$this->Flash->success(__d('data', 'record add {0} saved', h($var)));
 
 				return $this->redirect(['action' => 'index']);
 			}
 
-			$this->Flash->error(__('formContainsErrors'));
+			$this->Flash->error(__d('data', 'formContainsErrors'));
 		}
 
 		$this->set(compact('language'));
@@ -97,12 +97,12 @@ class LanguagesController extends DataAppController {
 
 			if ($this->Languages->save($language)) {
 				$var = $language->name;
-				$this->Flash->success(__('record edit {0} saved', h($var)));
+				$this->Flash->success(__d('data', 'record edit {0} saved', h($var)));
 
 				return $this->redirect(['action' => 'index']);
 			}
 
-			$this->Flash->error(__('formContainsErrors'));
+			$this->Flash->error(__d('data', 'formContainsErrors'));
 		}
 
 		$this->set(compact('language'));
@@ -119,7 +119,7 @@ class LanguagesController extends DataAppController {
 		$language = $this->Languages->get($id);
 		if ($this->Languages->delete($language)) {
 			$var = $language['name'];
-			$this->Flash->success(__('record del {0} done', h($var)));
+			$this->Flash->success(__d('data', 'record del {0} done', h($var)));
 
 			return $this->redirect(['action' => 'index']);
 		}
@@ -159,13 +159,13 @@ class LanguagesController extends DataAppController {
 			}
 		}
 
-		$this->Flash->success($count . ' of ' . count($languages) . ' ' . __('languages added'));
+		$this->Flash->success($count . ' of ' . count($languages) . ' ' . __d('data', 'languages added'));
 
 		$errorMessage = [];
 		foreach ($errors as $error) {
 			$errorMessage[] = $error['data'] . ' (' . json_encode($error['errors']) . ')';
 		}
-		$this->Flash->warning(__('not added') . ' ' . implode(', ', $errorMessage));
+		$this->Flash->warning(__d('data', 'not added') . ' ' . implode(', ', $errorMessage));
 
 		return $this->redirect(['action' => 'index']);
 	}
@@ -222,7 +222,7 @@ class LanguagesController extends DataAppController {
 		$languages = $this->Languages->getPrimaryLanguages('list')->toArray();
 		$count = $this->Languages->updateAll(['status' => Language::STATUS_ACTIVE], ['id' => array_keys($languages)]);
 
-		$this->Flash->success(__('{0} of {1} set active', $count, count($languages)));
+		$this->Flash->success(__d('data', '{0} of {1} set active', $count, count($languages)));
 
 		return $this->redirect(['action' => 'index']);
 	}

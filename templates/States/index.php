@@ -15,7 +15,7 @@ use Cake\Core\Plugin;
 		</div>
 	<?php } ?>
 
-<h2><?php echo __('States');?></h2>
+<h2><?php echo __d('data', 'States');?></h2>
 
 <table class="table">
 <tr>
@@ -23,7 +23,7 @@ use Cake\Core\Plugin;
 	<th><?php echo $this->Paginator->sort('name');?></th>
 	<th><?php echo $this->Paginator->sort('ori_name');?></th>
 	<th><?php echo $this->Paginator->sort('code');?></th>
-	<th><?php echo __('Coordinates');?></th>
+	<th><?php echo __d('data', 'Coordinates');?></th>
 </tr>
 <?php
 /** @var \Data\Model\Entity\State[] $states */
@@ -64,6 +64,6 @@ foreach ($states as $state):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['controller' => 'Countries', 'action' => 'index']); ?> </li>
+		<li><?php echo $this->Html->link(__d('data', 'List {0}', __d('data', 'Countries')), ['controller' => 'Countries', 'action' => 'index']); ?> </li>
 	</ul>
 </div>

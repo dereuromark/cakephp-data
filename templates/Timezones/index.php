@@ -5,7 +5,7 @@
  */
 ?>
 <div class="timezones index content large-9 medium-8 columns col-12">
-    <h1><?= __('Timezones') ?></h1>
+    <h1><?= __d('data', 'Timezones') ?></h1>
 
     <div class="">
         <table class="table table-sm table-striped">
@@ -17,7 +17,7 @@
                     <th><?= $this->Paginator->sort('offset_dst') ?></th>
                     <th><?= $this->Paginator->sort('type') ?></th>
                     <th><?= $this->Paginator->sort('active') ?></th>
-					<th><?php echo __('Coordinates');?></th>
+					<th><?php echo __d('data', 'Coordinates');?></th>
                     <th><?= $this->Paginator->sort('covered') ?></th>
                     <th><?= $this->Paginator->sort('notes') ?></th>
                 </tr>

@@ -9,14 +9,14 @@
 <div class="searchBox" style="float: right;">
 <?php
 	echo $this->Form->create(null, ['valueSources' => 'query']);
-	echo $this->Form->control('code', ['placeholder' => __('Placeholder') . ': * und ?']);
+	echo $this->Form->control('code', ['placeholder' => __d('data', 'Placeholder') . ': * und ?']);
 	echo $this->Form->control('country_id', ['empty' => ' - egal - ']);
-	echo $this->Form->button(__('Search'));
+	echo $this->Form->button(__d('data', 'Search'));
 	echo $this->Form->end();
 ?>
 </div>
 
-	<h2><?php echo __('Postal Codes');?></h2>
+	<h2><?php echo __d('data', 'Postal Codes');?></h2>
 
 	<table class="table">
 		<tr>
@@ -27,7 +27,7 @@
 		<th><?php echo $this->Paginator->sort('official_address');?></th>
 		<th><?php echo $this->Paginator->sort('created', null, ['direction' => 'desc']);?></th>
 		<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
-		<th class="actions"><?php echo __('Actions');?></th>
+		<th class="actions"><?php echo __d('data', 'Actions');?></th>
 	</tr>
 <?php
 $i = 0;
@@ -62,7 +62,7 @@ foreach ($postalCodes as $postalCode): ?>
 				'class' => 'btn btn-link p-0 align-baseline',
 				'form' => [
 					'class' => 'd-inline',
-					'data-confirm-message' => __('Are you sure you want to delete # {0}?', $postalCode['id']),
+					'data-confirm-message' => __d('data', 'Are you sure you want to delete # {0}?', $postalCode['id']),
 				],
 			]); ?>
 		</td>
@@ -78,9 +78,9 @@ foreach ($postalCodes as $postalCode): ?>
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('New {0}', __('Postal Code')), ['action' => 'add']); ?></li>
-		<li><?php echo $this->Html->link(__('Query'), ['action' => 'query']); ?></li>
-		<li><?php echo $this->Html->link(__('Geolocate'), ['action' => 'geolocate']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'New {0}', __d('data', 'Postal Code')), ['action' => 'add']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Query'), ['action' => 'query']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Geolocate'), ['action' => 'geolocate']); ?></li>
 	</ul>
 </div>
 <?= $this->element('Data.csp_confirm') ?>

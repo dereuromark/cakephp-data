@@ -9,7 +9,7 @@ use Cake\Core\Plugin;
 
 <div class="page index">
 <h2><?php
-	echo __('Currencies');?></h2>
+	echo __d('data', 'Currencies');?></h2>
 
 <table class="table">
 <tr>
@@ -19,9 +19,9 @@ use Cake\Core\Plugin;
 	<th><?php echo $this->Paginator->sort('symbol_right');?></th>
 	<th><?php echo $this->Paginator->sort('decimal_places');?></th>
 	<th><?php echo $this->Paginator->sort('value');?></th>
-	<th class="actions"><?php echo __('Status');?></th>
+	<th class="actions"><?php echo __d('data', 'Status');?></th>
 	<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
-	<th class="actions"><?php echo __('Actions');?></th>
+	<th class="actions"><?php echo __d('data', 'Actions');?></th>
 </tr>
 <?php
 /** @var \Data\Model\Entity\Currency[] $currencies */
@@ -52,11 +52,11 @@ foreach ($currencies as $currency):
 		</td>
 		<td>
 			<span class="ajaxToggling" id="ajaxToggle-<?php echo $currency['id']?>">
-			<?php echo $this->Html->link($this->Format->yesNo($currency['active'], ['onTitle' => __('Active'), 'offTitle' => __('Inactive')]), ['action' => 'toggle', 'active', $currency['id']], ['escapeTitle' => false]); ?></span>&nbsp;&nbsp;<?php
+			<?php echo $this->Html->link($this->Format->yesNo($currency['active'], ['onTitle' => __d('data', 'Active'), 'offTitle' => __d('data', 'Inactive')]), ['action' => 'toggle', 'active', $currency['id']], ['escapeTitle' => false]); ?></span>&nbsp;&nbsp;<?php
 			if ($currency['base'] && !empty($baseCurrency)) {
-				echo $this->Format->yesNo($currency['base'], ['onTitle' => __('Base value')]);
+				echo $this->Format->yesNo($currency['base'], ['onTitle' => __d('data', 'Base value')]);
 			} else {
-				echo $this->Html->link($this->Icon->render('check-square-o', ['title' => __('Zum Basis-Wert machen')]), ['action' => 'base', $currency['id']], ['escapeTitle' => false], 'Sicher?');
+				echo $this->Html->link($this->Icon->render('check-square-o', ['title' => __d('data', 'Zum Basis-Wert machen')]), ['action' => 'base', $currency['id']], ['escapeTitle' => false], 'Sicher?');
 			} ?>
 		</td>
 		<td>
@@ -70,7 +70,7 @@ foreach ($currencies as $currency):
 				'class' => 'btn btn-link p-0 align-baseline',
 				'form' => [
 					'class' => 'd-inline',
-					'data-confirm-message' => __('Are you sure you want to delete # {0}?', $currency['id']),
+					'data-confirm-message' => __d('data', 'Are you sure you want to delete # {0}?', $currency['id']),
 				],
 			]); ?>
 		</td>
@@ -83,8 +83,8 @@ foreach ($currencies as $currency):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add {0}', __('Currency')), ['action' => 'add']); ?></li>
-		<li><?php echo $this->Html->link(__('Update {0}', __('Currency Values')), ['action' => 'update']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Add {0}', __d('data', 'Currency')), ['action' => 'add']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Update {0}', __d('data', 'Currency Values')), ['action' => 'update']); ?></li>
 	</ul>
 </div>
 <?= $this->element('Data.csp_confirm') ?>

@@ -57,7 +57,7 @@ class AddressesTable extends Table {
 			->allowEmptyString('state_id')
 			->add('state_id', 'fitsToCountry', [
 				'rule' => 'fitsToCountry',
-				'message' => __('The province seems not be fit to the chosen country'),
+				'message' => __d('data', 'The province seems not be fit to the chosen country'),
 				'provider' => 'table',
 			]);
 
@@ -70,7 +70,7 @@ class AddressesTable extends Table {
 			->allowEmptyString('address_type_id')
 			->add('address_type_id', 'primaryUnique', [
 				'rule' => 'primaryUnique',
-				'message' => __('Only one address can be marked as "Main Residence", please choose another type'),
+				'message' => __d('data', 'Only one address can be marked as "Main Residence", please choose another type'),
 				'last' => true,
 				'provider' => 'table',
 			]);
@@ -80,7 +80,7 @@ class AddressesTable extends Table {
 			->allowEmptyString('postal_code')
 			->add('postal_code', 'correspondsWithCountry', [
 				'rule' => 'correspondsWithCountry',
-				'message' => __('The zip code seems not to have the correct length'),
+				'message' => __d('data', 'The zip code seems not to have the correct length'),
 				'provider' => 'table',
 			]);
 
@@ -97,16 +97,16 @@ class AddressesTable extends Table {
 			->allowEmptyString('formatted_address')
 			->add('formatted_address', 'validateUnique', [
 				'rule' => ['validateUnique', ['scope' => ['foreign_id', 'model']]],
-				'message' => __('valErrRecordNameExists'),
+				'message' => __d('data', 'valErrRecordNameExists'),
 				'provider' => 'table',
 			]);
 
 		$validator
-			->decimal('lat', 6, __('not a valid geografic number for latitude'))
+			->decimal('lat', 6, __d('data', 'not a valid geografic number for latitude'))
 			->allowEmptyString('lat');
 
 		$validator
-			->decimal('lng', 6, __('not a valid geografic number for longitude'))
+			->decimal('lng', 6, __d('data', 'not a valid geografic number for longitude'))
 			->allowEmptyString('lng');
 
 		return $validator;

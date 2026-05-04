@@ -49,8 +49,8 @@ class Address extends Entity {
 	 */
 	public static function addressTypes($value = null) {
 		$options = [
-			static::TYPE_MAIN => __('Main Residence'),
-			static::TYPE_OTHER => __('Other'),
+			static::TYPE_MAIN => __d('data', 'Main Residence'),
+			static::TYPE_OTHER => __d('data', 'Other'),
 		];
 
 		return parent::enum($value, $options);

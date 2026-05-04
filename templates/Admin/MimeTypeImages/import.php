@@ -11,7 +11,7 @@
 
 <?php if (!empty($alreadyIn) || !empty($fileExtensions)) { ?>
 	<fieldset>
-		<legend><?php echo __('Confirm and Save');?></legend>
+		<legend><?php echo __d('data', 'Confirm and Save');?></legend>
 	<?php echo count($alreadyIn)?> bereits vorhanden: <ul style="margin-left:160px"><?php echo implode(',', $alreadyIn)?>
 	<?php if (empty($alreadyIn)) { ?>
 		- - -
@@ -34,16 +34,16 @@
 <?php } ?>
 
 	<fieldset>
-		<legend><?php echo __('Add {0}', __('Extensions'));?></legend>
+		<legend><?php echo __d('data', 'Add {0}', __d('data', 'Extensions'));?></legend>
 	<?php
 		echo $this->Form->control('import', ['type' => 'textarea']);
 	?>
 	Eine mit Komma, Leerzeichen, NewLine, etc. separierte Liste, die nur Endungen (exe, jpg, ...) oder Dateien (1.jpg, 2.gif) enthält, deren Endungen dann importiert werden.
 	</fieldset>
-<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
+<?php echo $this->Form->submit(__d('data', 'Submit')); echo $this->Form->end();?>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List Mime Type Images'), ['action' => 'index']);?></li>
+		<li><?php echo $this->Html->link(__d('data', 'List Mime Type Images'), ['action' => 'index']);?></li>
 	</ul>
 </div>

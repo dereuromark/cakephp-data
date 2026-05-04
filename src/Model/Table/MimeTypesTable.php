@@ -174,7 +174,7 @@ class MimeTypesTable extends Table {
 		$email->setTo(Configure::read('Config.adminEmail'), Configure::read('Config.adminEmailname'));
 		$email->setReplyTo(Configure::read('Config.adminEmail'), Configure::read('Config.adminEmailname'));
 
-		$email->setSubject(Configure::read('Config.page_name') . ' - ' . __('MimeType'));
+		$email->setSubject(Configure::read('Config.page_name') . ' - ' . __d('data', 'MimeType'));
 		$email->viewBuilder()->setTemplate('simple_email');
 
 		$text = 'MimeType added: ' . $ext . '';

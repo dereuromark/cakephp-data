@@ -8,7 +8,7 @@
 <div class="page form">
 <?php echo $this->Form->create($mimeTypeImage, ['type' => 'file']);?>
 	<fieldset>
-		<legend><?php echo __('Edit Mime Type Image');?></legend>
+		<legend><?php echo __d('data', 'Edit Mime Type Image');?></legend>
 	<?php
 		//echo $this->Form->control('id');
 		echo $this->Form->control('name');
@@ -23,18 +23,18 @@
 		echo $this->Form->control('details', ['type' => 'textarea']);
 	?>
 	</fieldset>
-<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
+<?php echo $this->Form->submit(__d('data', 'Submit')); echo $this->Form->end();?>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postButton(__('Delete'), ['action' => 'delete', $this->Form->getSourceValue('MimeTypeImages.id')], [
+		<li><?php echo $this->Form->postButton(__d('data', 'Delete'), ['action' => 'delete', $this->Form->getSourceValue('MimeTypeImages.id')], [
 			'class' => 'btn btn-link p-0 align-baseline',
 			'form' => [
 				'class' => 'd-inline',
-				'data-confirm-message' => __('Are you sure you want to delete # {0}?', $this->Form->getSourceValue('MimeTypeImage.id')),
+				'data-confirm-message' => __d('data', 'Are you sure you want to delete # {0}?', $this->Form->getSourceValue('MimeTypeImage.id')),
 			],
 		]); ?></li>
-		<li><?php echo $this->Html->link(__('List Mime Type Images'), ['action' => 'index']);?></li>
+		<li><?php echo $this->Html->link(__d('data', 'List Mime Type Images'), ['action' => 'index']);?></li>
 	</ul>
 </div>
 <?= $this->element('Data.csp_confirm') ?>

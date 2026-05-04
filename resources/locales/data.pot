@@ -1,0 +1,595 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2026-05-04 02:23+0200\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+msgid "record add {0} saved"
+msgstr ""
+
+msgid "formContainsErrors"
+msgstr ""
+
+msgid "record edit {0} saved"
+msgstr ""
+
+msgid "record del {0} done"
+msgstr ""
+
+msgid "record del {0} not done exception"
+msgstr ""
+
+msgid "Address '{0}' marked as last used"
+msgstr ""
+
+msgid " - n/a - "
+msgstr ""
+
+msgid "record add not saved"
+msgstr ""
+
+msgid "record edit not saved"
+msgstr ""
+
+msgid "noBaseCurrency"
+msgstr ""
+
+msgid "set as primary {0} done"
+msgstr ""
+
+msgid "set as primary not done exception"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
+
+msgid "languages added"
+msgstr ""
+
+msgid "not added"
+msgstr ""
+
+msgid "{0} of {1} set active"
+msgstr ""
+
+msgid "re-rendered"
+msgstr ""
+
+msgid "record invalid"
+msgstr ""
+
+msgid "record del not exists"
+msgstr ""
+
+msgid "The timezone has been saved."
+msgstr ""
+
+msgid "The timezone could not be saved. Please, try again."
+msgstr ""
+
+msgid "The timezone has been deleted."
+msgstr ""
+
+msgid "The timezone could not be deleted. Please, try again."
+msgstr ""
+
+msgid "Main Residence"
+msgstr ""
+
+msgid "Other"
+msgstr ""
+
+msgid "Inactive"
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "The province seems not be fit to the chosen country"
+msgstr ""
+
+msgid "Only one address can be marked as \"Main Residence\", please choose another type"
+msgstr ""
+
+msgid "The zip code seems not to have the correct length"
+msgstr ""
+
+msgid "valErrRecordNameExists"
+msgstr ""
+
+msgid "not a valid geografic number for latitude"
+msgstr ""
+
+msgid "not a valid geografic number for longitude"
+msgstr ""
+
+msgid "valErrMandatoryField"
+msgstr ""
+
+msgid "Germany"
+msgstr ""
+
+msgid "GIF (*.gif)"
+msgstr ""
+
+msgid "PNG (*.png)"
+msgstr ""
+
+msgid "JPG (*.jpg)"
+msgstr ""
+
+msgid "MimeType"
+msgstr ""
+
+msgid "Addresses"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Add {0}"
+msgstr ""
+
+msgid "Address"
+msgstr ""
+
+msgid "User"
+msgstr ""
+
+msgid "Model"
+msgstr ""
+
+msgid "Country"
+msgstr ""
+
+msgid "Country Province"
+msgstr ""
+
+msgid "First Name"
+msgstr ""
+
+msgid "Last Name"
+msgstr ""
+
+msgid "Street"
+msgstr ""
+
+msgid "Postal Code"
+msgstr ""
+
+msgid "City"
+msgstr ""
+
+msgid "Lat"
+msgstr ""
+
+msgid "Lng"
+msgstr ""
+
+msgid "Last Used"
+msgstr ""
+
+msgid "Formatted Address"
+msgstr ""
+
+msgid "Edit {0}"
+msgstr ""
+
+msgid "Delete {0}"
+msgstr ""
+
+msgid "Are you sure you want to delete # {0}?"
+msgstr ""
+
+msgid "List {0}"
+msgstr ""
+
+msgid "noSelection"
+msgstr ""
+
+msgid "Relations"
+msgstr ""
+
+msgid "Submit"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Coordinates"
+msgstr ""
+
+msgid "Show"
+msgstr ""
+
+msgid "click for full map"
+msgstr ""
+
+msgid "Debug"
+msgstr ""
+
+msgid "Mark as {0}"
+msgstr ""
+
+msgid "Used"
+msgstr ""
+
+msgid "Cities"
+msgstr ""
+
+msgid "New {0}"
+msgstr ""
+
+msgid "Country Id"
+msgstr ""
+
+msgid "Official Id"
+msgstr ""
+
+msgid "County Id"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Citizens"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Postal Code Unique"
+msgstr ""
+
+msgid "Modified"
+msgstr ""
+
+msgid "Continent"
+msgstr ""
+
+msgid "Continents"
+msgstr ""
+
+msgid "Tree"
+msgstr ""
+
+msgid "Ori Name"
+msgstr ""
+
+msgid "Code"
+msgstr ""
+
+msgid "Parent Continent"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Countries"
+msgstr ""
+
+msgid "wildcardSearch {0} and {1}"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "n/a"
+msgstr ""
+
+msgid "Koordinaten updaten"
+msgstr ""
+
+msgid "Sync"
+msgstr ""
+
+msgid "Icons"
+msgstr ""
+
+msgid "Sync Countries"
+msgstr ""
+
+msgid "Iso2"
+msgstr ""
+
+msgid "Iso3"
+msgstr ""
+
+msgid "Phone Code"
+msgstr ""
+
+msgid "Timezone"
+msgstr ""
+
+msgid "Special"
+msgstr ""
+
+msgid "Address Format"
+msgstr ""
+
+msgid "Delete Country"
+msgstr ""
+
+msgid "Currency"
+msgstr ""
+
+msgid "Currencies"
+msgstr ""
+
+msgid "Base value"
+msgstr ""
+
+msgid "Zum Basis-Wert machen"
+msgstr ""
+
+msgid "Update {0}"
+msgstr ""
+
+msgid "Currency Values"
+msgstr ""
+
+msgid "Full Currency Table"
+msgstr ""
+
+msgid "Symbol Left"
+msgstr ""
+
+msgid "Symbol Right"
+msgstr ""
+
+msgid "Decimal Places"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Delete Currency"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Languages"
+msgstr ""
+
+msgid "Locale"
+msgstr ""
+
+msgid "Locales"
+msgstr ""
+
+msgid "Import {0}"
+msgstr ""
+
+msgid "Direction"
+msgstr ""
+
+msgid "Compare {0}"
+msgstr ""
+
+msgid "Compare {0} to core"
+msgstr ""
+
+msgid "Import {0} from Core"
+msgstr ""
+
+msgid "Sure?"
+msgstr ""
+
+msgid "Set primary languages active"
+msgstr ""
+
+msgid "Locale Fallback"
+msgstr ""
+
+msgid "Add Mime Type Image"
+msgstr ""
+
+msgid "List Mime Type Images"
+msgstr ""
+
+msgid "Edit Mime Type Image"
+msgstr ""
+
+msgid "Confirm and Save"
+msgstr ""
+
+msgid "Extensions"
+msgstr ""
+
+msgid "Mime Type Images"
+msgstr ""
+
+msgid "Icon"
+msgstr ""
+
+msgid "Usage"
+msgstr ""
+
+msgid "Größe ist nicht 16x16, sondern "
+msgstr ""
+
+msgid "Search with Google"
+msgstr ""
+
+msgid "(Auto-) Allocate Icons Files"
+msgstr ""
+
+msgid "Import Extensions"
+msgstr ""
+
+msgid "Search Icon on google.de"
+msgstr ""
+
+msgid "Mime Type Image"
+msgstr ""
+
+msgid "Ext"
+msgstr ""
+
+msgid "Created"
+msgstr ""
+
+msgid "Delete Mime Type Image"
+msgstr ""
+
+msgid "Add Mime Type"
+msgstr ""
+
+msgid "List Mime Types"
+msgstr ""
+
+msgid "Mime Type Detection"
+msgstr ""
+
+msgid "Test"
+msgstr ""
+
+msgid "Edit Mime Type"
+msgstr ""
+
+msgid "Mime Types"
+msgstr ""
+
+msgid " out of "
+msgstr ""
+
+msgid "(Auto-) Allocate Icons by Extension"
+msgstr ""
+
+msgid "Allocate Icons by Type (Groups)"
+msgstr ""
+
+msgid "Import from Core Media View"
+msgstr ""
+
+msgid "Import from File"
+msgstr ""
+
+msgid "Manual Input"
+msgstr ""
+
+msgid "Mime Type"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Delete Mime Type"
+msgstr ""
+
+msgid "Postal Codes"
+msgstr ""
+
+msgid "Placeholder"
+msgstr ""
+
+msgid "Query"
+msgstr ""
+
+msgid "Geolocate"
+msgstr ""
+
+msgid "Query {0}"
+msgstr ""
+
+msgid "Geo Data"
+msgstr ""
+
+msgid "Enter Postal Code, City, Address or other Geo Data"
+msgstr ""
+
+msgid "Map"
+msgstr ""
+
+msgid "Official Address"
+msgstr ""
+
+msgid "State"
+msgstr ""
+
+msgid "pleaseSelect"
+msgstr ""
+
+msgid "States"
+msgstr ""
+
+msgid "Update coordinates"
+msgstr ""
+
+msgid "Update Coordinates"
+msgstr ""
+
+msgid "Add State"
+msgstr ""
+
+msgid "noOptionAvailable"
+msgstr ""
+
+msgid "List Timezones"
+msgstr ""
+
+msgid "Timezones"
+msgstr ""
+
+msgid "Add Timezone"
+msgstr ""
+
+msgid "Edit Timezone"
+msgstr ""
+
+msgid "Link Timezones"
+msgstr ""
+
+msgid "Sync Timezones"
+msgstr ""
+
+msgid "Country Code"
+msgstr ""
+
+msgid "Offset"
+msgstr ""
+
+msgid "Offset Dst"
+msgstr ""
+
+msgid "Covered"
+msgstr ""
+
+msgid "Notes"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "countryCodeExplanation"
+msgstr ""
+
+msgid "Note"
+msgstr ""
+
+msgid "Legend"
+msgstr ""
+
+msgid "Search {0}"
+msgstr ""
+
+msgid "Area Code"
+msgstr ""
+
+msgid "noRestriction"
+msgstr ""
+

@@ -34,16 +34,16 @@ class LocationsTable extends Table {
 	public function validationDefault(Validator $validator): Validator {
 		$validator
 			->scalar('name')
-			->notEmptyString('name', __('valErrMandatoryField'))
+			->notEmptyString('name', __d('data', 'valErrMandatoryField'))
 			->add('name', 'unique', [
 				'rule' => ['validateUnique', ['scope' => ['country_id']]],
-				'message' => __('valErrRecordNameExists'),
+				'message' => __d('data', 'valErrRecordNameExists'),
 				'provider' => 'table',
 			]);
 
 		$validator
 			->integer('country_id')
-			->notEmptyString('country_id', __('valErrMandatoryField'));
+			->notEmptyString('country_id', __d('data', 'valErrMandatoryField'));
 
 		return $validator;
 	}
@@ -70,7 +70,7 @@ class LocationsTable extends Table {
 	 * @return \Cake\Datasource\EntityInterface|false
 	 */
 	public function getLocation($locationName, $countryId = null) {
-		$country = $countryId !== null ? ', ' . $countryId : __('Germany'); ////Country::addressList($countryId)
+		$country = $countryId !== null ? ', ' . $countryId : __d('data', 'Germany'); ////Country::addressList($countryId)
 		$countryId = $countryId ?? 1;
 
 		if (is_numeric($locationName) && strlen($locationName) < 5) { //Country::zipCodeLength($countryId)

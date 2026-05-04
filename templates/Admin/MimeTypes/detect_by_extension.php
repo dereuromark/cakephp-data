@@ -6,7 +6,7 @@
  */
 ?>
 <div class="page index">
-<h2><?php echo __('Mime Type Detection');?></h2>
+<h2><?php echo __d('data', 'Mime Type Detection');?></h2>
 <?php
 foreach ($extensions as $extension) {
 	echo 'test.' . $extension . ', ';
@@ -19,7 +19,7 @@ foreach ($extensions as $extension) {
 <?php echo $this->Form->create($mimeType, ['type' => 'file']);?>
 
 	<fieldset>
-		<legend><?php echo __('Test');?></legend>
+		<legend><?php echo __d('data', 'Test');?></legend>
 	<?php
 		echo $this->Form->control('file', ['type' => 'file']);
 	?>

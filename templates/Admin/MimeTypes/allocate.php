@@ -11,6 +11,6 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List Mime Types'), ['action' => 'index']);?></li>
+		<li><?php echo $this->Html->link(__d('data', 'List Mime Types'), ['action' => 'index']);?></li>
 	</ul>
 </div>

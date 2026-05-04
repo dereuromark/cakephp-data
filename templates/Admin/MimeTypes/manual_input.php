@@ -5,7 +5,7 @@
  */
 ?>
 <div class="page index">
-<h2><?php echo __('Manual Input');?></h2>
+<h2><?php echo __d('data', 'Manual Input');?></h2>
 
 
 

@@ -8,7 +8,7 @@
 <div class="page form">
 <?php echo $this->Form->create($mimeTypeImage, ['type' => 'file']);?>
 	<fieldset>
-		<legend><?php echo __('Add Mime Type Image');?></legend>
+		<legend><?php echo __d('data', 'Add Mime Type Image');?></legend>
 	<?php
 		echo $this->Form->control('name');
 		echo '<br/>';
@@ -22,10 +22,10 @@
 		echo $this->Form->control('details', ['type' => 'textarea']);
 	?>
 	</fieldset>
-<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
+<?php echo $this->Form->submit(__d('data', 'Submit')); echo $this->Form->end();?>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List Mime Type Images'), ['action' => 'index']);?></li>
+		<li><?php echo $this->Html->link(__d('data', 'List Mime Type Images'), ['action' => 'index']);?></li>
 	</ul>
 </div>

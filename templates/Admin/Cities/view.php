@@ -5,57 +5,57 @@
  */
 ?>
 <div class="page view">
-<h2><?php  echo __('City');?></h2>
+<h2><?php  echo __d('data', 'City');?></h2>
 	<dl>
-		<dt><?php echo __('Country Id'); ?></dt>
+		<dt><?php echo __d('data', 'Country Id'); ?></dt>
 		<dd>
 			<?php echo h($city['country_id']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Official Id'); ?></dt>
+		<dt><?php echo __d('data', 'Official Id'); ?></dt>
 		<dd>
 			<?php echo h($city['official_key']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('County Id'); ?></dt>
+		<dt><?php echo __d('data', 'County Id'); ?></dt>
 		<dd>
 			<?php echo h($city['county_id']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Name'); ?></dt>
+		<dt><?php echo __d('data', 'Name'); ?></dt>
 		<dd>
 			<?php echo h($city['name']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Citizens'); ?></dt>
+		<dt><?php echo __d('data', 'Citizens'); ?></dt>
 		<dd>
 			<?php echo h($city['citizens']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Postal Code'); ?></dt>
+		<dt><?php echo __d('data', 'Postal Code'); ?></dt>
 		<dd>
 			<?php echo h($city['postal_code']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Lat'); ?></dt>
+		<dt><?php echo __d('data', 'Lat'); ?></dt>
 		<td>
 			<?php echo $this->Number->format($city['lat']); ?>
 		</td>
-		<dt><?php echo __('Lng'); ?></dt>
+		<dt><?php echo __d('data', 'Lng'); ?></dt>
 		<td>
 			<?php echo $this->Number->format($city['lng']); ?>
 		</td>
-		<dt><?php echo __('Description'); ?></dt>
+		<dt><?php echo __d('data', 'Description'); ?></dt>
 		<dd>
 			<?php echo nl2br(h($city['description'])); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Postal Code Unique'); ?></dt>
+		<dt><?php echo __d('data', 'Postal Code Unique'); ?></dt>
 		<dd>
 			<?php echo $this->Format->yesNo($city['postal_code_unique']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Modified'); ?></dt>
+		<dt><?php echo __d('data', 'Modified'); ?></dt>
 		<dd>
 			<?php echo $this->Time->niceDate($city['modified']); ?>
 			&nbsp;
@@ -65,15 +65,15 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit {0}', __('City')), ['action' => 'edit', $city['id']]); ?> </li>
-		<li><?php echo $this->Form->postButton(__('Delete {0}', __('City')), ['action' => 'delete', $city['id']], [
+		<li><?php echo $this->Html->link(__d('data', 'Edit {0}', __d('data', 'City')), ['action' => 'edit', $city['id']]); ?> </li>
+		<li><?php echo $this->Form->postButton(__d('data', 'Delete {0}', __d('data', 'City')), ['action' => 'delete', $city['id']], [
 			'class' => 'btn btn-link p-0 align-baseline',
 			'form' => [
 				'class' => 'd-inline',
-				'data-confirm-message' => __('Are you sure you want to delete # {0}?', $city['id']),
+				'data-confirm-message' => __d('data', 'Are you sure you want to delete # {0}?', $city['id']),
 			],
 		]); ?> </li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Cities')), ['action' => 'index']); ?> </li>
+		<li><?php echo $this->Html->link(__d('data', 'List {0}', __d('data', 'Cities')), ['action' => 'index']); ?> </li>
 	</ul>
 </div>
 <?= $this->element('Data.csp_confirm') ?>

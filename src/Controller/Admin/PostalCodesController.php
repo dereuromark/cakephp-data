@@ -67,12 +67,12 @@ class PostalCodesController extends DataAppController {
 			$postalCode = $this->PostalCodes->patchEntity($postalCode, $this->request->getData());
 			if ($this->PostalCodes->save($postalCode)) {
 				$var = $postalCode['code'];
-				$this->Flash->success(__('record add {0} saved', h($var)));
+				$this->Flash->success(__d('data', 'record add {0} saved', h($var)));
 
 				return $this->Common->postRedirect(['action' => 'index']);
 			}
 
-			$this->Flash->error(__('formContainsErrors'));
+			$this->Flash->error(__d('data', 'formContainsErrors'));
 		}
 
 		$this->set(compact('postalCode'));
@@ -90,12 +90,12 @@ class PostalCodesController extends DataAppController {
 
 			if ($this->PostalCodes->save($postalCode)) {
 				$var = $postalCode['code'];
-				$this->Flash->success(__('record edit {0} saved', h($var)));
+				$this->Flash->success(__d('data', 'record edit {0} saved', h($var)));
 
 				return $this->Common->postRedirect(['action' => 'index']);
 			}
 
-			$this->Flash->error(__('formContainsErrors'));
+			$this->Flash->error(__d('data', 'formContainsErrors'));
 		}
 
 		$this->set(compact('postalCode'));
@@ -112,11 +112,11 @@ class PostalCodesController extends DataAppController {
 		$var = $postalCode['code'];
 
 		if ($this->PostalCodes->delete($postalCode)) {
-			$this->Flash->success(__('record del {0} done', h($var)));
+			$this->Flash->success(__d('data', 'record del {0} done', h($var)));
 
 			return $this->redirect(['action' => 'index']);
 		}
-		$this->Flash->error(__('record del {0} not done exception', h($var)));
+		$this->Flash->error(__d('data', 'record del {0} not done exception', h($var)));
 
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}

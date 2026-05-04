@@ -199,12 +199,12 @@ class CountriesController extends DataAppController {
 			if ($this->Countries->save($country)) {
 				$id = $country->id;
 				//$name = $this->request->data['name'];
-				$this->Flash->success(__('record add {0} saved', $id));
+				$this->Flash->success(__d('data', 'record add {0} saved', $id));
 
 				return $this->redirect(['action' => 'index']);
 			}
 
-			$this->Flash->error(__('record add not saved'));
+			$this->Flash->error(__d('data', 'record add not saved'));
 		}
 
 		$this->set(compact('country'));
@@ -222,12 +222,12 @@ class CountriesController extends DataAppController {
 			$country = $this->Countries->patchEntity($country, $this->request->getData());
 			if ($this->Countries->save($country)) {
 				$name = $country->name;
-				$this->Flash->success(__('record edit {0} saved', h($name)));
+				$this->Flash->success(__d('data', 'record edit {0} saved', h($name)));
 
 				return $this->redirect(['action' => 'index']);
 			}
 
-			$this->Flash->error(__('record edit not saved'));
+			$this->Flash->error(__d('data', 'record edit not saved'));
 		}
 
 		$continents = [];
@@ -246,12 +246,12 @@ class CountriesController extends DataAppController {
 		$country = $this->Countries->get($id);
 
 		if ($this->Countries->delete($country)) {
-			$this->Flash->success(__('record del {0} done', $id));
+			$this->Flash->success(__d('data', 'record del {0} done', $id));
 
 			return $this->redirect(['action' => 'index']);
 		}
 
-		$this->Flash->error(__('record del {0} not done exception', $id));
+		$this->Flash->error(__d('data', 'record del {0} not done exception', $id));
 
 		return $this->redirect(['action' => 'index']);
 	}
@@ -259,7 +259,7 @@ class CountriesController extends DataAppController {
 	/*
 	public function up($id = null) {
 		if (empty($id) || !($navigation = $this->Countries->find('first', ['conditions' => ['Countries.id' => $id]]))) {
-			$this->Flash->error(__('invalid record'));
+			$this->Flash->error(__d('data', 'invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->Countries->moveDown($id, 1);
@@ -268,7 +268,7 @@ class CountriesController extends DataAppController {
 
 	public function down($id = null) {
 		if (empty($id) || !($navigation = $this->Countries->find('first', ['conditions' => ['Countries.id' => $id]]))) {
-			$this->Flash->error(__('invalid record'));
+			$this->Flash->error(__d('data', 'invalid record'));
 			return $this->Common->autoRedirect(['action' => 'index']);
 		}
 		$this->Countries->moveUp($id, 1);

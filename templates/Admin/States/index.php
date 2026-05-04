@@ -23,7 +23,7 @@ use Cake\Core\Plugin;
 </div>
 <?php } ?>
 
-<h2><?php echo __('States');?></h2>
+<h2><?php echo __d('data', 'States');?></h2>
 
 <table class="table">
 <tr>
@@ -31,9 +31,9 @@ use Cake\Core\Plugin;
 	<th><?php echo $this->Paginator->sort('name');?></th>
 	<th><?php echo $this->Paginator->sort('ori_name');?></th>
 	<th><?php echo $this->Paginator->sort('code');?></th>
-	<th><?php echo __('Coordinates');?></th>
+	<th><?php echo __d('data', 'Coordinates');?></th>
 	<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
-	<th class="actions"><?php echo __('Actions');?></th>
+	<th class="actions"><?php echo __d('data', 'Actions');?></th>
 </tr>
 <?php
 foreach ($states as $state):
@@ -67,12 +67,12 @@ foreach ($states as $state):
 
 				if (Configure::read('GoogleMap.key')) {
 					$mapMarkers = $this->GoogleMap->staticMarkers($markers);
-					echo ' ' . $this->Html->link($this->Icon->render('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $state->lat . ',' . $state->lng, 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 5]), ['id' => 'googleMap', 'class' => 'internal zoom-image highslideImage', 'title' => __('click for full map'), 'escapeTitle' => false, 'target' => '_blank']);
+					echo ' ' . $this->Html->link($this->Icon->render('view', [], ['title' => __d('data', 'Show')]), $this->GoogleMap->staticMapUrl(['center' => $state->lat . ',' . $state->lng, 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 5]), ['id' => 'googleMap', 'class' => 'internal zoom-image highslideImage', 'title' => __d('data', 'click for full map'), 'escapeTitle' => false, 'target' => '_blank']);
 				} else {
 					$options = [
 						'to' => $state->lat . ',' . $state->lng,
 					];
-					echo $this->Html->link($this->Icon->render('view', [], ['title' => __('Show')]), $this->GoogleMap->mapUrl($options), ['class' => 'external', 'title' => __('click for full map'), 'escapeTitle' => false, 'target' => '_blank']);
+					echo $this->Html->link($this->Icon->render('view', [], ['title' => __d('data', 'Show')]), $this->GoogleMap->mapUrl($options), ['class' => 'external', 'title' => __d('data', 'click for full map'), 'escapeTitle' => false, 'target' => '_blank']);
 				}
 			}
 
@@ -84,14 +84,14 @@ foreach ($states as $state):
 		<td class="actions">
 			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $state['id']], ['escapeTitle' => false]); ?>
 
-			<?php echo $this->Html->link($this->Icon->render('map-o', [], ['title' => __('Update coordinates')]), ['action' => 'updateCoordinates', $state['id']], ['escapeTitle' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('map-o', [], ['title' => __d('data', 'Update coordinates')]), ['action' => 'updateCoordinates', $state['id']], ['escapeTitle' => false]); ?>
 
 			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $state['id']], [
 				'escapeTitle' => false,
 				'class' => 'btn btn-link p-0 align-baseline',
 				'form' => [
 					'class' => 'd-inline',
-					'data-confirm-message' => __('Are you sure you want to delete # {0}?', $state['id']),
+					'data-confirm-message' => __d('data', 'Are you sure you want to delete # {0}?', $state['id']),
 				],
 			]); ?>
 		</td>
@@ -105,10 +105,10 @@ foreach ($states as $state):
 <div class="actions">
 	<ul>
 <?php if (true || $this->AuthUser->hasRole('admin')) { ?>
-		<li><?php echo $this->Html->link(__('Update Coordinates'), ['action' => 'updateCoordinates']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Update Coordinates'), ['action' => 'updateCoordinates']); ?></li>
 <?php } ?>
-		<li><?php echo $this->Html->link(__('Add State'), ['action' => 'add']); ?></li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Countries')), ['controller' => 'Countries', 'action' => 'index']); ?> </li>
+		<li><?php echo $this->Html->link(__d('data', 'Add State'), ['action' => 'add']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'List {0}', __d('data', 'Countries')), ['controller' => 'Countries', 'action' => 'index']); ?> </li>
 	</ul>
 </div>
 <?= $this->element('Data.csp_confirm') ?>

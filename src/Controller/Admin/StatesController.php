@@ -84,12 +84,12 @@ class StatesController extends DataAppController {
 			if ($this->States->save($state)) {
 				$id = $state->id;
 				$name = $this->request->getData('name');
-				$this->Flash->success(__('record add {0} saved', h($name)));
+				$this->Flash->success(__d('data', 'record add {0} saved', h($name)));
 
 				return $this->redirect(['action' => 'index']);
 			}
 
-			$this->Flash->error(__('record add not saved'));
+			$this->Flash->error(__d('data', 'record add not saved'));
 		}
 
 		$countries = $this->States->Countries->find('list');
@@ -108,12 +108,12 @@ class StatesController extends DataAppController {
 
 			if ($this->States->save($state)) {
 				$name = $this->request->getData('name');
-				$this->Flash->success(__('record edit {0} saved', h($name)));
+				$this->Flash->success(__d('data', 'record edit {0} saved', h($name)));
 
 				return $this->redirect(['action' => 'index']);
 			}
 
-			$this->Flash->error(__('record edit not saved'));
+			$this->Flash->error(__d('data', 'record edit not saved'));
 		}
 
 		$countries = $this->States->Countries->find('list');
@@ -131,12 +131,12 @@ class StatesController extends DataAppController {
 
 		$name = $state['name'];
 		if ($this->States->delete($state)) {
-			$this->Flash->success(__('record del {0} done', h($name)));
+			$this->Flash->success(__d('data', 'record del {0} done', h($name)));
 
 			return $this->redirect(['action' => 'index']);
 		}
 
-		$this->Flash->error(__('record del {0} not done exception', $name));
+		$this->Flash->error(__d('data', 'record del {0} not done exception', $name));
 
 		return $this->redirect(['action' => 'index']);
 	}

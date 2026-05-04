@@ -12,7 +12,7 @@
 
 	<?php echo $this->Form->create(); ?>
 	<fieldset>
-		<legend><?php echo __('Sync Countries');?></legend>
+		<legend><?php echo __d('data', 'Sync Countries');?></legend>
 
 		<?php
 		foreach ($diff as $action => $rows) {
@@ -37,6 +37,6 @@
 		}
 	?>
 	</fieldset>
-	<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
+	<?php echo $this->Form->submit(__d('data', 'Submit')); echo $this->Form->end();?>
 
 </div>
