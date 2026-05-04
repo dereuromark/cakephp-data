@@ -59,14 +59,14 @@ class ContinentsController extends DataAppController {
 			$continent = $this->Continents->patchEntity($continent, $this->request->getData());
 			if ($this->Continents->save($continent)) {
 				$var = $continent['name'];
-				$this->Flash->success(__('record add {0} saved', h($var)));
+				$this->Flash->success(__d('data', 'record add {0} saved', h($var)));
 
 				return $this->Common->postRedirect(['action' => 'index']);
 			}
 
-			$this->Flash->error(__('formContainsErrors'));
+			$this->Flash->error(__d('data', 'formContainsErrors'));
 		}
-		$parents = ['' => __(' - n/a - ')] + $this->Continents->ParentContinents->find('treeList', ...['spacer' => '» '])->toArray();
+		$parents = ['' => __d('data', ' - n/a - ')] + $this->Continents->ParentContinents->find('treeList', ...['spacer' => '» '])->toArray();
 		$this->set(compact('continent', 'parents'));
 	}
 
@@ -82,15 +82,15 @@ class ContinentsController extends DataAppController {
 			$continent = $this->Continents->patchEntity($continent, $this->request->getData());
 			if ($this->Continents->save($continent)) {
 				$var = $continent['name'];
-				$this->Flash->success(__('record edit {0} saved', h($var)));
+				$this->Flash->success(__d('data', 'record edit {0} saved', h($var)));
 
 				return $this->Common->postRedirect(['action' => 'index']);
 			}
 
-			$this->Flash->error(__('formContainsErrors'));
+			$this->Flash->error(__d('data', 'formContainsErrors'));
 		}
 
-		$parents = ['' => __(' - n/a - ')] + $this->Continents->ParentContinents->find('treeList', ...['spacer' => '» '])->toArray();
+		$parents = ['' => __d('data', ' - n/a - ')] + $this->Continents->ParentContinents->find('treeList', ...['spacer' => '» '])->toArray();
 		$this->set(compact('continent', 'parents'));
 	}
 
@@ -106,11 +106,11 @@ class ContinentsController extends DataAppController {
 		$var = $continent['name'];
 
 		if ($this->Continents->delete($continent)) {
-			$this->Flash->success(__('record del {0} done', h($var)));
+			$this->Flash->success(__d('data', 'record del {0} done', h($var)));
 
 			return $this->redirect(['action' => 'index']);
 		}
-		$this->Flash->error(__('record del {0} not done exception', h($var)));
+		$this->Flash->error(__d('data', 'record del {0} not done exception', h($var)));
 
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}

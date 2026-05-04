@@ -203,9 +203,9 @@ class MimeTypeImagesTable extends Table {
 	 */
 	public static function extensions($value = null) {
 		$options = [
-			'gif' => __('GIF (*.gif)'),
-			'png' => __('PNG (*.png)'),
-			'jpg' => __('JPG (*.jpg)'),
+			'gif' => __d('data', 'GIF (*.gif)'),
+			'png' => __d('data', 'PNG (*.png)'),
+			'jpg' => __d('data', 'JPG (*.jpg)'),
 		];
 
 		if ($value !== null) {

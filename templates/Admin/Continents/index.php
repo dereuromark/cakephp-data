@@ -5,7 +5,7 @@
  */
 ?>
 <div class="page index">
-<h2><?php echo __('Continents');?></h2>
+<h2><?php echo __d('data', 'Continents');?></h2>
 
 <table class="table">
 <tr>
@@ -13,7 +13,7 @@
 	<th><?php echo $this->Paginator->sort('code');?></th>
 	<th><?php echo $this->Paginator->sort('parent_id');?></th>
 	<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
-	<th class="actions"><?php echo __('Actions');?></th>
+	<th class="actions"><?php echo __d('data', 'Actions');?></th>
 </tr>
 <?php
 foreach ($continents as $continent):
@@ -56,8 +56,8 @@ foreach ($continents as $continent):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add {0}', __('Continent')), ['action' => 'add']); ?></li>
-		<li><?php echo $this->Html->link(__('Tree'), ['action' => 'tree']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Add {0}', __d('data', 'Continent')), ['action' => 'add']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Tree'), ['action' => 'tree']); ?></li>
 	</ul>
 </div>
 <?= $this->element('Data.csp_confirm') ?>

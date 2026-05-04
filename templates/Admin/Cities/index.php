@@ -5,7 +5,7 @@
  */
 ?>
 <div class="page index">
-	<h2><?php echo __('Cities');?></h2>
+	<h2><?php echo __d('data', 'Cities');?></h2>
 
 	<table class="table">
 		<tr>
@@ -16,7 +16,7 @@
 		<th><?php echo ('Coordinates');?></th>
 		<th><?php echo $this->Paginator->sort('postal_code_unique');?></th>
 		<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
-		<th class="actions"><?php echo __('Actions');?></th>
+		<th class="actions"><?php echo __d('data', 'Actions');?></th>
 	</tr>
 <?php
 foreach ($cities as $city) { ?>
@@ -68,7 +68,7 @@ foreach ($cities as $city) { ?>
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('New {0}', __('City')), ['action' => 'add']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'New {0}', __d('data', 'City')), ['action' => 'add']); ?></li>
 	</ul>
 </div>
 <?= $this->element('Data.csp_confirm') ?>

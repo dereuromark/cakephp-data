@@ -8,7 +8,7 @@
 <div class="page form">
 <?php echo $this->Form->create($mimeTypeImage);?>
 	<fieldset>
-		<legend><?php echo __('Add Mime Type Image');?></legend>
+		<legend><?php echo __d('data', 'Add Mime Type Image');?></legend>
 	<?php
 		if (!empty($images)) {
 			//echo $this->Form->control('images', array('type'=>'select','multiple'=>'checkbox','options'=>$images,'label'=>false));
@@ -36,11 +36,11 @@
 	?>
 
 	</fieldset>
-<?php echo $this->Form->submit(__('Submit')); ?>
+<?php echo $this->Form->submit(__d('data', 'Submit')); ?>
 <?php echo $this->Form->end();?>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List Mime Type Images'), ['action' => 'index']);?></li>
+		<li><?php echo $this->Html->link(__d('data', 'List Mime Type Images'), ['action' => 'index']);?></li>
 	</ul>
 </div>

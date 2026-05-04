@@ -6,7 +6,7 @@
 use Cake\Core\Configure;
 ?>
 <div class="page index">
-<h2><?php echo __('Addresses');?></h2>
+<h2><?php echo __d('data', 'Addresses');?></h2>
 
 <table class="table">
 <tr>
@@ -19,10 +19,10 @@ use Cake\Core\Configure;
 	<th><?php echo $this->Paginator->sort('street');?></th>
 	<th><?php echo $this->Paginator->sort('postal_code');?></th>
 	<th><?php echo $this->Paginator->sort('city');?></th>
-	<th><?php echo __('Coordinates');?></th>
+	<th><?php echo __d('data', 'Coordinates');?></th>
 	<th><?php echo $this->Paginator->sort('last_used');?></th>
 	<th><?php echo $this->Paginator->sort('formatted_address');?></th>
-	<th class="actions"><?php echo __('Actions');?></th>
+	<th class="actions"><?php echo __d('data', 'Actions');?></th>
 </tr>
 <?php
 /** @var \Data\Model\Entity\Address[] $addresses */
@@ -69,12 +69,12 @@ foreach ($addresses as $address):
 
 					if (Configure::read('GoogleMap.key')) {
 						$mapMarkers = $this->GoogleMap->staticMarkers($markers);
-						echo $this->Html->link($this->Icon->render('view', ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $address->lat . ',' . $address->lng, 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 12]), ['id' => 'googleMap', 'class' => 'internal zoom-image highslideImage', 'title' => __('click for full map'), 'escapeTitle' => false, 'target' => '_blank']);
+						echo $this->Html->link($this->Icon->render('view', ['title' => __d('data', 'Show')]), $this->GoogleMap->staticMapUrl(['center' => $address->lat . ',' . $address->lng, 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 12]), ['id' => 'googleMap', 'class' => 'internal zoom-image highslideImage', 'title' => __d('data', 'click for full map'), 'escapeTitle' => false, 'target' => '_blank']);
 					} else {
 						$options = [
 							'to' => $address->lat . ',' . $address->lng,
 						];
-						echo $this->Html->link($this->Icon->render('view', [], ['title' => __('Show')]), $this->GoogleMap->mapUrl($options), ['class' => 'external', 'title' => __('click for full map'), 'escapeTitle' => false, 'target' => '_blank']);
+						echo $this->Html->link($this->Icon->render('view', [], ['title' => __d('data', 'Show')]), $this->GoogleMap->mapUrl($options), ['class' => 'external', 'title' => __d('data', 'click for full map'), 'escapeTitle' => false, 'target' => '_blank']);
 					}
 				}
 			 ?>
@@ -110,7 +110,7 @@ foreach ($addresses as $address):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add {0}', __('Address')), ['action' => 'add']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Add {0}', __d('data', 'Address')), ['action' => 'add']); ?></li>
 	</ul>
 </div>
 <?= $this->element('Data.csp_confirm') ?>

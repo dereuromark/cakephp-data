@@ -40,8 +40,8 @@ class Continent extends Entity {
 	 */
 	public static function directions($value = null) {
 		$options = [
-			static::STATUS_INACTIVE => __('Inactive'),
-			static::STATUS_ACTIVE => __('Active'),
+			static::STATUS_INACTIVE => __d('data', 'Inactive'),
+			static::STATUS_ACTIVE => __d('data', 'Active'),
 		];
 
 		return parent::enum($value, $options);

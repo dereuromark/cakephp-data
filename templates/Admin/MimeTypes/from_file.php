@@ -18,12 +18,12 @@ The imported data has <b><?php echo count($mimeTypes)?> MimeTypes</b> listed<br/
 <div class="page form">
 <?php echo $this->Form->create($mimeType);?>
 	<fieldset>
-		<legend><?php echo __('Add Mime Type');?></legend>
+		<legend><?php echo __d('data', 'Add Mime Type');?></legend>
 	<?php
 		pr($report);
 	?>
 	</fieldset>
-<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
+<?php echo $this->Form->submit(__d('data', 'Submit')); echo $this->Form->end();?>
 </div>
 
 <?php } ?>
@@ -33,6 +33,6 @@ The imported data has <b><?php echo count($mimeTypes)?> MimeTypes</b> listed<br/
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List Mime Types'), ['action' => 'index']);?></li>
+		<li><?php echo $this->Html->link(__d('data', 'List Mime Types'), ['action' => 'index']);?></li>
 	</ul>
 </div>

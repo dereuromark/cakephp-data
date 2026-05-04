@@ -41,11 +41,11 @@ class AddressesController extends DataAppController {
 			$address = $this->Addresses->patchEntity($address, $this->request->getData());
 			if ($this->Addresses->save($address)) {
 				$var = $address['formatted_address'];
-				$this->Flash->success(__('record add {0} saved', h($var)));
+				$this->Flash->success(__d('data', 'record add {0} saved', h($var)));
 
 				return $this->redirect(['action' => 'index']);
 			}
-			$this->Flash->error(__('formContainsErrors'));
+			$this->Flash->error(__d('data', 'formContainsErrors'));
 
 		} else {
 			# TODO: geolocate via IP? only for frontend
@@ -74,11 +74,11 @@ class AddressesController extends DataAppController {
 
 			if ($this->Addresses->save($address)) {
 				$var = $address['formatted_address'];
-				$this->Flash->success(__('record edit {0} saved', h($var)));
+				$this->Flash->success(__d('data', 'record edit {0} saved', h($var)));
 
 				return $this->redirect(['action' => 'index']);
 			}
-			$this->Flash->error(__('formContainsErrors'));
+			$this->Flash->error(__d('data', 'formContainsErrors'));
 
 		}
 		if (!$this->request->getData()) {
@@ -112,11 +112,11 @@ class AddressesController extends DataAppController {
 		$var = $address['formatted_address'];
 
 		if ($this->Addresses->delete($address)) {
-			$this->Flash->success(__('record del {0} done', h($var)));
+			$this->Flash->success(__d('data', 'record del {0} done', h($var)));
 
 			return $this->redirect(['action' => 'index']);
 		}
-		$this->Flash->error(__('record del {0} not done exception', h($var)));
+		$this->Flash->error(__d('data', 'record del {0} not done exception', h($var)));
 
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}
@@ -133,7 +133,7 @@ class AddressesController extends DataAppController {
 		$addressId = $address->id;
 		$this->Addresses->touch($addressId);
 		$var = $address['formatted_address'];
-		$this->Flash->success(__('Address \'{0}\' marked as last used', h($var)));
+		$this->Flash->success(__d('data', 'Address \'{0}\' marked as last used', h($var)));
 
 		return $this->Common->autoRedirect(['action' => 'index']);
 	}

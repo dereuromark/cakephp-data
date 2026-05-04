@@ -7,7 +7,7 @@
  */
 ?>
 <div class="page index">
-<h2><?php echo __('Languages');?></h2>
+<h2><?php echo __d('data', 'Languages');?></h2>
 ISO List contains <?php echo count($isoList['values']); ?> languages.
 <br/>
 Core contains <?php echo count($locales);?> locales (with <?php echo count($languages); ?> regional locales).
@@ -19,7 +19,7 @@ Core contains <?php echo count($locales);?> locales (with <?php echo count($lang
 	<th><?php echo $isoList['heading'][0];?></th>
 	<th><?php echo $isoList['heading'][1];?></th>
 	<th><?php echo $isoList['heading'][2];?></th>
-	<th class="actions"><?php echo __('Actions');?></th>
+	<th class="actions"><?php echo __d('data', 'Actions');?></th>
 </tr>
 <?php
 $i = 0;
@@ -62,11 +62,11 @@ foreach ($isoList['values'] as $language):
 <h3>Only in core or faulty</h3>
 <table class="table"><tr>
 	<th>&nbsp;</th>
-	<th><?php echo __('Language');?></th>
-	<th><?php echo __('Code');?></th>
-	<th><?php echo __('Locale');?></th>
-	<th><?php echo __('Status');?></th>
-	<th class="actions"><?php echo __('Actions');?></th>
+	<th><?php echo __d('data', 'Language');?></th>
+	<th><?php echo __d('data', 'Code');?></th>
+	<th><?php echo __d('data', 'Locale');?></th>
+	<th><?php echo __d('data', 'Status');?></th>
+	<th class="actions"><?php echo __d('data', 'Actions');?></th>
 </tr>
 <?php
 $isoLocales = [];
@@ -136,6 +136,6 @@ foreach ($locales as $key => $locale):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List {0}', __('Languages')), ['action' => 'index']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'List {0}', __d('data', 'Languages')), ['action' => 'index']); ?></li>
 	</ul>
 </div>

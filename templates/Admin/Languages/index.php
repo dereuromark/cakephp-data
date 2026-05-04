@@ -11,15 +11,15 @@ use Cake\Core\Plugin;
 ?>
 
 <div class="page index">
-<h2><?php echo __('Languages');?></h2>
+<h2><?php echo __d('data', 'Languages');?></h2>
 
 <?php if (Plugin::isLoaded('Search')) { ?>
 <div class="search-box">
 <?php
 echo $this->Form->create(null, ['valueSources' => 'query']);
-echo $this->Form->control('search', ['placeholder' => __('wildcardSearch {0} and {1}', '*', '?')]);
-echo $this->Form->control('dir', ['label' => __('Direction'), 'options' => $language::directions(), 'empty' => Configure::read('Select.defaultBefore') . __('noSelection') . Configure::read('Select.defaultAfter')]);
-echo $this->Form->button(__('Search'), []);
+echo $this->Form->control('search', ['placeholder' => __d('data', 'wildcardSearch {0} and {1}', '*', '?')]);
+echo $this->Form->control('dir', ['label' => __d('data', 'Direction'), 'options' => $language::directions(), 'empty' => Configure::read('Select.defaultBefore') . __d('data', 'noSelection') . Configure::read('Select.defaultAfter')]);
+echo $this->Form->button(__d('data', 'Search'), []);
 echo $this->Form->end();
 ?>
 <?php if ($this->Search->isSearch()) {
@@ -38,7 +38,7 @@ echo $this->Form->end();
 	<th><?php echo $this->Paginator->sort('direction');?></th>
 	<th><?php echo $this->Paginator->sort('status');?></th>
 	<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
-	<th class="actions"><?php echo __('Actions');?></th>
+	<th class="actions"><?php echo __d('data', 'Actions');?></th>
 </tr>
 <?php
 foreach ($languages as $language):
@@ -68,7 +68,7 @@ foreach ($languages as $language):
 			<?php echo $language::directions($language->direction); ?>
 		</td>
 		<td>
-			<?php echo $this->Format->yesNo($language['status'], ['onTitle' => __('Active'), 'offTitle' => __('Inactive')]); ?>
+			<?php echo $this->Format->yesNo($language['status'], ['onTitle' => __d('data', 'Active'), 'offTitle' => __d('data', 'Inactive')]); ?>
 		</td>
 		<td>
 			<?php echo $this->Time->niceDate($language['modified']); ?>
@@ -81,7 +81,7 @@ foreach ($languages as $language):
 				'class' => 'btn btn-link p-0 align-baseline',
 				'form' => [
 					'class' => 'd-inline',
-					'data-confirm-message' => __('Are you sure you want to delete # {0}?', $language['id']),
+					'data-confirm-message' => __d('data', 'Are you sure you want to delete # {0}?', $language['id']),
 				],
 			]); ?>
 		</td>
@@ -101,11 +101,11 @@ The language flags are actually country flags. Due to incompatabities between co
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add {0}', __('Language')), ['action' => 'add']); ?></li>
-		<li><?php echo $this->Html->link(__('Compare {0}', __('Languages')), ['action' => 'compare_to_iso_list']); ?></li>
-		<li><?php echo $this->Html->link(__('Compare {0} to core', __('Languages')), ['action' => 'compare_iso_list_to_core']); ?></li>
-		<li><?php echo $this->Html->link(__('Import {0} from Core', __('Language')), ['action' => 'import_from_core'], [], __('Sure?')); ?></li>
-		<li><?php echo $this->Html->link(__('Set primary languages active'), ['action' => 'set_primary_languages_active'], [], __('Sure?')); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Add {0}', __d('data', 'Language')), ['action' => 'add']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Compare {0}', __d('data', 'Languages')), ['action' => 'compare_to_iso_list']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Compare {0} to core', __d('data', 'Languages')), ['action' => 'compare_iso_list_to_core']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Import {0} from Core', __d('data', 'Language')), ['action' => 'import_from_core'], [], __d('data', 'Sure?')); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Set primary languages active'), ['action' => 'set_primary_languages_active'], [], __d('data', 'Sure?')); ?></li>
 	</ul>
 </div>
 <?= $this->element('Data.csp_confirm') ?>

@@ -5,19 +5,19 @@
  */
 ?>
 <div class="page index">
-<h2><?php echo __('Mime Type Images');?></h2>
+<h2><?php echo __d('data', 'Mime Type Images');?></h2>
 
 <table class="table">
 <tr>
-	<th><?php echo __('Icon');?></th>
+	<th><?php echo __d('data', 'Icon');?></th>
 	<th><?php echo $this->Paginator->sort('name');?></th>
 	<th><?php echo $this->Paginator->sort('ext');?></th>
 	<th><?php echo $this->Paginator->sort('active');?></th>
-	<th><?php echo __('Usage');?></th>
+	<th><?php echo __d('data', 'Usage');?></th>
 	<th><?php echo $this->Paginator->sort('details');?></th>
 	<th><?php echo $this->Paginator->sort('created', null, ['direction' => 'desc']);?></th>
 	<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
-	<th class="actions"><?php echo __('Actions');?></th>
+	<th class="actions"><?php echo __d('data', 'Actions');?></th>
 </tr>
 <?php
 $i = 0;
@@ -89,14 +89,14 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 				'class' => 'btn btn-link p-0 align-baseline',
 				'form' => [
 					'class' => 'd-inline',
-					'data-confirm-message' => __('Are you sure you want to delete # {0}?', $mimeTypeImage['id']),
+					'data-confirm-message' => __d('data', 'Are you sure you want to delete # {0}?', $mimeTypeImage['id']),
 				],
 			]); ?>
 			<?php
 				if (isset($imageWidth) && isset($imageHeight) && $imageWidth != 16 && $imageHeight != 16) {
-					echo $this->Icon->render('expand', ['title' => __('Größe ist nicht 16x16, sondern ' . $imageWidth . 'x' . $imageHeight . '! Anpassen...')]);
+					echo $this->Icon->render('expand', ['title' => __d('data', 'Größe ist nicht 16x16, sondern ' . $imageWidth . 'x' . $imageHeight . '! Anpassen...')]);
 				} elseif (empty($mimeTypeImage['ext']) || !empty($mimeTypeImage['warning'])) {
-					echo $this->Html->link($this->Icon->render('google', ['title' => __('Search with Google')]), 'http://images.google.de/images?q=' . $mimeTypeImage['name'] . '+imagesize%3A16x16&btnG=Bilder-Suche', ['escapeTitle' => false]);
+					echo $this->Html->link($this->Icon->render('google', ['title' => __d('data', 'Search with Google')]), 'http://images.google.de/images?q=' . $mimeTypeImage['name'] . '+imagesize%3A16x16&btnG=Bilder-Suche', ['escapeTitle' => false]);
 				}
 			?>
 		</td>
@@ -107,10 +107,10 @@ foreach ($mimeTypeImages as $mimeTypeImage):
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add Mime Type Image'), ['action' => 'add']); ?></li>
-		<li><?php echo $this->Html->link(__('(Auto-) Allocate Icons Files'), ['action' => 'allocate']); ?></li>
-		<li><?php echo $this->Html->link(__('Import Extensions'), ['action' => 'import']); ?></li>
-		<li><?php echo $this->Html->link(__('Search Icon on google.de'), 'http://images.google.de/images?q=icon+imagesize%3A16x16&btnG=Bilder-Suche'); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Add Mime Type Image'), ['action' => 'add']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', '(Auto-) Allocate Icons Files'), ['action' => 'allocate']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Import Extensions'), ['action' => 'import']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Search Icon on google.de'), 'http://images.google.de/images?q=icon+imagesize%3A16x16&btnG=Bilder-Suche'); ?></li>
 	</ul>
 </div>
 <?= $this->element('Data.csp_confirm') ?>

@@ -7,12 +7,12 @@
  */
 ?>
 <div class="page index">
-<h2><?php echo __('Mime Types');?></h2>
+<h2><?php echo __d('data', 'Mime Types');?></h2>
 
 <div class="searchWrapper">
 <?php echo $this->Form->create();?>
 <div class="floatLeft"><?php echo $this->Form->control('Form.search', ['label' => '(Teil)Suche:', 'value' => $searchStr]);?></div>
-<div class="floatLeft"><?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?></div>
+<div class="floatLeft"><?php echo $this->Form->submit(__d('data', 'Submit')); echo $this->Form->end();?></div>
 <?php
 if (!empty($searchStr)) {
 	echo '<div class="floatRight">' . $this->Html->link('Wieder alle anzeigen', ['action' => 'index', 'clear' => 'search']) . '</div>';
@@ -26,7 +26,7 @@ if (!empty($searchStr) && !empty($allCount)) {
 	} else {
 		$perCent = ceil(($currentCount / $allCount) * 100);
 	}
-	echo '<br class="clear"/><div>' . $this->Html->image('icons/results.gif') . ' Treffer: <b>' . $perCent . '%</b> (' . $currentCount . __(' out of ') . $allCount . ')</div>';
+	echo '<br class="clear"/><div>' . $this->Html->image('icons/results.gif') . ' Treffer: <b>' . $perCent . '%</b> (' . $currentCount . __d('data', ' out of ') . $allCount . ')</div>';
 }
 ?>
 </div>
@@ -34,7 +34,7 @@ if (!empty($searchStr) && !empty($allCount)) {
 
 <table class="table">
 <tr>
-	<th><?php echo __('Icon');?></th>
+	<th><?php echo __d('data', 'Icon');?></th>
 	<th><?php echo $this->Paginator->sort('ext');?></th>
 	<th><?php echo $this->Paginator->sort('name');?></th>
 	<th><?php echo $this->Paginator->sort('type');?></th>
@@ -42,7 +42,7 @@ if (!empty($searchStr) && !empty($allCount)) {
 	<th><?php echo $this->Paginator->sort('core');?></th>
 	<th><?php echo $this->Paginator->sort('created', null, ['direction' => 'desc']);?></th>
 	<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
-	<th class="actions"><?php echo __('Actions');?></th>
+	<th class="actions"><?php echo __d('data', 'Actions');?></th>
 </tr>
 <?php
 $i = 0;
@@ -101,7 +101,7 @@ foreach ($mimeTypes as $mimeType):
 				'class' => 'btn btn-link p-0 align-baseline',
 				'form' => [
 					'class' => 'd-inline',
-					'data-confirm-message' => __('Are you sure you want to delete # {0}?', $mimeType['id']),
+					'data-confirm-message' => __d('data', 'Are you sure you want to delete # {0}?', $mimeType['id']),
 				],
 			]); ?>
 		</td>
@@ -114,12 +114,12 @@ foreach ($mimeTypes as $mimeType):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add Mime Type'), ['action' => 'add']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Add Mime Type'), ['action' => 'add']); ?></li>
 
-		<li><?php echo $this->Html->link(__('(Auto-) Allocate Icons by Extension'), ['action' => 'allocate']); ?></li>
-		<li><?php echo $this->Html->link(__('Allocate Icons by Type (Groups)'), ['action' => 'allocateByType']); ?></li>
-		<li><?php echo $this->Html->link(__('Import from Core Media View'), ['action' => 'fromCore']); ?></li>
-		<li><?php echo $this->Html->link(__('Import from File'), ['action' => 'fromFile']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', '(Auto-) Allocate Icons by Extension'), ['action' => 'allocate']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Allocate Icons by Type (Groups)'), ['action' => 'allocateByType']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Import from Core Media View'), ['action' => 'fromCore']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Import from File'), ['action' => 'fromFile']); ?></li>
 	</ul>
 </div>
 <br/>

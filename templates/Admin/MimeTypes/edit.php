@@ -18,7 +18,7 @@ $this->Html->script('jquery/plugins/jquery.dd.js');?>
 <div class="page form">
 <?php echo $this->Form->create($mimeType);?>
 	<fieldset>
-		<legend><?php echo __('Edit Mime Type');?></legend>
+		<legend><?php echo __d('data', 'Edit Mime Type');?></legend>
 	<?php
 		//echo $this->Form->control('id');
 
@@ -33,18 +33,18 @@ $this->Html->script('jquery/plugins/jquery.dd.js');?>
 		echo $this->Form->control('active');
 	?>
 	</fieldset>
-<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
+<?php echo $this->Form->submit(__d('data', 'Submit')); echo $this->Form->end();?>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Form->postButton(__('Delete'), ['action' => 'delete', $this->Form->getSourceValue('MimeType.id')], [
+		<li><?php echo $this->Form->postButton(__d('data', 'Delete'), ['action' => 'delete', $this->Form->getSourceValue('MimeType.id')], [
 			'class' => 'btn btn-link p-0 align-baseline',
 			'form' => [
 				'class' => 'd-inline',
-				'data-confirm-message' => __('Are you sure you want to delete # {0}?', $this->Form->getSourceValue('MimeType.id')),
+				'data-confirm-message' => __d('data', 'Are you sure you want to delete # {0}?', $this->Form->getSourceValue('MimeType.id')),
 			],
 		]); ?></li>
-		<li><?php echo $this->Html->link(__('List Mime Types'), ['action' => 'index']);?></li>
+		<li><?php echo $this->Html->link(__d('data', 'List Mime Types'), ['action' => 'index']);?></li>
 	</ul>
 </div>
 <?= $this->element('Data.csp_confirm') ?>

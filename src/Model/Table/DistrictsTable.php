@@ -28,11 +28,11 @@ class DistrictsTable extends Table {
 	public function validationDefault(Validator $validator): Validator {
 		$validator
 			->scalar('name')
-			->notEmptyString('name', __('valErrMandatoryField'));
+			->notEmptyString('name', __d('data', 'valErrMandatoryField'));
 
 		$validator
 			->integer('city_id')
-			->notEmptyString('city_id', __('valErrMandatoryField'));
+			->notEmptyString('city_id', __d('data', 'valErrMandatoryField'));
 
 		return $validator;
 	}

@@ -18,14 +18,14 @@ use Cake\Core\Plugin;
 <?php $this->Html->script('highslide/highslide_config'); ?>
 
 <div class="page index">
-<h2><?php echo __('Countries');?></h2>
+<h2><?php echo __d('data', 'Countries');?></h2>
 
 <?php if (Plugin::isLoaded('Search')) { ?>
 <div class="search-box">
 <?php
 echo $this->Form->create(null, ['valueSources' => 'query']);
-echo $this->Form->control('search', ['placeholder' => __('wildcardSearch {0} and {1}', '*', '?')]);
-echo $this->Form->button(__('Search'), []);
+echo $this->Form->control('search', ['placeholder' => __d('data', 'wildcardSearch {0} and {1}', '*', '?')]);
+echo $this->Form->button(__d('data', 'Search'), []);
 echo $this->Form->end();
 if ($this->Search->isSearch()) {
 	echo $this->Search->resetLink(null, ['class' => 'btn btn-secondary']);
@@ -41,10 +41,10 @@ if ($this->Search->isSearch()) {
 	<th><?php echo $this->Paginator->sort('ori_name');?></th>
 	<th><?php echo $this->Paginator->sort('iso2');?></th>
 	<th><?php echo $this->Paginator->sort('iso3');?></th>
-	<th><?php echo __('Coordinates');?></th>
+	<th><?php echo __d('data', 'Coordinates');?></th>
 	<th><?php echo $this->Paginator->sort('sort');?></th>
 	<th><?php echo $this->Paginator->sort('modified', null, ['direction' => 'desc']);?></th>
-	<th class="actions"><?php echo __('Actions');?></th>
+	<th class="actions"><?php echo __d('data', 'Actions');?></th>
 </tr>
 <?php
 foreach ($countries as $country):
@@ -72,7 +72,7 @@ foreach ($countries as $country):
 			if ((int)$country['lat'] != 0 || (int)$country['lng'] != 0) {
 				$coordinates = $country['lat'] . ',' . $country['lng'];
 			}
-			echo $this->Format->yesNo((int)!empty($coordinates), ['onTitle' => $coordinates, 'offTitle' => __('n/a')]) . ' ';
+			echo $this->Format->yesNo((int)!empty($coordinates), ['onTitle' => $coordinates, 'offTitle' => __d('data', 'n/a')]) . ' ';
 
 			if (!empty($coordinates)) {
 				$markers = [];
@@ -80,12 +80,12 @@ foreach ($countries as $country):
 
 				if (Configure::read('GoogleMap.key')) {
 					$mapMarkers = $this->GoogleMap->staticMarkers($markers);
-					echo ' ' . $this->Html->link($this->Icon->render('view', [], ['title' => __('Show')]), $this->GoogleMap->staticMapUrl(['center' => $country['lat'] . ',' . $country['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 3]), ['class' => 'internal zoom-image highslideImage', 'title' => __('click for full map'), 'escapeTitle' => false, 'target' => '_blank']);
+					echo ' ' . $this->Html->link($this->Icon->render('view', [], ['title' => __d('data', 'Show')]), $this->GoogleMap->staticMapUrl(['center' => $country['lat'] . ',' . $country['lng'], 'markers' => $mapMarkers, 'size' => '640x510', 'zoom' => 3]), ['class' => 'internal zoom-image highslideImage', 'title' => __d('data', 'click for full map'), 'escapeTitle' => false, 'target' => '_blank']);
 				} else {
 					$options = [
 						'to' => $country->lat . ',' . $country->lng,
 					];
-					echo $this->Html->link($this->Icon->render('view', [], ['title' => __('Show')]), $this->GoogleMap->mapUrl($options), ['class' => 'external', 'title' => __('click for full map'), 'escapeTitle' => false, 'target' => '_blank']);
+					echo $this->Html->link($this->Icon->render('view', [], ['title' => __d('data', 'Show')]), $this->GoogleMap->mapUrl($options), ['class' => 'external', 'title' => __d('data', 'click for full map'), 'escapeTitle' => false, 'target' => '_blank']);
 				}
 			}
 
@@ -104,14 +104,14 @@ foreach ($countries as $country):
 			<?php echo $this->Html->link($this->Icon->render('view'), ['action'=>'view', $country->id], ['escapeTitle' => false]); ?>
 			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $country->id], ['escapeTitle' => false]); ?>
 
-			<?php echo $this->Html->link($this->Icon->render('map-o', [], ['title' => __('Koordinaten updaten')]), ['action' => 'update_coordinates', $country->id], ['escapeTitle' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('map-o', [], ['title' => __d('data', 'Koordinaten updaten')]), ['action' => 'update_coordinates', $country->id], ['escapeTitle' => false]); ?>
 
 			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $country->id], [
 				'escapeTitle' => false,
 				'class' => 'btn btn-link p-0 align-baseline',
 				'form' => [
 					'class' => 'd-inline',
-					'data-confirm-message' => __('Are you sure you want to delete # {0}?', $country->id),
+					'data-confirm-message' => __d('data', 'Are you sure you want to delete # {0}?', $country->id),
 				],
 			]); ?>
 		</td>
@@ -125,16 +125,16 @@ foreach ($countries as $country):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add {0}', __('Country')), ['action' => 'add']); ?></li>
-		<li><?php echo $this->Html->link(__('Sync'), ['action' => 'sync']); ?></li>
-		<li><?php echo $this->Html->link(__('Icons'), ['action' => 'icons']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Add {0}', __d('data', 'Country')), ['action' => 'add']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Sync'), ['action' => 'sync']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Icons'), ['action' => 'icons']); ?></li>
 	</ul>
 </div>
 
 <br/>
 Hinweis:
 <ul>
-<li><?__('countryCodeExplanation')?></li>
+<li><?__d('data', 'countryCodeExplanation')?></li>
 </ul>
 <?= $this->element('Data.csp_confirm') ?>
 

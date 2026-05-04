@@ -5,7 +5,7 @@
  */
 ?>
 <div class="page index">
-<h2><?php echo __('Full Currency Table');?></h2>
+<h2><?php echo __d('data', 'Full Currency Table');?></h2>
 
 <?php
 	echo pre($currencies);
@@ -18,6 +18,6 @@
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Add {0}', __('Currency')), ['action' => 'add']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'Add {0}', __d('data', 'Currency')), ['action' => 'add']); ?></li>
 	</ul>
 </div>

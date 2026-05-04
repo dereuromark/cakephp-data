@@ -8,11 +8,11 @@ use Cake\Core\Configure;
 
 ?>
 <div class="page form">
-<h2><?php echo __('Add {0}', __('City')); ?></h2>
+<h2><?php echo __d('data', 'Add {0}', __d('data', 'City')); ?></h2>
 
 <?php echo $this->Form->create($city);?>
 	<fieldset>
-		<legend><?php echo __('Add {0}', __('City')); ?></legend>
+		<legend><?php echo __d('data', 'Add {0}', __d('data', 'City')); ?></legend>
 	<?php
 		echo $this->Form->control('country_id');
 		echo $this->Form->control('official_key', ['type' => 'text']);
@@ -30,12 +30,12 @@ use Cake\Core\Configure;
 		echo $this->Form->control('description');
 	?>
 	</fieldset>
-<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
+<?php echo $this->Form->submit(__d('data', 'Submit')); echo $this->Form->end();?>
 </div>
 
 <div class="actions">
 	<ul>
 
-		<li><?php echo $this->Html->link(__('List {0}', __('Cities')), ['action' => 'index']);?></li>
+		<li><?php echo $this->Html->link(__d('data', 'List {0}', __d('data', 'Cities')), ['action' => 'index']);?></li>
 	</ul>
 </div>

@@ -10,7 +10,7 @@ use Shim\Filesystem\Folder;
 ?>
 
 <div class="page index">
-<h2><?php echo __('Languages');?></h2>
+<h2><?php echo __d('data', 'Languages');?></h2>
 ISO List contains <?php echo count($isoList['values']); ?> languages.
 <br/>
 Local DB contains <?php echo count($languages); ?> locales.
@@ -21,8 +21,8 @@ Local DB contains <?php echo count($languages); ?> locales.
 	<th><?php echo $isoList['heading'][0];?></th>
 	<th><?php echo $isoList['heading'][1];?></th>
 	<th><?php echo $isoList['heading'][2];?></th>
-	<th><?php echo __('Locales'); ?></th>
-	<th class="actions"><?php echo __('Actions');?></th>
+	<th><?php echo __d('data', 'Locales'); ?></th>
+	<th class="actions"><?php echo __d('data', 'Actions');?></th>
 </tr>
 <?php
 $i = 0;
@@ -86,6 +86,6 @@ foreach ($isoList['values'] as $language):
 
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('List {0}', __('Languages')), ['action' => 'index']); ?></li>
+		<li><?php echo $this->Html->link(__d('data', 'List {0}', __d('data', 'Languages')), ['action' => 'index']); ?></li>
 	</ul>
 </div>

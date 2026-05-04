@@ -16,10 +16,10 @@ $this->Html->script($this->GoogleMap->apiUrl(), ['inline' => false])?>
 <div>
 <?php echo $this->Form->create(null);?>
 	<fieldset>
-		<legend><?php echo __('Search {0}', __('Area Code')); ?></legend>
+		<legend><?php echo __d('data', 'Search {0}', __d('data', 'Area Code')); ?></legend>
 	<?php
 		echo $this->Form->control('code');
-		echo $this->Form->submit(__('Submit'));
+		echo $this->Form->submit(__d('data', 'Submit'));
 	?>
 	</fieldset>
 <?php echo $this->Form->end();?>

@@ -5,11 +5,11 @@
  */
 ?>
 <div class="page form">
-<h2><?php echo __('Edit {0}', __('Postal Code')); ?></h2>
+<h2><?php echo __d('data', 'Edit {0}', __d('data', 'Postal Code')); ?></h2>
 
 <?php echo $this->Form->create($postalCode);?>
 	<fieldset>
-		<legend><?php echo __('Edit {0}', __('Postal Code')); ?></legend>
+		<legend><?php echo __d('data', 'Edit {0}', __d('data', 'Postal Code')); ?></legend>
 	<?php
 		//echo $this->Form->control('id');
 		echo $this->Form->control('code');
@@ -19,20 +19,20 @@
 		echo $this->Form->control('official_address');
 	?>
 	</fieldset>
-<?php echo $this->Form->submit(__('Submit')); echo $this->Form->end();?>
+<?php echo $this->Form->submit(__d('data', 'Submit')); echo $this->Form->end();?>
 </div>
 
 <div class="actions">
 	<ul>
 
-		<li><?php echo $this->Form->postButton(__('Delete'), ['action' => 'delete', $this->Form->getSourceValue('PostalCode.id')], [
+		<li><?php echo $this->Form->postButton(__d('data', 'Delete'), ['action' => 'delete', $this->Form->getSourceValue('PostalCode.id')], [
 			'class' => 'btn btn-link p-0 align-baseline',
 			'form' => [
 				'class' => 'd-inline',
-				'data-confirm-message' => __('Are you sure you want to delete # {0}?', $this->Form->getSourceValue('PostalCode.id')),
+				'data-confirm-message' => __d('data', 'Are you sure you want to delete # {0}?', $this->Form->getSourceValue('PostalCode.id')),
 			],
 		]); ?></li>
-		<li><?php echo $this->Html->link(__('List {0}', __('Postal Codes')), ['action' => 'index']);?></li>
+		<li><?php echo $this->Html->link(__d('data', 'List {0}', __d('data', 'Postal Codes')), ['action' => 'index']);?></li>
 	</ul>
 </div>
 <?= $this->element('Data.csp_confirm') ?>

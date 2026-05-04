@@ -177,11 +177,11 @@ class TimezonesController extends AppController {
 		if ($this->request->is('post')) {
 			$timezone = $this->Timezones->patchEntity($timezone, $this->request->getData());
 			if ($this->Timezones->save($timezone)) {
-				$this->Flash->success(__('The timezone has been saved.'));
+				$this->Flash->success(__d('data', 'The timezone has been saved.'));
 
 				return $this->redirect(['action' => 'index']);
 			}
-			$this->Flash->error(__('The timezone could not be saved. Please, try again.'));
+			$this->Flash->error(__d('data', 'The timezone could not be saved. Please, try again.'));
 		}
 		$this->set(compact('timezone'));
 	}
@@ -195,11 +195,11 @@ class TimezonesController extends AppController {
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$timezone = $this->Timezones->patchEntity($timezone, $this->request->getData());
 			if ($this->Timezones->save($timezone)) {
-				$this->Flash->success(__('The timezone has been saved.'));
+				$this->Flash->success(__d('data', 'The timezone has been saved.'));
 
 				return $this->redirect(['action' => 'index']);
 			}
-			$this->Flash->error(__('The timezone could not be saved. Please, try again.'));
+			$this->Flash->error(__d('data', 'The timezone could not be saved. Please, try again.'));
 		}
 		$this->set(compact('timezone'));
 	}
@@ -212,9 +212,9 @@ class TimezonesController extends AppController {
 		$this->request->allowMethod(['post', 'delete']);
 		$timezone = $this->Timezones->get($id);
 		if ($this->Timezones->delete($timezone)) {
-			$this->Flash->success(__('The timezone has been deleted.'));
+			$this->Flash->success(__d('data', 'The timezone has been deleted.'));
 		} else {
-			$this->Flash->error(__('The timezone could not be deleted. Please, try again.'));
+			$this->Flash->error(__d('data', 'The timezone could not be deleted. Please, try again.'));
 		}
 
 		return $this->redirect(['action' => 'index']);

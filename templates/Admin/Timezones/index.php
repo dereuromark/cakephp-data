@@ -9,25 +9,25 @@ use Cake\Core\Plugin;
 ?>
 <nav class="actions large-3 medium-4 columns col-sm-4 col-xs-12" id="actions-sidebar">
     <ul class="side-nav nav nav-pills flex-column">
-        <li class="nav-item heading"><?= __('Actions') ?></li>
+        <li class="nav-item heading"><?= __d('data', 'Actions') ?></li>
         <li class="nav-item">
-            <?= $this->Html->link(__('New {0}', __('Timezone')), ['action' => 'add'], ['class' => 'nav-link']) ?>
+            <?= $this->Html->link(__d('data', 'New {0}', __d('data', 'Timezone')), ['action' => 'add'], ['class' => 'nav-link']) ?>
         </li>
 		<li class="nav-item">
-			<?php echo $this->Html->link(__('Sync'), ['action' => 'sync'], ['class' => 'nav-link']); ?>
+			<?php echo $this->Html->link(__d('data', 'Sync'), ['action' => 'sync'], ['class' => 'nav-link']); ?>
 		</li>
     </ul>
 </nav>
 <div class="timezones index content large-9 medium-8 columns col-sm-8 col-12">
 
-	<h2><?= __('Timezones') ?></h2>
+	<h2><?= __d('data', 'Timezones') ?></h2>
 
 	<?php if (Plugin::isLoaded('Search')) { ?>
 		<div class="search-box">
 			<?php
 			echo $this->Form->create(null, ['valueSources' => 'query']);
-			echo $this->Form->control('search', ['placeholder' => __('wildcardSearch {0} and {1}', '*', '?')]);
-			echo $this->Form->button(__('Search'), []);
+			echo $this->Form->control('search', ['placeholder' => __d('data', 'wildcardSearch {0} and {1}', '*', '?')]);
+			echo $this->Form->button(__d('data', 'Search'), []);
 			echo $this->Form->end();
 			?>
 			<?php if ($this->Search->isSearch()) {
@@ -52,7 +52,7 @@ use Cake\Core\Plugin;
                     <th><?= $this->Paginator->sort('notes') ?></th>
                     <th><?= $this->Paginator->sort('created', null, ['direction' => 'desc']) ?></th>
                     <th><?= $this->Paginator->sort('modified', null, ['direction' => 'desc']) ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th class="actions"><?= __d('data', 'Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -87,7 +87,7 @@ use Cake\Core\Plugin;
                             'class' => 'btn btn-link p-0 align-baseline',
                             'form' => [
                                 'class' => 'd-inline',
-                                'data-confirm-message' => __('Are you sure you want to delete # {0}?', $timezone->id),
+                                'data-confirm-message' => __d('data', 'Are you sure you want to delete # {0}?', $timezone->id),
                             ],
                         ]); ?>
                     </td>

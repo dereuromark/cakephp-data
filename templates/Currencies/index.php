@@ -5,7 +5,7 @@
  */
 ?>
 <div class="currencies index content large-9 medium-8 columns col-12">
-    <h1><?= __('Currencies') ?></h1>
+    <h1><?= __d('data', 'Currencies') ?></h1>
 
     <div class="">
         <table class="table table-sm table-striped">
