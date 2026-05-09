@@ -8,9 +8,8 @@ use Cake\Validation\Validator;
 use Tools\Model\Table\Table;
 
 /**
- * @property \Data\Model\Table\CitiesTable $Cities
- *
  * @deprecated Use only Countries => States => Cities
+ * @property \Data\Model\Table\CitiesTable $Cities
  */
 class DistrictsTable extends Table {
 

@@ -24,9 +24,9 @@ use Data\Sync\Timezones;
  * @property \Cake\I18n\DateTime $modified
  * @property \Data\Model\Entity\Timezone|null $canonical_timezone
  * @property int|null $linked_id
+ * @property \Data\Model\Entity\Country $country
  * @property-read string|null $offset_string
  * @property-read string|null $offset_dst_string
- * @property \Data\Model\Entity\Country $country
  */
 class Timezone extends Entity {
 

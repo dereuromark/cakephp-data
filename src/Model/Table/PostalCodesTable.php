@@ -6,7 +6,6 @@ use Cake\Core\Plugin;
 use Tools\Model\Table\Table;
 
 /**
- * @mixin \Search\Model\Behavior\SearchBehavior
  * @property \Data\Model\Table\CountriesTable|\Cake\ORM\Association\BelongsTo $Countries
  * @method \Data\Model\Entity\PostalCode get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
  * @method \Data\Model\Entity\PostalCode newEntity(array $data, array $options = [])
@@ -16,12 +15,13 @@ use Tools\Model\Table\Table;
  * @method array<\Data\Model\Entity\PostalCode> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Data\Model\Entity\PostalCode findOrCreate($search, ?callable $callback = null, $options = [])
  * @method \Data\Model\Entity\PostalCode saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @mixin \Geo\Model\Behavior\GeocoderBehavior
  * @method \Data\Model\Entity\PostalCode newEmptyEntity()
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\PostalCode>|false saveMany(iterable $entities, $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\PostalCode> saveManyOrFail(iterable $entities, $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\PostalCode>|false deleteMany(iterable $entities, $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\PostalCode> deleteManyOrFail(iterable $entities, $options = [])
+ * @mixin \Search\Model\Behavior\SearchBehavior
+ * @mixin \Geo\Model\Behavior\GeocoderBehavior
  */
 class PostalCodesTable extends Table {
 

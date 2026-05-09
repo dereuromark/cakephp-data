@@ -12,9 +12,8 @@ use Tools\Model\Table\Table;
 use Tools\Utility\Utility;
 
 /**
- * @mixin \Geo\Model\Behavior\GeocoderBehavior
- *
  * @deprecated Moved to Geo plugin.
+ * @mixin \Geo\Model\Behavior\GeocoderBehavior
  */
 class LocationsTable extends Table {
 

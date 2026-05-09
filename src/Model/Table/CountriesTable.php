@@ -12,7 +12,9 @@ use InvalidArgumentException;
 use Tools\Model\Table\Table;
 
 /**
- * @mixin \Search\Model\Behavior\SearchBehavior
+ * @property \Data\Model\Table\ContinentsTable|\Cake\ORM\Association\BelongsTo $Continents
+ * @property \Data\Model\Table\StatesTable|\Cake\ORM\Association\HasMany $States
+ * @property \Data\Model\Table\TimezonesTable|\Cake\ORM\Association\HasMany $Timezones
  * @method \Data\Model\Entity\Country get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
  * @method \Data\Model\Entity\Country newEntity(array $data, array $options = [])
  * @method array<\Data\Model\Entity\Country> newEntities(array $data, array $options = [])
@@ -26,9 +28,7 @@ use Tools\Model\Table\Table;
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country> saveManyOrFail(iterable $entities, array $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country>|false deleteMany(iterable $entities, array $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country> deleteManyOrFail(iterable $entities, array $options = [])
- * @property \Data\Model\Table\ContinentsTable|\Cake\ORM\Association\BelongsTo $Continents
- * @property \Data\Model\Table\StatesTable|\Cake\ORM\Association\HasMany $States
- * @property \Data\Model\Table\TimezonesTable|\Cake\ORM\Association\HasMany $Timezones
+ * @mixin \Search\Model\Behavior\SearchBehavior
  */
 class CountriesTable extends Table {
 

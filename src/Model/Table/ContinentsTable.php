@@ -10,8 +10,6 @@ use Tools\Model\Table\Table;
  * @property \Data\Model\Table\ContinentsTable|\Cake\ORM\Association\BelongsTo $ParentContinents
  * @property \Cake\ORM\Table|\Cake\ORM\Association\HasMany $ChildContinents
  * @property \Cake\ORM\Table|\Cake\ORM\Association\HasMany $Countries
- *
- * @mixin \Cake\ORM\Behavior\TreeBehavior
  * @method \Data\Model\Entity\Continent newEmptyEntity()
  * @method \Data\Model\Entity\Continent newEntity(array $data, array $options = [])
  * @method array<\Data\Model\Entity\Continent> newEntities(array $data, array $options = [])
@@ -25,6 +23,7 @@ use Tools\Model\Table\Table;
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Continent> saveManyOrFail(iterable $entities, array $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Continent>|false deleteMany(iterable $entities, array $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Continent> deleteManyOrFail(iterable $entities, array $options = [])
+ * @mixin \Cake\ORM\Behavior\TreeBehavior
  */
 class ContinentsTable extends Table {
 

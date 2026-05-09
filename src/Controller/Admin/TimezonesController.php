@@ -12,8 +12,8 @@ use Shim\Datasource\Paging\NumericPaginator;
 
 /**
  * @property \Data\Model\Table\TimezonesTable $Timezones
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Timezone> paginate($object = null, array $settings = [])
  * @property \Search\Controller\Component\SearchComponent $Search
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Timezone> paginate($object = null, array $settings = [])
  */
 class TimezonesController extends AppController {
 

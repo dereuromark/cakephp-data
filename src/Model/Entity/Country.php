@@ -26,14 +26,14 @@ use Tools\Model\Entity\Entity;
  * @property \Data\Model\Entity\Continent|null $continent
  * @property string|null $phone_code
  * @property string|null $timezone_offset
+ * @property array<int> $timezone_offsets
+ * @property array<\Data\Model\Entity\Timezone> $timezones
+ * @property string|null $timezone
  * @property-read array $timezones_offsets
  * @property-read string|null $timezone_offset_string
  * @property-read array<string> $timezone_offset_strings
  * @property-read string|null $slug2
  * @property-read string|null $slug3
- * @property array<int> $timezone_offsets
- * @property array<\Data\Model\Entity\Timezone> $timezones
- * @property string|null $timezone
  */
 class Country extends Entity {
 

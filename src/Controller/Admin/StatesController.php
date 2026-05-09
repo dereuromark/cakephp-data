@@ -8,8 +8,8 @@ use Shim\Datasource\Paging\NumericPaginator;
 
 /**
  * @property \Data\Model\Table\StatesTable $States
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State> paginate($object = null, array $settings = [])
  * @property \Search\Controller\Component\SearchComponent $Search
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State> paginate($object = null, array $settings = [])
  */
 class StatesController extends DataAppController {
 

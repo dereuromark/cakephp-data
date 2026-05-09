@@ -11,7 +11,6 @@ use Data\Currency\CurrencyLib;
 use Tools\Model\Table\Table;
 
 /**
- * @mixin \Search\Model\Behavior\SearchBehavior
  * @method \Data\Model\Entity\Currency get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
  * @method \Data\Model\Entity\Currency newEntity(array $data, array $options = [])
  * @method array<\Data\Model\Entity\Currency> newEntities(array $data, array $options = [])
@@ -25,6 +24,7 @@ use Tools\Model\Table\Table;
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Currency> saveManyOrFail(iterable $entities, array $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Currency>|false deleteMany(iterable $entities, array $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Currency> deleteManyOrFail(iterable $entities, array $options = [])
+ * @mixin \Search\Model\Behavior\SearchBehavior
  */
 class CurrenciesTable extends Table {
 

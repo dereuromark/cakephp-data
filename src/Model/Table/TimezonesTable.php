@@ -14,6 +14,8 @@ use RuntimeException;
 /**
  * Timezones Model
  *
+ * @property \Data\Model\Table\TimezonesTable|\Cake\ORM\Association\BelongsTo $CanonicalTimezones
+ * @property \Data\Model\Table\CountriesTable|\Cake\ORM\Association\BelongsTo $Countries
  * @method \Data\Model\Entity\Timezone newEmptyEntity()
  * @method \Data\Model\Entity\Timezone newEntity(array $data, array $options = [])
  * @method array<\Data\Model\Entity\Timezone> newEntities(array $data, array $options = [])
@@ -27,11 +29,8 @@ use RuntimeException;
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Timezone> saveManyOrFail(iterable $entities, array $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Timezone>|false deleteMany(iterable $entities, array $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Timezone> deleteManyOrFail(iterable $entities, array $options = [])
- *
  * @mixin \Search\Model\Behavior\SearchBehavior
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
- * @property \Data\Model\Table\TimezonesTable|\Cake\ORM\Association\BelongsTo $CanonicalTimezones
- * @property \Data\Model\Table\CountriesTable|\Cake\ORM\Association\BelongsTo $Countries
  */
 class TimezonesTable extends Table {
 

@@ -12,7 +12,8 @@ use Geo\Geocoder\Geocoder;
 use Tools\Model\Table\Table;
 
 /**
- * @mixin \Search\Model\Behavior\SearchBehavior
+ * @property \Cake\ORM\Association\BelongsTo<\Data\Model\Table\CountriesTable> $Countries
+ * @property \Data\Model\Table\CountiesTable|\Cake\ORM\Association\HasMany $Counties
  * @method \Data\Model\Entity\State get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
  * @method \Data\Model\Entity\State newEntity(array $data, array $options = [])
  * @method array<\Data\Model\Entity\State> newEntities(array $data, array $options = [])
@@ -21,14 +22,13 @@ use Tools\Model\Table\Table;
  * @method \Data\Model\Entity\State patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method array<\Data\Model\Entity\State> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Data\Model\Entity\State findOrCreate($search, ?callable $callback = null, array $options = [])
- * @mixin \Tools\Model\Behavior\SluggedBehavior
  * @method \Data\Model\Entity\State newEmptyEntity()
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State>|false saveMany(iterable $entities, array $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State> saveManyOrFail(iterable $entities, array $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State>|false deleteMany(iterable $entities, array $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State> deleteManyOrFail(iterable $entities, array $options = [])
- * @property \Cake\ORM\Association\BelongsTo<\Data\Model\Table\CountriesTable> $Countries
- * @property \Data\Model\Table\CountiesTable|\Cake\ORM\Association\HasMany $Counties
+ * @mixin \Search\Model\Behavior\SearchBehavior
+ * @mixin \Tools\Model\Behavior\SluggedBehavior
  */
 class StatesTable extends Table {
 

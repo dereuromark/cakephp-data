@@ -19,7 +19,6 @@ use Tools\Model\Table\Table;
  * for details see
  * http://www.loc.gov/standards/iso639-2/php/code_list.php
  *
- * @mixin \Search\Model\Behavior\SearchBehavior
  * @method \Data\Model\Entity\Language get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
  * @method \Data\Model\Entity\Language newEntity(array $data, array $options = [])
  * @method array<\Data\Model\Entity\Language> newEntities(array $data, array $options = [])
@@ -33,6 +32,7 @@ use Tools\Model\Table\Table;
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Language> saveManyOrFail(iterable $entities, array $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Language>|false deleteMany(iterable $entities, array $options = [])
  * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Language> deleteManyOrFail(iterable $entities, array $options = [])
+ * @mixin \Search\Model\Behavior\SearchBehavior
  */
 class LanguagesTable extends Table {
 
