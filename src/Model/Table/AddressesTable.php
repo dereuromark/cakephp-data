@@ -182,11 +182,7 @@ class AddressesTable extends Table {
 			return true;
 		}
 
-		if ($res->zip_length && $res->zip_length != mb_strlen($data['postal_code'])) {
-			return false;
-		}
-
-		return true;
+		return $res->validatePostalCode((string)$data['postal_code']);
 	}
 
 	/**
