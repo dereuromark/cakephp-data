@@ -2,6 +2,7 @@
 
 namespace Data\Test\TestCase\Sync;
 
+use Cake\Http\Exception\NotFoundException;
 use Data\Model\Entity\Timezone;
 use Data\Sync\Timezones;
 use DateTimeImmutable;
@@ -177,6 +178,31 @@ class TimezonesTest extends TestCase {
 				unlink($cachePath);
 			}
 		}
+	}
+
+	/**
+	 * Wikipedia unreachable / NotFoundException must degrade to an empty array, not bubble up
+	 * as a 500 in the admin sync action. CI runners frequently can't reach Wikipedia at all.
+	 *
+	 * @return void
+	 */
+	public function testAllReturnsEmptyOnFetchFailure(): void {
+		$cachePath = TMP . 'wiki-timezones.txt';
+		if (file_exists($cachePath)) {
+			unlink($cachePath);
+		}
+
+		// Anonymous subclass that simulates an unreachable upstream by throwing
+		// the same exception Timezones::fetchContent() would emit on a non-OK HTTP response.
+		$tz = new class extends Timezones {
+
+			protected function fetchContent(): string {
+				throw new NotFoundException('Cannot load timezones HTML from Wikipedia');
+			}
+
+		};
+
+		$this->assertSame([], $tz->all());
 	}
 
 }

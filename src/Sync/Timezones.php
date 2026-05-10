@@ -28,15 +28,23 @@ class Timezones {
 	 * Returns the full timezone catalog scraped from the Wikipedia tz-database article.
 	 *
 	 * Brittle by design — Wikipedia changes its wikitext layout periodically and the
-	 * regex parser below will silently produce empty results on shape drift. Prefer
-	 * {@see allFromPhp()} when the descriptive Wikipedia commentary fields
+	 * regex parser below will silently produce empty results on shape drift. Network
+	 * failures (Wikipedia unreachable, captive portal, rate limit, DNS) are also
+	 * caught here and surfaced as an empty array so callers — notably the admin
+	 * sync action — degrade to "nothing to do" rather than 500ing the request.
+	 *
+	 * Prefer {@see allFromPhp()} when the descriptive Wikipedia commentary fields
 	 * (`covered`, `notes`, `abbr`, `alias`) are not required; that path uses PHP's
 	 * bundled IANA tz database and has no external dependency.
 	 *
 	 * @return array
 	 */
 	public function all(): array {
-		$content = $this->fetchContent();
+		try {
+			$content = $this->fetchContent();
+		} catch (NotFoundException) {
+			return [];
+		}
 
 		$data = json_decode($content, true);
 		if (!is_array($data) || !isset($data['parse']['wikitext']['*']) || !is_string($data['parse']['wikitext']['*'])) {
