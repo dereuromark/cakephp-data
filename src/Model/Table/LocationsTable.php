@@ -103,6 +103,15 @@ class LocationsTable extends Table {
 		if (!is_numeric($lat) || !is_numeric($lng) || !is_numeric($limit)) {
 			return null;
 		}
+
+		// Cast and re-render through %F (locale-independent C-locale float format) before
+		// embedding into the SQL expression. Without this, a stray comma decimal
+		// separator (e.g. de_DE) or a non-canonical numeric string accepted by
+		// is_numeric would slip into the SELECT clause.
+		$latSafe = sprintf('%F', (float)$lat);
+		$lngSafe = sprintf('%F', (float)$lng);
+		$limitSafe = (int)$limit;
+
 		$conditions = [
 			'Location.lat<>0',
 			'Location.lng<>0',
@@ -114,15 +123,15 @@ class LocationsTable extends Table {
 				['Location.id', 'Location.name', 'Location.formatted_address'],
 				[
 					'6371.04 * ACOS( COS( PI()/2 - RADIANS(90 - Location.lat)) * '
-					. 'COS( PI()/2 - RADIANS(90 - ' . $lat . ')) * '
-					. 'COS( RADIANS(Location.lng) - RADIANS(' . $lng . ')) + '
+					. 'COS( PI()/2 - RADIANS(90 - ' . $latSafe . ')) * '
+					. 'COS( RADIANS(Location.lng) - RADIANS(' . $lngSafe . ')) + '
 					. 'SIN( PI()/2 - RADIANS(90 - Location.lat)) * '
-					. 'SIN( PI()/2 - RADIANS(90 - ' . $lat . '))) '
+					. 'SIN( PI()/2 - RADIANS(90 - ' . $latSafe . '))) '
 					. 'AS distance',
 				],
 			),
 			'order' => 'distance ASC',
-			'limit' => $limit,
+			'limit' => $limitSafe,
 		]);
 
 		return $result;

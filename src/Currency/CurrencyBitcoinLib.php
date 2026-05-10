@@ -31,27 +31,27 @@ class CurrencyBitcoinLib {
 	}
 
 	/**
-	 * @return int|null
+	 * Returns the current price of 1 BTC in the configured fiat currency.
+	 *
+	 * Coingecko returns the price as a JSON number with decimal precision
+	 * (e.g. 95871.42), so the return type must be float — coercing to int
+	 * silently drops the fractional part and skews any downstream ratio.
+	 *
+	 * @return float|null
 	 */
-	public function coingecko(): ?int {
+	public function coingecko(): ?float {
 		$currency = strtolower($this->getConfig('currency'));
 		$url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=' . $currency;
 
-		/*
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		$response = curl_exec($ch);
-		curl_close($ch);
-		*/
 		$response = $this->_get($url);
 		if ($response === null) {
 			return null;
 		}
 
 		$data = json_decode($response, true);
+		$value = $data['bitcoin'][$currency] ?? null;
 
-		return $data['bitcoin'][$currency] ?? null;
+		return $value !== null ? (float)$value : null;
 	}
 
 	/**

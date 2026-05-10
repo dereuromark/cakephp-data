@@ -98,16 +98,30 @@ class MimeTest extends TestCase {
 	 * @return void
 	 */
 	public function testgetMimeTypeByAlias() {
-		$res = $this->Mime->detectMimeType('https://raw.githubusercontent.com/dereuromark/cakephp-ide-helper/master/docs/img/code_completion.png');
-		$this->assertEquals('image/png', $res);
+		// docs/img/* moved to docs/public/img/* in cakephp-ide-helper a while back; the
+		// previous URL silently 404'd and emptied the response. Use the live path.
+		$validUrl = 'https://raw.githubusercontent.com/dereuromark/cakephp-ide-helper/master/docs/public/img/code_completion.png';
+		$invalidUrl = 'https://raw.githubusercontent.com/dereuromark/cakephp-ide-helper/master/docs/public/img/code_completion_does_not_exist.png';
 
-		$res = $this->Mime->detectMimeType('https://raw.githubusercontent.com/dereuromark/cakephp-ide-helper/master/docs/img/code_completion_invalid.png');
-		$this->assertEquals('', $res);
+		// Network sanity probe so this test skips cleanly when the runner cannot reach
+		// raw.githubusercontent.com, instead of erroring out and turning the suite red.
+		// We only probe the invalid URL (cheap 404 round-trip) — if that returns headers,
+		// the host is reachable and the assertions below are meaningful.
+		$probe = @get_headers($invalidUrl, false, stream_context_create(['http' => ['timeout' => 3]]));
+		if ($probe === false) {
+			$this->markTestSkipped('raw.githubusercontent.com not reachable from this runner.');
+		}
+
+		$res = $this->Mime->detectMimeType($validUrl);
+		$this->assertSame('image/png', $res);
+
+		$res = $this->Mime->detectMimeType($invalidUrl);
+		$this->assertSame('', $res);
 
 		$file = Plugin::path('Data') . 'tests' . DS . 'test_files' . DS . 'json' . DS . 'bitcoincharts.json';
 		$this->assertFileExists($file);
 		$res = $this->Mime->detectMimeType($file);
-		$this->assertEquals('application/json', $res);
+		$this->assertSame('application/json', $res);
 	}
 
 	/**

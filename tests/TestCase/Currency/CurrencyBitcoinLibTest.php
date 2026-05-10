@@ -45,7 +45,43 @@ class CurrencyBitcoinLibTest extends TestCase {
 				->willReturn(file_get_contents($this->path . 'coingecko.json'));
 		}
 		$result = $this->CurrencyBitcoin->coingecko();
-		$this->assertTrue($result !== null && $result > 999);
+		$this->assertNotNull($result);
+		$this->assertIsFloat($result);
+		$this->assertGreaterThan(999, $result);
+	}
+
+	/**
+	 * Decimal precision must round-trip; coingecko returns floats like 95871.42 and
+	 * the previous int-typed return silently truncated the fractional part.
+	 *
+	 * @return void
+	 */
+	public function testCoingeckoPreservesDecimalPrecision() {
+		if ($this->isDebug()) {
+			$this->markTestSkipped('Live mode: cannot pin a deterministic float for assertion.');
+		}
+		$this->CurrencyBitcoin->expects($this->once())
+			->method('_get')
+			->willReturn(file_get_contents($this->path . 'coingecko.json'));
+
+		$result = $this->CurrencyBitcoin->coingecko();
+		$this->assertSame(95871.42, $result);
+	}
+
+	/**
+	 * Network failure path: _get() returns null and coingecko() must propagate null.
+	 *
+	 * @return void
+	 */
+	public function testCoingeckoReturnsNullOnNetworkFailure() {
+		if ($this->isDebug()) {
+			$this->markTestSkipped('Live mode skips the failure injection.');
+		}
+		$this->CurrencyBitcoin->expects($this->once())
+			->method('_get')
+			->willReturn(null);
+
+		$this->assertNull($this->CurrencyBitcoin->coingecko());
 	}
 
 	/**
