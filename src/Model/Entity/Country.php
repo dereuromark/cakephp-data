@@ -149,4 +149,48 @@ class Country extends Entity {
 		return mb_strtolower($this->iso3);
 	}
 
+	/**
+	 * Validates the given postal code against this country's configured constraints.
+	 *
+	 * Resolution order:
+	 *  - If `zip_regexp` is a non-empty PCRE pattern (with delimiters), it is the
+	 *    authoritative test. Anything that doesn't match returns false.
+	 *  - Otherwise, if `zip_length` is non-zero, the code's mb-length must match exactly.
+	 *  - Otherwise, the country has no declared postal code format and the code is
+	 *    accepted as valid.
+	 *
+	 * Empty input is rejected when any constraint is configured, accepted otherwise —
+	 * callers that want "optional postal code" semantics should short-circuit on their
+	 * side before calling this method.
+	 *
+	 * Invalid regex patterns return false rather than throwing, so a malformed
+	 * `zip_regexp` row in the database does not crash a save or a request.
+	 *
+	 * @param string $code Postal code candidate.
+	 * @return bool
+	 */
+	public function validatePostalCode(string $code): bool {
+		$pattern = isset($this->zip_regexp) ? trim((string)$this->zip_regexp) : '';
+		$length = isset($this->zip_length) ? (int)$this->zip_length : 0;
+
+		if ($pattern === '' && $length === 0) {
+			return true;
+		}
+
+		if ($code === '') {
+			return false;
+		}
+
+		if ($pattern !== '') {
+			$match = @preg_match($pattern, $code);
+			if ($match === false) {
+				return false;
+			}
+
+			return $match === 1;
+		}
+
+		return mb_strlen($code) === $length;
+	}
+
 }
