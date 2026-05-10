@@ -5,6 +5,8 @@ namespace Data\Sync;
 use Cake\Http\Client;
 use Cake\Http\Exception\NotFoundException;
 use Data\Model\Entity\Timezone;
+use DateTimeImmutable;
+use DateTimeZone;
 use InvalidArgumentException;
 
 /**
@@ -23,12 +25,23 @@ class Timezones {
 	public const PAGE = 'List_of_tz_database_time_zones';
 
 	/**
+	 * Returns the full timezone catalog scraped from the Wikipedia tz-database article.
+	 *
+	 * Brittle by design — Wikipedia changes its wikitext layout periodically and the
+	 * regex parser below will silently produce empty results on shape drift. Prefer
+	 * {@see allFromPhp()} when the descriptive Wikipedia commentary fields
+	 * (`covered`, `notes`, `abbr`, `alias`) are not required; that path uses PHP's
+	 * bundled IANA tz database and has no external dependency.
+	 *
 	 * @return array
 	 */
 	public function all(): array {
 		$content = $this->fetchContent();
 
 		$data = json_decode($content, true);
+		if (!is_array($data) || !isset($data['parse']['wikitext']['*']) || !is_string($data['parse']['wikitext']['*'])) {
+			return [];
+		}
 		$data = $data['parse']['wikitext']['*'];
 
 		if (!is_dir(TMP)) {
@@ -134,6 +147,57 @@ class Timezones {
 			];
 			if ($name === 'Europe/Berlin') {
 			}
+		}
+
+		ksort($timezones);
+
+		return $timezones;
+	}
+
+	/**
+	 * Returns the timezone catalog from PHP's bundled IANA tz database.
+	 *
+	 * Output shape matches {@see all()} so it is a drop-in replacement for the structural
+	 * fields (`name`, `country_code`, `offset`, `offset_dst`, `type`). The descriptive
+	 * fields populated by the wikitext scraper (`covered`, `notes`, `abbr`, `alias`)
+	 * are returned as null — PHP does not carry that commentary.
+	 *
+	 * Reference timestamps are passed in to keep DST detection stable: a January date
+	 * yields the standard offset, a July date yields the DST offset (where applicable).
+	 *
+	 * @param \DateTimeImmutable|null $standardReference Date used to read the standard offset (defaults to January 15 of the current year).
+	 * @param \DateTimeImmutable|null $dstReference Date used to read the DST offset (defaults to July 15 of the current year).
+	 * @return array
+	 */
+	public function allFromPhp(?DateTimeImmutable $standardReference = null, ?DateTimeImmutable $dstReference = null): array {
+		$year = (int)date('Y');
+		$standardReference ??= new DateTimeImmutable($year . '-01-15T12:00:00Z');
+		$dstReference ??= new DateTimeImmutable($year . '-07-15T12:00:00Z');
+
+		$timezones = [];
+		foreach (DateTimeZone::listIdentifiers() as $name) {
+			$tz = new DateTimeZone($name);
+
+			$standardOffset = $tz->getOffset($standardReference);
+			$dstOffset = $tz->getOffset($dstReference);
+
+			$countryCode = null;
+			$location = $tz->getLocation();
+			if (is_array($location) && !empty($location['country_code']) && $location['country_code'] !== '??') {
+				$countryCode = $location['country_code'];
+			}
+
+			$timezones[$name] = [
+				'name' => $name,
+				'country_code' => $countryCode,
+				'offset' => $standardOffset,
+				'offset_dst' => $standardOffset !== $dstOffset ? $dstOffset : null,
+				'type' => 'Canonical',
+				'covered' => null,
+				'notes' => '',
+				'alias' => null,
+				'abbr' => null,
+			];
 		}
 
 		ksort($timezones);
