@@ -12,22 +12,26 @@ use InvalidArgumentException;
 use Tools\Model\Table\Table;
 
 /**
- * @property \Data\Model\Table\ContinentsTable|\Cake\ORM\Association\BelongsTo $Continents
- * @property \Data\Model\Table\StatesTable|\Cake\ORM\Association\HasMany $States
- * @property \Data\Model\Table\TimezonesTable|\Cake\ORM\Association\HasMany $Timezones
+ * @extends \Tools\Model\Table\Table<array{Search: \Search\Model\Behavior\SearchBehavior}, \Data\Model\Entity\Country>
+ * @property \Cake\ORM\Association\BelongsTo<\Data\Model\Table\ContinentsTable> $Continents
+ * @property \Cake\ORM\Association\HasMany<\Data\Model\Table\StatesTable> $States
+ * @property \Cake\ORM\Association\HasMany<\Data\Model\Table\TimezonesTable> $Timezones
  * @method \Data\Model\Entity\Country get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
  * @method \Data\Model\Entity\Country newEntity(array $data, array $options = [])
  * @method array<\Data\Model\Entity\Country> newEntities(array $data, array $options = [])
- * @method \Data\Model\Entity\Country|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
- * @method \Data\Model\Entity\Country patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method array<\Data\Model\Entity\Country> patchEntities(iterable $entities, array $data, array $options = [])
- * @method \Data\Model\Entity\Country findOrCreate($search, ?callable $callback = null, array $options = [])
- * @method \Data\Model\Entity\Country saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
+ * @method \Data\Model\Entity\Country|false save(\Data\Model\Entity\Country $entity, array $options = [])
+ * @method \Data\Model\Entity\Country patchEntity(\Data\Model\Entity\Country $entity, array $data, array $options = [])
+ * @method array<\Data\Model\Entity\Country> patchEntities(iterable<\Data\Model\Entity\Country> $entities, array $data, array $options = [])
+ * @method \Data\Model\Entity\Country findOrCreate(\Cake\ORM\Query\SelectQuery|callable|array $search, ?callable $callback = null, array $options = [])
+ * @method \Data\Model\Entity\Country saveOrFail(\Data\Model\Entity\Country $entity, array $options = [])
  * @method \Data\Model\Entity\Country newEmptyEntity()
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country>|false saveMany(iterable $entities, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country> saveManyOrFail(iterable $entities, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country>|false deleteMany(iterable $entities, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country> deleteManyOrFail(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country>|false saveMany(iterable<\Data\Model\Entity\Country> $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country> saveManyOrFail(iterable<\Data\Model\Entity\Country> $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country>|false deleteMany(iterable<\Data\Model\Entity\Country> $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Country> deleteManyOrFail(iterable<\Data\Model\Entity\Country> $entities, array $options = [])
+ * @method bool delete(\Data\Model\Entity\Country $entity, array $options = [])
+ * @method bool deleteOrFail(\Data\Model\Entity\Country $entity, array $options = [])
+ * @method \Data\Model\Entity\Country|array<\Data\Model\Entity\Country> loadInto(\Data\Model\Entity\Country|array<\Data\Model\Entity\Country> $entities, array $contain)
  * @mixin \Search\Model\Behavior\SearchBehavior
  */
 class CountriesTable extends Table {

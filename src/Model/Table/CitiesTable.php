@@ -6,22 +6,24 @@ use Cake\Core\Configure;
 use Tools\Model\Table\Table;
 
 /**
- * @property \Data\Model\Table\CountriesTable|\Cake\ORM\Association\BelongsTo $Countries
- *
+ * @extends \Tools\Model\Table\Table<array{Slugged: \Tools\Model\Behavior\SluggedBehavior}, \Data\Model\Entity\City>
+ * @property \Cake\ORM\Association\BelongsTo<\Data\Model\Table\CountriesTable> $Countries
  * @method \Data\Model\Entity\City newEmptyEntity()
  * @method \Data\Model\Entity\City newEntity(array $data, array $options = [])
  * @method array<\Data\Model\Entity\City> newEntities(array $data, array $options = [])
  * @method \Data\Model\Entity\City get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
- * @method \Data\Model\Entity\City findOrCreate($search, ?callable $callback = null, array $options = [])
- * @method \Data\Model\Entity\City patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method array<\Data\Model\Entity\City> patchEntities(iterable $entities, array $data, array $options = [])
- * @method \Data\Model\Entity\City|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
- * @method \Data\Model\Entity\City saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\City>|false saveMany(iterable $entities, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\City> saveManyOrFail(iterable $entities, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\City>|false deleteMany(iterable $entities, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\City> deleteManyOrFail(iterable $entities, array $options = [])
- *
+ * @method \Data\Model\Entity\City findOrCreate(\Cake\ORM\Query\SelectQuery|callable|array $search, ?callable $callback = null, array $options = [])
+ * @method \Data\Model\Entity\City patchEntity(\Data\Model\Entity\City $entity, array $data, array $options = [])
+ * @method array<\Data\Model\Entity\City> patchEntities(iterable<\Data\Model\Entity\City> $entities, array $data, array $options = [])
+ * @method \Data\Model\Entity\City|false save(\Data\Model\Entity\City $entity, array $options = [])
+ * @method \Data\Model\Entity\City saveOrFail(\Data\Model\Entity\City $entity, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\City>|false saveMany(iterable<\Data\Model\Entity\City> $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\City> saveManyOrFail(iterable<\Data\Model\Entity\City> $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\City>|false deleteMany(iterable<\Data\Model\Entity\City> $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\City> deleteManyOrFail(iterable<\Data\Model\Entity\City> $entities, array $options = [])
+ * @method bool delete(\Data\Model\Entity\City $entity, array $options = [])
+ * @method bool deleteOrFail(\Data\Model\Entity\City $entity, array $options = [])
+ * @method \Data\Model\Entity\City|array<\Data\Model\Entity\City> loadInto(\Data\Model\Entity\City|array<\Data\Model\Entity\City> $entities, array $contain)
  * @mixin \Tools\Model\Behavior\SluggedBehavior
  */
 class CitiesTable extends Table {

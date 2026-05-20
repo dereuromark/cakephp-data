@@ -27,9 +27,9 @@
 	},
 	"require": {
 		"php": ">=8.2",
-		"cakephp/cakephp": "^5.1.1",
-		"dereuromark/cakephp-shim": "^3.1.0",
-		"dereuromark/cakephp-tools": "^3.9.2"
+		"cakephp/cakephp": "^5.3.4",
+		"dereuromark/cakephp-shim": "^3.9.0",
+		"dereuromark/cakephp-tools": "^3.12.8"
 	},
 	"require-dev": {
 		"cakephp/migrations": "^5.0.0",
