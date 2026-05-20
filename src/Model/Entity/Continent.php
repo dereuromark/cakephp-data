@@ -15,8 +15,8 @@ use Tools\Model\Entity\Entity;
  * @property int $status
  * @property \Cake\I18n\DateTime $modified
  * @property \Data\Model\Entity\Continent|null $parent_continent
- * @property array<\Cake\ORM\Entity> $child_continents
- * @property array<\Cake\ORM\Entity> $countries
+ * @property array<\Data\Model\Entity\Continent> $child_continents
+ * @property array<\Data\Model\Entity\Country> $countries
  */
 class Continent extends Entity {
 

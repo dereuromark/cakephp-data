@@ -19,19 +19,23 @@ use Tools\Model\Table\Table;
  * for details see
  * http://www.loc.gov/standards/iso639-2/php/code_list.php
  *
+ * @extends \Tools\Model\Table\Table<array{Search: \Search\Model\Behavior\SearchBehavior}, \Data\Model\Entity\Language>
  * @method \Data\Model\Entity\Language get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
  * @method \Data\Model\Entity\Language newEntity(array $data, array $options = [])
  * @method array<\Data\Model\Entity\Language> newEntities(array $data, array $options = [])
- * @method \Data\Model\Entity\Language|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
- * @method \Data\Model\Entity\Language patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method array<\Data\Model\Entity\Language> patchEntities(iterable $entities, array $data, array $options = [])
- * @method \Data\Model\Entity\Language findOrCreate($search, ?callable $callback = null, array $options = [])
- * @method \Data\Model\Entity\Language saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
+ * @method \Data\Model\Entity\Language|false save(\Data\Model\Entity\Language $entity, array $options = [])
+ * @method \Data\Model\Entity\Language patchEntity(\Data\Model\Entity\Language $entity, array $data, array $options = [])
+ * @method array<\Data\Model\Entity\Language> patchEntities(iterable<\Data\Model\Entity\Language> $entities, array $data, array $options = [])
+ * @method \Data\Model\Entity\Language findOrCreate(\Cake\ORM\Query\SelectQuery|callable|array $search, ?callable $callback = null, array $options = [])
+ * @method \Data\Model\Entity\Language saveOrFail(\Data\Model\Entity\Language $entity, array $options = [])
  * @method \Data\Model\Entity\Language newEmptyEntity()
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Language>|false saveMany(iterable $entities, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Language> saveManyOrFail(iterable $entities, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Language>|false deleteMany(iterable $entities, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Language> deleteManyOrFail(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Language>|false saveMany(iterable<\Data\Model\Entity\Language> $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Language> saveManyOrFail(iterable<\Data\Model\Entity\Language> $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Language>|false deleteMany(iterable<\Data\Model\Entity\Language> $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Language> deleteManyOrFail(iterable<\Data\Model\Entity\Language> $entities, array $options = [])
+ * @method bool delete(\Data\Model\Entity\Language $entity, array $options = [])
+ * @method bool deleteOrFail(\Data\Model\Entity\Language $entity, array $options = [])
+ * @method \Data\Model\Entity\Language|array<\Data\Model\Entity\Language> loadInto(\Data\Model\Entity\Language|array<\Data\Model\Entity\Language> $entities, array $contain)
  * @mixin \Search\Model\Behavior\SearchBehavior
  */
 class LanguagesTable extends Table {

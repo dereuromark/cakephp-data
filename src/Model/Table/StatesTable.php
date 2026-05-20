@@ -12,21 +12,25 @@ use Geo\Geocoder\Geocoder;
 use Tools\Model\Table\Table;
 
 /**
+ * @extends \Tools\Model\Table\Table<array{Search: \Search\Model\Behavior\SearchBehavior, Slugged: \Tools\Model\Behavior\SluggedBehavior}, \Data\Model\Entity\State>
  * @property \Cake\ORM\Association\BelongsTo<\Data\Model\Table\CountriesTable> $Countries
  * @property \Data\Model\Table\CountiesTable|\Cake\ORM\Association\HasMany $Counties
  * @method \Data\Model\Entity\State get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
  * @method \Data\Model\Entity\State newEntity(array $data, array $options = [])
  * @method array<\Data\Model\Entity\State> newEntities(array $data, array $options = [])
- * @method \Data\Model\Entity\State|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
- * @method \Data\Model\Entity\State saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
- * @method \Data\Model\Entity\State patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method array<\Data\Model\Entity\State> patchEntities(iterable $entities, array $data, array $options = [])
- * @method \Data\Model\Entity\State findOrCreate($search, ?callable $callback = null, array $options = [])
+ * @method \Data\Model\Entity\State|false save(\Data\Model\Entity\State $entity, array $options = [])
+ * @method \Data\Model\Entity\State saveOrFail(\Data\Model\Entity\State $entity, array $options = [])
+ * @method \Data\Model\Entity\State patchEntity(\Data\Model\Entity\State $entity, array $data, array $options = [])
+ * @method array<\Data\Model\Entity\State> patchEntities(iterable<\Data\Model\Entity\State> $entities, array $data, array $options = [])
+ * @method \Data\Model\Entity\State findOrCreate(\Cake\ORM\Query\SelectQuery|callable|array $search, ?callable $callback = null, array $options = [])
  * @method \Data\Model\Entity\State newEmptyEntity()
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State>|false saveMany(iterable $entities, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State> saveManyOrFail(iterable $entities, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State>|false deleteMany(iterable $entities, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State> deleteManyOrFail(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State>|false saveMany(iterable<\Data\Model\Entity\State> $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State> saveManyOrFail(iterable<\Data\Model\Entity\State> $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State>|false deleteMany(iterable<\Data\Model\Entity\State> $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\State> deleteManyOrFail(iterable<\Data\Model\Entity\State> $entities, array $options = [])
+ * @method bool delete(\Data\Model\Entity\State $entity, array $options = [])
+ * @method bool deleteOrFail(\Data\Model\Entity\State $entity, array $options = [])
+ * @method \Data\Model\Entity\State|array<\Data\Model\Entity\State> loadInto(\Data\Model\Entity\State|array<\Data\Model\Entity\State> $entities, array $contain)
  * @mixin \Search\Model\Behavior\SearchBehavior
  * @mixin \Tools\Model\Behavior\SluggedBehavior
  */

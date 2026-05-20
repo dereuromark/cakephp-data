@@ -7,22 +7,26 @@ use Cake\Event\EventInterface;
 use Tools\Model\Table\Table;
 
 /**
- * @property \Data\Model\Table\ContinentsTable|\Cake\ORM\Association\BelongsTo $ParentContinents
- * @property \Cake\ORM\Table|\Cake\ORM\Association\HasMany $ChildContinents
- * @property \Cake\ORM\Table|\Cake\ORM\Association\HasMany $Countries
+ * @extends \Tools\Model\Table\Table<array{Tree: \Cake\ORM\Behavior\TreeBehavior}, \Data\Model\Entity\Continent>
+ * @property \Cake\ORM\Association\BelongsTo<\Data\Model\Table\ContinentsTable> $ParentContinents
+ * @property \Cake\ORM\Association\HasMany<\Data\Model\Table\ContinentsTable> $ChildContinents
+ * @property \Cake\ORM\Association\HasMany<\Data\Model\Table\CountriesTable> $Countries
  * @method \Data\Model\Entity\Continent newEmptyEntity()
  * @method \Data\Model\Entity\Continent newEntity(array $data, array $options = [])
  * @method array<\Data\Model\Entity\Continent> newEntities(array $data, array $options = [])
  * @method \Data\Model\Entity\Continent get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
- * @method \Data\Model\Entity\Continent findOrCreate($search, ?callable $callback = null, array $options = [])
- * @method \Data\Model\Entity\Continent patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method array<\Data\Model\Entity\Continent> patchEntities(iterable $entities, array $data, array $options = [])
- * @method \Data\Model\Entity\Continent|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
- * @method \Data\Model\Entity\Continent saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Continent>|false saveMany(iterable $entities, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Continent> saveManyOrFail(iterable $entities, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Continent>|false deleteMany(iterable $entities, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Continent> deleteManyOrFail(iterable $entities, array $options = [])
+ * @method \Data\Model\Entity\Continent findOrCreate(\Cake\ORM\Query\SelectQuery|callable|array $search, ?callable $callback = null, array $options = [])
+ * @method \Data\Model\Entity\Continent patchEntity(\Data\Model\Entity\Continent $entity, array $data, array $options = [])
+ * @method array<\Data\Model\Entity\Continent> patchEntities(iterable<\Data\Model\Entity\Continent> $entities, array $data, array $options = [])
+ * @method \Data\Model\Entity\Continent|false save(\Data\Model\Entity\Continent $entity, array $options = [])
+ * @method \Data\Model\Entity\Continent saveOrFail(\Data\Model\Entity\Continent $entity, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Continent>|false saveMany(iterable<\Data\Model\Entity\Continent> $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Continent> saveManyOrFail(iterable<\Data\Model\Entity\Continent> $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Continent>|false deleteMany(iterable<\Data\Model\Entity\Continent> $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Continent> deleteManyOrFail(iterable<\Data\Model\Entity\Continent> $entities, array $options = [])
+ * @method bool delete(\Data\Model\Entity\Continent $entity, array $options = [])
+ * @method bool deleteOrFail(\Data\Model\Entity\Continent $entity, array $options = [])
+ * @method \Data\Model\Entity\Continent|array<\Data\Model\Entity\Continent> loadInto(\Data\Model\Entity\Continent|array<\Data\Model\Entity\Continent> $entities, array $contain)
  * @mixin \Cake\ORM\Behavior\TreeBehavior
  */
 class ContinentsTable extends Table {

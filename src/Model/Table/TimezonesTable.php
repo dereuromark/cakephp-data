@@ -14,21 +14,25 @@ use RuntimeException;
 /**
  * Timezones Model
  *
- * @property \Data\Model\Table\TimezonesTable|\Cake\ORM\Association\BelongsTo $CanonicalTimezones
- * @property \Data\Model\Table\CountriesTable|\Cake\ORM\Association\BelongsTo $Countries
+ * @extends \Cake\ORM\Table<array{Search: \Search\Model\Behavior\SearchBehavior, Timestamp: \Cake\ORM\Behavior\TimestampBehavior}, \Data\Model\Entity\Timezone>
+ * @property \Cake\ORM\Association\BelongsTo<\Data\Model\Table\TimezonesTable> $CanonicalTimezones
+ * @property \Cake\ORM\Association\BelongsTo<\Data\Model\Table\CountriesTable> $Countries
  * @method \Data\Model\Entity\Timezone newEmptyEntity()
  * @method \Data\Model\Entity\Timezone newEntity(array $data, array $options = [])
  * @method array<\Data\Model\Entity\Timezone> newEntities(array $data, array $options = [])
  * @method \Data\Model\Entity\Timezone get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
- * @method \Data\Model\Entity\Timezone findOrCreate($search, ?callable $callback = null, array $options = [])
- * @method \Data\Model\Entity\Timezone patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method array<\Data\Model\Entity\Timezone> patchEntities(iterable $entities, array $data, array $options = [])
- * @method \Data\Model\Entity\Timezone|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
- * @method \Data\Model\Entity\Timezone saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Timezone>|false saveMany(iterable $entities, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Timezone> saveManyOrFail(iterable $entities, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Timezone>|false deleteMany(iterable $entities, array $options = [])
- * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Timezone> deleteManyOrFail(iterable $entities, array $options = [])
+ * @method \Data\Model\Entity\Timezone findOrCreate(\Cake\ORM\Query\SelectQuery|callable|array $search, ?callable $callback = null, array $options = [])
+ * @method \Data\Model\Entity\Timezone patchEntity(\Data\Model\Entity\Timezone $entity, array $data, array $options = [])
+ * @method array<\Data\Model\Entity\Timezone> patchEntities(iterable<\Data\Model\Entity\Timezone> $entities, array $data, array $options = [])
+ * @method \Data\Model\Entity\Timezone|false save(\Data\Model\Entity\Timezone $entity, array $options = [])
+ * @method \Data\Model\Entity\Timezone saveOrFail(\Data\Model\Entity\Timezone $entity, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Timezone>|false saveMany(iterable<\Data\Model\Entity\Timezone> $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Timezone> saveManyOrFail(iterable<\Data\Model\Entity\Timezone> $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Timezone>|false deleteMany(iterable<\Data\Model\Entity\Timezone> $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Data\Model\Entity\Timezone> deleteManyOrFail(iterable<\Data\Model\Entity\Timezone> $entities, array $options = [])
+ * @method bool delete(\Data\Model\Entity\Timezone $entity, array $options = [])
+ * @method bool deleteOrFail(\Data\Model\Entity\Timezone $entity, array $options = [])
+ * @method \Data\Model\Entity\Timezone|array<\Data\Model\Entity\Timezone> loadInto(\Data\Model\Entity\Timezone|array<\Data\Model\Entity\Timezone> $entities, array $contain)
  * @mixin \Search\Model\Behavior\SearchBehavior
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
