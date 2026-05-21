@@ -4,5 +4,4 @@ parameters:
 		- TestCase/
 	bootstrapFiles:
 		- bootstrap.php
-		- ../phpunit.phar
 	ignoreErrors:

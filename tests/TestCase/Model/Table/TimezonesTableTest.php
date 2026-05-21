@@ -34,15 +34,6 @@ class TimezonesTableTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function tearDown(): void {
-		unset($this->Timezones);
-
-		parent::tearDown();
-	}
-
-	/**
-	 * @return void
-	 */
 	public function testValidationDefault(): void {
 		$this->markTestIncomplete('Not implemented yet.');
 	}
