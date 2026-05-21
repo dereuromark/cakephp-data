@@ -54,11 +54,7 @@ return [
 		'iconFontClass' => null, // e.g. 'flag-icon'
 		// Custom path for country flag images. Plugin-dotted paths are supported,
 		// e.g. 'MyPlugin./img/country_flags/'. Null uses the bundled Data flags.
-		// NOTE: DataHelper reads camelCase `imagePath`, but CountriesController and
-		// Admin/CountriesController read snake_case `image_path`. Set BOTH to the same
-		// value until the source is unified, or the admin flag pages will ignore it.
 		'imagePath' => null,
-		'image_path' => null, // Read by Countries / Admin Countries controllers (see note)
 	],
 
 	// Language flag display options (read by DataHelper).

@@ -53,7 +53,7 @@ class CountriesController extends DataAppController {
 	public function beforeFilter(EventInterface $event): void {
 		parent::beforeFilter($event);
 
-		$specific = Configure::read('Country.image_path');
+		$specific = Configure::read('Country.imagePath') ?? Configure::read('Country.image_path');
 		if ($specific) {
 			$this->imageFolder = WWW_ROOT . 'img' . DS . $specific . DS;
 		} else {
