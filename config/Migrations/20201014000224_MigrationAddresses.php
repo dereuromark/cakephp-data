@@ -69,11 +69,6 @@ class MigrationAddresses extends BaseMigration {
 				'limit' => 60,
 				'null' => true,
 			])
-			->addColumn('postal_code', 'string', [
-				'default' => null,
-				'limit' => 7,
-				'null' => false,
-			])
 			->addColumn('formatted_address', 'string', [
 				'default' => null,
 				'limit' => 190,
@@ -85,6 +80,11 @@ class MigrationAddresses extends BaseMigration {
 			])
 			->addColumn('lng', 'float', [
 				'default' => null,
+				'null' => true,
+			])
+			->addColumn('last_used', 'datetime', [
+				'default' => null,
+				'limit' => null,
 				'null' => true,
 			])
 			->addColumn('created', 'datetime', [
