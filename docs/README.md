@@ -22,6 +22,28 @@ It also contains:
 - Currencies
 - MimeTypes and MimeTypeImages
 
+## Addresses
+
+`Address` records attach to any host record via the polymorphic `foreign_id`
+(the host record's primary key) together with `model` (the host model name).
+`foreign_id` is a `biginteger` and follows the application's primary-key
+signedness via the `Migrations.unsigned_primary_keys` flag, so it lines up with
+the integer ids it references.
+
+### Using UUIDs
+
+If your host records use UUID primary keys, add a migration in your application
+that changes the column type after the plugin's tables exist:
+
+```php
+$this->table('addresses')
+    ->changeColumn('foreign_id', 'uuid', [
+        'null' => true,
+        'default' => null,
+    ])
+    ->update();
+```
+
 ## Country Icons
 The plugin ships with default icons in `webroot/img/country_flags/`.
 It is recommended to copy them to APP level, though, for performance reasons.
