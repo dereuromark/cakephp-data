@@ -17,7 +17,7 @@ class AddressesFixture extends TestFixture {
 	 */
 	public array $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'collate' => null, 'comment' => ''],
-		'foreign_id' => ['type' => 'biginteger', 'null' => false, 'default' => null, 'length' => 20, 'unsigned' => false, 'comment' => ''],
+		'foreign_id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'unsigned' => false, 'comment' => ''],
 		'model' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 30, 'comment' => '', 'charset' => 'utf8'],
 		'country_id' => ['type' => 'integer', 'null' => true, 'default' => null, 'length' => 10, 'collate' => null, 'comment' => 'redundance purposely'],
 		'first_name' => ['type' => 'string', 'null' => true, 'default' => null, 'length' => 50, 'comment' => '', 'charset' => 'utf8'],

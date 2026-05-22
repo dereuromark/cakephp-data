@@ -17,12 +17,18 @@ class MigrationAddresses extends BaseMigration {
 	 * @return void
 	 */
 	public function change() {
-		// The polymorphic foreign_id references a host record's primary key, so it
-		// must match the application's primary-key signedness. The flag is false
-		// (signed primary keys) when unset, so an unset flag yields a signed column,
-		// matching the default-signed ids it references. Pass the default explicitly
-		// to make that intent unmistakable. (Unsigned only takes effect on MySQL.)
+		// The polymorphic foreign_id type and signedness follow the application's
+		// Polymorphic.type and Migrations.unsigned_primary_keys config keys.
+		$type = (string)Configure::read('Polymorphic.type', 'integer');
 		$signed = !(bool)Configure::read('Migrations.unsigned_primary_keys', false);
+
+		$polymorphicOptions = [
+			'default' => null,
+			'null' => true,
+		];
+		if (in_array($type, ['integer', 'biginteger'], true)) {
+			$polymorphicOptions['signed'] = $signed;
+		}
 
 		$this->table('addresses')
 			->addColumn('id', 'integer', [
@@ -57,11 +63,7 @@ class MigrationAddresses extends BaseMigration {
 				'limit' => 80,
 				'null' => false,
 			])
-			->addColumn('foreign_id', 'biginteger', [
-				'default' => null,
-				'null' => true,
-				'signed' => $signed,
-			])
+			->addColumn('foreign_id', $type, $polymorphicOptions)
 			->addColumn('model_key', 'string', [
 				'default' => '',
 				'limit' => 60,

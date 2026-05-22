@@ -26,22 +26,19 @@ It also contains:
 
 `Address` records attach to any host record via the polymorphic `foreign_id`
 (the host record's primary key) together with `model` (the host model name).
-`foreign_id` is a `biginteger` and follows the application's primary-key
-signedness via the `Migrations.unsigned_primary_keys` flag, so it lines up with
-the integer ids it references.
 
-### Using UUIDs
+`foreign_id` defaults to `integer` and its type is controlled by the global
+`Polymorphic.type` config key. Accepted values are `integer`, `biginteger`,
+`uuid`, and `binaryuuid`. For the integer variants the column signedness follows
+`Migrations.unsigned_primary_keys`. For UUID variants no signedness option is
+applied.
 
-If your host records use UUID primary keys, add a migration in your application
-that changes the column type after the plugin's tables exist:
+To use a different type, set the config before running migrations — for example
+in `config/app.php` or `config/app_local.php`:
 
 ```php
-$this->table('addresses')
-    ->changeColumn('foreign_id', 'uuid', [
-        'null' => true,
-        'default' => null,
-    ])
-    ->update();
+// In your app config (e.g. config/app.php or config/app_local.php):
+Configure::write('Polymorphic.type', 'uuid'); // or 'biginteger' / 'binaryuuid'
 ```
 
 ## Country Icons
