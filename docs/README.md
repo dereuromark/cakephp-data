@@ -37,9 +37,15 @@ To use a different type, set the config before running migrations — for exampl
 in `config/app.php` or `config/app_local.php`:
 
 ```php
-// In your app config (e.g. config/app.php or config/app_local.php):
-Configure::write('Polymorphic.type', 'uuid'); // or 'biginteger' / 'binaryuuid'
+// config/app.php (merged into Configure at bootstrap, including the migrations CLI)
+'Polymorphic' => [
+    'type' => 'uuid', // integer (default) | biginteger | uuid | binaryuuid
+],
 ```
+
+This setting only affects *fresh installs* (i.e. when the migration runs for the
+first time). Existing installs keep their current column type; to change the type
+on an existing install, write an app-level migration that alters the column.
 
 ## Country Icons
 The plugin ships with default icons in `webroot/img/country_flags/`.
