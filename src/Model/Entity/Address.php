@@ -6,6 +6,7 @@ use Tools\Model\Entity\Entity;
 
 /**
  * @property int $id
+ * @property int|null $foreign_id
  * @property int|null $category_id
  * @property int|null $address_type_id
  * @property int|null $location_id

@@ -17,7 +17,7 @@ class AddressesFixture extends TestFixture {
 	 */
 	public array $fields = [
 		'id' => ['type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'collate' => null, 'comment' => ''],
-		'foreign_id' => ['type' => 'uuid', 'null' => false, 'default' => null, 'length' => 36, 'comment' => '', 'charset' => 'utf8'],
+		'foreign_id' => ['type' => 'integer', 'null' => true, 'default' => null, 'length' => 10, 'unsigned' => false, 'comment' => ''],
 		'model' => ['type' => 'string', 'null' => false, 'default' => null, 'length' => 30, 'comment' => '', 'charset' => 'utf8'],
 		'country_id' => ['type' => 'integer', 'null' => true, 'default' => null, 'length' => 10, 'collate' => null, 'comment' => 'redundance purposely'],
 		'first_name' => ['type' => 'string', 'null' => true, 'default' => null, 'length' => 50, 'comment' => '', 'charset' => 'utf8'],
@@ -43,7 +43,7 @@ class AddressesFixture extends TestFixture {
 	 */
 	public array $records = [
 		[
-			'foreign_id' => '481fc6d0-b920-43e0-a40d-111111111111',
+			'foreign_id' => 11,
 			'model' => 'Partner',
 			'country_id' => null,
 			'first_name' => 'Hans',
@@ -60,7 +60,7 @@ class AddressesFixture extends TestFixture {
 			'type_id' => '0',
 		],
 		[
-			'foreign_id' => '481fc6d0-b920-43e0-a40d-111111111111',
+			'foreign_id' => 11,
 			'model' => 'Restaurant',
 			'country_id' => '1',
 			'first_name' => '',
@@ -77,7 +77,7 @@ class AddressesFixture extends TestFixture {
 			'type_id' => '0',
 		],
 		[
-			'foreign_id' => '481fc6d0-b920-43e0-a40d-111111111111',
+			'foreign_id' => 11,
 			'model' => 'Partner',
 			'country_id' => null,
 			'first_name' => 'Tim',
@@ -94,7 +94,7 @@ class AddressesFixture extends TestFixture {
 			'type_id' => '0',
 		],
 		[
-			'foreign_id' => '481fc6d0-b920-43e0-a40d-111111111111',
+			'foreign_id' => 11,
 			'model' => 'Restaurant',
 			'country_id' => '1',
 			'first_name' => '',
