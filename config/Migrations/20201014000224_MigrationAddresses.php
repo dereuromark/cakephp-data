@@ -84,6 +84,7 @@ class MigrationAddresses extends BaseMigration {
 			])
 			->addColumn('last_used', 'datetime', [
 				'default' => null,
+				'limit' => null,
 				'null' => true,
 			])
 			->addColumn('created', 'datetime', [
