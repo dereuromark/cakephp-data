@@ -17,13 +17,6 @@ class MigrationCities extends BaseMigration {
 	 */
 	public function change() {
 		$this->table('cities')
-			->addColumn('id', 'integer', [
-				'autoIncrement' => true,
-				'default' => null,
-				'limit' => null,
-				'null' => false,
-			])
-			->addPrimaryKey(['id'])
 			->addColumn('country_id', 'integer', [
 				'default' => null,
 				'limit' => null,

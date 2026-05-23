@@ -31,13 +31,6 @@ class MigrationAddresses extends BaseMigration {
 		}
 
 		$this->table('addresses')
-			->addColumn('id', 'integer', [
-				'autoIncrement' => true,
-				'default' => null,
-				'limit' => null,
-				'null' => false,
-			])
-			->addPrimaryKey(['id'])
 			->addColumn('country_id', 'integer', [
 				'default' => null,
 				'limit' => null,
