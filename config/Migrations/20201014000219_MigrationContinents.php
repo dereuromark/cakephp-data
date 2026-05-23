@@ -72,7 +72,7 @@ INSERT INTO `continents` (`id`, `name`, `ori_name`, `code`, `parent_id`, `lft`, 
 (5, 'South America', '', 'SA', 4, 8, 9, 1, '2011-07-15 19:56:16'),
 (6, 'North America', '', 'NA', 4, 10, 11, 1, '2011-07-15 19:56:22'),
 (7, 'Antarctica', '', 'AN', null, 13, 14, 0, '2011-07-15 19:56:39'),
-(8, 'Australia/Oceania', '',  'OC', null, 15, 16, 1, '2011-07-15 19:56:48')
+(8, 'Australia/Oceania', '',  'OC', null, 15, 16, 1, '2011-07-15 19:56:48'),
 (9, 'Africa', '',  'AF', null, 17, 18, 1, '2011-07-15 19:56:48');
 SQL;
 		$this->execute($sql);

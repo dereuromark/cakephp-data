@@ -16,7 +16,7 @@ class MigrationPostalCodes extends BaseMigration {
 	 * @return void
 	 */
 	public function change() {
-		$this->table('addresses')
+		$this->table('postal_codes')
 			->addColumn('id', 'integer', [
 				'autoIncrement' => true,
 				'default' => null,
