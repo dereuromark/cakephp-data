@@ -135,19 +135,19 @@ class MimeTypeImagesController extends DataAppController {
 					continue;
 				}
 
-					$filename = $this->request->getData('filenames')[$key];
-					$ext = pathinfo((string)$filename, PATHINFO_EXTENSION);
-					$ext = mb_strtolower($ext);
-					$name = mb_strtolower((string)$image);
+				$filename = $this->request->getData('filenames')[$key];
+				$ext = pathinfo((string)$filename, PATHINFO_EXTENSION);
+				$ext = mb_strtolower($ext);
+				$name = mb_strtolower((string)$image);
 				if (empty($name) || empty($ext)) {
 					$this->Flash->error(' \'' . $filename . ' \': \'' . $name . '\' not a valid extension name, or \'' . $ext . '\' not a valid image file extension...');
 
 					continue;
 				}
 
-					$recordId = null;
+				$recordId = null;
 
-					$dbImage = $this->MimeTypeImages->find('all', ...['conditions' => ['name' => $name]])->first();
+				$dbImage = $this->MimeTypeImages->find('all', ...['conditions' => ['name' => $name]])->first();
 				if ($dbImage) {
 					if (empty($dbImage['ext']) || !file_exists(PATH_MIMETYPES . $dbImage['name'] . '.' . $dbImage['ext'])) {
 						$recordId = $dbImage['id'];
@@ -180,7 +180,7 @@ class MimeTypeImagesController extends DataAppController {
 
 			}
 			if (!empty($renameSuccess)) {
-					$this->Flash->success(count($renameSuccess) . ' Icons added: ' . implode(', ', $renameSuccess));
+				$this->Flash->success(count($renameSuccess) . ' Icons added: ' . implode(', ', $renameSuccess));
 			}
 		}
 
