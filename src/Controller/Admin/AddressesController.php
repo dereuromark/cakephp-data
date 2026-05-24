@@ -16,7 +16,7 @@ class AddressesController extends DataAppController {
 	 */
 	public function index() {
 		$addresses = $this->paginate();
-		$this->set(compact('addresses'));
+		$this->set(['addresses' => $addresses]);
 
 		$this->viewBuilder()->setHelpers(['Geo.GoogleMap']);
 	}
@@ -28,7 +28,7 @@ class AddressesController extends DataAppController {
 	public function view($id = null) {
 		$address = $this->Addresses->get($id);
 
-		$this->set(compact('address'));
+		$this->set(['address' => $address]);
 		$this->viewBuilder()->setHelpers(['Geo.GoogleMap']);
 	}
 
@@ -59,7 +59,7 @@ class AddressesController extends DataAppController {
 			$states = $this->Addresses->States->find('list');
 		}
 
-		$this->set(compact('countries', 'states'));
+		$this->set(['countries' => $countries, 'states' => $states]);
 	}
 
 	/**
@@ -98,7 +98,7 @@ class AddressesController extends DataAppController {
 			$states = $this->Addresses->States->find('list');
 		}
 
-		$this->set(compact('countries', 'states'));
+		$this->set(['countries' => $countries, 'states' => $states]);
 	}
 
 	/**

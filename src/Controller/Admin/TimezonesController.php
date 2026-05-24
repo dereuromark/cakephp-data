@@ -56,7 +56,7 @@ class TimezonesController extends AppController {
 			$timezones = $this->paginate();
 		}
 
-		$this->set(compact('timezones'));
+		$this->set(['timezones' => $timezones]);
 	}
 
 	/**
@@ -66,7 +66,7 @@ class TimezonesController extends AppController {
 		$storedTimezones = $this->Timezones->find()->all()->toArray();
 		$storedTimezones = Hash::combine($storedTimezones, '{n}.name', '{n}');
 
-		$fields = $this->request->getQuery('fields') ? explode(',', $this->request->getQuery('fields')) : [];
+		$fields = $this->request->getQuery('fields') ? explode(',', (string)$this->request->getQuery('fields')) : [];
 		$diff = (new Timezones())->diff($storedTimezones, $fields);
 
 		if ($this->request->is('post')) {
@@ -110,7 +110,7 @@ class TimezonesController extends AppController {
 			return $this->redirect(['action' => 'sync']);
 		}
 
-		$this->set(compact('diff', 'storedTimezones'));
+		$this->set(['diff' => $diff, 'storedTimezones' => $storedTimezones]);
 	}
 
 	/**
@@ -150,7 +150,7 @@ class TimezonesController extends AppController {
 			return $this->redirect(['action' => 'link']);
 		}
 
-		$this->set(compact('todo', 'storedTimezones'));
+		$this->set(['todo' => $todo, 'storedTimezones' => $storedTimezones]);
 	}
 
 	/**
@@ -166,7 +166,7 @@ class TimezonesController extends AppController {
 		}
 		$timezone = $this->Timezones->get($id, contain: $contain);
 
-		$this->set(compact('timezone'));
+		$this->set(['timezone' => $timezone]);
 	}
 
 	/**
@@ -183,7 +183,7 @@ class TimezonesController extends AppController {
 			}
 			$this->Flash->error(__d('data', 'The timezone could not be saved. Please, try again.'));
 		}
-		$this->set(compact('timezone'));
+		$this->set(['timezone' => $timezone]);
 	}
 
 	/**
@@ -201,7 +201,7 @@ class TimezonesController extends AppController {
 			}
 			$this->Flash->error(__d('data', 'The timezone could not be saved. Please, try again.'));
 		}
-		$this->set(compact('timezone'));
+		$this->set(['timezone' => $timezone]);
 	}
 
 	/**

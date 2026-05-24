@@ -18,7 +18,7 @@ class ContinentsController extends DataAppController {
 			->contain(['ParentContinents']);
 
 		$continents = $this->paginate($query);
-		$this->set(compact('continents'));
+		$this->set(['continents' => $continents]);
 	}
 
 	/**
@@ -33,7 +33,7 @@ class ContinentsController extends DataAppController {
 			->find('list', ...['keyField' => 'continent_id', 'valueField' => 'count'])
 			->toArray();
 
-		$this->set(compact('continents', 'countries'));
+		$this->set(['continents' => $continents, 'countries' => $countries]);
 
 		$this->viewBuilder()->addHelper('Tools.Tree');
 	}
@@ -46,7 +46,7 @@ class ContinentsController extends DataAppController {
 	public function view($id = null) {
 		$continent = $this->Continents->get($id, contain: ['ParentContinents']);
 
-		$this->set(compact('continent'));
+		$this->set(['continent' => $continent]);
 	}
 
 	/**
@@ -67,7 +67,7 @@ class ContinentsController extends DataAppController {
 			$this->Flash->error(__d('data', 'formContainsErrors'));
 		}
 		$parents = ['' => __d('data', ' - n/a - ')] + $this->Continents->ParentContinents->find('treeList', ...['spacer' => '» '])->toArray();
-		$this->set(compact('continent', 'parents'));
+		$this->set(['continent' => $continent, 'parents' => $parents]);
 	}
 
 	/**
@@ -91,7 +91,7 @@ class ContinentsController extends DataAppController {
 		}
 
 		$parents = ['' => __d('data', ' - n/a - ')] + $this->Continents->ParentContinents->find('treeList', ...['spacer' => '» '])->toArray();
-		$this->set(compact('continent', 'parents'));
+		$this->set(['continent' => $continent, 'parents' => $parents]);
 	}
 
 	/**

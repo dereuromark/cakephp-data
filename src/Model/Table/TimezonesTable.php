@@ -153,7 +153,7 @@ class TimezonesTable extends Table {
 		}
 
 		$notes = $timezone->notes ?? '';
-		if (strpos($notes, 'Link to [[') === false) {
+		if (!str_contains($notes, 'Link to [[')) {
 			return null;
 		}
 

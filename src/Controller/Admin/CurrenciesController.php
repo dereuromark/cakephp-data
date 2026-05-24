@@ -31,7 +31,7 @@ class CurrenciesController extends DataAppController {
 	 */
 	public function table() {
 		$currencies = $this->Currencies->availableCurrencies();
-		$this->set(compact('currencies'));
+		$this->set(['currencies' => $currencies]);
 	}
 
 	/**
@@ -65,7 +65,7 @@ class CurrenciesController extends DataAppController {
 			}
 		}
 
-		$this->set(compact('baseCurrency', 'currencies'));
+		$this->set(['baseCurrency' => $baseCurrency, 'currencies' => $currencies]);
 	}
 
 	/**
@@ -76,7 +76,7 @@ class CurrenciesController extends DataAppController {
 	public function view($id = null) {
 		$currency = $this->Currencies->get($id);
 
-		$this->set(compact('currency'));
+		$this->set(['currency' => $currency]);
 	}
 
 	/**
@@ -101,7 +101,7 @@ class CurrenciesController extends DataAppController {
 		}
 
 		$currencies = $this->Currencies->currencyList();
-		$this->set(compact('currency', 'currencies'));
+		$this->set(['currency' => $currency, 'currencies' => $currencies]);
 	}
 
 	/**
@@ -123,7 +123,7 @@ class CurrenciesController extends DataAppController {
 			$this->Flash->error(__d('data', 'record edit not saved'));
 		}
 
-		$this->set(compact('currency'));
+		$this->set(['currency' => $currency]);
 	}
 
 	/**
@@ -203,7 +203,7 @@ class CurrenciesController extends DataAppController {
 		$this->autoRender = false;
 		if (isset($value)) {
 			$this->set('ajaxToggle', $value);
-			$this->set(compact('field', 'model'));
+			$this->set(['field' => $field, 'model' => $model]);
 
 			//FIXME
 			$this->render('admin_toggle', 'ajax');

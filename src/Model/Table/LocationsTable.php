@@ -70,7 +70,7 @@ class LocationsTable extends Table {
 	 */
 	public function getLocation($locationName, $countryId = null) {
 		$country = $countryId !== null ? ', ' . $countryId : __d('data', 'Germany'); ////Country::addressList($countryId)
-		$countryId = $countryId ?? 1;
+		$countryId ??= 1;
 
 		if (is_numeric($locationName) && strlen($locationName) < 5) { //Country::zipCodeLength($countryId)
 			$location = $this->find('all', ...['conditions' => ['formatted_address LIKE' => $locationName . '%' . $country]])->first();
@@ -117,24 +117,23 @@ class LocationsTable extends Table {
 			'Location.lng<>0',
 			'1=1 HAVING distance<' . 75,
 		];
-		$result = $this->find('all', ...[
+
+		return $this->find('all', ...[
 			'conditions' => $conditions,
-			'fields' => array_merge(
-				['Location.id', 'Location.name', 'Location.formatted_address'],
-				[
-					'6371.04 * ACOS( COS( PI()/2 - RADIANS(90 - Location.lat)) * '
-					. 'COS( PI()/2 - RADIANS(90 - ' . $latSafe . ')) * '
-					. 'COS( RADIANS(Location.lng) - RADIANS(' . $lngSafe . ')) + '
-					. 'SIN( PI()/2 - RADIANS(90 - Location.lat)) * '
-					. 'SIN( PI()/2 - RADIANS(90 - ' . $latSafe . '))) '
-					. 'AS distance',
-				],
-			),
+			'fields' => [
+				'Location.id',
+				'Location.name',
+				'Location.formatted_address',
+				'6371.04 * ACOS( COS( PI()/2 - RADIANS(90 - Location.lat)) * '
+						. 'COS( PI()/2 - RADIANS(90 - ' . $latSafe . ')) * '
+						. 'COS( RADIANS(Location.lng) - RADIANS(' . $lngSafe . ')) + '
+						. 'SIN( PI()/2 - RADIANS(90 - Location.lat)) * '
+						. 'SIN( PI()/2 - RADIANS(90 - ' . $latSafe . '))) '
+						. 'AS distance',
+			],
 			'order' => 'distance ASC',
 			'limit' => $limitSafe,
 		]);
-
-		return $result;
 	}
 
 	/**
@@ -152,7 +151,7 @@ class LocationsTable extends Table {
 			Log::write(LOG_WARNING, 'Invalid IP `' . $ip . '`');
 		}
 
-		return !empty($record) ? $this->findLocationByCoordinates($record->latitude, $record->longitude, 1) : false;
+		return empty($record) ? false : $this->findLocationByCoordinates($record->latitude, $record->longitude, 1);
 	}
 
 	/**
@@ -174,7 +173,7 @@ class LocationsTable extends Table {
 		}
 		$ip = Utility::getClientIp();
 		# usually getClientIp already removes multiple ips in favor of one single ip. but seems to fail sometimes
-		if (strpos($ip, ',') !== false) {
+		if (str_contains($ip, ',')) {
 			return null;
 
 			//$ips = explode(',', $ip);

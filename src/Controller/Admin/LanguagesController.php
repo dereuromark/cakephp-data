@@ -49,7 +49,7 @@ class LanguagesController extends DataAppController {
 
 		$language = $this->Languages->newEmptyEntity();
 
-		$this->set(compact('languages', 'language'));
+		$this->set(['languages' => $languages, 'language' => $language]);
 	}
 
 	/**
@@ -60,7 +60,7 @@ class LanguagesController extends DataAppController {
 	public function view($id = null) {
 		$language = $this->Languages->get($id);
 
-		$this->set(compact('language'));
+		$this->set(['language' => $language]);
 	}
 
 	/**
@@ -81,7 +81,7 @@ class LanguagesController extends DataAppController {
 			$this->Flash->error(__d('data', 'formContainsErrors'));
 		}
 
-		$this->set(compact('language'));
+		$this->set(['language' => $language]);
 	}
 
 	/**
@@ -105,7 +105,7 @@ class LanguagesController extends DataAppController {
 			$this->Flash->error(__d('data', 'formContainsErrors'));
 		}
 
-		$this->set(compact('language'));
+		$this->set(['language' => $language]);
 	}
 
 	/**
@@ -180,7 +180,7 @@ class LanguagesController extends DataAppController {
 
 		$languages = $this->Languages->find('all', ...[]);
 
-		$this->set(compact('isoList', 'languages'));
+		$this->set(['isoList' => $isoList, 'languages' => $languages]);
 	}
 
 	/**
@@ -194,25 +194,25 @@ class LanguagesController extends DataAppController {
 		$languages = $this->Languages->catalog() ?? [];
 		$locales = [];
 		foreach ($languages as $key => $value) {
-			if (strlen($key) === 2) {
+			if (strlen((string)$key) === 2) {
 				$locales[$key] = $value;
 				$locales[$key]['regional'] = [];
 
 				continue;
 			}
-			if (strlen($key) === 1) {
+			if (strlen((string)$key) === 1) {
 				//$locales[$key] = $value;
 				//$locales[$key]['deprecated'] = 1;
 				continue;
 			}
-			$baseLocale = substr($key, 0, 2);
+			$baseLocale = substr((string)$key, 0, 2);
 			if (!isset($locales[$baseLocale])) {
 				$locales[$baseLocale] = ['missing_base' => 1];
 			}
 			$locales[$baseLocale]['regional'][] = $value;
 		}
 
-		$this->set(compact('isoList', 'languages', 'locales'));
+		$this->set(['isoList' => $isoList, 'languages' => $languages, 'locales' => $locales]);
 	}
 
 	/**

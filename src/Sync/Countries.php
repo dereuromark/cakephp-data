@@ -35,7 +35,7 @@ class Countries {
 		$countries = $array['countries']['country'] ?? [];
 
 		$result = [];
-		foreach ($countries as $key => $element) {
+		foreach ($countries as $element) {
 			if (!empty($element['timezones']) && !isset($element['timezones'][0])) {
 				$element['timezones'] = [$element['timezones']];
 			}
@@ -136,14 +136,14 @@ class Countries {
 			return null;
 		}
 
-		if (substr($phoneCode, 0, 1) === '+') {
+		if (str_starts_with($phoneCode, '+')) {
 			$phoneCode = substr($phoneCode, 1);
 		}
-		if (substr($phoneCode, 0, 2) === '00') {
+		if (str_starts_with($phoneCode, '00')) {
 			$phoneCode = substr($phoneCode, 2);
 		}
 
-		if (strpos($phoneCode, ' and ') !== false) {
+		if (str_contains($phoneCode, ' and ')) {
 			$phoneCodePieces = explode(' and ', $phoneCode);
 			$phoneCode = implode(',', $phoneCodePieces);
 		}

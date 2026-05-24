@@ -49,7 +49,7 @@ class StatesController extends DataAppController {
 		}
 
 		$countries = $this->States->Countries->findActive()->find('list');
-		$this->set(compact('states', 'countries'));
+		$this->set(['states' => $states, 'countries' => $countries]);
 	}
 
 	/**
@@ -68,7 +68,7 @@ class StatesController extends DataAppController {
 			$defaultFieldLabel = 'doesNotMatter';
 		}
 
-		$this->set(compact('states', 'defaultFieldLabel'));
+		$this->set(['states' => $states, 'defaultFieldLabel' => $defaultFieldLabel]);
 	}
 
 }

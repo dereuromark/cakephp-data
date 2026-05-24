@@ -108,7 +108,7 @@ class CurrenciesTable extends Table {
 		}
 
 		if (isset($data['code'])) {
-			$data['code'] = mb_strtoupper($data['code']);
+			$data['code'] = mb_strtoupper((string)$data['code']);
 
 			$code = $data['code'];
 			# intelligent autocomplete
@@ -140,7 +140,7 @@ class CurrenciesTable extends Table {
 	 */
 	public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void {
 		if (isset($entity['name'])) {
-			$entity['name'] = ucwords($entity['name']);
+			$entity['name'] = ucwords((string)$entity['name']);
 		}
 	}
 

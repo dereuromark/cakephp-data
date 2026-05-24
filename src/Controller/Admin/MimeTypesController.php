@@ -46,7 +46,7 @@ class MimeTypesController extends DataAppController {
 			//pr(WWW_ROOT.'files'.DS.'tmp'.DS.'test.'.$extension);
 		}
 
-		$this->set(compact('extensions'));
+		$this->set(['extensions' => $extensions]);
 	}
 
 	/**
@@ -59,7 +59,7 @@ class MimeTypesController extends DataAppController {
 		//$unused = $this->MimeTypes->MimeTypeImages->find('all', ...['conditions' => ['MimeTypeImages.id' => $unusedIds]]);
 		$unused = [];
 
-		$this->set(compact('unused'));
+		$this->set(['unused' => $unused]);
 	}
 
 	/**
@@ -78,7 +78,7 @@ class MimeTypesController extends DataAppController {
 			if ($image) {
 				$id = $type['id'];
 				if ($this->MimeTypes->updateAll(['mime_type_image_id' => $image['id']], ['id' => $id])) {
-					$addedIcon[] = $fileExt . ' ' . CHAR_ARROWS . ' ' . $image['name'] . '.' . (!empty($image['ext']) ? $image['ext'] : '?');
+					$addedIcon[] = $fileExt . ' ' . CHAR_ARROWS . ' ' . $image['name'] . '.' . (empty($image['ext']) ? '?' : $image['ext']);
 				}
 			}
 		}
@@ -136,7 +136,7 @@ class MimeTypesController extends DataAppController {
 			}
 		}
 
-		$this->set(compact('report', 'mimeTypes'));
+		$this->set(['report' => $report, 'mimeTypes' => $mimeTypes]);
 	}
 
 	/**
@@ -147,7 +147,7 @@ class MimeTypesController extends DataAppController {
 		$this->paginate['conditions'] = $conditions;
 
 		$mimeTypes = $this->paginate();
-		$this->set(compact('mimeTypes'));
+		$this->set(['mimeTypes' => $mimeTypes]);
 	}
 
 	/**
@@ -182,7 +182,7 @@ class MimeTypesController extends DataAppController {
 				$searchStr = $sessionSearch['search'];
 			}
 		}
-		$this->set(compact('searchStr'));
+		$this->set(['searchStr' => $searchStr]);
 
 		if (!empty($searchStr)) {
 			$this->request->getSession()->write($model . '.search', ['search' => $searchStr, 'field' => $fieldStr]);
@@ -209,7 +209,7 @@ class MimeTypesController extends DataAppController {
 		}
 		$mimeType = $this->MimeTypes->get($id);
 
-		$this->set(compact('mimeType'));
+		$this->set(['mimeType' => $mimeType]);
 	}
 
 	/**
@@ -237,7 +237,7 @@ class MimeTypesController extends DataAppController {
 			$this->request = $this->request->withData('active', true);
 		}
 		$mimeTypeImages = $this->MimeTypes->MimeTypeImages->find('list');
-		$this->set(compact('mimeType', 'mimeTypeImages'));
+		$this->set(['mimeType' => $mimeType, 'mimeTypeImages' => $mimeTypeImages]);
 	}
 
 	/**
@@ -263,7 +263,7 @@ class MimeTypesController extends DataAppController {
 		}
 
 		$mimeTypeImages = $this->MimeTypes->MimeTypeImages->find('list');
-		$this->set(compact('mimeType', 'mimeTypeImages'));
+		$this->set(['mimeType' => $mimeType, 'mimeTypeImages' => $mimeTypeImages]);
 	}
 
 	/**

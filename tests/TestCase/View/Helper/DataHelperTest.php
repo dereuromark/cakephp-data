@@ -20,7 +20,7 @@ class DataHelperTest extends TestCase {
 	public function setUp(): void {
 		parent::setUp();
 
-		$this->DataHelper = new DataHelper(new View(null));
+		$this->DataHelper = new DataHelper(new View());
 	}
 
 	/**

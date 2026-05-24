@@ -32,7 +32,7 @@ class TimezonesController extends AppController {
 	public function index() {
 		$timezones = $this->paginate($this->Timezones);
 
-		$this->set(compact('timezones'));
+		$this->set(['timezones' => $timezones]);
 	}
 
 }

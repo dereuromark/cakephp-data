@@ -108,7 +108,7 @@ class StatesTable extends Table {
 	 */
 	public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options): void {
 		if (isset($data['code'])) {
-			$data['code'] = mb_strtoupper($data['code']);
+			$data['code'] = mb_strtoupper((string)$data['code']);
 		}
 	}
 
@@ -184,10 +184,9 @@ class StatesTable extends Table {
 					 */
 
 					$state = $this->patchEntity($res, $saveArray);
-					if (!$this->save($state)) {
-						if ($data->getCountry()?->getCode() !== 'DC') {
-							//fixme
-						}
+					if (!$this->save($state) && $data->getCountry()?->getCode() !== 'DC') {
+						//fixme
+
 					}
 				}
 
@@ -230,23 +229,19 @@ class StatesTable extends Table {
 					$state = $this->patchEntity($res, $saveArray);
 					if ($this->save($state)) {
 						$count++;
-
 						/*
-						if (!empty($saveArray['code']) && $saveArray['code'] !== $res->code) {
-							//$this->log('Code for state \'' . $data['country_province'] . '\' changed from \'' . $res['code'] . '\' to \'' . $saveArray['code'] .'\'', LOG_NOTICE);
-						}
-						*/
-
-					} else {
+                        if (!empty($saveArray['code']) && $saveArray['code'] !== $res->code) {
+                        	//$this->log('Code for state \'' . $data['country_province'] . '\' changed from \'' . $res['code'] . '\' to \'' . $saveArray['code'] .'\'', LOG_NOTICE);
+                        }
+                        */
+					} elseif ($data->getCountry()?->getCode() !== 'DC') {
 						//pr($data); pr($geocoder->debug()); die();
-
-						if ($data->getCountry()?->getCode() !== 'DC') { // ['country_province_code']
-							//echo returns($this->id);
-							//pr($res);
-							//pr($data);
-							//pr($saveArray);
-							//die(returns($this->validationErrors));
-						}
+						// ['country_province_code']
+						//echo returns($this->id);
+						//pr($res);
+						//pr($data);
+						//pr($saveArray);
+						//die(returns($this->validationErrors));
 					}
 				}
 			}

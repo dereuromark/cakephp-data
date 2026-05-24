@@ -40,7 +40,7 @@ class CurrencyBitcoinLib {
 	 * @return float|null
 	 */
 	public function coingecko(): ?float {
-		$currency = strtolower($this->getConfig('currency'));
+		$currency = strtolower((string)$this->getConfig('currency'));
 		$url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=' . $currency;
 
 		$response = $this->_get($url);

@@ -51,8 +51,6 @@ class CountriesController extends DataAppController {
 	 * @return void
 	 */
 	public function beforeFilter(EventInterface $event): void {
-		parent::beforeFilter($event);
-
 		$specific = Configure::read('Country.imagePath') ?? Configure::read('Country.image_path');
 		if ($specific) {
 			$this->imageFolder = WWW_ROOT . 'img' . DS . $specific . DS;
@@ -75,14 +73,14 @@ class CountriesController extends DataAppController {
 		$iconFontClass = (bool)Configure::read('Country.iconFontClass');
 		if (!$iconFontClass) {
 			foreach ($countries as $country) {
-				$icon = strtolower($country['iso2']);
+				$icon = strtolower((string)$country['iso2']);
 				if (!isset($icons[$icon])) {
 					$countriesWithoutIcons[] = $country;
 				}
 			}
 		}
 
-		$this->set(compact('icons', 'countries', 'countriesWithoutIcons', 'iconFontClass'));
+		$this->set(['icons' => $icons, 'countries' => $countries, 'countriesWithoutIcons' => $countriesWithoutIcons, 'iconFontClass' => $iconFontClass]);
 	}
 
 	/**
@@ -110,7 +108,7 @@ class CountriesController extends DataAppController {
 		$storedCountries = $this->Countries->find()->all()->toArray();
 		$storedCountries = Hash::combine($storedCountries, '{n}.iso3', '{n}');
 
-		$fields = $this->request->getQuery('fields') ? explode(',', $this->request->getQuery('fields')) : [];
+		$fields = $this->request->getQuery('fields') ? explode(',', (string)$this->request->getQuery('fields')) : [];
 		$diff = (new Countries())->diff($storedCountries, $fields);
 
 		if ($this->request->is('post')) {
@@ -154,7 +152,7 @@ class CountriesController extends DataAppController {
 			return $this->redirect(['action' => 'sync']);
 		}
 
-		$this->set(compact('diff', 'storedCountries'));
+		$this->set(['diff' => $diff, 'storedCountries' => $storedCountries]);
 	}
 
 	/**
@@ -168,7 +166,7 @@ class CountriesController extends DataAppController {
 			$countries = $this->paginate();
 		}
 
-		$this->set(compact('countries'));
+		$this->set(['countries' => $countries]);
 
 		$this->viewBuilder()->setHelpers(['Geo.GoogleMap']);
 	}
@@ -185,7 +183,7 @@ class CountriesController extends DataAppController {
 		}
 		$country = $this->Countries->get($id, contain: $contain);
 
-		$this->set(compact('country'));
+		$this->set(['country' => $country]);
 	}
 
 	/**
@@ -207,7 +205,7 @@ class CountriesController extends DataAppController {
 			$this->Flash->error(__d('data', 'record add not saved'));
 		}
 
-		$this->set(compact('country'));
+		$this->set(['country' => $country]);
 	}
 
 	/**
@@ -234,7 +232,7 @@ class CountriesController extends DataAppController {
 		if (Configure::read('Data.Country.Continent') !== false) {
 			$continents = $this->Countries->Continents->find('treeList', ...['spacer' => '» '])->toArray();
 		}
-		$this->set(compact('country', 'continents'));
+		$this->set(['country' => $country, 'continents' => $continents]);
 	}
 
 	/**
@@ -298,7 +296,7 @@ class CountriesController extends DataAppController {
 		$countries = $this->Countries->find('all');
 
 		//TODO.
-		$this->set(compact('countries'));
+		$this->set(['countries' => $countries]);
 	}
 
 }

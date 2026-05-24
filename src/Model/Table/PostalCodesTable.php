@@ -97,11 +97,7 @@ class PostalCodesTable extends Table {
 	 */
 	public function searchLocation($code, $countryId = null, array $options = []) {
 		if (!empty($options['exact'])) {
-			if (!empty($options['term'])) {
-				$term = sprintf($options['term'], $code);
-			} else {
-				$term = $code . '%';
-			}
+			$term = empty($options['term']) ? $code . '%' : sprintf($options['term'], $code);
 			$search = ['code LIKE' => "$term"];
 		} else {
 			$search = ['code' => $code];
