@@ -14,6 +14,9 @@ namespace Data\Utility;
  */
 class L10n {
 
+	public function __construct() {
+	}
+
 	/**
 	 * Maps ISO 639-3 to I10n::_l10nCatalog
 	 * The terminological codes (first one per language) should be used if possible.
