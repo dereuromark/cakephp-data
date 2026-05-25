@@ -131,9 +131,9 @@ class MimeTypeImagesTable extends Table {
 			# remove id from mime_types table
 
 			/** @var array<\Data\Model\Entity\MimeTypeImage> $types */
-			$types = $this->MimeTypes->find('all', ...['fields' => ['id'], 'conditions' => ['mime_type_image_id' => $mimeTypeImage->id]])->toArray();
+			$types = $this->MimeTypes->find('all', ...['fields' => ['id'], 'conditions' => ['mime_type_image_id' => $mimeTypeImage->get('id')]])->toArray();
 			foreach ($types as $type) {
-				$id = $type->id;
+				$id = $type->get('id');
 				$this->MimeTypes->updateAll(['mime_type_image_id' => null], ['id' => $id]);
 			}
 		}

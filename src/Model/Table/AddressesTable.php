@@ -276,7 +276,7 @@ class AddressesTable extends Table {
 			if (isset($entity['country_id']) && empty($entity['country_id']) && !empty($entity['geocoder_result']['country_code'])) {
 				$country = $this->Countries->find('all', ...['conditions' => ['Countries.iso2' => $entity['geocoder_result']['country_code']]])->first();
 				if (!empty($country)) {
-					$entity['country_id'] = $country->id;
+					$entity['country_id'] = $country->get('id');
 				}
 			}
 		}
