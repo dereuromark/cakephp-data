@@ -13,6 +13,8 @@ use Tools\Utility\Utility;
 
 /**
  * @deprecated Moved to Geo plugin.
+ * @extends \Tools\Model\Table\Table<array<string, \Cake\ORM\Behavior>, \Data\Model\Entity\Location>
+ * @method \Data\Model\Entity\Location newEntity(array $data, array $options = [])
  * @mixin \Geo\Model\Behavior\GeocoderBehavior
  */
 class LocationsTable extends Table {
