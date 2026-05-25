@@ -48,7 +48,7 @@ class StatesController extends DataAppController {
 		}
 		$countries = $this->States->Countries->find('list')->toArray();
 
-		$this->set(['states' => $states, 'countries' => $countries]);
+		$this->set(compact('states', 'countries'));
 		$this->viewBuilder()->setHelpers(['Geo.GoogleMap']);
 	}
 
@@ -70,7 +70,7 @@ class StatesController extends DataAppController {
 			$defaultFieldLabel = 'doesNotMatter';
 		}
 
-		$this->set(['states' => $states, 'defaultFieldLabel' => $defaultFieldLabel]);
+		$this->set(compact('states', 'defaultFieldLabel'));
 	}
 
 	/**
@@ -93,7 +93,7 @@ class StatesController extends DataAppController {
 		}
 
 		$countries = $this->States->Countries->find('list');
-		$this->set(['state' => $state, 'countries' => $countries]);
+		$this->set(compact('state', 'countries'));
 	}
 
 	/**
@@ -117,7 +117,7 @@ class StatesController extends DataAppController {
 		}
 
 		$countries = $this->States->Countries->find('list');
-		$this->set(['state' => $state, 'countries' => $countries]);
+		$this->set(compact('state', 'countries'));
 	}
 
 	/**

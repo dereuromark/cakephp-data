@@ -59,7 +59,7 @@ class AddressesController extends DataAppController {
 			$states = $this->Addresses->States->find('list');
 		}
 
-		$this->set(['countries' => $countries, 'states' => $states]);
+		$this->set(compact('countries', 'states'));
 	}
 
 	/**
@@ -98,7 +98,7 @@ class AddressesController extends DataAppController {
 			$states = $this->Addresses->States->find('list');
 		}
 
-		$this->set(['countries' => $countries, 'states' => $states]);
+		$this->set(compact('countries', 'states'));
 	}
 
 	/**

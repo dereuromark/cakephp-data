@@ -66,7 +66,7 @@ class CountryStateHelperComponent extends Component {
 				break;
 			}
 		}
-		$this->Controller->set(['countries' => $countries, 'states' => $states, 'defaultValue' => $defaultValue]);
+		$this->Controller->set(compact('countries', 'states', 'defaultValue'));
 	}
 
 }

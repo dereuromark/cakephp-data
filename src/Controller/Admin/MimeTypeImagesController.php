@@ -76,7 +76,7 @@ class MimeTypeImagesController extends DataAppController {
 					$fileExtensions[$extension] = $extension;
 				}
 
-				$this->set(['fileExtensions' => $fileExtensions, 'alreadyIn' => $alreadyIn]);
+				$this->set(compact('fileExtensions', 'alreadyIn'));
 
 			}
 
@@ -358,7 +358,7 @@ class MimeTypeImagesController extends DataAppController {
 		foreach ($images as $image) {
 			$availableImages[$image] = $image;
 		}
-		$this->set(['mimeTypeImage' => $mimeTypeImage, 'availableImages' => $availableImages]);
+		$this->set(compact('mimeTypeImage', 'availableImages'));
 	}
 
 	/**
@@ -395,7 +395,7 @@ class MimeTypeImagesController extends DataAppController {
 		foreach ($images as $image) {
 			$availableImages[$image] = $image;
 		}
-		$this->set(['mimeTypeImage' => $mimeTypeImage, 'availableImages' => $availableImages]);
+		$this->set(compact('mimeTypeImage', 'availableImages'));
 	}
 
 	/**

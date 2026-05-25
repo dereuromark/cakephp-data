@@ -80,7 +80,7 @@ class CountriesController extends DataAppController {
 			}
 		}
 
-		$this->set(['icons' => $icons, 'countries' => $countries, 'countriesWithoutIcons' => $countriesWithoutIcons, 'iconFontClass' => $iconFontClass]);
+		$this->set(compact('icons', 'countries', 'countriesWithoutIcons', 'iconFontClass'));
 	}
 
 	/**
@@ -152,7 +152,7 @@ class CountriesController extends DataAppController {
 			return $this->redirect(['action' => 'sync']);
 		}
 
-		$this->set(['diff' => $diff, 'storedCountries' => $storedCountries]);
+		$this->set(compact('diff', 'storedCountries'));
 	}
 
 	/**
@@ -232,7 +232,7 @@ class CountriesController extends DataAppController {
 		if (Configure::read('Data.Country.Continent') !== false) {
 			$continents = $this->Countries->Continents->find('treeList', ...['spacer' => '» '])->toArray();
 		}
-		$this->set(['country' => $country, 'continents' => $continents]);
+		$this->set(compact('country', 'continents'));
 	}
 
 	/**

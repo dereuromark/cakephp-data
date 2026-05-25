@@ -110,7 +110,7 @@ class TimezonesController extends AppController {
 			return $this->redirect(['action' => 'sync']);
 		}
 
-		$this->set(['diff' => $diff, 'storedTimezones' => $storedTimezones]);
+		$this->set(compact('diff', 'storedTimezones'));
 	}
 
 	/**
@@ -150,7 +150,7 @@ class TimezonesController extends AppController {
 			return $this->redirect(['action' => 'link']);
 		}
 
-		$this->set(['todo' => $todo, 'storedTimezones' => $storedTimezones]);
+		$this->set(compact('todo', 'storedTimezones'));
 	}
 
 	/**

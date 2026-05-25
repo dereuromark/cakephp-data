@@ -47,7 +47,7 @@ class PostalCodesController extends DataAppController {
 		}
 
 		$numbers = strlen((string)$term);
-		$this->set(['postalCodes' => $postalCodes, 'numbers' => $numbers]);
+		$this->set(compact('postalCodes', 'numbers'));
 		$this->viewBuilder()->setHelpers(['Geo.GoogleMap']);
 	}
 

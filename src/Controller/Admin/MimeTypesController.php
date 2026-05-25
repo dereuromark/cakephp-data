@@ -136,7 +136,7 @@ class MimeTypesController extends DataAppController {
 			}
 		}
 
-		$this->set(['report' => $report, 'mimeTypes' => $mimeTypes]);
+		$this->set(compact('report', 'mimeTypes'));
 	}
 
 	/**
@@ -237,7 +237,7 @@ class MimeTypesController extends DataAppController {
 			$this->request = $this->request->withData('active', true);
 		}
 		$mimeTypeImages = $this->MimeTypes->MimeTypeImages->find('list');
-		$this->set(['mimeType' => $mimeType, 'mimeTypeImages' => $mimeTypeImages]);
+		$this->set(compact('mimeType', 'mimeTypeImages'));
 	}
 
 	/**
@@ -263,7 +263,7 @@ class MimeTypesController extends DataAppController {
 		}
 
 		$mimeTypeImages = $this->MimeTypes->MimeTypeImages->find('list');
-		$this->set(['mimeType' => $mimeType, 'mimeTypeImages' => $mimeTypeImages]);
+		$this->set(compact('mimeType', 'mimeTypeImages'));
 	}
 
 	/**

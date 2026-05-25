@@ -65,7 +65,7 @@ class CurrenciesController extends DataAppController {
 			}
 		}
 
-		$this->set(['baseCurrency' => $baseCurrency, 'currencies' => $currencies]);
+		$this->set(compact('baseCurrency', 'currencies'));
 	}
 
 	/**
@@ -101,7 +101,7 @@ class CurrenciesController extends DataAppController {
 		}
 
 		$currencies = $this->Currencies->currencyList();
-		$this->set(['currency' => $currency, 'currencies' => $currencies]);
+		$this->set(compact('currency', 'currencies'));
 	}
 
 	/**
@@ -203,7 +203,7 @@ class CurrenciesController extends DataAppController {
 		$this->autoRender = false;
 		if (isset($value)) {
 			$this->set('ajaxToggle', $value);
-			$this->set(['field' => $field, 'model' => $model]);
+			$this->set(compact('field', 'model'));
 
 			//FIXME
 			$this->render('admin_toggle', 'ajax');

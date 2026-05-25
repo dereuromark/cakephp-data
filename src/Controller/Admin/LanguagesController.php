@@ -49,7 +49,7 @@ class LanguagesController extends DataAppController {
 
 		$language = $this->Languages->newEmptyEntity();
 
-		$this->set(['languages' => $languages, 'language' => $language]);
+		$this->set(compact('languages', 'language'));
 	}
 
 	/**
@@ -180,7 +180,7 @@ class LanguagesController extends DataAppController {
 
 		$languages = $this->Languages->find('all', ...[]);
 
-		$this->set(['isoList' => $isoList, 'languages' => $languages]);
+		$this->set(compact('isoList', 'languages'));
 	}
 
 	/**
@@ -212,7 +212,7 @@ class LanguagesController extends DataAppController {
 			$locales[$baseLocale]['regional'][] = $value;
 		}
 
-		$this->set(['isoList' => $isoList, 'languages' => $languages, 'locales' => $locales]);
+		$this->set(compact('isoList', 'languages', 'locales'));
 	}
 
 	/**
