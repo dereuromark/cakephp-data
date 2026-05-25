@@ -161,7 +161,7 @@ class MimeTypesTable extends Table {
 		/** @var \Data\Model\Entity\MimeType|null $type */
 		$type = $this->findMimeType($ext);
 		if ($type) {
-			$id = $type->id;
+			$id = $type->get('id');
 
 			return (bool)$this->updateAll(['sort' => $type['sort'] + 1], ['id' => $id]);
 		}

@@ -128,7 +128,7 @@ class StatesTable extends Table {
 		$state = $this->newEntity($conditions);
 
 		if ($this->save($state)) {
-			return $state->id;
+			return $state->get('id');
 		}
 
 		throw new InternalErrorException(json_encode($state->getErrors()) ?: 'Unknown error');
@@ -161,7 +161,7 @@ class StatesTable extends Table {
 		$geocoder = new Geocoder();
 
 		$override = false;
-		if ($state->id == -1) {
+		if ($state->get('id') == -1) {
 			$id = '';
 			$override = true;
 		}
