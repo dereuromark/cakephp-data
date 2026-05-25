@@ -3,16 +3,18 @@
 namespace Data\Model\Table;
 
 use Cake\Core\Configure;
-use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
 use Cake\Log\Log;
 use Cake\Validation\Validation;
 use Cake\Validation\Validator;
+use Data\Model\Entity\Location;
 use Tools\Model\Table\Table;
 use Tools\Utility\Utility;
 
 /**
  * @deprecated Moved to Geo plugin.
+ * @extends \Tools\Model\Table\Table<array<string, \Cake\ORM\Behavior>, \Data\Model\Entity\Location>
+ * @method \Data\Model\Entity\Location newEntity(array $data, array $options = [])
  * @mixin \Geo\Model\Behavior\GeocoderBehavior
  */
 class LocationsTable extends Table {
@@ -51,10 +53,10 @@ class LocationsTable extends Table {
 	 * FIXME
 	 *
 	 * @param \Cake\Event\EventInterface $event
-	 * @param \Cake\ORM\Entity $entity
+	 * @param \Data\Model\Entity\Location $entity
 	 * @return void
 	 */
-	public function _beforeSave(EventInterface $event, EntityInterface $entity) {
+	public function _beforeSave(EventInterface $event, Location $entity): void {
 		$additional = ['locality', 'sublocality'];
 		foreach ($additional as $field) {
 			if (!empty($entity['geocoder_result'][$field])) {
@@ -66,12 +68,14 @@ class LocationsTable extends Table {
 	/**
 	 * @param string $locationName
 	 * @param int|null $countryId
-	 * @return \Cake\Datasource\EntityInterface|false
+	 * @return \Data\Model\Entity\Location|false
 	 */
 	public function getLocation($locationName, $countryId = null) {
 		$country = $countryId !== null ? ', ' . $countryId : __d('data', 'Germany'); ////Country::addressList($countryId)
-		$countryId = $countryId ?? 1;
+		$countryId ??= 1;
 
+		/** @var \Data\Model\Entity\Location|null $location */
+		$location = null;
 		if (is_numeric($locationName) && strlen($locationName) < 5) { //Country::zipCodeLength($countryId)
 			$location = $this->find('all', ...['conditions' => ['formatted_address LIKE' => $locationName . '%' . $country]])->first();
 		} else {
@@ -80,17 +84,19 @@ class LocationsTable extends Table {
 
 		if (empty($location)) {
 			$location = $this->newEntity(['name' => $locationName, 'country_id' => $countryId, 'country_name' => $country]);
-			$result = $this->save($location);
+			if (!$this->save($location)) {
+				return false;
+			}
 		}
 
-		if (empty($result['lat']) && empty($result['lng']) || !empty($result['inconclusive'])) {
+		if (empty($location['lat']) && empty($location['lng']) || !empty($location['inconclusive'])) {
 			# delete lastest cached (and now not needed anymore) record
 			$this->delete($location);
 
 			return false;
 		}
 
-		return $result;
+		return $location;
 	}
 
 	/**
@@ -112,29 +118,28 @@ class LocationsTable extends Table {
 		$lngSafe = sprintf('%F', (float)$lng);
 		$limitSafe = (int)$limit;
 
-		$conditions = [
-			'Location.lat<>0',
-			'Location.lng<>0',
-			'1=1 HAVING distance<' . 75,
-		];
-		$result = $this->find('all', ...[
-			'conditions' => $conditions,
-			'fields' => array_merge(
-				['Location.id', 'Location.name', 'Location.formatted_address'],
-				[
-					'6371.04 * ACOS( COS( PI()/2 - RADIANS(90 - Location.lat)) * '
-					. 'COS( PI()/2 - RADIANS(90 - ' . $latSafe . ')) * '
-					. 'COS( RADIANS(Location.lng) - RADIANS(' . $lngSafe . ')) + '
-					. 'SIN( PI()/2 - RADIANS(90 - Location.lat)) * '
-					. 'SIN( PI()/2 - RADIANS(90 - ' . $latSafe . '))) '
-					. 'AS distance',
-				],
-			),
-			'order' => 'distance ASC',
-			'limit' => $limitSafe,
-		]);
+		$alias = $this->getAlias();
+		$query = $this->find();
+		$distance = '6371.04 * ACOS( COS( PI()/2 - RADIANS(90 - ' . $alias . '.lat)) * '
+			. 'COS( PI()/2 - RADIANS(90 - ' . $latSafe . ')) * '
+			. 'COS( RADIANS(' . $alias . '.lng) - RADIANS(' . $lngSafe . ')) + '
+			. 'SIN( PI()/2 - RADIANS(90 - ' . $alias . '.lat)) * '
+			. 'SIN( PI()/2 - RADIANS(90 - ' . $latSafe . ')))';
 
-		return $result;
+		return $query
+			->select([
+				$alias . '.id',
+				$alias . '.name',
+				$alias . '.formatted_address',
+				'distance' => $query->newExpr($distance),
+			])
+			->where([
+				$alias . '.lat <>' => 0,
+				$alias . '.lng <>' => 0,
+			])
+			->having(['distance <' => 75])
+			->orderBy(['distance' => 'ASC'])
+			->limit($limitSafe);
 	}
 
 	/**
@@ -152,7 +157,7 @@ class LocationsTable extends Table {
 			Log::write(LOG_WARNING, 'Invalid IP `' . $ip . '`');
 		}
 
-		return !empty($record) ? $this->findLocationByCoordinates($record->latitude, $record->longitude, 1) : false;
+		return empty($record) ? false : $this->findLocationByCoordinates($record->latitude, $record->longitude, 1);
 	}
 
 	/**
@@ -174,7 +179,7 @@ class LocationsTable extends Table {
 		}
 		$ip = Utility::getClientIp();
 		# usually getClientIp already removes multiple ips in favor of one single ip. but seems to fail sometimes
-		if (strpos($ip, ',') !== false) {
+		if (str_contains($ip, ',')) {
 			return null;
 
 			//$ips = explode(',', $ip);

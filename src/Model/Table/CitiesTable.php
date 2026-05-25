@@ -118,12 +118,19 @@ class CitiesTable extends Table {
 	/**
 	 * @param string $postalCode
 	 *
-	 * @return \Cake\Datasource\EntityInterface|null
+	 * @return \Data\Model\Entity\City|null
 	 */
 	public function getCityToPostalCode($postalCode) {
 		$result = $this->getCitiesToPostalCode($postalCode);
 
-		return $result ? $result->first() : null;
+		if (!$result) {
+			return null;
+		}
+
+		/** @var \Data\Model\Entity\City|null $city */
+		$city = $result->first();
+
+		return $city;
 	}
 
 }

@@ -31,7 +31,7 @@ class CountriesTest extends TestCase {
 		$this->assertNotEmpty($result);
 		$this->assertTrue(count($result) > 247);
 
-		foreach ($result as $country => $row) {
+		foreach ($result as $row) {
 			if (empty($row['timezones'])) {
 				continue;
 			}

@@ -78,11 +78,7 @@ class MimeTypeHelper extends Helper {
 		if ($attr) {
 			$imageAttr = array_merge($imageAttr, $attr);
 		}
-		if (!empty($icon['img'])) {
-			$image = IMG_MIMETYPES . $icon['img'];
-		} else {
-			$image = IMG_ICONS . ICON_FILE;
-		}
+		$image = empty($icon['img']) ? IMG_ICONS . ICON_FILE : IMG_MIMETYPES . $icon['img'];
 
 		return $this->Html->image($image, $imageAttr);
 	}
@@ -103,11 +99,8 @@ class MimeTypeHelper extends Helper {
 		if ($this->types === null) {
 			$this->types = (array)$this->_getTypes();
 		}
-		if (!empty($this->types)) {
-			return true;
-		}
 
-		return false;
+		return !empty($this->types);
 	}
 
 	/**
@@ -125,7 +118,7 @@ class MimeTypeHelper extends Helper {
 
 			$content = [];
 			foreach ($mimeTypes as $m) {
-				$img = (!empty($m->mime_type_image['ext']) ? $m->mime_type_image['name'] . '.' . $m->mime_type_image['ext'] : '');
+				$img = (empty($m->mime_type_image['ext']) ? '' : $m->mime_type_image['name'] . '.' . $m->mime_type_image['ext']);
 				$content[] = [
 					'ext' => $m['ext'],
 					'name' => $m['name'],

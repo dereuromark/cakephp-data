@@ -75,7 +75,7 @@ class CountriesController extends DataAppController {
 		$iconFontClass = (bool)Configure::read('Country.iconFontClass');
 		if (!$iconFontClass) {
 			foreach ($countries as $country) {
-				$icon = strtolower($country['iso2']);
+				$icon = strtolower((string)$country['iso2']);
 				if (!isset($icons[$icon])) {
 					$countriesWithoutIcons[] = $country;
 				}
@@ -110,7 +110,8 @@ class CountriesController extends DataAppController {
 		$storedCountries = $this->Countries->find()->all()->toArray();
 		$storedCountries = Hash::combine($storedCountries, '{n}.iso3', '{n}');
 
-		$fields = $this->request->getQuery('fields') ? explode(',', $this->request->getQuery('fields')) : [];
+		$fields = $this->request->getQuery('fields');
+		$fields = is_string($fields) ? explode(',', $fields) : [];
 		$diff = (new Countries())->diff($storedCountries, $fields);
 
 		if ($this->request->is('post')) {

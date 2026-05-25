@@ -96,7 +96,7 @@ class ContinentsTable extends Table {
 	 */
 	public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options): void {
 		if (isset($data['code'])) {
-			$data['code'] = mb_strtoupper($data['code']);
+			$data['code'] = mb_strtoupper((string)$data['code']);
 		}
 	}
 

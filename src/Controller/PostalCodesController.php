@@ -13,14 +13,9 @@ class PostalCodesController extends DataAppController {
 	 * @return \Cake\Http\Response|null|void
 	 */
 	public function map() {
-		if ($this->Common->isPosted()) {
-			$term = $this->request->getData('code');
+		$term = $this->Common->isPosted() ? $this->request->getData('code') : '';
 
-		} else {
-			$term = '';
-		}
-
-		$length = max(1, strlen($term));
+		$length = max(1, strlen((string)$term));
 
 		$query = $this->PostalCodes->find();
 		$query->where(['code LIKE' => $term . '%', 'country_id' => 1])
@@ -51,7 +46,7 @@ class PostalCodesController extends DataAppController {
 			$postalCodes = $query->all()->toArray();
 		}
 
-		$numbers = strlen($term);
+		$numbers = strlen((string)$term);
 		$this->set(compact('postalCodes', 'numbers'));
 		$this->viewBuilder()->setHelpers(['Geo.GoogleMap']);
 	}

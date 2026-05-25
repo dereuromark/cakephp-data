@@ -27,7 +27,7 @@ class MimeTypeHelperTest extends TestCase {
 	public function setUp(): void {
 		parent::setUp();
 
-		$this->MimeTypeHelper = new MimeTypeHelper(new View(null));
+		$this->MimeTypeHelper = new MimeTypeHelper(new View());
 	}
 
 	/**

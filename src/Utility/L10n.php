@@ -14,6 +14,9 @@ namespace Data\Utility;
  */
 class L10n {
 
+	public function __construct() {
+	}
+
 	/**
 	 * Maps ISO 639-3 to I10n::_l10nCatalog
 	 * The terminological codes (first one per language) should be used if possible.
@@ -262,12 +265,6 @@ class L10n {
 	];
 
 	/**
-	 * Class constructor
-	 */
-	public function __construct() {
-	}
-
-	/**
 	 * Attempts to find locale for language, or language for locale
 	 *
 	 * @param array|string|null $mixed 2/3 char string (language/locale), array of those strings, or null
@@ -290,11 +287,8 @@ class L10n {
 			if (strlen($mixed) === 2 && in_array($mixed, $this->_l10nMap, true)) {
 				return (string)array_search($mixed, $this->_l10nMap, true);
 			}
-			if (isset($this->_l10nMap[$mixed])) {
-				return $this->_l10nMap[$mixed];
-			}
 
-			return false;
+			return $this->_l10nMap[$mixed] ?? false;
 		}
 
 		return $this->_l10nMap;

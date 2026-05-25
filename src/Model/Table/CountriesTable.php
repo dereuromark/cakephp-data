@@ -136,10 +136,10 @@ class CountriesTable extends Table {
 	 */
 	public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options): void {
 		if (isset($data['iso2'])) {
-			$data['iso2'] = mb_strtoupper($data['iso2']);
+			$data['iso2'] = mb_strtoupper((string)$data['iso2']);
 		}
 		if (isset($data['iso3'])) {
-			$data['iso3'] = mb_strtoupper($data['iso3']);
+			$data['iso3'] = mb_strtoupper((string)$data['iso3']);
 		}
 	}
 

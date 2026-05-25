@@ -194,18 +194,18 @@ class LanguagesController extends DataAppController {
 		$languages = $this->Languages->catalog() ?? [];
 		$locales = [];
 		foreach ($languages as $key => $value) {
-			if (strlen($key) === 2) {
+			if (strlen((string)$key) === 2) {
 				$locales[$key] = $value;
 				$locales[$key]['regional'] = [];
 
 				continue;
 			}
-			if (strlen($key) === 1) {
+			if (strlen((string)$key) === 1) {
 				//$locales[$key] = $value;
 				//$locales[$key]['deprecated'] = 1;
 				continue;
 			}
-			$baseLocale = substr($key, 0, 2);
+			$baseLocale = substr((string)$key, 0, 2);
 			if (!isset($locales[$baseLocale])) {
 				$locales[$baseLocale] = ['missing_base' => 1];
 			}

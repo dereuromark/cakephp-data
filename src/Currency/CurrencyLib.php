@@ -175,11 +175,7 @@ class CurrencyLib {
 			$currencies['BTC'] = 'Bitcoin';
 		}
 
-		if (isset($currencies[$currency])) {
-			return $currencies[$currency];
-		}
-
-		return $default;
+		return $currencies[$currency] ?? $default;
 	}
 
 	/**

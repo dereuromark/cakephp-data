@@ -78,7 +78,7 @@ class MimeTypesController extends DataAppController {
 			if ($image) {
 				$id = $type['id'];
 				if ($this->MimeTypes->updateAll(['mime_type_image_id' => $image['id']], ['id' => $id])) {
-					$addedIcon[] = $fileExt . ' ' . CHAR_ARROWS . ' ' . $image['name'] . '.' . (!empty($image['ext']) ? $image['ext'] : '?');
+					$addedIcon[] = $fileExt . ' ' . CHAR_ARROWS . ' ' . $image['name'] . '.' . (empty($image['ext']) ? '?' : $image['ext']);
 				}
 			}
 		}

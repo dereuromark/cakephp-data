@@ -60,14 +60,14 @@ class Timezones {
 		$rows = $this->parse($rows);
 		$timezones = [];
 		foreach ($rows as $row) {
-			preg_match('#\|([^\|]+)]]$#', $row['name'], $nameMatches);
+			preg_match('#\|([^\|]+)]]$#', (string)$row['name'], $nameMatches);
 			if ($nameMatches) {
 				$name = trim($nameMatches[1]);
-				while (strpos($name, '[') === 0) {
+				while (str_starts_with($name, '[')) {
 					$name = substr($name, 1);
 				}
 			} else {
-				preg_match('#\[\[([^\[]+)]]$#', $row['name'], $nameMatches);
+				preg_match('#\[\[([^\[]+)]]$#', (string)$row['name'], $nameMatches);
 				$name = $nameMatches[1] ?? str_replace(['[[', ']]'], '', $row['name']);
 			}
 
@@ -84,12 +84,8 @@ class Timezones {
 
 			$countryCode = null;
 			if ($row['country_code']) {
-				preg_match_all('#\|(\w+)]]#', $row['country_code'], $countryCodeMatches);
-				if ($countryCodeMatches[1]) {
-					$countryCode = implode(',', $countryCodeMatches[1]);
-				} else {
-					$countryCode = null;
-				}
+				preg_match_all('#\|(\w+)]]#', (string)$row['country_code'], $countryCodeMatches);
+				$countryCode = $countryCodeMatches[1] ? implode(',', $countryCodeMatches[1]) : null;
 			}
 
 			/*
@@ -116,26 +112,26 @@ class Timezones {
 				$offsetDst = static::stringToInt($offsetDst);
 			}
 
-			$notes = trim($row['notes']);
-			preg_match('#\|data-sort-value=[a-z0-9.]+\|(.*)$#i', $row['notes'], $notesMatches);
+			$notes = trim((string)$row['notes']);
+			preg_match('#\|data-sort-value=[a-z0-9.]+\|(.*)$#i', (string)$row['notes'], $notesMatches);
 			if ($notesMatches) {
 				$notes = trim($notesMatches[1]);
 			}
 
 			$status = null;
-			if (strpos($row['status'], 'Canonical') !== false) {
+			if (str_contains((string)$row['status'], 'Canonical')) {
 				$status = 'Canonical';
-			} elseif (strpos($row['status'], 'Link') !== false) {
+			} elseif (str_contains((string)$row['status'], 'Link')) {
 				$status = 'Link';
 			}
 
 			$abbr = null;
 			$alias = null;
 			if ($row['abbr']) {
-				preg_match('#\|(\w+)]]#', $row['abbr'], $abbrMatches);
+				preg_match('#\|(\w+)]]#', (string)$row['abbr'], $abbrMatches);
 				$abbr = $abbrMatches[1] ?? null;
 
-				preg_match('#\[\[([^\|]+)\|#', $row['abbr'], $aliasMatches);
+				preg_match('#\[\[([^\|]+)\|#', (string)$row['abbr'], $aliasMatches);
 				$alias = $aliasMatches[1] ?? null;
 			}
 
@@ -148,13 +144,11 @@ class Timezones {
 				'offset' => $offset,
 				'offset_dst' => $offsetDst,
 				'type' => $status,
-				'covered' => trim($row['covered'], '| ') ?: null,
+				'covered' => trim((string)$row['covered'], '| ') ?: null,
 				'notes' => $notes,
 				'alias' => $alias,
 				'abbr' => $abbr,
 			];
-			if ($name === 'Europe/Berlin') {
-			}
 		}
 
 		ksort($timezones);
@@ -380,7 +374,7 @@ class Timezones {
 	protected function parseJunks(array $rows): array {
 		$start = null;
 		foreach ($rows as $i => $row) {
-			if (strpos($row, '| [[ISO_3166-1:') !== false) {
+			if (str_contains((string)$row, '| [[ISO_3166-1:')) {
 				$start = $i;
 
 				break;
@@ -401,7 +395,7 @@ class Timezones {
 				continue;
 			}
 
-			if (strpos($rows[$i], '|- style') === 0 || strpos($rows[$i], '|- id=') === 0) {
+			if (str_starts_with($rows[$i], '|- style') || str_starts_with($rows[$i], '|- id=')) {
 				$index++;
 				$rowIndex = 0;
 

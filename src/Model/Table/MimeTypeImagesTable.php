@@ -79,10 +79,10 @@ class MimeTypeImagesTable extends Table {
 	 */
 	public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void {
 		if (isset($entity['name'])) {
-			$entity['name'] = mb_strtolower($entity['name']);
+			$entity['name'] = mb_strtolower((string)$entity['name']);
 		}
 		if (isset($entity['ext'])) {
-			$entity['ext'] = mb_strtolower($entity['ext']);
+			$entity['ext'] = mb_strtolower((string)$entity['ext']);
 		}
 	}
 
@@ -124,18 +124,16 @@ class MimeTypeImagesTable extends Table {
 			$image = $mimeTypeImage->name . '.' . $mimeTypeImage->ext;
 
 			# delete image (right now: move to archive)
-			if (file_exists(PATH_MIMETYPES . $image)) {
-				if (!rename(PATH_MIMETYPES . $image, PATH_MIMETYPES . 'archive' . DS . $image)) {
-					return;
-				}
+			if (file_exists(PATH_MIMETYPES . $image) && !rename(PATH_MIMETYPES . $image, PATH_MIMETYPES . 'archive' . DS . $image)) {
+				return;
 			}
 
 			# remove id from mime_types table
 
-			/** @var array<\Data\Model\Entity\MimeTypeImage> $types */
-			$types = $this->MimeTypes->find('all', ...['fields' => ['id'], 'conditions' => ['mime_type_image_id' => $mimeTypeImage->id]])->toArray();
+			/** @var array<array<string, mixed>|\Cake\Datasource\EntityInterface> $types */
+			$types = $this->MimeTypes->find('all', ...['fields' => ['id'], 'conditions' => ['mime_type_image_id' => $mimeTypeImage->get('id')]])->toArray();
 			foreach ($types as $type) {
-				$id = $type->id;
+				$id = is_array($type) ? ($type['id'] ?? null) : $type->get('id');
 				$this->MimeTypes->updateAll(['mime_type_image_id' => null], ['id' => $id]);
 			}
 		}
@@ -160,7 +158,7 @@ class MimeTypeImagesTable extends Table {
 		$images = $this->find('all', ...['conditions' => ['active' => 1]]); // ,'contain'=>'MimeType.id'
 		foreach ($images as $image) {
 			//$count = count($image['MimeType']);
-			$list[$image['id']] = $image['name'] . '.' . (!empty($image['ext']) ? $image['ext'] : '?');
+			$list[$image['id']] = $image['name'] . '.' . (empty($image['ext']) ? '?' : $image['ext']);
 		}
 
 		return $list;

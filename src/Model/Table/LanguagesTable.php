@@ -128,11 +128,7 @@ class LanguagesTable extends Table {
 	 */
 	public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options): void {
 		$dir = Configure::read('Data.Language.dir', 'lower'); // lower or upper casing
-		if ($dir === 'upper') {
-			$method = 'mb_strtoupper';
-		} else {
-			$method = 'mb_strtolower';
-		}
+		$method = $dir === 'upper' ? 'mb_strtoupper' : 'mb_strtolower';
 
 		if (isset($data['code'])) {
 			$data['code'] = $method($data['code']);
@@ -144,19 +140,19 @@ class LanguagesTable extends Table {
 			$data['iso3'] = $method($data['iso3']);
 		}
 		if (isset($data['locale'])) {
-			if (strpos($data['locale'], '_') !== false) {
-				$pieces = explode('_', $data['locale'], 2);
+			if (str_contains((string)$data['locale'], '_')) {
+				$pieces = explode('_', (string)$data['locale'], 2);
 				$data['locale'] = mb_strtolower($pieces[0]) . '_' . mb_strtoupper($pieces[1]);
 			} else {
-				$data['locale'] = mb_strtolower($data['locale']);
+				$data['locale'] = mb_strtolower((string)$data['locale']);
 			}
 		}
 		if (isset($data['locale_fallback'])) {
-			if (strpos($data['locale_fallback'], '_') !== false) {
-				$pieces = explode('_', $data['locale_fallback'], 2);
+			if (str_contains((string)$data['locale_fallback'], '_')) {
+				$pieces = explode('_', (string)$data['locale_fallback'], 2);
 				$data['locale_fallback'] = mb_strtolower($pieces[0]) . '_' . mb_strtoupper($pieces[1]);
 			} else {
-				$data['locale_fallback'] = mb_strtolower($data['locale_fallback']);
+				$data['locale_fallback'] = mb_strtolower((string)$data['locale_fallback']);
 			}
 		}
 	}
@@ -282,7 +278,7 @@ class LanguagesTable extends Table {
 
 		foreach ($elements as $element) {
 			$languageArray = $element->plaintext;
-			$languageArray = explode("\t" . "\t", $languageArray);
+			$languageArray = explode("\t\t", (string)$languageArray);
 			array_shift($languageArray);
 			$max = count($languageArray);
 
@@ -293,17 +289,17 @@ class LanguagesTable extends Table {
 			}
 
 			$languages = [];
-			for ($i = 0; $i < $max; $i = $i + 4) {
+			for ($i = 0; $i < $max; $i += 4) {
 				$iso3 = $languageArray[$i];
 				if (isset($languages[$iso3])) {
 					continue;
 				}
 
 				$iso2 = $languageArray[$i + 1];
-				if (strpos($iso3, '(') !== false) {
+				if (str_contains($iso3, '(')) {
 					$iso3array = explode("\n", $iso3);
-					foreach ($iso3array as $key => $val) {
-						if (strpos($val, '(T)') === false) {
+					foreach ($iso3array as $val) {
+						if (!str_contains($val, '(T)')) {
 							continue;
 						}
 						$pieces = explode('(', $val);

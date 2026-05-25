@@ -86,10 +86,10 @@ class MimeTypesTable extends Table {
 	 */
 	public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void {
 		if (isset($entity['ext'])) {
-			$entity['ext'] = mb_strtolower($entity['ext']);
+			$entity['ext'] = mb_strtolower((string)$entity['ext']);
 		}
 		if (isset($entity['name'])) {
-			$entity['name'] = ucwords($entity['name']);
+			$entity['name'] = ucwords((string)$entity['name']);
 		}
 	}
 
@@ -144,7 +144,10 @@ class MimeTypesTable extends Table {
 			return null;
 		}
 
-		return $this->find('all', ...['conditions' => [$this->getAlias() . '.ext' => $ext]])->first();
+		/** @var \Data\Model\Entity\MimeType|null $mimeType */
+		$mimeType = $this->find('all', ...['conditions' => [$this->getAlias() . '.ext' => $ext]])->first();
+
+		return $mimeType;
 	}
 
 	/**
@@ -158,7 +161,7 @@ class MimeTypesTable extends Table {
 		/** @var \Data\Model\Entity\MimeType|null $type */
 		$type = $this->findMimeType($ext);
 		if ($type) {
-			$id = $type->id;
+			$id = $type->get('id');
 
 			return (bool)$this->updateAll(['sort' => $type['sort'] + 1], ['id' => $id]);
 		}
@@ -178,7 +181,7 @@ class MimeTypesTable extends Table {
 		$email->viewBuilder()->setTemplate('simple_email');
 
 		$text = 'MimeType added: ' . $ext . '';
-		$email->setViewVars(compact('text'));
+		$email->setViewVars(['text' => $text]);
 
 		$email->send();
 

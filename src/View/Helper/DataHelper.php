@@ -51,10 +51,8 @@ class DataHelper extends Helper {
 
 		[$wwwPath, $path] = $this->getCountryIconPaths();
 
-		if ($options) {
-			if (!empty($options['ending'])) {
-				$ending = $options['ending'];
-			}
+		if ($options && !empty($options['ending'])) {
+			$ending = $options['ending'];
 		}
 
 		if ($code) {
@@ -87,9 +85,7 @@ class DataHelper extends Helper {
 
 		$title = $attr['title'] ?? strtoupper($code);
 
-		$template = '<span class="' . $class . ' ' . $class . '-' . $code . '" title="' . h($title) . '"></span>';
-
-		return $template;
+		return '<span class="' . $class . ' ' . $class . '-' . $code . '" title="' . h($title) . '"></span>';
 	}
 
 	/**
@@ -133,7 +129,7 @@ class DataHelper extends Helper {
 	 * @return array
 	 */
 	protected function getAvailableLanguageFlags() {
-		if (isset($this->languageFlags)) {
+		if ($this->languageFlags !== null) {
 			return $this->languageFlags;
 		}
 
@@ -181,18 +177,14 @@ class DataHelper extends Helper {
 		$specific = Configure::read('Country.imagePath');
 		if ($specific) {
 			[$plugin, $specificPath] = pluginSplit($specific);
-			if (substr($specificPath, 0, 1) !== '/') {
+			if (!str_starts_with((string)$specificPath, '/')) {
 				$specificPath = '/img/' . $specific;
 			}
 			$wwwPath = $specificPath;
 			if ($plugin) {
 				$wwwPath = '/' . Inflector::underscore($plugin) . '/' . $wwwPath;
 			}
-			if ($plugin) {
-				$path = Plugin::path($plugin) . 'webroot' . DS;
-			} else {
-				$path = WWW_ROOT;
-			}
+			$path = $plugin ? Plugin::path($plugin) . 'webroot' . DS : WWW_ROOT;
 			$specificPath = str_replace('/', DS, $specificPath);
 			$path .= trim($specificPath, DS) . DS;
 		} else {
@@ -213,18 +205,14 @@ class DataHelper extends Helper {
 		}
 
 		[$plugin, $specificPath] = pluginSplit($specific);
-		if (substr($specificPath, 0, 1) !== '/') {
+		if (!str_starts_with((string)$specificPath, '/')) {
 			$specificPath = '/img/' . $specific;
 		}
 		$wwwPath = $specificPath;
 		if ($plugin) {
 			$wwwPath = '/' . Inflector::underscore($plugin) . '/' . $wwwPath;
 		}
-		if ($plugin) {
-			$path = Plugin::path($plugin) . 'webroot' . DS;
-		} else {
-			$path = WWW_ROOT;
-		}
+		$path = $plugin ? Plugin::path($plugin) . 'webroot' . DS : WWW_ROOT;
 		$specificPath = str_replace('/', DS, $specificPath);
 		$path .= trim($specificPath, DS) . DS;
 

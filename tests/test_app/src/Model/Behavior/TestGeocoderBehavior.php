@@ -23,9 +23,8 @@ class TestGeocoderBehavior extends GeocoderBehavior {
 		$bounds = new Bounds(0, 0, 0, 0);
 		$coordinates = new Coordinates(0, 0);
 		$adminLevels = new AdminLevelCollection();
-		$result = new Address('', $adminLevels, $coordinates, $bounds, 1, 'One', '12345', null, null, null, $country);
 
-		return $result;
+		return new Address('', $adminLevels, $coordinates, $bounds, 1, 'One', '12345', null, null, null, $country);
 	}
 
 }
