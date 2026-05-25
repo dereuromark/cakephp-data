@@ -110,7 +110,8 @@ class CountriesController extends DataAppController {
 		$storedCountries = $this->Countries->find()->all()->toArray();
 		$storedCountries = Hash::combine($storedCountries, '{n}.iso3', '{n}');
 
-		$fields = $this->request->getQuery('fields') ? explode(',', (string)$this->request->getQuery('fields')) : [];
+		$fields = $this->request->getQuery('fields');
+		$fields = is_string($fields) ? explode(',', $fields) : [];
 		$diff = (new Countries())->diff($storedCountries, $fields);
 
 		if ($this->request->is('post')) {

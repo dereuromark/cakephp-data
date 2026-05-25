@@ -66,7 +66,8 @@ class TimezonesController extends AppController {
 		$storedTimezones = $this->Timezones->find()->all()->toArray();
 		$storedTimezones = Hash::combine($storedTimezones, '{n}.name', '{n}');
 
-		$fields = $this->request->getQuery('fields') ? explode(',', (string)$this->request->getQuery('fields')) : [];
+		$fields = $this->request->getQuery('fields');
+		$fields = is_string($fields) ? explode(',', $fields) : [];
 		$diff = (new Timezones())->diff($storedTimezones, $fields);
 
 		if ($this->request->is('post')) {
