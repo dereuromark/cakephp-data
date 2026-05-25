@@ -3,11 +3,11 @@
 namespace Data\Model\Table;
 
 use Cake\Core\Configure;
-use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
 use Cake\Log\Log;
 use Cake\Validation\Validation;
 use Cake\Validation\Validator;
+use Data\Model\Entity\Location;
 use Tools\Model\Table\Table;
 use Tools\Utility\Utility;
 
@@ -51,10 +51,10 @@ class LocationsTable extends Table {
 	 * FIXME
 	 *
 	 * @param \Cake\Event\EventInterface $event
-	 * @param \Cake\ORM\Entity $entity
+	 * @param \Data\Model\Entity\Location $entity
 	 * @return void
 	 */
-	public function _beforeSave(EventInterface $event, EntityInterface $entity) {
+	public function _beforeSave(EventInterface $event, Location $entity): void {
 		$additional = ['locality', 'sublocality'];
 		foreach ($additional as $field) {
 			if (!empty($entity['geocoder_result'][$field])) {
@@ -66,7 +66,7 @@ class LocationsTable extends Table {
 	/**
 	 * @param string $locationName
 	 * @param int|null $countryId
-	 * @return \Cake\Datasource\EntityInterface|false
+	 * @return \Data\Model\Entity\Location|false
 	 */
 	public function getLocation($locationName, $countryId = null) {
 		$country = $countryId !== null ? ', ' . $countryId : __d('data', 'Germany'); ////Country::addressList($countryId)
@@ -112,28 +112,27 @@ class LocationsTable extends Table {
 		$lngSafe = sprintf('%F', (float)$lng);
 		$limitSafe = (int)$limit;
 
-		$conditions = [
-			'Location.lat<>0',
-			'Location.lng<>0',
-			'1=1 HAVING distance<' . 75,
-		];
+		$query = $this->find();
+		$distance = '6371.04 * ACOS( COS( PI()/2 - RADIANS(90 - Location.lat)) * '
+			. 'COS( PI()/2 - RADIANS(90 - ' . $latSafe . ')) * '
+			. 'COS( RADIANS(Location.lng) - RADIANS(' . $lngSafe . ')) + '
+			. 'SIN( PI()/2 - RADIANS(90 - Location.lat)) * '
+			. 'SIN( PI()/2 - RADIANS(90 - ' . $latSafe . ')))';
 
-		return $this->find('all', ...[
-			'conditions' => $conditions,
-			'fields' => [
+		return $query
+			->select([
 				'Location.id',
 				'Location.name',
 				'Location.formatted_address',
-				'6371.04 * ACOS( COS( PI()/2 - RADIANS(90 - Location.lat)) * '
-						. 'COS( PI()/2 - RADIANS(90 - ' . $latSafe . ')) * '
-						. 'COS( RADIANS(Location.lng) - RADIANS(' . $lngSafe . ')) + '
-						. 'SIN( PI()/2 - RADIANS(90 - Location.lat)) * '
-						. 'SIN( PI()/2 - RADIANS(90 - ' . $latSafe . '))) '
-						. 'AS distance',
-			],
-			'order' => 'distance ASC',
-			'limit' => $limitSafe,
-		]);
+				'distance' => $query->newExpr($distance),
+			])
+			->where([
+				'Location.lat<>' => 0,
+				'Location.lng<>' => 0,
+			])
+			->having(['distance <' => 75])
+			->orderBy(['distance' => 'ASC'])
+			->limit($limitSafe);
 	}
 
 	/**

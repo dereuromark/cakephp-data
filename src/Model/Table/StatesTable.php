@@ -230,10 +230,10 @@ class StatesTable extends Table {
 					if ($this->save($state)) {
 						$count++;
 						/*
-                        if (!empty($saveArray['code']) && $saveArray['code'] !== $res->code) {
-                        	//$this->log('Code for state \'' . $data['country_province'] . '\' changed from \'' . $res['code'] . '\' to \'' . $saveArray['code'] .'\'', LOG_NOTICE);
-                        }
-                        */
+						 * if (!empty($saveArray['code']) && $saveArray['code'] !== $res->code) {
+						 * 	//$this->log('Code for state \'' . $data['country_province'] . '\' changed from \'' . $res['code'] . '\' to \'' . $saveArray['code'] .'\'', LOG_NOTICE);
+						 * }
+						 */
 					} elseif ($data->getCountry()?->getCode() !== 'DC') {
 						//pr($data); pr($geocoder->debug()); die();
 						// ['country_province_code']

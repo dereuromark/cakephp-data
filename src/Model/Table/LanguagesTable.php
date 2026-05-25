@@ -278,7 +278,7 @@ class LanguagesTable extends Table {
 
 		foreach ($elements as $element) {
 			$languageArray = $element->plaintext;
-				$languageArray = explode("\t\t", (string)$languageArray);
+			$languageArray = explode("\t\t", (string)$languageArray);
 			array_shift($languageArray);
 			$max = count($languageArray);
 
