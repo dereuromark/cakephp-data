@@ -82,19 +82,19 @@ class LocationsTable extends Table {
 
 		if (empty($location)) {
 			$location = $this->newEntity(['name' => $locationName, 'country_id' => $countryId, 'country_name' => $country]);
-			$result = $this->save($location);
-		} else {
-			$result = $location;
+			if (!$this->save($location)) {
+				return false;
+			}
 		}
 
-		if (empty($result['lat']) && empty($result['lng']) || !empty($result['inconclusive'])) {
+		if (empty($location['lat']) && empty($location['lng']) || !empty($location['inconclusive'])) {
 			# delete lastest cached (and now not needed anymore) record
 			$this->delete($location);
 
 			return false;
 		}
 
-		return $result;
+		return $location;
 	}
 
 	/**
@@ -132,8 +132,8 @@ class LocationsTable extends Table {
 				'distance' => $query->newExpr($distance),
 			])
 			->where([
-				$alias . '.lat<>' => 0,
-				$alias . '.lng<>' => 0,
+				$alias . '.lat <>' => 0,
+				$alias . '.lng <>' => 0,
 			])
 			->having(['distance <' => 75])
 			->orderBy(['distance' => 'ASC'])
