@@ -72,6 +72,8 @@ class LocationsTable extends Table {
 		$country = $countryId !== null ? ', ' . $countryId : __d('data', 'Germany'); ////Country::addressList($countryId)
 		$countryId ??= 1;
 
+		/** @var \Data\Model\Entity\Location|null $location */
+		$location = null;
 		if (is_numeric($locationName) && strlen($locationName) < 5) { //Country::zipCodeLength($countryId)
 			$location = $this->find('all', ...['conditions' => ['formatted_address LIKE' => $locationName . '%' . $country]])->first();
 		} else {
@@ -81,6 +83,8 @@ class LocationsTable extends Table {
 		if (empty($location)) {
 			$location = $this->newEntity(['name' => $locationName, 'country_id' => $countryId, 'country_name' => $country]);
 			$result = $this->save($location);
+		} else {
+			$result = $location;
 		}
 
 		if (empty($result['lat']) && empty($result['lng']) || !empty($result['inconclusive'])) {
