@@ -144,7 +144,10 @@ class MimeTypesTable extends Table {
 			return null;
 		}
 
-		return $this->find('all', ...['conditions' => [$this->getAlias() . '.ext' => $ext]])->first();
+		/** @var \Data\Model\Entity\MimeType|null $mimeType */
+		$mimeType = $this->find('all', ...['conditions' => [$this->getAlias() . '.ext' => $ext]])->first();
+
+		return $mimeType;
 	}
 
 	/**

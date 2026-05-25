@@ -98,7 +98,7 @@ class DistrictsTable extends Table {
 	 *
 	 * @param string $slug
 	 * @param array $customOptions
-	 * @return array
+	 * @return \Data\Model\Entity\District|null
 	 */
 	public function getIdBySlug($slug, array $customOptions = []) {
 		$options = [
@@ -110,7 +110,10 @@ class DistrictsTable extends Table {
 			$options = array_merge($options, $customOptions);
 		}
 
-		return $this->find('all', ...$options)->first();
+		/** @var \Data\Model\Entity\District|null $district */
+		$district = $this->find('all', ...$options)->first();
+
+		return $district;
 	}
 
 }
