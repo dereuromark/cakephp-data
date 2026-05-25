@@ -17,7 +17,7 @@ class CurrenciesController extends AppController {
 	public function index() {
 		$currencies = $this->paginate($this->Currencies);
 
-		$this->set(['currencies' => $currencies]);
+		$this->set(compact('currencies'));
 	}
 
 }

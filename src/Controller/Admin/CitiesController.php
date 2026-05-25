@@ -27,7 +27,7 @@ class CitiesController extends DataAppController {
 	 */
 	public function index() {
 		$cities = $this->paginate();
-		$this->set(['cities' => $cities]);
+		$this->set(compact('cities'));
 	}
 
 	/**
@@ -37,7 +37,7 @@ class CitiesController extends DataAppController {
 	public function view($id = null) {
 		$city = $this->Cities->get($id);
 
-		$this->set(['city' => $city]);
+		$this->set(compact('city'));
 	}
 
 	/**
@@ -58,7 +58,7 @@ class CitiesController extends DataAppController {
 		}
 
 		$countries = $this->Cities->Countries->find('list');
-		$this->set(['countries' => $countries]);
+		$this->set(compact('countries'));
 	}
 
 	/**
@@ -81,7 +81,7 @@ class CitiesController extends DataAppController {
 		}
 
 		$countries = $this->Cities->Countries->find('list');
-		$this->set(['countries' => $countries]);
+		$this->set(compact('countries'));
 	}
 
 	/**

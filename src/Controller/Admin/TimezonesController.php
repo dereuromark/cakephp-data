@@ -56,7 +56,7 @@ class TimezonesController extends AppController {
 			$timezones = $this->paginate();
 		}
 
-		$this->set(['timezones' => $timezones]);
+		$this->set(compact('timezones'));
 	}
 
 	/**
@@ -166,7 +166,7 @@ class TimezonesController extends AppController {
 		}
 		$timezone = $this->Timezones->get($id, contain: $contain);
 
-		$this->set(['timezone' => $timezone]);
+		$this->set(compact('timezone'));
 	}
 
 	/**
@@ -183,7 +183,7 @@ class TimezonesController extends AppController {
 			}
 			$this->Flash->error(__d('data', 'The timezone could not be saved. Please, try again.'));
 		}
-		$this->set(['timezone' => $timezone]);
+		$this->set(compact('timezone'));
 	}
 
 	/**
@@ -201,7 +201,7 @@ class TimezonesController extends AppController {
 			}
 			$this->Flash->error(__d('data', 'The timezone could not be saved. Please, try again.'));
 		}
-		$this->set(['timezone' => $timezone]);
+		$this->set(compact('timezone'));
 	}
 
 	/**

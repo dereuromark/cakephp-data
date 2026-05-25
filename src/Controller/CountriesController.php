@@ -61,7 +61,7 @@ class CountriesController extends DataAppController {
 	public function index() {
 		$countries = $this->paginate();
 
-		$this->set(['countries' => $countries]);
+		$this->set(compact('countries'));
 	}
 
 	/**

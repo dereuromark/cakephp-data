@@ -31,7 +31,7 @@ class CurrenciesController extends DataAppController {
 	 */
 	public function table() {
 		$currencies = $this->Currencies->availableCurrencies();
-		$this->set(['currencies' => $currencies]);
+		$this->set(compact('currencies'));
 	}
 
 	/**
@@ -76,7 +76,7 @@ class CurrenciesController extends DataAppController {
 	public function view($id = null) {
 		$currency = $this->Currencies->get($id);
 
-		$this->set(['currency' => $currency]);
+		$this->set(compact('currency'));
 	}
 
 	/**
@@ -123,7 +123,7 @@ class CurrenciesController extends DataAppController {
 			$this->Flash->error(__d('data', 'record edit not saved'));
 		}
 
-		$this->set(['currency' => $currency]);
+		$this->set(compact('currency'));
 	}
 
 	/**

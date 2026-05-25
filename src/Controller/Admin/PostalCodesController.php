@@ -54,7 +54,7 @@ class PostalCodesController extends DataAppController {
 	public function view($id = null) {
 		$postalCode = $this->PostalCodes->get($id, contain: ['Countries']);
 
-		$this->set(['postalCode' => $postalCode]);
+		$this->set(compact('postalCode'));
 	}
 
 	/**
@@ -75,7 +75,7 @@ class PostalCodesController extends DataAppController {
 			$this->Flash->error(__d('data', 'formContainsErrors'));
 		}
 
-		$this->set(['postalCode' => $postalCode]);
+		$this->set(compact('postalCode'));
 	}
 
 	/**
@@ -98,7 +98,7 @@ class PostalCodesController extends DataAppController {
 			$this->Flash->error(__d('data', 'formContainsErrors'));
 		}
 
-		$this->set(['postalCode' => $postalCode]);
+		$this->set(compact('postalCode'));
 	}
 
 	/**

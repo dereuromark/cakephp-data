@@ -166,7 +166,7 @@ class CountriesController extends DataAppController {
 			$countries = $this->paginate();
 		}
 
-		$this->set(['countries' => $countries]);
+		$this->set(compact('countries'));
 
 		$this->viewBuilder()->setHelpers(['Geo.GoogleMap']);
 	}
@@ -183,7 +183,7 @@ class CountriesController extends DataAppController {
 		}
 		$country = $this->Countries->get($id, contain: $contain);
 
-		$this->set(['country' => $country]);
+		$this->set(compact('country'));
 	}
 
 	/**
@@ -205,7 +205,7 @@ class CountriesController extends DataAppController {
 			$this->Flash->error(__d('data', 'record add not saved'));
 		}
 
-		$this->set(['country' => $country]);
+		$this->set(compact('country'));
 	}
 
 	/**
@@ -296,7 +296,7 @@ class CountriesController extends DataAppController {
 		$countries = $this->Countries->find('all');
 
 		//TODO.
-		$this->set(['countries' => $countries]);
+		$this->set(compact('countries'));
 	}
 
 }

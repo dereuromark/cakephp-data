@@ -60,7 +60,7 @@ class LanguagesController extends DataAppController {
 	public function view($id = null) {
 		$language = $this->Languages->get($id);
 
-		$this->set(['language' => $language]);
+		$this->set(compact('language'));
 	}
 
 	/**
@@ -81,7 +81,7 @@ class LanguagesController extends DataAppController {
 			$this->Flash->error(__d('data', 'formContainsErrors'));
 		}
 
-		$this->set(['language' => $language]);
+		$this->set(compact('language'));
 	}
 
 	/**
@@ -105,7 +105,7 @@ class LanguagesController extends DataAppController {
 			$this->Flash->error(__d('data', 'formContainsErrors'));
 		}
 
-		$this->set(['language' => $language]);
+		$this->set(compact('language'));
 	}
 
 	/**

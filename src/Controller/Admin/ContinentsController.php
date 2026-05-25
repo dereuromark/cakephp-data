@@ -18,7 +18,7 @@ class ContinentsController extends DataAppController {
 			->contain(['ParentContinents']);
 
 		$continents = $this->paginate($query);
-		$this->set(['continents' => $continents]);
+		$this->set(compact('continents'));
 	}
 
 	/**
@@ -46,7 +46,7 @@ class ContinentsController extends DataAppController {
 	public function view($id = null) {
 		$continent = $this->Continents->get($id, contain: ['ParentContinents']);
 
-		$this->set(['continent' => $continent]);
+		$this->set(compact('continent'));
 	}
 
 	/**

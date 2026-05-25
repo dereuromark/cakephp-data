@@ -46,7 +46,7 @@ class MimeTypesController extends DataAppController {
 			//pr(WWW_ROOT.'files'.DS.'tmp'.DS.'test.'.$extension);
 		}
 
-		$this->set(['extensions' => $extensions]);
+		$this->set(compact('extensions'));
 	}
 
 	/**
@@ -59,7 +59,7 @@ class MimeTypesController extends DataAppController {
 		//$unused = $this->MimeTypes->MimeTypeImages->find('all', ...['conditions' => ['MimeTypeImages.id' => $unusedIds]]);
 		$unused = [];
 
-		$this->set(['unused' => $unused]);
+		$this->set(compact('unused'));
 	}
 
 	/**
@@ -147,7 +147,7 @@ class MimeTypesController extends DataAppController {
 		$this->paginate['conditions'] = $conditions;
 
 		$mimeTypes = $this->paginate();
-		$this->set(['mimeTypes' => $mimeTypes]);
+		$this->set(compact('mimeTypes'));
 	}
 
 	/**
@@ -182,7 +182,7 @@ class MimeTypesController extends DataAppController {
 				$searchStr = $sessionSearch['search'];
 			}
 		}
-		$this->set(['searchStr' => $searchStr]);
+		$this->set(compact('searchStr'));
 
 		if (!empty($searchStr)) {
 			$this->request->getSession()->write($model . '.search', ['search' => $searchStr, 'field' => $fieldStr]);
@@ -209,7 +209,7 @@ class MimeTypesController extends DataAppController {
 		}
 		$mimeType = $this->MimeTypes->get($id);
 
-		$this->set(['mimeType' => $mimeType]);
+		$this->set(compact('mimeType'));
 	}
 
 	/**

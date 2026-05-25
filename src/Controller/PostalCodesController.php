@@ -31,7 +31,7 @@ class PostalCodesController extends DataAppController {
 
 		if (!empty($term)) {
 			$overviewCode = $postalCodes[0];
-			$this->set(['overviewCode' => $overviewCode]);
+			$this->set(compact('overviewCode'));
 
 			$query = $this->PostalCodes->find();
 			$query->where(['code LIKE' => $term . '%', 'country_id' => 1])

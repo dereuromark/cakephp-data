@@ -184,7 +184,7 @@ class MimeTypeImagesController extends DataAppController {
 			}
 		}
 
-		$this->set(['images' => $images]);
+		$this->set(compact('images'));
 	}
 
 	/**
@@ -232,7 +232,7 @@ class MimeTypeImagesController extends DataAppController {
 		}
 		*/
 
-		$this->set(['mimeTypeImages' => $mimeTypeImages]);
+		$this->set(compact('mimeTypeImages'));
 	}
 
 	/**
@@ -243,7 +243,7 @@ class MimeTypeImagesController extends DataAppController {
 	public function view($id = null) {
 		$mimeTypeImage = $this->MimeTypeImages->get($id);
 
-		$this->set(['mimeTypeImage' => $mimeTypeImage]);
+		$this->set(compact('mimeTypeImage'));
 	}
 
 	/**

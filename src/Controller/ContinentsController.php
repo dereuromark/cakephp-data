@@ -13,7 +13,7 @@ class ContinentsController extends DataAppController {
 	public function index() {
 		$continents = $this->Continents->find('threaded');
 
-		$this->set(['continents' => $continents]);
+		$this->set(compact('continents'));
 
 		$this->viewBuilder()->addHelper('Tools.Tree');
 	}
