@@ -116,23 +116,24 @@ class LocationsTable extends Table {
 		$lngSafe = sprintf('%F', (float)$lng);
 		$limitSafe = (int)$limit;
 
+		$alias = $this->getAlias();
 		$query = $this->find();
-		$distance = '6371.04 * ACOS( COS( PI()/2 - RADIANS(90 - Location.lat)) * '
+		$distance = '6371.04 * ACOS( COS( PI()/2 - RADIANS(90 - ' . $alias . '.lat)) * '
 			. 'COS( PI()/2 - RADIANS(90 - ' . $latSafe . ')) * '
-			. 'COS( RADIANS(Location.lng) - RADIANS(' . $lngSafe . ')) + '
-			. 'SIN( PI()/2 - RADIANS(90 - Location.lat)) * '
+			. 'COS( RADIANS(' . $alias . '.lng) - RADIANS(' . $lngSafe . ')) + '
+			. 'SIN( PI()/2 - RADIANS(90 - ' . $alias . '.lat)) * '
 			. 'SIN( PI()/2 - RADIANS(90 - ' . $latSafe . ')))';
 
 		return $query
 			->select([
-				'Location.id',
-				'Location.name',
-				'Location.formatted_address',
+				$alias . '.id',
+				$alias . '.name',
+				$alias . '.formatted_address',
 				'distance' => $query->newExpr($distance),
 			])
 			->where([
-				'Location.lat<>' => 0,
-				'Location.lng<>' => 0,
+				$alias . '.lat<>' => 0,
+				$alias . '.lng<>' => 0,
 			])
 			->having(['distance <' => 75])
 			->orderBy(['distance' => 'ASC'])
