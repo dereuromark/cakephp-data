@@ -215,6 +215,9 @@ class Timezones {
 	 */
 	public function diff(array $storedTimezones, array $fields = []): array {
 		$all = $this->all();
+		if (!$all) {
+			return [];
+		}
 
 		$completeDiff = [];
 		foreach ($storedTimezones as $key => $storedTimezone) {

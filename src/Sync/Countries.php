@@ -54,6 +54,9 @@ class Countries {
 	 */
 	public function diff(array $storedCountries, array $fields = []): array {
 		$all = $this->all();
+		if (!$all) {
+			return [];
+		}
 
 		$completeDiff = [];
 		foreach ($storedCountries as $key => $storedCountry) {

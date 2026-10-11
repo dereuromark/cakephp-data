@@ -92,8 +92,10 @@ class LanguagesTableTest extends TestCase {
 		$names = $this->Languages->getPrimaryLanguages('all', ['conditions' => ['name' => 'Englisch']])
 			->all()->extract('name')->toList();
 		$this->assertSame([], $names);
-		$this->assertSame(['Deutsch'], $this->Languages->getPrimaryLanguages('all',
-			['conditions' => ['name' => 'Deutsch']])->all()->extract('name')->toList());
+		$this->assertSame(['Deutsch'], $this->Languages->getPrimaryLanguages(
+			'all',
+			['conditions' => ['name' => 'Deutsch']],
+		)->all()->extract('name')->toList());
 	}
 
 }

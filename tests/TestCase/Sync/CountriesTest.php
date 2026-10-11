@@ -131,4 +131,10 @@ class CountriesTest extends TestCase {
 		$this->assertSame('3600', $result['add'][0]['data']['timezone_offset']);
 	}
 
+	public function testEmptyUpstreamDoesNotProposeDeletions(): void {
+		$sync = $this->getMockBuilder(Countries::class)->onlyMethods(['all'])->getMock();
+		$sync->expects($this->once())->method('all')->willReturn([]);
+		$this->assertSame([], $sync->diff(['DEU' => new Country(['name' => 'Existing'])]));
+	}
+
 }

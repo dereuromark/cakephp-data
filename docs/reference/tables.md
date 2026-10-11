@@ -42,7 +42,7 @@ $namesById = $languages->getList();
 $namesByCode = $languages->codeList();
 ```
 
-`getActive()` filters active rows. `getPrimaryLanguages()` selects rows whose locale equals their fallback locale. The list helpers additionally filter active rows; they do not mean that every locale variant is included.
+`getActive()` filters active rows. `getPrimaryLanguages()` selects rows whose locale equals their fallback locale. The list helpers filter active rows; they do not mean that every locale variant is included.
 
 ## Named connections
 

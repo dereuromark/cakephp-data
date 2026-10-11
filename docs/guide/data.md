@@ -15,13 +15,15 @@ Initial continent records are historical data. Their presence does not establish
 
 ## Timezone seed
 
-The timezone seed retrieves a remote timezone list. It needs network access and the upstream document to remain compatible with the parser:
+The timezone seed first retrieves a remote timezone list. If that source is unavailable or cannot be parsed, it falls back to PHP's bundled IANA timezone database:
 
 ```sh
 bin/cake migrations seed -p Data --seed TimezonesSeed
 ```
 
-Run it against an empty timezone table. The seed inserts rows; it does not merge existing rows or link canonical timezone aliases for you. Repeating it can violate the unique timezone-name index. The [Admin timezone sync](./admin) offers a review step for an existing dataset.
+The PHP fallback has timezone names, countries, and offset fields; it omits the remote source's descriptive notes and coverage text. The data follows the timezone database installed with PHP. The fallback samples January and July offsets; it is a convenience dataset, not a replacement for PHP's timezone transition rules. For storage, a timezone without a separate DST offset uses its regular offset in the non-null `offset_dst` column.
+
+Run it against an empty timezone table. The seed inserts rows; it does not merge existing rows or link canonical timezone aliases for you. Repeating it appends duplicate timezone rows; the supplied migration does not define a unique timezone-name index. The [Admin timezone sync](./admin) offers a review step for an existing dataset.
 
 ## Country sync
 

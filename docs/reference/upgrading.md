@@ -10,6 +10,8 @@ The country active finder supports the ORM's `find('active')` dispatch as well a
 
 Country sync now writes timezone changes to the stored `timezone_offset` field. Missing upstream timezone data is treated as an empty list. Review a sync proposal before applying it; these fixes do not make remote data authoritative.
 
+Empty remote country and timezone catalogs no longer propose deleting existing records. The timezone seed uses PHP's bundled timezone database when its remote source is unavailable or cannot be parsed.
+
 The legacy Locations helper uses the current query expression API. Locations remains deprecated in favor of Geo. Counties and Districts also remain deprecated; this audit does not reintroduce them as recommended models.
 
 ## Prepare an application upgrade
