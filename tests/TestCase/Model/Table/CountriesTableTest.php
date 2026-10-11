@@ -3,6 +3,7 @@
 namespace Data\Test\TestCase\Model\Table;
 
 use Cake\ORM\TableRegistry;
+use Data\Model\Table\CountriesTable;
 use Shim\TestSuite\TestCase;
 
 class CountriesTableTest extends TestCase {
@@ -69,6 +70,21 @@ class CountriesTableTest extends TestCase {
 			->all()->extract('iso2')->toList());
 		$this->assertSame(['DE'], $this->Countries->findActive(options: ['conditions' => ['iso2' => 'DE']])
 			->all()->extract('iso2')->toList());
+	}
+
+	public function testLegacyFinderOverrideSupportsDirectAndOrmCalls(): void {
+		$table = new class (['table' => 'countries', 'alias' => 'Countries']) extends CountriesTable {
+			/**
+			 * @param array $options
+			 * @return \Cake\ORM\Query\SelectQuery
+			 */
+			public function findActive(array $options = []) {
+				return parent::findActive($options);
+			}
+		};
+		$this->assertSame(['DE'], $table->findActive(['conditions' => ['iso2' => 'DE']])->all()->extract('iso2')->toList());
+		$this->assertSame(['DE'], $table->find()->where(['iso2' => 'DE'])->find('active')->all()->extract('iso2')->toList());
+		$this->assertSame(['DE'], $table->find('active', conditions: ['iso2' => 'DE'])->all()->extract('iso2')->toList());
 	}
 
 }

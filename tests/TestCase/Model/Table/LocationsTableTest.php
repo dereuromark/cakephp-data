@@ -2,7 +2,11 @@
 
 namespace Data\Test\TestCase\Model\Table;
 
+use Cake\Datasource\EntityInterface;
+use Cake\Event\Event;
+use Cake\Event\EventInterface;
 use Cake\ORM\TableRegistry;
+use Data\Model\Table\LocationsTable;
 use Shim\TestSuite\TestCase;
 
 class LocationsTableTest extends TestCase {
@@ -91,6 +95,28 @@ class LocationsTableTest extends TestCase {
 		$sql = $query->sql();
 		$this->assertStringContainsString('52.500000', $sql);
 		$this->assertStringContainsString('13.400000', $sql);
+	}
+
+	public function testLegacySaveHookOverrideAcceptsEntityInterface(): void {
+		$table = new class extends LocationsTable {
+			/**
+             * @return void
+             */
+			public function _beforeSave(EventInterface $event, EntityInterface $entity) {
+				parent::_beforeSave($event, $entity);
+			}
+		};
+		$entity = $this->createMock(EntityInterface::class);
+		$entity->expects($this->once())->method('get')->with('geocoder_result')->willReturn(['locality' => 'Berlin']);
+		$entity->expects($this->once())->method('set')->with('locality', 'Berlin');
+		$table->_beforeSave(new Event('Model.beforeSave', $table), $entity);
+	}
+
+	public function testSaveHookIgnoresMalformedGeocoderResult(): void {
+		$entity = $this->createMock(EntityInterface::class);
+		$entity->method('get')->willReturn('invalid');
+		$entity->expects($this->never())->method('set');
+		$this->Locations->_beforeSave(new Event('Model.beforeSave', $this->Locations), $entity);
 	}
 
 }

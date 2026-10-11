@@ -246,4 +246,30 @@ class CountriesTest extends TestCase {
 		$this->assertSame('49', $method->invoke(new Countries(), 49));
 	}
 
+	public function testLegacyNormalizerOverridesReceiveValidatedSourceValues(): void {
+		$sync = new class extends Countries {
+			public mixed $phone = 49;
+
+			public mixed $zones = [['gmtOffset' => 3600]];
+
+			public function all(): array {
+				return ['DEU' => ['name' => 'Germany', 'iso2' => 'DE', 'iso3' => 'DEU', 'phonecode' => $this->phone, 'timezones' => $this->zones]];
+			}
+			protected function normalizePhoneCode(string $phoneCode): ?string {
+				return parent::normalizePhoneCode($phoneCode);
+			}
+			protected function normalizeTimeZones(array $timezones): ?string {
+				return parent::normalizeTimeZones($timezones);
+			}
+		};
+		$data = $sync->diff([])['add'][0]['data'];
+		$this->assertSame('49', $data['phone_code']);
+		$this->assertSame('3600', $data['timezone_offset']);
+		$sync->phone = [];
+		$sync->zones = 'invalid';
+		$data = $sync->diff([])['add'][0]['data'];
+		$this->assertNull($data['phone_code']);
+		$this->assertNull($data['timezone_offset']);
+	}
+
 }
