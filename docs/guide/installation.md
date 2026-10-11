@@ -1,5 +1,7 @@
 # Installation
 
+For this development branch, the application's root `composer.json` must allow development dependencies with `"minimum-stability": "dev"`. Set `"prefer-stable": true` to prefer stable packages when their constraints permit it.
+
 Install the plugin in your application's root directory:
 
 ```sh
@@ -48,4 +50,3 @@ A country model enables Continent, State, and Timezone associations by default. 
 
 Continue with [Getting started](./getting-started).
 
-For this development branch, the application's root `composer.json` must allow development dependencies with `"minimum-stability": "dev"`. Set `"prefer-stable": true` to prefer stable packages when their constraints permit it.
