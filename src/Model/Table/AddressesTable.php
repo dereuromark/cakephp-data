@@ -96,7 +96,7 @@ class AddressesTable extends Table {
 			->scalar('formatted_address')
 			->allowEmptyString('formatted_address')
 			->add('formatted_address', 'validateUnique', [
-				'rule' => ['validateUnique', ['scope' => ['foreign_id', 'model']]],
+				'rule' => ['validateUnique', ['scope' => ['foreign_id', $this->modelField()]]],
 				'message' => __d('data', 'valErrRecordNameExists'),
 				'provider' => 'table',
 			]);
@@ -119,6 +119,10 @@ class AddressesTable extends Table {
 	public function initialize(array $config): void {
 		parent::initialize($config);
 
+		if (!$this->getSchema()->hasColumn('type_id')) {
+			unset($this->order['type_id'], $this->order[$this->aliasField('type_id')]);
+		}
+
 		$this->addBehavior('Geo.Geocoder', ['real' => false, 'override' => true, 'allow_inconclusive' => true]);
 
 		$this->belongsTo('Countries', [
@@ -133,7 +137,7 @@ class AddressesTable extends Table {
 		$this->belongsTo('Users', [
 			'className' => CLASS_USERS,
 			'foreignKey' => 'foreign_id',
-			'conditions' => ['model' => 'User'],
+			'conditions' => [$this->aliasField($this->modelField()) => 'User'],
 		]);
 	}
 
@@ -149,11 +153,22 @@ class AddressesTable extends Table {
 			return true;
 		}
 		$conditions = ['foreign_id' => $data['foreign_id'], 'address_type_id' => Address::TYPE_MAIN];
+		$modelField = $this->modelField();
+		if (array_key_exists($modelField, $data)) {
+			$conditions[$modelField] = $data[$modelField];
+		}
 		if (!empty($data['user_id'])) {
 			$conditions['user_id !='] = $data['user_id'];
 		}
 
 		return !$this->find('all', ...['conditions' => $conditions])->first();
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function modelField(): string {
+		return $this->getSchema()->hasColumn('model') ? 'model' : 'model_key';
 	}
 
 	/**
