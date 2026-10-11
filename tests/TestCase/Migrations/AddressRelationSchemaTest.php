@@ -4,13 +4,19 @@ namespace Data\Test\TestCase\Migrations;
 
 use Cake\Database\Driver\Sqlite;
 use Cake\Datasource\ConnectionManager;
+use Cake\Http\ServerRequest;
 use Cake\ORM\Locator\TableLocator;
+use Cake\ORM\TableRegistry;
+use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
+use Cake\View\View;
 use Data\Model\Entity\Address;
 use Migrations\Migrations;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 class AddressRelationSchemaTest extends TestCase {
+
+	use IntegrationTestTrait;
 
 	/**
 	 * @return array<string, array{bool}>
@@ -74,7 +80,35 @@ class AddressRelationSchemaTest extends TestCase {
 			$connection->insert('addresses', $company);
 			$this->assertSame(2, $addresses->find()->count());
 			$this->assertNull($addresses->find()->where([$addresses->aliasField($modelField) => 'Company'])->contain(['Users'])->firstOrFail()->user);
+			$addresses->setSchema($connection->getSchemaCollection()->describe('addresses'));
+			$companyRow = $addresses->get(2);
+			$addresses->patchEntity($companyRow, ['address_type_id' => Address::TYPE_MAIN, 'user_id' => 999]);
+			$this->assertSame([], $companyRow->getErrors());
+			$duplicate = $data;
+			$duplicate['formatted_address'] = 'Second address';
+			$connection->insert('addresses', $duplicate);
+			$userRow = $addresses->get(1);
+			$addresses->patchEntity($userRow, ['formatted_address' => 'Second address']);
+			$this->assertArrayHasKey('validateUnique', $userRow->getError('formatted_address'));
+
+			$this->loadPlugins(['Data', 'Tools']);
+			TableRegistry::getTableLocator()->set('Data.Addresses', $addresses);
+			$this->disableErrorHandlerMiddleware();
+			$submitted = $data;
+			unset($submitted['address_type_id']);
+			$submitted['formatted_address'] = 'Admin address';
+			$this->post(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'Addresses', 'action' => 'add'], $submitted);
+			$this->assertRedirect();
+			$this->assertSame('User', $addresses->find()->where(['formatted_address' => 'Admin address'])->firstOrFail()->get($modelField));
+			$view = new View();
+			$view->setRequest(new ServerRequest(['params' => ['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'Addresses', 'action' => 'add']]));
+			$view->setPlugin('Data');
+			$view->setTemplatePath('Admin/Addresses');
+			$view->set(['address' => $addresses->newEmptyEntity(), 'countries' => [], 'states' => [], 'modelField' => $addresses->getModelField()]);
+			$form = $view->render('add', false);
+			$this->assertStringContainsString('name="' . $modelField . '"', $form);
 		} finally {
+			TableRegistry::getTableLocator()->clear();
 			ConnectionManager::drop('data_address_relation_test');
 		}
 	}

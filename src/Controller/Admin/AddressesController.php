@@ -59,7 +59,8 @@ class AddressesController extends DataAppController {
 			$states = $this->Addresses->States->find('list');
 		}
 
-		$this->set(compact('countries', 'states'));
+		$modelField = $this->Addresses->getModelField();
+		$this->set(compact('address', 'countries', 'states', 'modelField'));
 	}
 
 	/**
@@ -98,7 +99,8 @@ class AddressesController extends DataAppController {
 			$states = $this->Addresses->States->find('list');
 		}
 
-		$this->set(compact('countries', 'states'));
+		$modelField = $this->Addresses->getModelField();
+		$this->set(compact('address', 'countries', 'states', 'modelField'));
 	}
 
 	/**
