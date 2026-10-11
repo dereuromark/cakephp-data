@@ -6,6 +6,7 @@ use ArrayObject;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
 use Cake\I18n\DateTime;
+use Cake\ORM\RulesChecker;
 use Cake\Validation\Validator;
 use Data\Model\Entity\Address;
 use Tools\Model\Table\Table;
@@ -138,6 +139,35 @@ class AddressesTable extends Table {
 	}
 
 	/**
+	 * @param \Cake\ORM\RulesChecker $rules
+	 * @return \Cake\ORM\RulesChecker
+	 */
+	public function buildRules(RulesChecker $rules): RulesChecker {
+		$rules = parent::buildRules($rules);
+		$rules->add(function (EntityInterface $entity): bool {
+			if (!$entity->isNew() && !$entity->isDirty('foreign_id') && !$entity->isDirty($this->getModelField())) {
+				return true;
+			}
+			$context = ['data' => $entity->toArray(), 'entity' => $entity, 'newRecord' => $entity->isNew(), 'field' => 'formatted_address'];
+			$context['data'] = $this->ownerValidationData($context);
+			$formattedAddress = $context['data']['formatted_address'] ?? null;
+			if ($formattedAddress !== null && $formattedAddress !== '' && !$this->validateUnique($formattedAddress, [
+				'scope' => ['foreign_id', $this->getModelField()],
+				'allowMultipleNulls' => false,
+			], $context)) {
+				return false;
+			}
+
+			return $this->primaryUnique($context['data']['address_type_id'] ?? null, $context);
+		}, 'uniqueAddressOwner', [
+			'errorField' => 'foreign_id',
+			'message' => __d('data', 'valErrRecordNameExists'),
+		]);
+
+		return $rules;
+	}
+
+	/**
 	 * @param array $config
 	 * @return void
 	 */
@@ -205,8 +235,13 @@ class AddressesTable extends Table {
 	protected function ownerValidationData(array $context): array {
 		$data = $context['data'];
 		$entity = $context['entity'] ?? null;
-		if ($entity instanceof EntityInterface) {
+		if ($entity instanceof EntityInterface && !$entity->isNew()) {
 			$data += $entity->extract(array_merge(['foreign_id', $this->getModelField(), 'formatted_address', 'address_type_id'], (array)$this->getPrimaryKey()));
+		}
+
+		$modelField = $this->getModelField();
+		if (!array_key_exists($modelField, $data)) {
+			$data[$modelField] = $this->getSchema()->getColumn($modelField)['default'] ?? null;
 		}
 
 		return $data;

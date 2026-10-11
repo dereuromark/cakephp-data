@@ -108,7 +108,33 @@ class AddressRelationSchemaTest extends TestCase {
 			unset($withoutOwner[$modelField]);
 			$withoutOwner['formatted_address'] = 'Another nullable owner address';
 			$newAddress = $addresses->newEntity($withoutOwner);
-			$this->assertNotEmpty($newAddress->getError('address_type_id'));
+			$this->assertSame([], $newAddress->getErrors());
+			$this->assertNotFalse($addresses->save($newAddress));
+			$this->assertSame('', $addresses->get($newAddress->id)->get($modelField));
+			$secondDefault = $withoutOwner;
+			$secondDefault['formatted_address'] = 'Different default-owner address';
+			$this->assertFalse($addresses->save($addresses->newEntity($secondDefault)));
+			$duplicateDefault = $withoutOwner;
+			$duplicateDefault['address_type_id'] = 99;
+			$this->assertFalse($addresses->save($addresses->newEntity($duplicateDefault)));
+			foreach (['', null] as $emptyOwner) {
+				$occupied = $data;
+				$occupied[$modelField] = $emptyOwner;
+				$occupied['formatted_address'] = 'Occupied empty owner ' . ($emptyOwner === null ? 'null' : 'blank');
+				$connection->insert('addresses', $occupied);
+				$ownerChange = $addresses->get(2);
+				$addresses->patchEntity($ownerChange, [$modelField => $emptyOwner]);
+				$this->assertSame([], $ownerChange->getErrors());
+				$this->assertFalse($addresses->save($ownerChange));
+				$this->assertSame('Company', $addresses->get(2)->get($modelField));
+			}
+			$nonconflicting = $company;
+			$nonconflicting['foreign_id'] = 7;
+			$connection->insert('addresses', $nonconflicting);
+			$ownerChange = $addresses->find()->where(['foreign_id' => 7])->firstOrFail();
+			$addresses->patchEntity($ownerChange, [$modelField => '']);
+			$this->assertNotFalse($addresses->save($ownerChange));
+			$this->assertSame('', $addresses->get($ownerChange->id)->get($modelField));
 
 			$this->loadPlugins(['Data', 'Tools']);
 			TableRegistry::getTableLocator()->set('Data.Addresses', $addresses);
