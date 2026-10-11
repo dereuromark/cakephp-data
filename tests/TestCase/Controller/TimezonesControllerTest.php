@@ -5,10 +5,10 @@ namespace Data\Test\TestCase\Controller;
 
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
+use Data\Controller\TimezonesController;
+use PHPUnit\Framework\Attributes\UsesClass;
 
-/**
- * @uses \Data\Controller\TimezonesController
- */
+#[UsesClass(TimezonesController::class)]
 class TimezonesControllerTest extends TestCase {
 
 	use IntegrationTestTrait;

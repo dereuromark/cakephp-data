@@ -6,10 +6,10 @@ namespace Data\Test\TestCase\Controller\Admin;
 use Cake\Database\Driver\Postgres;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
+use Data\Controller\Admin\TimezonesController;
+use PHPUnit\Framework\Attributes\UsesClass;
 
-/**
- * @uses \Data\Controller\Admin\TimezonesController
- */
+#[UsesClass(TimezonesController::class)]
 class TimezonesControllerTest extends TestCase {
 
 	use IntegrationTestTrait;

@@ -78,4 +78,57 @@ class CountriesTest extends TestCase {
 		$this->assertTrue(count($result['add']) >= 248);
 	}
 
+	public function testDiffUsesPersistedTimezoneField(): void {
+		$sync = $this->getMockBuilder(Countries::class)->onlyMethods(['all'])->getMock();
+		$sync->expects($this->once())->method('all')->willReturn([
+			'DEU' => [
+				'name' => 'Germany',
+				'native' => 'Deutschland',
+				'iso2' => 'DE',
+				'phone_code' => '49',
+				'timezones' => [['gmtOffset' => 3600]],
+			],
+		]);
+		$country = new Country([
+			'name' => 'Germany',
+			'ori_name' => 'Deutschland',
+			'iso2' => 'DE',
+			'phone_code' => '49',
+			'timezone_offset' => '0',
+		]);
+		$result = $sync->diff(['DEU' => $country], ['timezone_offset']);
+		$this->assertSame(['timezone_offset' => '3600'], $result['edit'][0]['fields']);
+	}
+
+	public function testDiffHandlesMissingTimezones(): void {
+		$sync = $this->getMockBuilder(Countries::class)->onlyMethods(['all'])->getMock();
+		$sync->expects($this->once())->method('all')->willReturn([
+			'DEU' => ['name' => 'Germany', 'native' => 'Deutschland', 'iso2' => 'DE', 'phone_code' => '49'],
+		]);
+		$country = new Country([
+			'name' => 'Germany',
+			'ori_name' => 'Deutschland',
+			'iso2' => 'DE',
+			'phone_code' => '49',
+			'timezone_offset' => null,
+		]);
+		$this->assertSame([], $sync->diff(['DEU' => $country]));
+	}
+
+	public function testNewCountriesMapNativeNamesAndOffsets(): void {
+		$sync = $this->getMockBuilder(Countries::class)->onlyMethods(['all'])->getMock();
+		$sync->expects($this->once())->method('all')->willReturn([
+			'DEU' => [
+				'name' => 'Germany',
+				'native' => 'Deutschland',
+				'iso2' => 'DE',
+				'iso3' => 'DEU',
+				'timezones' => [['gmtOffset' => 3600]],
+			],
+		]);
+		$result = $sync->diff([]);
+		$this->assertSame('Deutschland', $result['add'][0]['data']['ori_name']);
+		$this->assertSame('3600', $result['add'][0]['data']['timezone_offset']);
+	}
+
 }

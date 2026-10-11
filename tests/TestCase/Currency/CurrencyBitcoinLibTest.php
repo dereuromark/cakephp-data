@@ -24,7 +24,7 @@ class CurrencyBitcoinLibTest extends TestCase {
 	public function setUp(): void {
 		parent::setUp();
 
-		if ($this->isDebug()) {
+		if ($this->isDebug() || $this->name() === 'testRatio') {
 			$this->CurrencyBitcoin = new CurrencyBitcoinLib();
 
 			return;

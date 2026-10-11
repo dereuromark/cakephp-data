@@ -1,55 +1,17 @@
 # CakePHP Data Plugin
 [![CI](https://github.com/dereuromark/cakephp-data/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/dereuromark/cakephp-data/actions/workflows/ci.yml?query=branch%3Amaster)
 [![Coverage Status](https://codecov.io/gh/dereuromark/cakephp-data/branch/master/graph/badge.svg)](https://codecov.io/gh/dereuromark/cakephp-data)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%207-brightgreen.svg?style=flat)](https://phpstan.org/)
+[![PHPStan](https://img.shields.io/badge/PHPStan-level%208-brightgreen.svg?style=flat)](https://phpstan.org/)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.2-8892BF.svg)](https://php.net/)
 [![License](https://poser.pugx.org/dereuromark/cakephp-data/license.svg)](LICENSE)
 [![Latest Stable Version](https://poser.pugx.org/dereuromark/cakephp-data/v/stable.svg)](https://packagist.org/packages/dereuromark/cakephp-data)
 [![Total Downloads](https://poser.pugx.org/dereuromark/cakephp-data/d/total.svg)](https://packagist.org/packages/dereuromark/cakephp-data)
 [![Coding Standards](https://img.shields.io/badge/cs-PSR--2--R-purple.svg?style=flat-square)](https://github.com/php-fig-rectified/fig-rectified-standards)
 
-A CakePHP plugin containing several useful data models that can be used in many projects.
+Reference tables, country and language icons, currencies, addresses, and MIME types for CakePHP applications.
 
-Note: This branch requires **CakePHP 5.3+**. See [version map](https://github.com/dereuromark/cakephp-data/wiki#cakephp-version-map) for details.
+[Documentation](https://dereuromark.github.io/cakephp-data/) · [Installation](https://dereuromark.github.io/cakephp-data/guide/installation) · [Getting started](https://dereuromark.github.io/cakephp-data/guide/getting-started)
 
-## Features
-- Continents => Countries => States => Counties => Districts => Cities
-- Postal Codes
-- Addresses
-- MimeTypes and MimeTypeImages
-- Languages (optionally with language flags)
-- Currencies (with converter)
+The plugin supplies schema and selected seed data. Country, city, postal code, language, and currency tables are not a complete, automatically maintained dataset. Choose the tables and sources your application needs.
 
-Both schema and data.
-
-Countries also can have country flags (images).
-
-## Demo
-See https://sandbox.dereuromark.de/export
-
-## How to include
-Installing the plugin is pretty much as with every other CakePHP Plugin.
-```
-composer require dereuromark/cakephp-data
-```
-
-And then load your plugin.
-
-Decide on what part of the plugin you need and make sure you executed the migrations for the database tables.
-It is recommended to just copy the migration files over to project level.
-
-That's it. It should be up and running.
-
-### Possible Dependencies
-
-- Tools plugin
-- FOC Search plugin (optional, if you want basic filtering)
-
-## Disclaimer
-Use at your own risk. Please provide any fixes or enhancements via issue or better pull request.
-Some classes are still from 1.2 (and are merely upgraded to 2.x/3.x) and might still need some serious refactoring.
-If you are able to help on that one, that would be awesome.
-
-### TODOs
-
-* Better test coverage
+[Demo](https://sandbox.dereuromark.de/export) · [Version map](https://github.com/dereuromark/cakephp-data/wiki#cakephp-version-map)

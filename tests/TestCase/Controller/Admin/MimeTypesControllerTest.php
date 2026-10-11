@@ -5,10 +5,10 @@ namespace Data\Test\TestCase\Controller\Admin;
 
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
+use Data\Controller\Admin\MimeTypesController;
+use PHPUnit\Framework\Attributes\UsesClass;
 
-/**
- * @uses \Data\Controller\Admin\MimeTypesController
- */
+#[UsesClass(MimeTypesController::class)]
 class MimeTypesControllerTest extends TestCase {
 
 	use IntegrationTestTrait;

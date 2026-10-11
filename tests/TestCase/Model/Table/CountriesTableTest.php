@@ -61,4 +61,12 @@ class CountriesTableTest extends TestCase {
 		$this->assertSame('FBR', $result->iso3);
 	}
 
+	public function testActiveFinderSupportsOrmDispatchAndDirectCalls(): void {
+		$expected = $this->Countries->findActive()->all()->extract('iso2')->toList();
+		$this->assertNotEmpty($expected);
+		$this->assertSame($expected, $this->Countries->find('active')->all()->extract('iso2')->toList());
+		$this->assertSame(['DE'], $this->Countries->findActive(['conditions' => ['iso2' => 'DE']])
+			->all()->extract('iso2')->toList());
+	}
+
 }

@@ -168,7 +168,7 @@ class LanguagesTable extends Table {
 			'conditions' => ['status' => Language::STATUS_ACTIVE],
 		];
 
-		return $this->find($type, $options);
+		return $this->find($type, ...$options);
 	}
 
 	/**
@@ -180,8 +180,9 @@ class LanguagesTable extends Table {
 		$options = [
 			'conditions' => ['locale_fallback = locale'],
 		];
+		$options = array_replace($options, $customOptions);
 
-		return $this->find($type, $options);
+		return $this->find($type, ...$options);
 	}
 
 	/**
