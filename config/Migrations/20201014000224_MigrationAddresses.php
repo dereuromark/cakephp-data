@@ -17,15 +17,17 @@ class MigrationAddresses extends BaseMigration {
 	 * @return void
 	 */
 	public function change() {
-		// The polymorphic foreign_id type and signedness follow the application's
-		// Polymorphic.type and Migrations.unsigned_primary_keys config keys.
-		$type = (string)Configure::read('Polymorphic.type', 'integer');
+		$configuredType = Configure::read('Polymorphic.type');
+		$type = $configuredType === null ? 'string' : (string)$configuredType;
 		$signed = !(bool)Configure::read('Migrations.unsigned_primary_keys', false);
 
 		$polymorphicOptions = [
 			'default' => null,
 			'null' => true,
 		];
+		if ($configuredType === null) {
+			$polymorphicOptions['limit'] = 10;
+		}
 		if (in_array($type, ['integer', 'biginteger'], true)) {
 			$polymorphicOptions['signed'] = $signed;
 		}
