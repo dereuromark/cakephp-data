@@ -2,12 +2,13 @@
 
 namespace Data\Model\Table;
 
+use ArrayAccess;
 use Cake\Core\Configure;
+use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
 use Cake\Log\Log;
 use Cake\Validation\Validation;
 use Cake\Validation\Validator;
-use Data\Model\Entity\Location;
 use Tools\Model\Table\Table;
 use Tools\Utility\Utility;
 
@@ -53,14 +54,21 @@ class LocationsTable extends Table {
 	 * FIXME
 	 *
 	 * @param \Cake\Event\EventInterface $event
-	 * @param \Data\Model\Entity\Location $entity
+	 * @param \Cake\Datasource\EntityInterface $entity
 	 * @return void
 	 */
-	public function _beforeSave(EventInterface $event, Location $entity): void {
+	public function _beforeSave(EventInterface $event, EntityInterface $entity) {
+		if (!$entity->has('geocoder_result')) {
+			return;
+		}
+		$result = $entity->get('geocoder_result');
+		if (!is_array($result) && !$result instanceof ArrayAccess) {
+			return;
+		}
 		$additional = ['locality', 'sublocality'];
 		foreach ($additional as $field) {
-			if (!empty($entity['geocoder_result'][$field])) {
-				$entity[$field] = $entity['geocoder_result'][$field];
+			if (!empty($result[$field])) {
+				$entity->set($field, $result[$field]);
 			}
 		}
 	}

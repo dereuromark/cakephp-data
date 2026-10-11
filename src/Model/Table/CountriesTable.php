@@ -37,6 +37,8 @@ use Tools\Model\Table\Table;
  */
 class CountriesTable extends Table {
 
+	private ?SelectQuery $activeQuery = null;
+
 	/**
 	 * @var array<int|string, mixed>
 	 */
@@ -145,13 +147,37 @@ class CountriesTable extends Table {
 	}
 
 	/**
-	 * @param \Cake\ORM\Query\SelectQuery|array<string, mixed> $options
+	 * @param array<string, mixed> $options
 	 * @return \Cake\ORM\Query\SelectQuery
 	 */
-	public function findActive(SelectQuery|array $options = []): SelectQuery {
-		$query = $options instanceof SelectQuery ? $options : $this->find('all', ...$options);
+	public function findActive(array $options = []) {
+		$query = $this->activeQuery ?? $this->find('all');
+		$query->applyOptions($options);
 
 		return $query->where([$this->getAlias() . '.status' => Country::STATUS_ACTIVE]);
+	}
+
+	/**
+	 * @param string $type
+	 * @param \Cake\ORM\Query\SelectQuery $query
+	 * @param mixed ...$args
+	 * @return \Cake\ORM\Query\SelectQuery
+	 */
+	public function callFinder(string $type, SelectQuery $query, mixed ...$args): SelectQuery {
+		if (strtolower($type) === 'active') {
+			$options = $args['options'] ?? $args[0] ?? [];
+			unset($args['options'], $args[0]);
+			$options = array_replace(is_array($options) ? $options : [], $args);
+			$previous = $this->activeQuery;
+			$this->activeQuery = $query;
+			try {
+				return $this->findActive($options);
+			} finally {
+				$this->activeQuery = $previous;
+			}
+		}
+
+		return parent::callFinder($type, $query, ...$args);
 	}
 
 	/**

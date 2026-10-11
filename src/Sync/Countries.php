@@ -75,6 +75,7 @@ class Countries {
 			return [];
 		}
 
+		$this->sourceAvailable = true;
 		$completeDiff = [];
 		foreach ($storedCountries as $key => $storedCountry) {
 			if (!isset($all[$key])) {
@@ -108,8 +109,8 @@ class Countries {
 					'ori_name' => is_string($new['native'] ?? null) && trim($new['native']) !== '' ? $new['native'] : $new['name'],
 					'iso2' => $new['iso2'],
 					'iso3' => $new['iso3'],
-					'phone_code' => $this->normalizePhoneCode($new['phonecode'] ?? $new['phone_code'] ?? ''),
-					'timezone_offset' => $this->normalizeTimeZones($new['timezones'] ?? []),
+					'phone_code' => $this->normalizePhoneCode($this->phoneCodeInput($new['phonecode'] ?? $new['phone_code'] ?? null)),
+					'timezone_offset' => $this->normalizeTimeZones($this->timezoneInput($new['timezones'] ?? null)),
 				],
 			];
 		}
@@ -136,11 +137,11 @@ class Countries {
 			$diff['iso2'] = $country['iso2'];
 		}
 
-		$phoneCode = $this->normalizePhoneCode($country['phonecode'] ?? $country['phone_code'] ?? '');
+		$phoneCode = $this->normalizePhoneCode($this->phoneCodeInput($country['phonecode'] ?? $country['phone_code'] ?? null));
 		if ($phoneCode !== null && $phoneCode !== $storedCountry->phone_code) {
 			$diff['phone_code'] = $phoneCode;
 		}
-		$timezones = $this->normalizeTimeZones($country['timezones'] ?? []);
+		$timezones = $this->normalizeTimeZones($this->timezoneInput($country['timezones'] ?? null));
 		if ($timezones !== null && $timezones !== $storedCountry->timezone_offset) {
 			$diff['timezone_offset'] = $timezones;
 		}
@@ -148,16 +149,25 @@ class Countries {
 		return $diff;
 	}
 
+	private function phoneCodeInput(mixed $value): string {
+		return is_string($value) || is_int($value) ? (string)$value : '';
+	}
+
 	/**
-	 * @param mixed $phoneCode
+	 * @param mixed $value
+	 * @return array
+	 */
+	private function timezoneInput(mixed $value): array {
+		return is_array($value) ? $value : [];
+	}
+
+	/**
+	 * @param string $phoneCode
 	 *
 	 * @return string|null
 	 */
-	protected function normalizePhoneCode(mixed $phoneCode): ?string {
-		if (is_int($phoneCode)) {
-			$phoneCode = (string)$phoneCode;
-		}
-		if (!is_string($phoneCode) || trim($phoneCode) === '') {
+	protected function normalizePhoneCode(string $phoneCode): ?string {
+		if (trim($phoneCode) === '') {
 			return null;
 		}
 
@@ -177,14 +187,11 @@ class Countries {
 	}
 
 	/**
-	 * @param mixed $timezones
+	 * @param array $timezones
 	 *
 	 * @return string|null
 	 */
-	protected function normalizeTimeZones(mixed $timezones): ?string {
-		if (!is_array($timezones)) {
-			return null;
-		}
+	protected function normalizeTimeZones(array $timezones): ?string {
 		$array = [];
 		foreach ($timezones as $timezone) {
 			$offset = is_array($timezone) ? ($timezone['gmtOffset'] ?? null) : null;
