@@ -3,12 +3,12 @@
 namespace Data\Sync;
 
 use Cake\Http\Client;
-use Cake\Http\Client\Exception\NetworkException;
 use Cake\Http\Exception\NotFoundException;
 use Data\Model\Entity\Timezone;
 use DateTimeImmutable;
 use DateTimeZone;
 use InvalidArgumentException;
+use Psr\Http\Client\ClientExceptionInterface;
 
 /**
  * @see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
@@ -47,7 +47,7 @@ class Timezones {
 		$this->sourceAvailable = true;
 		try {
 			$content = $this->fetchContent();
-		} catch (NotFoundException | NetworkException) {
+		} catch (NotFoundException | ClientExceptionInterface) {
 			$this->sourceAvailable = false;
 
 			return [];

@@ -49,6 +49,12 @@ class InstallationTest extends TestCase {
 		} finally {
 			ConnectionManager::drop('data_installation_test');
 			Configure::write('Data.Timezone.source', $previous);
+			unset($io);
+			foreach (['data-seed-output.txt', 'data-seed-error.txt'] as $file) {
+				if (is_file(TMP . $file)) {
+					unlink(TMP . $file);
+				}
+			}
 		}
 	}
 

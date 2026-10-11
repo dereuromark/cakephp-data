@@ -4,6 +4,7 @@ namespace Data\Test\TestCase\Sync;
 
 use Cake\Http\Client;
 use Cake\Http\Client\Exception\NetworkException;
+use Cake\Http\Client\Exception\RequestException;
 use Cake\Http\Client\Request;
 use Cake\Http\Client\Response;
 use Cake\ORM\TableRegistry;
@@ -199,6 +200,18 @@ class CountriesTest extends TestCase {
 		]);
 		$result = $sync->diff(['AUT' => new Country(['name' => 'Austria'])]);
 		$this->assertArrayNotHasKey('delete', $result);
+	}
+
+	public function testStreamRequestFailureReturnsUnavailableCatalog(): void {
+		$sync = new class extends Countries {
+
+			protected function fetchContent(): string {
+				throw new RequestException('Stream connection failed', new Request('https://example.invalid'));
+			}
+
+		};
+		$this->assertSame([], $sync->all());
+		$this->assertFalse($sync->isSourceAvailable());
 	}
 
 }

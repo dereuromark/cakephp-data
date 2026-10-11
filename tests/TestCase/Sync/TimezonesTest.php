@@ -4,6 +4,7 @@ namespace Data\Test\TestCase\Sync;
 
 use Cake\Http\Client;
 use Cake\Http\Client\Exception\NetworkException;
+use Cake\Http\Client\Exception\RequestException;
 use Cake\Http\Client\Request;
 use Cake\Http\Client\Response;
 use Cake\Http\Exception\NotFoundException;
@@ -316,6 +317,18 @@ class TimezonesTest extends TestCase {
 		$utc = $table->find()->where(['name' => 'UTC'])->firstOrFail();
 		$this->assertSame(190, mb_strlen($utc->notes));
 		$this->assertSame(190, mb_strlen($utc->covered));
+	}
+
+	public function testStreamRequestFailureReturnsUnavailableCatalog(): void {
+		$sync = new class extends Timezones {
+
+			protected function fetchContent(): string {
+				throw new RequestException('Stream connection failed', new Request('https://example.invalid'));
+			}
+
+		};
+		$this->assertSame([], $sync->all());
+		$this->assertFalse($sync->isSourceAvailable());
 	}
 
 }

@@ -3,11 +3,11 @@
 namespace Data\Sync;
 
 use Cake\Http\Client;
-use Cake\Http\Client\Exception\NetworkException;
 use Cake\Http\Exception\NotFoundException;
 use Cake\Utility\Exception\XmlException;
 use Cake\Utility\Xml;
 use Data\Model\Entity\Country;
+use Psr\Http\Client\ClientExceptionInterface;
 
 /**
  * @see https://github.com/dr5hn/countries-states-cities-database/blob/master/xml/countries.xml
@@ -32,7 +32,7 @@ class Countries {
 		try {
 			$content = $this->fetchContent();
 			$xml = Xml::build($content, ['readFile' => false]);
-		} catch (NetworkException | NotFoundException | XmlException) {
+		} catch (ClientExceptionInterface | NotFoundException | XmlException) {
 			$this->sourceAvailable = false;
 
 			return [];
