@@ -168,7 +168,7 @@ class LanguagesTable extends Table {
 			'conditions' => ['status' => Language::STATUS_ACTIVE],
 		];
 
-		return $this->find($type, $options);
+		return $this->find($type, ...$options);
 	}
 
 	/**
@@ -177,11 +177,7 @@ class LanguagesTable extends Table {
 	 * @return \Cake\ORM\Query\SelectQuery
 	 */
 	public function getPrimaryLanguages($type = 'all', array $customOptions = []) {
-		$options = [
-			'conditions' => ['locale_fallback = locale'],
-		];
-
-		return $this->find($type, $options);
+		return $this->find($type, ...$customOptions)->where(['locale_fallback = locale']);
 	}
 
 	/**

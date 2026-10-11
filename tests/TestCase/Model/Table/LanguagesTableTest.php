@@ -82,4 +82,20 @@ class LanguagesTableTest extends TestCase {
 		$this->assertSame('fes', $result->locale_fallback);
 	}
 
+	public function testActiveLanguages(): void {
+		$names = $this->Languages->getActive()->all()->extract('name')->toList();
+		$this->assertContains('Deutsch', $names);
+		$this->assertNotContains('Deutsch (Deutschland)', $names);
+	}
+
+	public function testPrimaryLanguagesWithCustomConditions(): void {
+		$names = $this->Languages->getPrimaryLanguages('all', ['conditions' => ['name' => 'Englisch']])
+			->all()->extract('name')->toList();
+		$this->assertSame([], $names);
+		$this->assertSame(['Deutsch'], $this->Languages->getPrimaryLanguages(
+			'all',
+			['conditions' => ['name' => 'Deutsch']],
+		)->all()->extract('name')->toList());
+	}
+
 }

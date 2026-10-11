@@ -18,11 +18,16 @@ class TimezonesSeed extends BaseSeed {
 	 *
 	 * @return void
 	 */
-	public function run() {
-		$data = (new Timezones())->all();
+	public function run(): void {
+		$timezones = new Timezones();
+		$data = $timezones->all();
+		if (!$data) {
+			$data = $timezones->allFromPhp();
+		}
 		foreach ($data as $key => $row) {
 			$data[$key]['created'] = $data[$key]['modified'] = substr((new DateTime())->toIso8601String(), 0, 19);
 			$data[$key]['active'] = $row['type'] === 'Canonical';
+			$data[$key]['offset_dst'] = $row['offset_dst'] ?? $row['offset'];
 			unset($data[$key]['abbr']);
 			unset($data[$key]['alias']);
 

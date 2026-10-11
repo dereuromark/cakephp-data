@@ -7,6 +7,7 @@ use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
+use Cake\ORM\Query\SelectQuery;
 use Data\Model\Entity\Country;
 use InvalidArgumentException;
 use Tools\Model\Table\Table;
@@ -144,11 +145,13 @@ class CountriesTable extends Table {
 	}
 
 	/**
-	 * @param array<string, mixed> $options
+	 * @param \Cake\ORM\Query\SelectQuery|array<string, mixed> $options
 	 * @return \Cake\ORM\Query\SelectQuery
 	 */
-	public function findActive(array $options = []) {
-		return $this->find('all', ...$options)->where([$this->getAlias() . '.status' => Country::STATUS_ACTIVE]);
+	public function findActive(SelectQuery|array $options = []): SelectQuery {
+		$query = $options instanceof SelectQuery ? $options : $this->find('all', ...$options);
+
+		return $query->where([$this->getAlias() . '.status' => Country::STATUS_ACTIVE]);
 	}
 
 	/**

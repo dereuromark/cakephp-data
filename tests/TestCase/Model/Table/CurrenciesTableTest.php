@@ -27,7 +27,7 @@ class CurrenciesTableTest extends TestCase {
 		parent::setUp();
 
 		$this->Currencies = TableRegistry::getTableLocator()->get('Data.Currencies');
-		$this->Currencies->CurrencyLib = $this->getMockBuilder(CurrencyLib::class)->getMock();
+		$this->Currencies->CurrencyLib = $this->createStub(CurrencyLib::class);
 	}
 
 	/**

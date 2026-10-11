@@ -5,10 +5,10 @@ namespace Data\Test\TestCase\Controller;
 
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
+use Data\Controller\CurrenciesController;
+use PHPUnit\Framework\Attributes\UsesClass;
 
-/**
- * @uses \Data\Controller\CurrenciesController
- */
+#[UsesClass(CurrenciesController::class)]
 class CurrenciesControllerTest extends TestCase {
 
 	use IntegrationTestTrait;

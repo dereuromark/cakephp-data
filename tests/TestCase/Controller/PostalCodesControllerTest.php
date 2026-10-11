@@ -6,10 +6,10 @@ use Cake\Database\Driver\Mysql;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
+use Data\Controller\PostalCodesController;
+use PHPUnit\Framework\Attributes\UsesClass;
 
-/**
- * @uses \Data\Controller\PostalCodesController
- */
+#[UsesClass(PostalCodesController::class)]
 class PostalCodesControllerTest extends TestCase {
 
 	use IntegrationTestTrait;

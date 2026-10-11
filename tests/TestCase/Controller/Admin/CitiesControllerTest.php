@@ -4,10 +4,10 @@ namespace Data\Test\TestCase\Controller\Admin;
 
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
+use Data\Controller\Admin\CitiesController;
+use PHPUnit\Framework\Attributes\UsesClass;
 
-/**
- * @uses \Data\Controller\Admin\CitiesController
- */
+#[UsesClass(CitiesController::class)]
 class CitiesControllerTest extends TestCase {
 
 	use IntegrationTestTrait;

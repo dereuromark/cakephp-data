@@ -4,10 +4,10 @@ namespace Data\Test\TestCase\Controller\Admin;
 
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
+use Data\Controller\Admin\LanguagesController;
+use PHPUnit\Framework\Attributes\UsesClass;
 
-/**
- * @uses \Data\Controller\Admin\LanguagesController
- */
+#[UsesClass(LanguagesController::class)]
 class LanguagesControllerTest extends TestCase {
 
 	use IntegrationTestTrait;

@@ -90,7 +90,7 @@ class DistrictsTable extends Table {
 			'fields' => [$this->getAlias() . '.slug', $this->getAlias() . '.name'],
 		];
 
-		return $this->find($type, $options);
+		return $this->find($type, ...$options);
 	}
 
 	/**

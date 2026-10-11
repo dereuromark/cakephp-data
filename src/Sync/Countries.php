@@ -25,7 +25,7 @@ class Countries {
 		$client->setConfig(['timeout' => 3]);
 		$response = $client->get(static::URL_XML);
 		if (!$response->isOk()) {
-			throw new NotFoundException('Cannot load countries.csv from GitHub');
+			throw new NotFoundException('Cannot load countries.xml from GitHub');
 		}
 
 		$content = $response->getBody()->getContents();
@@ -54,6 +54,9 @@ class Countries {
 	 */
 	public function diff(array $storedCountries, array $fields = []): array {
 		$all = $this->all();
+		if (!$all) {
+			return [];
+		}
 
 		$completeDiff = [];
 		foreach ($storedCountries as $key => $storedCountry) {
@@ -88,7 +91,10 @@ class Countries {
 		foreach ($all as $new) {
 			$completeDiff['add'][] = [
 				'label' => $new['name'],
-				'data' => $new,
+				'data' => $new + [
+					'ori_name' => $new['native'] ?? $new['name'],
+					'timezone_offset' => $this->normalizeTimeZones($new['timezones'] ?? []),
+				],
 			];
 		}
 
@@ -118,9 +124,9 @@ class Countries {
 		if ($phoneCode !== $storedCountry->phone_code) {
 			$diff['phone_code'] = $phoneCode;
 		}
-		$timezones = $this->normalizeTimeZones($country['timezones'] ?? '');
+		$timezones = $this->normalizeTimeZones($country['timezones'] ?? []);
 		if ($timezones !== $storedCountry->timezone_offset) {
-			$diff['timezone'] = $timezones;
+			$diff['timezone_offset'] = $timezones;
 		}
 
 		return $diff;

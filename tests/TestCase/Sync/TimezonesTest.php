@@ -205,4 +205,10 @@ class TimezonesTest extends TestCase {
 		$this->assertSame([], $tz->all());
 	}
 
+	public function testEmptyUpstreamDoesNotProposeDeletions(): void {
+		$sync = $this->getMockBuilder(Timezones::class)->onlyMethods(['all'])->getMock();
+		$sync->expects($this->once())->method('all')->willReturn([]);
+		$this->assertSame([], $sync->diff(['Europe/Berlin' => new Timezone(['name' => 'Existing'])]));
+	}
+
 }

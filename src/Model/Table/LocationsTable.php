@@ -131,7 +131,7 @@ class LocationsTable extends Table {
 				$alias . '.id',
 				$alias . '.name',
 				$alias . '.formatted_address',
-				'distance' => $query->newExpr($distance),
+				'distance' => $query->expr($distance),
 			])
 			->where([
 				$alias . '.lat <>' => 0,
