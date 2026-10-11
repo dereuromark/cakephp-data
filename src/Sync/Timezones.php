@@ -217,21 +217,7 @@ class Timezones {
 				$transitions = $tz->getTransitions($reference->getTimestamp(), $reference->getTimestamp() + 1);
 				$samples[] = $transitions[0];
 			}
-			$standardOffset = $samples[0]['offset'];
-			$dstOffset = null;
-			foreach ($samples as $sample) {
-				if ($sample['isdst']) {
-					$dstOffset = $sample['offset'];
-				} else {
-					$standardOffset = $sample['offset'];
-				}
-			}
-
-			if ($dstOffset !== null && $standardOffset !== $dstOffset) {
-				$offsets = array_column($samples, 'offset');
-				$standardOffset = min($offsets);
-				$dstOffset = max($offsets);
-			}
+			[$standardOffset, $dstOffset] = $this->classifySeasonalOffsets($samples);
 
 			$countryCode = null;
 			$location = $tz->getLocation();
@@ -255,6 +241,30 @@ class Timezones {
 		ksort($timezones);
 
 		return $timezones;
+	}
+
+	/**
+	 * @param array<array{offset: int, isdst: bool}> $samples
+	 * @return array{int, int|null}
+	 */
+	protected function classifySeasonalOffsets(array $samples): array {
+		$standardOffset = $samples[0]['offset'];
+		$dstOffset = null;
+		foreach ($samples as $sample) {
+			if ($sample['isdst']) {
+				$dstOffset = $sample['offset'];
+			} else {
+				$standardOffset = $sample['offset'];
+			}
+		}
+
+		if ($dstOffset !== null && $standardOffset !== $dstOffset) {
+			$offsets = array_column($samples, 'offset');
+			$standardOffset = min($offsets);
+			$dstOffset = max($offsets);
+		}
+
+		return [$standardOffset, $dstOffset];
 	}
 
 	/**

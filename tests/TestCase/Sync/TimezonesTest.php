@@ -12,6 +12,7 @@ use Cake\ORM\TableRegistry;
 use Data\Model\Entity\Timezone;
 use Data\Sync\Timezones;
 use DateTimeImmutable;
+use ReflectionMethod;
 use Shim\TestSuite\TestCase;
 
 class TimezonesTest extends TestCase {
@@ -372,6 +373,14 @@ class TimezonesTest extends TestCase {
 		};
 		$this->assertSame(7200, $sync->all()['Europe/Berlin']['offset_dst']);
 		$this->assertTrue($sync->isSourceAvailable());
+	}
+
+	public function testNegativeDstSamplesUseConventionalSeasonalOffsets(): void {
+		$method = new ReflectionMethod(Timezones::class, 'classifySeasonalOffsets');
+		$this->assertSame([0, 3600], $method->invoke($this->Timezones, [
+			['offset' => 0, 'isdst' => true],
+			['offset' => 3600, 'isdst' => false],
+		]));
 	}
 
 }

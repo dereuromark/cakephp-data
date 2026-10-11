@@ -154,6 +154,9 @@ class Countries {
 	 * @return string|null
 	 */
 	protected function normalizePhoneCode(mixed $phoneCode): ?string {
+		if (is_int($phoneCode)) {
+			$phoneCode = (string)$phoneCode;
+		}
 		if (!is_string($phoneCode) || trim($phoneCode) === '') {
 			return null;
 		}

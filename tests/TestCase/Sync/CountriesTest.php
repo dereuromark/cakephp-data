@@ -10,6 +10,7 @@ use Cake\Http\Client\Response;
 use Cake\ORM\TableRegistry;
 use Data\Model\Entity\Country;
 use Data\Sync\Countries;
+use ReflectionMethod;
 use Shim\TestSuite\TestCase;
 
 class CountriesTest extends TestCase {
@@ -238,6 +239,11 @@ class CountriesTest extends TestCase {
 			$this->assertNull($new['phone_code']);
 			$this->assertNull($new['timezone_offset']);
 		}
+	}
+
+	public function testIntegerPhoneCodesRemainSupported(): void {
+		$method = new ReflectionMethod(Countries::class, 'normalizePhoneCode');
+		$this->assertSame('49', $method->invoke(new Countries(), 49));
 	}
 
 }
