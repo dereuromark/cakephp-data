@@ -12,9 +12,9 @@ Use your application's actual Users alias if it differs. The plugin's base depen
 
 ## Host keys
 
-Address records attach to a host record through `foreign_id` and `model`. Store both values consistently; the foreign key alone does not identify the host model.
+Address records attach to a host record through `foreign_id` and `model_key`. Store both values consistently; the foreign key alone does not identify the host model.
 
-`Polymorphic.type` controls the `foreign_id` column type on a fresh migration. The accepted values are `integer`, `biginteger`, `uuid`, and `binaryuuid`:
+`Polymorphic.type` controls the `foreign_id` column type on a fresh migration. Without that setting, the column remains a nullable string with a length of 10. Explicit values include `string`, `integer`, `biginteger`, `uuid` and `binaryuuid`:
 
 ```php
 use Cake\Core\Configure;
@@ -31,8 +31,8 @@ Changing this configuration does not alter an existing column. Write an applicat
 ```php
 $addresses = $this->fetchTable('Data.Addresses');
 $userAddresses = $addresses->find()
-    ->where(['Addresses.model' => 'User', 'Addresses.foreign_id' => $userId])
+    ->where(['Addresses.model_key' => 'User', 'Addresses.foreign_id' => $userId])
     ->all();
 ```
 
-Apply your application's ownership checks before returning address data. The legacy `getByType()` helper filters an address type and `foreign_id`, but does not also filter `model`; add that condition when different host models can share the same primary key.
+Apply your application's ownership checks before returning address data. The legacy `getByType()` helper filters an address type and `foreign_id`, but does not also filter `model_key`; add that condition when different host models can share the same primary key.
