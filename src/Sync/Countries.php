@@ -3,7 +3,9 @@
 namespace Data\Sync;
 
 use Cake\Http\Client;
+use Cake\Http\Client\Exception\NetworkException;
 use Cake\Http\Exception\NotFoundException;
+use Cake\Utility\Exception\XmlException;
 use Cake\Utility\Xml;
 use Data\Model\Entity\Country;
 
@@ -11,6 +13,11 @@ use Data\Model\Entity\Country;
  * @see https://github.com/dr5hn/countries-states-cities-database/blob/master/xml/countries.xml
  */
 class Countries {
+
+	protected bool $sourceAvailable = true;
+
+	public function __construct(protected ?Client $client = null) {
+	}
 
 	/**
 	 * @var string
@@ -21,27 +28,35 @@ class Countries {
 	 * @return array
 	 */
 	public function all(): array {
-		$client = new Client();
-		$client->setConfig(['timeout' => 3]);
-		$response = $client->get(static::URL_XML);
-		if (!$response->isOk()) {
-			throw new NotFoundException('Cannot load countries.xml from GitHub');
-		}
+		$this->sourceAvailable = true;
+		try {
+			$content = $this->fetchContent();
+			$xml = Xml::build($content, ['readFile' => false]);
+		} catch (NetworkException | NotFoundException | XmlException) {
+			$this->sourceAvailable = false;
 
-		$content = $response->getBody()->getContents();
-		$xml = Xml::build($content);
+			return [];
+		}
 
 		$array = Xml::toArray($xml);
 		$countries = $array['countries']['country'] ?? [];
+		if (isset($countries['iso3'])) {
+			$countries = [$countries];
+		}
 
 		$result = [];
 		foreach ($countries as $element) {
+			if (!is_array($element) || empty($element['iso3']) || empty($element['iso2']) || empty($element['name'])) {
+				continue;
+			}
 			if (!empty($element['timezones']) && !isset($element['timezones'][0])) {
 				$element['timezones'] = [$element['timezones']];
 			}
 
 			$result[$element['iso3']] = $element;
 		}
+
+		$this->sourceAvailable = (bool)$result;
 
 		return $result;
 	}
@@ -55,17 +70,14 @@ class Countries {
 	public function diff(array $storedCountries, array $fields = []): array {
 		$all = $this->all();
 		if (!$all) {
+			$this->sourceAvailable = false;
+
 			return [];
 		}
 
 		$completeDiff = [];
 		foreach ($storedCountries as $key => $storedCountry) {
 			if (!isset($all[$key])) {
-				$completeDiff['delete'][] = [
-					'label' => $storedCountry->name,
-					'entity' => $storedCountry,
-				];
-
 				continue;
 			}
 
@@ -91,8 +103,12 @@ class Countries {
 		foreach ($all as $new) {
 			$completeDiff['add'][] = [
 				'label' => $new['name'],
-				'data' => $new + [
-					'ori_name' => $new['native'] ?? $new['name'],
+				'data' => [
+					'name' => $new['name'],
+					'ori_name' => ($new['native'] ?? '') ?: $new['name'],
+					'iso2' => $new['iso2'],
+					'iso3' => $new['iso3'],
+					'phone_code' => $this->normalizePhoneCode($new['phonecode'] ?? $new['phone_code'] ?? ''),
 					'timezone_offset' => $this->normalizeTimeZones($new['timezones'] ?? []),
 				],
 			];
@@ -120,7 +136,7 @@ class Countries {
 			$diff['iso2'] = $country['iso2'];
 		}
 
-		$phoneCode = $this->normalizePhoneCode($country['phone_code'] ?? '');
+		$phoneCode = $this->normalizePhoneCode($country['phonecode'] ?? $country['phone_code'] ?? '');
 		if ($phoneCode !== $storedCountry->phone_code) {
 			$diff['phone_code'] = $phoneCode;
 		}
@@ -174,6 +190,23 @@ class Countries {
 		}
 
 		return implode(',', $array);
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function fetchContent(): string {
+		$client = $this->client ?? new Client(['timeout' => 3]);
+		$response = $client->get(static::URL_XML);
+		if (!$response->isOk()) {
+			throw new NotFoundException('Cannot load countries.xml from GitHub');
+		}
+
+		return $response->getBody()->getContents();
+	}
+
+	public function isSourceAvailable(): bool {
+		return $this->sourceAvailable;
 	}
 
 }

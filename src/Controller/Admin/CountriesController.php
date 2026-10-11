@@ -112,7 +112,11 @@ class CountriesController extends DataAppController {
 
 		$fields = $this->request->getQuery('fields');
 		$fields = is_string($fields) ? explode(',', $fields) : [];
-		$diff = (new Countries())->diff($storedCountries, $fields);
+		$sync = new Countries();
+		$diff = $sync->diff($storedCountries, $fields);
+		if (!$sync->isSourceAvailable()) {
+			$this->Flash->warning('The remote dataset is unavailable or could not be parsed. No sync changes were proposed.');
+		}
 
 		if ($this->request->is('post')) {
 			$data = (array)$this->request->getData('Form');

@@ -2,11 +2,18 @@
 
 namespace Data\Test\TestCase\Sync;
 
+use Cake\Http\Client;
+use Cake\Http\Client\Exception\NetworkException;
+use Cake\Http\Client\Request;
+use Cake\Http\Client\Response;
+use Cake\ORM\TableRegistry;
 use Data\Model\Entity\Country;
 use Data\Sync\Countries;
 use Shim\TestSuite\TestCase;
 
 class CountriesTest extends TestCase {
+
+	protected array $fixtures = ['plugin.Data.Countries', 'plugin.Data.Continents', 'plugin.Data.States', 'plugin.Data.Timezones'];
 
 	/**
 	 * @var \Data\Sync\Countries
@@ -67,13 +74,12 @@ class CountriesTest extends TestCase {
 		$expected = [
 			'add',
 			'edit',
-			'delete',
 		];
 		sort($keys);
 		sort($expected);
 
 		$this->assertSame($expected, $keys);
-		$this->assertCount(1, $result['delete']);
+		$this->assertArrayNotHasKey('delete', $result);
 		$this->assertCount(1, $result['edit']);
 		$this->assertTrue(count($result['add']) >= 248);
 	}
@@ -135,6 +141,64 @@ class CountriesTest extends TestCase {
 		$sync = $this->getMockBuilder(Countries::class)->onlyMethods(['all'])->getMock();
 		$sync->expects($this->once())->method('all')->willReturn([]);
 		$this->assertSame([], $sync->diff(['DEU' => new Country(['name' => 'Existing'])]));
+	}
+
+	public function testUpstreamXmlCreatesSavableCountry(): void {
+		$client = $this->createMock(Client::class);
+		$client->expects($this->once())->method('get')->willReturn(new Response(
+			['HTTP/1.1 200 OK'],
+			file_get_contents(TESTS . 'test_files/xml/countries-sync.xml'),
+		));
+		$sync = new Countries($client);
+		$result = $sync->diff([]);
+		$data = $result['add'][0]['data'];
+		$this->assertSame('93', $data['phone_code']);
+		$this->assertArrayNotHasKey('timezones', $data);
+		$countries = TableRegistry::getTableLocator()->get('Data.Countries');
+		$country = $countries->newEntity($data);
+		$this->assertSame([], $country->getErrors());
+		$countries->saveOrFail($country);
+		$this->assertSame('16200', $country->timezone_offset);
+	}
+
+	public function testUpstreamPhoneCodeIsPreservedInExistingCountry(): void {
+		$sync = $this->getMockBuilder(Countries::class)->onlyMethods(['all'])->getMock();
+		$sync->expects($this->once())->method('all')->willReturn([
+			'AFG' => ['name' => 'Afghanistan', 'native' => 'Afghanistan', 'iso2' => 'AF', 'phonecode' => '93'],
+		]);
+		$country = new Country([
+			'name' => 'Afghanistan',
+			'ori_name' => 'Afghanistan',
+			'iso2' => 'AF',
+			'phone_code' => '93',
+			'timezone_offset' => null,
+		]);
+		$this->assertSame([], $sync->diff(['AFG' => $country]));
+	}
+
+	public function testNetworkFailureReturnsUnavailableCatalog(): void {
+		$client = $this->createMock(Client::class);
+		$client->expects($this->once())->method('get')->willThrowException(
+			new NetworkException('DNS unavailable', new Request('https://example.invalid')),
+		);
+		$sync = new Countries($client);
+		$this->assertSame([], $sync->all());
+		$this->assertFalse($sync->isSourceAvailable());
+	}
+
+	public function testMalformedXmlReturnsEmptyCatalog(): void {
+		$client = $this->createMock(Client::class);
+		$client->expects($this->once())->method('get')->willReturn(new Response(['HTTP/1.1 200 OK'], '<invalid'));
+		$this->assertSame([], (new Countries($client))->all());
+	}
+
+	public function testPartialCatalogDoesNotProposeDeletions(): void {
+		$sync = $this->getMockBuilder(Countries::class)->onlyMethods(['all'])->getMock();
+		$sync->expects($this->once())->method('all')->willReturn([
+			'DEU' => ['name' => 'Germany', 'native' => 'Deutschland', 'iso2' => 'DE', 'iso3' => 'DEU'],
+		]);
+		$result = $sync->diff(['AUT' => new Country(['name' => 'Austria'])]);
+		$this->assertArrayNotHasKey('delete', $result);
 	}
 
 }

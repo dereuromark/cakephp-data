@@ -1,6 +1,7 @@
 <?php
 declare(strict_types = 1);
 
+use Cake\Core\Configure;
 use Cake\I18n\DateTime;
 use Data\Sync\Timezones;
 use Migrations\BaseSeed;
@@ -20,7 +21,7 @@ class TimezonesSeed extends BaseSeed {
 	 */
 	public function run(): void {
 		$timezones = new Timezones();
-		$data = $timezones->all();
+		$data = Configure::read('Data.Timezone.source') === 'php' ? $timezones->allFromPhp() : $timezones->all();
 		if (!$data) {
 			$data = $timezones->allFromPhp();
 		}

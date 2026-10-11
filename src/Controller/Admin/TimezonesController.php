@@ -68,7 +68,11 @@ class TimezonesController extends AppController {
 
 		$fields = $this->request->getQuery('fields');
 		$fields = is_string($fields) ? explode(',', $fields) : [];
-		$diff = (new Timezones())->diff($storedTimezones, $fields);
+		$sync = new Timezones();
+		$diff = $sync->diff($storedTimezones, $fields);
+		if (!$sync->isSourceAvailable()) {
+			$this->Flash->warning('The remote dataset is unavailable or could not be parsed. No sync changes were proposed.');
+		}
 
 		if ($this->request->is('post')) {
 			$data = (array)$this->request->getData('Form');
