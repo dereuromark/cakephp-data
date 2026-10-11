@@ -47,3 +47,5 @@ You can copy the migration files you need from `vendor/dereuromark/cakephp-data/
 A country model enables Continent, State, and Timezone associations by default. Disable unused associations before creating its table instance, as described in [Tables and configuration](../reference/tables).
 
 Continue with [Getting started](./getting-started).
+
+For this development branch, the application's root `composer.json` must allow development dependencies with `"minimum-stability": "dev"`. Set `"prefer-stable": true` to prefer stable packages when their constraints permit it.
