@@ -33,11 +33,9 @@ class Timezones {
 	/**
 	 * Returns the full timezone catalog scraped from the Wikipedia tz-database article.
 	 *
-	 * Brittle by design — Wikipedia changes its wikitext layout periodically and the
-	 * regex parser below will silently produce empty results on shape drift. Network
-	 * failures (Wikipedia unreachable, captive portal, rate limit, DNS) are also
-	 * caught here and surfaced as an empty array so callers — notably the admin
-	 * sync action — degrade to "nothing to do" rather than 500ing the request.
+	 * Returns an empty catalog when the source cannot be fetched or parsed.
+	 * Call isSourceAvailable() after a sync to distinguish that result from an
+	 * unchanged dataset. Missing source rows never establish a deletion.
 	 *
 	 * Prefer {@see allFromPhp()} when the descriptive Wikipedia commentary fields
 	 * (`covered`, `notes`, `abbr`, `alias`) are not required; that path uses PHP's
@@ -453,6 +451,11 @@ class Timezones {
 		$timezone['country_code'] = $timezone['country_code'] ? substr($timezone['country_code'], 0, 2) : null;
 		$timezone['offset_dst'] ??= $timezone['offset'];
 		$timezone['active'] = $timezone['type'] === 'Canonical';
+		foreach (['covered', 'notes'] as $field) {
+			if (isset($timezone[$field])) {
+				$timezone[$field] = mb_substr($timezone[$field], 0, 190);
+			}
+		}
 		unset($timezone['abbr'], $timezone['alias']);
 
 		return $timezone;

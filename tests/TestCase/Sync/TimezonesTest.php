@@ -7,12 +7,15 @@ use Cake\Http\Client\Exception\NetworkException;
 use Cake\Http\Client\Request;
 use Cake\Http\Client\Response;
 use Cake\Http\Exception\NotFoundException;
+use Cake\ORM\TableRegistry;
 use Data\Model\Entity\Timezone;
 use Data\Sync\Timezones;
 use DateTimeImmutable;
 use Shim\TestSuite\TestCase;
 
 class TimezonesTest extends TestCase {
+
+	protected array $fixtures = ['plugin.Data.Timezones', 'plugin.Data.Countries'];
 
 	/**
 	 * @var \Data\Sync\Timezones
@@ -288,6 +291,31 @@ class TimezonesTest extends TestCase {
 		$result = $sync->diff(['Europe/Berlin' => new Timezone(['name' => 'Europe/Berlin'])]);
 		$this->assertArrayNotHasKey('delete', $result);
 		$this->assertSame(0, $result['add'][0]['data']['offset_dst']);
+	}
+
+	public function testTimezoneProposalsCanBeSavedWithLongDescriptions(): void {
+		$sync = new class extends Timezones {
+
+			protected function fetchContent(): string {
+				return file_get_contents(TESTS . 'test_files/json/timezones-sync.json');
+			}
+
+		};
+		$all = $sync->all();
+		$all['UTC']['notes'] = str_repeat('n', 500);
+		$all['UTC']['covered'] = str_repeat('c', 500);
+		$sync = $this->getMockBuilder(Timezones::class)->onlyMethods(['all'])->getMock();
+		$sync->expects($this->once())->method('all')->willReturn($all);
+		$proposals = $sync->diff([]);
+		$table = TableRegistry::getTableLocator()->get('Data.Timezones');
+		foreach ($proposals['add'] as $proposal) {
+			$timezone = $table->newEntity($proposal['data']);
+			$this->assertSame([], $timezone->getErrors());
+			$table->saveOrFail($timezone);
+		}
+		$utc = $table->find()->where(['name' => 'UTC'])->firstOrFail();
+		$this->assertSame(190, mb_strlen($utc->notes));
+		$this->assertSame(190, mb_strlen($utc->covered));
 	}
 
 }
