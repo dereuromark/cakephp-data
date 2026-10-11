@@ -105,7 +105,7 @@ class Countries {
 				'label' => $new['name'],
 				'data' => [
 					'name' => $new['name'],
-					'ori_name' => ($new['native'] ?? '') ?: $new['name'],
+					'ori_name' => is_string($new['native'] ?? null) && trim($new['native']) !== '' ? $new['native'] : $new['name'],
 					'iso2' => $new['iso2'],
 					'iso3' => $new['iso3'],
 					'phone_code' => $this->normalizePhoneCode($new['phonecode'] ?? $new['phone_code'] ?? ''),
@@ -129,7 +129,7 @@ class Countries {
 		if ($country['name'] !== $storedCountry->name) {
 			$diff['name'] = $country['name'];
 		}
-		if (array_key_exists('native', $country) && $country['native'] !== $storedCountry->ori_name) {
+		if (is_string($country['native'] ?? null) && trim($country['native']) !== '' && $country['native'] !== $storedCountry->ori_name) {
 			$diff['ori_name'] = $country['native'];
 		}
 		if ($country['iso2'] !== $storedCountry->iso2) {
@@ -137,11 +137,11 @@ class Countries {
 		}
 
 		$phoneCode = $this->normalizePhoneCode($country['phonecode'] ?? $country['phone_code'] ?? '');
-		if ((array_key_exists('phonecode', $country) || array_key_exists('phone_code', $country)) && $phoneCode !== $storedCountry->phone_code) {
+		if ($phoneCode !== null && $phoneCode !== $storedCountry->phone_code) {
 			$diff['phone_code'] = $phoneCode;
 		}
 		$timezones = $this->normalizeTimeZones($country['timezones'] ?? []);
-		if (array_key_exists('timezones', $country) && $timezones !== $storedCountry->timezone_offset) {
+		if ($timezones !== null && $timezones !== $storedCountry->timezone_offset) {
 			$diff['timezone_offset'] = $timezones;
 		}
 
@@ -149,12 +149,12 @@ class Countries {
 	}
 
 	/**
-	 * @param string $phoneCode
+	 * @param mixed $phoneCode
 	 *
 	 * @return string|null
 	 */
-	protected function normalizePhoneCode(string $phoneCode): ?string {
-		if (!$phoneCode) {
+	protected function normalizePhoneCode(mixed $phoneCode): ?string {
+		if (!is_string($phoneCode) || trim($phoneCode) === '') {
 			return null;
 		}
 
@@ -174,14 +174,21 @@ class Countries {
 	}
 
 	/**
-	 * @param array $timezones
+	 * @param mixed $timezones
 	 *
 	 * @return string|null
 	 */
-	protected function normalizeTimeZones(array $timezones): ?string {
+	protected function normalizeTimeZones(mixed $timezones): ?string {
+		if (!is_array($timezones)) {
+			return null;
+		}
 		$array = [];
 		foreach ($timezones as $timezone) {
-			$array[] = $timezone['gmtOffset'];
+			$offset = is_array($timezone) ? ($timezone['gmtOffset'] ?? null) : null;
+			if (!is_int($offset) && (!is_string($offset) || !preg_match('/^[+-]?\d+$/D', $offset))) {
+				return null;
+			}
+			$array[] = $offset;
 		}
 		$array = array_unique($array);
 

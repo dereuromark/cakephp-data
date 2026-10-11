@@ -221,4 +221,23 @@ class CountriesTest extends TestCase {
 		$this->assertSame([], $sync->diff(['DEU' => $country]));
 	}
 
+	public function testEmptyAndMalformedOptionalXmlPreservesStoredValues(): void {
+		foreach (['<timezones/>', '<timezones><invalid/></timezones>', '<timezones><gmtOffset>invalid</gmtOffset></timezones>'] as $timezones) {
+			$sync = new class ($timezones) extends Countries {
+				public function __construct(private string $timezones) {
+					parent::__construct();
+				}
+				protected function fetchContent(): string {
+					return '<countries><country><name>Germany</name><iso2>DE</iso2><iso3>DEU</iso3><native/><phonecode/>' . $this->timezones . '</country></countries>';
+				}
+			};
+			$country = new Country(['name' => 'Germany', 'ori_name' => 'Deutschland', 'iso2' => 'DE', 'phone_code' => '49', 'timezone_offset' => '3600']);
+			$this->assertSame([], $sync->diff(['DEU' => $country]));
+			$new = $sync->diff([])['add'][0]['data'];
+			$this->assertSame('Germany', $new['ori_name']);
+			$this->assertNull($new['phone_code']);
+			$this->assertNull($new['timezone_offset']);
+		}
+	}
+
 }

@@ -21,7 +21,7 @@ The timezone seed first retrieves a remote timezone list. If that source is unav
 bin/cake seeds run TimezonesSeed -p Data
 ```
 
-The PHP fallback has timezone names, countries, and offset fields; it omits the remote source's descriptive notes and coverage text. The data follows the timezone database installed with PHP. The fallback samples January and July and classifies standard and daylight-saving offsets using the IANA DST flag; it is a convenience dataset, not a replacement for PHP's timezone transition rules. For storage, a timezone without a separate DST offset uses its regular offset in the non-null `offset_dst` column.
+The PHP fallback has timezone names, countries, and offset fields; it omits the remote source's descriptive notes and coverage text. The data follows the timezone database installed with PHP. The fallback samples January and July and uses IANA DST flags to detect seasonal changes, storing the lower seasonal offset as standard and the higher as daylight time; it is a convenience dataset, not a replacement for PHP's timezone transition rules. For storage, a timezone without a separate DST offset uses its regular offset in the non-null `offset_dst` column.
 
 To use the offline source explicitly, configure this before running the seed:
 
@@ -39,7 +39,7 @@ Run it against an empty timezone table. The seed inserts rows; it does not merge
 
 The country sync reads the XML dataset from [countries-states-cities-database](https://github.com/dr5hn/countries-states-cities-database). It compares ISO3 codes and offers additions and changes. Missing upstream records are not proposed for deletion; a partial remote catalog cannot prove that a stored record should be removed. Review changes before applying them. Deleting a country can affect associated records.
 
-The comparison covers names, ISO2 codes, phone codes, and timezone offsets. Missing optional source fields leave stored values unchanged. It does not automatically import states, cities, or every upstream field. The sync depends on an external network request and can fail if the source changes or is unavailable.
+The comparison covers names, ISO2 codes, phone codes, and timezone offsets. Missing, empty, or malformed optional source fields leave stored values unchanged; they do not request deletion of a stored native name, phone code, or timezone offset. It does not automatically import states, cities, or every upstream field. The sync depends on an external network request and can fail if the source changes or is unavailable.
 
 ## Application imports
 

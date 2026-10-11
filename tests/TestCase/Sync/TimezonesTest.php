@@ -335,6 +335,10 @@ class TimezonesTest extends TestCase {
 		$all = $this->Timezones->allFromPhp(new DateTimeImmutable('2026-01-15T12:00:00Z'), new DateTimeImmutable('2026-07-15T12:00:00Z'));
 		$this->assertSame(36000, $all['Australia/Sydney']['offset']);
 		$this->assertSame(39600, $all['Australia/Sydney']['offset_dst']);
+		$this->assertSame(0, $all['Europe/Dublin']['offset']);
+		$this->assertSame(3600, $all['Europe/Dublin']['offset_dst']);
+		$this->assertSame(37800, $all['Australia/Lord_Howe']['offset']);
+		$this->assertSame(39600, $all['Australia/Lord_Howe']['offset_dst']);
 	}
 
 	public function testInvalidTimezoneFieldsAreNotCachedOrProposed(): void {

@@ -196,7 +196,8 @@ class Timezones {
 	 * are empty because PHP does not carry that commentary.
 	 *
 	 * The default samples are January and July. Each sample is classified by its
-	 * IANA daylight-saving flag, including southern-hemisphere seasons.
+	 * IANA daylight-saving flag. Seasonal pairs use the lower offset for standard
+	 * time and the higher for daylight time, including negative-DST databases.
 	 *
 	 * @param \DateTimeImmutable|null $standardReference First sampling date (defaults to January 15 of the current year).
 	 * @param \DateTimeImmutable|null $dstReference Second sampling date (defaults to July 15 of the current year).
@@ -224,6 +225,12 @@ class Timezones {
 				} else {
 					$standardOffset = $sample['offset'];
 				}
+			}
+
+			if ($dstOffset !== null && $standardOffset !== $dstOffset) {
+				$offsets = array_column($samples, 'offset');
+				$standardOffset = min($offsets);
+				$dstOffset = max($offsets);
 			}
 
 			$countryCode = null;
