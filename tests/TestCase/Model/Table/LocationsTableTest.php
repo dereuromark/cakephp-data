@@ -2,9 +2,11 @@
 
 namespace Data\Test\TestCase\Model\Table;
 
+use ArrayObject;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
 use Cake\Event\EventInterface;
+use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
 use Data\Model\Table\LocationsTable;
 use Shim\TestSuite\TestCase;
@@ -107,6 +109,7 @@ class LocationsTableTest extends TestCase {
 			}
 		};
 		$entity = $this->createMock(EntityInterface::class);
+		$entity->expects($this->once())->method('has')->with('geocoder_result')->willReturn(true);
 		$entity->expects($this->once())->method('get')->with('geocoder_result')->willReturn(['locality' => 'Berlin']);
 		$entity->expects($this->once())->method('set')->with('locality', 'Berlin');
 		$table->_beforeSave(new Event('Model.beforeSave', $table), $entity);
@@ -114,9 +117,20 @@ class LocationsTableTest extends TestCase {
 
 	public function testSaveHookIgnoresMalformedGeocoderResult(): void {
 		$entity = $this->createMock(EntityInterface::class);
+		$entity->expects($this->once())->method('has')->with('geocoder_result')->willReturn(true);
 		$entity->method('get')->willReturn('invalid');
 		$entity->expects($this->never())->method('set');
 		$this->Locations->_beforeSave(new Event('Model.beforeSave', $this->Locations), $entity);
+	}
+
+	public function testSaveHookSupportsStrictEntitiesAndArrayAccessResults(): void {
+		$entity = new Entity();
+		$entity->requireFieldPresence();
+		$this->Locations->_beforeSave(new Event('Model.beforeSave', $this->Locations), $entity);
+		$this->assertFalse($entity->has('locality'));
+		$entity->set('geocoder_result', new ArrayObject(['locality' => 'Berlin']));
+		$this->Locations->_beforeSave(new Event('Model.beforeSave', $this->Locations), $entity);
+		$this->assertSame('Berlin', $entity->get('locality'));
 	}
 
 }

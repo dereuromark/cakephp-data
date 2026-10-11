@@ -75,6 +75,7 @@ class Countries {
 			return [];
 		}
 
+		$this->sourceAvailable = true;
 		$completeDiff = [];
 		foreach ($storedCountries as $key => $storedCountry) {
 			if (!isset($all[$key])) {

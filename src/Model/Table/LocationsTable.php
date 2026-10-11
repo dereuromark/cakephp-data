@@ -2,6 +2,7 @@
 
 namespace Data\Model\Table;
 
+use ArrayAccess;
 use Cake\Core\Configure;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
@@ -57,8 +58,11 @@ class LocationsTable extends Table {
 	 * @return void
 	 */
 	public function _beforeSave(EventInterface $event, EntityInterface $entity) {
+		if (!$entity->has('geocoder_result')) {
+			return;
+		}
 		$result = $entity->get('geocoder_result');
-		if (!is_array($result)) {
+		if (!is_array($result) && !$result instanceof ArrayAccess) {
 			return;
 		}
 		$additional = ['locality', 'sublocality'];

@@ -248,11 +248,17 @@ class CountriesTest extends TestCase {
 
 	public function testLegacyNormalizerOverridesReceiveValidatedSourceValues(): void {
 		$sync = new class extends Countries {
+			public bool $available = true;
+
 			public mixed $phone = 49;
 
 			public mixed $zones = [['gmtOffset' => 3600]];
 
 			public function all(): array {
+				if (!$this->available) {
+					return [];
+				}
+
 				return ['DEU' => ['name' => 'Germany', 'iso2' => 'DE', 'iso3' => 'DEU', 'phonecode' => $this->phone, 'timezones' => $this->zones]];
 			}
 			protected function normalizePhoneCode(string $phoneCode): ?string {
@@ -270,6 +276,13 @@ class CountriesTest extends TestCase {
 		$data = $sync->diff([])['add'][0]['data'];
 		$this->assertNull($data['phone_code']);
 		$this->assertNull($data['timezone_offset']);
+		$sync->available = false;
+		$this->assertSame([], $sync->diff([]));
+		$this->assertFalse($sync->isSourceAvailable());
+		$sync->available = true;
+		$this->assertNotEmpty($sync->diff([]));
+		$this->assertTrue($sync->isSourceAvailable());
+
 	}
 
 }
