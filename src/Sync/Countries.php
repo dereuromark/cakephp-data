@@ -129,7 +129,7 @@ class Countries {
 		if ($country['name'] !== $storedCountry->name) {
 			$diff['name'] = $country['name'];
 		}
-		if ($country['native'] !== $storedCountry->ori_name) {
+		if (array_key_exists('native', $country) && $country['native'] !== $storedCountry->ori_name) {
 			$diff['ori_name'] = $country['native'];
 		}
 		if ($country['iso2'] !== $storedCountry->iso2) {
@@ -137,11 +137,11 @@ class Countries {
 		}
 
 		$phoneCode = $this->normalizePhoneCode($country['phonecode'] ?? $country['phone_code'] ?? '');
-		if ($phoneCode !== $storedCountry->phone_code) {
+		if ((array_key_exists('phonecode', $country) || array_key_exists('phone_code', $country)) && $phoneCode !== $storedCountry->phone_code) {
 			$diff['phone_code'] = $phoneCode;
 		}
 		$timezones = $this->normalizeTimeZones($country['timezones'] ?? []);
-		if ($timezones !== $storedCountry->timezone_offset) {
+		if (array_key_exists('timezones', $country) && $timezones !== $storedCountry->timezone_offset) {
 			$diff['timezone_offset'] = $timezones;
 		}
 

@@ -331,4 +331,43 @@ class TimezonesTest extends TestCase {
 		$this->assertFalse($sync->isSourceAvailable());
 	}
 
+	public function testPhpSouthernHemisphereUsesDstFlag(): void {
+		$all = $this->Timezones->allFromPhp(new DateTimeImmutable('2026-01-15T12:00:00Z'), new DateTimeImmutable('2026-07-15T12:00:00Z'));
+		$this->assertSame(36000, $all['Australia/Sydney']['offset']);
+		$this->assertSame(39600, $all['Australia/Sydney']['offset_dst']);
+	}
+
+	public function testInvalidTimezoneFieldsAreNotCachedOrProposed(): void {
+		$content = file_get_contents(TESTS . 'test_files/json/timezones-sync.json');
+		$cache = TMP . 'wiki-timezones.txt';
+		$previous = is_file($cache) ? file_get_contents($cache) : null;
+		try {
+			foreach (['+01:00' => '+01:99', 'Canonical' => 'Unknown', 'Europe/Berlin' => 'Invalid zone'] as $valid => $invalid) {
+				if (is_file($cache)) {
+					unlink($cache);
+				}
+				$client = $this->createMock(Client::class);
+				$client->expects($this->once())->method('get')->willReturn(new Response(['body' => str_replace($valid, $invalid, $content)]));
+				$sync = new Timezones($client);
+				$this->assertSame([], $sync->diff([]));
+				$this->assertFalse($sync->isSourceAvailable());
+				$this->assertFileDoesNotExist($cache);
+			}
+		} finally {
+			if ($previous !== null) {
+				file_put_contents($cache, $previous);
+			}
+		}
+	}
+
+	public function testWikipediaItalicOffsetsRemainValid(): void {
+		$sync = new class extends Timezones {
+			protected function fetchContent(): string {
+				return str_replace('|+02:00]]', "|''+02:00'']]", file_get_contents(TESTS . 'test_files/json/timezones-sync.json'));
+			}
+		};
+		$this->assertSame(7200, $sync->all()['Europe/Berlin']['offset_dst']);
+		$this->assertTrue($sync->isSourceAvailable());
+	}
+
 }

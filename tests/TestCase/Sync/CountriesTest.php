@@ -214,4 +214,11 @@ class CountriesTest extends TestCase {
 		$this->assertFalse($sync->isSourceAvailable());
 	}
 
+	public function testMissingOptionalFieldsPreserveStoredValues(): void {
+		$sync = $this->getMockBuilder(Countries::class)->onlyMethods(['all'])->getMock();
+		$sync->expects($this->once())->method('all')->willReturn(['DEU' => ['name' => 'Germany', 'iso2' => 'DE', 'iso3' => 'DEU']]);
+		$country = new Country(['name' => 'Germany', 'ori_name' => 'Deutschland', 'iso2' => 'DE', 'phone_code' => '49', 'timezone_offset' => '3600']);
+		$this->assertSame([], $sync->diff(['DEU' => $country]));
+	}
+
 }

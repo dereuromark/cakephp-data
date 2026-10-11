@@ -53,6 +53,17 @@ class Timezones {
 			return [];
 		}
 
+		$timezones = $this->parseCatalog($content);
+		$this->sourceAvailable = (bool)$timezones;
+
+		return $timezones;
+	}
+
+	/**
+	 * @param string $content
+	 * @return array
+	 */
+	protected function parseCatalog(string $content): array {
 		$data = json_decode($content, true);
 		if (!is_array($data) || !isset($data['parse']['wikitext']['*']) || !is_string($data['parse']['wikitext']['*'])) {
 			$this->sourceAvailable = false;
@@ -81,12 +92,12 @@ class Timezones {
 			}
 
 			$offset = null;
-			preg_match('#\|(.\d+:\d+)]]$#', str_replace('−', '-', $row['offset']), $offsetMatches);
+			preg_match('#\|(.\d+:\d+)]]$#', str_replace(['−', "''"], ['-', ''], $row['offset']), $offsetMatches);
 			if ($offsetMatches) {
 				$offset = $offsetMatches[1];
 			}
 			$offsetDst = null;
-			preg_match('#\|(.\d+:\d+)]]$#', str_replace('−', '-', $row['offset_dst']), $offsetDstMatches);
+			preg_match('#\|(.\d+:\d+)]]$#', str_replace(['−', "''"], ['-', ''], $row['offset_dst']), $offsetDstMatches);
 			if ($offsetDstMatches) {
 				$offsetDst = $offsetDstMatches[1];
 			}
@@ -113,6 +124,15 @@ class Timezones {
 				}
 			}
 			*/
+
+			if (!preg_match('/^[A-Za-z0-9_+\/-]+$/D', $name) || !preg_match('/^\|\s*(?:Canonical|Link)(?:\{\{su\|p=†\}\})?\s*$/uD', (string)$row['status'])) {
+				return [];
+			}
+			foreach ([$offset, $offsetDst] as $parsedOffset) {
+				if (!is_string($parsedOffset) || !preg_match('/^[+-](\d{2}):(\d{2})$/D', $parsedOffset, $parts) || (int)$parts[1] > 24 || (int)$parts[2] > 59) {
+					return [];
+				}
+			}
 
 			if ($offset) {
 				$offset = static::stringToInt($offset);
@@ -173,13 +193,13 @@ class Timezones {
 	 * Output shape matches {@see all()} so it is a drop-in replacement for the structural
 	 * fields (`name`, `country_code`, `offset`, `offset_dst`, `type`). The descriptive
 	 * fields populated by the wikitext scraper (`covered`, `notes`, `abbr`, `alias`)
-	 * are returned as null — PHP does not carry that commentary.
+	 * are empty because PHP does not carry that commentary.
 	 *
-	 * Reference timestamps are passed in to keep DST detection stable: a January date
-	 * yields the standard offset, a July date yields the DST offset (where applicable).
+	 * The default samples are January and July. Each sample is classified by its
+	 * IANA daylight-saving flag, including southern-hemisphere seasons.
 	 *
-	 * @param \DateTimeImmutable|null $standardReference Date used to read the standard offset (defaults to January 15 of the current year).
-	 * @param \DateTimeImmutable|null $dstReference Date used to read the DST offset (defaults to July 15 of the current year).
+	 * @param \DateTimeImmutable|null $standardReference First sampling date (defaults to January 15 of the current year).
+	 * @param \DateTimeImmutable|null $dstReference Second sampling date (defaults to July 15 of the current year).
 	 * @return array
 	 */
 	public function allFromPhp(?DateTimeImmutable $standardReference = null, ?DateTimeImmutable $dstReference = null): array {
@@ -191,8 +211,20 @@ class Timezones {
 		foreach (DateTimeZone::listIdentifiers() as $name) {
 			$tz = new DateTimeZone($name);
 
-			$standardOffset = $tz->getOffset($standardReference);
-			$dstOffset = $tz->getOffset($dstReference);
+			$samples = [];
+			foreach ([$standardReference, $dstReference] as $reference) {
+				$transitions = $tz->getTransitions($reference->getTimestamp(), $reference->getTimestamp() + 1);
+				$samples[] = $transitions[0];
+			}
+			$standardOffset = $samples[0]['offset'];
+			$dstOffset = null;
+			foreach ($samples as $sample) {
+				if ($sample['isdst']) {
+					$dstOffset = $sample['offset'];
+				} else {
+					$standardOffset = $sample['offset'];
+				}
+			}
 
 			$countryCode = null;
 			$location = $tz->getLocation();
@@ -204,7 +236,7 @@ class Timezones {
 				'name' => $name,
 				'country_code' => $countryCode,
 				'offset' => $standardOffset,
-				'offset_dst' => $standardOffset !== $dstOffset ? $dstOffset : null,
+				'offset_dst' => $dstOffset !== null && $standardOffset !== $dstOffset ? $dstOffset : null,
 				'type' => 'Canonical',
 				'covered' => null,
 				'notes' => '',
@@ -388,14 +420,18 @@ class Timezones {
 		$current = null;
 		foreach ($rows as $row) {
 			if (preg_match('/^\|-\s*(?:id=|style=)/', $row)) {
-				if ($current !== null && in_array(count($current), [9, 10], true)) {
+				if ($current !== null) {
+					if (!in_array(count($current), [9, 10], true)) {
+						return [];
+					}
 					$data[] = $current;
 				}
 				$current = [];
 			} elseif ($current !== null && str_starts_with($row, '|}')) {
-				if (in_array(count($current), [9, 10], true)) {
-					$data[] = $current;
+				if (!in_array(count($current), [9, 10], true)) {
+					return [];
 				}
+				$data[] = $current;
 
 				break;
 			} elseif ($current !== null && preg_match('/^\|(?![-}])/', $row)) {
@@ -440,7 +476,7 @@ class Timezones {
 		$data = json_decode($content, true);
 		$wikitext = $data['parse']['wikitext']['*'] ?? null;
 
-		return is_string($wikitext) && (bool)$this->parseJunks(explode("\n", $wikitext));
+		return is_string($wikitext) && (bool)$this->parseCatalog($content);
 	}
 
 	/**
