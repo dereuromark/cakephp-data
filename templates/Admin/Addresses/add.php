@@ -2,6 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var \Data\Model\Entity\Address $address
+ * @var string $modelField
  */
 
 use Cake\Core\Configure;
@@ -28,7 +29,7 @@ use Cake\Core\Configure;
 	<fieldset>
 		<legend><?php echo __d('data', 'Relations'); ?></legend>
 	<?php
-		echo $this->Form->control('model');
+		echo $this->Form->control($modelField);
 		echo $this->Form->control('foreign_id', ['type' => 'text', 'empty' => [0 => ' - [ ' . __d('data', 'noSelection') . ' ] - ']]);
 	?>
 	</fieldset>

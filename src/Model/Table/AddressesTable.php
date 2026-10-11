@@ -96,7 +96,11 @@ class AddressesTable extends Table {
 			->scalar('formatted_address')
 			->allowEmptyString('formatted_address')
 			->add('formatted_address', 'validateUnique', [
-				'rule' => ['validateUnique', ['scope' => ['foreign_id', $this->modelField()]]],
+				'rule' => function ($value, array $context): bool {
+					$context['data'] = $this->ownerValidationData($context);
+
+					return $this->validateUnique($value, ['scope' => ['foreign_id', $this->getModelField()]], $context);
+				},
 				'message' => __d('data', 'valErrRecordNameExists'),
 				'provider' => 'table',
 			]);
@@ -137,7 +141,7 @@ class AddressesTable extends Table {
 		$this->belongsTo('Users', [
 			'className' => CLASS_USERS,
 			'foreignKey' => 'foreign_id',
-			'conditions' => [$this->aliasField($this->modelField()) => 'User'],
+			'conditions' => [$this->aliasField($this->getModelField()) => 'User'],
 		]);
 	}
 
@@ -148,17 +152,19 @@ class AddressesTable extends Table {
 	 * @return bool
 	 */
 	public function primaryUnique($value, array $context) {
-		$data = $context['data'];
+		$data = $this->ownerValidationData($context);
 		if (empty($data['foreign_id']) || $data['address_type_id'] != Address::TYPE_MAIN) {
 			return true;
 		}
 		$conditions = ['foreign_id' => $data['foreign_id'], 'address_type_id' => Address::TYPE_MAIN];
-		$modelField = $this->modelField();
+		$modelField = $this->getModelField();
 		if (array_key_exists($modelField, $data)) {
 			$conditions[$modelField] = $data[$modelField];
 		}
-		if (!empty($data['user_id'])) {
-			$conditions['user_id !='] = $data['user_id'];
+		foreach ((array)$this->getPrimaryKey() as $primaryKey) {
+			if (isset($data[$primaryKey])) {
+				$conditions[$this->aliasField($primaryKey) . ' !='] = $data[$primaryKey];
+			}
 		}
 
 		return !$this->find('all', ...['conditions' => $conditions])->first();
@@ -167,8 +173,22 @@ class AddressesTable extends Table {
 	/**
 	 * @return string
 	 */
-	protected function modelField(): string {
+	public function getModelField(): string {
 		return $this->getSchema()->hasColumn('model') ? 'model' : 'model_key';
+	}
+
+	/**
+	 * @param array $context
+	 * @return array
+	 */
+	protected function ownerValidationData(array $context): array {
+		$data = $context['data'];
+		$entity = $context['entity'] ?? null;
+		if ($entity instanceof EntityInterface) {
+			$data += $entity->extract(array_merge(['foreign_id', $this->getModelField()], (array)$this->getPrimaryKey()));
+		}
+
+		return $data;
 	}
 
 	/**
