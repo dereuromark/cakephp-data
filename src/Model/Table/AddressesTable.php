@@ -153,7 +153,6 @@ class AddressesTable extends Table {
 			$formattedAddress = $context['data']['formatted_address'] ?? null;
 			if ($formattedAddress !== null && $formattedAddress !== '' && !$this->validateUnique($formattedAddress, [
 				'scope' => ['foreign_id', $this->getModelField()],
-				'allowMultipleNulls' => false,
 			], $context)) {
 				return false;
 			}

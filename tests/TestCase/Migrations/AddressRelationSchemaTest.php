@@ -135,6 +135,27 @@ class AddressRelationSchemaTest extends TestCase {
 			$addresses->patchEntity($ownerChange, [$modelField => '']);
 			$this->assertNotFalse($addresses->save($ownerChange));
 			$this->assertSame('', $addresses->get($ownerChange->id)->get($modelField));
+			$newAddressWithData = function (array $data) use ($addresses) {
+				$entity = $addresses->newEmptyEntity();
+				foreach ($data as $field => $value) {
+					$entity->set($field, $value);
+				}
+
+				return $entity;
+			};
+			$unattached = $data;
+			$unattached['foreign_id'] = null;
+			$unattached[$modelField] = '';
+			$unattached['formatted_address'] = 'Unattached copy';
+			$this->assertNotFalse($addresses->save($newAddressWithData($unattached)));
+			$this->assertNotFalse($addresses->save($newAddressWithData($unattached)));
+			$nullableCopy = $data;
+			$nullableCopy['foreign_id'] = 8;
+			$nullableCopy[$modelField] = null;
+			$nullableCopy['address_type_id'] = 99;
+			$nullableCopy['formatted_address'] = 'Nullable non-main copy';
+			$this->assertNotFalse($addresses->save($newAddressWithData($nullableCopy)));
+			$this->assertNotFalse($addresses->save($newAddressWithData($nullableCopy)));
 
 			$this->loadPlugins(['Data', 'Tools']);
 			TableRegistry::getTableLocator()->set('Data.Addresses', $addresses);
