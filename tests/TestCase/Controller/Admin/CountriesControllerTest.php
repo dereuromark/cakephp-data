@@ -75,7 +75,7 @@ class CountriesControllerTest extends TestCase {
 		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'Countries', 'action' => 'index']);
 		$this->assertResponseCode(200);
 
-		$this->assertSame(WWW_ROOT . 'img' . DS . $imagePath . DS, $this->_controller->imageFolder);
+		$this->assertSame(WWW_ROOT . 'img' . DS . $imagePath . DS, $this->controller->imageFolder);
 	}
 
 	/**
@@ -90,7 +90,7 @@ class CountriesControllerTest extends TestCase {
 		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'Countries', 'action' => 'index']);
 		$this->assertResponseCode(200);
 
-		$this->assertSame(WWW_ROOT . 'img' . DS . 'legacy_flags' . DS, $this->_controller->imageFolder);
+		$this->assertSame(WWW_ROOT . 'img' . DS . 'legacy_flags' . DS, $this->controller->imageFolder);
 	}
 
 }

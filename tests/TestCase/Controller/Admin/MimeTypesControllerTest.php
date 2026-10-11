@@ -52,6 +52,7 @@ class MimeTypesControllerTest extends TestCase {
 	 * @return void
 	 */
 	public function testAdd(): void {
+		$this->disableErrorHandlerMiddleware();
 		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'MimeTypes', 'action' => 'add']);
 		$this->assertResponseCode(200);
 	}
@@ -60,6 +61,7 @@ class MimeTypesControllerTest extends TestCase {
 	 * @return void
 	 */
 	public function testEdit(): void {
+		$this->disableErrorHandlerMiddleware();
 		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'MimeTypes', 'action' => 'edit', 1]);
 		$this->assertResponseCode(200);
 	}

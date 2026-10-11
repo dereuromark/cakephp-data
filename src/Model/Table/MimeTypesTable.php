@@ -64,6 +64,7 @@ class MimeTypesTable extends Table {
 			],
 			'isUnique' => [
 				'rule' => 'validateUnique',
+				'provider' => 'table',
 				'message' => 'Already exists',
 			],
 		],

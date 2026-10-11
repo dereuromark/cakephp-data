@@ -52,21 +52,21 @@ foreach ($currencies as $currency):
 		</td>
 		<td>
 			<span class="ajaxToggling" id="ajaxToggle-<?php echo $currency['id']?>">
-			<?php echo $this->Html->link($this->Format->yesNo($currency['active'], ['onTitle' => __d('data', 'Active'), 'offTitle' => __d('data', 'Inactive')]), ['action' => 'toggle', 'active', $currency['id']], ['escapeTitle' => false]); ?></span>&nbsp;&nbsp;<?php
+			<?php echo $this->Html->link($this->Format->yesNo($currency['active'], ['onTitle' => __d('data', 'Active'), 'offTitle' => __d('data', 'Inactive')]), ['action' => 'toggle', 'active', $currency['id']], ['escape' => false]); ?></span>&nbsp;&nbsp;<?php
 			if ($currency['base'] && !empty($baseCurrency)) {
 				echo $this->Format->yesNo($currency['base'], ['onTitle' => __d('data', 'Base value')]);
 			} else {
-				echo $this->Html->link($this->Icon->render('check-square-o', ['title' => __d('data', 'Zum Basis-Wert machen')]), ['action' => 'base', $currency['id']], ['escapeTitle' => false], 'Sicher?');
+				echo $this->Html->link($this->Icon->render('check-square-o', ['title' => __d('data', 'Zum Basis-Wert machen')]), ['action' => 'base', $currency['id']], ['escape' => false], 'Sicher?');
 			} ?>
 		</td>
 		<td>
 			<?php echo $this->Time->niceDate($currency['modified']); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $currency['id']], ['escapeTitle' => false]); ?>
-			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $currency['id']], ['escapeTitle' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $currency['id']], ['escape' => false]); ?>
+			<?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $currency['id']], ['escape' => false]); ?>
 			<?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $currency['id']], [
-				'escapeTitle' => false,
+				'escape' => false,
 				'class' => 'btn btn-link p-0 align-baseline',
 				'form' => [
 					'class' => 'd-inline',

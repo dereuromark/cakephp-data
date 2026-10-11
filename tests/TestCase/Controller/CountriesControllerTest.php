@@ -53,8 +53,8 @@ class CountriesControllerTest extends TestCase {
 		$this->get(['plugin' => 'Data', 'controller' => 'Countries', 'action' => 'index']);
 		$this->assertResponseCode(200);
 
-		$property = new ReflectionProperty($this->_controller, 'imageFolder');
-		$this->assertSame(WWW_ROOT . 'img' . DS . $imagePath . DS, $property->getValue($this->_controller));
+		$property = new ReflectionProperty($this->controller, 'imageFolder');
+		$this->assertSame(WWW_ROOT . 'img' . DS . $imagePath . DS, $property->getValue($this->controller));
 	}
 
 	/**
@@ -69,8 +69,8 @@ class CountriesControllerTest extends TestCase {
 		$this->get(['plugin' => 'Data', 'controller' => 'Countries', 'action' => 'index']);
 		$this->assertResponseCode(200);
 
-		$property = new ReflectionProperty($this->_controller, 'imageFolder');
-		$this->assertSame(WWW_ROOT . 'img' . DS . 'legacy_flags' . DS, $property->getValue($this->_controller));
+		$property = new ReflectionProperty($this->controller, 'imageFolder');
+		$this->assertSame(WWW_ROOT . 'img' . DS . 'legacy_flags' . DS, $property->getValue($this->controller));
 	}
 
 }

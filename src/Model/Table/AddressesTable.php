@@ -37,9 +37,9 @@ if (!defined('CLASS_USERS')) {
 class AddressesTable extends Table {
 
 	/**
-	 * @var string
+	 * @var array<string>|string|null
 	 */
-	public $displayField = 'formatted_address';
+	public array|string|null $displayField = 'formatted_address';
 
 	/**
 	 * @var array<int|string, mixed>
@@ -53,6 +53,7 @@ class AddressesTable extends Table {
 	 * @return \Cake\Validation\Validator
 	 */
 	public function validationDefault(Validator $validator): Validator {
+		$validator->setProvider('table', $this);
 		$validator
 			->integer('state_id')
 			->allowEmptyString('state_id')

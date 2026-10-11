@@ -3,7 +3,7 @@
 Install the plugin in your application's root directory:
 
 ```sh
-composer require dereuromark/cakephp-data
+composer require dereuromark/cakephp-data:dev-cake6
 bin/cake plugin load Data
 ```
 
@@ -26,7 +26,7 @@ The models use your application's default database connection. Back up an existi
 If your application does not already have Migrations installed and loaded:
 
 ```sh
-composer require cakephp/migrations
+composer require cakephp/migrations:dev-fix/6.x-cakephp-compatibility
 bin/cake plugin load Migrations
 ```
 

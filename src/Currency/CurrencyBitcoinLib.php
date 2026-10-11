@@ -18,7 +18,7 @@ class CurrencyBitcoinLib {
 	/**
 	 * @var array<string, mixed>
 	 */
-	protected $_defaultConfig = [
+	protected array $defaultConfig = [
 		'currency' => 'EUR', # set to NULL or empty for all
 		'api' => 'coingecko',
 	];

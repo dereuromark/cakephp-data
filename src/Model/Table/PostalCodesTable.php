@@ -26,9 +26,9 @@ use Tools\Model\Table\Table;
 class PostalCodesTable extends Table {
 
 	/**
-	 * @var string
+	 * @var array<string>|string|null
 	 */
-	public $displayField = 'code';
+	public array|string|null $displayField = 'code';
 
 	/**
 	 * @var array<int|string, mixed>

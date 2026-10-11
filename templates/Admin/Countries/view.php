@@ -68,7 +68,7 @@
 	<ul>
 		<li><?php echo $this->Html->link(__d('data', 'Edit {0}', __d('data', 'Country')), ['action' => 'edit', $country->id]); ?> </li>
 		<li><?php echo $this->Form->postButton(__d('data', 'Delete Country'), ['action' => 'delete', $country->id], [
-			'escapeTitle' => false,
+			'escape' => false,
 			'class' => 'btn btn-link p-0 align-baseline',
 			'form' => [
 				'class' => 'd-inline',

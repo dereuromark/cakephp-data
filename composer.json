@@ -26,25 +26,25 @@
 		"source": "https://github.com/dereuromark/cakephp-data"
 	},
 	"require": {
-		"php": ">=8.2",
-		"cakephp/cakephp": "^5.3.4",
-		"dereuromark/cakephp-shim": "^3.9.0",
-		"dereuromark/cakephp-tools": "^3.12.8"
+		"php": ">=8.5",
+		"cakephp/cakephp": "^6.0@dev",
+		"dereuromark/cakephp-shim": "dev-cake6",
+		"dereuromark/cakephp-tools": "dev-cake6"
 	},
 	"require-dev": {
-		"cakephp/migrations": "^5.0.0",
-		"dereuromark/cakephp-geo": "^3.0.0",
-		"dereuromark/cakephp-i18n-lint": "^0.1.1",
+		"cakephp/migrations": "dev-fix/6.x-cakephp-compatibility",
+		"dereuromark/cakephp-geo": "dev-cake6",
+		"dereuromark/cakephp-i18n-lint": "dev-cake6",
 		"fig-r/psr2r-sniffer": "dev-master",
-		"friendsofcake/search": "^7.0.0",
-		"phpunit/phpunit": "^11.5 || ^12.1 || ^13.0",
+		"friendsofcake/search": "dev-cake6",
+		"phpunit/phpunit": "^13.0",
 		"willdurand/geocoder": "^4.2.2 || ^5.0.0",
 		"yangqi/htmldom": "dev-master"
 	},
 	"conflict": {
 		"cakephp/migrations": "<4.5"
 	},
-	"minimum-stability": "stable",
+	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"autoload": {
 		"psr-4": {
