@@ -8,11 +8,17 @@ use Data\Model\Entity\Timezone;
 use DateTimeImmutable;
 use DateTimeZone;
 use InvalidArgumentException;
+use Psr\Http\Client\ClientExceptionInterface;
 
 /**
  * @see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
  */
 class Timezones {
+
+	protected bool $sourceAvailable = true;
+
+	public function __construct(protected ?Client $client = null) {
+	}
 
 	/**
 	 * @var string
@@ -27,11 +33,9 @@ class Timezones {
 	/**
 	 * Returns the full timezone catalog scraped from the Wikipedia tz-database article.
 	 *
-	 * Brittle by design — Wikipedia changes its wikitext layout periodically and the
-	 * regex parser below will silently produce empty results on shape drift. Network
-	 * failures (Wikipedia unreachable, captive portal, rate limit, DNS) are also
-	 * caught here and surfaced as an empty array so callers — notably the admin
-	 * sync action — degrade to "nothing to do" rather than 500ing the request.
+	 * Returns an empty catalog when the source cannot be fetched or parsed.
+	 * Call isSourceAvailable() after a sync to distinguish that result from an
+	 * unchanged dataset. Missing source rows never establish a deletion.
 	 *
 	 * Prefer {@see allFromPhp()} when the descriptive Wikipedia commentary fields
 	 * (`covered`, `notes`, `abbr`, `alias`) are not required; that path uses PHP's
@@ -40,14 +44,30 @@ class Timezones {
 	 * @return array
 	 */
 	public function all(): array {
+		$this->sourceAvailable = true;
 		try {
 			$content = $this->fetchContent();
-		} catch (NotFoundException) {
+		} catch (NotFoundException | ClientExceptionInterface) {
+			$this->sourceAvailable = false;
+
 			return [];
 		}
 
+		$timezones = $this->parseCatalog($content);
+		$this->sourceAvailable = (bool)$timezones;
+
+		return $timezones;
+	}
+
+	/**
+	 * @param string $content
+	 * @return array
+	 */
+	protected function parseCatalog(string $content): array {
 		$data = json_decode($content, true);
 		if (!is_array($data) || !isset($data['parse']['wikitext']['*']) || !is_string($data['parse']['wikitext']['*'])) {
+			$this->sourceAvailable = false;
+
 			return [];
 		}
 		$data = $data['parse']['wikitext']['*'];
@@ -72,12 +92,12 @@ class Timezones {
 			}
 
 			$offset = null;
-			preg_match('#\|(.\d+:\d+)]]$#', str_replace('−', '-', $row['offset']), $offsetMatches);
+			preg_match('#\|(.\d+:\d+)]]$#', str_replace(['−', "''"], ['-', ''], $row['offset']), $offsetMatches);
 			if ($offsetMatches) {
 				$offset = $offsetMatches[1];
 			}
 			$offsetDst = null;
-			preg_match('#\|(.\d+:\d+)]]$#', str_replace('−', '-', $row['offset_dst']), $offsetDstMatches);
+			preg_match('#\|(.\d+:\d+)]]$#', str_replace(['−', "''"], ['-', ''], $row['offset_dst']), $offsetDstMatches);
 			if ($offsetDstMatches) {
 				$offsetDst = $offsetDstMatches[1];
 			}
@@ -104,6 +124,15 @@ class Timezones {
 				}
 			}
 			*/
+
+			if (!preg_match('/^[A-Za-z0-9_+\/-]+$/D', $name) || !preg_match('/^\|\s*(?:Canonical|Link)(?:\{\{su\|p=†\}\})?\s*$/uD', (string)$row['status'])) {
+				return [];
+			}
+			foreach ([$offset, $offsetDst] as $parsedOffset) {
+				if (!is_string($parsedOffset) || !preg_match('/^[+-](\d{2}):(\d{2})$/D', $parsedOffset, $parts) || (int)$parts[1] > 24 || (int)$parts[2] > 59) {
+					return [];
+				}
+			}
 
 			if ($offset) {
 				$offset = static::stringToInt($offset);
@@ -153,6 +182,8 @@ class Timezones {
 
 		ksort($timezones);
 
+		$this->sourceAvailable = (bool)$timezones;
+
 		return $timezones;
 	}
 
@@ -162,13 +193,14 @@ class Timezones {
 	 * Output shape matches {@see all()} so it is a drop-in replacement for the structural
 	 * fields (`name`, `country_code`, `offset`, `offset_dst`, `type`). The descriptive
 	 * fields populated by the wikitext scraper (`covered`, `notes`, `abbr`, `alias`)
-	 * are returned as null — PHP does not carry that commentary.
+	 * are empty because PHP does not carry that commentary.
 	 *
-	 * Reference timestamps are passed in to keep DST detection stable: a January date
-	 * yields the standard offset, a July date yields the DST offset (where applicable).
+	 * The default samples are January and July. Each sample is classified by its
+	 * IANA daylight-saving flag. Seasonal pairs use the lower offset for standard
+	 * time and the higher for daylight time, including negative-DST databases.
 	 *
-	 * @param \DateTimeImmutable|null $standardReference Date used to read the standard offset (defaults to January 15 of the current year).
-	 * @param \DateTimeImmutable|null $dstReference Date used to read the DST offset (defaults to July 15 of the current year).
+	 * @param \DateTimeImmutable|null $standardReference First sampling date (defaults to January 15 of the current year).
+	 * @param \DateTimeImmutable|null $dstReference Second sampling date (defaults to July 15 of the current year).
 	 * @return array
 	 */
 	public function allFromPhp(?DateTimeImmutable $standardReference = null, ?DateTimeImmutable $dstReference = null): array {
@@ -180,8 +212,12 @@ class Timezones {
 		foreach (DateTimeZone::listIdentifiers() as $name) {
 			$tz = new DateTimeZone($name);
 
-			$standardOffset = $tz->getOffset($standardReference);
-			$dstOffset = $tz->getOffset($dstReference);
+			$samples = [];
+			foreach ([$standardReference, $dstReference] as $reference) {
+				$transitions = $tz->getTransitions($reference->getTimestamp(), $reference->getTimestamp() + 1);
+				$samples[] = $transitions[0];
+			}
+			[$standardOffset, $dstOffset] = $this->classifySeasonalOffsets($samples);
 
 			$countryCode = null;
 			$location = $tz->getLocation();
@@ -193,7 +229,7 @@ class Timezones {
 				'name' => $name,
 				'country_code' => $countryCode,
 				'offset' => $standardOffset,
-				'offset_dst' => $standardOffset !== $dstOffset ? $dstOffset : null,
+				'offset_dst' => $dstOffset !== null && $standardOffset !== $dstOffset ? $dstOffset : null,
 				'type' => 'Canonical',
 				'covered' => null,
 				'notes' => '',
@@ -208,6 +244,30 @@ class Timezones {
 	}
 
 	/**
+	 * @param array<array{offset: int, isdst: bool}> $samples
+	 * @return array{int, int|null}
+	 */
+	protected function classifySeasonalOffsets(array $samples): array {
+		$standardOffset = $samples[0]['offset'];
+		$dstOffset = null;
+		foreach ($samples as $sample) {
+			if ($sample['isdst']) {
+				$dstOffset = $sample['offset'];
+			} else {
+				$standardOffset = $sample['offset'];
+			}
+		}
+
+		if ($dstOffset !== null && $standardOffset !== $dstOffset) {
+			$offsets = array_column($samples, 'offset');
+			$standardOffset = min($offsets);
+			$dstOffset = max($offsets);
+		}
+
+		return [$standardOffset, $dstOffset];
+	}
+
+	/**
 	 * @param array<\Data\Model\Entity\Timezone> $storedTimezones
 	 * @param array<string> $fields
 	 *
@@ -215,18 +275,16 @@ class Timezones {
 	 */
 	public function diff(array $storedTimezones, array $fields = []): array {
 		$all = $this->all();
+		$all = array_map($this->normalizeForStorage(...), $all);
 		if (!$all) {
+			$this->sourceAvailable = false;
+
 			return [];
 		}
 
 		$completeDiff = [];
 		foreach ($storedTimezones as $key => $storedTimezone) {
 			if (!isset($all[$key])) {
-				$completeDiff['delete'][] = [
-					'label' => $storedTimezone->name,
-					'entity' => $storedTimezone,
-				];
-
 				continue;
 			}
 
@@ -311,7 +369,7 @@ class Timezones {
 			];
 			$hasDst = count($junk) > 9;
 			if ($hasDst) {
-				$rowIndexMap['abbr'] = 7;
+				$rowIndexMap['abbr'] = 6;
 				$rowIndexMap['notes'] = 9;
 			}
 
@@ -375,38 +433,27 @@ class Timezones {
 	 * @return array
 	 */
 	protected function parseJunks(array $rows): array {
-		$start = null;
-		foreach ($rows as $i => $row) {
-			if (str_contains((string)$row, '| [[ISO_3166-1:')) {
-				$start = $i;
+		$data = [];
+		$current = null;
+		foreach ($rows as $row) {
+			if (preg_match('/^\|-\s*(?:id=|style=)/', $row)) {
+				if ($current !== null) {
+					if (!in_array(count($current), [9, 10], true)) {
+						return [];
+					}
+					$data[] = $current;
+				}
+				$current = [];
+			} elseif ($current !== null && str_starts_with($row, '|}')) {
+				if (!in_array(count($current), [9, 10], true)) {
+					return [];
+				}
+				$data[] = $current;
 
 				break;
+			} elseif ($current !== null && preg_match('/^\|(?![-}])/', $row)) {
+				$current[] = $row;
 			}
-		}
-
-		if ($start === null) {
-			return [];
-		}
-
-		$count = count($rows);
-
-		$data = [];
-		$index = 0;
-		$rowIndex = 0;
-		for ($i = $start; $i < $count; $i++) {
-			if (!isset($rows[$i])) {
-				continue;
-			}
-
-			if (str_starts_with($rows[$i], '|- style') || str_starts_with($rows[$i], '|- id=')) {
-				$index++;
-				$rowIndex = 0;
-
-				continue;
-			}
-
-			$data[$index][] = $rows[$i];
-			$rowIndex++;
 		}
 
 		return $data;
@@ -416,21 +463,59 @@ class Timezones {
 	 * @return string
 	 */
 	protected function fetchContent(): string {
-		if (file_exists(TMP . 'wiki-timezones.txt')) {
-			return (string)file_get_contents(TMP . 'wiki-timezones.txt');
+		$cachePath = TMP . 'wiki-timezones.txt';
+		if (is_file($cachePath) && filemtime($cachePath) >= time() - 3600) {
+			$content = (string)file_get_contents($cachePath);
+			if ($this->isValidResponse($content)) {
+				return $content;
+			}
 		}
 
-		$client = new Client();
-		$client->setConfig(['timeout' => 3]);
+		$client = $this->client ?? new Client(['timeout' => 3]);
 		$response = $client->get(sprintf(static::URL, static::PAGE));
 		if (!$response->isOk()) {
 			throw new NotFoundException('Cannot load timezones HTML from Wikipedia');
 		}
 
 		$content = $response->getBody()->getContents();
-		file_put_contents(TMP . 'wiki-timezones.txt', $content);
+		if ($this->isValidResponse($content)) {
+			file_put_contents($cachePath, $content);
+		}
 
 		return $content;
+	}
+
+	/**
+	 * @param string $content
+	 * @return bool
+	 */
+	protected function isValidResponse(string $content): bool {
+		$data = json_decode($content, true);
+		$wikitext = $data['parse']['wikitext']['*'] ?? null;
+
+		return is_string($wikitext) && (bool)$this->parseCatalog($content);
+	}
+
+	/**
+	 * @param array $timezone
+	 * @return array
+	 */
+	public function normalizeForStorage(array $timezone): array {
+		$timezone['country_code'] = $timezone['country_code'] ? substr($timezone['country_code'], 0, 2) : null;
+		$timezone['offset_dst'] ??= $timezone['offset'];
+		$timezone['active'] = $timezone['type'] === 'Canonical';
+		foreach (['covered', 'notes'] as $field) {
+			if (isset($timezone[$field])) {
+				$timezone[$field] = mb_substr($timezone[$field], 0, 190);
+			}
+		}
+		unset($timezone['abbr'], $timezone['alias']);
+
+		return $timezone;
+	}
+
+	public function isSourceAvailable(): bool {
+		return $this->sourceAvailable;
 	}
 
 }

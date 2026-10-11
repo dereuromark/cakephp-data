@@ -2,13 +2,22 @@
 
 namespace Data\Test\TestCase\Sync;
 
+use Cake\Http\Client;
+use Cake\Http\Client\Exception\NetworkException;
+use Cake\Http\Client\Exception\RequestException;
+use Cake\Http\Client\Request;
+use Cake\Http\Client\Response;
 use Cake\Http\Exception\NotFoundException;
+use Cake\ORM\TableRegistry;
 use Data\Model\Entity\Timezone;
 use Data\Sync\Timezones;
 use DateTimeImmutable;
+use ReflectionMethod;
 use Shim\TestSuite\TestCase;
 
 class TimezonesTest extends TestCase {
+
+	protected array $fixtures = ['plugin.Data.Timezones', 'plugin.Data.Countries'];
 
 	/**
 	 * @var \Data\Sync\Timezones
@@ -43,10 +52,10 @@ class TimezonesTest extends TestCase {
 			//'lng' => (float)13.22,
 			'offset' => 3600,
 			'offset_dst' => 7200,
-			'abbr' => 'CEST',
+			'abbr' => 'CET',
 			'notes' => 'In 1945, the [[Bizone|Trizone]] did not follow Berlin\'s switch to DST, see [[Time in Germany]]',
 			'type' => 'Canonical',
-			'alias' => 'Central European Summer Time',
+			'alias' => 'Central European Time',
 		];
 		$this->assertEquals($expected, $berlin);
 	}
@@ -75,13 +84,12 @@ class TimezonesTest extends TestCase {
 		$expected = [
 			'add',
 			'edit',
-			'delete',
 		];
 		sort($keys);
 		sort($expected);
 
 		$this->assertSame($expected, $keys);
-		$this->assertCount(1, $result['delete']);
+		$this->assertArrayNotHasKey('delete', $result);
 		$this->assertCount(1, $result['edit']);
 		$this->assertTrue(count($result['add']) >= 488);
 	}
@@ -164,20 +172,14 @@ class TimezonesTest extends TestCase {
 	 * @return void
 	 */
 	public function testAllReturnsEmptyOnUnexpectedWikipediaPayload(): void {
-		$cachePath = TMP . 'wiki-timezones.txt';
-		if (file_exists($cachePath)) {
-			unlink($cachePath);
-		}
-		// Seed the cache with a payload the parser does not understand.
-		file_put_contents($cachePath, json_encode(['parse' => ['unexpected' => 'shape']]));
+		$sync = new class extends Timezones {
 
-		try {
-			$this->assertSame([], $this->Timezones->all());
-		} finally {
-			if (file_exists($cachePath)) {
-				unlink($cachePath);
+			protected function fetchContent(): string {
+				return '{"parse":{"unexpected":"shape"}}';
 			}
-		}
+
+		};
+		$this->assertSame([], $sync->all());
 	}
 
 	/**
@@ -209,6 +211,176 @@ class TimezonesTest extends TestCase {
 		$sync = $this->getMockBuilder(Timezones::class)->onlyMethods(['all'])->getMock();
 		$sync->expects($this->once())->method('all')->willReturn([]);
 		$this->assertSame([], $sync->diff(['Europe/Berlin' => new Timezone(['name' => 'Existing'])]));
+	}
+
+	public function testCurrentWikipediaMarkupIncludesZonesWithoutCountryCodes(): void {
+		$sync = new class extends Timezones {
+
+			protected function fetchContent(): string {
+				return file_get_contents(TESTS . 'test_files/json/timezones-sync.json');
+			}
+
+		};
+		$all = $sync->all();
+		$this->assertCount(2, $all);
+		$this->assertNull($all['UTC']['country_code']);
+		$this->assertSame(0, $all['UTC']['offset']);
+		$this->assertSame('DE', $all['Europe/Berlin']['country_code']);
+		$this->assertSame(3600, $all['Europe/Berlin']['offset']);
+		$this->assertSame(7200, $all['Europe/Berlin']['offset_dst']);
+		$this->assertSame('CET', $all['Europe/Berlin']['abbr']);
+	}
+
+	public function testNetworkFailureDoesNotAbortFallback(): void {
+		$client = $this->createMock(Client::class);
+		$client->expects($this->once())->method('get')->willThrowException(
+			new NetworkException('DNS unavailable', new Request('https://example.invalid')),
+		);
+		$cache = TMP . 'wiki-timezones.txt';
+		$previous = is_file($cache) ? file_get_contents($cache) : null;
+		file_put_contents($cache, 'invalid cached response');
+		try {
+			$sync = new Timezones($client);
+			$this->assertSame([], $sync->all());
+			$this->assertFalse($sync->isSourceAvailable());
+			$this->assertGreaterThan(400, count($sync->allFromPhp()));
+		} finally {
+			if ($previous === null) {
+				unlink($cache);
+			} else {
+				file_put_contents($cache, $previous);
+			}
+		}
+	}
+
+	public function testExpiredAndInvalidCachesAreRefreshed(): void {
+		$content = file_get_contents(TESTS . 'test_files/json/timezones-sync.json');
+		$cache = TMP . 'wiki-timezones.txt';
+		$previous = is_file($cache) ? file_get_contents($cache) : null;
+		try {
+			foreach ([true, false] as $expired) {
+				file_put_contents($cache, $expired ? $content : 'invalid cached response');
+				if ($expired) {
+					touch($cache, time() - 3601);
+				}
+				clearstatcache(true, $cache);
+				$client = $this->createMock(Client::class);
+				$client->expects($this->once())->method('get')->willReturn(new Response(['HTTP/1.1 200 OK'], $content));
+				$this->assertCount(2, (new Timezones($client))->all());
+				$this->assertSame($content, file_get_contents($cache));
+			}
+		} finally {
+			if ($previous === null) {
+				unlink($cache);
+			} else {
+				file_put_contents($cache, $previous);
+			}
+		}
+	}
+
+	public function testPartialCatalogCannotDeleteStoredZones(): void {
+		$sync = $this->getMockBuilder(Timezones::class)->onlyMethods(['all'])->getMock();
+		$sync->expects($this->once())->method('all')->willReturn([
+			'UTC' => [
+				'name' => 'UTC',
+				'country_code' => null,
+				'offset' => 0,
+				'offset_dst' => null,
+				'type' => 'Canonical',
+				'covered' => null,
+			],
+		]);
+		$result = $sync->diff(['Europe/Berlin' => new Timezone(['name' => 'Europe/Berlin'])]);
+		$this->assertArrayNotHasKey('delete', $result);
+		$this->assertSame(0, $result['add'][0]['data']['offset_dst']);
+	}
+
+	public function testTimezoneProposalsCanBeSavedWithLongDescriptions(): void {
+		$sync = new class extends Timezones {
+
+			protected function fetchContent(): string {
+				return file_get_contents(TESTS . 'test_files/json/timezones-sync.json');
+			}
+
+		};
+		$all = $sync->all();
+		$all['UTC']['notes'] = str_repeat('n', 500);
+		$all['UTC']['covered'] = str_repeat('c', 500);
+		$sync = $this->getMockBuilder(Timezones::class)->onlyMethods(['all'])->getMock();
+		$sync->expects($this->once())->method('all')->willReturn($all);
+		$proposals = $sync->diff([]);
+		$table = TableRegistry::getTableLocator()->get('Data.Timezones');
+		foreach ($proposals['add'] as $proposal) {
+			$timezone = $table->newEntity($proposal['data']);
+			$this->assertSame([], $timezone->getErrors());
+			$table->saveOrFail($timezone);
+		}
+		$utc = $table->find()->where(['name' => 'UTC'])->firstOrFail();
+		$this->assertSame(190, mb_strlen($utc->notes));
+		$this->assertSame(190, mb_strlen($utc->covered));
+	}
+
+	public function testStreamRequestFailureReturnsUnavailableCatalog(): void {
+		$sync = new class extends Timezones {
+
+			protected function fetchContent(): string {
+				throw new RequestException('Stream connection failed', new Request('https://example.invalid'));
+			}
+
+		};
+		$this->assertSame([], $sync->all());
+		$this->assertFalse($sync->isSourceAvailable());
+	}
+
+	public function testPhpSouthernHemisphereUsesDstFlag(): void {
+		$all = $this->Timezones->allFromPhp(new DateTimeImmutable('2026-01-15T12:00:00Z'), new DateTimeImmutable('2026-07-15T12:00:00Z'));
+		$this->assertSame(36000, $all['Australia/Sydney']['offset']);
+		$this->assertSame(39600, $all['Australia/Sydney']['offset_dst']);
+		$this->assertSame(0, $all['Europe/Dublin']['offset']);
+		$this->assertSame(3600, $all['Europe/Dublin']['offset_dst']);
+		$this->assertSame(37800, $all['Australia/Lord_Howe']['offset']);
+		$this->assertSame(39600, $all['Australia/Lord_Howe']['offset_dst']);
+	}
+
+	public function testInvalidTimezoneFieldsAreNotCachedOrProposed(): void {
+		$content = file_get_contents(TESTS . 'test_files/json/timezones-sync.json');
+		$cache = TMP . 'wiki-timezones.txt';
+		$previous = is_file($cache) ? file_get_contents($cache) : null;
+		try {
+			foreach (['+01:00' => '+01:99', 'Canonical' => 'Unknown', 'Europe/Berlin' => 'Invalid zone'] as $valid => $invalid) {
+				if (is_file($cache)) {
+					unlink($cache);
+				}
+				$client = $this->createMock(Client::class);
+				$client->expects($this->once())->method('get')->willReturn(new Response(['body' => str_replace($valid, $invalid, $content)]));
+				$sync = new Timezones($client);
+				$this->assertSame([], $sync->diff([]));
+				$this->assertFalse($sync->isSourceAvailable());
+				$this->assertFileDoesNotExist($cache);
+			}
+		} finally {
+			if ($previous !== null) {
+				file_put_contents($cache, $previous);
+			}
+		}
+	}
+
+	public function testWikipediaItalicOffsetsRemainValid(): void {
+		$sync = new class extends Timezones {
+			protected function fetchContent(): string {
+				return str_replace('|+02:00]]', "|''+02:00'']]", file_get_contents(TESTS . 'test_files/json/timezones-sync.json'));
+			}
+		};
+		$this->assertSame(7200, $sync->all()['Europe/Berlin']['offset_dst']);
+		$this->assertTrue($sync->isSourceAvailable());
+	}
+
+	public function testNegativeDstSamplesUseConventionalSeasonalOffsets(): void {
+		$method = new ReflectionMethod(Timezones::class, 'classifySeasonalOffsets');
+		$this->assertSame([0, 3600], $method->invoke($this->Timezones, [
+			['offset' => 0, 'isdst' => true],
+			['offset' => 3600, 'isdst' => false],
+		]));
 	}
 
 }

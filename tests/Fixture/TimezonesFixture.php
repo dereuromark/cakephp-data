@@ -19,7 +19,7 @@ class TimezonesFixture extends TestFixture {
 	public array $fields = [
 		'id' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
 		'name' => ['type' => 'string', 'length' => 100, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
-		'country_code' => ['type' => 'string', 'length' => 2, 'null' => false, 'default' => null, 'comment' => 'ISO_3166-2', 'precision' => null],
+		'country_code' => ['type' => 'string', 'length' => 2, 'null' => true, 'default' => null, 'comment' => 'ISO_3166-2', 'precision' => null],
 		'offset' => ['type' => 'integer', 'length' => 10, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
 		'offset_dst' => ['type' => 'integer', 'length' => 10, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
 		'type' => ['type' => 'string', 'length' => 100, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],

@@ -14,10 +14,12 @@ Start with country and timezone management after migrating the complete schema. 
 
 ## Review sync changes
 
-The country and timezone sync actions retrieve remote datasets and show proposed changes. Applying a selection requires a POST request. Review edits and deletions before submitting, and keep a database backup.
+The country and timezone sync actions retrieve remote datasets and show proposed changes. Applying a selection requires a POST request. Missing upstream rows are not proposed for deletion because a partial catalog cannot establish that stored data is obsolete. Review edits before submitting, and keep a database backup.
 
 The timezone sync compares the provider's data with your stored rows. Canonical records and aliases require careful review; importing a list does not necessarily establish every alias relationship.
 
 For public applications that only need country lookups or flags, disable Data's routes and expose a smaller, application-specific controller instead.
 
 An empty remote catalog produces no sync changes. A network failure or parser failure must not propose deleting all existing records.
+
+When a remote source is unavailable or cannot be parsed, the sync screen displays a warning instead of presenting an empty result as proof that the records are current.

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<countries>
+  <country>
+    <id>1</id>
+    <name>Afghanistan</name>
+    <iso3>AFG</iso3>
+    <iso2>AF</iso2>
+    <phonecode>93</phonecode>
+    <native>افغانستان</native>
+    <timezones>
+      <zoneName>Asia/Kabul</zoneName>
+      <gmtOffset>16200</gmtOffset>
+    </timezones>
+  </country>
+</countries>

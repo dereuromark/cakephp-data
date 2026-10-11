@@ -2,10 +2,15 @@
 
 namespace Data\Test\TestCase\Migrations;
 
+use Cake\Console\CommandRunner;
+use Cake\Console\ConsoleIo;
+use Cake\Console\ConsoleOutput;
+use Cake\Core\Configure;
 use Cake\Database\Driver\Sqlite;
 use Cake\Datasource\ConnectionManager;
 use Cake\TestSuite\TestCase;
 use Migrations\Migrations;
+use TestApp\Application;
 
 class InstallationTest extends TestCase {
 
@@ -15,9 +20,8 @@ class InstallationTest extends TestCase {
 			'driver' => Sqlite::class,
 			'database' => ':memory:',
 		]);
-		$cachePath = TMP . 'wiki-timezones.txt';
-		$previous = is_file($cachePath) ? file_get_contents($cachePath) : null;
-		file_put_contents($cachePath, json_encode(['parse' => ['unexpected' => 'shape']]));
+		$previous = Configure::read('Data.Timezone.source');
+		Configure::write('Data.Timezone.source', 'php');
 
 		try {
 			$migrations = new Migrations(['connection' => 'data_installation_test', 'plugin' => 'Data']);
@@ -27,18 +31,29 @@ class InstallationTest extends TestCase {
 			$continents = $connection->execute('SELECT COUNT(*) AS total FROM continents')->fetch('assoc');
 			$this->assertSame(9, (int)$continents['total']);
 
-			$this->assertTrue($migrations->seed(['seed' => 'TimezonesSeed']));
+			$app = new Application(CONFIG);
+			$app->addPlugin('Data');
+			$app->addPlugin('Migrations');
+			$runner = new CommandRunner($app, 'cake');
+			$io = new ConsoleIo(new ConsoleOutput(TMP . 'data-seed-output.txt'), new ConsoleOutput(TMP . 'data-seed-error.txt'));
+			$arguments = ['cake', 'seeds', 'run', 'TimezonesSeed', '-p', 'Data', '-c', 'data_installation_test'];
+			$this->assertSame(0, $runner->run($arguments, $io));
 			$timezones = $connection->execute('SELECT COUNT(*) AS total FROM timezones')->fetch('assoc');
 			$this->assertGreaterThan(400, (int)$timezones['total']);
+			$this->assertSame(0, $runner->run($arguments, $io));
+			$repeated = $connection->execute('SELECT COUNT(*) AS total FROM timezones')->fetch('assoc');
+			$this->assertSame($timezones['total'], $repeated['total']);
 			$utc = $connection->execute("SELECT offset, offset_dst FROM timezones WHERE name = 'UTC'")->fetch('assoc');
 			$this->assertSame(0, (int)$utc['offset']);
 			$this->assertSame(0, (int)$utc['offset_dst']);
 		} finally {
 			ConnectionManager::drop('data_installation_test');
-			if ($previous === null) {
-				unlink($cachePath);
-			} else {
-				file_put_contents($cachePath, $previous);
+			Configure::write('Data.Timezone.source', $previous);
+			unset($io);
+			foreach (['data-seed-output.txt', 'data-seed-error.txt'] as $file) {
+				if (is_file(TMP . $file)) {
+					unlink(TMP . $file);
+				}
 			}
 		}
 	}

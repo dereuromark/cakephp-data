@@ -4,7 +4,7 @@
  * Data Example Configuration
  *
  * Merge the keys below into your application's config/app.php (or
- * config/app_local.php) — do not replace the whole file, since this snippet
+ * config/app_local.php). Keep the other settings; this snippet
  * only contains this plugin's configuration. When copying entries that
  * reference imported classes, use fully-qualified class names or move the
  * `use` imports to the top of the target file. Customize the values as needed.
@@ -38,6 +38,7 @@ return [
 		],
 		'Timezone' => [
 			'Country' => true, // false disables Timezones belongsTo Countries association (Table and Admin controller)
+			'source' => 'wikipedia', // Seed source: 'wikipedia' with PHP fallback, or 'php' for offline seeding
 		],
 		'Address' => [
 			'State' => true, // truthy enables the States list lookup in Admin/AddressesController add/edit

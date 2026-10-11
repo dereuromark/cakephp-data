@@ -1,6 +1,7 @@
 <?php
 declare(strict_types = 1);
 
+use Cake\Core\Configure;
 use Cake\I18n\DateTime;
 use Data\Sync\Timezones;
 use Migrations\BaseSeed;
@@ -20,24 +21,13 @@ class TimezonesSeed extends BaseSeed {
 	 */
 	public function run(): void {
 		$timezones = new Timezones();
-		$data = $timezones->all();
+		$data = Configure::read('Data.Timezone.source') === 'php' ? $timezones->allFromPhp() : $timezones->all();
 		if (!$data) {
 			$data = $timezones->allFromPhp();
 		}
 		foreach ($data as $key => $row) {
-			$data[$key]['created'] = $data[$key]['modified'] = substr((new DateTime())->toIso8601String(), 0, 19);
-			$data[$key]['active'] = $row['type'] === 'Canonical';
-			$data[$key]['offset_dst'] = $row['offset_dst'] ?? $row['offset'];
-			unset($data[$key]['abbr']);
-			unset($data[$key]['alias']);
-
-			if ($row['country_code'] && strpos($row['country_code'], ',') !== false) {
-				$data[$key]['country_code'] = substr($row['country_code'], 0, 2);
-			}
-
-			if ($row['notes'] && mb_strlen($row['notes']) > 190) {
-				$data[$key]['notes'] = mb_substr($row['notes'], 0, 190);
-			}
+			$data[$key] = $timezones->normalizeForStorage($row);
+			$data[$key]['created'] = $data[$key]['modified'] = (new DateTime())->format('Y-m-d H:i:s');
 		}
 
 		$table = $this->table('timezones');
