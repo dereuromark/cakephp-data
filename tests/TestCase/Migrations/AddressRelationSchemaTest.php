@@ -90,6 +90,25 @@ class AddressRelationSchemaTest extends TestCase {
 			$userRow = $addresses->get(1);
 			$addresses->patchEntity($userRow, ['formatted_address' => 'Second address']);
 			$this->assertArrayHasKey('validateUnique', $userRow->getError('formatted_address'));
+			$ownerChange = $addresses->get(2);
+			$addresses->patchEntity($ownerChange, [$modelField => 'User', 'foreign_id' => 1]);
+			$this->assertNotEmpty($ownerChange->getError($modelField));
+			$this->assertFalse($addresses->save($ownerChange));
+			$this->assertSame('Company', $addresses->get(2)->get($modelField));
+			$nullable = $data;
+			$nullable['foreign_id'] = 3;
+			$nullable[$modelField] = null;
+			$nullable['formatted_address'] = 'Nullable owner address';
+			$connection->insert('addresses', $nullable);
+			$nullableRow = $addresses->find()->where(['foreign_id' => 3])->firstOrFail();
+			$addresses->patchEntity($nullableRow, ['address_type_id' => Address::TYPE_MAIN]);
+			$this->assertSame([], $nullableRow->getErrors());
+			$this->assertNotFalse($addresses->save($nullableRow));
+			$withoutOwner = $nullable;
+			unset($withoutOwner[$modelField]);
+			$withoutOwner['formatted_address'] = 'Another nullable owner address';
+			$newAddress = $addresses->newEntity($withoutOwner);
+			$this->assertNotEmpty($newAddress->getError('address_type_id'));
 
 			$this->loadPlugins(['Data', 'Tools']);
 			TableRegistry::getTableLocator()->set('Data.Addresses', $addresses);

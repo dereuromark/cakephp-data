@@ -113,6 +113,27 @@ class AddressesTable extends Table {
 			->decimal('lng', 6, __d('data', 'not a valid geografic number for longitude'))
 			->allowEmptyString('lng');
 
+		foreach (['foreign_id', $this->getModelField()] as $ownerField) {
+			$validator->allowEmptyString($ownerField)->add($ownerField, 'ownerUnique', [
+				'rule' => function ($value, array $context): bool {
+					if ($context['newRecord']) {
+						return true;
+					}
+					$context['data'] = $this->ownerValidationData($context);
+					$formattedAddress = $context['data']['formatted_address'] ?? null;
+					if ($formattedAddress !== null && $formattedAddress !== '') {
+						$context['field'] = 'formatted_address';
+						if (!$this->validateUnique($formattedAddress, ['scope' => ['foreign_id', $this->getModelField()]], $context)) {
+							return false;
+						}
+					}
+
+					return $this->primaryUnique($context['data']['address_type_id'] ?? null, $context);
+				},
+				'message' => __d('data', 'valErrRecordNameExists'),
+			]);
+		}
+
 		return $validator;
 	}
 
@@ -153,13 +174,13 @@ class AddressesTable extends Table {
 	 */
 	public function primaryUnique($value, array $context) {
 		$data = $this->ownerValidationData($context);
-		if (empty($data['foreign_id']) || $data['address_type_id'] != Address::TYPE_MAIN) {
+		if (empty($data['foreign_id']) || ($data['address_type_id'] ?? null) != Address::TYPE_MAIN) {
 			return true;
 		}
 		$conditions = ['foreign_id' => $data['foreign_id'], 'address_type_id' => Address::TYPE_MAIN];
 		$modelField = $this->getModelField();
 		if (array_key_exists($modelField, $data)) {
-			$conditions[$modelField] = $data[$modelField];
+			$conditions[$this->aliasField($modelField) . ($data[$modelField] === null ? ' IS' : '')] = $data[$modelField];
 		}
 		foreach ((array)$this->getPrimaryKey() as $primaryKey) {
 			if (isset($data[$primaryKey])) {
@@ -185,7 +206,7 @@ class AddressesTable extends Table {
 		$data = $context['data'];
 		$entity = $context['entity'] ?? null;
 		if ($entity instanceof EntityInterface) {
-			$data += $entity->extract(array_merge(['foreign_id', $this->getModelField()], (array)$this->getPrimaryKey()));
+			$data += $entity->extract(array_merge(['foreign_id', $this->getModelField(), 'formatted_address', 'address_type_id'], (array)$this->getPrimaryKey()));
 		}
 
 		return $data;
