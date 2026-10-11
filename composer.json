@@ -34,6 +34,7 @@
 	"require-dev": {
 		"cakephp/migrations": "^5.0.0",
 		"dereuromark/cakephp-geo": "^3.0.0",
+		"dereuromark/cakephp-i18n-lint": "^0.1.1",
 		"fig-r/psr2r-sniffer": "dev-master",
 		"friendsofcake/search": "^7.0.0",
 		"phpunit/phpunit": "^11.5 || ^12.1 || ^13.0",
@@ -71,6 +72,9 @@
 		"stan-setup": "cp composer.json composer.backup && composer require --dev phpstan/phpstan:^2.0.0 && mv composer.backup composer.json",
 		"stan-tests": "phpstan analyze -c tests/phpstan.neon",
 		"test": "phpunit",
-		"test-coverage": "phpunit --log-junit tmp/coverage/unitreport.xml --coverage-html tmp/coverage --coverage-clover tmp/coverage/coverage.xml"
+		"test-coverage": "phpunit --log-junit tmp/coverage/unitreport.xml --coverage-html tmp/coverage --coverage-clover tmp/coverage/coverage.xml",
+		"i18n-check": "i18n-lint check",
+		"i18n-extract": "i18n-lint extract",
+		"i18n-lint": "i18n-lint lint"
 	}
 }
