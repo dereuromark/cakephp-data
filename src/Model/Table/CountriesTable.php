@@ -151,7 +151,7 @@ class CountriesTable extends Table {
 	 * @return \Cake\ORM\Query\SelectQuery
 	 */
 	public function findActive(array $options = []) {
-		$query = $this->activeQuery ?? $this->find('all', ...$options);
+		$query = $this->activeQuery ?? $this->find('all');
 		$query->applyOptions($options);
 
 		return $query->where([$this->getAlias() . '.status' => Country::STATUS_ACTIVE]);
