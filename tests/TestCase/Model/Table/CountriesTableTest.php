@@ -67,6 +67,8 @@ class CountriesTableTest extends TestCase {
 		$this->assertSame($expected, $this->Countries->find('active')->all()->extract('iso2')->toList());
 		$this->assertSame(['DE'], $this->Countries->findActive(['conditions' => ['iso2' => 'DE']])
 			->all()->extract('iso2')->toList());
+		$this->assertSame(['DE'], $this->Countries->findActive(options: ['conditions' => ['iso2' => 'DE']])
+			->all()->extract('iso2')->toList());
 	}
 
 }

@@ -145,13 +145,11 @@ class CountriesTable extends Table {
 	}
 
 	/**
-	 * @param \Cake\ORM\Query\SelectQuery|array<string, mixed>|null $query
+	 * @param \Cake\ORM\Query\SelectQuery|array<string, mixed> $options
 	 * @return \Cake\ORM\Query\SelectQuery
 	 */
-	public function findActive(SelectQuery|array|null $query = null): SelectQuery {
-		if (!$query instanceof SelectQuery) {
-			$query = $this->find('all', ...($query ?? []));
-		}
+	public function findActive(SelectQuery|array $options = []): SelectQuery {
+		$query = $options instanceof SelectQuery ? $options : $this->find('all', ...$options);
 
 		return $query->where([$this->getAlias() . '.status' => Country::STATUS_ACTIVE]);
 	}
