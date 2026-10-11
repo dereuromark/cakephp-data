@@ -31,7 +31,7 @@ class City extends Entity {
 	 *
 	 * @var array<string, bool>
 	 */
-	protected array $_accessible = [
+	protected array $patchable = [
 		'*' => true,
 		'id' => false,
 	];

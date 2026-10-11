@@ -62,6 +62,7 @@ class AddressRelationSchemaTest extends TestCase {
 			$locator->setConfig('Users', ['connection' => $connection]);
 			$addresses = $locator->get('Data.Addresses', ['connection' => $connection]);
 			$addresses->removeBehavior('Geocoder');
+			$addresses->getAssociation('Users')->setTarget($locator->get('Users'));
 			$row = $addresses->find()->contain(['Users'])->firstOrFail();
 			$this->assertSame('example', $row->user->username);
 			$errors = $addresses->getValidator()->validate($data);

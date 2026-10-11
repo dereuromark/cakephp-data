@@ -80,10 +80,10 @@ use Cake\Core\Plugin;
                     <td><?= $this->Time->nice($timezone->created) ?></td>
                     <td><?= $this->Time->nice($timezone->modified) ?></td>
                     <td class="actions">
-                        <?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $timezone->id], ['escapeTitle' => false]); ?>
-                        <?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $timezone->id], ['escapeTitle' => false]); ?>
+                        <?php echo $this->Html->link($this->Icon->render('view'), ['action' => 'view', $timezone->id], ['escape' => false]); ?>
+                        <?php echo $this->Html->link($this->Icon->render('edit'), ['action' => 'edit', $timezone->id], ['escape' => false]); ?>
                         <?php echo $this->Form->postButton($this->Icon->render('delete'), ['action' => 'delete', $timezone->id], [
-                            'escapeTitle' => false,
+                            'escape' => false,
                             'class' => 'btn btn-link p-0 align-baseline',
                             'form' => [
                                 'class' => 'd-inline',

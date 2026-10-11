@@ -39,7 +39,7 @@ class Timezone extends Entity {
 	 *
 	 * @var array<string, bool>
 	 */
-	protected array $_accessible = [
+	protected array $patchable = [
 		'*' => true,
 		'id' => false,
 	];
@@ -51,7 +51,7 @@ class Timezone extends Entity {
 	 *
 	 * @var array<string>
 	 */
-	protected array $_virtual = [
+	protected array $virtual = [
 		'offset_string',
 		'offset_dst_string',
 	];

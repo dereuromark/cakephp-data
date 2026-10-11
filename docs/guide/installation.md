@@ -1,9 +1,11 @@
 # Installation
 
+For this development branch, the application's root `composer.json` must allow development dependencies with `"minimum-stability": "dev"`. Set `"prefer-stable": true` to prefer stable packages when their constraints permit it.
+
 Install the plugin in your application's root directory:
 
 ```sh
-composer require dereuromark/cakephp-data
+composer require dereuromark/cakephp-data:dev-cake6
 bin/cake plugin load Data
 ```
 
@@ -26,7 +28,7 @@ The models use your application's default database connection. Back up an existi
 If your application does not already have Migrations installed and loaded:
 
 ```sh
-composer require cakephp/migrations
+composer require cakephp/migrations:dev-fix/6.x-cakephp-compatibility
 bin/cake plugin load Migrations
 ```
 
@@ -47,3 +49,4 @@ You can copy the migration files you need from `vendor/dereuromark/cakephp-data/
 A country model enables Continent, State, and Timezone associations by default. Disable unused associations before creating its table instance, as described in [Tables and configuration](../reference/tables).
 
 Continue with [Getting started](./getting-started).
+

@@ -163,7 +163,7 @@ class LanguagesController extends DataAppController {
 
 		$errorMessage = [];
 		foreach ($errors as $error) {
-			$errorMessage[] = $error['data'] . ' (' . json_encode($error['errors']) . ')';
+			$errorMessage[] = json_encode($error['data']) . ' (' . json_encode($error['errors']) . ')';
 		}
 		$this->Flash->warning(__d('data', 'not added') . ' ' . implode(', ', $errorMessage));
 

@@ -48,7 +48,7 @@
 	<ul>
 		<li><?php echo $this->Html->link(__d('data', 'Edit {0}', __d('data', 'Currency')), ['action' => 'edit', $currency['id']]); ?> </li>
 		<li><?php echo $this->Form->postButton(__d('data', 'Delete Currency'), ['action' => 'delete', $currency['id']], [
-			'escapeTitle' => false,
+			'escape' => false,
 			'class' => 'btn btn-link p-0 align-baseline',
 			'form' => [
 				'class' => 'd-inline',

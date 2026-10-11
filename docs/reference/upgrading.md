@@ -1,5 +1,11 @@
 # Upgrading
 
+## CakePHP 6 development branch
+
+The `cake6` branch runs against CakePHP 6 and the matching Shim, Tools and Geo branches. Entity overrides use `$patchable` for mass assignment and `$virtual` for computed properties. Controller callbacks follow the framework's `void` lifecycle contracts. HTML helper links use the `escape` option.
+
+Application validators that use table rules must register their provider before adding those rules with `$validator->setProvider('table', $this)`. This is required because CakePHP 6 resolves rule callbacks when they are registered.
+
 Use the [version map](https://github.com/dereuromark/cakephp-data/wiki#cakephp-version-map) when moving between CakePHP major versions. Composer is the source of the supported PHP, CakePHP, Tools, and Shim version constraints.
 
 Back up reference tables before changing plugin versions or applying migrations. Keep application-owned imports and schema changes separate from vendor files.
