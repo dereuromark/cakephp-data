@@ -105,8 +105,8 @@ class MimeTypeImagesController extends DataAppController {
 			if ($dbImage) {
 				if (empty($dbImage['ext']) || !file_exists(PATH_MIMETYPES . $dbImage['name'] . '.' . $dbImage['ext'])) {
 
-					if (rename(PATH_MIMETYPES . 'import' . DS . $image, PATH_MIMETYPES . $dbImage['name'] . '.' . $ext) &&
-						$this->MimeTypeImages->allocate($dbImage['id'], $fileName, $ext)) {
+					if (rename(PATH_MIMETYPES . 'import' . DS . $image, PATH_MIMETYPES . $dbImage['name'] . '.' . $ext)
+						&& $this->MimeTypeImages->allocate($dbImage['id'], $fileName, $ext)) {
 						$renameSuccess[] = $fileName . '.' . $ext;
 						unset($images[$key]);
 					} else {

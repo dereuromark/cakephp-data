@@ -47,7 +47,7 @@ class Timezones {
 		$this->sourceAvailable = true;
 		try {
 			$content = $this->fetchContent();
-		} catch (NotFoundException | ClientExceptionInterface) {
+		} catch (NotFoundException|ClientExceptionInterface) {
 			$this->sourceAvailable = false;
 
 			return [];

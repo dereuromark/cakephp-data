@@ -32,7 +32,7 @@ class Countries {
 		try {
 			$content = $this->fetchContent();
 			$xml = Xml::build($content, ['readFile' => false]);
-		} catch (ClientExceptionInterface | NotFoundException | XmlException) {
+		} catch (ClientExceptionInterface|NotFoundException|XmlException) {
 			$this->sourceAvailable = false;
 
 			return [];
