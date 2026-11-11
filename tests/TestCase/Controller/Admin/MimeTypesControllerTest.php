@@ -94,8 +94,7 @@ class MimeTypesControllerTest extends TestCase {
 		$this->get(['prefix' => 'Admin', 'plugin' => 'Data', 'controller' => 'MimeTypes', 'action' => $action, ...$pass]);
 
 		$this->assertResponseCode(200);
-		$this->assertResponseContains('nonce="core-nonce">');
-		$this->assertResponseNotRegExp('/<script(?![^>]*nonce=)/');
+		$this->assertAllScriptsHaveNonce('core-nonce');
 	}
 
 	/**
@@ -121,6 +120,20 @@ class MimeTypesControllerTest extends TestCase {
 
 		$this->assertResponseCode(200);
 		$this->assertResponseContains('<script type="text/javascript" nonce="custom-nonce">');
+	}
+
+	/**
+	 * Asserts the page has scripts and every one carries exactly the given nonce.
+	 *
+	 * @param string $nonce
+	 *
+	 * @return void
+	 */
+	protected function assertAllScriptsHaveNonce(string $nonce): void {
+		$body = (string)$this->_response->getBody();
+		$scripts = preg_match_all('/<script\b/', $body);
+		$this->assertGreaterThan(0, $scripts);
+		$this->assertSame($scripts, preg_match_all('/<script\b[^>]*\snonce="' . preg_quote($nonce, '/') . '"/', $body));
 	}
 
 	/**
