@@ -3,7 +3,7 @@
  * @var \App\View\AppView $this
  * @var \Data\Model\Entity\MimeType $mimeType
  */
-$cspNonce = (string)$this->getRequest()->getAttribute('cspNonce', '');
+$cspNonce = (string)($this->getRequest()->getAttribute('cspScriptNonce') ?? $this->getRequest()->getAttribute('cspNonce', ''));
 ?>
 <?php /**
  * @var \App\View\AppView $this
